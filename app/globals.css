@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/*
+  PIXELUP LABS design tokens — pulled from computed styles of pixeluplabs.com.
+  See ../pixeluplabs-design-spec.md for provenance.
+*/
+@theme {
+  /* Colors */
+  --color-base: #000000;
+  --color-white: #ffffff;
+  --color-muted-65: rgba(255, 255, 255, 0.65);
+  --color-muted-40: rgba(255, 255, 255, 0.4);
+  --color-body-grey: #b4b3b3;
+  --color-label-grey: #999999;
+  --color-accent: #004aeb;
+  --color-button-dark: rgba(242, 243, 247, 0.08);
+
+  /* Fonts */
+  --font-display: var(--font-display), "Inter", sans-serif;
+  --font-button: var(--font-button), "Instrument Sans", sans-serif;
+
+  /* Custom breakpoint: two-column layout kicks in at ~1200px */
+  --breakpoint-desk: 75rem; /* 1200px */
+
+  /* Marquee animation for the "Trusted by" logo strip */
+  --animate-marquee: marquee 30s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+html,
+body {
+  background: var(--color-base);
+}
+
+/* Display type on this site is tracked tight — roughly -3.5% of font size. */
+.tracking-display {
+  letter-spacing: -0.035em;
+}
