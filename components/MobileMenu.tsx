@@ -14,7 +14,7 @@ export function MobileMenu() {
         aria-label={open ? "Close menu" : "Open menu"}
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-9 w-9 items-center justify-center text-white"
+        className="fade-up flex h-9 w-9 items-center justify-center text-white"
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           {open ? (

@@ -6,9 +6,14 @@ import { CtaButtons } from "./CtaButtons";
 export function LeftNav() {
   return (
     <nav className="flex flex-col gap-8 desk:h-full desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0">
-      {/* Header: logo + (mobile-only) hamburger */}
-      <div className="fade-up flex items-center justify-between">
-        <Logo />
+      {/* Header: logo + (mobile-only) hamburger.
+          NOTE: this row must NOT be animated/transformed — the mobile menu
+          panel inside it is absolutely positioned against the page, and a
+          transform here would hijack its containing block. Animate children. */}
+      <div className="flex items-center justify-between">
+        <div className="fade-up">
+          <Logo />
+        </div>
         <MobileMenu />
       </div>
 
