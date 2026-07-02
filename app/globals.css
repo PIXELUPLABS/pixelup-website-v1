@@ -40,7 +40,36 @@ body {
   background: var(--color-base);
 }
 
-/* Display type on this site is tracked tight — roughly -3.5% of font size. */
+/* Display type is tracked tight: -1.1px at the 30px desktop H1 size,
+   expressed in em so it scales proportionally at the 24px mobile size (≈ -0.88px). */
 .tracking-display {
-  letter-spacing: -0.035em;
+  letter-spacing: -0.03667em;
+}
+
+/* Scrollable areas that shouldn't show a scrollbar (right showcase column). */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome / Safari / Edge */
+}
+
+/* Subtle entrance: elements fade up in chronological order via animation-delay. */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.fade-up {
+  animation: fade-up 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-up {
+    animation: none;
+  }
 }

@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
-import { Inter, Instrument_Sans } from "next/font/google";
+import { Instrument_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 
-// Inter stands in for Framer's "Inter Display" (all display + body text).
-const inter = Inter({
+// Inter Display — the real display face from the original Framer site,
+// self-hosted (not on Google Fonts). Only 400/500 are used; the sole 600
+// on the page (button labels) is Instrument Sans.
+const interDisplay = localFont({
   variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  src: [
+    { path: "./fonts/InterDisplay-Regular.ttf", weight: "400", style: "normal" },
+    { path: "./fonts/InterDisplay-Medium.ttf", weight: "500", style: "normal" },
+  ],
   display: "swap",
 });
 
@@ -19,6 +24,7 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://pixeluplabs.com"),
   title: "PIXELUP LABS - Premium Brands and Websites",
   description:
     "We build brands, websites and products that command enterprise trust.",
@@ -32,10 +38,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${instrumentSans.variable} h-full antialiased`}
+      className={`${interDisplay.variable} ${instrumentSans.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-base font-display text-white">
-        {children}
+        {/* Site-wide content clamp: background stays full-bleed, content stops growing at 1920px. */}
+        <div className="mx-auto w-full max-w-[1920px]">{children}</div>
       </body>
     </html>
   );

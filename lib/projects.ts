@@ -16,6 +16,8 @@ export interface Project {
   href: string;
   external: boolean;
   media: ProjectMedia;
+  /** Optional logo mark rendered centered on top of the card media (e.g. Sainapse). */
+  overlayLogo?: string;
 }
 
 export const projects: Project[] = [
@@ -27,11 +29,33 @@ export const projects: Project[] = [
     media: { type: "image", src: "/media/greptile.png" },
   },
   {
+    slug: "henry-labs",
+    label: "Henry Labs",
+    href: "https://henrylabs.ai",
+    external: true,
+    media: { type: "video", src: "/media/henry-labs.mp4" },
+  },
+  {
+    slug: "ctgt",
+    label: "CTGT",
+    href: "https://www.ctgt.ai/",
+    external: true,
+    media: { type: "image", src: "/media/ctgt.png" },
+  },
+  {
+    slug: "streamline",
+    label: "Streamline",
+    href: "https://www.streamline.ai/",
+    external: true,
+    media: { type: "image", src: "/media/streamline.png" },
+  },
+  {
     slug: "sainapse",
     label: "Sainapse",
     href: "https://sainapse-staging.webflow.io/",
     external: true,
     media: { type: "video", src: "/media/sainapse.mp4" },
+    overlayLogo: "/media/sainapse.svg",
   },
   {
     slug: "reducto",
@@ -74,13 +98,6 @@ export const projects: Project[] = [
     href: "https://dayflow.so/",
     external: true,
     media: { type: "image", src: "/media/dayflow.png" },
-  },
-  {
-    slug: "jumbo-top-up",
-    label: "Jumbo Top-up",
-    href: "/jumbo-top-up",
-    external: false,
-    media: { type: "image", src: "/media/jumbo-top-up.png" },
   },
 ];
 

@@ -7,10 +7,10 @@ export function Showcase() {
     // On desktop this column scrolls internally; the nav column stays put.
     <section
       aria-label="Selected work"
-      className="flex flex-col gap-6 desk:h-full desk:flex-1 desk:overflow-y-auto"
+      className="no-scrollbar flex flex-col gap-6 desk:h-full desk:flex-1 desk:overflow-y-auto"
     >
-      {projects.map((project) => (
-        <ProjectCard key={project.slug} project={project} />
+      {projects.map((project, index) => (
+        <ProjectCard key={project.slug} project={project} index={index} />
       ))}
     </section>
   );
