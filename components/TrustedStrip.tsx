@@ -18,7 +18,7 @@ export function TrustedStrip() {
               src={strip}
               alt={i === 0 ? "Logos of YC companies PixelUp Labs has worked with" : ""}
               aria-hidden={i === 1}
-              className="mr-2 h-5 w-auto opacity-70"
+              className="mr-2 h-6 w-auto opacity-70"
               priority
             />
           ))}
