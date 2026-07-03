@@ -454,7 +454,10 @@ const sully: CaseStudy = {
     "We treated this as an enterprise credibility problem. The website needed to become a deal closer, not a blocker. Every page, motion sequence, and explainer was designed to help hospital executives understand complex AI workflows before the demo even started.",
     "The impact was immediate. One concept explainer page directly contributed to closing a major enterprise contract. Within 11 months, Sully scaled 26x, adding 20M+ minutes to healthcare workforce capacity and raising $32M+ at a $150M valuation.",
   ],
-  hero: { tone: "white" },
+  hero: {
+    media: { type: "image", src: "/media/sully/hero.png" },
+    alt: "Sully.ai logo mark over a bright hospital corridor with clinicians",
+  },
   sections: [
     {
       heading: "How Did We Approach the Project?",
