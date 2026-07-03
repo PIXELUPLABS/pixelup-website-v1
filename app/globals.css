@@ -14,6 +14,8 @@
   --color-label-grey: #999999;
   --color-accent: #004aeb;
   --color-button-dark: rgba(242, 243, 247, 0.08);
+  /* Hairline dividers on case study pages — blue-grey 0.5px rules (#344973 @ 20%). */
+  --color-hairline: rgba(52, 73, 115, 0.2);
 
   /* Fonts */
   --font-display: var(--font-display), "Inter", sans-serif;

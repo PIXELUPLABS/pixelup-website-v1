@@ -52,8 +52,8 @@ export const projects: Project[] = [
   {
     slug: "sainapse",
     label: "Sainapse",
-    href: "https://sainapse-staging.webflow.io/",
-    external: true,
+    href: "/sainapse",
+    external: false,
     media: { type: "video", src: "/media/sainapse.mp4" },
     overlayLogo: "/media/sainapse.svg",
   },
@@ -74,8 +74,8 @@ export const projects: Project[] = [
   {
     slug: "sully",
     label: "Sully.ai",
-    href: "https://sully.ai/",
-    external: true,
+    href: "/sully",
+    external: false,
     media: { type: "image", src: "/media/sully.png" },
   },
   {

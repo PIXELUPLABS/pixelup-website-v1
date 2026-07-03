@@ -40,10 +40,7 @@ export default function RootLayout({
       lang="en"
       className={`${interDisplay.variable} ${instrumentSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-base font-display text-white">
-        {/* Site-wide content clamp: background stays full-bleed, content stops growing at 1920px. */}
-        <div className="mx-auto w-full max-w-[1920px]">{children}</div>
-      </body>
+      <body className="min-h-full bg-base font-display text-white">{children}</body>
     </html>
   );
 }
