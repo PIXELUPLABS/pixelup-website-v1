@@ -35,7 +35,8 @@ export function CaseQuote({ quote }: { quote: CaseStudy["quote"] }) {
           {quote.text}
         </p>
       </blockquote>
-      <div className="flex flex-col gap-1">
+      {/* mt-2 tops up the shell's 20px gap to 28px, matching the image→quote gap. */}
+      <div className="mt-2 flex flex-col gap-1">
         <p className="text-[16px] leading-[1.3] tracking-[-0.02em] text-white">
           {quote.name}
         </p>

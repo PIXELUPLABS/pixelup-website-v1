@@ -3,11 +3,15 @@ import Link from "next/link";
 import type { MoreProjectRef } from "@/lib/case-studies";
 import { projects, type Project } from "@/lib/projects";
 
+// Same hover as the homepage ProjectCard: media scales up smoothly, clipped by the frame.
+const mediaHover =
+  "transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]";
+
 function CardMedia({ project }: { project: Project }) {
   if (project.media.type === "video") {
     return (
       <video
-        className="h-full w-full object-cover"
+        className={`h-full w-full object-cover ${mediaHover}`}
         src={project.media.src}
         poster={project.media.poster}
         autoPlay
@@ -23,7 +27,7 @@ function CardMedia({ project }: { project: Project }) {
       alt={`${project.label} — project by PixelUp Labs`}
       fill
       sizes="(min-width: 1200px) 26vw, 100vw"
-      className="object-cover"
+      className={`object-cover ${mediaHover}`}
     />
   );
 }

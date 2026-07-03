@@ -40,11 +40,12 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         <CaseSidebar study={study} />
 
         <main className="min-w-0 flex-1 desk:pb-6">
-          {/* Title + (mobile) client info + hero */}
+          {/* Title + (mobile) client info + hero. */}
           <div className="flex flex-col gap-4 desk:gap-0">
-            {/* Equal 24px padding above/below the title; height grows with content.
-                The max-width keeps the title wrapping onto two lines at any viewport. */}
-            <div className="p-6 pb-0 desk:pb-6">
+            {/* Equal 24px space above and below the title on every breakpoint
+                (mobile: 8px padding + the 16px flex gap); height grows with
+                content. The max-width keeps the title on two lines. */}
+            <div className="p-6 pb-2 desk:pb-6">
               <h1 className="fade-up tracking-display max-w-[30ch] text-balance text-[32px] font-medium leading-none text-white [animation-delay:100ms] desk:text-[56px]">
                 {study.title}
               </h1>

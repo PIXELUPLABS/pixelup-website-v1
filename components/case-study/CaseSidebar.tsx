@@ -39,15 +39,17 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
     <aside className="desk:w-[calc(26%-10.4px)] desk:min-w-[340px] desk:max-w-[460px] desk:shrink-0 desk:border-r-[0.5px] desk:border-hairline">
       <div className="desk:sticky desk:top-0 desk:flex desk:h-screen desk:flex-col">
         {/* Header: logo + (mobile-only) hamburger. Same constraint as LeftNav:
-            don't transform this row — the menu panel positions against the page. */}
-        <div className="flex items-center justify-between p-5">
+            don't transform this row — the menu panel positions against the page.
+            pt-6 lines the logo up with the main column's title (24px top). */}
+        <div className="flex items-center justify-between px-5 pb-5 pt-6">
           <div className="fade-up">
             <Logo />
           </div>
           <MobileMenu />
         </div>
 
-        <div className="no-scrollbar hidden desk:flex desk:min-h-0 desk:flex-1 desk:flex-col desk:justify-between desk:gap-8 desk:overflow-y-auto desk:pb-8 desk:pt-2">
+        {/* pb-6 matches the main column's 24px bottom padding. */}
+        <div className="no-scrollbar hidden desk:flex desk:min-h-0 desk:flex-1 desk:flex-col desk:justify-between desk:gap-8 desk:overflow-y-auto desk:pb-6 desk:pt-2">
           <div className="fade-up flex flex-col [animation-delay:100ms]">
             <div className="px-5 pb-3">
               <BackButton />
