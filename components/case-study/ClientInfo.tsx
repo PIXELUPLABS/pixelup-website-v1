@@ -22,9 +22,9 @@ function InfoRow({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex px-5 py-3 text-[12px] tracking-[-0.02em]">
-      <p className="w-[92px] shrink-0 leading-[1.3] text-white/60">{label}</p>
-      <div className="min-w-0 flex-1 leading-[1.15] text-white">{children}</div>
+    <div className="flex px-5 py-3 text-[14px] tracking-[-0.01em]">
+      <p className="w-[104px] shrink-0 leading-[1.3] text-white/60">{label}</p>
+      <div className="min-w-0 flex-1 leading-[1.25] text-white">{children}</div>
     </div>
   );
 }

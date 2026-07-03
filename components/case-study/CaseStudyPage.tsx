@@ -39,12 +39,16 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
       <div className="relative flex flex-col desk:flex-row">
         <CaseSidebar study={study} />
 
-        <main className="min-w-0 flex-1 desk:py-6">
+        <main className="min-w-0 flex-1 desk:pb-6">
           {/* Title + (mobile) client info + hero */}
-          <div className="flex flex-col gap-4 desk:gap-10">
-            <h1 className="fade-up tracking-display px-6 text-[32px] font-medium leading-none text-white [animation-delay:100ms] desk:text-[56px]">
-              {study.title}
-            </h1>
+          <div className="flex flex-col gap-4 desk:gap-0">
+            {/* Equal 24px padding above/below the title; height grows with content.
+                The max-width keeps the title wrapping onto two lines at any viewport. */}
+            <div className="p-6 pb-0 desk:pb-6">
+              <h1 className="fade-up tracking-display max-w-[30ch] text-[32px] font-medium leading-none text-white [animation-delay:100ms] desk:text-[56px]">
+                {study.title}
+              </h1>
+            </div>
             <ClientInfo info={study.info} className="fade-up [animation-delay:200ms] desk:hidden" />
             <div className="fade-up [animation-delay:300ms]">
               <CaseMediaBlock block={{ kind: "full", slot: study.hero }} />

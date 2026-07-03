@@ -57,7 +57,7 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
               {study.description.map((paragraph) => (
                 <p
                   key={paragraph}
-                  className="text-[12px] leading-[1.15] tracking-[-0.02em] text-white"
+                  className="text-[14px] leading-[1.35] tracking-[-0.01em] text-white"
                 >
                   {paragraph}
                 </p>
