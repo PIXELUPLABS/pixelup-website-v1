@@ -17,7 +17,7 @@ export function SectionShell({
       {/* 8px top padding + the 16px block gap above the section = 24px of
           visual space above the heading, equal to the 24px below it. */}
       <div className="p-6 pt-2 desk:w-1/2">
-        <h2 className="tracking-display text-[24px] font-medium leading-none text-white desk:text-[48px]">
+        <h2 className="tracking-display text-balance text-[24px] font-medium leading-none text-white desk:text-[48px]">
           {heading}
         </h2>
       </div>

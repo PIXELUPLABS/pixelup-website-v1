@@ -91,7 +91,7 @@ export function MoreProjects({ refs }: { refs: MoreProjectRef[] }) {
 
   return (
     <section className="flex w-full flex-col gap-8 border-t-[0.5px] border-hairline p-6 desk:gap-12">
-      <h2 className="tracking-display max-w-[536px] text-[24px] font-medium leading-none text-white desk:text-[48px]">
+      <h2 className="tracking-display max-w-[536px] text-balance text-[24px] font-medium leading-none text-white desk:text-[48px]">
         More Projects
       </h2>
       <div className="grid gap-8 desk:grid-cols-2 desk:gap-6">
