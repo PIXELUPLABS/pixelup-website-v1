@@ -28,6 +28,7 @@ export const metadata: Metadata = {
   title: "PIXELUP LABS - Premium Brands and Websites",
   description:
     "We build brands, websites and products that command enterprise trust.",
+  alternates: { canonical: "/" },
 };
 
 export default function RootLayout({

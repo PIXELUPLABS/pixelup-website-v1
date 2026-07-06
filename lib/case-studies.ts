@@ -90,7 +90,7 @@ export interface CaseStudy {
 }
 
 const greptile: CaseStudy = {
-  slug: "greptile-design-system",
+  slug: "greptile",
   title: "Greptile: YC W24 to $25M Series A in 6 Months",
   metaTitle: "Greptile Case Study — PIXELUP LABS",
   metaDescription:
@@ -298,6 +298,7 @@ const sainapse: CaseStudy = {
   ],
   hero: {
     media: { type: "video", src: "/media/sainapse.mp4" },
+    alt: "Sainapse brand reveal motion loop",
     overlayLogo: "/media/sainapse.svg",
   },
   sections: [
@@ -432,7 +433,7 @@ const sainapse: CaseStudy = {
   ],
   moreProjects: [
     { slug: "sully", tags: "Website & Motion Design" },
-    { slug: "greptile-design-system", tags: "Branding & Product Design" },
+    { slug: "greptile", tags: "Branding & Product Design" },
   ],
 };
 
@@ -589,7 +590,7 @@ const sully: CaseStudy = {
     },
   ],
   moreProjects: [
-    { slug: "greptile-design-system", tags: "Branding & Product Design" },
+    { slug: "greptile", tags: "Branding & Product Design" },
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },
   ],
 };

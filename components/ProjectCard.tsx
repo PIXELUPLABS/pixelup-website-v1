@@ -6,13 +6,14 @@ import type { Project } from "@/lib/projects";
 const mediaHover =
   "transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]";
 
-function CardMedia({ project }: { project: Project }) {
+function CardMedia({ project, priority }: { project: Project; priority: boolean }) {
   if (project.media.type === "video") {
     return (
       <video
         className={`h-full w-full object-cover ${mediaHover}`}
         src={project.media.src}
         poster={project.media.poster}
+        aria-label={project.alt}
         autoPlay
         loop
         muted
@@ -23,8 +24,9 @@ function CardMedia({ project }: { project: Project }) {
   return (
     <Image
       src={project.media.src}
-      alt={`${project.label} — project by PixelUp Labs`}
+      alt={project.alt}
       fill
+      priority={priority}
       sizes="(min-width: 1200px) 70vw, 100vw"
       className={`object-cover ${mediaHover}`}
     />
@@ -46,7 +48,8 @@ export function ProjectCard({
   // ~1008 x 584 on the live site → aspect ratio ≈ 1.73:1. Square corners, clipped.
   const inner = (
     <div className="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
-      <CardMedia project={project} />
+      {/* The first card is the homepage LCP — preload it. */}
+      <CardMedia project={project} priority={index === 0} />
       {project.overlayLogo && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <img

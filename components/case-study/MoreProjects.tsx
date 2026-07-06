@@ -8,12 +8,27 @@ const mediaHover =
   "transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]";
 
 function CardMedia({ project }: { project: Project }) {
+  // Prefer the dedicated square high-res crop (from the case study title
+  // image); it fills the 1:1 frame without the lossy cover-crop of the
+  // 16:9 homepage media, and replaces videos with a crisp still.
+  if (project.cardImage) {
+    return (
+      <Image
+        src={project.cardImage}
+        alt={project.alt}
+        fill
+        sizes="(min-width: 1200px) 38vw, 100vw"
+        className={`object-cover ${mediaHover}`}
+      />
+    );
+  }
   if (project.media.type === "video") {
     return (
       <video
         className={`h-full w-full object-cover ${mediaHover}`}
         src={project.media.src}
         poster={project.media.poster}
+        aria-label={project.alt}
         autoPlay
         loop
         muted
@@ -24,9 +39,9 @@ function CardMedia({ project }: { project: Project }) {
   return (
     <Image
       src={project.media.src}
-      alt={`${project.label} — project by PixelUp Labs`}
+      alt={project.alt}
       fill
-      sizes="(min-width: 1200px) 26vw, 100vw"
+      sizes="(min-width: 1200px) 38vw, 100vw"
       className={`object-cover ${mediaHover}`}
     />
   );
@@ -43,7 +58,9 @@ function ProjectCardSmall({
     <>
       <div className="relative aspect-square w-full overflow-hidden bg-white/[0.03]">
         <CardMedia project={project} />
-        {project.overlayLogo && (
+        {/* Card crops already carry the client's mark; only overlay it on
+            homepage media (e.g. the Sainapse video). */}
+        {!project.cardImage && project.overlayLogo && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <img src={project.overlayLogo} alt="" aria-hidden="true" className="w-[30%]" />
           </div>

@@ -14,11 +14,14 @@ export function CaseMediaSlot({
   slot,
   aspect,
   sizes = "(min-width: 1200px) 80vw, 100vw",
+  priority = false,
 }: {
   slot: MediaSlot;
   /** aspect-* utility that sets the frame's proportion (from Figma). */
   aspect: string;
   sizes?: string;
+  /** Preload the image — for above-the-fold media (the case hero). */
+  priority?: boolean;
 }) {
   const tone = slot.tone ?? "faint";
 
@@ -33,6 +36,7 @@ export function CaseMediaSlot({
           className="absolute inset-0 h-full w-full object-cover"
           src={slot.media.src}
           poster={slot.media.poster}
+          aria-label={slot.alt}
           autoPlay
           loop
           muted
@@ -44,6 +48,7 @@ export function CaseMediaSlot({
           alt={slot.alt ?? ""}
           fill
           sizes={sizes}
+          priority={priority}
           className="object-cover"
         />
       )}
@@ -65,11 +70,17 @@ export function CaseMediaSlot({
  * A media row between sections: full-bleed single frame (1160×696 in Figma)
  * or a side-by-side pair (576×548 each) that stacks on mobile.
  */
-export function CaseMediaBlock({ block }: { block: MediaBlock }) {
+export function CaseMediaBlock({
+  block,
+  priority = false,
+}: {
+  block: MediaBlock;
+  priority?: boolean;
+}) {
   if (block.kind === "full") {
     return (
       <div className="px-6 desk:px-0">
-        <CaseMediaSlot slot={block.slot} aspect="aspect-[1160/696]" />
+        <CaseMediaSlot slot={block.slot} aspect="aspect-[1160/696]" priority={priority} />
       </div>
     );
   }

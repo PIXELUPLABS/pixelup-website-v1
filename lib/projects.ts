@@ -16,17 +16,23 @@ export interface Project {
   href: string;
   external: boolean;
   media: ProjectMedia;
+  /** Describes the card media — alt text for images, aria-label for videos. */
+  alt: string;
+  /** Square high-res crop used by the "More projects" cards on case pages. */
+  cardImage?: string;
   /** Optional logo mark rendered centered on top of the card media (e.g. Sainapse). */
   overlayLogo?: string;
 }
 
 export const projects: Project[] = [
   {
-    slug: "greptile-design-system",
+    slug: "greptile",
     label: "Greptile",
-    href: "/greptile-design-system",
+    href: "/case-studies/greptile",
     external: false,
     media: { type: "image", src: "/media/greptile.png" },
+    alt: "Glowing green Greptile logo mark on a dark background — brand and product design by PixelUp Labs",
+    cardImage: "/media/greptile/card.png",
   },
   {
     slug: "henry-labs",
@@ -34,6 +40,7 @@ export const projects: Project[] = [
     href: "https://henrylabs.ai",
     external: true,
     media: { type: "video", src: "/media/henry-labs.mp4" },
+    alt: "Henry Labs website motion reel — design by PixelUp Labs",
   },
   {
     slug: "ctgt",
@@ -41,6 +48,7 @@ export const projects: Project[] = [
     href: "https://www.ctgt.ai/",
     external: true,
     media: { type: "image", src: "/media/ctgt.png" },
+    alt: "CTGT website design by PixelUp Labs",
   },
   {
     slug: "streamline",
@@ -48,13 +56,16 @@ export const projects: Project[] = [
     href: "https://www.streamline.ai/",
     external: true,
     media: { type: "image", src: "/media/streamline.png" },
+    alt: "Streamline website design by PixelUp Labs",
   },
   {
     slug: "sainapse",
     label: "Sainapse",
-    href: "/sainapse",
+    href: "/case-studies/sainapse",
     external: false,
     media: { type: "video", src: "/media/sainapse.mp4" },
+    alt: "Sainapse brand reveal motion loop — brand identity by PixelUp Labs",
+    cardImage: "/media/sainapse/card.png",
     overlayLogo: "/media/sainapse.svg",
   },
   {
@@ -63,6 +74,7 @@ export const projects: Project[] = [
     href: "https://reducto.ai/",
     external: true,
     media: { type: "image", src: "/media/reducto.png" },
+    alt: "Reducto website design by PixelUp Labs",
   },
   {
     slug: "valley",
@@ -70,13 +82,16 @@ export const projects: Project[] = [
     href: "https://www.joinvalley.co/",
     external: true,
     media: { type: "image", src: "/media/valley.png" },
+    alt: "Valley website design by PixelUp Labs",
   },
   {
     slug: "sully",
     label: "Sully.ai",
-    href: "/sully",
+    href: "/case-studies/sully",
     external: false,
     media: { type: "image", src: "/media/sully.png" },
+    alt: "Sully.ai logo mark over a bright hospital corridor — website and motion design by PixelUp Labs",
+    cardImage: "/media/sully/card.png",
   },
   {
     slug: "revyl",
@@ -84,6 +99,7 @@ export const projects: Project[] = [
     href: "https://revyl.ai/",
     external: true,
     media: { type: "image", src: "/media/revyl.png" },
+    alt: "Revyl website design by PixelUp Labs",
   },
   {
     slug: "synthio",
@@ -91,6 +107,7 @@ export const projects: Project[] = [
     href: "https://synthiolabs.com/",
     external: true,
     media: { type: "image", src: "/media/synthio.png" },
+    alt: "Synthio Labs website design by PixelUp Labs",
   },
   {
     slug: "dayflow",
@@ -98,6 +115,7 @@ export const projects: Project[] = [
     href: "https://dayflow.so/",
     external: true,
     media: { type: "image", src: "/media/dayflow.png" },
+    alt: "Dayflow website design by PixelUp Labs",
   },
 ];
 

@@ -52,7 +52,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
             </div>
             <ClientInfo info={study.info} className="fade-up [animation-delay:200ms] desk:hidden" />
             <div className="fade-up [animation-delay:300ms]">
-              <CaseMediaBlock block={{ kind: "full", slot: study.hero }} />
+              <CaseMediaBlock block={{ kind: "full", slot: study.hero }} priority />
             </div>
           </div>
 
