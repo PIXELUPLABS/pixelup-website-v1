@@ -135,10 +135,10 @@ const greptile: CaseStudy = {
     link: { label: "greptile.com", href: "https://greptile.com" },
   },
   description: [
-    "Under intense timelines, we partnered with Greptile to evolve their AI code review platform from a functional product into an enterprise-ready system.",
-    "With YC backing and strong technology, Greptile was gaining traction, but gaps in product clarity, brand maturity, and overall experience surfaced as they moved upmarket, where trust and reliability are non-negotiable.",
-    "We treated the work as a system design problem. Brand, product, website, and sales assets were designed together, prioritizing clarity, durability, and trust at every touchpoint.",
-    "The impact was immediate. Demo requests doubled in week one, 180,000+ bugs were caught in the first month, and within six months Greptile raised a $25M Series A at a $180M valuation led by Benchmark.",
+    "Under intense timelines, we partnered with Greptile to evolve their AI code review platform into an enterprise-ready system.",
+    "Greptile had YC backing and strong technology, but gaps in product clarity and brand maturity surfaced as they moved upmarket, where trust is non-negotiable.",
+    "We treated the work as a system design problem: brand, product, website, and sales assets designed together, prioritizing clarity and trust at every touchpoint.",
+    "The impact was immediate. Demo requests doubled in week one, and within six months Greptile raised a $25M Series A at a $180M valuation led by Benchmark.",
     "And yeah, it didn’t just work. It scaled.",
   ],
   hero: {
@@ -296,9 +296,9 @@ const sainapse: CaseStudy = {
     link: { label: "sainapse.ai", href: "https://sainapse.ai" },
   },
   description: [
-    "After seven years and 2M+ production tickets, Sainapse had proven technology, but a brand that couldn't keep pace. Founded in 2017 with backing from Accel, the platform had evolved from basic automation to a full agentic AI system, yet their identity still felt fragmented, technical, and hard to explain.",
-    "As they prepared to launch general availability in December 2024, the gaps became critical. Enterprise buyers needed clarity. Sales teams needed confidence. The market needed a signal that Sainapse was built to scale.",
-    "We approached this as a complete system rebuild. Brand voice, visual identity, and web presence were designed together to communicate one truth: proof over promise. Every word, interaction, and design decision reinforced precision, traceability, and calm confidence: the exact qualities enterprises demand from mission-critical infrastructure.",
+    "After seven years and 2M+ production tickets, Sainapse had proven technology, but a brand that couldn't keep pace. Their identity felt fragmented, technical, and hard to explain.",
+    "As general availability approached, the gaps became critical. Enterprise buyers needed clarity, and the market needed a signal that Sainapse was built to scale.",
+    "We approached this as a complete system rebuild: brand voice, visual identity, and web presence designed together to communicate one truth, proof over promise. Every decision reinforced precision, traceability, and calm confidence.",
     "The result was a brand that finally matched the sophistication of the platform underneath.",
   ],
   hero: {
@@ -432,9 +432,9 @@ const sully: CaseStudy = {
   },
   description: [
     "Sully was scaling fast, $0.5M to $5M ARR in 9 months, but their website wasn't keeping up.",
-    "With YC backing and breakthrough AI technology automating clinical workflows for major hospital systems, Sully was closing enterprise deals. But enterprise buyers were landing on an outdated, inconsistent site that didn't match the product they were being sold. The brand was fragmented. SEO was broken. For a company closing $15M+ contracts with hospital executives, the website had become a liability.",
-    "We treated this as an enterprise credibility problem. The website needed to become a deal closer, not a blocker. Every page, motion sequence, and explainer was designed to help hospital executives understand complex AI workflows before the demo even started.",
-    "The impact was immediate. One concept explainer page directly contributed to closing a major enterprise contract. Within 11 months, Sully scaled 26x, adding 20M+ minutes to healthcare workforce capacity and raising $32M+ at a $150M valuation.",
+    "Enterprise buyers were landing on an outdated, inconsistent site that didn't match the product they were being sold. For a company closing $15M+ contracts with hospital executives, the website had become a liability.",
+    "We treated this as an enterprise credibility problem. Every page, motion sequence, and explainer was designed to help hospital executives understand complex AI workflows before the demo even started.",
+    "The impact was immediate. One explainer page directly contributed to closing a major enterprise contract, and within 11 months Sully scaled 26x, raising $32M+ at a $150M valuation.",
   ],
   hero: {
     media: { type: "image", src: "/media/sully/hero.png" },
