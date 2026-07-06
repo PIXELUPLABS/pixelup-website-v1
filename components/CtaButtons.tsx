@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { links } from "@/lib/projects";
 
 function PaperPlaneIcon() {
@@ -45,15 +46,13 @@ export function CtaButtons() {
         <span>CHAT ON TG</span>
         <PaperPlaneIcon />
       </a>
-      <a
-        href={links.discoveryCall}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        href={links.bookCall}
         className={`${baseButton} bg-accent hover:brightness-110`}
       >
         <span>START NOW</span>
         <ArrowUpRightIcon />
-      </a>
+      </Link>
     </div>
   );
 }

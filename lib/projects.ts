@@ -109,18 +109,12 @@ export const projects: Project[] = [
     media: { type: "image", src: "/media/synthio.png" },
     alt: "Synthio Labs website design by PixelUp Labs",
   },
-  {
-    slug: "dayflow",
-    label: "Dayflow",
-    href: "https://dayflow.so/",
-    external: true,
-    media: { type: "image", src: "/media/dayflow.png" },
-    alt: "Dayflow website design by PixelUp Labs",
-  },
 ];
 
 /** Global CTA / social links used across the site. */
 export const links = {
+  /** Internal booking page with the Cal.com embed (see app/call). */
+  bookCall: "/call",
   discoveryCall: "https://cal.com/pixelup/discovery",
   telegram: "https://t.me/dakshpixelup",
 };

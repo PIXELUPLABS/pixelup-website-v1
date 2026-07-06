@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { links } from "@/lib/projects";
 
@@ -35,14 +36,13 @@ export function MobileMenu() {
           >
             Chat on Telegram
           </a>
-          <a
-            href={links.discoveryCall}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href={links.bookCall}
+            onClick={() => setOpen(false)}
             className="rounded-[2px] bg-accent px-3 py-2.5 text-[14px] font-medium text-white"
           >
             Start now
-          </a>
+          </Link>
         </div>
       )}
     </div>
