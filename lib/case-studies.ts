@@ -82,19 +82,52 @@ export interface CaseStudy {
     role: string;
     image: MediaSlot;
   };
-  faqHeading: string;
-  /* NOTE: only the answers marked verbatim existed in Figma; the rest were
-     drafted from the case study copy — review before launch. */
-  faq: FaqItem[];
   moreProjects: MoreProjectRef[];
 }
+
+/**
+ * Shared FAQ shown on every case study page: about PixelUp itself, written
+ * to resolve the objections prospects most often bring to a first call.
+ */
+export const faqHeading = "Frequently Answered Question";
+
+export const pixelupFaq: FaqItem[] = [
+  {
+    q: "What does PixelUp Labs do?",
+    a: "We build brands, websites and products for startups that need to command enterprise trust. Brand identity, website design, product design, design systems, motion and sales assets, all designed together as one system.",
+  },
+  {
+    q: "What results have you delivered for clients?",
+    a: "Greptile doubled demo requests in week one and raised a $25M Series A within six months of launch. Sully scaled 26x in 11 months after its redesign. Sainapse relaunched ahead of general availability and is now deployed by Fortune 500 companies including Ford and Freshworks.",
+  },
+  {
+    q: "How long does a typical engagement take?",
+    a: "We work on startup timelines. Most engagements ship in weeks, not months, and we regularly deliver under hard deadlines like fundraise announcements and launch dates.",
+  },
+  {
+    q: "How much does it cost?",
+    a: "Scope drives pricing, so we quote per engagement. Book a discovery call and you will leave with a clear recommendation and a straightforward quote.",
+  },
+  {
+    q: "What is it like to work with you?",
+    a: "You work directly with the team on Telegram, with fast turnarounds and quick iterations. No account managers, no layers, no surprises.",
+  },
+  {
+    q: "We already have a brand and website. Do we need to start over?",
+    a: "Rarely. Most clients come to us with something functional that no longer matches their ambition. We keep what works and rebuild what holds you back.",
+  },
+  {
+    q: "How do we get started?",
+    a: "Book a discovery call or message us on Telegram. We will review where you are today and tell you honestly what we would change.",
+  },
+];
 
 const greptile: CaseStudy = {
   slug: "greptile",
   title: "Greptile: YC W24 to $25M Series A in 6 Months",
-  metaTitle: "Greptile Case Study — PIXELUP LABS",
+  metaTitle: "Greptile Case Study - PIXELUP LABS",
   metaDescription:
-    "How we partnered with Greptile to evolve their AI code review platform into an enterprise-ready system — doubling demo requests in week one and helping set up a $25M Series A.",
+    "How we partnered with Greptile to evolve their AI code review platform into an enterprise-ready system, doubling demo requests in week one and helping set up a $25M Series A.",
   info: {
     client: "Greptile (AI code review platform)",
     year: "2025",
@@ -244,34 +277,6 @@ const greptile: CaseStudy = {
       alt: "Daksh Gupta, founder of Greptile",
     },
   },
-  faqHeading: "Frequently Answered Question",
-  faq: [
-    {
-      q: "How much funding did Greptile raise?",
-      a: "Greptile raised a $25M Series A at a $180M valuation, led by Benchmark, within six months of the redesign launching.",
-    },
-    {
-      // Verbatim from Figma.
-      q: "What does Greptile do?",
-      a: "Greptile is an AI code review platform that automatically catches bugs in pull requests for engineering teams.",
-    },
-    {
-      q: "How long did the design project take?",
-      a: "The engagement ran on an intense startup timeline — brand, product, website, and sales assets were designed together as one system.",
-    },
-    {
-      q: "What results did the redesign achieve?",
-      a: "Demo requests doubled in the first week, 180,000+ bugs were caught in the first month, and Greptile raised a $25M Series A within six months.",
-    },
-    {
-      q: "Who invested in Greptile?",
-      a: "Greptile is backed by Y Combinator, and its $25M Series A was led by Benchmark.",
-    },
-    {
-      q: "When was Greptile in Y Combinator?",
-      a: "Greptile went through Y Combinator in the Winter 2024 (W24) batch.",
-    },
-  ],
   moreProjects: [
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },
     { slug: "sully", tags: "Website & Motion Design" },
@@ -281,9 +286,9 @@ const greptile: CaseStudy = {
 const sainapse: CaseStudy = {
   slug: "sainapse",
   title: "Sainapse: From Technical Product to Enterprise Standard",
-  metaTitle: "Sainapse Case Study — PIXELUP LABS",
+  metaTitle: "Sainapse Case Study - PIXELUP LABS",
   metaDescription:
-    "A complete system rebuild for Sainapse's agentic AI support platform — brand voice, visual identity, and web presence designed together ahead of their general availability launch.",
+    "A complete system rebuild for Sainapse's agentic AI support platform: brand voice, visual identity, and web presence designed together ahead of their general availability launch.",
   info: {
     client: "Sainapse (AI Customer Support Platform)",
     year: "2025",
@@ -293,7 +298,7 @@ const sainapse: CaseStudy = {
   description: [
     "After seven years and 2M+ production tickets, Sainapse had proven technology, but a brand that couldn't keep pace. Founded in 2017 with backing from Accel, the platform had evolved from basic automation to a full agentic AI system, yet their identity still felt fragmented, technical, and hard to explain.",
     "As they prepared to launch general availability in December 2024, the gaps became critical. Enterprise buyers needed clarity. Sales teams needed confidence. The market needed a signal that Sainapse was built to scale.",
-    "We approached this as a complete system rebuild. Brand voice, visual identity, and web presence were designed together to communicate one truth: proof over promise. Every word, interaction, and design decision reinforced precision, traceability, and calm confidence—the exact qualities enterprises demand from mission-critical infrastructure.",
+    "We approached this as a complete system rebuild. Brand voice, visual identity, and web presence were designed together to communicate one truth: proof over promise. Every word, interaction, and design decision reinforced precision, traceability, and calm confidence: the exact qualities enterprises demand from mission-critical infrastructure.",
     "The result was a brand that finally matched the sophistication of the platform underneath.",
   ],
   hero: {
@@ -407,30 +412,6 @@ const sainapse: CaseStudy = {
       alt: "Abhirup Ghosh, co-founder of Sainapse",
     },
   },
-  faqHeading: "Frequently Answered Question",
-  faq: [
-    {
-      // Verbatim from Figma.
-      q: "What did the Sainapse rebrand include?",
-      a: "The rebrand included complete brand identity, logo design, brand voice guidelines, and website design.",
-    },
-    {
-      q: "When did Sainapse launch their new website?",
-      a: "The new brand and website launched as Sainapse prepared for general availability in December 2024.",
-    },
-    {
-      q: "What was the design approach for Sainapse?",
-      a: "We treated it as a credibility problem, not a cosmetics one — proof over promise, precision in language, and trust at every touchpoint.",
-    },
-    {
-      q: "How long did the Sainapse design project take?",
-      a: "Brand voice, visual identity, and web presence were designed together as a single system rebuild in one focused engagement.",
-    },
-    {
-      q: "What companies has Sainapse worked with since the rebrand?",
-      a: "Sainapse is deployed by Fortune 500 companies including Ford, Avery Dennison, and Freshworks.",
-    },
-  ],
   moreProjects: [
     { slug: "sully", tags: "Website & Motion Design" },
     { slug: "greptile", tags: "Branding & Product Design" },
@@ -440,9 +421,9 @@ const sainapse: CaseStudy = {
 const sully: CaseStudy = {
   slug: "sully",
   title: "Sully: From Liability to Deal Closer in 11 Months",
-  metaTitle: "Sully Case Study — PIXELUP LABS",
+  metaTitle: "Sully Case Study - PIXELUP LABS",
   metaDescription:
-    "How we turned Sully's website from an enterprise liability into a deal closer — motion-driven explainers that helped scale 26x and support a $32M+ raise at a $150M valuation.",
+    "How we turned Sully's website from an enterprise liability into a deal closer, with motion-driven explainers that helped scale 26x and support a $32M+ raise at a $150M valuation.",
   info: {
     client: "Sully (AI Healthcare Platform)",
     year: "2025",
@@ -564,31 +545,6 @@ const sully: CaseStudy = {
       alt: "Ahmed Omar, co-founder and CEO of Sully.ai",
     },
   },
-  faqHeading: "Frequently Answered Question",
-  faq: [
-    {
-      q: "What did the Sully website redesign include?",
-      a: "The redesign covered the full website — product pages, motion-driven concept explainers, a unified brand system, and a structural SEO overhaul.",
-    },
-    {
-      // Verbatim from Figma.
-      q: "How much funding has Sully raised?",
-      a: "Sully has raised $32M+ at a $150M valuation and is backed by Y Combinator.",
-    },
-    {
-      q: "What is Sully's valuation?",
-      a: "Sully's most recent raise valued the company at $150M.",
-    },
-    {
-      // TODO: confirm the batch with the client before launch.
-      q: "When was Sully in Y Combinator?",
-      a: "Sully is a Y Combinator-backed company.",
-    },
-    {
-      q: "What design approach worked for Sully?",
-      a: "We treated it as a sales enablement problem — motion-driven explainers, enterprise clarity, a consistent brand system, and strategic SEO.",
-    },
-  ],
   moreProjects: [
     { slug: "greptile", tags: "Branding & Product Design" },
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },

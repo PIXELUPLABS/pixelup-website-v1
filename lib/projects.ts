@@ -16,7 +16,7 @@ export interface Project {
   href: string;
   external: boolean;
   media: ProjectMedia;
-  /** Describes the card media — alt text for images, aria-label for videos. */
+  /** Describes the card media, alt text for images, aria-label for videos. */
   alt: string;
   /** Square high-res crop used by the "More projects" cards on case pages. */
   cardImage?: string;
@@ -31,7 +31,7 @@ export const projects: Project[] = [
     href: "/case-studies/greptile",
     external: false,
     media: { type: "image", src: "/media/greptile.png" },
-    alt: "Glowing green Greptile logo mark on a dark background — brand and product design by PixelUp Labs",
+    alt: "Glowing green Greptile logo mark on a dark background, brand and product design by PixelUp Labs",
     cardImage: "/media/greptile/card.png",
   },
   {
@@ -40,7 +40,7 @@ export const projects: Project[] = [
     href: "https://henrylabs.ai",
     external: true,
     media: { type: "video", src: "/media/henry-labs.mp4" },
-    alt: "Henry Labs website motion reel — design by PixelUp Labs",
+    alt: "Henry Labs website motion reel, design by PixelUp Labs",
   },
   {
     slug: "ctgt",
@@ -64,7 +64,7 @@ export const projects: Project[] = [
     href: "/case-studies/sainapse",
     external: false,
     media: { type: "video", src: "/media/sainapse.mp4" },
-    alt: "Sainapse brand reveal motion loop — brand identity by PixelUp Labs",
+    alt: "Sainapse brand reveal motion loop, brand identity by PixelUp Labs",
     cardImage: "/media/sainapse/card.png",
     overlayLogo: "/media/sainapse.svg",
   },
@@ -90,7 +90,7 @@ export const projects: Project[] = [
     href: "/case-studies/sully",
     external: false,
     media: { type: "image", src: "/media/sully.png" },
-    alt: "Sully.ai logo mark over a bright hospital corridor — website and motion design by PixelUp Labs",
+    alt: "Sully.ai logo mark over a bright hospital corridor, website and motion design by PixelUp Labs",
     cardImage: "/media/sully/card.png",
   },
   {

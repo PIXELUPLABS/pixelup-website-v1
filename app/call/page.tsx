@@ -3,9 +3,9 @@ import { CalEmbed } from "@/components/CalEmbed";
 import { LeftNav } from "@/components/LeftNav";
 
 export const metadata: Metadata = {
-  title: "Book a Call — PIXELUP LABS",
+  title: "Book a Call - PIXELUP LABS",
   description:
-    "Book a discovery call with PixelUp Labs — brands, websites and products that command enterprise trust.",
+    "Book a discovery call with PixelUp Labs: brands, websites and products that command enterprise trust.",
   alternates: { canonical: "/call" },
 };
 
@@ -17,6 +17,7 @@ export default function CallPage() {
       <LeftNav
         heading="We love working with bold founders who are tired of the ordinary"
         subheading="Brands, Websites and product design that leaves a lasting impression."
+        balanceHero
       />
       <section
         aria-label="Book a discovery call"

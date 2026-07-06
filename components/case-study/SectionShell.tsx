@@ -8,15 +8,21 @@
 export function SectionShell({
   heading,
   children,
+  topRule = false,
 }: {
   heading: string;
   children: React.ReactNode;
+  /** Full-width hairline above the section (Figma: the FAQ block). */
+  topRule?: boolean;
 }) {
   return (
-    <section className="w-full">
-      {/* 8px top padding + the 16px block gap above the section = 24px of
-          visual space above the heading, equal to the 24px below it. */}
-      <div className="p-6 pt-2 desk:w-1/2">
+    <section
+      className={`w-full ${topRule ? "border-t-[0.5px] border-hairline" : ""}`}
+    >
+      {/* Without a top rule, 8px top padding + the 16px block gap above the
+          section = 24px of visual space above the heading, equal to the 24px
+          below it. With a rule, the heading needs the full 24px under it. */}
+      <div className={`p-6 desk:w-1/2 ${topRule ? "" : "pt-2"}`}>
         <h2 className="tracking-display text-balance text-[24px] font-medium leading-none text-white desk:text-[48px]">
           {heading}
         </h2>

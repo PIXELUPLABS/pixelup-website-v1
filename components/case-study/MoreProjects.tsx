@@ -107,13 +107,24 @@ export function MoreProjects({ refs }: { refs: MoreProjectRef[] }) {
   });
 
   return (
-    <section className="flex w-full flex-col gap-8 border-t-[0.5px] border-hairline p-6 desk:gap-12">
-      <h2 className="tracking-display max-w-[536px] text-balance text-[24px] font-medium leading-none text-white desk:text-[48px]">
-        More Projects
-      </h2>
-      <div className="grid gap-8 desk:grid-cols-2 desk:gap-6">
-        {cards.map(({ project, tags }) => (
-          <ProjectCardSmall key={project.slug} project={project} tags={tags} />
+    <section className="w-full border-t-[0.5px] border-hairline">
+      <div className="p-6">
+        <h2 className="tracking-display max-w-[536px] text-balance text-[24px] font-medium leading-none text-white desk:text-[48px]">
+          More Projects
+        </h2>
+      </div>
+      {/* Cards span the full content width, split exactly at the page center
+          (the px-6 side padding is symmetric, so 50% of this row = the
+          vertical center rule): the first card's right border sits ON the
+          rule, the second starts one 24px gutter after it. */}
+      <div className="flex flex-col gap-8 px-6 pb-6 desk:flex-row desk:gap-0">
+        {cards.map(({ project, tags }, index) => (
+          <div
+            key={project.slug}
+            className={`flex min-w-0 desk:w-1/2 ${index > 0 ? "desk:pl-6" : ""}`}
+          >
+            <ProjectCardSmall project={project} tags={tags} />
+          </div>
         ))}
       </div>
     </section>

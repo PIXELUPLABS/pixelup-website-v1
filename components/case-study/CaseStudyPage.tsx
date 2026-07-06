@@ -1,6 +1,6 @@
 import Image from "next/image";
 import caseBg from "@/public/media/case-bg.png";
-import type { CaseStudy } from "@/lib/case-studies";
+import { faqHeading, pixelupFaq, type CaseStudy } from "@/lib/case-studies";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { CaseQuote } from "./CaseQuote";
@@ -75,8 +75,8 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
 
               <CaseQuote quote={study.quote} />
 
-              <SectionShell heading={study.faqHeading}>
-                <CaseFaq items={study.faq} />
+              <SectionShell heading={faqHeading} topRule>
+                <CaseFaq items={pixelupFaq} />
               </SectionShell>
 
               <MoreProjects refs={study.moreProjects} />

@@ -1,0 +1,23 @@
+# PixelUp Labs
+
+> PixelUp Labs is a design agency that builds brands, websites and products that command enterprise trust. We work primarily with YC-backed and venture-funded startups, positioning technical products so enterprise buyers see a market leader, not a risky bet.
+
+Services: brand identity, website design, product design, design systems, motion design, sales decks and SEO.
+
+Clients include Greptile, Sainapse, Sully.ai, Henry Labs, CTGT, Streamline, Reducto, Valley, Revyl and Synthio Labs.
+
+## Case Studies
+
+- [Greptile](https://pixeluplabs.com/case-studies/greptile): How we partnered with Greptile to evolve their AI code review platform into an enterprise-ready system. Demo requests doubled in week one, and within six months Greptile raised a $25M Series A at a $180M valuation led by Benchmark.
+- [Sainapse](https://pixeluplabs.com/case-studies/sainapse): A complete system rebuild for Sainapse's agentic AI support platform: brand voice, visual identity and web presence designed together ahead of their general availability launch. Deployed by Fortune 500 companies including Ford, Avery Dennison and Freshworks.
+- [Sully](https://pixeluplabs.com/case-studies/sully): How we turned Sully's website from an enterprise liability into a deal closer, with motion-driven explainers that helped the AI healthcare platform scale 26x and support a $32M+ raise at a $150M valuation.
+
+## Contact
+
+- [Book a discovery call](https://pixeluplabs.com/call): Schedule a call to discuss your project.
+- [Telegram](https://t.me/dakshpixelup): Chat directly with the team.
+- [Twitter/X](https://x.com/dakshpixelup): Follow PixelUp Labs.
+
+## Optional
+
+- [Homepage](https://pixeluplabs.com/): Selected work showcase with links to all client projects.
