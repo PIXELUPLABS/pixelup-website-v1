@@ -3,7 +3,24 @@ import { MobileMenu } from "./MobileMenu";
 import { TrustedStrip } from "./TrustedStrip";
 import { CtaButtons } from "./CtaButtons";
 
-export function LeftNav() {
+// Homepage hero copy — pages like /call pass their own.
+const defaultHeading =
+  "We build brands, websites and products that command enterprise trust";
+const defaultSubheading = (
+  <>
+    We <strong className="font-medium text-white">position your brand</strong>{" "}
+    to match your ambition. Enterprise clients see a{" "}
+    <strong className="font-medium text-white">market leader, not a risky bet</strong>
+  </>
+);
+
+export function LeftNav({
+  heading = defaultHeading,
+  subheading = defaultSubheading,
+}: {
+  heading?: string;
+  subheading?: React.ReactNode;
+}) {
   return (
     <nav className="flex flex-col gap-8 desk:h-full desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0">
       {/* Header: logo + (mobile-only) hamburger.
@@ -20,12 +37,10 @@ export function LeftNav() {
       {/* Hero */}
       <div className="flex flex-col gap-4 desk:mt-14">
         <h1 className="fade-up tracking-display max-w-[22ch] text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[30px]">
-          We build brands, websites and products that command enterprise trust
+          {heading}
         </h1>
         <p className="fade-up max-w-[40ch] text-[16px] leading-[1.2] tracking-[-0.02em] text-muted-65 [animation-delay:200ms]">
-          We <strong className="font-medium text-white">position your brand</strong>{" "}
-          to match your ambition. Enterprise clients see a{" "}
-          <strong className="font-medium text-white">market leader, not a risky bet</strong>
+          {subheading}
         </p>
       </div>
 
