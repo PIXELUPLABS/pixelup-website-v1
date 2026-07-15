@@ -43,14 +43,14 @@ export function CtaButtons() {
         rel="noopener noreferrer"
         className={`${baseButton} bg-button-dark hover:bg-white/[0.12]`}
       >
-        <span>CHAT ON TG</span>
+        <span>CHAT ON TELEGRAM</span>
         <PaperPlaneIcon />
       </a>
       <Link
         href={links.bookCall}
         className={`${baseButton} bg-accent hover:brightness-110`}
       >
-        <span>START NOW</span>
+        <span>START YOUR PROJECT</span>
         <ArrowUpRightIcon />
       </Link>
     </div>

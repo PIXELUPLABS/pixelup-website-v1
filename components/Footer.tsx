@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import unionMark from "@/public/media/Union.png";
 import { links, projects } from "@/lib/projects";
 import { CtaButtons } from "./CtaButtons";
 
@@ -20,29 +22,25 @@ const navItems = [
 
 /**
  * Site footer from the case study Figma template, shared with the homepage.
- * The giant outline wordmark is CSS-stroked text for now — swap for the brand
- * SVG when the asset lands. Sized with container-query units so it also fits
- * inside the homepage's scrolling column.
+ * The giant wordmark is the Union brand mark, sized with container-query
+ * units so it also fits inside the homepage's scrolling column.
  */
 export function Footer() {
   return (
     <footer className="border-t-[0.5px] border-hairline [container-type:inline-size]">
-      <p
-        aria-hidden="true"
-        className="whitespace-nowrap px-[2.5cqw] pt-[3cqw] text-center text-[11cqw] font-medium uppercase leading-[0.95] text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.9)]"
-      >
-        Pixelup Labs
-      </p>
+      <div aria-hidden="true" className="px-[2.5cqw] pt-[3cqw]">
+        <Image src={unionMark} alt="" className="h-auto w-full" />
+      </div>
 
-      <div className="mt-[3cqw] grid border-t-[0.5px] border-hairline desk:grid-cols-2">
-        <div className="p-5 desk:border-r-[0.5px] desk:border-hairline desk:p-10">
-          <div className="desk:max-w-[280px]">
+      <div className="mt-[3cqw] grid border-t-[0.5px] border-hairline desk:h-100 desk:grid-cols-2">
+        <div className="flex flex-col p-8 desk:border-r-[0.5px] desk:border-hairline desk:px-10 desk:pt-10">
+          <div className="desk:min-w-[340px] desk:max-w-[400px]">
             <CtaButtons />
           </div>
         </div>
         <nav
           aria-label="Footer"
-          className="flex flex-col items-start gap-3 border-t-[0.5px] border-hairline p-5 font-button text-[24px] font-semibold uppercase leading-[1.3] tracking-[-0.02em] text-white desk:border-t-0 desk:px-6 desk:py-8 desk:text-[28px]"
+          className="flex flex-col items-start gap-3 border-t-[0.5px] border-hairline p-8 font-button text-[24px] font-semibold uppercase leading-[1.3] tracking-[-0.02em] text-white desk:border-t-0 desk:px-6 desk:pt-10 desk:text-[28px]"
         >
           {navItems.map((item) =>
             item.href ? (

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
+import { Navbar } from "@/components/Navbar";
 import "./globals.css";
 
 // Inter Display — the real display face from the original Framer site,
@@ -41,7 +42,10 @@ export default function RootLayout({
       lang="en"
       className={`${interDisplay.variable} ${instrumentSans.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-base font-display text-white">{children}</body>
+      <body className="min-h-full bg-base font-display text-white">
+        <Navbar />
+        {children}
+      </body>
     </html>
   );
 }

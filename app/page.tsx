@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
 import { Showcase } from "@/components/Showcase";
 import { links } from "@/lib/projects";
@@ -39,16 +40,32 @@ const schema = {
 
 export default function Home() {
   return (
-    // Mobile: single column, page scrolls.
-    // Desktop (≥1200px): fixed-height flex row — static left nav + internally
-    // scrolling right showcase. See pixeluplabs-design-spec.md §2.
-    <div className="relative flex flex-col gap-8 p-5 desk:h-screen desk:flex-row desk:gap-8 desk:overflow-hidden">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-      />
-      <LeftNav />
-      <Showcase />
-    </div>
+    <>
+      {/* Mobile: single column, page scrolls.
+          Desktop (≥1200px): left nav pinned to the viewport while the showcase
+          scrolls the page underneath it — once the last card passes, the nav
+          unpins and the footer follows. See pixeluplabs-design-spec.md §2. */}
+      <div className="relative flex flex-col gap-8 p-5 desk:flex-row desk:items-start desk:gap-0">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+        <LeftNav sticky />
+        {/* Divider between the nav and showcase columns. `self-stretch`
+            overrides the row's `items-start` so it spans the row's full
+            height (set by Showcase's content) — flush from the navbar at
+            the top to the footer at the bottom, not just LeftNav's own
+            (shorter, sticky-capped) box. `-my-5` extends it past the row's
+            own p-5 padding so it touches the navbar/footer with no gap.
+            Horizontal margins replace the row's gap-8, keeping the same
+            total spacing either side of the line. */}
+        <div
+          aria-hidden="true"
+          className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
+        />
+        <Showcase scroll="page" />
+      </div>
+      <Footer />
+    </>
   );
 }

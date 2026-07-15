@@ -67,8 +67,10 @@ export function CaseMediaSlot({
 }
 
 /**
- * A media row between sections: full-bleed single frame (1160×696 in Figma)
- * or a side-by-side pair (576×548 each) that stacks on mobile.
+ * A media row between sections: a single frame (1160×696 in Figma) or a
+ * side-by-side pair (576×548 each) that stacks on mobile. On desktop each
+ * block gets even 24px spacing on all sides (desk:p-6), same as the hero;
+ * mobile keeps the original edge-to-edge px-6 treatment.
  */
 export function CaseMediaBlock({
   block,
@@ -79,13 +81,13 @@ export function CaseMediaBlock({
 }) {
   if (block.kind === "full") {
     return (
-      <div className="px-6 desk:px-0">
+      <div className="px-6 desk:p-6">
         <CaseMediaSlot slot={block.slot} aspect="aspect-[1160/696]" priority={priority} />
       </div>
     );
   }
   return (
-    <div className="flex flex-col gap-2 px-6 desk:flex-row desk:px-0">
+    <div className="flex flex-col gap-2 px-6 desk:flex-row desk:gap-6 desk:p-6">
       {block.slots.map((slot, i) => (
         <div key={i} className="min-w-0 flex-1">
           <CaseMediaSlot

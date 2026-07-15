@@ -1,6 +1,7 @@
 import Image from "next/image";
 import caseBg from "@/public/media/case-bg.png";
 import { faqHeading, pixelupFaq, type CaseStudy } from "@/lib/case-studies";
+import { Footer } from "../Footer";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { CaseQuote } from "./CaseQuote";
@@ -22,10 +23,13 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
       {/* Blue light-streak page background from Figma (the full locked `bg`
           layer, 1440×6773): anchored to the very top, spanning the full page
           width and flowing down the page behind all content. The mask fades
-          the image's bottom edge out so tall pages never show a hard cut. */}
+          the image's bottom edge out so tall pages never show a hard cut.
+          -top-16 pulls it up behind the sticky Navbar (h-16, 4rem) above this
+          page, so it's visible through the navbar at the top instead of
+          starting right below it; Navbar's z-30 keeps it painting on top. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 select-none [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]"
+        className="pointer-events-none absolute inset-x-0 -top-16 select-none [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]"
       >
         <Image
           src={caseBg}
@@ -44,21 +48,27 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
           <div className="flex flex-col gap-4 desk:gap-0">
             {/* Equal 24px space above and below the title on every breakpoint
                 (mobile: 8px padding + the 16px flex gap); height grows with
-                content. The max-width keeps the title on two lines. */}
-            <div className="p-6 pb-2 desk:pb-6">
+                content. The max-width keeps the title on two lines. On desktop
+                the bottom gap is owned by the hero's own padding below instead
+                (desk:pb-0), so it isn't double-counted. */}
+            <div className="p-6 pb-2 desk:pb-0">
               <h1 className="fade-up tracking-display max-w-[30ch] text-balance text-[32px] font-medium leading-none text-white [animation-delay:100ms] desk:text-[56px]">
                 {study.title}
               </h1>
             </div>
             <ClientInfo info={study.info} className="fade-up [animation-delay:200ms] desk:hidden" />
+            {/* CaseMediaBlock itself now owns the desk:p-6 spacing (shared
+                with every other media block on the page) — no extra padding
+                needed here. */}
             <div className="fade-up [animation-delay:300ms]">
               <CaseMediaBlock block={{ kind: "full", slot: study.hero }} priority />
             </div>
           </div>
 
           {/* Everything below the hero shares the faint center rule from the
-              Figma template (desktop only); content paints above it. */}
-          <div className="relative mt-4">
+              Figma template (desktop only); content paints above it. desk:mt-0
+              because the hero's own desk:p-6 above already provides the gap. */}
+          <div className="relative mt-4 desk:mt-0">
             <div
               aria-hidden="true"
               className="absolute inset-y-0 left-1/2 hidden border-l-[0.5px] border-hairline desk:block"
@@ -84,6 +94,8 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
           </div>
         </main>
       </div>
+
+      <Footer />
     </div>
   );
 }
