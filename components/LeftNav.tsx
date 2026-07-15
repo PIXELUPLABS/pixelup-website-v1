@@ -31,7 +31,10 @@ export function LeftNav({
   sticky?: boolean;
 }) {
   return (
-    <nav
+    // `aside`, not `nav` — this is hero copy + trusted-strip + CTAs, not a
+    // list of navigation links. Matches CaseSidebar's use of `aside` for the
+    // same sidebar role on case study pages.
+    <aside
       className={`flex flex-col gap-8 desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0 ${
         sticky
           ? // Stuck offset = Navbar's height (h-16, 4rem) + the page shell's
@@ -79,6 +82,6 @@ export function LeftNav({
           <CtaButtons />
         </div>
       </div>
-    </nav>
+    </aside>
   );
 }

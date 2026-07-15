@@ -115,6 +115,24 @@ export const pixelupFaq: FaqItem[] = [
   },
 ];
 
+/**
+ * FAQPage structured data (schema.org) for the FAQ block above — same
+ * questions/answers shown on every case study page, so Google can surface
+ * them as an FAQ rich result. Keep in sync with `pixelupFaq`.
+ */
+export const pixelupFaqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: pixelupFaq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+};
+
 const greptile: CaseStudy = {
   slug: "greptile",
   title: "Greptile: YC W24 to $25M Series A in 6 Months",

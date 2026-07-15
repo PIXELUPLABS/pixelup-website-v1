@@ -1,6 +1,11 @@
 import Image from "next/image";
 import caseBg from "@/public/media/case-bg.png";
-import { faqHeading, pixelupFaq, type CaseStudy } from "@/lib/case-studies";
+import {
+  faqHeading,
+  pixelupFaq,
+  pixelupFaqSchema,
+  type CaseStudy,
+} from "@/lib/case-studies";
 // import { Footer } from "../Footer"; // TODO: footer hidden site-wide for now, re-enable when ready.
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
@@ -19,6 +24,10 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
   return (
     // `relative` so the MobileMenu panel positions against the page.
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pixelupFaqSchema) }}
+      />
       {/* Blue light-streak page background from Figma (the full locked `bg`
           layer, 1440×6773): anchored to the very top, spanning the full page
           width and flowing down the page behind all content. The mask fades

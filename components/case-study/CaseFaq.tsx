@@ -40,19 +40,24 @@ export function CaseFaq({ items }: { items: FaqItem[] }) {
         const open = openIndex === index;
         return (
           <div key={item.q} className="py-3 first:pt-0 last:pb-0">
-            <button
-              type="button"
-              aria-expanded={open}
-              onClick={() => setOpenIndex(open ? null : index)}
-              className="group flex w-full cursor-pointer items-center justify-between gap-2 text-left"
-            >
-              <span className="text-[16px] leading-[1.5] text-white transition-opacity duration-200 group-hover:opacity-60">
-                {item.q}
-              </span>
-              <span className="transition-opacity duration-200 group-hover:opacity-60">
-                <PlusMinusIcon open={open} />
-              </span>
-            </button>
+            {/* h3 wraps the button (headings can't nest inside <button>) so
+                each question is a real heading in the page outline — matches
+                the FAQPage schema's Question/Answer pairs. */}
+            <h3>
+              <button
+                type="button"
+                aria-expanded={open}
+                onClick={() => setOpenIndex(open ? null : index)}
+                className="group flex w-full cursor-pointer items-center justify-between gap-2 text-left"
+              >
+                <span className="text-[16px] leading-[1.5] text-white transition-opacity duration-200 group-hover:opacity-60">
+                  {item.q}
+                </span>
+                <span className="transition-opacity duration-200 group-hover:opacity-60">
+                  <PlusMinusIcon open={open} />
+                </span>
+              </button>
+            </h3>
             {/* Answer stays in the DOM; grid-rows animates the height. */}
             <div
               className={`grid transition-[grid-template-rows] duration-300 ease-out ${

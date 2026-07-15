@@ -7,7 +7,9 @@ export function Showcase({ scroll = "internal" }: { scroll?: "internal" | "page"
     // "internal": column scrolls on its own, nav column stays put (fixed-height shells).
     // "page": no internal scroll — content sizes naturally so the page scrolls
     // past it (e.g. the homepage, to reveal the footer after the last card).
-    <section
+    // `main` — this is the page's primary content region (only usage today
+    // is the homepage's project listing), not a generic section.
+    <main
       aria-label="Selected work"
       className={`flex flex-col gap-6 desk:flex-1 ${
         scroll === "internal" ? "no-scrollbar desk:h-full desk:overflow-y-auto" : ""
@@ -16,6 +18,6 @@ export function Showcase({ scroll = "internal" }: { scroll?: "internal" | "page"
       {projects.map((project, index) => (
         <ProjectCard key={project.slug} project={project} index={index} />
       ))}
-    </section>
+    </main>
   );
 }

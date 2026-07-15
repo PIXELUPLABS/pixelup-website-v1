@@ -21,12 +21,13 @@ export default function CallPage() {
         subheading="Brands, Websites and product design that leaves a lasting impression."
         balanceHero
       />
-      <section
+      {/* `main` — this is the page's primary content region. */}
+      <main
         aria-label="Book a discovery call"
         className="no-scrollbar min-h-[640px] desk:h-full desk:min-h-0 desk:flex-1 desk:overflow-y-auto"
       >
         <CalEmbed />
-      </section>
+      </main>
     </div>
   );
 }

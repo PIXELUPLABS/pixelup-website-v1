@@ -67,9 +67,9 @@ function ProjectCardSmall({
         )}
       </div>
       <div className="flex flex-col">
-        <p className="truncate text-[20px] font-medium leading-[1.3] tracking-[-0.02em] text-white">
+        <h3 className="truncate text-[20px] font-medium leading-[1.3] tracking-[-0.02em] text-white">
           {project.label}
-        </p>
+        </h3>
         <p className="text-[12px] leading-[1.3] tracking-[-0.02em] text-white/60">
           {tags}
         </p>
