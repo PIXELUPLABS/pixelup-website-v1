@@ -113,16 +113,12 @@ export function MoreProjects({ refs }: { refs: MoreProjectRef[] }) {
           More Projects
         </h2>
       </div>
-      {/* Cards span the full content width, split exactly at the page center
-          (the px-6 side padding is symmetric, so 50% of this row = the
-          vertical center rule): the first card's right border sits ON the
-          rule, the second starts one 24px gutter after it. */}
-      <div className="flex flex-col gap-8 px-6 pb-6 desk:flex-row desk:gap-0">
-        {cards.map(({ project, tags }, index) => (
-          <div
-            key={project.slug}
-            className={`flex min-w-0 desk:w-1/2 ${index > 0 ? "desk:pl-6" : ""}`}
-          >
+      {/* Cards span the full content width, split evenly by the page center
+          with a 24px gutter between them, matching the media "pair" blocks
+          elsewhere on the page (equal-width flex-1 items + gap-6). */}
+      <div className="flex flex-col gap-8 px-6 pb-6 desk:flex-row desk:gap-6">
+        {cards.map(({ project, tags }) => (
+          <div key={project.slug} className="flex min-w-0 flex-1">
             <ProjectCardSmall project={project} tags={tags} />
           </div>
         ))}

@@ -1,4 +1,7 @@
-import { Footer } from "@/components/Footer";
+import Image from "next/image";
+// import bgBottom from "@/public/media/bg-bottom.png"; // TODO: hidden for now, re-enable when ready.
+import bgHome from "@/public/media/bg-home.png";
+// import { Footer } from "@/components/Footer"; // TODO: footer hidden site-wide for now, re-enable when ready.
 import { LeftNav } from "@/components/LeftNav";
 import { Showcase } from "@/components/Showcase";
 import { links } from "@/lib/projects";
@@ -40,7 +43,22 @@ const schema = {
 
 export default function Home() {
   return (
-    <>
+    // `relative` so the two background layers below anchor to the whole
+    // page (hero through footer) instead of just the viewport.
+    <div className="relative">
+      {/* Top-anchored background: page starts with this image. -top-16
+          pulls it up behind the sticky Navbar (h-16), same trick as the
+          case study page background; Navbar's z-30 keeps it painting on
+          top. Fades out by 85% down (bg-bottom is hidden for now, so this
+          fade just needs to clear a hard cut, not hand off to it). */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 -top-16 select-none [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]"
+      >
+        <Image src={bgHome} alt="" priority sizes="100vw" className="h-auto w-full" />
+      </div>
+      {/* <div> bg-bottom background TODO: hidden for now, re-enable when ready. */}
+
       {/* Mobile: single column, page scrolls.
           Desktop (≥1200px): left nav pinned to the viewport while the showcase
           scrolls the page underneath it — once the last card passes, the nav
@@ -65,7 +83,7 @@ export default function Home() {
         />
         <Showcase scroll="page" />
       </div>
-      <Footer />
-    </>
+      {/* <Footer /> TODO: hidden site-wide for now, re-enable when ready. */}
+    </div>
   );
 }

@@ -75,13 +75,6 @@ export interface CaseStudy {
   description: string[];
   hero: MediaSlot;
   sections: CaseSection[];
-  quote: {
-    heading: string;
-    text: string;
-    name: string;
-    role: string;
-    image: MediaSlot;
-  };
   moreProjects: MoreProjectRef[];
 }
 
@@ -139,7 +132,6 @@ const greptile: CaseStudy = {
     "Greptile had YC backing and strong technology, but gaps in product clarity and brand maturity surfaced as they moved upmarket, where trust is non-negotiable.",
     "We treated the work as a system design problem: brand, product, website, and sales assets designed together, prioritizing clarity and trust at every touchpoint.",
     "The impact was immediate. Demo requests doubled in week one, and within six months Greptile raised a $25M Series A at a $180M valuation led by Benchmark.",
-    "And yeah, it didn’t just work. It scaled.",
   ],
   hero: {
     media: { type: "image", src: "/media/greptile/hero.png" },
@@ -267,16 +259,6 @@ const greptile: CaseStudy = {
       ],
     },
   ],
-  quote: {
-    heading: "What Did Greptile’s CEO Say?",
-    text: "We constantly hear from customers that the web app feels unusually well designed.",
-    name: "Daksh Gupta",
-    role: "Founder",
-    image: {
-      media: { type: "image", src: "/media/greptile/daksh-gupta.png" },
-      alt: "Daksh Gupta, founder of Greptile",
-    },
-  },
   moreProjects: [
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },
     { slug: "sully", tags: "Website & Motion Design" },
@@ -297,7 +279,7 @@ const sainapse: CaseStudy = {
   },
   description: [
     "After seven years and 2M+ production tickets, Sainapse had proven technology, but a brand that couldn't keep pace. Their identity felt fragmented, technical, and hard to explain.",
-    "As general availability approached, the gaps became critical. Enterprise buyers needed clarity, and the market needed a signal that Sainapse was built to scale.",
+    "As Sainapse neared general availability, enterprise buyers needed clarity and confidence that the platform was built to scale.",
     "We approached this as a complete system rebuild: brand voice, visual identity, and web presence designed together to communicate one truth, proof over promise. Every decision reinforced precision, traceability, and calm confidence.",
     "The result was a brand that finally matched the sophistication of the platform underneath.",
   ],
@@ -402,16 +384,6 @@ const sainapse: CaseStudy = {
       ],
     },
   ],
-  quote: {
-    heading: "What Did Sainapse’s CEO Say?",
-    text: "The brand established a new standard for how Sainapse communicates, clear, evidence-driven, and built to scale alongside the platform itself.",
-    name: "Abhirup Ghosh",
-    role: "Co-founder, Head of Innovation",
-    image: {
-      media: { type: "image", src: "/media/sainapse/abhirup-ghosh.png" },
-      alt: "Abhirup Ghosh, co-founder of Sainapse",
-    },
-  },
   moreProjects: [
     { slug: "sully", tags: "Website & Motion Design" },
     { slug: "greptile", tags: "Branding & Product Design" },
@@ -535,16 +507,6 @@ const sully: CaseStudy = {
       ],
     },
   ],
-  quote: {
-    heading: "What Did Sully’s CEO Say?",
-    text: "Thanks for the super quick turnarounds and working with us to keep refining on the brand direction. We and our customers are really happy with the new website!",
-    name: "Ahmed Omar",
-    role: "Co-founder & CEO",
-    image: {
-      media: { type: "image", src: "/media/sully/ahmed-omar.png" },
-      alt: "Ahmed Omar, co-founder and CEO of Sully.ai",
-    },
-  },
   moreProjects: [
     { slug: "greptile", tags: "Branding & Product Design" },
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },

@@ -1,10 +1,9 @@
 import Image from "next/image";
 import caseBg from "@/public/media/case-bg.png";
 import { faqHeading, pixelupFaq, type CaseStudy } from "@/lib/case-studies";
-import { Footer } from "../Footer";
+// import { Footer } from "../Footer"; // TODO: footer hidden site-wide for now, re-enable when ready.
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
-import { CaseQuote } from "./CaseQuote";
 import { CaseSection } from "./CaseSection";
 import { CaseSidebar } from "./CaseSidebar";
 import { ClientInfo } from "./ClientInfo";
@@ -14,7 +13,7 @@ import { SectionShell } from "./SectionShell";
 /**
  * Shared case study template (see Figma case study drafts): sticky info
  * sidebar + main column of title, hero, staggered Q&A sections with media
- * rows, quote, FAQ, more projects, and the site footer.
+ * rows, FAQ, more projects, and the site footer.
  */
 export function CaseStudyPage({ study }: { study: CaseStudy }) {
   return (
@@ -43,7 +42,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
       <div className="relative flex flex-col desk:flex-row">
         <CaseSidebar study={study} />
 
-        <main className="min-w-0 flex-1 desk:pb-6">
+        <main className="min-w-0 flex-1">
           {/* Title + (mobile) client info + hero. */}
           <div className="flex flex-col gap-4 desk:gap-0">
             {/* Equal 24px space above and below the title on every breakpoint
@@ -67,8 +66,11 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
 
           {/* Everything below the hero shares the faint center rule from the
               Figma template (desktop only); content paints above it. desk:mt-0
-              because the hero's own desk:p-6 above already provides the gap. */}
-          <div className="relative mt-4 desk:mt-0">
+              because the hero's own desk:p-6 above already provides the gap.
+              desk:pb-6 lives on this wrapper (not <main>) so the rule below,
+              which is inset-y-0 against this relative box, stretches through
+              that padding and touches the footer instead of stopping short. */}
+          <div className="relative mt-4 desk:mt-0 desk:pb-6">
             <div
               aria-hidden="true"
               className="absolute inset-y-0 left-1/2 hidden border-l-[0.5px] border-hairline desk:block"
@@ -83,8 +85,6 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                 </div>
               ))}
 
-              <CaseQuote quote={study.quote} />
-
               <SectionShell heading={faqHeading} topRule>
                 <CaseFaq items={pixelupFaq} />
               </SectionShell>
@@ -95,7 +95,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         </main>
       </div>
 
-      <Footer />
+      {/* <Footer /> TODO: hidden site-wide for now, re-enable when ready. */}
     </div>
   );
 }

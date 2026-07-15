@@ -15,9 +15,10 @@ const socials = [
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Work", href: "/", count: projects.length },
+  { label: "Explorations", href: "/" },
   // About / Blog pages don't exist yet — rendered inert until they do.
-  { label: "About", href: null },
-  { label: "Blog", href: null },
+  // { label: "About", href: null },
+  // { label: "Blog", href: null },
 ] as const;
 
 /**
@@ -27,7 +28,7 @@ const navItems = [
  */
 export function Footer() {
   return (
-    <footer className="border-t-[0.5px] border-hairline [container-type:inline-size]">
+    <footer className="relative border-t-[0.5px] border-hairline [container-type:inline-size]">
       <div aria-hidden="true" className="px-[2.5cqw] pt-[3cqw]">
         <Image src={unionMark} alt="" className="h-auto w-full" />
       </div>
@@ -35,7 +36,7 @@ export function Footer() {
       <div className="mt-[3cqw] grid border-t-[0.5px] border-hairline desk:h-100 desk:grid-cols-2">
         <div className="flex flex-col p-8 desk:border-r-[0.5px] desk:border-hairline desk:px-10 desk:pt-10">
           <div className="desk:min-w-[340px] desk:max-w-[400px]">
-            <CtaButtons />
+            <CtaButtons telegramSolidBlack />
           </div>
         </div>
         <nav

@@ -6,10 +6,10 @@ import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
 const navLinks = [
-  { label: "About", href: "/" },
-  { label: "YC Partner", href: "/" },
+  // { label: "About", href: "/" },
+  // { label: "YC Partner", href: "/" },
   { label: "Explorations", href: "/" },
-  { label: "Services", href: "/" },
+  // { label: "Services", href: "/" },
   { label: "Blog", href: "/" },
 ] as const;
 
