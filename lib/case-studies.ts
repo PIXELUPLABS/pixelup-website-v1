@@ -146,7 +146,7 @@ const greptile: CaseStudy = {
     link: { label: "greptile.com", href: "https://greptile.com" },
   },
   description: [
-    "Under intense timelines, we partnered with Greptile to evolve their AI code review platform into an enterprise-ready system.",
+    "We partnered with Greptile to evolve their AI code review platform into an enterprise-ready system.",
     "Greptile had YC backing and strong technology, but gaps in product clarity and brand maturity surfaced as they moved upmarket, where trust is non-negotiable.",
     "We treated the work as a system design problem: brand, product, website, and sales assets designed together, prioritizing clarity and trust at every touchpoint.",
     "The impact was immediate. Demo requests doubled in week one, and within six months Greptile raised a $25M Series A at a $180M valuation led by Benchmark.",
