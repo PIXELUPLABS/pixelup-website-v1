@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
-const navLinks = [
-  // { label: "About", href: "/" },
-  // { label: "YC Partner", href: "/" },
+const navLinks: { label: string; href: string | null }[] = [
+  // { label: "About", href: null },
+  // { label: "YC Partner", href: null },
   { label: "Explorations", href: "/" },
-  // { label: "Services", href: "/" },
-  { label: "Blog", href: "/" },
-] as const;
+  // { label: "Services", href: null },
+  { label: "Blog", href: "/blog" },
+];
 
 /**
  * Full-width sticky top bar, separate from LeftNav's own logo/header.

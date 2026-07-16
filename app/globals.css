@@ -40,6 +40,14 @@
 html,
 body {
   background: var(--color-base);
+  /* Page-level scroll (homepage, case studies) still works — just hidden,
+     matching the .no-scrollbar treatment already used for internal scroll
+     containers below. */
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome / Safari / Edge */
 }
 
 /* Display type is tracked tight: -1.1px at the 30px desktop H1 size,
