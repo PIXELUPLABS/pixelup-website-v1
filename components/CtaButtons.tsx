@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { links } from "@/lib/projects";
 
 function PaperPlaneIcon() {
@@ -40,13 +39,15 @@ export function CtaButtons({
         <span>CHAT ON TELEGRAM</span>
         <PaperPlaneIcon />
       </a>
-      <Link
-        href={links.bookCall}
+      <a
+        href={links.discoveryCall}
+        target="_blank"
+        rel="noopener noreferrer"
         className={`${baseButton} bg-accent hover:brightness-110`}
       >
         <span>START YOUR PROJECT</span>
         <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
-      </Link>
+      </a>
     </div>
   );
 }
