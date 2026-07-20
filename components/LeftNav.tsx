@@ -19,6 +19,8 @@ export function LeftNav({
   subheading = defaultSubheading,
   balanceHero = false,
   sticky = false,
+  headingSize = "desk:text-[30px]",
+  headingFontClassName = "",
 }: {
   heading?: string;
   subheading?: React.ReactNode;
@@ -29,6 +31,11 @@ export function LeftNav({
       that use native page scroll (e.g. the homepage, so the footer can sit
       below the fold) rather than an internal-scroll shell. */
   sticky?: boolean;
+  /** Desktop heading size override — defaults to the homepage/`/call` size. */
+  headingSize?: string;
+  /** Extra className for the heading only (e.g. a next/font className) —
+      defaults to inheriting the site's usual font-display. */
+  headingFontClassName?: string;
 }) {
   return (
     // `aside`, not `nav` — this is hero copy + trusted-strip + CTAs, not a
@@ -62,7 +69,7 @@ export function LeftNav({
       {/* Hero */}
       <div className="flex flex-col gap-4 desk:mt-10">
         <h1
-          className={`fade-up tracking-display max-w-[22ch] text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[30px] ${balanceHero ? "text-balance" : ""}`}
+          className={`fade-up tracking-display max-w-[22ch] text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] ${headingSize} ${headingFontClassName} ${balanceHero ? "text-balance" : ""}`}
         >
           {heading}
         </h1>
