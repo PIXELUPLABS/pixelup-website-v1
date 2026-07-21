@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
@@ -22,6 +23,7 @@ const navLinks: { label: string; href: string | null }[] = [
  */
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 0);
@@ -44,7 +46,10 @@ export function Navbar() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="font-button text-[13px] font-semibold uppercase tracking-[-0.02em] text-white/70 transition-colors hover:text-white"
+                aria-current={pathname === item.href ? "page" : undefined}
+                className={`font-button text-[13px] font-semibold uppercase tracking-[-0.02em] transition-colors hover:text-white ${
+                  pathname === item.href ? "text-white" : "text-white/70"
+                }`}
               >
                 {item.label}
               </Link>
