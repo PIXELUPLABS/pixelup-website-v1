@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<!--
+  Reference landing page — the real "/" route, hand-flattened into one file.
+
+  Source of truth: this is NOT hand-designed content. Every class, every
+  string of copy, and every image path below is copied verbatim from the
+  actual component source files that compose the real / route:
+
+    app/layout.tsx              → <body> classes, global font setup (omitted here — see that file)
+    components/Navbar.tsx       → <header>
+    components/Logo.tsx         → the logo <a>/<img> inside <header>
+    components/MobileMenu.tsx   → the hamburger button inside <header> (closed state shown)
+    app/page.tsx                → the outer <div class="relative">, background image, page shell row
+    components/LeftNav.tsx      → <aside> (hero heading/subheading + bottom group)
+    components/TrustedStrip.tsx → the marquee block inside <aside>
+    components/CtaButtons.tsx   → the two-button row inside <aside>
+    components/Showcase.tsx     → <main aria-label="Selected work">
+    components/ProjectCard.tsx  → each card inside <main>
+    lib/projects.ts             → the real project data used to fill in the 10 cards below
+
+  Footer is intentionally NOT included: as of this snapshot, both render
+  call sites (app/page.tsx and CaseStudyPage.tsx) have <Footer /> commented
+  out behind a "TODO: re-enable when ready" note — so the real live page
+  does not render one either. Add it back here the moment it's re-enabled.
+
+  Interactive/JS-driven states are shown in their default/rest state only
+  (Navbar's scroll-triggered background, MobileMenu's open panel, the
+  marquee's animation, fade-up entrance animation, image hover-scale). This
+  file describes structure and rhythm, not motion — see DESIGN.md §8 for that.
+
+  If this page is later split into more components, or the homepage
+  changes shape, regenerate this file from the real source rather than
+  hand-editing it out of sync with the code.
+-->
+<html lang="en" class="h-full antialiased">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>PIXELUP LABS - Premium Brands and Websites</title>
+  </head>
+  <body class="min-h-full bg-base font-display text-white">
+    <!-- components/Navbar.tsx — sticky, appears on every route via app/layout.tsx.
+         Shown here in its unscrolled state (bg-transparent); once
+         window.scrollY > 0 it becomes bg-base/90 + backdrop-blur. -->
+    <header class="sticky top-0 z-30 h-16 border-b-[0.5px] border-hairline transition-colors bg-transparent">
+      <div class="flex h-full items-center justify-between gap-6 px-5">
+        <!-- components/Logo.tsx -->
+        <a class="flex items-center" aria-label="PIXELUP LABS home" href="/">
+          <img src="/media/nav-logo.svg" alt="PIXELUP LABS" class="-ml-[4.7px] h-[28px] w-auto" />
+        </a>
+
+        <!-- Neither nav link is the current route on "/", so both render inactive (text-white/70). -->
+        <nav aria-label="Primary" class="hidden items-center gap-8 desk:flex">
+          <a
+            href="/explorations"
+            class="font-button text-[13px] font-semibold uppercase tracking-[-0.02em] text-white/70 transition-colors hover:text-white"
+            >Explorations</a
+          >
+          <a
+            href="/blog"
+            class="font-button text-[13px] font-semibold uppercase tracking-[-0.02em] text-white/70 transition-colors hover:text-white"
+            >Blog</a
+          >
+        </nav>
+
+        <!-- components/MobileMenu.tsx — desk:hidden, closed state (hamburger, not the open panel) -->
+        <div class="desk:hidden">
+          <button
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            class="fade-up flex h-9 w-9 items-center justify-center text-white"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- app/page.tsx — outer page wrapper. `relative` so the background image
+         layer below anchors to the whole page, not just the viewport. -->
+    <div class="relative">
+      <!-- Decorative top-anchored background streak (bg-home.png). -top-16 pulls
+           it up behind the sticky navbar; fades to transparent by 85% down via
+           mask-image so it never hard-cuts against page content below. -->
+      <div
+        aria-hidden="true"
+        class="pointer-events-none absolute inset-x-0 -top-16 select-none [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]"
+      >
+        <img src="/media/bg-home.png" alt="" class="h-auto w-full" />
+      </div>
+
+      <!-- Page shell row: p-5 outer inset, stacks to one column below the desk
+           (1200px) breakpoint, becomes a two-column row (sidebar + content) at
+           and above it. -->
+      <div class="relative flex flex-col gap-8 p-5 desk:flex-row desk:items-start desk:gap-0">
+        <!-- components/LeftNav.tsx, called with `sticky` — pins to the viewport
+             on desktop while the content column scrolls past it. -->
+        <aside
+          class="flex flex-col gap-8 desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0 desk:sticky desk:top-21 desk:h-[calc(100vh-6.5rem)] desk:self-start"
+        >
+          <!-- Hero -->
+          <div class="flex flex-col gap-4 desk:mt-10">
+            <h1
+              class="fade-up tracking-display max-w-[22ch] text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[30px]"
+            >
+              We build brands, websites and products that command enterprise trust
+            </h1>
+            <p
+              class="fade-up max-w-[40ch] text-[16px] leading-[1.2] tracking-[-0.02em] text-muted-65 [animation-delay:200ms]"
+            >
+              We <strong class="font-medium text-white">position your brand</strong> to match your
+              ambition. Enterprise clients see a
+              <strong class="font-medium text-white">market leader, not a risky bet</strong>
+            </p>
+          </div>
+
+          <!-- Bottom group: trusted strip + CTAs, pinned to the bottom of the
+               sidebar on desktop via desk:mt-auto. -->
+          <div class="flex flex-col gap-5 desk:mt-auto">
+            <!-- components/TrustedStrip.tsx -->
+            <div class="fade-up [animation-delay:300ms]">
+              <div class="flex flex-col gap-3">
+                <p class="text-[12px] text-label-grey">Trusted by top YC companies</p>
+                <!-- Horizontal marquee: the repeat block below is duplicated once
+                     (second copy aria-hidden) so translateX(-50%) loops seamlessly. -->
+                <div
+                  class="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]"
+                >
+                  <div class="flex w-max animate-[marquee_30s_linear_infinite]">
+                    <div class="mr-3 flex items-center gap-3">
+                      <img
+                        src="/media/trusted-strip.png"
+                        alt="Logos of YC companies PixelUp Labs has worked with"
+                        class="h-6 w-auto opacity-70"
+                      />
+                      <img src="/media/logos/pogo.svg" alt="Pogo" class="h-[18px] w-auto opacity-70" />
+                      <img src="/media/logos/streamline.svg" alt="Streamline" class="h-4 w-auto opacity-70" />
+                      <img src="/media/logos/bland.svg" alt="Bland" class="h-[15px] w-auto opacity-70" />
+                      <img src="/media/logos/sainapse.svg" alt="Sainapse" class="h-4 w-auto opacity-70" />
+                    </div>
+                    <div aria-hidden="true" class="mr-3 flex items-center gap-3">
+                      <img src="/media/trusted-strip.png" alt="" class="h-6 w-auto opacity-70" />
+                      <img src="/media/logos/pogo.svg" alt="" class="h-[18px] w-auto opacity-70" />
+                      <img src="/media/logos/streamline.svg" alt="" class="h-4 w-auto opacity-70" />
+                      <img src="/media/logos/bland.svg" alt="" class="h-[15px] w-auto opacity-70" />
+                      <img src="/media/logos/sainapse.svg" alt="" class="h-4 w-auto opacity-70" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- components/CtaButtons.tsx — default variant (telegramSolidBlack=false),
+                 mobile: two-up side by side; desktop: stacked full-width. -->
+            <div class="fade-up [animation-delay:400ms]">
+              <div class="flex flex-row gap-2.5 desk:flex-col">
+                <a
+                  href="https://t.me/dakshpixelup"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex flex-1 items-center justify-between rounded-[2px] bg-button-dark px-3 py-[11.5px] font-button text-[12px] font-semibold tracking-[-0.12px] text-white transition-colors hover:bg-white/[0.12]"
+                >
+                  <span>CHAT ON TELEGRAM</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path
+                      d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z"
+                      stroke="currentColor"
+                      stroke-width="1.8"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://cal.com/pixelup/discovery"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="flex flex-1 items-center justify-between rounded-[2px] bg-accent px-3 py-[11.5px] font-button text-[12px] font-semibold tracking-[-0.12px] text-white transition-colors hover:brightness-110"
+                >
+                  <span>START YOUR PROJECT</span>
+                  <img src="/media/Container.svg" alt="" width="14" height="14" aria-hidden="true" />
+                </a>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Divider between the nav and showcase columns — desk:-my-5 extends it
+             past the row's own p-5 padding so it touches the navbar/footer with
+             no gap; hidden below desk (columns stack, no vertical rule needed). -->
+        <div
+          aria-hidden="true"
+          class="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
+        ></div>
+
+        <!-- components/Showcase.tsx, scroll="page" — this IS the page's <main>
+             landmark. Vertical stack (not a grid), 24px gap between cards. -->
+        <main aria-label="Selected work" class="flex flex-col gap-6 desk:flex-1">
+          <!-- components/ProjectCard.tsx x10, in the exact order from lib/projects.ts.
+               Each is fade-up with a staggered animation-delay (200ms + 120ms per
+               card, capped at 800ms) and scales its media 1.05x on hover. -->
+
+          <!-- 1. Greptile — internal case study -->
+          <a href="/case-studies/greptile" aria-label="Greptile" class="fade-up group block" style="animation-delay: 200ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <img
+                src="/media/greptile.png"
+                alt="Glowing green Greptile logo mark on a dark background, brand and product design by PixelUp Labs"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+              />
+            </div>
+          </a>
+
+          <!-- 2. Henry Labs — external, video -->
+          <a href="https://henrylabs.ai" target="_blank" rel="noopener noreferrer" aria-label="Henry Labs" class="fade-up group block" style="animation-delay: 320ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <video
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+                src="/media/henry-labs.mp4"
+                aria-label="Henry Labs website motion reel, design by PixelUp Labs"
+                autoplay
+                loop
+                muted
+                playsinline
+              ></video>
+            </div>
+          </a>
+
+          <!-- 3. CTGT — external -->
+          <a href="https://www.ctgt.ai/" target="_blank" rel="noopener noreferrer" aria-label="CTGT" class="fade-up group block" style="animation-delay: 440ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <img
+                src="/media/ctgt.png"
+                alt="CTGT website design by PixelUp Labs"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+              />
+            </div>
+          </a>
+
+          <!-- 4. Streamline — external -->
+          <a href="https://www.streamline.ai/" target="_blank" rel="noopener noreferrer" aria-label="Streamline" class="fade-up group block" style="animation-delay: 560ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <img
+                src="/media/streamline.png"
+                alt="Streamline website design by PixelUp Labs"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+              />
+            </div>
+          </a>
+
+          <!-- 5. Sainapse — internal case study, video + overlay logo -->
+          <a href="/case-studies/sainapse" aria-label="Sainapse" class="fade-up group block" style="animation-delay: 680ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <video
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+                src="/media/sainapse.mp4"
+                aria-label="Sainapse brand reveal motion loop, brand identity by PixelUp Labs"
+                autoplay
+                loop
+                muted
+                playsinline
+              ></video>
+              <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+                <img src="/media/sainapse.svg" alt="" aria-hidden="true" class="w-[18%]" />
+              </div>
+            </div>
+          </a>
+
+          <!-- 6. Reducto — external -->
+          <a href="https://reducto.ai/" target="_blank" rel="noopener noreferrer" aria-label="Reducto" class="fade-up group block" style="animation-delay: 800ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <img
+                src="/media/reducto.png"
+                alt="Reducto website design by PixelUp Labs"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+              />
+            </div>
+          </a>
+
+          <!-- 7. Valley — external (delay capped at 800ms) -->
+          <a href="https://www.joinvalley.co/" target="_blank" rel="noopener noreferrer" aria-label="Valley" class="fade-up group block" style="animation-delay: 800ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <img
+                src="/media/valley.png"
+                alt="Valley website design by PixelUp Labs"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+              />
+            </div>
+          </a>
+
+          <!-- 8. Sully.ai — internal case study -->
+          <a href="/case-studies/sully" aria-label="Sully.ai" class="fade-up group block" style="animation-delay: 800ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <img
+                src="/media/sully.png"
+                alt="Sully.ai logo mark over a bright hospital corridor, website and motion design by PixelUp Labs"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+              />
+            </div>
+          </a>
+
+          <!-- 9. Revyl — external -->
+          <a href="https://revyl.ai/" target="_blank" rel="noopener noreferrer" aria-label="Revyl" class="fade-up group block" style="animation-delay: 800ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <img
+                src="/media/revyl.png"
+                alt="Revyl website design by PixelUp Labs"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+              />
+            </div>
+          </a>
+
+          <!-- 10. Synthio Labs — external -->
+          <a href="https://synthiolabs.com/" target="_blank" rel="noopener noreferrer" aria-label="Synthio Labs" class="fade-up group block" style="animation-delay: 800ms">
+            <div class="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
+              <img
+                src="/media/synthio.png"
+                alt="Synthio Labs website design by PixelUp Labs"
+                class="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]"
+              />
+            </div>
+          </a>
+        </main>
+      </div>
+
+      <!-- <Footer /> — TODO: hidden site-wide for now, both real call sites have
+           it commented out. Add it back here the moment it's re-enabled. -->
+    </div>
+  </body>
+</html>

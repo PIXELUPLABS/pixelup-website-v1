@@ -1,0 +1,326 @@
+{
+  "_meta": {
+    "purpose": "Source of truth for every reusable component in /components. An agent generating a new page must check this file first.",
+    "rule": "If a page needs something not listed here, do NOT invent a new one-off component that duplicates an existing pattern. Instead, flag it as a \"component gap\": name the gap, describe what's needed, and point to the closest existing component it might extend. Record the gap in this file's \"_gaps\" array (add one if it doesn't exist yet) rather than silently building something ad hoc.",
+    "scope_note": "This covers /components only. Page templates that compose several of these (e.g. CaseStudyPage) are included too, tagged category: \"page_template\", since a future agent needs to know they exist before building a competing template from scratch.",
+    "known_inconsistencies": [
+      "Two near-identical blues in use: color.brand.accent (#004aeb, the 'real' token) and color.brand.highlight (#0658FC, used only on /explorations and the blog author box). Unresolved — see tokens.json.",
+      "Footer is currently disabled site-wide: both call sites (app/page.tsx and CaseStudyPage.tsx) have it commented out behind a 'TODO: re-enable when ready' note. It is documented below as if active since the component itself is intact and unchanged; check those call sites before assuming it renders anywhere."
+    ]
+  },
+
+  "Navbar": {
+    "file": "components/Navbar.tsx",
+    "category": "layout",
+    "description": "Sticky full-width top bar: logo, primary nav links (desktop only), mobile hamburger (MobileMenu). Rendered once, globally, in app/layout.tsx.",
+    "variants": ["none — singleton, rendered once for the whole site"],
+    "states": {
+      "default": "Transparent background, at the top of an unscrolled page.",
+      "scrolled": "bg-base/90 + backdrop-blur once window.scrollY > 0.",
+      "link:default": "text-white/70",
+      "link:hover": "text-white",
+      "link:active_route": "text-white (matches hover color) + aria-current=\"page\", determined via usePathname().",
+      "link:disabled": "href: null renders a static, non-interactive text-white/30 span instead of a Link."
+    },
+    "tokens_used": ["color.neutral.hairline (border-b)", "color.neutral.base (bg-base/90)", "typography.font.button"],
+    "when_to_use": "Never render directly on a page — it already lives in the root layout and appears on every route automatically.",
+    "do_not": [
+      "Don't add a second Navbar instance on any page.",
+      "Don't add a nav link here without also deciding whether it belongs in MobileMenu's link list (they are currently separate, hand-maintained lists — About/Blog placeholders exist commented out in both)."
+    ]
+  },
+
+  "LeftNav": {
+    "file": "components/LeftNav.tsx",
+    "category": "layout",
+    "description": "Hero sidebar: heading, subheading, TrustedStrip, CtaButtons. Used on the homepage, /call, and /explorations, each passing its own heading/subheading copy.",
+    "variants": {
+      "sticky": "boolean prop. true = pinned to the viewport, height calc(100vh-6.5rem) (used with page-level scroll, e.g. homepage, /explorations). false (default) = fills a fixed-height row (used by /call, which has its own internal-scroll shell).",
+      "balanceHero": "boolean prop, applies text-balance/text-pretty for nicer line wrapping. Off by default because the homepage H1's line breaks were hand-tuned.",
+      "headingSize": "string prop, Tailwind class override for desktop heading size (default desk:text-[30px]).",
+      "headingFontClassName": "string prop, extra className applied only to the <h1> — e.g. a next/font className to swap the heading's font on a single page without touching the site-wide font-display."
+    },
+    "states": {
+      "entrance": "fade-up animation on mount, staggered via inline animation-delay per child block."
+    },
+    "tokens_used": ["typography.font.display (default)", "typography.tracking.display-tight", "color.neutral.white", "color.neutral.muted-65", "breakpoint.desk"],
+    "when_to_use": "Any page that needs the site's \"hero sidebar\" pattern: big heading + subheading + trusted-by strip + CTA buttons, paired with a content column to its right.",
+    "do_not": [
+      "Don't confuse this with CaseSidebar — case study pages use a different, data-driven sidebar (client/year/involvement info) instead of this hero copy.",
+      "It renders as <aside>, not <nav> — it's hero copy + CTAs, not a navigation link list. Don't wrap it in nav semantics.",
+      "Don't hardcode a new hero block elsewhere — extend this component's props instead."
+    ]
+  },
+
+  "CaseSidebar": {
+    "file": "components/case-study/CaseSidebar.tsx",
+    "category": "layout",
+    "description": "Case-study-specific sidebar: back button, ClientInfo (client/year/involvement/link), long-form description, CtaButtons. Sticky on desktop.",
+    "variants": ["none — always the same shape, data comes from the CaseStudy object"],
+    "states": {
+      "mobile": "Renders nothing (client info moves under the title, description hidden) — see comment in file."
+    },
+    "tokens_used": ["color.neutral.hairline (border-r)", "breakpoint.desk"],
+    "when_to_use": "Case study pages only (components/case-study/CaseStudyPage.tsx), one per page, paired with a <main> content column as a sibling (not nested).",
+    "do_not": [
+      "Don't reuse LeftNav's raw desk:w-[26%] value elsewhere on a page that lacks the homepage's p-5 outer shell — this component's width is desk:w-[calc(26%-10.4px)], deliberately adjusted to render the same effective width as LeftNav on a page without that shell. Reuse this exact formula, not LeftNav's."
+    ]
+  },
+
+  "Showcase": {
+    "file": "components/Showcase.tsx",
+    "category": "layout",
+    "description": "Renders the homepage's project list as the page's <main> landmark. One ProjectCard per project.",
+    "variants": {
+      "scroll": "\"internal\" (default) = column scrolls independently inside a fixed-height shell. \"page\" = no internal scroll, used on the homepage so the page itself scrolls and the footer can appear below the fold."
+    },
+    "states": ["none — content is static per the projects data"],
+    "tokens_used": ["spacing (gap-6, 24px between cards)", "breakpoint.desk"],
+    "when_to_use": "Homepage only, currently — it IS the page's <main>, not a generic reusable list container.",
+    "do_not": [
+      "Don't render more than one per page (it's a <main> landmark).",
+      "Don't reuse this for a different image set (e.g. explorations) — that page has its own ExplorationGallery instead."
+    ]
+  },
+
+  "ProjectCard": {
+    "file": "components/ProjectCard.tsx",
+    "category": "content",
+    "description": "One homepage project entry: media (image or video), optional overlay logo, links out (internal Link or external <a>).",
+    "variants": ["external vs internal link, driven by project.external"],
+    "states": {
+      "default": "Static frame, aspect-[1008/584].",
+      "hover": "Media scales up 1.05x via group-hover, clipped by the frame.",
+      "entrance": "fade-up with a staggered delay based on list index (capped at 800ms)."
+    },
+    "tokens_used": ["radius: none (square corners are intentional, not an oversight)"],
+    "when_to_use": "Inside Showcase only, one per project.",
+    "do_not": [
+      "Don't add border-radius/shadow — square corners are a deliberate Figma decision.",
+      "Don't skip the priority/fetchPriority wiring on the first card — it's the homepage's LCP element."
+    ]
+  },
+
+  "CtaButtons": {
+    "file": "components/CtaButtons.tsx",
+    "category": "interactive",
+    "description": "The paired 'Chat on Telegram' + 'Start Your Project' buttons.",
+    "variants": {
+      "telegramSolidBlack": "boolean prop. false (default) = translucent color.neutral.button-dark with a hover lighten (used in LeftNav/CaseSidebar). true = solid black, no hover lighten (used in Footer)."
+    },
+    "states": {
+      "telegram:default": "bg-button-dark",
+      "telegram:hover": "bg-white/12 (or stays black if telegramSolidBlack)",
+      "start-project:default": "bg-accent",
+      "start-project:hover": "brightness-110"
+    },
+    "tokens_used": ["color.brand.accent", "color.neutral.button-dark", "radius.sm"],
+    "when_to_use": "Anywhere the site's two primary CTAs need to appear together (currently: LeftNav, CaseSidebar, Footer).",
+    "do_not": [
+      "Don't change 'Start Your Project' back into an internal <Link> to /call — it deliberately opens links.discoveryCall (an external Cal.com URL) in a new tab now.",
+      "Don't add a third button here — it's built for exactly two, laid out with flex-1 each."
+    ]
+  },
+
+  "TrustedStrip": {
+    "file": "components/TrustedStrip.tsx",
+    "category": "content",
+    "description": "\"Trusted by top YC companies\" label + an infinite horizontal marquee of logos (baked strip image + a few extra SVG logos), duplicated once for a seamless loop.",
+    "variants": ["none"],
+    "states": ["continuous CSS marquee animation, no interactive states"],
+    "tokens_used": ["color.neutral.label-grey", "--animate-marquee (app/globals.css)"],
+    "when_to_use": "Inside LeftNav only, currently.",
+    "do_not": [
+      "Don't add a logo to only one of the two duplicated blocks — both copies must stay identical or the loop will visibly jump.",
+      "The first copy carries real alt text; the duplicate is aria-hidden — keep that split when adding logos."
+    ]
+  },
+
+  "MobileMenu": {
+    "file": "components/MobileMenu.tsx",
+    "category": "interactive",
+    "description": "Hamburger button + dropdown panel (Telegram link, 'Start now' link), mobile only.",
+    "variants": ["none"],
+    "states": {
+      "closed": "Hamburger icon.",
+      "open": "X icon, panel visible below the navbar."
+    },
+    "tokens_used": ["radius.sm", "radius.md", "color.brand.accent"],
+    "when_to_use": "Inside Navbar only.",
+    "do_not": [
+      "Don't remove desk:hidden — this is the mobile-only counterpart to Navbar's desktop nav links.",
+      "Its own link list is separate from Navbar's navLinks array — update both if adding a destination."
+    ]
+  },
+
+  "Logo": {
+    "file": "components/Logo.tsx",
+    "category": "content",
+    "description": "Site wordmark (single SVG, mark + wordmark), links to /.",
+    "variants": ["none"],
+    "states": ["none"],
+    "tokens_used": [],
+    "when_to_use": "Navbar only.",
+    "do_not": [
+      "Don't change the -ml-[4.7px] negative margin without re-checking the SVG's baked-in left whitespace — it's a deliberate optical alignment fix, not arbitrary."
+    ]
+  },
+
+  "Footer": {
+    "file": "components/Footer.tsx",
+    "category": "layout",
+    "description": "Site footer: giant Union wordmark, CtaButtons + nav links, copyright/social row. Shared between the homepage and case study pages.",
+    "status": "Currently disabled site-wide — both render call sites have it commented out pending a TODO. The component itself is intact.",
+    "variants": ["none"],
+    "states": ["none — static content"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white"],
+    "when_to_use": "Once per page, as the very last element, on pages that scroll to a natural end (currently: homepage, case study pages, when re-enabled).",
+    "do_not": [
+      "Don't re-enable it without checking the background-image blur/z-index fix made for it earlier (Footer needed position: relative so it paints correctly above the page's background-image layers).",
+      "Its own <footer> requires relative positioning to stack correctly above absolutely-positioned page background layers — don't remove that."
+    ]
+  },
+
+  "ArticleFilters": {
+    "file": "components/blog/ArticleFilters.tsx",
+    "category": "interactive",
+    "description": "\"Filter\" (category pills: All/Branding/Design/Development) + \"Display\" (List/Grid pills) row on /blog.",
+    "variants": ["Display column is hidden on mobile (desk:flex only) — only Filter shows there."],
+    "states": {
+      "pill:default": "bg-white text-black",
+      "pill:active": "bg-accent text-white",
+      "pill:hover (inactive only)": "bg-white/80"
+    },
+    "tokens_used": ["color.brand.accent", "radius.lg", "color.neutral.white"],
+    "when_to_use": "Top of /blog only, currently a visual/interactive placeholder — it doesn't yet actually filter the article list below it.",
+    "do_not": [
+      "Don't add a flex `gap` between the two columns without removing their percentage widths (or vice versa) — gap + width summing to 100% overflows the row. Use flex-1 if a gap is needed, matching the fix already applied here."
+    ]
+  },
+
+  "ExplorationGallery": {
+    "file": "components/explorations/ExplorationGallery.tsx",
+    "category": "interactive",
+    "description": "Renders the /explorations image list (full-width and 50/50-pair blocks) plus the Grid/Zoom toggle, plus a click-to-expand lightbox (framer-motion fade/scale, backdrop blur, prev/next arrows, Escape/arrow-key nav, body scroll lock).",
+    "variants": ["blocks prop: { kind: \"full\", src } | { kind: \"pair\", srcs: [a, b] }, ordered top-to-bottom exactly as rendered."],
+    "states": {
+      "view:grid": "Default. Derived (not separately tracked) from whether the lightbox is closed.",
+      "view:zoom": "Derived from the lightbox being open — clicking 'Zoom' opens it at image index 0; closing the lightbox by any means reverts to 'grid'.",
+      "lightbox:open/closed": "AnimatePresence-driven fade/scale; body overflow locked while open."
+    },
+    "tokens_used": ["color.brand.highlight (#0658FC, active toggle)", "color.neutral.white/black", "radius.lg", "radius.full (nav arrow buttons)"],
+    "when_to_use": "Inside /explorations only. Requires framer-motion (already installed).",
+    "do_not": [
+      "Don't reintroduce a separate `view` state — it's intentionally derived from openIndex so the active button can never desync from the actual lightbox state.",
+      "Don't give two side-by-side pair images `w-1/2` plus a `gap` together — same overflow bug as ArticleFilters; use `min-w-0 flex-1` instead."
+    ]
+  },
+
+  "SectionShell": {
+    "file": "components/case-study/SectionShell.tsx",
+    "category": "layout",
+    "description": "Case study Q&A section wrapper: uppercase heading in the left half, full-width hairline rule, content in the right half (aligned to the vertical center rule).",
+    "variants": {
+      "topRule": "boolean. Adds a full-width hairline above the section (used for the FAQ block)."
+    },
+    "states": ["none"],
+    "tokens_used": ["color.neutral.hairline", "typography.tracking.display-tight", "breakpoint.desk"],
+    "when_to_use": "Case study pages only, for the repeated 'heading left / content right' Q&A pattern (including the FAQ block).",
+    "do_not": [
+      "Don't reuse this for a full-width section — it hardcodes a 50/50 desktop split matched to the case study sidebar layout. The blog page's FAQ section deliberately does NOT use this for exactly that reason; it builds its own full-width heading + content stack instead."
+    ]
+  },
+
+  "CaseFaq": {
+    "file": "components/case-study/CaseFaq.tsx",
+    "category": "interactive",
+    "description": "FAQ accordion, one item open at a time (first open by default). Each question is an <h3> wrapping the toggle button.",
+    "variants": ["none — items prop drives content (FaqItem[])"],
+    "states": {
+      "item:open": "Answer expanded via grid-template-rows animation, opacity 1.",
+      "item:closed": "grid-rows-[0fr], opacity 0, but stays in the DOM (not unmounted)."
+    },
+    "tokens_used": ["color.neutral.hairline (divide-y)", "typography.size.16"],
+    "when_to_use": "Case study pages (via SectionShell) and the /blog page (standalone, full width) — same shared FAQ content (lib/case-studies.ts pixelupFaq) and matching FAQPage JSON-LD schema on both.",
+    "do_not": [
+      "Don't put the heading (<h3>) inside the <button> — headings cannot legally nest inside button elements. It wraps the button instead."
+    ]
+  },
+
+  "CaseMedia": {
+    "file": "components/case-study/CaseMedia.tsx",
+    "category": "content",
+    "description": "CaseMediaSlot (single image/video frame with tone placeholder fills) + CaseMediaBlock (\"full\" 1160x696 frame or \"pair\" of 576x548 frames).",
+    "variants": {
+      "tone": "\"white\" | \"faint\" | \"green\" — placeholder fill shown when a slot has no real media yet.",
+      "kind": "\"full\" | \"pair\", passed via MediaBlock."
+    },
+    "states": ["priority prop: true = loading=\"eager\" + fetchPriority=\"high\" (the case hero image only); false = lazy."],
+    "tokens_used": ["aspect ratios 1160/696 (full), 576/548 (pair)"],
+    "when_to_use": "Case study pages only, between Q&A sections and as the hero.",
+    "do_not": [
+      "Don't use the deprecated next/image `priority` prop on new usages here — this project is on Next 16, where it no longer implies fetchPriority=\"high\"; use loading + fetchPriority explicitly instead."
+    ]
+  },
+
+  "CaseSection": {
+    "file": "components/case-study/CaseSection.tsx",
+    "category": "content",
+    "description": "Renders a CaseStudy section's lead paragraph, focus list, results rows, and/or paragraphs, inside a SectionShell.",
+    "variants": ["content is conditional on which optional fields (lead/focus/results/paragraphs) exist on the section data"],
+    "states": ["none"],
+    "tokens_used": ["typography.size.16"],
+    "when_to_use": "Case study pages only, once per CaseSection entry in a CaseStudy's sections array.",
+    "do_not": ["Don't add a new section shape without extending the shared CaseSection type in lib/case-studies.ts first."]
+  },
+
+  "ClientInfo": {
+    "file": "components/case-study/ClientInfo.tsx",
+    "category": "content",
+    "description": "Client / Year / Involvement / Link rows with hairline dividers. Lives in CaseSidebar on desktop, under the title on mobile.",
+    "variants": ["none"],
+    "states": ["none"],
+    "tokens_used": ["color.neutral.hairline"],
+    "when_to_use": "Case study pages only.",
+    "do_not": []
+  },
+
+  "MoreProjects": {
+    "file": "components/case-study/MoreProjects.tsx",
+    "category": "content",
+    "description": "\"More Projects\" section at the end of a case study: two equal-width project cards with an overlay logo/title/tags.",
+    "variants": ["none — refs prop (MoreProjectRef[]) drives which projects show"],
+    "states": {
+      "card:hover": "Media scales up, same treatment as the homepage ProjectCard."
+    },
+    "tokens_used": ["typography.size.20 (card title)", "color.neutral.hairline"],
+    "when_to_use": "End of every case study page.",
+    "do_not": [
+      "Don't give the two cards a flex `gap` together with fixed widths that already sum to 100% — use flex-1, same fix as ArticleFilters/ExplorationGallery."
+    ]
+  },
+
+  "CaseStudyPage": {
+    "file": "components/case-study/CaseStudyPage.tsx",
+    "category": "page_template",
+    "description": "Full case study page template: background image, CaseSidebar + main content column (title, hero, CaseSection/CaseMedia loop, CaseFaq, MoreProjects, Footer).",
+    "variants": ["none — study prop (CaseStudy) drives all content"],
+    "states": ["none"],
+    "tokens_used": ["color.neutral.hairline (center vertical rule)", "breakpoint.desk"],
+    "when_to_use": "Rendered once by app/case-studies/[slug]/page.tsx per case study. Also renders the FAQPage JSON-LD schema.",
+    "do_not": [
+      "Don't build a competing case-study template — add a new CaseStudy entry to lib/case-studies.ts instead; this template handles layout for all of them."
+    ]
+  },
+
+  "CalEmbed": {
+    "file": "components/CalEmbed.tsx",
+    "category": "content",
+    "description": "Inline Cal.com booking widget (@calcom/embed-react), dark-themed to match the site.",
+    "variants": ["none"],
+    "states": ["none — Cal's own UI handles booking states internally"],
+    "tokens_used": [],
+    "when_to_use": "app/call/page.tsx only.",
+    "do_not": ["Don't change calLink/namespace without updating the matching getCalApi namespace call — they must match."]
+  }
+}
