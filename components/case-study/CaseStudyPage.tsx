@@ -6,7 +6,7 @@ import {
   pixelupFaqSchema,
   type CaseStudy,
 } from "@/lib/case-studies";
-// import { Footer } from "../Footer"; // TODO: footer hidden site-wide for now, re-enable when ready.
+import { Footer } from "../Footer";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { CaseSection } from "./CaseSection";
@@ -104,7 +104,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         </main>
       </div>
 
-      {/* <Footer /> TODO: hidden site-wide for now, re-enable when ready. */}
+      <Footer />
     </div>
   );
 }

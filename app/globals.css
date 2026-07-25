@@ -64,6 +64,17 @@ body::-webkit-scrollbar {
   display: none; /* Chrome / Safari / Edge */
 }
 
+/* Autofill (e.g. selecting a saved email suggestion) forces its own opaque
+   background via the UA's -webkit-autofill style, which plain background-color
+   can't override — the inset box-shadow trick is the only reliable fix. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-text-fill-color: #ffffff;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 /* Subtle entrance: elements fade up in chronological order via animation-delay. */
 @keyframes fade-up {
   from {

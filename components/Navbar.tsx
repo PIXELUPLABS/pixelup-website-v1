@@ -47,8 +47,10 @@ export function Navbar() {
                 key={item.label}
                 href={item.href}
                 aria-current={pathname === item.href ? "page" : undefined}
-                className={`font-button text-[13px] font-semibold uppercase tracking-[-0.02em] transition-colors hover:text-white ${
-                  pathname === item.href ? "text-white" : "text-white/70"
+                className={`px-3 py-1.5 font-button text-[13px] font-semibold uppercase tracking-[-0.02em] transition-colors ${
+                  pathname === item.href
+                    ? "bg-accent text-white"
+                    : "text-white/70 hover:text-white"
                 }`}
               >
                 {item.label}

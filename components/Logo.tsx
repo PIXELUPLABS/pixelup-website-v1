@@ -1,20 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import navLogo from "@/public/media/nav-logo.svg";
+import navLogo from "@/public/media/pixelup-logo.svg";
 
 export function Logo() {
-  // Single SVG lockup (mark + wordmark) — replaces the old PNG mark + HTML text.
+  // Square icon mark (no wordmark baked in, unlike the old lockup) — no left
+  // whitespace to compensate for, so no negative margin needed here.
   return (
     <Link href="/" className="flex items-center" aria-label="PIXELUP LABS home">
-      {/* The SVG has ~6.7 viewBox-units of left whitespace baked in (≈4.7px at
-          this size); the negative margin pulls the visible mark flush with the
-          container edge so it lines up with the heading below. */}
-      <Image
-        src={navLogo}
-        alt="PIXELUP LABS"
-        priority
-        className="-ml-[4.7px] h-[28px] w-auto"
-      />
+      <Image src={navLogo} alt="PIXELUP LABS" priority className="h-7 w-auto" />
     </Link>
   );
 }

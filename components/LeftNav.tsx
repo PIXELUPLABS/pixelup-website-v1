@@ -22,7 +22,7 @@ export function LeftNav({
   headingSize = "desk:text-[30px]",
   headingFontClassName = "",
 }: {
-  heading?: string;
+  heading?: React.ReactNode;
   subheading?: React.ReactNode;
   /** Balance/prettify hero line wrapping (no widows). Off for the homepage,
       whose H1 breaks were hand-tuned. */

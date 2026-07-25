@@ -70,40 +70,6 @@ function NavButton({ direction, onClick }: { direction: "prev" | "next"; onClick
   );
 }
 
-const views = [
-  { key: "grid", label: "Grid" },
-  { key: "zoom", label: "Zoom" },
-] as const;
-
-/** Grid/Zoom toggle above the images. Zoom also opens the lightbox at the
-    first image — lives here (not a separate component) because it needs
-    to reach into the same open/close state as the lightbox itself. */
-function ViewToggle({
-  view,
-  onSelect,
-}: {
-  view: "grid" | "zoom";
-  onSelect: (view: "grid" | "zoom") => void;
-}) {
-  return (
-    <div className="flex gap-2 pb-2">
-      {views.map((item) => (
-        <button
-          key={item.key}
-          type="button"
-          aria-pressed={view === item.key}
-          onClick={() => onSelect(item.key)}
-          className={`flex h-6 cursor-pointer items-center justify-center px-2 text-[12px] font-medium uppercase leading-none transition-colors ${
-            view === item.key ? "bg-[#0658FC] text-white" : "bg-white text-black"
-          }`}
-        >
-          {item.label}
-        </button>
-      ))}
-    </div>
-  );
-}
-
 /** Renders the exploration images; clicking one opens it in an 80vw/80vh
     lightbox with the page blurred behind it, with prev/next arrows to
     step through every image on the page. */
@@ -111,14 +77,6 @@ export function ExplorationGallery({ blocks }: { blocks: ExplorationBlock[] }) {
   const flatSrcs = blocks.flatMap((block) => (block.kind === "full" ? [block.src] : block.srcs));
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const openSrc = openIndex === null ? null : flatSrcs[openIndex];
-  // Derived, not separate state — so "which button is blue" can never drift
-  // out of sync with whether the lightbox is actually open (Escape, backdrop
-  // click, etc. all close it by setting openIndex back to null).
-  const view: "grid" | "zoom" = openIndex === null ? "grid" : "zoom";
-
-  const onSelectView = (next: "grid" | "zoom") => {
-    setOpenIndex(next === "zoom" ? 0 : null);
-  };
 
   const showPrev = () =>
     setOpenIndex((i) => (i === null ? null : (i - 1 + flatSrcs.length) % flatSrcs.length));
@@ -145,7 +103,6 @@ export function ExplorationGallery({ blocks }: { blocks: ExplorationBlock[] }) {
 
   return (
     <>
-      <ViewToggle view={view} onSelect={onSelectView} />
       {blocks.map((block, index) =>
         block.kind === "full" ? (
           <ExplorationImage

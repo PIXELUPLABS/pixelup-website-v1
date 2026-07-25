@@ -1,7 +1,7 @@
 import Image from "next/image";
 // import bgBottom from "@/public/media/bg-bottom.png"; // TODO: hidden for now, re-enable when ready.
 import bgHome from "@/public/media/bg-home.png";
-// import { Footer } from "@/components/Footer"; // TODO: footer hidden site-wide for now, re-enable when ready.
+import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
 import { Showcase } from "@/components/Showcase";
 import { links } from "@/lib/projects";
@@ -83,7 +83,7 @@ export default function Home() {
         />
         <Showcase scroll="page" />
       </div>
-      {/* <Footer /> TODO: hidden site-wide for now, re-enable when ready. */}
+      <Footer />
     </div>
   );
 }

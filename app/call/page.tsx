@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { CalEmbed } from "@/components/CalEmbed";
+import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
 
 export const metadata: Metadata = {
@@ -11,23 +12,26 @@ export const metadata: Metadata = {
 
 export default function CallPage() {
   return (
-    // Same shell as the homepage: static left nav + right column. The Cal
-    // embed manages its own internal scrolling inside the fixed-height shell.
-    // Height is trimmed by the sticky Navbar's height (h-16, 4rem) so the
-    // shell + navbar together fill exactly one viewport instead of overflowing it.
-    <div className="relative flex flex-col gap-8 p-5 desk:h-[calc(100vh-4rem)] desk:flex-row desk:gap-8 desk:overflow-hidden">
-      <LeftNav
-        heading="We love working with bold founders who are tired of the ordinary"
-        subheading="Brands, Websites and product design that leaves a lasting impression."
-        balanceHero
-      />
-      {/* `main` — this is the page's primary content region. */}
-      <main
-        aria-label="Book a discovery call"
-        className="no-scrollbar min-h-[640px] desk:h-full desk:min-h-0 desk:flex-1 desk:overflow-y-auto"
-      >
-        <CalEmbed />
-      </main>
-    </div>
+    <>
+      {/* Same shell as the homepage: static left nav + right column. The Cal
+          embed manages its own internal scrolling inside the fixed-height shell.
+          Height is trimmed by the sticky Navbar's height (h-16, 4rem) so the
+          shell + navbar together fill exactly one viewport instead of overflowing it. */}
+      <div className="relative flex flex-col gap-8 p-5 desk:h-[calc(100vh-4rem)] desk:flex-row desk:gap-8 desk:overflow-hidden">
+        <LeftNav
+          heading="We love working with bold founders who are tired of the ordinary"
+          subheading="Brands, Websites and product design that leaves a lasting impression."
+          balanceHero
+        />
+        {/* `main` — this is the page's primary content region. */}
+        <main
+          aria-label="Book a discovery call"
+          className="no-scrollbar min-h-[640px] desk:h-full desk:min-h-0 desk:flex-1 desk:overflow-y-auto"
+        >
+          <CalEmbed />
+        </main>
+      </div>
+      <Footer />
+    </>
   );
 }
