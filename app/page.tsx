@@ -70,14 +70,6 @@ export default function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
         <LeftNav sticky />
-        {/* Divider between the nav and showcase columns. `self-stretch`
-            overrides the row's `items-start` so it spans the row's full
-            height (set by Showcase's content) — flush from the navbar at
-            the top to the footer at the bottom, not just LeftNav's own
-            (shorter, sticky-capped) box. `-my-5` extends it past the row's
-            own p-5 padding so it touches the navbar/footer with no gap.
-            Horizontal margins replace the row's gap-8, keeping the same
-            total spacing either side of the line. */}
         <div
           aria-hidden="true"
           className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
