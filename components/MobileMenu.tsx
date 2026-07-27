@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { links } from "@/lib/projects";
+import { navLinks } from "./Navbar";
 
 // Hamburger shown only on mobile (< desk). Toggles a small links panel.
 export function MobileMenu() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <div className="desk:hidden">
@@ -28,6 +31,29 @@ export function MobileMenu() {
 
       {open && (
         <div className="absolute inset-x-5 top-16 z-20 flex flex-col gap-2 rounded-[4px] border border-white/10 bg-black/95 p-3">
+          {navLinks.map((item) =>
+            item.href ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                aria-current={pathname === item.href ? "page" : undefined}
+                className={`rounded-[2px] px-3 py-2.5 text-[14px] font-medium uppercase tracking-[-0.02em] ${
+                  pathname === item.href ? "text-white" : "text-white/70 hover:bg-white/5"
+                }`}
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <span
+                key={item.label}
+                className="cursor-default rounded-[2px] px-3 py-2.5 text-[14px] font-medium uppercase tracking-[-0.02em] text-white/30"
+              >
+                {item.label}
+              </span>
+            )
+          )}
+          <div aria-hidden="true" className="border-t border-white/10" />
           <a
             href={links.telegram}
             target="_blank"

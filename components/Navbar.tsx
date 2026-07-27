@@ -8,7 +8,7 @@ import { links } from "@/lib/projects";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
-const navLinks: { label: string; href: string | null }[] = [
+export const navLinks: { label: string; href: string | null }[] = [
   // { label: "About", href: null },
   // { label: "YC Partner", href: null },
   { label: "Explorations", href: "/explorations" },
