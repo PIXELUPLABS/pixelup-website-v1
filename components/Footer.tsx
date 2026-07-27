@@ -4,14 +4,10 @@ import footerBg from "@/public/media/footer-bg.png";
 import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Union.png";
 
-// Only the studies with a real page get a link — the rest are inert until they exist.
 const caseStudies = [
   { name: "Greptile", slug: "greptile" },
   { name: "Sainapse", slug: "sainapse" },
   { name: "Sully", slug: "sully" },
-  { name: "Streamline", slug: null },
-  { name: "CTGT", slug: null },
-  { name: "HenryLabs", slug: null },
 ] as const;
 
 export function Footer({
@@ -47,21 +43,15 @@ export function Footer({
               Case Studies
             </p>
             <div className="flex flex-col gap-2">
-              {caseStudies.map((study) =>
-                study.slug ? (
-                  <Link
-                    key={study.name}
-                    href={`/case-studies/${study.slug}`}
-                    className="text-[14px] font-normal text-white hover:opacity-70"
-                  >
-                    {study.name}
-                  </Link>
-                ) : (
-                  <p key={study.name} className="text-[14px] font-normal text-white">
-                    {study.name}
-                  </p>
-                )
-              )}
+              {caseStudies.map((study) => (
+                <Link
+                  key={study.name}
+                  href={`/case-studies/${study.slug}`}
+                  className="text-[14px] font-normal text-white hover:opacity-70"
+                >
+                  {study.name}
+                </Link>
+              ))}
             </div>
           </div>
           <div className="flex flex-col gap-8 p-6 desk:h-full">

@@ -4,6 +4,7 @@ import { Geist } from "next/font/google";
 import Image from "next/image";
 import { useState } from "react";
 import auditFormBg from "@/public/media/audit-form-bg.png";
+import auditFormPattern from "@/public/media/audit-form-pattern.svg";
 import dakshImg from "@/public/media/daksh-img.svg";
 
 // Scoped to the closing line below — the rest of the site keeps font-display.
@@ -63,12 +64,13 @@ export function AuditForm() {
     >
       <div className="relative h-90 w-full desk:h-full desk:w-3/5">
         <Image src={auditFormBg} alt="" fill className="object-cover" />
+        <Image src={auditFormPattern} alt="" fill className="object-cover opacity-10" />
         <div className="relative flex h-full flex-col justify-between p-6">
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col">
             <div className="relative h-12 w-12 overflow-hidden rounded-full bg-white">
               <Image src={dakshImg} alt="Daksh Aswal" fill className="object-cover" />
             </div>
-            <div className="flex flex-col gap-1.5">
+            <div className="flex flex-col pt-2">
               <p className="font-normal text-white">Daksh Aswal</p>
               <p className="font-normal text-white/60">Creative Director</p>
             </div>

@@ -11,4 +11,5 @@ export const explorationBlocks: ExplorationBlock[] = [
   { kind: "full", src: "/media/explorations/img-5.png" },
   { kind: "pair", srcs: ["/media/explorations/img-6.png", "/media/explorations/img-7.png"] },
   { kind: "full", src: "/media/explorations/img-8.png" },
+  { kind: "full", src: "/media/explorations/img-9.webp" },
 ];
