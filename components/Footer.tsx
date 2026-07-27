@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import footerBg from "@/public/media/footer-bg.png";
 import navLogo from "@/public/media/pixelup-logo.svg";
-import unionMark from "@/public/media/Union.png";
+import unionMark from "@/public/media/Vector.svg";
 
 const caseStudies = [
   { name: "Greptile", slug: "greptile" },

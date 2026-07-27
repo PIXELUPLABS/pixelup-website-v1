@@ -41,14 +41,18 @@ export function ArticleFilters() {
       <div className="flex flex-col gap-[10px]">
         <p className="text-[12px] font-medium uppercase text-label-grey">Filters:</p>
         <div className="flex flex-wrap gap-2">
-          {categories.map((item) => (
+          {categories.flatMap((item) => [
+            // basis-full forces a flex-wrap break — Development always
+            // starts a new line instead of only wrapping when the aside
+            // gets narrow.
+            ...(item === "Development" ? [<div key={`${item}-break`} className="basis-full" />] : []),
             <Pill
               key={item}
               label={item}
               active={category === item}
               onClick={() => setCategory(item)}
-            />
-          ))}
+            />,
+          ])}
         </div>
       </div>
       <div className="flex flex-col gap-[10px]">
