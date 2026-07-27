@@ -62,6 +62,36 @@ function ContentBlock({ block }: { block: BlogContentBlock }) {
       );
     case "paragraph":
       return <p className="text-[14px] leading-[1.6] text-body-grey">{block.text}</p>;
+    case "table":
+      return (
+        <div className="w-full overflow-x-auto">
+          <table className="w-full min-w-120 border-collapse border-[0.5px] border-hairline text-left text-[14px]">
+            <thead>
+              <tr className="divide-x divide-hairline border-b-[0.5px] border-hairline">
+                {block.headers.map((header) => (
+                  <th
+                    key={header}
+                    className="p-3 text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey"
+                  >
+                    {header}
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-hairline">
+              {block.rows.map((row, rowIndex) => (
+                <tr key={rowIndex} className="divide-x divide-hairline">
+                  {row.map((cell, cellIndex) => (
+                    <td key={cellIndex} className="p-3 leading-[1.5] text-body-grey">
+                      {cell}
+                    </td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      );
   }
 }
 

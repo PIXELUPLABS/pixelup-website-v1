@@ -4,7 +4,8 @@
 export type BlogContentBlock =
   | { type: "heading"; text: string }
   | { type: "paragraph"; text: string }
-  | { type: "list"; items: string[] };
+  | { type: "list"; items: string[] }
+  | { type: "table"; headers: string[]; rows: string[][] };
 
 export interface BlogPost {
   slug: string;
@@ -35,6 +36,57 @@ export const blogPosts: BlogPost[] = [
       {
         type: "paragraph",
         text: "Disclosure, up front: we wrote this list and we put ourselves at number one. Read our entry with that in mind. Instead of pretending to be neutral: we publish our actual prices, name five things we are bad at, and hand five specific jobs on this page to studios that beat us at them.",
+      },
+      {
+        type: "table",
+        headers: ["The Job", "Who to Hire", "Price Signal"],
+        rows: [
+          [
+            "Brand + site for AI-native B2B going enterprise, on a clock",
+            "PIXELUP (us, and we wrote this list)",
+            "$25–40k",
+          ],
+          [
+            "An AI product used by millions, where the UX is the value",
+            "MetaLab",
+            "$100k min, $150–250k+",
+          ],
+          [
+            "The craft your peer set already hired",
+            "basement studio",
+            "$10k+ min, $100–149/hr",
+          ],
+          [
+            "Making a complex model legible in a demo",
+            "Lazarev",
+            "~$100/hr",
+          ],
+          [
+            "A shipped agent or intelligent interface",
+            "Punchcut",
+            "Enterprise, project-based",
+          ],
+          [
+            "A category claim at Series B+",
+            "Character",
+            "$80–250k",
+          ],
+          [
+            "Cheapest credible sprint",
+            "Parallel",
+            "$12–30k",
+          ],
+          [
+            "Content-heavy site at Series B+",
+            "Webstacks",
+            "Project-based",
+          ],
+          [
+            "Pre-launch and seed on a tight budget",
+            "Everything Design",
+            "Early-stage packages",
+          ],
+        ],
       },
       { type: "heading", text: "Why designing for an AI company is a different job" },
       {
@@ -95,10 +147,139 @@ export const blogPosts: BlogPost[] = [
         text: "Every number is published or reported as of July 2026. Screenshot and re-date before quoting any of it; opaque pricing changes quietly.",
       },
       {
+        type: "table",
+        headers: ["Tier", "Who", "Range", "Timeline"],
+        rows: [
+          [
+            "Elite product studio",
+            "MetaLab",
+            "$100k min, $150–250k+",
+            "3–6 months"
+          ],
+          [
+            "Prestige brand studio",
+            "Character",
+            "$80–250k",
+            "10–24 weeks"
+          ],
+          [
+            "Established studio",
+            "Clay",
+            "$50k+ min, $150–199/hr",
+            "8–16 weeks"
+          ],
+          [
+            "Boutique sprint",
+            "PIXELUP",
+            "$25–40k",
+            "2–5 weeks"
+          ],
+          [
+            "Craft boutique",
+            "basement studio",
+            "$10k+ min, $100–149/hr",
+            "4–10 weeks"
+          ],
+          [
+            "Early-stage sprint",
+            "Parallel",
+            "$12–30k, $6–15k/mo growth tier",
+            "3–8 weeks"
+          ],
+          [
+            "Productized subscription",
+            "",
+            "$699–$4,995/mo",
+            "ongoing"
+          ],
+          [
+            "Freelancer",
+            "",
+            "$2–8k",
+            "variable"
+          ],
+          [
+            "Template + Claude Code",
+            "",
+            "Free",
+            "a weekend"
+          ],
+        ],
+      },
+      {
         type: "paragraph",
         text: "The honest read: the jump from $25k to $100k does not buy better taste. It buys seniority on your account, more research, and a bigger system. Whether you need those is a stage question, not a quality question.",
       },
       { type: "heading", text: "Quick comparison" },
+      {
+        type: "table",
+        headers: ["Agency", "Best for", "Location", "Price Signal", "AI Receipt"],
+        rows: [
+          [
+            "PIXELUP",
+            "AI-native B2B going enterprise",
+            "San Francisco + Bangalore studio",
+            "$25–40k",
+            "Greptile, Sully, Reducto"
+          ],
+          [
+            "MetaLab",
+            "Peer-set craft",
+            "Buenos Aires + LA",
+            "$10k+ min",
+            "Cursor, Harvey, Scale, Baseten"
+          ],
+          [
+            "Lazarev",
+            "Model legibility",
+            "San Francisco",
+            "~$100/hr",
+            "30+ AI products, Accern"
+          ],
+          [
+            "Punchcut",
+            "Shipped agents",
+            "San Francisco",
+            "Enterprise",
+            "AI agents since 2002"
+          ],
+          [
+            "Character",
+            "Category claims",
+            "San Francisco",
+            "$80–250k",
+            "Prestige tech brands"
+          ],
+          [
+            "Clay",
+            "Growth-stage brand + web",
+            "San Francisco",
+            "$50k+ min",
+            "Coinbase, Uber"
+          ],
+          [
+            "Parallel",
+            "Cheapest credible sprint",
+            "Remote (US/UK focus)",
+            "$12–30k",
+            "Early-stage AI practice"
+          ],
+          [
+            "Webstacks",
+            "Content-heavy sites",
+            "San Diego",
+            "Project-based",
+            "Gong, Calendly, ServiceTitan"
+          ],
+          [
+            "Everything Design",
+            "Pre-launch and seed",
+            "Bengaluru",
+            "Early-stage packages",
+            "Cloudphysician, Entropik"
+          ],
+        ],
+      },
       { type: "heading", text: "The 10 agencies" },
       {
         type: "paragraph",
@@ -443,7 +624,12 @@ export function formatBlogDate(date: string): string {
 /** Rough reading time from word count at 200wpm, e.g. "6 MIN READ". */
 export function estimateReadTime(content: BlogContentBlock[]): string {
   const wordCount = content.reduce((count, block) => {
-    const text = block.type === "list" ? block.items.join(" ") : block.text;
+    const text =
+      block.type === "list"
+        ? block.items.join(" ")
+        : block.type === "table"
+          ? [block.headers, ...block.rows].flat().join(" ")
+          : block.text;
     return count + text.split(/\s+/).filter(Boolean).length;
   }, 0);
   const minutes = Math.max(1, Math.round(wordCount / 200));
