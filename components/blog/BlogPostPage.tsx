@@ -1,8 +1,7 @@
 import { Geist } from "next/font/google";
 import Image from "next/image";
-import blogBannerBg from "@/public/media/blog-banner-bg.png";
 import { Footer } from "@/components/Footer";
-import type { BlogPost } from "@/lib/blog";
+import type { BlogContentBlock, BlogPost } from "@/lib/blog";
 import { BlogPostSidebar } from "./BlogPostSidebar";
 
 // Scoped to the "Related Articles" heading only — the rest of the site keeps font-display.
@@ -44,6 +43,28 @@ function RelatedArticleCard() {
   );
 }
 
+/** Renders one block of `post.content` in reading order. */
+function ContentBlock({ block }: { block: BlogContentBlock }) {
+  switch (block.type) {
+    case "heading":
+      return (
+        <h2 className="tracking-display text-[35px] font-medium leading-tight text-white">
+          {block.text}
+        </h2>
+      );
+    case "list":
+      return (
+        <ul className="flex flex-col gap-2 pl-5 text-[14px] leading-[1.6] text-body-grey marker:text-white/40 [&>li]:list-disc">
+          {block.items.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      );
+    case "paragraph":
+      return <p className="text-[14px] leading-[1.6] text-body-grey">{block.text}</p>;
+  }
+}
+
 /** Blog post detail shell — aside + divider + right-section layout, same
     treatment as /blog. Right-section content beyond the hero banner is a
     placeholder for now; the real article layout lands later. */
@@ -58,39 +79,12 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
       />
       <main className="flex min-w-0 flex-1 flex-col gap-8">
         <div className="relative h-120 w-full">
-          <Image src={blogBannerBg} alt="" fill priority sizes="100vw" className="object-cover" />
+          <Image src={post.image} alt="" fill priority sizes="100vw" className="object-cover" />
         </div>
-        {/* gap-8 on `main` (32px) gives the spacing above this heading. */}
-        <h2 className="tracking-display text-[35px] font-medium leading-tight text-white capitalize">
-          The Decisions that shaped the product
-        </h2>
-        <p className="text-[14px] leading-[1.6] text-body-grey">
-          A few choices stand out as deliberate departures from category norms:
-        </p>
-        <p className="text-[14px] leading-[1.6] text-body-grey">
-          Keyboard-first, not mouse-first. Nearly every action in Linear has a keyboard shortcut, and the command palette (Cmd+K) became the primary way to navigate the app. This wasn't a power-user add-on bolted on later  it was a foundational constraint from day one, which meant the entire interface had to be designed around speed of input rather than visual density.
-        </p>
-        <p className="text-[14px] leading-[1.6] text-body-grey">
-          Opinionated workflows over infinite customization. Where Jira lets teams configure nearly anything, Linear shipped with a smaller, more rigid set of workflow states and conventions. Teams couldn't endlessly reconfigure the tool to match old habits. This was a genuine risk  some teams churned because Linear didn't bend to their existing process. But it kept the product coherent and let the team ship fast without maintaining a combinatorial explosion of configuration options. Performance as a design principle, not an engineering afterthought. Linear built its own sync engine so the app would feel instantaneous, even offline. Speed wasn't a metric they optimized after launch  it was treated as core to the experience, on the same level as visual design.
-        </p>
-        <p className="text-[14px] leading-[1.6] text-body-grey">
-          Saying no to integrations, early. Rather than building shallow integrations with dozens of tools to check boxes on a comparison chart, Linear focused deeply on a smaller set of high-value connections (GitHub, Slack, Figma) and let breadth come later, once the core product was solid.
-        </p>
-        <h2 className="tracking-display text-[35px] font-medium leading-tight text-white capitalize">
-          The Problem with "Just Add It"
-        </h2>
-        <p className="text-[14px] leading-[1.6] text-body-grey">
-          A few choices stand out as deliberate departures from category norms:
-        </p>
-        <p className="text-[14px] leading-[1.6] text-body-grey">
-          Keyboard-first, not mouse-first. Nearly every action in Linear has a keyboard shortcut, and the command palette (Cmd+K) became the primary way to navigate the app. This wasn't a power-user add-on bolted on later  it was a foundational constraint from day one, which meant the entire interface had to be designed around speed of input rather than visual density.
-        </p>
-        <p className="text-[14px] leading-[1.6] text-body-grey">
-          Opinionated workflows over infinite customization. Where Jira lets teams configure nearly anything, Linear shipped with a smaller, more rigid set of workflow states and conventions. Teams couldn't endlessly reconfigure the tool to match old habits. This was a genuine risk  some teams churned because Linear didn't bend to their existing process. But it kept the product coherent and let the team ship fast without maintaining a combinatorial explosion of configuration options. Performance as a design principle, not an engineering afterthought. Linear built its own sync engine so the app would feel instantaneous, even offline. Speed wasn't a metric they optimized after launch  it was treated as core to the experience, on the same level as visual design.
-        </p>
-        <p className="text-[14px] leading-[1.6] text-body-grey">
-          Saying no to integrations, early. Rather than building shallow integrations with dozens of tools to check boxes on a comparison chart, Linear focused deeply on a smaller set of high-value connections (GitHub, Slack, Figma) and let breadth come later, once the core product was solid.
-        </p>
+        {/* gap-8 on `main` (32px) gives the spacing above/between each block. */}
+        {post.content.map((block, index) => (
+          <ContentBlock key={index} block={block} />
+        ))}
         {/* gap-8 on `main` (32px) gives the spacing above this rule too. */}
         <div aria-hidden="true" className="w-full border-t-[0.5px] border-hairline" />
         <h2 className={`${geist.className} text-[40px] font-medium leading-tight text-white`}>

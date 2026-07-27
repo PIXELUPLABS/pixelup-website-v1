@@ -1,4 +1,4 @@
-import { formatBlogDate, type BlogPost } from "@/lib/blog";
+import { estimateReadTime, formatBlogDate, type BlogPost } from "@/lib/blog";
 import { BackButton } from "../BackButton";
 import { CtaButtons } from "../CtaButtons";
 import { TrustedStrip } from "../TrustedStrip";
@@ -20,28 +20,34 @@ function MetaRow({ label, value }: { label: string; value: string }) {
  */
 export function BlogPostSidebar({ post }: { post: BlogPost }) {
   const metaRows = [
-    { label: "Written by", value: "DAKSH" },
-    { label: "Created on", value: formatBlogDate(post.date) },
-    { label: "Updated on", value: formatBlogDate(post.date) },
-    { label: "Read", value: "12 MINS" },
+    { label: "Written by", value: post.author },
+    { label: "Created on", value: formatBlogDate(post.publishedDate) },
+    { label: "Updated on", value: formatBlogDate(post.updatedDate) },
+    { label: "Read", value: estimateReadTime(post.content) },
   ];
 
   return (
-    <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:h-[calc(100vh-6.5rem)] desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0 desk:self-start">
-      <div className="flex flex-col gap-6">
-        <BackButton href="/blog" label="Back to blog" icon="arrow" />
-        <h1 className="tracking-display text-[24px] font-medium leading-[1.1] text-white desk:text-[40px]">
-          {post.title}
-        </h1>
-        <div className="flex flex-col">
-          {metaRows.map((row, index) => (
-            <MetaRow key={index} label={row.label} value={row.value} />
-          ))}
+    <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:flex desk:h-[calc(100vh-6.5rem)] desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0 desk:self-start">
+      {/* Long titles/content push this past one viewport — min-h-0 lets the
+          flex-1 box shrink below its content size so overflow-y-auto can
+          actually kick in, instead of the box growing and pushing the CTA
+          group off the bottom of the sticky aside. */}
+      <div className="no-scrollbar flex flex-col gap-8 desk:min-h-0 desk:flex-1 desk:justify-between desk:overflow-y-auto desk:pt-2">
+        <div className="flex flex-col gap-6">
+          <BackButton href="/blog" label="Back to blog" icon="arrow" />
+          <h1 className="tracking-display text-[24px] font-medium leading-[1.1] text-white desk:text-[32px]">
+            {post.title}
+          </h1>
+          <div className="flex flex-col">
+            {metaRows.map((row, index) => (
+              <MetaRow key={index} label={row.label} value={row.value} />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="flex flex-col gap-5 desk:mt-auto">
-        <TrustedStrip />
-        <CtaButtons />
+        <div className="flex flex-col gap-5">
+          <TrustedStrip />
+          <CtaButtons />
+        </div>
       </div>
     </aside>
   );

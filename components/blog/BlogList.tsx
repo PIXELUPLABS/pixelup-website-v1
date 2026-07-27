@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import blogBannerBg from "@/public/media/blog-banner-bg.png";
 import { blogPosts, formatBlogDate } from "@/lib/blog";
 
 /** Full-width blog container. Each blog row is itself full width, split 45%
@@ -19,7 +18,7 @@ export function BlogList() {
           >
             <div className="relative h-56.25 w-full desk:h-full desk:w-[45%]">
               <Image
-                src={blogBannerBg}
+                src={post.image}
                 alt=""
                 fill
                 sizes="(min-width: 1200px) 45vw, 100vw"
@@ -39,7 +38,7 @@ export function BlogList() {
                 </p>
               </div>
               <p className="text-[12px] font-medium uppercase text-label-grey pb-1">
-                {formatBlogDate(post.date)}
+                {formatBlogDate(post.publishedDate)}
               </p>
             </div>
           </Link>
