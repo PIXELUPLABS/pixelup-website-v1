@@ -47,11 +47,13 @@ export default function ExplorationsPage() {
           className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
         />
         {/* Same card frame + gap-6 (24px) stack as the homepage's ProjectCard list. */}
-        <main className="flex min-w-0 flex-1 flex-col gap-2">
-          <ExplorationGallery blocks={explorationBlocks} />
+        <main className="flex min-w-0 flex-1 flex-col gap-8">
+          <div className="flex flex-col gap-2">
+            <ExplorationGallery blocks={explorationBlocks} />
+          </div>
+          <Footer inset={false} />
         </main>
       </div>
-      <Footer />
     </>
   );
 }

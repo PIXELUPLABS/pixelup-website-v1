@@ -14,9 +14,20 @@ const caseStudies = [
   { name: "HenryLabs", slug: null },
 ] as const;
 
-export function Footer() {
+export function Footer({
+  inset = true,
+}: {
+  /** Horizontal (px-5) inset — off when the caller already sits inside a
+      padded column (e.g. the homepage's showcase column), so the padding
+      isn't applied twice. */
+  inset?: boolean;
+}) {
   return (
-    <footer className="relative h-[calc(100vh-4rem)] px-5 py-5 border-t-[0.5px] border-hairline">
+    <footer
+      className={`relative h-[calc(100vh-4rem)] border-t-[0.5px] border-hairline py-5 ${
+        inset ? "px-5" : ""
+      }`}
+    >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 select-none">
         <Image src={footerBg} alt="" fill className="object-cover" />
       </div>

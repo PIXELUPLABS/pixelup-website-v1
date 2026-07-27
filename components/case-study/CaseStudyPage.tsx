@@ -101,10 +101,10 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
               <MoreProjects refs={study.moreProjects} />
             </div>
           </div>
+
+          <Footer />
         </main>
       </div>
-
-      <Footer />
     </div>
   );
 }

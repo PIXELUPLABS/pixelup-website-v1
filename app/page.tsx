@@ -1,6 +1,7 @@
 import Image from "next/image";
 // import bgBottom from "@/public/media/bg-bottom.png"; // TODO: hidden for now, re-enable when ready.
 import bgHome from "@/public/media/bg-home.png";
+import { AuditForm } from "@/components/AuditForm";
 import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
 import { Showcase } from "@/components/Showcase";
@@ -81,9 +82,12 @@ export default function Home() {
           aria-hidden="true"
           className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
         />
-        <Showcase scroll="page" />
+        <div className="flex min-w-0 flex-1 flex-col gap-8">
+          <Showcase scroll="page" />
+          <AuditForm />
+          <Footer inset={false} />
+        </div>
       </div>
-      <Footer />
     </div>
   );
 }
