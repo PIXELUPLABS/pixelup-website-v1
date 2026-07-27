@@ -1,14 +1,10 @@
 "use client";
 
-import { Geist } from "next/font/google";
 import Image from "next/image";
 import { useState } from "react";
 import auditFormBg from "@/public/media/audit-form-bg.png";
 import auditFormPattern from "@/public/media/audit-form-pattern.svg";
 import dakshImg from "@/public/media/daksh-img.svg";
-
-// Scoped to the closing line below — the rest of the site keeps font-display.
-const geist = Geist({ subsets: ["latin"], weight: ["500"] });
 
 // Same transparent + hairline-underline treatment as the Footer's newsletter input.
 const fieldClassName =
@@ -75,7 +71,7 @@ export function AuditForm() {
               <p className="font-normal text-white/60">Creative Director</p>
             </div>
           </div>
-          <p className={`${geist.className} text-[28px] font-medium leading-[120%] text-white desk:text-[40px]`}>
+          <p className="font-display text-[28px] font-medium leading-[120%] text-white desk:text-[40px]">
             See your site <span className="text-white/60">the way</span>
             <br />
             <span className="text-white/60">your buyer does.</span>
