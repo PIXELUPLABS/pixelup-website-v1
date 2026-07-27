@@ -111,10 +111,14 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         <div className="relative h-120 w-full">
           <Image src={post.image} alt="" fill priority sizes="100vw" className="object-cover" />
         </div>
-        {/* gap-8 on `main` (32px) gives the spacing above/between each block. */}
-        {post.content.map((block, index) => (
-          <ContentBlock key={index} block={block} />
-        ))}
+        {/* Own gap-5 (20px) — tighter than main's gap-8, which is meant for
+            spacing between structural sections (banner, divider, related
+            articles), not between individual paragraphs/headings here. */}
+        <div className="flex w-full flex-col gap-5">
+          {post.content.map((block, index) => (
+            <ContentBlock key={index} block={block} />
+          ))}
+        </div>
         {/* gap-8 on `main` (32px) gives the spacing above this rule too. */}
         <div aria-hidden="true" className="w-full border-t-[0.5px] border-hairline" />
         <h2 className={`${geist.className} text-[40px] font-medium leading-tight text-white`}>
