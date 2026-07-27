@@ -1,11 +1,48 @@
 import { Geist } from "next/font/google";
 import Image from "next/image";
 import blogBannerBg from "@/public/media/blog-banner-bg.png";
+import { Footer } from "@/components/Footer";
 import type { BlogPost } from "@/lib/blog";
 import { BlogPostSidebar } from "./BlogPostSidebar";
 
 // Scoped to the "Related Articles" heading only — the rest of the site keeps font-display.
 const geist = Geist({ subsets: ["latin"], weight: ["500"] });
+
+/** One "Related Articles" card — date, image, category tag, heading,
+    subheading, "Read Article". Same content on both sides for now. */
+function RelatedArticleCard() {
+  return (
+    <div className="flex min-w-0 flex-1 flex-col gap-3">
+      <p className="text-[12px] font-medium uppercase text-label-grey">JUN 24, 2026</p>
+      <div className="relative h-80 w-full">
+        <Image
+          src="/media/Link.png"
+          alt=""
+          fill
+          sizes="(min-width: 1200px) 25vw, 100vw"
+          className="object-cover"
+        />
+      </div>
+      {/* Extra mt-2 on top of the card's gap-3 rhythm for the spacing
+          called out between the image and the tag. */}
+      <div className="mt-2 flex items-center">
+        <span className="h-1 w-1.5 shrink-0 bg-[#0658FC]" />
+        <span className="bg-label-grey/20 px-0.5 py-px text-[12px] font-medium uppercase text-white">
+          Design
+        </span>
+      </div>
+      <p className="text-[24px] font-medium leading-tight text-white">
+        What makes a website project run smoothly
+      </p>
+      <p className="text-[14px] leading-[1.5] text-body-grey">
+        A short, practical look at the handful of decisions that keep a website
+        build on schedule instead of drifting past its deadline.
+      </p>
+      {/* Extra mt-2 for the spacing called out before "Read Article". */}
+      <p className="mt-2 text-[12px] font-medium uppercase text-white">Read Article</p>
+    </div>
+  );
+}
 
 /** Blog post detail shell — aside + divider + right-section layout, same
     treatment as /blog. Right-section content beyond the hero banner is a
@@ -59,6 +96,11 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         <h2 className={`${geist.className} text-[40px] font-medium leading-tight text-white`}>
           Related Articles
         </h2>
+        <div className="flex w-full flex-col gap-8 desk:flex-row desk:gap-6">
+          <RelatedArticleCard />
+          <RelatedArticleCard />
+        </div>
+        <Footer inset={false} />
       </main>
     </div>
   );
