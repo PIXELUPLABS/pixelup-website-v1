@@ -24,7 +24,7 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
         <div className="no-scrollbar hidden desk:flex desk:min-h-0 desk:flex-1 desk:flex-col desk:justify-between desk:gap-8 desk:overflow-y-auto desk:pb-6 desk:pt-2">
           <div className="fade-up flex flex-col [animation-delay:100ms]">
             <div className="px-5 pb-3">
-              <BackButton label="Back to all projects" />
+              <BackButton label="Back to all projects" icon="arrow" />
             </div>
             <ClientInfo info={study.info} />
             <div className="flex flex-col gap-3 px-5 pt-3">

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 import { links } from "@/lib/projects";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
@@ -20,26 +19,13 @@ export const navLinks: { label: string; href: string | null }[] = [
  * Full-width sticky top bar, separate from LeftNav's own logo/header.
  * Fixed at h-16 — LeftNav's sticky offset (see its `sticky` prop) is
  * computed against this exact height, so changing it here means updating
- * that offset too. Transparent at the top of the page, picks up the
- * base/90 + blur backing once the page has scrolled.
+ * that offset too. Solid bg-base at every scroll position.
  */
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 0);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={`sticky top-0 z-30 h-16 border-b-[0.5px] border-hairline transition-colors ${
-        scrolled ? "bg-base/90 backdrop-blur" : "bg-transparent"
-      }`}
-    >
+    <header className="sticky top-0 z-30 h-16 border-b-[0.5px] border-hairline bg-base">
       <div className="flex h-full items-center justify-between gap-6 px-5">
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-8 desk:flex">
