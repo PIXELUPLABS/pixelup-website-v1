@@ -2,9 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 export function BackButton({
+  href = "/",
   label = "Back",
   icon = "chevron",
 }: {
+  href?: string;
   label?: string;
   /** "chevron" — the usual back-arrow stroke icon. "arrow" — the back-btn
       icon from public/media. */
@@ -12,7 +14,7 @@ export function BackButton({
 }) {
   return (
     <Link
-      href="/"
+      href={href}
       aria-label={label}
       className="-ml-1 inline-flex h-8 w-8 items-center justify-center text-white/60 transition-colors hover:text-white"
     >

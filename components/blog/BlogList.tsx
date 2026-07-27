@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import blogBannerBg from "@/public/media/blog-banner-bg.png";
 import { blogPosts, formatBlogDate } from "@/lib/blog";
 
@@ -11,7 +12,11 @@ export function BlogList() {
     <section className="w-full">
       <div className="flex w-full flex-col divide-y divide-hairline">
         {blogPosts.map((post) => (
-          <div key={post.slug} className="flex w-full flex-col py-4 desk:h-56.25 desk:flex-row">
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}`}
+            className="flex w-full flex-col py-4 desk:h-56.25 desk:flex-row"
+          >
             <div className="relative h-56.25 w-full desk:h-full desk:w-[45%]">
               <Image
                 src={blogBannerBg}
@@ -37,7 +42,7 @@ export function BlogList() {
                 {formatBlogDate(post.date)}
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
