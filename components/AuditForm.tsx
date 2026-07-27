@@ -13,8 +13,11 @@ const fieldClassName =
 // Placeholder shell — audit form UI lands in the right column later.
 export function AuditForm() {
   return (
-    <section id="audit" className="flex h-[calc(90vh-4rem)] w-full border-t-[0.5px] border-hairline py-7">
-      <div className="relative w-3/5">
+    <section
+      id="audit"
+      className="flex w-full flex-col border-t-[0.5px] border-hairline py-7 desk:h-[calc(90vh-4rem)] desk:flex-row"
+    >
+      <div className="relative h-90 w-full desk:h-full desk:w-3/5">
         <Image src={auditFormBg} alt="" fill className="object-cover" />
         <div className="relative flex h-full flex-col justify-between p-6">
           <div className="flex flex-col gap-2">
@@ -26,26 +29,26 @@ export function AuditForm() {
               <p className="font-normal text-white/60">Creative Director</p>
             </div>
           </div>
-          <p className={`${geist.className} text-[40px] font-medium leading-[120%] text-white`}>
+          <p className={`${geist.className} text-[28px] font-medium leading-[120%] text-white desk:text-[40px]`}>
             See your site <span className="text-white/60">the way</span>
             <br />
             <span className="text-white/60">your buyer does.</span>
           </p>
         </div>
       </div>
-      <form className="flex h-full w-2/5 flex-col gap-9 px-5 py-6 bg-[#0A0A0A]">
-        <div className="flex gap-5">
+      <form className="flex w-full flex-col gap-5 bg-[#0A0A0A] px-5 py-6 desk:h-full desk:w-2/5 desk:gap-9">
+        <div className="flex flex-col gap-5 desk:flex-row">
           <input type="text" placeholder="First Name" className={fieldClassName} />
           <input type="email" placeholder="Work Email" className={fieldClassName} />
         </div>
-        <div className="flex gap-5">
+        <div className="flex flex-col gap-5 desk:flex-row">
           <input type="text" placeholder="Site to audit" className={fieldClassName} />
           <input type="text" placeholder="Your LinkedIn" className={fieldClassName} />
         </div>
         <input type="text" placeholder="Your Buyers" className={fieldClassName} />
         <textarea
           placeholder="What isn't working?"
-          className={`${fieldClassName} flex-1 resize-none`}
+          className={`${fieldClassName} min-h-25 flex-1 resize-none`}
         />
         <input type="text" placeholder="Where you are at?" className={fieldClassName} />
         <button
