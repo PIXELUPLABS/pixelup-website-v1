@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { links } from "@/lib/projects";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
@@ -47,9 +49,9 @@ export function Navbar() {
                 key={item.label}
                 href={item.href}
                 aria-current={pathname === item.href ? "page" : undefined}
-                className={`px-3 py-1.5 font-button text-[13px] font-semibold uppercase tracking-[-0.02em] transition-colors ${
+                className={`px-3 py-1.5 font-display text-[13px] font-medium uppercase tracking-[-0.02em] transition-colors ${
                   pathname === item.href
-                    ? "bg-accent text-white"
+                    ? "text-white"
                     : "text-white/70 hover:text-white"
                 }`}
               >
@@ -58,12 +60,30 @@ export function Navbar() {
             ) : (
               <span
                 key={item.label}
-                className="cursor-default font-button text-[13px] font-semibold uppercase tracking-[-0.02em] text-white/30"
+                className="cursor-default font-display text-[13px] font-medium uppercase tracking-[-0.02em] text-white/30"
               >
                 {item.label}
               </span>
             )
           )}
+          <div className="flex items-center gap-2.5">
+            <Link
+              href="/#audit"
+              className="flex items-center gap-1 rounded-none bg-button-dark px-3 py-2 font-display text-[12px] font-medium uppercase tracking-[-0.12px] text-white transition-colors hover:bg-white/12"
+            >
+              <span>Free Audit</span>
+              <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
+            </Link>
+            <a
+              href={links.discoveryCall}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1 rounded-none bg-accent px-3 py-2 font-display text-[12px] font-medium uppercase tracking-[-0.12px] text-white transition-colors hover:brightness-110"
+            >
+              <span>Book a Call</span>
+              <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
+            </a>
+          </div>
         </nav>
         <MobileMenu />
       </div>

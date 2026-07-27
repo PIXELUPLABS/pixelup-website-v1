@@ -13,7 +13,7 @@ const fieldClassName =
 // Placeholder shell — audit form UI lands in the right column later.
 export function AuditForm() {
   return (
-    <section className="flex h-[calc(90vh-4rem)] w-full border-t-[0.5px] border-hairline py-7">
+    <section id="audit" className="flex h-[calc(90vh-4rem)] w-full border-t-[0.5px] border-hairline py-7">
       <div className="relative w-3/5">
         <Image src={auditFormBg} alt="" fill className="object-cover" />
         <div className="relative flex h-full flex-col justify-between p-6">
