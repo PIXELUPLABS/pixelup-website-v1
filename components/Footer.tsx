@@ -24,16 +24,16 @@ export function Footer({
 }) {
   return (
     <footer
-      className={`relative h-[calc(100vh-4rem)] border-t-[0.5px] border-hairline py-5 ${
+      className={`relative w-full border-t-[0.5px] border-hairline py-5 desk:h-[calc(100vh-4rem)] ${
         inset ? "px-5" : ""
       }`}
     >
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 select-none">
         <Image src={footerBg} alt="" fill className="object-cover" />
       </div>
-      <div className="relative grid h-full grid-rows-[3fr_1fr] border-[0.5px] border-hairline">
-        <div className="grid grid-cols-3 divide-x divide-hairline">
-          <div className="flex h-full flex-col justify-between p-6">
+      <div className="relative flex flex-col border-[0.5px] border-hairline desk:grid desk:h-full desk:grid-rows-[3fr_1fr]">
+        <div className="grid grid-cols-1 divide-y divide-hairline desk:grid-cols-3 desk:divide-x desk:divide-y-0">
+          <div className="flex flex-col gap-6 p-6 desk:h-full desk:justify-between">
             <div className="flex flex-col gap-6">
               <Image src={navLogo} alt="PIXELUP LABS" className="h-8 w-8" />
               <p className="font-normal text-white">
@@ -42,7 +42,7 @@ export function Footer({
             </div>
             <p className="text-[14px] font-normal text-white">©2026 PIXELUP LABS</p>
           </div>
-          <div className="flex h-full flex-col gap-8 p-6">
+          <div className="flex flex-col gap-8 p-6 desk:h-full">
             <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
               Case Studies
             </p>
@@ -64,7 +64,7 @@ export function Footer({
               )}
             </div>
           </div>
-          <div className="flex h-full flex-col gap-8 p-6">
+          <div className="flex flex-col gap-8 p-6 desk:h-full">
             <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
               Subscribe to our newsletter
             </p>
