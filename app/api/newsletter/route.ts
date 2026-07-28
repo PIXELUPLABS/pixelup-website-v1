@@ -1,13 +1,14 @@
+import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-// Newsletter signups go to the "Newsletter" tab of the same spreadsheet as the
-// audit form, through the same Apps Script webhook. See scripts/apps-script/Code.gs.
+// Newsletter signups go to their own Supabase table, separate from
+// audit_submissions — see app/api/audit/route.ts for the sibling form.
 
-// Must stay in sync with FORMS.newsletter.fields in scripts/apps-script/Code.gs
-// and initialValues in components/NewsletterForm.tsx.
+// Must stay in sync with initialValues in components/NewsletterForm.tsx and
+// the newsletter_subscribers table's actual columns.
 const fields = ["name", "email"] as const;
 
-// Deliberately loose — just enough to keep obvious junk out of the sheet.
+// Deliberately loose — just enough to keep obvious junk out of the table.
 // Real deliverability checking belongs to whatever sends the newsletter.
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -31,39 +32,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
   }
 
-  const webhookUrl = process.env.AUDIT_WEBHOOK_URL;
-  const webhookSecret = process.env.AUDIT_WEBHOOK_SECRET;
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!webhookUrl || !webhookSecret) {
-    console.error(
-      "Missing AUDIT_WEBHOOK_URL / AUDIT_WEBHOOK_SECRET — see scripts/apps-script/Code.gs."
-    );
+  if (!supabaseUrl || !serviceRoleKey) {
+    console.error("Missing SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY env vars.");
     return NextResponse.json({ error: "Server not configured" }, { status: 500 });
   }
 
-  try {
-    const res = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        secret: webhookSecret,
-        // Tells the script which tab to append to.
-        form: "newsletter",
-        name: (body.name as string).trim(),
-        email,
-      }),
-      signal: AbortSignal.timeout(15_000),
-    });
+  const supabase = createClient(supabaseUrl, serviceRoleKey);
+  const { error } = await supabase.from("newsletter_subscribers").insert({
+    name: (body.name as string).trim(),
+    email,
+  });
 
-    // Apps Script always answers 200 and reports success in the body.
-    const result = await res.json().catch(() => null);
-
-    if (!res.ok || !result?.ok) {
-      console.error("Newsletter webhook rejected signup:", res.status, result);
-      return NextResponse.json({ error: "Could not save signup" }, { status: 502 });
+  if (error) {
+    // Duplicate email (unique constraint) — treat as a friendly success
+    // rather than an error, since the person is already subscribed.
+    if (error.code === "23505") {
+      return NextResponse.json({ ok: true });
     }
-  } catch (err) {
-    console.error("Newsletter webhook unreachable:", err);
+    console.error("Supabase insert failed:", error);
     return NextResponse.json({ error: "Could not save signup" }, { status: 502 });
   }
 
