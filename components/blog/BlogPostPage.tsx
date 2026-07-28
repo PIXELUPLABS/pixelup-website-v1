@@ -31,7 +31,7 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
       <p className="text-[24px] font-medium leading-tight text-white transition-opacity duration-200 group-hover:opacity-60">
         {post.title}
       </p>
-      <p className="text-[16px] leading-[1.5] text-body-grey">{post.description}</p>
+      {/* <p className="text-[16px] leading-[1.5] text-body-grey">{post.description}</p> */}
       {/* Extra mt-2 for the spacing called out before "Read Article". gap-2
           (8px) between the text and the button. */}
       <div className="mt-2 flex items-center gap-4">
