@@ -1,6 +1,7 @@
 import { Geist } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import { AuditForm } from "@/components/AuditForm";
 import { Footer } from "@/components/Footer";
 import { blogPosts, formatBlogDate, type BlogContentBlock, type BlogPost } from "@/lib/blog";
 import { BlogPostSidebar } from "./BlogPostSidebar";
@@ -146,6 +147,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
             ))}
           </div>
         </div>
+        <AuditForm />
         {/* Same treatment as /blog's Footer wrapper — cancels the row's
             p-5 on this wrapper only, so Footer fills the extra space via
             its own w-full without needing any change to Footer itself. */}

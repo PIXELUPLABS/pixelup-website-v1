@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AuditForm } from "@/components/AuditForm";
 import { BlogFaq } from "@/components/blog/BlogFaq";
 import { BlogFilterProvider } from "@/components/blog/BlogFilterContext";
 import { BlogList } from "@/components/blog/BlogList";
@@ -30,6 +31,7 @@ export default function BlogPage() {
         <main className="flex min-w-0 flex-1 flex-col gap-8">
           <BlogList />
           <BlogFaq />
+          <AuditForm />
           {/* This row's own p-5 insets main's right edge from the true
               viewport edge — BlogList/BlogFaq are fine keeping that inset,
               but Footer shouldn't have it. desk:-mr-5 (the row's p-5)
