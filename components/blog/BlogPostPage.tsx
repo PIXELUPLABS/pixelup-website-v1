@@ -17,7 +17,7 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
         {formatBlogDate(post.publishedDate)}
       </p>
       <div className="relative h-80 w-full">
-        <Image src={post.image} alt="" fill sizes="(min-width: 1200px) 25vw, 100vw" className="object-cover" />
+        <Image src={post.image} alt="" fill sizes="(min-width: 1200px) 25vw, 100vw" className="object-cover object-left" />
       </div>
       {/* Extra mt-2 on top of the card's gap-3 rhythm for the spacing
           called out between the image and the tag. */}
@@ -114,7 +114,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
       />
       <main className="flex min-w-0 flex-1 flex-col gap-8">
         <div className="relative h-120 w-full">
-          <Image src={post.image} alt="" fill priority sizes="100vw" className="object-cover" />
+          <Image src={post.image} alt="" fill priority sizes="100vw" className="object-cover object-left" />
         </div>
         {/* Own gap-5 (20px) — tighter than main's gap-8, which is meant for
             spacing between structural sections (banner, divider, related
