@@ -16,7 +16,7 @@ const caseStudies = [
 // insets the bordered/partitioned card from those outer edges.
 export function Footer() {
   return (
-    <footer className="relative w-full desk:h-[calc(100vh-4rem)]">
+    <footer className="relative w-full desk:h-140">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 select-none">
         <Image src={footerBg} alt="" fill className="object-cover" />
       </div>
