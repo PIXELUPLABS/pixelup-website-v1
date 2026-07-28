@@ -1,16 +1,25 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { blogPosts, formatBlogDate } from "@/lib/blog";
+import { useBlogFilter } from "./BlogFilterContext";
 
 /** Full-width blog container. Each blog row is itself full width, split 45%
     media / 55% info (no gap between them — the percentages already sum to
     100, see AGENTS.md's gap+width trap), rows separated by a hairline
     divider with padding on both sides of the rule. */
 export function BlogList() {
+  const { category } = useBlogFilter();
+  const posts =
+    category === "All"
+      ? blogPosts
+      : blogPosts.filter((post) => post.categories.includes(category));
+
   return (
     <section className="w-full">
       <div className="flex w-full flex-col divide-y divide-hairline">
-        {blogPosts.map((post) => (
+        {posts.map((post) => (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
@@ -27,11 +36,15 @@ export function BlogList() {
             </div>
             <div className="flex w-full flex-col justify-between gap-4 pt-4 desk:h-full desk:w-[55%] desk:gap-0 desk:pt-0 desk:pl-5">
               <div className="flex flex-col gap-1">
-                <div className="flex h-8.75 items-end">
-                  <span className="h-1 w-1.5 shrink-0 bg-[#0658FC]" />
-                  <span className="bg-label-grey/20 px-0.5 py-px text-[12px] font-medium uppercase text-white">
-                    {post.category}
-                  </span>
+                <div className="flex h-8.75 flex-wrap items-end gap-2">
+                  {post.categories.map((item) => (
+                    <div key={item} className="flex items-end">
+                      <span className="h-1 w-1.5 shrink-0 bg-[#0658FC]" />
+                      <span className="bg-label-grey/20 px-0.5 py-px text-[12px] font-medium uppercase text-white">
+                        {item}
+                      </span>
+                    </div>
+                  ))}
                 </div>
                 <p className="text-[24px] font-medium leading-tight text-white/80 capitalize desk:text-[28px]">
                   {post.title}

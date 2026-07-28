@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useBlogFilter } from "./BlogFilterContext";
 
-const categories = ["All", "Branding", "Design", "Development"];
-const displayModes = ["List", "Grid"];
+const categories = ["All", "Branding", "Design"];
+// const displayModes = ["List", "Grid"]; // Display filter hidden for now.
 
 /** Sharp-edged filter pill: transparent + hairline border, filled with the
     site's subtle grey button overlay when active. */
@@ -33,28 +33,25 @@ function Pill({
 }
 
 export function ArticleFilters() {
-  const [category, setCategory] = useState(categories[0]);
-  const [display, setDisplay] = useState(displayModes[0]);
+  const { category, setCategory } = useBlogFilter();
+  // const [display, setDisplay] = useState(displayModes[0]); // Display filter hidden for now.
 
   return (
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-[10px]">
         <p className="text-[12px] font-medium uppercase text-label-grey">Filters:</p>
         <div className="flex flex-wrap gap-2">
-          {categories.flatMap((item) => [
-            // basis-full forces a flex-wrap break — Development always
-            // starts a new line instead of only wrapping when the aside
-            // gets narrow.
-            ...(item === "Development" ? [<div key={`${item}-break`} className="basis-full" />] : []),
+          {categories.map((item) => (
             <Pill
               key={item}
               label={item}
               active={category === item}
               onClick={() => setCategory(item)}
-            />,
-          ])}
+            />
+          ))}
         </div>
       </div>
+      {/* Display filter (List/Grid) hidden for now.
       <div className="flex flex-col gap-[10px]">
         <p className="text-[12px] font-medium uppercase text-label-grey">Display:</p>
         <div className="flex flex-wrap gap-2">
@@ -68,6 +65,7 @@ export function ArticleFilters() {
           ))}
         </div>
       </div>
+      */}
     </div>
   );
 }

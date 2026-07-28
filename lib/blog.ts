@@ -10,7 +10,7 @@ export type BlogContentBlock =
 export interface BlogPost {
   slug: string;
   title: string;
-  category: string;
+  categories: string[];
   image: string;
   author: string;
   publishedDate: string;
@@ -23,7 +23,7 @@ export const blogPosts: BlogPost[] = [
     slug: "best-design-agencies-for-ai-startups-2026",
     title:
       "Best Design Agencies for AI Startups (2026): Who Designed Midjourney, Cursor, and Greptile",
-    category: "Design",
+    categories: ["Design"],
     image: "/media/blog-banner-bg.png",
     author: "Daksh, PIXELUP LABS",
     publishedDate: "2026-07-25",
@@ -584,7 +584,7 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "best-design-agencies-in-san-francisco-2026",
     title: "Best Design Agencies in San Francisco (2026): 10 Compared, With Real Prices",
-    category: "Design",
+    categories: ["Design"],
     image: "/media/blog-banner-bg.png",
     author: "Daksh, PIXELUP LABS",
     publishedDate: "2026-07-25",
@@ -1197,33 +1197,320 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    // Placeholder — real content lands later, same shape as the entry above.
-    slug: "post-2",
-    title: "What makes a website project run smoothly",
-    category: "Design",
+    slug: "what-a-startup-rebrand-and-website-cost-in-2026",
+    title: "What a Startup Rebrand and Website Cost in 2026: By Stage, With Our Own Prices",
+    categories: ["Design", "Branding"],
     image: "/media/blog-banner-bg.png",
     author: "Daksh, PIXELUP LABS",
-    publishedDate: "2026-06-21",
-    updatedDate: "2026-06-21",
+    publishedDate: "2026-07-25",
+    updatedDate: "2026-07-25",
     content: [
       {
         type: "paragraph",
-        text: "Content for this article is coming soon.",
+        text: "A brand and website in 2026 costs $2–8k from a freelancer, $15–25k at seed, $25–40k from a boutique sprint at Series A, $50–150k from an established studio, and $80–500k from a prestige or network firm. Ours is $25–30k for a brand sprint and $25–40k with the website. What separates the tiers is strategy depth, team seniority, and how much system you keep, not the deliverable list.",
       },
-    ],
-  },
-  {
-    slug: "post-3",
-    title: "What makes a website project run smoothly",
-    category: "Design",
-    image: "/media/blog-banner-bg.png",
-    author: "Daksh, PIXELUP LABS",
-    publishedDate: "2026-05-30",
-    updatedDate: "2026-05-30",
-    content: [
+      { type: "heading", text: "What to spend by stage" },
+      {
+        type: "table",
+        headers: ["Stage", "Spend on Brand and Site", "Timeline", "What You Should Get"],
+        rows: [
+          [
+            "Pre-seed / pre-PMF",
+            "$0 to $3k",
+            "a weekend",
+            "A template, or Claude Code. Do not hire an agency.",
+          ],
+          [
+            "Seed, under $2M raised",
+            "$3k to $15k",
+            "2–4 weeks",
+            "A freelancer or a template plus a real writer. Positioning over polish.",
+          ],
+          [
+            "Seed, $2M+ raised",
+            "$15k to $30k",
+            "4–8 weeks",
+            "Positioning, identity, and a marketing site that says one clear thing.",
+          ],
+          [
+            "Series A going upmarket",
+            "$25k to $60k",
+            "4–6 weeks",
+            "Brand argument, site, and a design system your engineers can use.",
+          ],
+          [
+            "Series B with a category claim",
+            "$80k to $250k",
+            "10–24 weeks",
+            "Deep research, naming, multi-surface system, prestige-tier craft.",
+          ],
+          [
+            "Series C and beyond",
+            "$150k+",
+            "3–6 months",
+            "Network-firm process, global rollout, committee-ready governance.",
+          ],
+        ],
+      },
       {
         type: "paragraph",
-        text: "Content for this article is coming soon.",
+        text: "The row most founders get wrong is Series A. Hold that thought.",
+      },
+      { type: "heading", text: "The number the market will give you, and why we disagree" },
+      {
+        type: "paragraph",
+        text: "Search this question and you will be told a growth-stage startup should invest $75,000 to $250,000 in brand. That guidance is everywhere, and it is written almost entirely by agencies whose floor is $80,000.",
+      },
+      {
+        type: "paragraph",
+        text: "We ship brand plus website for $25,000 to $40,000, in two to five weeks, for exactly that stage. So one of us is wrong, and it is worth being precise about which.",
+      },
+      {
+        type: "paragraph",
+        text: "Here is what the extra $200,000 genuinely buys:",
+      },
+      {
+        type: "list",
+        items: [
+          "Research depth. Twenty stakeholder interviews and a segmentation study instead of four founder conversations and a competitor teardown.",
+          "Naming. Legal search, linguistic screening, trademark clearance across jurisdictions. Real work, and expensive for good reason.",
+          "Committee governance. A process built to survive six stakeholders who each need to feel heard. If you have a brand committee, you are buying this whether you want to or not.",
+          "Multi-surface systems. Product UI, packaging, events, sales collateral, and a governance model for all of it.",
+          "Insurance. At Series C, a botched rebrand is a nine-figure problem, and you are paying a firm whose process makes catastrophe unlikely.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Here is what it does not buy: better taste. There is no correlation between a $200,000 invoice and a brand a buyer finds more credible. A prestige studio and a good boutique are drawing from the same talent pool, and often literally the same people at different points in their careers.",
+      },
+      {
+        type: "paragraph",
+        text: "So the honest version: if you have a committee, a naming problem, or a category to define at Series B, the market number is right and you should pay it. If you are a Series A founder who needs enterprise buyers to stop hesitating before a deadline, $75,000 is the price of a process you do not need yet.",
+      },
+      { type: "heading", text: "Cost by stage, in detail" },
+      { type: "heading", text: "Pre-seed and pre-PMF: $0 to $3,000" },
+      {
+        type: "paragraph",
+        text: "Do not hire anybody. A brand amplifies a position, and if the position is still moving you are paying to personify something that will change. Use a template and Claude Code. If you spend money at all, spend it on a writer who can make your homepage say what you do.",
+      },
+      {
+        type: "paragraph",
+        text: "The counter-argument you will hear is that spending $20,000 at seed is cheaper than spending $60,000 rebranding after your Series A. That is true only if your positioning survives to Series A. Most pre-PMF positioning does not.",
+      },
+      { type: "heading", text: "Seed under $2M raised: $3,000 to $15,000" },
+      {
+        type: "paragraph",
+        text: "A freelancer at $2,000 to $8,000 will give you a logo and a competent site if you arrive knowing what you want to say. Published market data puts freelance brand work at $1,500 to $8,000, and that is usually just the identity.",
+      },
+      {
+        type: "paragraph",
+        text: "At this level you are buying execution, not opinion. That is the correct trade. Budget separately for a writer.",
+      },
+      { type: "heading", text: "Seed with $2M+ raised: $15,000 to $30,000" },
+      {
+        type: "paragraph",
+        text: "The market's seed package, roughly $15,000 to $25,000, buys positioning, logo, a color system, typography, and a simple website. Published allocations inside that number look like: $5,000 to $10,000 for a positioning workshop, $10,000 to $25,000 for identity from a boutique or senior freelancer, $5,000 to $15,000 for a basic site, and $2,000 to $5,000 for a pitch deck.",
+      },
+      {
+        type: "paragraph",
+        text: "Note those ranges overlap the total. That is normal and it is the tell: at seed you are choosing which two of those four things to actually fund.",
+      },
+      { type: "heading", text: "Series A going upmarket: $25,000 to $60,000" },
+      {
+        type: "paragraph",
+        text: "This is our stage, so read the next few sentences with that in mind.",
+      },
+      {
+        type: "paragraph",
+        text: "A Series A company selling to enterprise for the first time has a specific problem: the product wins on capability and then the deal goes quiet, because a buying committee is trying to assess whether you will still exist at renewal. That is a perception problem with a deadline attached, usually a pipeline review or a Series B narrative that freezes in a quarter.",
+      },
+      {
+        type: "paragraph",
+        text: "What that needs is a brand that argues something, a site that says it in five seconds, and a design system so it does not decay. What it does not need is a five-month process.",
+      },
+      {
+        type: "paragraph",
+        text: "$25,000 to $40,000 buys that from a boutique in two to five weeks. $50,000 to $60,000 buys it with more product-design surface. Above that you are paying for research depth and governance, which are real, and which most Series A companies do not yet have a use for.",
+      },
+      { type: "heading", text: "Series B with a category claim: $80,000 to $250,000" },
+      {
+        type: "paragraph",
+        text: "Now the market number is correct. Character runs $80,000 to $250,000. Focus Lab's Structural Rebrand runs $75,000 to $350,000 over three to five months. MetaLab starts at $100,000 and regularly reaches $150,000 to $250,000 or more.",
+      },
+      {
+        type: "paragraph",
+        text: "At this stage you likely have a stakeholder group, more than one product line, and a competitive claim that has to hold up under scrutiny for years. The research phase stops being a luxury.",
+      },
+      { type: "heading", text: "Series C and beyond: $150,000+" },
+      {
+        type: "paragraph",
+        text: "Landor runs $100,000 to $500,000 and up. Pentagram runs $80,000 to $400,000 and up. You are buying process, governance, and global rollout capability, from a firm that will not fall over when your board changes its mind in month four.",
+      },
+      { type: "heading", text: "The four ways to buy design" },
+      {
+        type: "table",
+        headers: ["Method", "Cost", "Speed", "Strategy Included?", "Who It Fails"],
+        rows: [
+          [
+            "Template + Claude Code",
+            "Free to $3k",
+            "A weekend",
+            "No",
+            "Anyone selling to enterprise. You will look like the 200 other sites shipped that quarter.",
+          ],
+          [
+            "Freelancer",
+            "$2k–8k",
+            "2–4 weeks",
+            "No",
+            "Anyone who has not decided what to say. Single-threaded, and ghosting is a real risk.",
+          ],
+          [
+            "Productized subscription",
+            "$699–$4,995/mo",
+            "Ongoing, queued",
+            "No",
+            "Anyone needing a point of view. Great production, no argument.",
+          ],
+          [
+            "Boutique sprint",
+            "$25k–60k",
+            "2–6 weeks",
+            "Yes",
+            "Committees, and budgets under $2M raised.",
+          ],
+          [
+            "Prestige / network studio",
+            "$80k–500k+",
+            "3–6 months",
+            "Yes, deeply",
+            "Anyone on a deadline, or anyone who needs the money for headcount.",
+          ],
+        ],
+      },
+      { type: "heading", text: "What moves the price up or down" },
+      {
+        type: "list",
+        items: [
+          "Scope, in order of expense. Naming is the most expensive thing you can add, because it drags legal and linguistic work with it. Product UI is next. A marketing site is cheaper than either. A logo alone is cheapest and least useful.",
+          "Whether you get a system. A brand handoff is a set of files. A design system is components, documentation, and templates your engineers can build against. The second costs more and is the difference between a brand that still looks sharp in twelve months and one that decays. On Greptile's 2025 rebrand and design system that meant 200+ components with dev-first documentation.",
+          "Speed. Compressing a timeline costs money everywhere except at studios built for compression. Our sprints are two weeks for brand and three for a site because the process is designed that way, not because we are cutting corners on a five-month process.",
+          "Strategy depth. Four founder conversations versus twenty stakeholder interviews is most of the gap between a $30,000 and a $150,000 engagement.",
+          "Who is actually on your account. At a small studio the founders do the work. At a large one, seniority is what you are negotiating for, and it is the single most under-asked question in an agency evaluation.",
+        ],
+      },
+      { type: "heading", text: "The costs the quote does not include" },
+      {
+        type: "paragraph",
+        text: "Nobody in this category prints these, so here they are.",
+      },
+      {
+        type: "list",
+        items: [
+          "The same brief varies 4x between vendors. A 10-page marketing site gets quoted $8,000 by one shop and $35,000 by another. That is not a quality signal in either direction, which is why you have to compare what is inside the number.",
+          "Out-of-scope changes run $150 to $300 per hour. Three rounds of revisions on a logo alone can add $1,000 to $2,000.",
+          "Implementation is not in the design fee. Common guidance is to budget two to three times the agency fee for total cost including implementation, legal, and operational rollout. That multiplier is real at enterprise scale. At Series A with one product and one website, it is closer to 1.2x, and anyone quoting you 3x at that stage is describing a project you are not running.",
+          "Platform fees are ongoing. Framer runs $10 per month on Basic, $30 on Pro, and from $100 on Scale, plus $20 per editor seat and a $10 Content Editor seat added in May 2026. Webflow is comparable. Small numbers, but they are forever.",
+          "Retainers are how the real cost accumulates. Basic maintenance runs $250 to $2,500 per month. A dedicated agency on standby is $2,000 to $6,000. Mid-market retainers run $5,000 to $15,000, and enterprise reaches $15,000 to $50,000 and up. Webflow-specific retainers span $1,000 per month for a freelancer to $40,000 and up for enterprise agencies.",
+        ],
+      },
+      { type: "heading", text: "Our actual prices, and why we publish them" },
+      {
+        type: "list",
+        items: [
+          "Brand sprint: $25,000 to $30,000. Two weeks.",
+          "Brand plus website: $25,000 to $40,000. Two to five weeks.",
+          "Retainer: from $4,000 per month. Same team that ships the sprints, continuously.",
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "For comparison, on retainers: Designjoy is $4,995 per month, ManyPixels is $699, Focus Lab starts at $5,000 for execution and $10,000 for a brand team, Superside starts at $15,000, and Parallel's growth tier is $6,000 to $15,000. Ours starts at $4,000 for the team that did the sprint.",
+      },
+      {
+        type: "paragraph",
+        text: "We publish these for one reason: the number is the filter. Roughly half the people who read this page will now correctly disqualify us, and that is the point. It saves them a call and it saves us one.",
+      },
+      {
+        type: "paragraph",
+        text: "It also means we cannot quietly quote you differently than we quote the next founder, which is a discipline most of this industry avoids. When an agency will not publish a range, the usual reason is that the range depends on what they think you can pay.",
+      },
+      { type: "heading", text: "When the cheaper option is genuinely right" },
+      { type: "paragraph", text: "We lose these, and we should." },
+      {
+        type: "list",
+        items: [
+          "You are pre-PMF. Use a template and Claude Code. Come back after the pivot settles. Hiring us now is the most expensive way to learn your positioning was wrong.",
+          "You have raised under $2M. $25,000 is a headcount decision at that size. A freelancer at $2,000 to $8,000 plus a good writer will get you 80% of the outcome for 15% of the number.",
+          "Your strategy is locked and the Figma is done. You need hands, not opinions. A freelancer is cheaper and faster, and we will spend your first week arguing with decisions you already made.",
+          "Your rebrand needs a committee. We work founder-to-founder. If six stakeholders need to sign off, hire a Character- or Landor-tier firm whose process is built for it, and budget three to five times our number.",
+          "Your problem is pipeline volume. Design makes every impression land harder. It does not create impressions. Hire a growth agency.",
+          "You need steady production, not an argument. A subscription at $699 to $4,995 per month is a better instrument than a sprint.",
+        ],
+      },
+      { type: "heading", text: "FAQ" },
+      { type: "heading", text: "How much does a rebrand cost?" },
+      {
+        type: "paragraph",
+        text: "For a funded startup in 2026: $15,000 to $25,000 at seed, $25,000 to $60,000 at Series A, and $80,000 to $350,000 at Series B and beyond. Freelancers run $2,000 to $8,000 for identity alone. Prestige and network firms reach $500,000. The variable that moves the number most is research depth, not the deliverable list.",
+      },
+      { type: "heading", text: "How much does branding cost for a startup?" },
+      {
+        type: "paragraph",
+        text: "$15,000 to $25,000 buys the standard seed package: positioning, logo, color system, typography, and a simple website. Inside that, a positioning workshop is typically $5,000 to $10,000 and identity work is $10,000 to $25,000, which means at seed you are choosing which parts to actually fund rather than buying all of it.",
+      },
+      { type: "heading", text: "How much does a website redesign cost?" },
+      {
+        type: "paragraph",
+        text: "Most companies pay $15,000 to $80,000. The full published range runs $3,000 to $160,000 and up: agencies quote $3,000 to $75,000 per site, freelancers $3,000 to $10,000. Common tiers are a basic refresh at $10,000 to $25,000, a mid-range business redesign at $30,000 to $80,000, and an enterprise rebuild at $100,000 to $200,000 and up. A 10-page marketing site alone gets quoted anywhere from $8,000 to $35,000.",
+      },
+      { type: "heading", text: "What do design agency retainers cost per month?" },
+      {
+        type: "paragraph",
+        text: "Basic website maintenance runs $250 to $2,500 per month. A dedicated agency on standby is $2,000 to $6,000. Mid-market retainers run $5,000 to $15,000 and enterprise reaches $15,000 to $50,000 and up. Named options: ManyPixels $699, Designjoy $4,995, Focus Lab from $5,000, Superside from $15,000. Ours starts at $4,000.",
+      },
+      { type: "heading", text: "How much should a funded startup invest in brand?" },
+      {
+        type: "paragraph",
+        text: "At Series A going upmarket, $25,000 to $60,000 and four to six weeks for brand plus website. Under $2M raised, close to nothing. At Series B with a category claim to defend, $80,000 and up is defensible. The real filter is not what you can afford, it is whether your positioning is settled enough to be worth amplifying.",
+      },
+      { type: "heading", text: "Should we rebrand before or after the raise?" },
+      {
+        type: "paragraph",
+        text: "Before, if the brand is what is making investors hesitate, and if you can ship it in weeks rather than months. After, if the round is closing in under six weeks or your positioning will change based on what you learn raising. The failure mode is starting a five-month rebrand eight weeks before a raise and going into meetings mid-transition, looking less coherent than when you started.",
+      },
+      { type: "heading", text: "How long does a startup rebrand take?" },
+      {
+        type: "paragraph",
+        text: "A focused brand identity is 4 to 8 weeks. A marketing site on Framer or Webflow is 2 to 6 weeks from approved design. Our brand sprints run two weeks and sites three. Prestige studios quote 10 to 24 weeks, and Focus Lab's Structural Rebrand is three to five months. Research depth drives the timeline more than page count does.",
+      },
+      { type: "heading", text: "Why do most design agencies not publish their prices?" },
+      {
+        type: "paragraph",
+        text: "Because the range often depends on what the agency thinks you can pay. Publishing a number removes that flexibility, and it also disqualifies buyers before a sales conversation can happen. We think the disqualification is a feature: it is faster for everyone when a founder can rule us out in thirty seconds.",
+      },
+      { type: "heading", text: "What is brand entropy, and why does it cost money?" },
+      {
+        type: "paragraph",
+        text: "Brand entropy is what happens when a rebrand decays after launch because nobody left behind a system. Roughly eight months in, the deck stops matching the site, engineers invent components, and the brand you paid for is gone. It costs money twice: once for the original work, once for the rebrand that follows. A design system is the fix, and it is the line item most founders cut first.",
+      },
+      { type: "heading", text: "When should a startup hire a freelancer instead of an agency?" },
+      {
+        type: "paragraph",
+        text: "When the strategy is locked, the scope is defined, and you need execution. At $2,000 to $8,000 a good freelancer is the best value in this market. Hire an agency when someone needs to take a position on what the brand should argue, when the work spans brand and site and product, or when you need a system maintained after launch.",
+      },
+      { type: "heading", text: "The bottom line" },
+      {
+        type: "paragraph",
+        text: "If you are pre-PMF, spend nothing. If you have raised under $2M, hire a freelancer. If you are at Series A and enterprise buyers are hesitating, $25,000 to $60,000 and four to six weeks is the right shape, and the $75,000 to $250,000 the internet quotes you is a process built for a company two stages ahead of yours. If you are at Series B defending a category claim, pay the market number, because at that point it is correct.",
+      },
+      {
+        type: "paragraph",
+        text: "Our numbers are above. If they disqualify us, that was the point of printing them. If they don't, our pricing page has the detail, and we keep lists of the studios we lose to in San Francisco and across AI.",
+      },
+      {
+        type: "paragraph",
+        text: "Market prices verified July 2026 from published pricing pages, agency cost guides, and Clutch profiles. This page decays faster than anything else we publish, so numbers get re-checked monthly. If you find one that has moved, tell us and we will fix it.",
       },
     ],
   },
