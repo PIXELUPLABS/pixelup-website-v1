@@ -22,9 +22,10 @@ export function Footer() {
         <Image src={footerBg} alt="" fill className="object-cover" />
       </div>
       {/* Inner div: spacing from the outer footer on every side except the
-          top (flush there). Everything else (top/bottom split, top row's
-          3 divisions) is partitioned inside this. */}
-      <div className="relative px-5 pb-5 desk:h-full">
+          top (flush there) — desktop only. On mobile the card goes flush
+          left/right too, since the wrapper at each call site already
+          cancels the page row's own p-5 there. */}
+      <div className="relative pb-5 desk:h-full desk:px-5">
         <div className="flex h-full flex-col border-[0.5px] border-hairline desk:grid desk:grid-rows-[3fr_1fr]">
           <div className="grid grid-cols-1 divide-y divide-hairline desk:grid-cols-3 desk:divide-x desk:divide-y-0">
             <div className="flex flex-col gap-6 p-6 desk:h-full desk:justify-between">

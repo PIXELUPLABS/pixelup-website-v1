@@ -31,7 +31,7 @@ export function BlogList() {
                 alt=""
                 fill
                 sizes="(min-width: 1200px) 45vw, 100vw"
-                className="object-cover"
+                className="object-cover object-left"
               />
             </div>
             <div className="flex w-full flex-col justify-between gap-4 pt-4 desk:h-full desk:w-[55%] desk:gap-0 desk:pt-0 desk:pl-5">

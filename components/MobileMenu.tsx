@@ -62,13 +62,15 @@ export function MobileMenu() {
           >
             Chat on Telegram
           </a>
-          <Link
-            href={links.bookCall}
+          <a
+            href={links.discoveryCall}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={() => setOpen(false)}
             className="rounded-[2px] bg-accent px-3 py-2.5 text-[14px] font-medium text-white"
           >
             Start now
-          </Link>
+          </a>
         </div>
       )}
     </div>

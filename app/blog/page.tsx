@@ -35,7 +35,7 @@ export default function BlogPage() {
               but Footer shouldn't have it. desk:-mr-5 (the row's p-5)
               cancels just that, on this wrapper only, so Footer fills it via
               its own w-full — no change needed to Footer itself. */}
-          <div className="desk:-mr-5 -ml-4 -mb-5">
+          <div className="-mx-5 -mb-5 desk:-ml-4">
             <Footer />
           </div>
         </main>
