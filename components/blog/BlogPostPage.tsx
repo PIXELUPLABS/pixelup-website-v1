@@ -29,8 +29,19 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
       </div>
       <p className="text-[24px] font-medium leading-tight text-white">{post.title}</p>
       <p className="text-[14px] leading-[1.5] text-body-grey">{post.description}</p>
-      {/* Extra mt-2 for the spacing called out before "Read Article". */}
-      <p className="mt-2 text-[12px] font-medium uppercase text-white">Read Article</p>
+      {/* Extra mt-2 for the spacing called out before "Read Article". gap-2
+          (8px) between the text and the button. */}
+      <div className="mt-2 flex items-center gap-4">
+        <p className="text-[12px] font-medium uppercase text-white">Read Article</p>
+        <span className="flex h-6.5 w-6.5 shrink-0 items-center justify-center bg-white">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path
+              d="M11.2173 8.80431V7.19579H9.60876V8.80431H11.2173ZM9.60876 7.19579V5.58727H8.00024V7.19579H9.60876ZM9.60876 10.4128V8.80431H8.00024V10.4128H9.60876ZM8.00024 5.58727V3.97876H6.39172V5.58727H8.00024ZM8.00024 12.0213V10.4128H6.39172V12.0213H8.00024ZM6.39172 3.97876V2.37024H4.7832V3.97876H6.39172ZM6.39172 13.6299V12.0213H4.7832V13.6299H6.39172Z"
+              fill="#0658FC"
+            />
+          </svg>
+        </span>
+      </div>
     </Link>
   );
 }

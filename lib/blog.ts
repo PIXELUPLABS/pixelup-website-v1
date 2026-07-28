@@ -589,7 +589,7 @@ export const blogPosts: BlogPost[] = [
     slug: "best-design-agencies-in-san-francisco-2026",
     title: "Best Design Agencies in San Francisco (2026): 10 Compared, With Real Prices",
     description:
-      "Every studio here is actually headquartered in SF, with real prices from $10k to $500k.",
+      "Every studio here is actually headquartered in San Francisco, with real prices from $10k to $500k.",
     categories: ["Design"],
     image: "/media/blog-banner-bg.png",
     author: "Daksh, PIXELUP LABS",
