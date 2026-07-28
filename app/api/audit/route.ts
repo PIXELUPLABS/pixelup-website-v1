@@ -1,22 +1,25 @@
+import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 
-// Submissions are written to the Google Sheet by an Apps Script web app rather
-// than the Sheets API directly — the pixelup Cloud org enforces
-// iam.disableServiceAccountKeyCreation, so a service account JSON key can't be
-// issued. The script lives in scripts/apps-script/Code.gs; setup notes are at
-// the top of that file.
+// Submissions are inserted straight into a Supabase table from this server
+// route, using the service role key (bypasses RLS — safe here since this is
+// server-only code, never exposed to the browser). See README notes in this
+// conversation / SUPABASE_SETUP.md for how to create the project and table.
 
-// The 6 fields AuditForm collects, in the order they land as sheet columns.
-// Must stay in sync with FIELDS in scripts/apps-script/Code.gs and
-// initialValues in components/AuditForm.tsx.
-const fields = [
-  "name",
-  "email",
-  "siteToAudit",
-  "linkedin",
-  "icp",
-  "anythingElse",
-] as const;
+// The 6 fields AuditForm collects. Keys here are the request-body field
+// names (camelCase); values are the matching Postgres column names
+// (snake_case) — keep both in sync with initialValues in
+// components/AuditForm.tsx and the table's actual columns.
+const fieldToColumn = {
+  name: "name",
+  email: "email",
+  siteToAudit: "site_to_audit",
+  linkedin: "linkedin",
+  icp: "icp",
+  anythingElse: "anything_else",
+} as const;
+
+const fields = Object.keys(fieldToColumn) as (keyof typeof fieldToColumn)[];
 
 // "anythingElse" is the only field the form lets you leave blank.
 const optionalFields = new Set<(typeof fields)[number]>(["anythingElse"]);
@@ -43,41 +46,25 @@ export async function POST(request: Request) {
     }
   }
 
-  const webhookUrl = process.env.AUDIT_WEBHOOK_URL;
-  const webhookSecret = process.env.AUDIT_WEBHOOK_SECRET;
+  const supabaseUrl = process.env.SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-  if (!webhookUrl || !webhookSecret) {
-    console.error(
-      "Missing AUDIT_WEBHOOK_URL / AUDIT_WEBHOOK_SECRET — see scripts/apps-script/Code.gs."
-    );
+  if (!supabaseUrl || !serviceRoleKey) {
+    console.error("Missing SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY env vars.");
     return NextResponse.json({ error: "Server not configured" }, { status: 500 });
   }
 
-  const payload: Record<string, string> = { secret: webhookSecret };
+  const row: Record<string, string | null> = {};
   for (const field of fields) {
-    payload[field] = ((body[field] as string | undefined) ?? "").trim();
+    const value = ((body[field] as string | undefined) ?? "").trim();
+    row[fieldToColumn[field]] = value === "" ? null : value;
   }
 
-  try {
-    const res = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-      // Apps Script /exec URLs 302 to script.googleusercontent.com; fetch
-      // follows that by default. Don't set redirect: "manual" here.
-      signal: AbortSignal.timeout(15_000),
-    });
+  const supabase = createClient(supabaseUrl, serviceRoleKey);
+  const { error } = await supabase.from("audit_submissions").insert(row);
 
-    // Apps Script can't set status codes — it always answers 200 and reports
-    // success in the body. Checking res.ok alone would swallow real failures.
-    const result = await res.json().catch(() => null);
-
-    if (!res.ok || !result?.ok) {
-      console.error("Audit webhook rejected submission:", res.status, result);
-      return NextResponse.json({ error: "Could not save submission" }, { status: 502 });
-    }
-  } catch (err) {
-    console.error("Audit webhook unreachable:", err);
+  if (error) {
+    console.error("Supabase insert failed:", error);
     return NextResponse.json({ error: "Could not save submission" }, { status: 502 });
   }
 
