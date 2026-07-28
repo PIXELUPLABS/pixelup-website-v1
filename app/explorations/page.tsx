@@ -26,7 +26,7 @@ export default function ExplorationsPage() {
               Concepts
               <br />
               We Killed
-              <span className="ml-1 inline-block h-[6.54px] w-[6.54px] shrink-0 bg-[#0658FC] align-baseline" />
+              {/* <span className="ml-1 inline-block h-[6.54px] w-[6.54px] shrink-0 bg-[#0658FC] align-baseline" /> */}
             </>
           }
           subheading={

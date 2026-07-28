@@ -19,11 +19,12 @@ export function BlogList() {
   return (
     <section className="w-full">
       <div className="flex w-full flex-col divide-y divide-hairline">
-        {posts.map((post) => (
+        {posts.map((post, index) => (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="flex w-full flex-col py-4 desk:h-56.25 desk:flex-row"
+            className="group fade-up flex w-full flex-col py-4 desk:h-56.25 desk:flex-row"
+            style={{ animationDelay: `${Math.min(200 + index * 120, 800)}ms` }}
           >
             <div className="relative h-56.25 w-full desk:h-full desk:w-[45%]">
               <Image
@@ -46,7 +47,7 @@ export function BlogList() {
                     </div>
                   ))}
                 </div>
-                <p className="text-[24px] font-medium leading-tight text-white/80 capitalize desk:text-[28px]">
+                <p className="text-[24px] font-medium leading-tight text-white/80 capitalize transition-opacity duration-200 group-hover:opacity-60 desk:text-[28px]">
                   {post.title}
                 </p>
               </div>

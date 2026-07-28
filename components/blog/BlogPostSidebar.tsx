@@ -23,7 +23,7 @@ export function BlogPostSidebar({ post }: { post: BlogPost }) {
     { label: "Written by", value: post.author },
     { label: "Created on", value: formatBlogDate(post.publishedDate) },
     { label: "Updated on", value: formatBlogDate(post.updatedDate) },
-    { label: "Read", value: estimateReadTime(post.content) },
+    { label: "Read time", value: estimateReadTime(post.content) },
   ];
 
   return (
@@ -33,7 +33,7 @@ export function BlogPostSidebar({ post }: { post: BlogPost }) {
           actually kick in, instead of the box growing and pushing the CTA
           group off the bottom of the sticky aside. */}
       <div className="no-scrollbar flex flex-col gap-8 desk:min-h-0 desk:flex-1 desk:justify-between desk:overflow-y-auto desk:pt-2">
-        <div className="flex flex-col gap-6">
+        <div className="fade-up flex flex-col gap-6 [animation-delay:100ms]">
           <BackButton href="/blog" label="Back to blog" icon="arrow" />
           <h1 className="tracking-display text-[24px] font-medium leading-[1.1] text-white desk:text-[32px]">
             {post.title}
@@ -44,7 +44,7 @@ export function BlogPostSidebar({ post }: { post: BlogPost }) {
             ))}
           </div>
         </div>
-        <div className="flex flex-col gap-5">
+        <div className="fade-up flex flex-col gap-5 [animation-delay:200ms]">
           <TrustedStrip />
           <CtaButtons />
         </div>

@@ -28,7 +28,7 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
         </span>
       </div>
       <p className="text-[24px] font-medium leading-tight text-white">{post.title}</p>
-      <p className="text-[14px] leading-[1.5] text-body-grey">{post.description}</p>
+      <p className="text-[16px] leading-[1.5] text-body-grey">{post.description}</p>
       {/* Extra mt-2 for the spacing called out before "Read Article". gap-2
           (8px) between the text and the button. */}
       <div className="mt-2 flex items-center gap-4">
@@ -64,7 +64,7 @@ function ContentBlock({ block }: { block: BlogContentBlock }) {
         </ul>
       );
     case "paragraph":
-      return <p className="text-[14px] leading-[1.6] text-body-grey">{block.text}</p>;
+      return <p className="text-[16px] leading-[1.6] text-body-grey">{block.text}</p>;
     case "table":
       return (
         <div className="w-full overflow-x-auto">
@@ -113,26 +113,28 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
       />
       <main className="flex min-w-0 flex-1 flex-col gap-8">
-        <div className="relative h-120 w-full">
+        <div className="fade-up relative h-120 w-full [animation-delay:100ms]">
           <Image src={post.image} alt="" fill priority sizes="100vw" className="object-cover object-left" />
         </div>
         {/* Own gap-5 (20px) — tighter than main's gap-8, which is meant for
             spacing between structural sections (banner, divider, related
             articles), not between individual paragraphs/headings here. */}
-        <div className="flex w-full flex-col gap-5">
+        <div className="fade-up flex w-full flex-col gap-5 [animation-delay:200ms]">
           {post.content.map((block, index) => (
             <ContentBlock key={index} block={block} />
           ))}
         </div>
-        {/* gap-8 on `main` (32px) gives the spacing above this rule too. */}
-        <div aria-hidden="true" className="w-full border-t-[0.5px] border-hairline" />
-        <h2 className={`${geist.className} text-[40px] font-medium leading-tight text-white`}>
-          Related Articles
-        </h2>
-        <div className="flex w-full flex-col gap-8 desk:flex-row desk:gap-6 mb-3 border-b-[0.5px] border-hairline pb-8">
-          {relatedPosts.map((relatedPost) => (
-            <RelatedArticleCard key={relatedPost.slug} post={relatedPost} />
-          ))}
+        <div className="fade-up flex w-full flex-col gap-8 [animation-delay:300ms]">
+          {/* gap-8 on `main` (32px) gives the spacing above this rule too. */}
+          <div aria-hidden="true" className="w-full border-t-[0.5px] border-hairline" />
+          <h2 className={`${geist.className} text-[40px] font-medium leading-tight text-white`}>
+            Related Articles
+          </h2>
+          <div className="flex w-full flex-col gap-8 desk:flex-row desk:gap-6 mb-3 border-b-[0.5px] border-hairline pb-8">
+            {relatedPosts.map((relatedPost) => (
+              <RelatedArticleCard key={relatedPost.slug} post={relatedPost} />
+            ))}
+          </div>
         </div>
         {/* Same treatment as /blog's Footer wrapper — cancels the row's
             p-5 on this wrapper only, so Footer fills the extra space via

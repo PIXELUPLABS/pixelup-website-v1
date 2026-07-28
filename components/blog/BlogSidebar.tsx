@@ -22,18 +22,26 @@ export function BlogSidebar() {
       <div className="flex flex-col gap-6">
         <BackButton label="Back to home" icon="arrow" />
         <div className="flex flex-col gap-4">
-          <h1 className={`${geist.className} tracking-display text-[24px] font-medium leading-[1.1] text-white desk:text-[54px]`}>
+          <h1
+            className={`${geist.className} fade-up tracking-display text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[54px]`}
+          >
             Articles
           </h1>
-          <p className="max-w-[40ch] text-[16px] leading-[1.2] tracking-[-0.02em] text-muted-65">
+          <p className="fade-up max-w-[40ch] text-[16px] leading-[1.2] tracking-[-0.02em] text-muted-65 [animation-delay:200ms]">
             Sub Heading of Articles will be added here
           </p>
         </div>
-        <ArticleFilters />
+        <div className="fade-up [animation-delay:300ms]">
+          <ArticleFilters />
+        </div>
       </div>
       <div className="flex flex-col gap-5 desk:mt-auto">
-        <TrustedStrip />
-        <CtaButtons />
+        <div className="fade-up [animation-delay:400ms]">
+          <TrustedStrip />
+        </div>
+        <div className="fade-up [animation-delay:500ms]">
+          <CtaButtons />
+        </div>
       </div>
     </aside>
   );

@@ -8,7 +8,7 @@ import dakshImg from "@/public/media/daksh-img.svg";
 
 // Same transparent + hairline-underline treatment as the Footer's newsletter input.
 const fieldClassName =
-  "w-full border-b-[0.5px] border-hairline bg-transparent pb-2 text-[14px] font-normal text-white placeholder:text-white/40 focus:outline-none";
+  "w-full border-b-[0.5px] border-hairline bg-transparent pb-2 text-[14px] font-normal text-white placeholder:text-white/40 focus:outline-none focus:border-accent";
 
 // Column order matches the submissions sheet — keep in sync with `fields` in
 // app/api/audit/route.ts and FIELDS in scripts/apps-script/Code.gs.
@@ -24,13 +24,16 @@ const initialValues = {
 // Everything except the free-text "Anything Else" box has to be filled in.
 const requiredFields = ["name", "email", "siteToAudit", "linkedin", "icp"] as const;
 
+const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 type FieldName = keyof typeof initialValues;
 type Status = "idle" | "submitting" | "success" | "error";
 
 export function AuditForm() {
   const [values, setValues] = useState(initialValues);
   const [status, setStatus] = useState<Status>("idle");
-  const isComplete = requiredFields.every((field) => values[field].trim() !== "");
+  const isComplete =
+    requiredFields.every((field) => values[field].trim() !== "") && isValidEmail(values.email);
 
   const handleChange =
     (field: FieldName) =>
@@ -72,13 +75,13 @@ export function AuditForm() {
             </div>
             <div className="flex flex-col pt-2">
               <p className="font-normal text-white">Daksh Aswal</p>
-              <p className="font-normal text-white/60">Creative Director</p>
+              <p className="font-normal text-white/60">Founder at Pixelup Labs</p>
             </div>
           </div>
           {/* Setup line steps back to white/60, the punch line holds full white
               — the same opacity hierarchy used for headings site-wide. */}
           <div className="flex flex-col gap-3">
-            <p className="font-display text-[28px] font-medium leading-[120%] text-white desk:text-[40px]">
+            <p className="font-display text-[28px] font-medium leading-[120%] text-white desk:text-[32px]">
               <span className="text-white/60">Your product is enterprise-ready.</span>
               <br />
               Does your site say so?
