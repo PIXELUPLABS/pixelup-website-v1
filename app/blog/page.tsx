@@ -28,7 +28,14 @@ export default function BlogPage() {
       <main className="flex min-w-0 flex-1 flex-col gap-8">
         <BlogList />
         <BlogFaq />
-        <Footer inset={false} />
+        {/* This row's own p-5 insets main's right edge from the true
+            viewport edge — BlogList/BlogFaq are fine keeping that inset,
+            but Footer shouldn't have it. desk:-mr-5 (the row's p-5)
+            cancels just that, on this wrapper only, so Footer fills it via
+            its own w-full — no change needed to Footer itself. */}
+        <div className="desk:-mr-5 -ml-4 -mb-5">
+          <Footer />
+        </div>
       </main>
     </div>
   );

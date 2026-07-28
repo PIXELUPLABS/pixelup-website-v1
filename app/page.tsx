@@ -77,7 +77,12 @@ export default function Home() {
         <div className="flex min-w-0 flex-1 flex-col gap-8">
           <Showcase scroll="page" />
           <AuditForm />
-          <Footer inset={false} />
+          {/* Same treatment as /blog's Footer wrapper — cancels the row's
+              p-5 on this wrapper only, so Footer fills the extra space via
+              its own w-full without needing any change to Footer itself. */}
+          <div className="desk:-mr-5 -ml-4 -mb-5">
+            <Footer />
+          </div>
         </div>
       </div>
     </div>
