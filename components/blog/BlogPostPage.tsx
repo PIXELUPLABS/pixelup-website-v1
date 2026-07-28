@@ -12,7 +12,7 @@ const geist = Geist({ subsets: ["latin"], weight: ["500"] });
     description, "Read Article". Links to the related post. */
 function RelatedArticleCard({ post }: { post: BlogPost }) {
   return (
-    <Link href={`/blog/${post.slug}`} className="flex min-w-0 flex-1 flex-col gap-3">
+    <Link href={`/blog/${post.slug}`} className="group flex min-w-0 flex-1 flex-col gap-3">
       <p className="text-[12px] font-medium uppercase text-label-grey">
         {formatBlogDate(post.publishedDate)}
       </p>
@@ -27,7 +27,9 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
           {post.categories[0]}
         </span>
       </div>
-      <p className="text-[24px] font-medium leading-tight text-white">{post.title}</p>
+      <p className="text-[24px] font-medium leading-tight text-white transition-opacity duration-200 group-hover:opacity-60">
+        {post.title}
+      </p>
       <p className="text-[16px] leading-[1.5] text-body-grey">{post.description}</p>
       {/* Extra mt-2 for the spacing called out before "Read Article". gap-2
           (8px) between the text and the button. */}
