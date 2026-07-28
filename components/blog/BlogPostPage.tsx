@@ -122,8 +122,21 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
       />
       <main className="flex min-w-0 flex-1 flex-col gap-8">
-        <div className="fade-up relative h-56.25 w-full [animation-delay:100ms] desk:h-120">
-          <Image src={post.image} alt="" fill priority sizes="100vw" className="object-cover object-left" />
+        {/* No fixed height / object-cover here on purpose — cropping to a
+            fixed box was cutting the image off on some viewport heights.
+            Every blog image shares the same 2084x960 aspect ratio, so
+            sizing from that and letting height follow width shows the
+            whole image instead. */}
+        <div className="fade-up w-full [animation-delay:100ms]">
+          <Image
+            src={post.image}
+            alt=""
+            width={2084}
+            height={960}
+            priority
+            sizes="100vw"
+            className="h-auto w-full"
+          />
         </div>
         {/* Own gap-5 (20px) — tighter than main's gap-8, which is meant for
             spacing between structural sections (banner, divider, related
