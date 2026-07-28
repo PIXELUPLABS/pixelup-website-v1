@@ -13,5 +13,11 @@ export const explorationBlocks: ExplorationBlock[] = [
   { kind: "pair", srcs: ["/media/explorations/img-10.webp", "/media/explorations/img-11.webp"] },
   { kind: "full", src: "/media/explorations/img-16.webp" },
   { kind: "full", src: "/media/explorations/img-17.webp" },
-  { kind: "pair", srcs: ["/media/explorations/img-14.webp", "/media/explorations/img-15.webp"] },
+  { kind: "pair", srcs: ["/media/explorations/img-18.webp", "/media/explorations/img-19.webp"] },
+  { kind: "full", src: "/media/explorations/img-20.webp" },
+  { kind: "full", src: "/media/explorations/img-21.webp" },
+  { kind: "pair", srcs: ["/media/explorations/img-22.webp", "/media/explorations/img-23.webp"] },
+  { kind: "full", src: "/media/explorations/img-24.webp" },
+  { kind: "full", src: "/media/explorations/img-25.webp" },
+  { kind: "pair", srcs: ["/media/explorations/img-26.webp", "/media/explorations/img-27.webp"] },
 ];
