@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { links } from "@/lib/projects";
+import { CtaButtons } from "./CtaButtons";
 import { navLinks } from "./Navbar";
 
 // Hamburger shown only on mobile (< desk). Toggles a small links panel.
@@ -30,7 +30,7 @@ export function MobileMenu() {
       </button>
 
       {open && (
-        <div className="absolute inset-x-5 top-16 z-20 flex flex-col gap-2 rounded-[4px] border border-white/10 bg-black/95 p-3">
+        <div className="absolute inset-x-0 top-16 z-20 flex flex-col gap-2 border-t border-white/10 bg-black p-4">
           {navLinks.map((item) =>
             item.href ? (
               <Link
@@ -54,23 +54,7 @@ export function MobileMenu() {
             )
           )}
           <div aria-hidden="true" className="border-t border-white/10" />
-          <a
-            href={links.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="rounded-[2px] px-3 py-2.5 text-[14px] text-white hover:bg-white/5"
-          >
-            Chat on Telegram
-          </a>
-          <a
-            href={links.discoveryCall}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setOpen(false)}
-            className="rounded-[2px] bg-accent px-3 py-2.5 text-[14px] font-medium text-white"
-          >
-            Start now
-          </a>
+          <CtaButtons stacked />
         </div>
       )}
     </div>

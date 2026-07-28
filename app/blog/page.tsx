@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function BlogPage() {
   return (
     <BlogFilterProvider>
-      <div className="relative flex flex-col gap-8 p-5 desk:flex-row desk:items-start desk:gap-0">
+      <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(pixelupFaqSchema) }}
@@ -35,7 +35,7 @@ export default function BlogPage() {
               but Footer shouldn't have it. desk:-mr-5 (the row's p-5)
               cancels just that, on this wrapper only, so Footer fills it via
               its own w-full — no change needed to Footer itself. */}
-          <div className="-mx-5 -mb-5 desk:-ml-4">
+          <div className="-mx-4 -mb-4 desk:-mr-5 desk:-mb-5 desk:-ml-4">
             <Footer />
           </div>
         </main>

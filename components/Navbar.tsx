@@ -26,7 +26,7 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-30 h-16 border-b-[0.5px] border-hairline bg-base">
-      <div className="flex h-full items-center justify-between gap-6 px-5">
+      <div className="flex h-full items-center justify-between gap-6 px-4 desk:px-5">
         <Logo />
         <nav aria-label="Primary" className="hidden items-center gap-7 desk:flex">
           {navLinks.map((item) =>

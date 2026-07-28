@@ -35,7 +35,7 @@ export function BlogSidebar() {
           <ArticleFilters />
         </div>
       </div>
-      <div className="flex flex-col gap-5 desk:mt-auto">
+      <div className="hidden flex-col gap-5 desk:mt-auto desk:flex">
         <div className="fade-up [animation-delay:400ms]">
           <TrustedStrip />
         </div>

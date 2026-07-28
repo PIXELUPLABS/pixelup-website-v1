@@ -17,7 +17,7 @@ export default function CallPage() {
           embed manages its own internal scrolling inside the fixed-height shell.
           Height is trimmed by the sticky Navbar's height (h-16, 4rem) so the
           shell + navbar together fill exactly one viewport instead of overflowing it. */}
-      <div className="relative flex flex-col gap-8 p-5 desk:h-[calc(100vh-4rem)] desk:flex-row desk:gap-8 desk:overflow-hidden">
+      <div className="relative flex flex-col gap-8 p-4 desk:h-[calc(100vh-4rem)] desk:flex-row desk:gap-8 desk:overflow-hidden desk:p-5">
         <LeftNav
           heading="We love working with bold founders who are tired of the ordinary"
           subheading="Brands, Websites and product design that leaves a lasting impression."

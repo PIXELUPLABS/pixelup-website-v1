@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default function ExplorationsPage() {
   return (
     <>
-      <div className="relative flex flex-col gap-8 p-5 desk:flex-row desk:items-start desk:gap-0">
+      <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
         <LeftNav
           sticky
           heading={
@@ -54,7 +54,7 @@ export default function ExplorationsPage() {
           {/* Same treatment as /blog's Footer wrapper — cancels the row's
               p-5 on this wrapper only, so Footer fills the extra space via
               its own w-full without needing any change to Footer itself. */}
-          <div className="-mx-5 -mb-5 desk:-ml-4">
+          <div className="-mx-4 -mb-4 desk:-mr-5 desk:-mb-5 desk:-ml-4">
             <Footer />
           </div>
         </main>

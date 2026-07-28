@@ -16,7 +16,7 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
       <p className="text-[12px] font-medium uppercase text-label-grey">
         {formatBlogDate(post.publishedDate)}
       </p>
-      <div className="relative h-80 w-full">
+      <div className="relative h-56.25 w-full desk:h-80">
         <Image src={post.image} alt="" fill sizes="(min-width: 1200px) 25vw, 100vw" className="object-cover object-left" />
       </div>
       {/* Extra mt-2 on top of the card's gap-3 rhythm for the spacing
@@ -51,13 +51,13 @@ function ContentBlock({ block }: { block: BlogContentBlock }) {
   switch (block.type) {
     case "heading":
       return (
-        <h2 className="tracking-display text-[35px] font-medium leading-tight text-white">
+        <h2 className="tracking-display text-[24px] font-medium leading-tight text-white desk:text-[48px]">
           {block.text}
         </h2>
       );
     case "list":
       return (
-        <ul className="flex flex-col gap-2 pl-5 text-[14px] leading-[1.6] text-body-grey marker:text-white/40 [&>li]:list-disc">
+        <ul className="flex flex-col gap-2 pl-5 text-[16px] leading-[1.6] text-body-grey marker:text-white/40 [&>li]:list-disc">
           {block.items.map((item) => (
             <li key={item}>{item}</li>
           ))}
@@ -68,7 +68,7 @@ function ContentBlock({ block }: { block: BlogContentBlock }) {
     case "table":
       return (
         <div className="w-full overflow-x-auto">
-          <table className="w-full min-w-120 border-collapse border-[0.5px] border-hairline text-left text-[14px]">
+          <table className="w-full min-w-120 border-collapse border-[0.5px] border-hairline text-left text-[16px]">
             <thead>
               <tr className="divide-x divide-hairline border-b-[0.5px] border-hairline">
                 {block.headers.map((header) => (
@@ -105,7 +105,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
   const relatedPosts = blogPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
   return (
-    <div className="relative flex flex-col gap-8 p-5 desk:flex-row desk:items-start desk:gap-0">
+    <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
       <BlogPostSidebar post={post} />
       {/* Divider between the aside and content columns, same treatment as /blog. */}
       <div
@@ -113,7 +113,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
       />
       <main className="flex min-w-0 flex-1 flex-col gap-8">
-        <div className="fade-up relative h-120 w-full [animation-delay:100ms]">
+        <div className="fade-up relative h-56.25 w-full [animation-delay:100ms] desk:h-120">
           <Image src={post.image} alt="" fill priority sizes="100vw" className="object-cover object-left" />
         </div>
         {/* Own gap-5 (20px) — tighter than main's gap-8, which is meant for
@@ -127,7 +127,9 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         <div className="fade-up flex w-full flex-col gap-8 [animation-delay:300ms]">
           {/* gap-8 on `main` (32px) gives the spacing above this rule too. */}
           <div aria-hidden="true" className="w-full border-t-[0.5px] border-hairline" />
-          <h2 className={`${geist.className} text-[40px] font-medium leading-tight text-white`}>
+          <h2
+            className={`${geist.className} text-[24px] font-medium leading-tight text-white desk:text-[48px]`}
+          >
             Related Articles
           </h2>
           <div className="flex w-full flex-col gap-8 desk:flex-row desk:gap-6 mb-3 border-b-[0.5px] border-hairline pb-8">
@@ -139,7 +141,7 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
         {/* Same treatment as /blog's Footer wrapper — cancels the row's
             p-5 on this wrapper only, so Footer fills the extra space via
             its own w-full without needing any change to Footer itself. */}
-        <div className="-mx-5 -mb-5 desk:-ml-4">
+        <div className="-mx-4 -mb-4 desk:-mr-5 desk:-mb-5 desk:-ml-4">
           <Footer />
         </div>
       </main>

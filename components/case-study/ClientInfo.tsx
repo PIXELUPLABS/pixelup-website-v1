@@ -47,9 +47,14 @@ export function ClientInfo({
       <InfoRow label="Client">{info.client}</InfoRow>
       <InfoRow label="Year">{info.year}</InfoRow>
       <InfoRow label="Involvement">
-        {info.involvement.map((item) => (
-          <p key={item}>{item}</p>
-        ))}
+        <div className="flex flex-wrap gap-x-1 gap-y-1">
+          {info.involvement.map((item, index) => (
+            <p key={item}>
+              {item}
+              {index < info.involvement.length - 1 ? "," : ""}
+            </p>
+          ))}
+        </div>
       </InfoRow>
       <InfoRow label="Link">
         <a

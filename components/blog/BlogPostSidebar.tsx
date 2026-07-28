@@ -44,7 +44,7 @@ export function BlogPostSidebar({ post }: { post: BlogPost }) {
             ))}
           </div>
         </div>
-        <div className="fade-up flex flex-col gap-5 [animation-delay:200ms]">
+        <div className="fade-up hidden flex-col gap-5 [animation-delay:200ms] desk:flex">
           <TrustedStrip />
           <CtaButtons />
         </div>
