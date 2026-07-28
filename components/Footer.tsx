@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { NewsletterForm } from "@/components/NewsletterForm";
 import footerBg from "@/public/media/footer-bg.png";
 import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Vector.svg";
@@ -52,17 +53,14 @@ export function Footer() {
               </div>
             </div>
             <div className="flex flex-col gap-8 p-6 desk:h-full">
-              <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
-                Subscribe to our newsletter
+              {/* No uppercase column label here (unlike the other two columns) —
+                  the copy names the newsletter itself. text-pretty keeps the
+                  last line from dropping to a single orphaned word. */}
+              <p className="text-pretty text-[14px] font-normal leading-[150%] text-white/60">
+                A newsletter on the design strategies that are working for enterprise
+                companies, written by Daksh. Two emails a month, no spam.
               </p>
-              <div className="flex w-full items-center justify-between border-b-[0.5px] border-hairline pb-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full bg-transparent text-[14px] font-normal text-white placeholder:text-white/40 focus:outline-none"
-                />
-                <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" className="cursor-pointer" />
-              </div>
+              <NewsletterForm />
             </div>
           </div>
           <div className="flex w-full items-center border-t-[0.5px] border-hairline p-6">
