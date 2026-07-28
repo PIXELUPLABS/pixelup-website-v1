@@ -10,6 +10,8 @@ export type BlogContentBlock =
 export interface BlogPost {
   slug: string;
   title: string;
+  /** One-line excerpt — shown on /blog's "Related Articles" cards. */
+  description: string;
   categories: string[];
   image: string;
   author: string;
@@ -23,6 +25,8 @@ export const blogPosts: BlogPost[] = [
     slug: "best-design-agencies-for-ai-startups-2026",
     title:
       "Best Design Agencies for AI Startups (2026): Who Designed Midjourney, Cursor, and Greptile",
+    description:
+      "Ten studios compared with real prices, from MetaLab to Punchcut to us, and where each one loses.",
     categories: ["Design"],
     image: "/media/blog-banner-bg.png",
     author: "Daksh, PIXELUP LABS",
@@ -584,6 +588,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "best-design-agencies-in-san-francisco-2026",
     title: "Best Design Agencies in San Francisco (2026): 10 Compared, With Real Prices",
+    description:
+      "Every studio here is actually headquartered in SF, with real prices from $10k to $500k.",
     categories: ["Design"],
     image: "/media/blog-banner-bg.png",
     author: "Daksh, PIXELUP LABS",
@@ -1199,6 +1205,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "what-a-startup-rebrand-and-website-cost-in-2026",
     title: "What a Startup Rebrand and Website Cost in 2026: By Stage, With Our Own Prices",
+    description:
+      "What a brand and website actually costs by stage, from a freelancer to a prestige studio.",
     categories: ["Design", "Branding"],
     image: "/media/blog-banner-bg.png",
     author: "Daksh, PIXELUP LABS",

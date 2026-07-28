@@ -56,7 +56,7 @@ export function AuditForm() {
   return (
     <section
       id="audit"
-      className="flex w-full flex-col border-t-[0.5px] border-hairline py-7 desk:h-[calc(90vh-4rem)] desk:flex-row"
+      className="flex w-full flex-col border-t-[0.5px] border-hairline py-7 desk:h-114 desk:flex-row"
     >
       <div className="relative h-90 w-full desk:h-full desk:w-3/5">
         <Image src={auditFormBg} alt="" fill className="object-cover" />
@@ -80,7 +80,7 @@ export function AuditForm() {
       </div>
       <form
         onSubmit={handleSubmit}
-        className="flex w-full flex-col gap-5 bg-[#0A0A0A] px-5 py-6 desk:h-full desk:w-2/5 desk:gap-9"
+        className="no-scrollbar flex w-full flex-col gap-5 bg-[#0A0A0A] px-5 py-6 desk:h-full desk:min-h-0 desk:w-2/5 desk:gap-5 desk:overflow-y-auto"
       >
         <div className="flex flex-col gap-5 desk:flex-row">
           <input
@@ -125,7 +125,7 @@ export function AuditForm() {
           placeholder="What isn't working?"
           value={values.whatIsntWorking}
           onChange={handleChange("whatIsntWorking")}
-          className={`${fieldClassName} min-h-25 flex-1 resize-none`}
+          className={`${fieldClassName} min-h-20 flex-1 resize-none`}
         />
         <input
           type="text"
