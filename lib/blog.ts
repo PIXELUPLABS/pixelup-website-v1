@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = [
     description:
       "Ten studios compared with real prices, from MetaLab to Punchcut to us, and where each one loses.",
     categories: ["Design"],
-    image: "/media/blogs/blog-banner.png",
+    image: "/media/blogs/blog-img-1.png",
     author: "Daksh, Founder at PIXELUP LABS",
     publishedDate: "2026-07-28",
     updatedDate: "2026-07-28",
@@ -591,7 +591,7 @@ export const blogPosts: BlogPost[] = [
     description:
       "Every studio here is actually headquartered in San Francisco, with real prices from $10k to $500k.",
     categories: ["Design"],
-    image: "/media/blogs/blog-banner.png",
+    image: "/media/blogs/blog-img-2.png",
     author: "Daksh, Founder at PIXELUP LABS",
     publishedDate: "2026-07-28",
     updatedDate: "2026-07-28",
@@ -1208,7 +1208,7 @@ export const blogPosts: BlogPost[] = [
     description:
       "What a brand and website actually costs by stage, from a freelancer to a prestige studio.",
     categories: ["Design", "Branding"],
-    image: "/media/blogs/blog-banner.png",
+    image: "/media/blogs/blog-img-3.png",
     author: "Daksh, Founder at PIXELUP LABS",
     publishedDate: "2026-07-28",
     updatedDate: "2026-07-28",
