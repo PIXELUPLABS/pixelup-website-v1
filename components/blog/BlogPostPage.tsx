@@ -55,6 +55,12 @@ function ContentBlock({ block }: { block: BlogContentBlock }) {
           {block.text}
         </h2>
       );
+    case "subheading":
+      return (
+        <h3 className="tracking-display text-[20px] font-medium leading-tight text-white desk:text-[28px]">
+          {block.text}
+        </h3>
+      );
     case "list":
       return (
         <ul className="flex flex-col gap-2 pl-5 text-[16px] leading-[1.6] text-body-grey marker:text-white/40 [&>li]:list-disc">
