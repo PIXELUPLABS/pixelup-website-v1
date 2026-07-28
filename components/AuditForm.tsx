@@ -75,7 +75,7 @@ export function AuditForm() {
             </div>
             <div className="flex flex-col pt-2">
               <p className="font-normal text-white">Daksh Aswal</p>
-              <p className="font-normal text-white/60">Founder at Pixelup Labs</p>
+              <p className="font-normal text-white/60">Founder at PIXELUP LABS</p>
             </div>
           </div>
           {/* Setup line steps back to white/60, the punch line holds full white
