@@ -54,7 +54,7 @@ export default function ExplorationsPage() {
           {/* Same treatment as /blog's Footer wrapper — cancels the row's
               p-5 on this wrapper only, so Footer fills the extra space via
               its own w-full without needing any change to Footer itself. */}
-          <div className="desk:-mr-5 -ml-4 -mb-5">
+          <div className="-mx-5 -mb-5 desk:-ml-4">
             <Footer />
           </div>
         </main>
