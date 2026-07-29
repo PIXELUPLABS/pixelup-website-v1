@@ -1,11 +1,13 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/case-studies";
+import { blogPosts } from "@/lib/blog";
 
 const BASE_URL = "https://pixeluplabs.com";
 
 /**
- * Served at /sitemap.xml (Next metadata route). Case study URLs are derived
- * from lib/case-studies.ts, so new studies are picked up automatically.
+ * Served at /sitemap.xml (Next metadata route). Case study and blog post
+ * URLs are derived from lib/case-studies.ts and lib/blog.ts, so new ones
+ * are picked up automatically.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -19,10 +21,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.8,
     },
+    {
+      url: `${BASE_URL}/explorations`,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/blog`,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
     ...Object.values(caseStudies).map((study) => ({
       url: `${BASE_URL}/case-studies/${study.slug}`,
       changeFrequency: "monthly" as const,
       priority: 0.9,
+    })),
+    ...blogPosts.map((post) => ({
+      url: `${BASE_URL}/blog/${post.slug}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }
