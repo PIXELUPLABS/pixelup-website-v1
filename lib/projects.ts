@@ -93,22 +93,22 @@ export const projects: Project[] = [
     alt: "Sully.ai logo mark over a bright hospital corridor, website and motion design by PixelUp Labs",
     cardImage: "/media/sully/card.png",
   },
-  {
-    slug: "revyl",
-    label: "Revyl",
-    href: "https://revyl.ai/",
-    external: true,
-    media: { type: "image", src: "/media/revyl.png" },
-    alt: "Revyl website design by PixelUp Labs",
-  },
-  {
-    slug: "synthio",
-    label: "Synthio Labs",
-    href: "https://synthiolabs.com/",
-    external: true,
-    media: { type: "image", src: "/media/synthio.png" },
-    alt: "Synthio Labs website design by PixelUp Labs",
-  },
+  // {
+  //   slug: "revyl",
+  //   label: "Revyl",
+  //   href: "https://revyl.ai/",
+  //   external: true,
+  //   media: { type: "image", src: "/media/revyl.png" },
+  //   alt: "Revyl website design by PixelUp Labs",
+  // },
+  // {
+  //   slug: "synthio",
+  //   label: "Synthio Labs",
+  //   href: "https://synthiolabs.com/",
+  //   external: true,
+  //   media: { type: "image", src: "/media/synthio.png" },
+  //   alt: "Synthio Labs website design by PixelUp Labs",
+  // },
 ];
 
 /** Global CTA / social links used across the site. */
