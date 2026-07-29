@@ -1,5 +1,3 @@
-import Image from "next/image";
-import caseBg from "@/public/media/case-bg.png";
 import {
   faqHeading,
   pixelupFaq,
@@ -28,26 +26,6 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(pixelupFaqSchema) }}
       />
-      {/* Blue light-streak page background from Figma (the full locked `bg`
-          layer, 1440×6773): anchored to the very top, spanning the full page
-          width and flowing down the page behind all content. The mask fades
-          the image's bottom edge out so tall pages never show a hard cut.
-          -top-16 pulls it up behind the sticky Navbar (h-16, 4rem) above this
-          page, so it's visible through the navbar at the top instead of
-          starting right below it; Navbar's z-30 keeps it painting on top. */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 -top-16 select-none [mask-image:linear-gradient(to_bottom,black_85%,transparent_100%)]"
-      >
-        <Image
-          src={caseBg}
-          alt=""
-          priority
-          sizes="100vw"
-          className="h-auto w-full"
-        />
-      </div>
-
       <div className="relative flex flex-col desk:flex-row">
         <CaseSidebar study={study} />
 

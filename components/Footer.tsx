@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NewsletterForm } from "@/components/NewsletterForm";
-import footerBg from "@/public/media/footer-bg.png";
 import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Vector.svg";
 
@@ -18,9 +17,6 @@ const caseStudies = [
 export function Footer() {
   return (
     <footer className="relative w-full desk:h-140">
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 select-none">
-        <Image src={footerBg} alt="" fill className="object-cover" />
-      </div>
       {/* Inner div: spacing from the outer footer on every side except the
           top (flush there) — desktop only. On mobile the card goes flush
           left/right too, since the wrapper at each call site already
