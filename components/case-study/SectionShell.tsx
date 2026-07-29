@@ -23,7 +23,7 @@ export function SectionShell({
           section = 24px of visual space above the heading, equal to the 24px
           below it. With a rule, the heading needs the full 24px under it. */}
       <div className={`p-6 desk:w-1/2 ${topRule ? "" : "pt-2"}`}>
-        <h2 className="tracking-display text-balance text-[24px] font-medium leading-none text-white desk:text-[48px]">
+        <h2 className="text-balance text-[24px] font-medium leading-tight tracking-[-0.02em] text-white desk:text-[48px]">
           {heading}
         </h2>
       </div>

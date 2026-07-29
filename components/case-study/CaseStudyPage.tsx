@@ -38,7 +38,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                 the bottom gap is owned by the hero's own padding below instead
                 (desk:pb-0), so it isn't double-counted. */}
             <div className="p-6 pb-2 desk:pb-0">
-              <h1 className="fade-up tracking-display max-w-[30ch] text-balance text-[32px] font-medium leading-none text-white [animation-delay:100ms] desk:text-[56px]">
+              <h1 className="fade-up max-w-[30ch] text-balance text-[32px] font-medium leading-tight tracking-[-0.02em] text-white [animation-delay:100ms] desk:text-[56px]">
                 {study.title}
               </h1>
             </div>

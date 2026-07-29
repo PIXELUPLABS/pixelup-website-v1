@@ -4,10 +4,10 @@ import strip from "@/public/media/trusted-strip.png";
 // Individual logos appended after the baked strip image. Heights are tuned
 // per mark so they sit optically level with the strip's wordmarks (~16px).
 const extraLogos = [
-  { src: "/media/logos/pogo.svg", alt: "Pogo", height: "h-[18px]" },
-  { src: "/media/logos/streamline.svg", alt: "Streamline", height: "h-4" },
-  { src: "/media/logos/bland.svg", alt: "Bland", height: "h-[15px]" },
-  { src: "/media/logos/sainapse.svg", alt: "Sainapse", height: "h-4" },
+  // { src: "/media/logos/pogo.svg", alt: "Pogo", height: "h-[18px]" },
+  // { src: "/media/logos/streamline.svg", alt: "Streamline", height: "h-4" },
+  // { src: "/media/logos/bland.svg", alt: "Bland", height: "h-[15px]" },
+  // { src: "/media/logos/sainapse.svg", alt: "Sainapse", height: "h-4" },
 ];
 
 export function TrustedStrip() {
@@ -33,14 +33,14 @@ export function TrustedStrip() {
                 className="h-6 w-auto opacity-70"
                 priority
               />
-              {extraLogos.map((logo) => (
+              {/* {extraLogos.map((logo) => (
                 <img
                   key={logo.src}
                   src={logo.src}
                   alt={i === 0 ? logo.alt : ""}
                   className={`${logo.height} w-auto opacity-70`}
                 />
-              ))}
+              ))} */}
             </div>
           ))}
         </div>
