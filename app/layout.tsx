@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
+import Script from "next/script";
 import { Navbar } from "@/components/Navbar";
 import "./globals.css";
 
@@ -42,6 +43,17 @@ export default function RootLayout({
       lang="en"
       className={`${interDisplay.variable} ${instrumentSans.variable} h-full antialiased`}
     >
+      {/* beforeInteractive is the only next/script strategy Next.js injects
+          into the initial HTML <head> — required here since the request was
+          for this script to live in <head>, not just load early. Only valid
+          in the root layout. */}
+      <Script
+        defer
+        data-website-id="dfid_swcipYZ3Rc55HGLL1A7A4"
+        data-domain="pixeluplabs.com"
+        src="https://datafa.st/js/script.js"
+        strategy="beforeInteractive"
+      />
       <body className="min-h-full bg-base font-display text-white">
         <Navbar />
         {children}
