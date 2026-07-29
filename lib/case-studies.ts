@@ -86,7 +86,7 @@ export const faqHeading = "Frequently Answered Question";
 
 export const pixelupFaq: FaqItem[] = [
   {
-    q: "What does PixelUp Labs do?",
+    q: "What does PIXELUP LABS do?",
     a: "We build brands, websites and products for startups that need to command enterprise trust. Brand identity, website design, product design, design systems, motion and sales assets, all designed together as one system.",
   },
   {
@@ -103,7 +103,7 @@ export const pixelupFaq: FaqItem[] = [
   },
   {
     q: "What is it like to work with you?",
-    a: "You work directly with the team on Telegram, with fast turnarounds and quick iterations. No account managers, no layers, no surprises.",
+    a: "You work directly with the team on Slack, with fast turnarounds and quick iterations. No account managers, no layers, no surprises.",
   },
   {
     q: "We already have a brand and website. Do we need to start over?",
