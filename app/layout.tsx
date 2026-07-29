@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { DisableImageDrag } from "@/components/DisableImageDrag";
 import { Navbar } from "@/components/Navbar";
 import "./globals.css";
 
@@ -55,6 +56,7 @@ export default function RootLayout({
         strategy="beforeInteractive"
       />
       <body className="min-h-full bg-base font-display text-white">
+        <DisableImageDrag />
         <Navbar />
         {children}
       </body>

@@ -50,6 +50,19 @@ body::-webkit-scrollbar {
   display: none; /* Chrome / Safari / Edge */
 }
 
+/* Site-wide: no drag-to-save ghost, no text-selection highlight, on any
+   image or inline SVG — applies everywhere without touching every <Image>
+   usage individually. -webkit-user-drag covers Chrome/Safari/Edge; the
+   draggable="false" HTML attribute is what Firefox actually respects, so
+   pair this with draggable={false} on any <img>/<Image> that still shows
+   a drag ghost in Firefox. */
+img,
+svg {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 /* Display type is tracked tight: -1.1px at the 30px desktop H1 size,
    expressed in em so it scales proportionally at the 24px mobile size (≈ -0.88px). */
 .tracking-display {
