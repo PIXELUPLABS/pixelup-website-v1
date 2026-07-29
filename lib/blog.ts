@@ -23,7 +23,7 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    slug: "best-design-agencies-for-ai-startups-2026",
+    slug: "best-design-agencies-for-ai-startups",
     title:
       "Best Design Agencies for AI Startups (2026): Who Designed Midjourney, Cursor, and Greptile",
     description:
@@ -587,7 +587,7 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "best-design-agencies-in-san-francisco-2026",
+    slug: "best-design-agencies-in-san-francisco",
     title: "Best Design Agencies in San Francisco (2026): 10 Compared, With Real Prices",
     description:
       "Every studio here is actually headquartered in San Francisco, with real prices from $10k to $500k.",
@@ -1204,7 +1204,7 @@ export const blogPosts: BlogPost[] = [
     ],
   },
   {
-    slug: "what-a-startup-rebrand-and-website-cost-in-2026",
+    slug: "what-a-startup-rebrand-and-website-cost",
     title: "What a Startup Rebrand and Website Cost in 2026: By Stage, With Our Own Prices",
     description:
       "What a brand and website actually costs by stage, from a freelancer to a prestige studio.",
