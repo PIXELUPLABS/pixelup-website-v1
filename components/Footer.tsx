@@ -31,7 +31,7 @@ export function Footer() {
                   We position your brand to <br /> match your ambition
                 </p>
               </div>
-              <p className="text-[14px] font-normal text-white">©2026 PIXELUP LABS</p>
+              <p className="text-[12px] font-normal text-white">©2026 PIXELUP LABS</p>
             </div>
             <div className="flex flex-col gap-8 p-6 desk:h-full">
               <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">

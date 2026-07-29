@@ -36,11 +36,14 @@ export const blogPosts: BlogPost[] = [
     content: [
       {
         type: "paragraph",
+        // Demo: **wrap text like this** in a paragraph to render it in white
+        // instead of the paragraph's default grey — see renderHighlightedText
+        // in components/blog/BlogPostPage.tsx.
         text: "MetaLab rebuilt Midjourney's interface, built Suno's brand, and built Windsurf's brand system, starting at $100k. basement.studio worked with Cursor, Harvey, Scale, and Replicate, starting near $10k. Lazarev has shipped 30+ AI products. Our sprints run $25–30k. Which one you want depends on whether the hard part is your product or your positioning. Ten studios below, with real prices and where each one loses.",
       },
       {
         type: "paragraph",
-        text: "Disclosure, up front: we wrote this list and we put ourselves at number one. Read our entry with that in mind. Instead of pretending to be neutral: we publish our actual prices, name five things we are bad at, and hand five specific jobs on this page to studios that beat us at them.",
+        text: "**Disclosure, up front:** we wrote this list and we put ourselves at number one. Read our entry with that in mind. Instead of pretending to be neutral: we publish our actual prices, name five things we are bad at, and hand five specific jobs on this page to studios that beat us at them.",
       },
       {
         type: "table",
@@ -119,20 +122,20 @@ export const blogPosts: BlogPost[] = [
       {
         type: "list",
         items: [
-          "Technical translation. Can they turn a complex product into plain buyer language without making it wrong?",
-          "Dual-audience design. Do developers and non-technical buyers both get served on the same page, or does one get sacrificed?",
-          "Enterprise trust signals. Are security, SOC 2, and model transparency designed surfaces, or footer links?",
-          "Conversion architecture. Demo and trial journeys, not brochures.",
-          "Shipping speed. AI positioning has a short shelf life. Can they keep pace when yours moves?",
+          "**Technical translation.** Can they turn a complex product into plain buyer language without making it wrong?",
+          "**Dual-audience design.** Do developers and non-technical buyers both get served on the same page, or does one get sacrificed?",
+          "**Enterprise trust signals.** Are security, SOC 2, and model transparency designed surfaces, or footer links?",
+          "**Conversion architecture.** Demo and trial journeys, not brochures.",
+          "**Shipping speed.** AI positioning has a short shelf life. Can they keep pace when yours moves?",
         ],
       },
       {
         type: "paragraph",
-        text: "How we know. We have run 31 projects for funded B2B and AI-native startups, including Greptile, Sully, Bland, Reducto, and CTGT. We hold 5.0★ across every review we've received. And we publish our own prices on this site, which almost nobody in this category does.",
+        text: "**How we know.** We have run 31 projects for funded B2B and AI-native startups, including Greptile, Sully, Bland, Reducto, and CTGT. We hold 5.0★ across every review we've received. And we publish our own prices on this site, which almost nobody in this category does.",
       },
       {
         type: "paragraph",
-        text: 'On self-ranking, since we do it. Every agency-authored list has a thumb on the scale, and you should know where each one puts itself. Parallel published its AI-startup list on 2 July 2026 and ranked itself #1. Punchcut publishes one titled "An Honest Comparison." We rank ourselves #1 here.',
+        text: '**On self-ranking, since we do it.** Every agency-authored list has a thumb on the scale, and you should know where each one puts itself. Parallel published its AI-startup list on 2 July 2026 and ranked itself #1. Punchcut publishes one titled "An Honest Comparison." We rank ourselves #1 here.',
       },
       {
         type: "paragraph",
@@ -140,7 +143,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Who this is for: B2B AI companies from seed through Series C hiring a design partner. Who it is not for: consumer apps, teams shopping for the cheapest template, or companies that need a full in-house product-design department rather than a partner.",
+        text: "**Who this is for:** B2B AI companies from seed through Series C hiring a design partner. **Who it is not for:** consumer apps, teams shopping for the cheapest template, or companies that need a full in-house product-design department rather than a partner.",
       },
       {
         type: "paragraph",
@@ -293,7 +296,7 @@ export const blogPosts: BlogPost[] = [
       { type: "subheading", text: "PIXELUP LABS (us)" },
       {
         type: "paragraph",
-        text: "Price: brand sprint $25–30k · brand + website $25–40k · retainer from $4k/mo (full pricing) · Timeline: 2-week brand sprints, 3-week sites · Stack: Framer, Webflow, custom when the product needs it",
+        text: "**Price:** brand sprint $25–30k · brand + website $25–40k · retainer from $4k/mo (full pricing) · **Timeline:** 2-week brand sprints, 3-week sites · **Stack:** Framer, Webflow, custom when the product needs it",
       },
       {
         type: "paragraph",
@@ -305,30 +308,30 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Where it shines: brand and website as one engagement, one team, in two to five weeks, with the design system left behind so it does not decay eight months later. On Greptile's 2025 engagement that meant 200+ components and dev-first documentation.",
+        text: "**Where it shines:** brand and website as one engagement, one team, in two to five weeks, with the design system left behind so it does not decay eight months later. On Greptile's 2025 engagement that meant 200+ components and dev-first documentation.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't:",
+        text: "**Where it doesn't:**",
       },
       {
         type: "list",
         items: [
-          "We are not a committee studio. We work founder-to-founder. If your rebrand needs a steering committee and a stakeholder matrix, hire a Character-tier firm and budget three to five times our number.",
-          "We are not a pair of hands. We take a position on messaging and positioning. If your strategy is locked and the Figma is done, a freelancer at $2–8k is cheaper and faster.",
-          "We are not a product-design department. We do product design inside a brand engagement. If you need a team embedded in your sprint cadence for a year, that is a different hire.",
-          "Our team works from Bangalore, on Pacific overlap. If procurement requires an on-site or US-domiciled delivery team, apply that filter early.",
-          "$25–30k is real money at seed. Under $2M raised, we are the wrong line item and a template is the honest answer.",
+          "**We are not a committee studio.** We work founder-to-founder. If your rebrand needs a steering committee and a stakeholder matrix, hire a Character-tier firm and budget three to five times our number.",
+          "**We are not a pair of hands.** We take a position on messaging and positioning. If your strategy is locked and the Figma is done, a freelancer at $2–8k is cheaper and faster.",
+          "**We are not a product-design department.** We do product design inside a brand engagement. If you need a team embedded in your sprint cadence for a year, that is a different hire.",
+          "**Our team works from Bangalore, on Pacific overlap.** If procurement requires an on-site or US-domiciled delivery team, apply that filter early.",
+          "**$25–30k is real money at seed.** Under $2M raised, we are the wrong line item and a template is the honest answer.",
         ],
       },
       {
         type: "paragraph",
-        text: "Verdict: hire us for AI-native B2B going enterprise on a Series A budget and a deadline. For a product used by millions, MetaLab. For the craft your peer set hired, basement. For a shipped agent, Punchcut. For a cheaper sprint, Parallel.",
+        text: "**Verdict:** hire us for AI-native B2B going enterprise on a Series A budget and a deadline. For a product used by millions, MetaLab. For the craft your peer set hired, basement. For a shipped agent, Punchcut. For a cheaper sprint, Parallel.",
       },
       { type: "subheading", text: "MetaLab" },
       {
         type: "paragraph",
-        text: "Price: $100k minimum, regularly $150–250k+, ~$150–199/hr · Location: Victoria BC, distributed",
+        text: "**Price:** $100k minimum, regularly $150–250k+, ~$150–199/hr · **Location:** Victoria BC, distributed",
       },
       {
         type: "paragraph",
@@ -336,167 +339,167 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Where it shines: AI products where the interface is the value and it will be used by very large numbers of people. Nobody on this list has done that more times.",
+        text: "**Where it shines:** AI products where the interface is the value and it will be used by very large numbers of people. Nobody on this list has done that more times.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: the $100k floor and multi-month timelines are a hard filter. If you are pre-Series B with finite runway and a conference in eight weeks, this is the wrong shape of engagement, and no amount of wanting it changes that.",
+        text: "**Where it doesn't:** the $100k floor and multi-month timelines are a hard filter. If you are pre-Series B with finite runway and a conference in eight weeks, this is the wrong shape of engagement, and no amount of wanting it changes that.",
       },{
         type: "paragraph",
-        text: "Verdict: the best product studio here, full stop, if you can afford the floor. They beat us on product depth and on scale experience by a wide margin.",
+        text: "**Verdict:** the best product studio here, full stop, if you can afford the floor. They beat us on product depth and on scale experience by a wide margin.",
       },
       { type: "subheading", text: "basement Studio" },
       {
         type: "paragraph",
-        text: "Price: $10k+ minimum, $100–149/hr · Location: Buenos Aires and LA, 35 people The most striking client roster in this category: Cursor, Scale, Harvey, Baseten, Black Forest Labs, Replicate, Linear, and Vercel. If you are an AI infra or devtools founder, this is the studio your peer set already hired. Webby and Awwwards recognition, and a reputation on design Twitter that they earned through the work rather than through marketing.",
+        text: "**Price:** $10k+ minimum, $100–149/hr · **Location:** Buenos Aires and LA, 35 people The most striking client roster in this category: Cursor, Scale, Harvey, Baseten, Black Forest Labs, Replicate, Linear, and Vercel. If you are an AI infra or devtools founder, this is the studio your peer set already hired. Webby and Awwwards recognition, and a reputation on design Twitter that they earned through the work rather than through marketing.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: modern tech craft, immersive web, and the specific visual language that reads as credible to a developer audience. The price-to-craft ratio is the best on this page.",
+        text: "**Where it shines:** modern tech craft, immersive web, and the specific visual language that reads as credible to a developer audience. The price-to-craft ratio is the best on this page.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: they are a craft and web studio more than a positioning shop. If you arrive without a clear point of view about your market, you will get a beautiful expression of an unclear idea. Also 35 people in Argentina means timezone math for a US West Coast team.",
+        text: "**Where it doesn't:** they are a craft and web studio more than a positioning shop. If you arrive without a clear point of view about your market, you will get a beautiful expression of an unclear idea. Also 35 people in Argentina means timezone math for a US West Coast team.",
       },
       {
         type: "paragraph",
-        text: "Verdict: if your positioning is settled and you want the aesthetic your competitors' engineers respect, hire basement. They beat us on pure craft and on peer-set signaling.",
+        text: "**Verdict:** if your positioning is settled and you want the aesthetic your competitors' engineers respect, hire basement. They beat us on pure craft and on peer-set signaling.",
       },
       { type: "subheading", text: "Lazarev" },
       {
         type: "paragraph",
-        text: "Price: ~$100/hr · Location: San Francisco, founded 2015 by Kyrylo Lazariev, 50+ team Designing AI products since 2017, with 30+ shipped across copilots, decision engines, and data-heavy platforms. Three consecutive years of Webby recognition for AI products, including Best Visual Design for AI at the 30th Annual Webby Awards. Their Accern work built AI research tooling for analysts and VCs. Their stated principle is blunt and correct: if design is not moving adoption or revenue, it is decoration.",
+        text: "**Price:** ~$100/hr · **Location:** San Francisco, founded 2015 by Kyrylo Lazariev, 50+ team Designing AI products since 2017, with 30+ shipped across copilots, decision engines, and data-heavy platforms. Three consecutive years of Webby recognition for AI products, including Best Visual Design for AI at the 30th Annual Webby Awards. Their Accern work built AI research tooling for analysts and VCs. Their stated principle is blunt and correct: if design is not moving adoption or revenue, it is decoration.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: the hardest problem in this category, which is making intelligence feel simple and trustworthy inside a demo, a POC, or a QBR. They are also the most visible studio in the category across organic and AI search, which tells you something about how they think about distribution.",
+        text: "**Where it shines:** the hardest problem in this category, which is making intelligence feel simple and trustworthy inside a demo, a POC, or a QBR. They are also the most visible studio in the category across organic and AI search, which tells you something about how they think about distribution.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: they lean product and UX over marketing brand. A pure positioning-and-identity engagement is not the center of their practice.",
+        text: "**Where it doesn't:** they lean product and UX over marketing brand. A pure positioning-and-identity engagement is not the center of their practice.",
       },
       {
         type: "paragraph",
-        text: "Verdict: strong when the product and the website have to tell one coherent story about a complex model.",
+        text: "**Verdict:** strong when the product and the website have to tell one coherent story about a complex model.",
       },
       { type: "subheading", text: "Punchcut" },
       {
         type: "paragraph",
-        text: "Price: enterprise, project-based · Location: San Francisco, founded 2002 Two decades at the frontier of human-machine interaction: voice interfaces, AI agents, automotive systems, and multimodal experiences for Google, Amazon, Ford, Samsung, LG, Salesforce, and Johnson & Johnson. Their Design Accelerator model ships production-ready products in 6 to 12 weeks by pairing senior teams with proven interaction patterns and build-to-learn prototyping.",
+        text: "**Price:** enterprise, project-based · **Location:** San Francisco, founded 2002 Two decades at the frontier of human-machine interaction: voice interfaces, AI agents, automotive systems, and multimodal experiences for Google, Amazon, Ford, Samsung, LG, Salesforce, and Johnson & Johnson. Their Design Accelerator model ships production-ready products in 6 to 12 weeks by pairing senior teams with proven interaction patterns and build-to-learn prototyping.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: when the deliverable is an intelligent product, an agent, or an interface that has to actually ship, and the patterns matter more than the paint.",
+        text: "**Where it shines:** when the deliverable is an intelligent product, an agent, or an interface that has to actually ship, and the patterns matter more than the paint.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: a focused product studio, not a marketing shop. If you need a brand and a website, you are paying enterprise rates for the wrong specialty.",
+        text: "**Where it doesn't:** a focused product studio, not a marketing shop. If you need a brand and a website, you are paying enterprise rates for the wrong specialty.",
       },
       {
         type: "paragraph",
-        text: "Verdict: hire Punchcut over us without hesitation if the job is the agent itself rather than how the company is perceived before the demo.",
+        text: "**Verdict:** hire Punchcut over us without hesitation if the job is the agent itself rather than how the company is perceived before the demo.",
       },
       { type: "subheading", text: "Character" },
       {
         type: "paragraph",
-        text: "Price: $80–250k · Location: San Francisco One of the most recognized brand studios in tech, known for identities that read expensive without reading corporate. Research-first: competitive analysis, customer research, and market positioning all land before any visual work, so the identity rests on strategy rather than taste.",
+        text: "**Price:** $80–250k · **Location:** San Francisco One of the most recognized brand studios in tech, known for identities that read expensive without reading corporate. Research-first: competitive analysis, customer research, and market positioning all land before any visual work, so the identity rests on strategy rather than taste.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: Series B and up, when the brand has to carry a category claim and the budget can absorb a real research phase.",
+        text: "**Where it shines:** Series B and up, when the brand has to carry a category claim and the budget can absorb a real research phase.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: the floor is $80k and the timeline is 10 to 24 weeks. There is no seed-stage version of Character.",
+        text: "**Where it doesn't:** the floor is $80k and the timeline is 10 to 24 weeks. There is no seed-stage version of Character.",
       },
       {
         type: "paragraph",
-        text: "Verdict: hire Character if you have raised a large B and the brand is the bet. They beat us on research depth and visual authority.",
+        text: "**Verdict:** hire Character if you have raised a large B and the brand is the bet. They beat us on research depth and visual authority.",
       },
       { type: "subheading", text: "Clay" },
       {
         type: "paragraph",
-        text: "Price: $50k+ minimum, $150–199/hr, projects reported $10–150k (Clutch) · Location: San Francisco HQ Among the most respected studios in the design community. The work balances brand perception against conversion, so the site looks crafted and still makes people act. Clients include Coinbase, Uber, Amazon, VMware, Cisco, and ADP, plus offices across NY, Austin, Denver, Lisbon, and Belgrade.",
+        text: "**Price:** $50k+ minimum, $150–199/hr, projects reported $10–150k (Clutch) · **Location:** San Francisco HQ Among the most respected studios in the design community. The work balances brand perception against conversion, so the site looks crafted and still makes people act. Clients include Coinbase, Uber, Amazon, VMware, Cisco, and ADP, plus offices across NY, Austin, Denver, Lisbon, and Belgrade.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: growth-stage applied AI with a healthy budget, wanting a site that signals category leadership.",
+        text: "**Where it shines:** growth-stage applied AI with a healthy budget, wanting a site that signals category leadership.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: the $50k minimum rules out pre-Series A, and the enterprise client mix means a 25-person startup is a small account.",
+        text: "**Where it doesn't:** the $50k minimum rules out pre-Series A, and the enterprise client mix means a 25-person startup is a small account.",
       },
       {
         type: "paragraph",
-        text: "Verdict: hire Clay when the product is real, the budget is there, and the site needs to look like the market leader's.",
+        text: "**Verdict:** hire Clay when the product is real, the budget is there, and the site needs to look like the market leader's.",
       },
       { type: "subheading", text: "Parallel" },
       {
         type: "paragraph",
-        text: "Price: design sprints $12–30k (seed engagements typically $14–20k), growth retainer $6–15k/mo · Location: remote, US and UK focus A design partner built specifically for early-stage AI and B2B SaaS, integrating product strategy, opportunity mapping, and onboarding design into one engagement so strategy and design decisions stay in the same room. They publish more content on this exact query set than anyone, which is how you probably found this page in the first place.",
+        text: "**Price:** design sprints $12–30k (seed engagements typically $14–20k), growth retainer $6–15k/mo · **Location:** remote, US and UK focus A design partner built specifically for early-stage AI and B2B SaaS, integrating product strategy, opportunity mapping, and onboarding design into one engagement so strategy and design decisions stay in the same room. They publish more content on this exact query set than anyone, which is how you probably found this page in the first place.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: seed and early Series A budgets that still want strategy in the room, and product-led companies where onboarding is the conversion surface.",
+        text: "**Where it shines:** seed and early Series A budgets that still want strategy in the room, and product-led companies where onboarding is the conversion surface.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: the sprint tier is genuinely cheaper than ours, and cheaper buys less: less brand depth, and a practice weighted toward product over the perception problem that stalls enterprise deals. They also rank themselves #1 on their own comparable list, so calibrate their rankings the same way you calibrate ours.",
+        text: "**Where it doesn't:** the sprint tier is genuinely cheaper than ours, and cheaper buys less: less brand depth, and a practice weighted toward product over the perception problem that stalls enterprise deals. They also rank themselves #1 on their own comparable list, so calibrate their rankings the same way you calibrate ours.",
       },
       {
         type: "paragraph",
-        text: "Verdict: the honest cheaper alternative to us. If $25k is out of reach and you need strategy anyway, start here.",
+        text: "**Verdict:** the honest cheaper alternative to us. If $25k is out of reach and you need strategy anyway, start here.",
       },
       { type: "subheading", text: "Webstacks" },
       {
         type: "paragraph",
-        text: "Price: project-based · Location: San Diego, remote-first They treat the website as a product: modular, documentation-driven, and built to scale. Strong on composable and headless architecture as well as Webflow, and specialized in sites juggling multiple product lines, enterprise and SMB audiences side by side, and heavy content. Clients include Gong, Calendly, and ServiceTitan.",
+        text: "**Price:** project-based · **Location:** San Diego, remote-first They treat the website as a product: modular, documentation-driven, and built to scale. Strong on composable and headless architecture as well as Webflow, and specialized in sites juggling multiple product lines, enterprise and SMB audiences side by side, and heavy content. Clients include Gong, Calendly, and ServiceTitan.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: Series B and up with a real in-house marketing team and a site that has outgrown a simple builder.",
+        text: "**Where it shines:** Series B and up with a real in-house marketing team and a site that has outgrown a simple builder.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: heavier than an early-stage team needs, and the engagement assumes you have marketers to feed it. This is not the partner for a first brand.",
+        text: "**Where it doesn't:** heavier than an early-stage team needs, and the engagement assumes you have marketers to feed it. This is not the partner for a first brand.",
       },
       {
         type: "paragraph",
-        text: "Verdict: the right call once your site is a content operation rather than a set of pages.",
+        text: "**Verdict:** the right call once your site is a content operation rather than a set of pages.",
       },
       { type: "subheading", text: "Everything Design" },
       {
         type: "paragraph",
-        text: "Price: early-stage brand and website packages, 8 to 10 week timeline · Location: Bengaluru An explicit AI-startup practice, with a philosophy that matches the argument of this article: use-case specificity over 'AI-powered,' proof over claims. They have built for clinical AI (Cloudphysician), consumer-insights AI (Entropik), contract AI (SimpliContract), and Peoplebox. In-house motion means the team writing the messaging also visualizes the AI workflow.",
+        text: "**Price:** early-stage brand and website packages, 8 to 10 week timeline · **Location:** Bengaluru An explicit AI-startup practice, with a philosophy that matches the argument of this article: use-case specificity over 'AI-powered,' proof over claims. They have built for clinical AI (Cloudphysician), consumer-insights AI (Entropik), contract AI (SimpliContract), and Peoplebox. In-house motion means the team writing the messaging also visualizes the AI workflow.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: pre-launch and seed companies with a finite budget that still need the product made legible.",
+        text: "**Where it shines:** pre-launch and seed companies with a finite budget that still need the product made legible.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: they do not publish pricing, so you cannot self-qualify before a call. And early-stage packages mean early-stage scope: this is not the team for an enterprise-motion repositioning.",
+        text: "**Where it doesn't:** they do not publish pricing, so you cannot self-qualify before a call. And early-stage packages mean early-stage scope: this is not the team for an enterprise-motion repositioning.",
       },
       {
         type: "paragraph",
-        text: "Verdict: the value pick at the earliest end, and a genuine alternative to us for founders who cannot reach $25k.",
+        text: "**Verdict:** the value pick at the earliest end, and a genuine alternative to us for founders who cannot reach $25k.",
       },
       { type: "heading", text: "When you should not hire an agency at all" },
       {
         type: "paragraph",
-        text: "The honest answer for a real share of the people reading this. If you are pre-PMF, don't. Use a template and Claude Code. A brand amplifies a position, and if the position is still moving you are paying to personify something that will change. Come back after the pivot settles.",
+        text: "The honest answer for a real share of the people reading this. **If you are pre-PMF**, don't. Use a template and Claude Code. A brand amplifies a position, and if the position is still moving you are paying to personify something that will change. Come back after the pivot settles.",
       },
       {
         type: "paragraph",
-        text: "If cost is your only reason for switching, a subscription at $699 to $4,995/mo buys production without strategy, and that is the right trade for some teams.",
+        text: "**If cost is your only reason for switching,** a subscription at $699 to $4,995/mo buys production without strategy, and that is the right trade for some teams.",
       },
       {
         type: "paragraph",
-        text: "If you have a locked Figma and fixed comps, hire a freelancer at $2–8k. You do not need anyone's opinion and should not pay for one.",
+        text: "**If you have a locked Figma and fixed comps,** hire a freelancer at $2–8k. You do not need anyone's opinion and should not pay for one.",
       },
       {
         type: "paragraph",
-        text: "If your problem is pipeline volume, hire a growth agency. Design makes every impression land harder. It does not create impressions.",
+        text: "**If your problem is pipeline volume,** hire a growth agency. Design makes every impression land harder. It does not create impressions.",
       },
       { type: "heading", text: "Red flags, fast filter" },
       {
@@ -603,11 +606,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Every studio below is headquartered in San Francisco. That sounds like a low bar for a page titled this way. It isn't. The list currently ranking for this query includes studios in Ukraine, London, and Georgia. We cut every agency we could not place in SF, including several we rate highly, because a city in the title should mean something.",
+        text: "**Every studio below is headquartered in San Francisco.** That sounds like a low bar for a page titled this way. It isn't. The list currently ranking for this query includes studios in Ukraine, London, and Georgia. We cut every agency we could not place in SF, including several we rate highly, because a city in the title should mean something.",
       },
       {
         type: "paragraph",
-        text: "Disclosure, up front: we wrote this list and we put ourselves at number one. Read our entry with that in mind. Instead of pretending to be neutral: we publish our actual prices, we name five things we are bad at, and we hand seven of the eight jobs in the box below to competitors who beat us at them.",
+        text: "**Disclosure, up front:** we wrote this list and we put ourselves at number one. Read our entry with that in mind. Instead of pretending to be neutral: we publish our actual prices, we name five things we are bad at, and we hand seven of the eight jobs in the box below to competitors who beat us at them.",
       },
       {
         // TODO: real row data for this comparison table lands later.
@@ -684,15 +687,15 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Brand is the identity system: positioning, naming, logo, voice, and the guidelines that hold it together. Hire this when the story itself is unclear, or when you are rebranding.",
+        text: "**Brand** is the identity system: positioning, naming, logo, voice, and the guidelines that hold it together. Hire this when the story itself is unclear, or when you are rebranding.",
       },
       {
         type: "paragraph",
-        text: "Web is the site that expresses the brand: marketing pages, conversion paths, the CMS your team edits without a developer. Hire this when the identity is solid but the site reads a generation behind.",
+        text: "**Web** is the site that expresses the brand: marketing pages, conversion paths, the CMS your team edits without a developer. Hire this when the identity is solid but the site reads a generation behind.",
       },
       {
         type: "paragraph",
-        text: "Product-UX is the app: flows, the UI system, the in-product experience. Hire this when users understand your pitch and then churn once they're inside.",
+        text: "**Product-UX** is the app: flows, the UI system, the in-product experience. Hire this when users understand your pitch and then churn once they're inside.",
       },
       {
         type: "paragraph",
@@ -702,11 +705,11 @@ export const blogPosts: BlogPost[] = [
       { type: "paragraph", text: "Two filters, then five criteria." },
       {
         type: "paragraph",
-        text: 'Filter one: headquartered in San Francisco. Not "serves SF." Not "Bay Area." Not "has a client in SF." A studio\'s own stated headquarters. This cut four agencies we would otherwise recommend, listed at the bottom.',
+        text: '**Filter one: headquartered in San Francisco.** Not "serves SF." Not "Bay Area." Not "has a client in SF." A studio\'s own stated headquarters. This cut four agencies we would otherwise recommend, listed at the bottom.',
       },
       {
         type: "paragraph",
-        text: "Filter two: not a network shop. Landor and frog both have real SF headquarters and both are owned by holding companies (frog by Capgemini). Their economics, timelines, and minimums put them in a different category from everything here, so they are out.",
+        text: "**Filter two: not a network shop.** Landor and frog both have real SF headquarters and both are owned by holding companies (frog by Capgemini). Their economics, timelines, and minimums put them in a different category from everything here, so they are out.",
       },
       {
         type: "paragraph",
@@ -715,20 +718,20 @@ export const blogPosts: BlogPost[] = [
       {
         type: "list",
         items: [
-          "Outcomes over awards. Does the case study show business impact, or a screenshot? A trophy proves taste. A metric proves impact.",
-          "System thinking. Does the work survive contact with a real product UI, a deck, and a live site, or is it a one-off artifact?",
-          "Stage fluency. An MVP scope and an enterprise rebrand are different jobs. Studios fluent in one drown in the other.",
-          "Process transparency. Who actually works on your account, partners or juniors, and how fast do they move?",
-          "Post-handoff usability. Do you get a system your team can run, or a beautiful dependency?",
+          "**Outcomes over awards.** Does the case study show business impact, or a screenshot? A trophy proves taste. A metric proves impact.",
+          "**System thinking.** Does the work survive contact with a real product UI, a deck, and a live site, or is it a one-off artifact?",
+          "**Stage fluency.** An MVP scope and an enterprise rebrand are different jobs. Studios fluent in one drown in the other.",
+          "**Process transparency.** Who actually works on your account, partners or juniors, and how fast do they move?",
+          "**Post-handoff usability.** Do you get a system your team can run, or a beautiful dependency?",
         ],
       },
       {
         type: "paragraph",
-        text: "How we know. We have run 31 projects for funded B2B and AI-native startups, including Greptile, Sully, Bland, Reducto, and CTGT. We hold 5.0★ across every review we've received. And we publish our own prices on this site, which almost nobody in this category does.",
+        text: "**How we know.** We have run 31 projects for funded B2B and AI-native startups, including Greptile, Sully, Bland, Reducto, and CTGT. We hold 5.0★ across every review we've received. And we publish our own prices on this site, which almost nobody in this category does.",
       },
       {
         type: "paragraph",
-        text: "On self-ranking, since we do it. Every agency-authored list has a thumb on the scale, and you should know where each one puts itself. dp.vision ranks itself #8 of 15 on the SF list currently ranking for this query (Updated June 2026). Parallel published an AI-startup list on 2 July 2026 and ranked itself #1. We rank ourselves #1 here.",
+        text: "**On self-ranking, since we do it.** Every agency-authored list has a thumb on the scale, and you should know where each one puts itself. dp.vision ranks itself #8 of 15 on the SF list currently ranking for this query (Updated June 2026). Parallel published an AI-startup list on 2 July 2026 and ranked itself #1. We rank ourselves #1 here.",
       },
       {
         type: "paragraph",
@@ -736,7 +739,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Who this is for: founders and marketing leads at funded startups through scale-ups hiring a design partner. Who it is not for: teams wanting the cheapest template, or enterprises needing a global network shop.",
+        text: "**Who this is for:** founders and marketing leads at funded startups through scale-ups hiring a design partner. **Who it is not for:** teams wanting the cheapest template, or enterprises needing a global network shop.",
       },
       {
         type: "paragraph",
@@ -886,7 +889,7 @@ export const blogPosts: BlogPost[] = [
       { type: "subheading", text: "PIXELUP LABS (us)" },
       {
         type: "paragraph",
-        text: "Lane: brand and web under one roof · Price: brand sprint $25–30k · brand + website $25–40k · retainer from $4k/mo (full pricing)",
+        text: "**Lane:** brand and web under one roof · **Price:** brand sprint $25–30k · brand + website $25–40k · retainer from $4k/mo (full pricing)",
       },
       {
         type: "paragraph",
@@ -896,43 +899,43 @@ export const blogPosts: BlogPost[] = [
         type: "paragraph",
         text: "The specific thing we do that most of this list does not: brand and website as one engagement, one team, in two to five weeks, and we leave the design system behind so it doesn't decay eight months later. On Greptile's 2025 engagement that meant 200+ components and dev-first documentation.",
       },
-      { type: "paragraph", text: "Where it doesn't:" },
+      { type: "paragraph", text: "**Where it doesn't:**" },
       {
         type: "list",
         items: [
-          "We are not a committee studio. We work founder-to-founder. If your rebrand needs a steering committee and a stakeholder matrix, we are the wrong shape and you should hire a Character- or Landor-tier firm that runs that process properly. Budget three to five times our number for it.",
-          "We are not a pair of hands. We take a position on messaging and positioning. If your strategy is locked and the Figma is done, a freelancer at $2–8k is cheaper and faster.",
-          "We are not a growth agency. We fix how you are perceived. We will not drive your MQLs.",
-          "Our team works from Bangalore, on Pacific overlap. If your procurement requires an on-site or US-domiciled delivery team, apply that filter early rather than discovering it in week two.",
-          "$25–30k is real money at seed. If you have raised under $2M, we are the wrong line item, and a template is the honest answer.",
+          "**We are not a committee studio.** We work founder-to-founder. If your rebrand needs a steering committee and a stakeholder matrix, we are the wrong shape and you should hire a Character- or Landor-tier firm that runs that process properly. Budget three to five times our number for it.",
+          "**We are not a pair of hands.** We take a position on messaging and positioning. If your strategy is locked and the Figma is done, a freelancer at $2–8k is cheaper and faster.",
+          "**We are not a growth agency.** We fix how you are perceived. We will not drive your MQLs.",
+          "**Our team works from Bangalore, on Pacific overlap.** If your procurement requires an on-site or US-domiciled delivery team, apply that filter early rather than discovering it in week two.",
+          "**$25–30k is real money at seed.** If you have raised under $2M, we are the wrong line item, and a template is the honest answer.",
         ],
       },
       {
         type: "paragraph",
-        text: "Verdict: hire us for AI-native B2B going enterprise on a Series A budget and a clock. For enterprise-tier research depth, Character. For multi-surface brand systems, Ramotion. For the AI product itself, Punchcut.",
+        text: "**Verdict:** hire us for AI-native B2B going enterprise on a Series A budget and a clock. For enterprise-tier research depth, Character. For multi-surface brand systems, Ramotion. For the AI product itself, Punchcut.",
       },
       { type: "subheading", text: "Character" },
-      { type: "paragraph", text: "Lane: brand · Price: $80–250k" },
+      { type: "paragraph", text: "**Lane:** brand · **Price:** $80–250k" },
       {
         type: "paragraph",
         text: "One of SF's most recognized brand studios, known for identities that read expensive without reading corporate, and for building brands that later became household names. The process is research-first: competitive analysis, customer research, and market positioning land before any visual work, so the logo and color system rest on strategy rather than taste.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: Series B and up, when the brand has to carry a category claim and the budget can absorb a real research phase.",
+        text: "**Where it shines:** Series B and up, when the brand has to carry a category claim and the budget can absorb a real research phase.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: the floor is $80k. There is no version of Character that fits a seed or bootstrapped budget, and a 10 to 24 week timeline does not fit a conference deadline eight weeks out.",
+        text: "**Where it doesn't:** the floor is $80k. There is no version of Character that fits a seed or bootstrapped budget, and a 10 to 24 week timeline does not fit a conference deadline eight weeks out.",
       },
       {
         type: "paragraph",
-        text: "Verdict: hire Character if you have raised a large B and the brand is the bet. They beat us on depth of research and on sheer visual authority.",
+        text: "**Verdict:** hire Character if you have raised a large B and the brand is the bet. They beat us on depth of research and on sheer visual authority.",
       },
       { type: "subheading", text: "Clay" },
       {
         type: "paragraph",
-        text: "Lane: brand and web · Price: $50k+ minimum, $150–199/hr, projects reported $10–150k (Clutch)",
+        text: "**Lane:** brand and web · **Price:** $50k+ minimum, $150–199/hr, projects reported $10–150k (Clutch)",
       },
       {
         type: "paragraph",
@@ -940,20 +943,20 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Where it shines: growth and scale-stage tech with a healthy budget, wanting a site that signals category leadership.",
+        text: "**Where it shines:** growth and scale-stage tech with a healthy budget, wanting a site that signals category leadership.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: the $50k minimum puts it out of reach pre-Series A, and the enterprise client mix means a 25-person startup is a small account.",
+        text: "**Where it doesn't:** the $50k minimum puts it out of reach pre-Series A, and the enterprise client mix means a 25-person startup is a small account.",
       },
       {
         type: "paragraph",
-        text: "Verdict: hire Clay when your product is real, the budget is there, and the site needs to look like the market leader's.",
+        text: "**Verdict:** hire Clay when your product is real, the budget is there, and the site needs to look like the market leader's.",
       },
       { type: "subheading", text: "Ramotion" },
       {
         type: "paragraph",
-        text: "Lane: brand plus product · Price: brand identity $30–150k, logo and visual identity alone $10–50k",
+        text: "**Lane:** brand plus product · **Price:** brand identity $30–150k, logo and visual identity alone $10–50k",
       },
       {
         type: "paragraph",
@@ -961,38 +964,38 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Where it shines: Series B and up needing one brand system that holds across the product UI, the sales deck, and the site.",
+        text: "**Where it shines:** Series B and up needing one brand system that holds across the product UI, the sales deck, and the site.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: the investment and timeline are calibrated for that stage, not for seed. If you need a marketing site in three weeks, this is the wrong shape of engagement.",
+        text: "**Where it doesn't:** the investment and timeline are calibrated for that stage, not for seed. If you need a marketing site in three weeks, this is the wrong shape of engagement.",
       },
       {
         type: "paragraph",
-        text: "Verdict: the strongest pick on this list for multi-surface brand systems. They beat us when the product UI is as much of the brand as the website is.",
+        text: "**Verdict:** the strongest pick on this list for multi-surface brand systems. They beat us when the product UI is as much of the brand as the website is.",
       },
       { type: "subheading", text: "Fantasy" },
-      { type: "paragraph", text: "Lane: digital product design · Price: enterprise, project-based" },
+      { type: "paragraph", text: "**Lane:** digital product design · **Price:** enterprise, project-based" },
       {
         type: "paragraph",
         text: "Studios in San Francisco and New York, roughly 250 people, and 25+ years of work on products used by enormous numbers of people: Nike, Disney, Microsoft, Netflix, Spotify, Ford, Google, and 23andMe. They describe themselves as the creative partner to 80% of Forbes' Top 10, and they have stayed independent with no holding-company overhead. Recent positioning leans AI-native digital product design.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: consumer-scale or enterprise-scale digital products where the interface is the business, and you need senior people who have shipped at that scale before.",
+        text: "**Where it shines:** consumer-scale or enterprise-scale digital products where the interface is the business, and you need senior people who have shipped at that scale before.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: at 250 people this is not a boutique, and the engagements are sized accordingly. A Series A startup wanting a brand and a marketing site is not the account this studio is built around.",
+        text: "**Where it doesn't:** at 250 people this is not a boutique, and the engagements are sized accordingly. A Series A startup wanting a brand and a marketing site is not the account this studio is built around.",
       },
       {
         type: "paragraph",
-        text: "Verdict: the most serious product-design shop on this list. If your product is going to be used by millions, they have done it more times than anyone else here.",
+        text: "**Verdict:** the most serious product-design shop on this list. If your product is going to be used by millions, they have done it more times than anyone else here.",
       },
       { type: "subheading", text: "Punchcut" },
       {
         type: "paragraph",
-        text: "Lane: product and UX for emerging technology · Price: enterprise, project-based",
+        text: "**Lane:** product and UX for emerging technology · **Price:** enterprise, project-based",
       },
       {
         type: "paragraph",
@@ -1000,74 +1003,74 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Where it shines: when the deliverable is an intelligent product, agent, or interface that has to actually ship.",
+        text: "**Where it shines:** when the deliverable is an intelligent product, agent, or interface that has to actually ship.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: this is a focused product studio, not a marketing shop. If what you need is a brand and a website, you are paying enterprise rates for the wrong specialty.",
+        text: "**Where it doesn't:** this is a focused product studio, not a marketing shop. If what you need is a brand and a website, you are paying enterprise rates for the wrong specialty.",
       },
       {
         type: "paragraph",
-        text: "Verdict: hire Punchcut over us without hesitation if the job is the AI product itself rather than how the company is perceived before the demo.",
+        text: "**Verdict:** hire Punchcut over us without hesitation if the job is the AI product itself rather than how the company is perceived before the demo.",
       },
       { type: "subheading", text: "Lazarev" },
-      { type: "paragraph", text: "Lane: product-UX and web for AI-native teams · Price: ~$100/hr" },
+      { type: "paragraph", text: "**Lane:** product-UX and web for AI-native teams · **Price:** ~$100/hr" },
       {
         type: "paragraph",
         text: "Headquartered on Mason Street in San Francisco, founded 2015 by Kyrylo Lazariev, with a team of 50+ strategists, designers, and analysts and Ukrainian roots. Designing AI products since 2017, with 30+ shipped across copilots, decision engines, and data-heavy platforms. Three consecutive years of Webby recognition for AI products, including Best Visual Design for AI at the 30th Annual Webby Awards. Their Accern work built AI research tooling for analysts and VCs. Their operating principle is blunt and correct: if design is not moving adoption or revenue, it is decoration.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: the hardest part of AI design, which is making intelligence feel simple and trustworthy in a demo, a POC, or a QBR. They are also the most visible studio in this category in both organic and AI search, which tells you something about how they think about distribution.",
+        text: "**Where it shines:** the hardest part of AI design, which is making intelligence feel simple and trustworthy in a demo, a POC, or a QBR. They are also the most visible studio in this category in both organic and AI search, which tells you something about how they think about distribution.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: they lean product and UX over marketing brand, so a pure positioning-and-identity job is not the center of their practice.",
+        text: "**Where it doesn't:** they lean product and UX over marketing brand, so a pure positioning-and-identity job is not the center of their practice.",
       },
       {
         type: "paragraph",
-        text: "Verdict: strong when your product and your website have to tell one coherent story about a complex model.",
+        text: "**Verdict:** strong when your product and your website have to tell one coherent story about a complex model.",
       },
       { type: "subheading", text: "Moniker" },
-      { type: "paragraph", text: "Lane: brand · Price: $40–150k (reported, not published)" },
+      { type: "paragraph", text: "**Lane:** brand · **Price:** $40–150k (reported, not published)" },
       {
         type: "paragraph",
         text: "An SF design and branding studio led by Brent Couchman, ten years in, combining design, language, and strategy. Their own pitch is the absence of overhead: a small senior team without the layers of management that get in the way of the work, which in practice means the people you meet are the people who do it.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: naming and verbal identity alongside visual work, and buyers who specifically do not want an account manager between them and the designers.",
+        text: "**Where it shines:** naming and verbal identity alongside visual work, and buyers who specifically do not want an account manager between them and the designers.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: a small senior team is a capacity constraint. If you need brand, site, product UI, and a deck delivered in parallel on a hard date, a larger shop absorbs that better.",
+        text: "**Where it doesn't:** a small senior team is a capacity constraint. If you need brand, site, product UI, and a deck delivered in parallel on a hard date, a larger shop absorbs that better.",
       },
       {
         type: "paragraph",
-        text: "Verdict: the closest studio on this list to how we work, at a higher price point and with deeper verbal-identity chops.",
+        text: "**Verdict:** the closest studio on this list to how we work, at a higher price point and with deeper verbal-identity chops.",
       },
       { type: "subheading", text: "Tolleson" },
-      { type: "paragraph", text: "Lane: brand · Price: $60–200k (reported, not published)" },
+      { type: "paragraph", text: "**Lane:** brand · **Price:** $60–200k (reported, not published)" },
       {
         type: "paragraph",
         text: "A veteran San Francisco studio with decades of work behind it. The output is refined and deliberately timeless, and they do not chase trends, which is either exactly what you want or exactly what you don't depending on your market.",
       },
       {
         type: "paragraph",
-        text: "Where it shines: companies that need to read as established and permanent rather than new and fast. Restraint is the product.",
+        text: "**Where it shines:** companies that need to read as established and permanent rather than new and fast. Restraint is the product.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: if your positioning depends on looking like the aggressive challenger to a legacy incumbent, a studio built on restraint is working against your brief.",
+        text: "**Where it doesn't:** if your positioning depends on looking like the aggressive challenger to a legacy incumbent, a studio built on restraint is working against your brief.",
       },
       {
         type: "paragraph",
-        text: "Verdict: hire Tolleson when the goal is gravity rather than momentum.",
+        text: "**Verdict:** hire Tolleson when the goal is gravity rather than momentum.",
       },
       { type: "subheading", text: "Wunderdogs" },
       {
         type: "paragraph",
-        text: "Lane: brand and narrative for fundraising-stage startups · Price: project-based and retainer, not published",
+        text: "**Lane:** brand and narrative for fundraising-stage startups · **Price:** project-based and retainer, not published",
       },
       {
         type: "paragraph",
@@ -1075,15 +1078,15 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Where it shines: a founder-led company preparing to raise, where the brand has to convince customers and investors in the same week.",
+        text: "**Where it shines:** a founder-led company preparing to raise, where the brand has to convince customers and investors in the same week.",
       },
       {
         type: "paragraph",
-        text: "Where it doesn't: the fundraise lens is a specialty, not a universal. If your problem is that enterprise procurement stalls your deals, an investor-tuned narrative solves the wrong half.",
+        text: "**Where it doesn't:** the fundraise lens is a specialty, not a universal. If your problem is that enterprise procurement stalls your deals, an investor-tuned narrative solves the wrong half.",
       },
       {
         type: "paragraph",
-        text: "Verdict: hire Wunderdogs if the next milestone is a round. Hire us if the next milestone is a Fortune 500 signature.",
+        text: "**Verdict:** hire Wunderdogs if the next milestone is a round. Hire us if the next milestone is a Fortune 500 signature.",
       },
       { type: "heading", text: "When you should not hire an agency at all" },
       {
@@ -1092,19 +1095,19 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "If you are pre-PMF, don't. Use a template and Claude Code. A brand amplifies a position, and if the position is still moving, you are paying to personify something that will change. Come back after the pivot settles.",
+        text: "**If you are pre-PMF,** don't. Use a template and Claude Code. A brand amplifies a position, and if the position is still moving, you are paying to personify something that will change. Come back after the pivot settles.",
       },
       {
         type: "paragraph",
-        text: "If cost is your only reason for switching, a subscription at $699 to $4,995/mo will give you production without strategy, and that is genuinely the right trade for some teams.",
+        text: "**If cost is your only reason for switching,** a subscription at $699 to $4,995/mo will give you production without strategy, and that is genuinely the right trade for some teams.",
       },
       {
         type: "paragraph",
-        text: "If you have a locked Figma and a fixed set of comps, hire a freelancer at $2–8k. You do not need anyone's opinion and you should not pay for one.",
+        text: "**If you have a locked Figma and a fixed set of comps,** hire a freelancer at $2–8k. You do not need anyone's opinion and you should not pay for one.",
       },
       {
         type: "paragraph",
-        text: "If your problem is pipeline volume, hire a growth agency. Design makes every impression land harder. It does not create impressions.",
+        text: "**If your problem is pipeline volume,** hire a growth agency. Design makes every impression land harder. It does not create impressions.",
       },
       { type: "heading", text: "Red flags, fast filter" },
       { type: "paragraph", text: "Any of these, keep looking." },

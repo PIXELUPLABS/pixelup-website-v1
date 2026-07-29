@@ -67,7 +67,7 @@ export function LeftNav({
       </div> */}
 
       {/* Hero */}
-      <div className="flex flex-col gap-4 desk:mt-10">
+      <div className="flex flex-col gap-4">
         <h1
           className={`fade-up tracking-display max-w-[22ch] text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] ${headingSize} ${headingFontClassName} ${balanceHero ? "text-balance" : ""}`}
         >

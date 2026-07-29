@@ -49,18 +49,37 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
   );
 }
 
+/** Splits paragraph text on `**highlighted**` markers and renders those
+    segments in white instead of the paragraph's default grey — a plain-text
+    convention so future paragraphs in lib/blog.ts can mark emphasis without
+    touching this component again. */
+function renderHighlightedText(text: string) {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((segment, index) => {
+    const match = segment.match(/^\*\*([^*]+)\*\*$/);
+    if (!match) return segment;
+    return (
+      <strong key={index} className="font-medium text-white">
+        {match[1]}
+      </strong>
+    );
+  });
+}
+
 /** Renders one block of `post.content` in reading order. */
 function ContentBlock({ block }: { block: BlogContentBlock }) {
   switch (block.type) {
     case "heading":
       return (
-        <h2 className="tracking-display text-[24px] font-medium leading-tight text-white desk:text-[48px]">
+        // mt-4 adds extra breathing room above headings on top of the
+        // content column's own gap-5, so they stand apart from the
+        // paragraph before them instead of sitting at the same spacing.
+        <h2 className="tracking-display mt-4 text-[24px] font-medium leading-tight text-white desk:text-[48px]">
           {block.text}
         </h2>
       );
     case "subheading":
       return (
-        <h3 className="tracking-display text-[20px] font-medium leading-tight text-white desk:text-[28px]">
+        <h3 className="tracking-display mt-4 text-[20px] font-medium leading-tight text-white desk:text-[28px]">
           {block.text}
         </h3>
       );
@@ -73,7 +92,11 @@ function ContentBlock({ block }: { block: BlogContentBlock }) {
         </ul>
       );
     case "paragraph":
-      return <p className="text-[16px] leading-[1.6] text-body-grey">{block.text}</p>;
+      return (
+        <p className="text-[16px] leading-[1.6] text-body-grey">
+          {renderHighlightedText(block.text)}
+        </p>
+      );
     case "table":
       return (
         <div className="w-full overflow-x-auto">

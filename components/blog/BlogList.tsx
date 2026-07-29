@@ -23,10 +23,10 @@ export function BlogList() {
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group fade-up flex w-full flex-col py-4 desk:h-56.25 desk:flex-row"
+            className="group fade-up flex w-full flex-col py-4 desk:h-65 desk:flex-row"
             style={{ animationDelay: `${Math.min(200 + index * 120, 800)}ms` }}
           >
-            <div className="relative h-56.25 w-full desk:h-full desk:w-[45%]">
+            <div className="relative h-65 w-full desk:h-full desk:w-[45%]">
               <Image
                 src={post.image}
                 alt=""
@@ -41,7 +41,7 @@ export function BlogList() {
                   {post.categories.map((item) => (
                     <div key={item} className="flex items-end">
                       <span className="h-1 w-1.5 shrink-0 bg-[#0658FC]" />
-                      <span className="bg-label-grey/20 px-0.5 py-px text-[12px] font-medium uppercase text-white">
+                      <span className="bg-label-grey/20 px-1 py-px text-[12px] font-medium uppercase text-white">
                         {item}
                       </span>
                     </div>

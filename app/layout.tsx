@@ -55,6 +55,22 @@ export default function RootLayout({
         src="https://datafa.st/js/script.js"
         strategy="beforeInteractive"
       />
+      {/* Google Analytics (gtag.js) — afterInteractive is Next.js's own
+          documented pattern for GA: it doesn't need to block the initial
+          render like the head-scoped script above does. */}
+      <Script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-M4JV6HF683"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-M4JV6HF683');
+        `}
+      </Script>
       <body className="min-h-full bg-base font-display text-white">
         <DisableImageDrag />
         <Navbar />
