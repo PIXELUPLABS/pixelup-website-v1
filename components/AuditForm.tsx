@@ -63,7 +63,11 @@ export function AuditForm() {
   return (
     <section
       id="audit"
-      className="flex w-full flex-col border-t-[0.5px] border-hairline py-7 desk:h-114 desk:flex-row"
+      // scroll-mt-16 matches the sticky Navbar's height (h-16) — without it,
+      // #audit's anchor scroll lands the section flush at the true viewport
+      // top, and the fixed navbar then covers that same 64px, hiding the top
+      // of the form.
+      className="flex w-full scroll-mt-16 flex-col border-t-[0.5px] border-hairline py-7 desk:h-114 desk:flex-row"
     >
       <div className="relative h-90 w-full desk:h-full desk:w-3/5">
         <Image src={auditFormBg} alt="" fill className="object-cover" />
