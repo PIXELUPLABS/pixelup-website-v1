@@ -28,18 +28,15 @@ const baseButton = `${ctaButtonBase} flex-1 text-white`;
 
 export function CtaButtons({
   telegramSolidBlack = false,
-  stacked = false,
 }: {
   /** Footer's Telegram button stays solid black, no hover lighten. */
   telegramSolidBlack?: boolean;
-  /** Force vertical stacking, full width, at every breakpoint — for narrow
-      contexts like the mobile menu panel, instead of the default row-on-
-      mobile/column-on-desktop split. */
-  stacked?: boolean;
 }) {
   return (
-    // Mobile: two-up side by side. Desktop: stacked, full width.
-    <div className={`flex gap-2.5 ${stacked ? "flex-col" : "flex-row desk:flex-col"}`}>
+    // Stacked and full width at every breakpoint. Side by side on mobile forced
+    // "START YOUR CONVERSATION" onto two lines, leaving the two buttons
+    // mismatched in height.
+    <div className="flex flex-col gap-2.5">
       <a
         href={links.telegram}
         target="_blank"

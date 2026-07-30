@@ -54,7 +54,7 @@ export function MobileMenu() {
             )
           )}
           <div aria-hidden="true" className="border-t border-white/10" />
-          <CtaButtons stacked />
+          <CtaButtons />
         </div>
       )}
     </div>

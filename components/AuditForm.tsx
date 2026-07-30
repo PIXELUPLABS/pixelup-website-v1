@@ -18,10 +18,13 @@ export function AuditForm() {
       // of the section.
       className="flex w-full scroll-mt-16 flex-col border-t-[0.5px] border-hairline py-7 desk:h-114"
     >
-      <div className="relative h-90 w-full desk:h-full">
+      {/* min-h rather than a fixed h on mobile: the copy block below is spaced
+          off the byline with an explicit 64px gap instead of being pushed apart
+          by justify-between, so the card has to be free to grow past 360px. */}
+      <div className="relative min-h-90 w-full desk:h-full">
         <Image src={auditFormBg} alt="" fill className="object-cover" />
         <Image src={auditFormPattern} alt="" fill className="object-cover opacity-10" />
-        <div className="relative flex h-full flex-col justify-between p-6">
+        <div className="relative flex h-full flex-col gap-16 p-6 desk:justify-between desk:gap-0">
           <div className="flex flex-col">
             <div className="relative h-12 w-12 overflow-hidden rounded-full bg-white">
               <Image src={dakshImg} alt="Daksh Aswal" fill className="object-cover" />
@@ -38,7 +41,13 @@ export function AuditForm() {
                 — the same opacity hierarchy used for headings site-wide. */}
             <div className="flex flex-col gap-3">
               <p className="tracking-display font-display text-[28px] font-medium leading-[120%] text-white desk:text-[32px]">
-                <span className="text-white/60">Your product is enterprise-ready.</span>
+                {/* inline-block keeps "enterprise-ready." unbreakable, so the
+                    narrow mobile column wraps it whole onto the second line
+                    rather than splitting it at the hyphen. Desktop is wide
+                    enough to fit the line either way. */}
+                <span className="text-white/60">
+                  Your product is <span className="inline-block">enterprise-ready.</span>
+                </span>
                 <br />
                 Does your site say so?
               </p>
