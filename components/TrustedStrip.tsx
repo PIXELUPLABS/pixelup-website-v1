@@ -13,7 +13,7 @@ const extraLogos = [
 export function TrustedStrip() {
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-[12px] text-label-grey">Trusted by top YC companies</p>
+      <p className="text-[12px] text-label-grey">Trusted by market leaders</p>
       {/* Horizontal marquee — the repeat block (strip + extra logos) is
           duplicated for a seamless loop. */}
       <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
