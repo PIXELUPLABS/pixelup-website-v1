@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
+    "@datafast/ai-crawl": "^1.0.9",
     "@supabase/supabase-js": "^2.110.9",
     "framer-motion": "^12.42.2",
     "next": "16.2.9",
