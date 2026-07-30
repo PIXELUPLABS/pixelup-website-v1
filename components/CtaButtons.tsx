@@ -34,7 +34,7 @@ export function CtaButtons({
 }) {
   return (
     // Stacked and full width at every breakpoint. Side by side on mobile forced
-    // "START YOUR CONVERSATION" onto two lines, leaving the two buttons
+    // "START A CONVERSATION" onto two lines, leaving the two buttons
     // mismatched in height.
     <div className="flex flex-col gap-2.5">
       <a
@@ -54,7 +54,7 @@ export function CtaButtons({
         rel="noopener noreferrer"
         className={`${baseButton} bg-accent hover:brightness-110`}
       >
-        <span>START YOUR CONVERSATION</span>
+        <span>START A CONVERSATION</span>
         <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
       </a>
     </div>

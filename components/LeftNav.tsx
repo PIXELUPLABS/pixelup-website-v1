@@ -1,3 +1,4 @@
+import { LeadCallout } from "./LeadCallout";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { TrustedStrip } from "./TrustedStrip";
@@ -80,8 +81,11 @@ export function LeftNav({
         </p>
       </div>
 
-      {/* Bottom group: trusted strip + CTAs (pinned to bottom on desktop) */}
+      {/* Bottom group: callout + trusted strip + CTAs (pinned to bottom on desktop) */}
       <div className="flex flex-col gap-5 desk:mt-auto">
+        <div className="fade-up [animation-delay:250ms]">
+          <LeadCallout />
+        </div>
         <div className="fade-up [animation-delay:300ms]">
           <TrustedStrip />
         </div>
