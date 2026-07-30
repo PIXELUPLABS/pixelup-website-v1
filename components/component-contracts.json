@@ -63,7 +63,7 @@
     "tokens_used": ["color.neutral.hairline (border-r)", "breakpoint.desk"],
     "when_to_use": "Case study pages only (components/case-study/CaseStudyPage.tsx), one per page, paired with a <main> content column as a sibling (not nested).",
     "do_not": [
-      "Don't give this a width of its own — it's desk:w-[425px], the same flat value as LeftNav and the blog asides. It used to carry a calc(26%-10.4px) adjustment to match LeftNav's percentage width on a page without the homepage's p-5 shell; a fixed px width makes that compensation unnecessary, so keep all four sidebars on the identical value."
+      "Don't give this a width of its own — it's desk:w-[405px], the same flat value as LeftNav and the blog asides. It used to carry a calc(26%-10.4px) adjustment to match LeftNav's percentage width on a page without the homepage's p-5 shell; a fixed px width makes that compensation unnecessary, so keep all four sidebars on the identical value."
     ]
   },
 

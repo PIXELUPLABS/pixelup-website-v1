@@ -14,11 +14,11 @@ import { ClientInfo } from "./ClientInfo";
  */
 export function CaseSidebar({ study }: { study: CaseStudy }) {
   return (
-    // 425px, same as LeftNav and the blog asides. This used to be
+    // 405px, same as LeftNav and the blog asides. This used to be
     // calc(26% - 10.4px) — the viewport-relative math that made a percentage
     // width resolve identically on a page without the homepage's 40px side
     // padding. A fixed px width needs no such compensation.
-    <aside className="desk:w-[425px] desk:shrink-0 desk:border-r-[0.5px] desk:border-hairline">
+    <aside className="desk:w-[405px] desk:shrink-0 desk:border-r-[0.5px] desk:border-hairline">
       {/* top-16/h-[calc(100vh-4rem)] account for the sticky Navbar's height
           (h-16, 4rem) above this page, so the sidebar sits flush below it
           instead of sticking underneath it. */}

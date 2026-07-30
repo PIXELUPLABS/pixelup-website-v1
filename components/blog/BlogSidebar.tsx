@@ -18,7 +18,7 @@ const geist = Geist({ subsets: ["latin"], weight: ["500"] });
  */
 export function BlogSidebar() {
   return (
-    <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:h-[calc(100vh-6.5rem)] desk:w-[425px] desk:shrink-0 desk:gap-0 desk:self-start">
+    <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:h-[calc(100vh-6.5rem)] desk:w-[405px] desk:shrink-0 desk:gap-0 desk:self-start">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           <h1
