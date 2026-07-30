@@ -15,9 +15,16 @@ function PaperPlaneIcon() {
   );
 }
 
-const baseButton =
-  "flex flex-1 items-center justify-between rounded-[2px] px-3 py-[11.5px] " +
-  "font-button text-[12px] font-semibold tracking-[-0.12px] text-white transition-colors";
+// Shared button geometry/type, deliberately free of any color or flex-sizing
+// class. AuditCta reuses this for the white variant — appending `text-black` to
+// a base that already carries `text-white` would NOT reliably win (equal
+// specificity, so stylesheet order decides, not class-attribute order), so the
+// colorway is always the caller's job.
+export const ctaButtonBase =
+  "flex items-center justify-between rounded-[2px] px-3 py-[11.5px] " +
+  "font-button text-[12px] font-semibold tracking-[-0.12px] transition-colors";
+
+const baseButton = `${ctaButtonBase} flex-1 text-white`;
 
 export function CtaButtons({
   telegramSolidBlack = false,
@@ -50,7 +57,7 @@ export function CtaButtons({
         rel="noopener noreferrer"
         className={`${baseButton} bg-accent hover:brightness-110`}
       >
-        <span>START YOUR PROJECT</span>
+        <span>START YOUR CONVERSATION</span>
         <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
       </a>
     </div>

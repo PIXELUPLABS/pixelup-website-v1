@@ -104,20 +104,20 @@
   "CtaButtons": {
     "file": "components/CtaButtons.tsx",
     "category": "interactive",
-    "description": "The paired 'Chat on Telegram' + 'Start Your Project' buttons.",
+    "description": "The paired 'Chat on Telegram' + 'Start Your Conversation' buttons.",
     "variants": {
       "telegramSolidBlack": "boolean prop. false (default) = translucent color.neutral.button-dark with a hover lighten (used in LeftNav/CaseSidebar). true = solid black, no hover lighten (used in Footer)."
     },
     "states": {
       "telegram:default": "bg-button-dark",
       "telegram:hover": "bg-white/12 (or stays black if telegramSolidBlack)",
-      "start-project:default": "bg-accent",
-      "start-project:hover": "brightness-110"
+      "start-conversation:default": "bg-accent",
+      "start-conversation:hover": "brightness-110"
     },
     "tokens_used": ["color.brand.accent", "color.neutral.button-dark", "radius.sm"],
     "when_to_use": "Anywhere the site's two primary CTAs need to appear together (currently: LeftNav, CaseSidebar, Footer).",
     "do_not": [
-      "Don't change 'Start Your Project' back into an internal <Link> to /call — it deliberately opens links.discoveryCall (an external Cal.com URL) in a new tab now.",
+      "Don't change 'Start Your Conversation' back into an internal <Link> to /call — it deliberately opens links.discoveryCall (an external Cal.com URL) in a new tab now.",
       "Don't add a third button here — it's built for exactly two, laid out with flex-1 each."
     ]
   },
