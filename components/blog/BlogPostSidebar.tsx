@@ -1,6 +1,7 @@
 import { estimateReadTime, formatBlogDate, type BlogPost } from "@/lib/blog";
 import { BackButton } from "../BackButton";
 import { CtaButtons } from "../CtaButtons";
+import { LeadCallout } from "../LeadCallout";
 import { TrustedStrip } from "../TrustedStrip";
 
 function MetaRow({ label, value }: { label: string; value: string }) {
@@ -27,7 +28,7 @@ export function BlogPostSidebar({ post }: { post: BlogPost }) {
   ];
 
   return (
-    <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:flex desk:h-[calc(100vh-6.5rem)] desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0 desk:self-start">
+    <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:flex desk:h-[calc(100vh-6.5rem)] desk:w-[425px] desk:shrink-0 desk:gap-0 desk:self-start">
       {/* Long titles/content push this past one viewport — min-h-0 lets the
           flex-1 box shrink below its content size so overflow-y-auto can
           actually kick in, instead of the box growing and pushing the CTA
@@ -45,6 +46,7 @@ export function BlogPostSidebar({ post }: { post: BlogPost }) {
           </div>
         </div>
         <div className="fade-up hidden flex-col gap-5 [animation-delay:200ms] desk:flex">
+          <LeadCallout />
           <TrustedStrip />
           <CtaButtons />
         </div>

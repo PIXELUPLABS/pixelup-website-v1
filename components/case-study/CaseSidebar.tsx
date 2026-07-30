@@ -1,6 +1,7 @@
 import type { CaseStudy } from "@/lib/case-studies";
 import { BackButton } from "../BackButton";
 import { CtaButtons } from "../CtaButtons";
+import { LeadCallout } from "../LeadCallout";
 import { ClientInfo } from "./ClientInfo";
 
 /**
@@ -13,9 +14,11 @@ import { ClientInfo } from "./ClientInfo";
  */
 export function CaseSidebar({ study }: { study: CaseStudy }) {
   return (
-    // Width matches the homepage LeftNav exactly: that nav is 26% of a page with
-    // 40px side padding, i.e. 0.26·(100vw−40px) = 26% − 10.4px, same min/max clamp.
-    <aside className="desk:w-[calc(26%-10.4px)] desk:min-w-[340px] desk:max-w-[460px] desk:shrink-0 desk:border-r-[0.5px] desk:border-hairline">
+    // 425px, same as LeftNav and the blog asides. This used to be
+    // calc(26% - 10.4px) — the viewport-relative math that made a percentage
+    // width resolve identically on a page without the homepage's 40px side
+    // padding. A fixed px width needs no such compensation.
+    <aside className="desk:w-[425px] desk:shrink-0 desk:border-r-[0.5px] desk:border-hairline">
       {/* top-16/h-[calc(100vh-4rem)] account for the sticky Navbar's height
           (h-16, 4rem) above this page, so the sidebar sits flush below it
           instead of sticking underneath it. */}
@@ -38,7 +41,11 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
               ))}
             </div>
           </div>
-          <div className="fade-up px-5 [animation-delay:200ms]">
+          {/* No TrustedStrip on this page, so the callout sits straight on top
+              of the CTAs. gap-5 matches the callout/strip/CTA rhythm the other
+              sidebars use. */}
+          <div className="fade-up flex flex-col gap-5 px-5 [animation-delay:200ms]">
+            <LeadCallout />
             <CtaButtons />
           </div>
         </div>
