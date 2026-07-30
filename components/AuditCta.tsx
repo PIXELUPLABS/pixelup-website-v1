@@ -54,8 +54,6 @@ export function AuditCta() {
         data-tally-open={TALLY_FORM_ID}
         data-tally-layout="modal"
         data-tally-width="600"
-        data-tally-emoji-text="👋"
-        data-tally-emoji-animation="none"
         data-tally-form-events-forwarding="1"
         className={`${ctaButtonBase} w-full shrink-0 gap-8 bg-white text-black hover:bg-white/90 desk:w-auto`}
       >
