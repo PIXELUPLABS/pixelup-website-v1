@@ -126,19 +126,18 @@
     "file": "components/LeadCallout.tsx",
     "category": "content",
     "description": "Accent-blue objection callout with a 3px left rule, sitting directly above TrustedStrip in the hero sidebar.",
-    "variants": ["none — responsive only: 12px type in 10px padding on mobile, 14px in 12px from the desk breakpoint up"],
+    "variants": ["none — responsive only: 12px type throughout, in 10px of padding on mobile and 12px from the desk breakpoint up"],
     "states": ["static — the fade-up entrance comes from the LeftNav wrapper, not this component"],
     "tokens_used": [
       "color.brand.accent (fill at 20%, left rule at full)",
       "color.neutral.white",
       "typography.font.display",
       "typography.size.12",
-      "typography.size.14",
       "breakpoint.desk"
     ],
     "when_to_use": "Inside LeftNav only, currently. It raises the objection the trusted-by logos answer, so it belongs immediately above TrustedStrip rather than floating on its own.",
     "do_not": [
-      "Don't pin it to a fixed 41px height — that height is what p-3 plus a single 14px/120% line already produce, and hardcoding it clips the second line at the widths where the copy wraps.",
+      "Don't pin it to a fixed height — padding plus a single 12px/120% line already produces it, and hardcoding it clips the second line at the widths where the copy wraps.",
       "Don't pass the copy in from the call site — it's self-contained like TrustedStrip, so there's exactly one place to edit the line."
     ]
   },
