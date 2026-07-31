@@ -1526,6 +1526,396 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: "agency-vs-freelancer-vs-design-subscription-vs-in-house",
+    title:
+      "Agency vs Freelancer vs Design Subscription vs In-House (2026): $27 an Hour to $240k a Year",
+    description:
+      "Real 2026 prices for every design option, from a $27-an-hour freelancer to a $240k in-house hire, and which one to pick.",
+    categories: ["Design", "Branding"],
+    image: "/media/blogs/blog-img-4.png",
+    author: "Daksh, Founder at PIXELUP LABS",
+    publishedDate: "2026-07-27",
+    updatedDate: "2026-07-27",
+    content: [
+      {
+        type: "paragraph",
+        text: "Pre-PMF, use a template or a freelancer. Funded, going upmarket, on a deadline: an agency sprint at $25–40k. High-volume production: a subscription at $549 to $5,000 a month. Ongoing senior design without a hire: an agency retainer from $6,000 a month. Shipping product weekly: hire in-house at $180–240k. Prices span $27 an hour to $240,000 a year, and the deciding question is not cost, it is who owns the argument.",
+      },
+      { type: "heading", text: "The 30-second decision table" },
+      {
+        type: "table",
+        headers: ["Your situation", "Right option", "What it costs"],
+        rows: [
+          ["Pre-PMF, positioning still moving", "Template, or a freelancer", "$0–8k"],
+          [
+            "Strategy locked, scope defined, need execution",
+            "Freelancer",
+            "$2–8k per project",
+          ],
+          ["Funded, going upmarket, hard deadline", "Agency sprint", "$25–40k"],
+          [
+            "Category claim at Series B, committee involved",
+            "Prestige agency",
+            "$80–250k",
+          ],
+          ["High volume of predictable assets", "Subscription", "$549–$5,000/mo"],
+          ["High volume plus video and motion", "Enterprise subscription", "$10,000+/mo"],
+          [
+            "Ongoing senior design, not ready for headcount",
+            "Agency retainer",
+            "From $6,000/mo",
+          ],
+          [
+            "Post-launch, own the system, ship product weekly",
+            "In-house hire",
+            "$180–240k/yr",
+          ],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "Two of those rows are ours: the sprint and the retainer. We will mark where that biases us.",
+      },
+      { type: "heading", text: "Who owns the argument" },
+      {
+        type: "paragraph",
+        text: "Here is the thing nobody says in these comparisons: most of these options give you production and quietly assume you arrive with the argument already made.",
+      },
+      {
+        type: "paragraph",
+        text: "A freelancer builds what you brief. A subscription executes what you queue. An in-house designer inherits whatever positioning already exists. All three are excellent at making things. None of them is responsible for deciding what your brand should say.",
+      },
+      {
+        type: "paragraph",
+        text: "That is fine when you know. It is expensive when you don't, because you will pay to produce the wrong thing beautifully, then pay again.",
+      },
+      {
+        type: "paragraph",
+        text: "So run the cost comparison, but answer this first: is your positioning settled? If yes, buy the cheapest competent production you can find, and at $27 an hour that floor has never been lower. If no, that is the actual purchase, and it narrows your options considerably.",
+      },
+      { type: "heading", text: "Real costs side by side" },
+      {
+        type: "table",
+        headers: ["", "What it costs", "Speed", "Strategy included?", "Biggest risk"],
+        rows: [
+          [
+            "Freelancer",
+            "$27/hr Upwork median, $45–85/hr mid-market, $80–130/hr+ senior. $2–8k per project",
+            "2–4 weeks",
+            "No",
+            "Single-threaded. Ghosting. Nobody owns the argument.",
+          ],
+          [
+            "Subscription",
+            "$549/mo entry, $1,299/mo dedicated designer, $4,995/mo unlimited, $10,000+/mo enterprise",
+            "Ongoing, queued",
+            "No",
+            "Queue-based output. You become the creative director.",
+          ],
+          [
+            "Agency sprint",
+            "$25–40k boutique, $80–250k prestige",
+            "2–6 weeks boutique, 3–6 months prestige",
+            "Yes",
+            "Cost. A bad fit is expensive and slow to unwind.",
+          ],
+          [
+            "Agency retainer",
+            "From $6,000/mo, market $5,000–15,000/mo",
+            "Continuous",
+            "Yes",
+            "You are renting a slice of a team, not all of it.",
+          ],
+          [
+            "In-house",
+            "$146k average base, $180–240k true first-year cost",
+            "3–6 months to productive",
+            "Inherits it",
+            "Ramp time. One person cannot span brand, product, and web.",
+          ],
+        ],
+      },
+      { type: "heading", text: "Freelancer" },
+      {
+        type: "paragraph",
+        text: "**What it costs.** Upwork's median rate for UX design is $27 an hour, and rates there cluster around $25 because you are competing in a race to the bottom. Longer commitments soften it: a six-month contract at 20 hours a week typically runs $50 to $90 an hour. Outside Upwork, the broader freelance market runs $25 to $150 an hour, with mid-level remote designers at $45 to $85 and an average near $65. Designers who can argue their decisions in business terms command $80 to $130 and up.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it genuinely wins.** Locked strategy, defined scope, and a real need for hands. At $2,000 to $8,000 a good freelancer is the best value in this entire market, and we say that as an agency. If you have the Figma, the copy, and the decisions made, paying us is paying for an argument you have already had.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it breaks.** Single-threaded by definition, so illness, a better offer, or a bigger client stalls you. Nobody owns the strategy, so a vague brief produces a confident wrong answer. And the good ones are managing several clients at once, which is fine until your timeline is the one that slips.",
+      },
+      {
+        type: "paragraph",
+        text: "**Red flags.** A portfolio with no named clients. Rates at the very bottom of the Upwork band for work you described as important. No questions about your buyer. Unwillingness to disagree with your brief.",
+      },
+      { type: "heading", text: "Design subscription" },
+      {
+        type: "paragraph",
+        text: "**What it costs.** The market spans $549 a month to over $10,000. ManyPixels starts at $549 for its Advanced plan, with a dedicated designer from $1,299. Designjoy is a single plan at $4,995, founded by Brett Williams in 2017 and still run entirely by him, which means one consistent senior designer rather than a rotating pool. Superside advertises from around $5,000, but client reports put real engagements at $10,000 a month scaling past $100,000, on twelve-month commitments with a $120,000 annual minimum.",
+      },
+      {
+        type: "paragraph",
+        text: "Note the model difference, because it decides value: Designjoy is unlimited requests at a flat fee, Superside is capacity-based hours. Unpredictable high volume favors the flat fee. Multi-discipline work spanning video and motion favors capacity.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it genuinely wins.** Steady, predictable, high-volume production. Ad variants, landing pages, deck templates, social assets, event collateral. If your bottleneck is throughput and you already know what good looks like, this is the most efficient instrument on the list, and nothing else here competes on cost per asset.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it breaks.** There is no positioning in a queue. You are the creative director, and the quality of the output is capped by the quality of your briefs. Turnaround is per-request, so a coherent brand system spanning ten surfaces is a bad fit for a model built around discrete tickets.",
+      },
+      {
+        type: "paragraph",
+        text: "**Red flags.** \"Unlimited\" without a stated daily or weekly output rate. Rotating anonymous designers with no continuity. Twelve-month lock-ins at the entry tier. No named senior on your account.",
+      },
+      { type: "heading", text: "Agency sprint" },
+      {
+        type: "paragraph",
+        text: "**Our bias, stated:** this is our primary model.",
+      },
+      {
+        type: "paragraph",
+        text: "**What it costs.** Boutique sprints run $25,000 to $40,000 over two to six weeks. Ours are $25,000 to $30,000 for a brand sprint and $25,000 to $40,000 with the website, in two to five weeks. Prestige studios run $80,000 to $250,000 over three to six months. There is a longer breakdown by stage in what a startup rebrand and website cost.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it genuinely wins.** When the positioning is not settled and there is a deadline. That is the narrow case, and it is the only one where paying sprint rates is clearly rational: you are buying an opinion plus the execution of it, compressed, from people who have run the motion before. Also when the work spans brand, site, and product at once, because that is exactly where handoffs between separate vendors lose the story.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it breaks.** It is the most expensive option per unit of output by a wide margin, and it is the wrong instrument for anything ongoing. A sprint also ends, which means without a retainer or an in-house hire behind it the system starts decaying in about eight months. And a bad fit is slow and expensive to unwind, unlike a freelancer you simply stop booking.",
+      },
+      {
+        type: "paragraph",
+        text: "**Red flags.** No published price. No discovery phase. No opinion on your messaging. Unlimited revisions, which means no point of view. A twelve-week quote for a fifteen-page marketing site.",
+      },
+      { type: "heading", text: "Agency retainer" },
+      {
+        type: "paragraph",
+        text: "**Our bias, stated:** we sell this, so weigh the section accordingly. The pricing below is public and checkable.",
+      },
+      {
+        type: "paragraph",
+        text: "**What it costs.** Market retainers run $5,000 to $15,000 a month at mid-market and $15,000 to $50,000 at enterprise. Named: Focus Lab starts at $5,000 for design execution and $10,000 for a dedicated brand team, Parallel's growth tier is $6,000 to $15,000, and Superside effectively starts at $10,000. Ours starts at $6,000 a month, and it is the same team that ships our sprints rather than a separate delivery pool.",
+      },
+      {
+        type: "paragraph",
+        text: "That puts an agency retainer in the middle of the market rather than at the bottom of it. Designjoy at $4,995 and ManyPixels at $549 are cheaper than we are, and both are subscriptions, so that comparison is throughput against judgment rather than like for like. Against actual retainers we sit at or near the floor: Focus Lab's execution tier is $5,000 and its dedicated brand team is $10,000, Parallel's growth tier starts at $6,000, Superside effectively starts at $10,000. And at $72,000 a year, a retainer is roughly a third of what a first design hire really costs.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it genuinely wins.** Three situations. You shipped a brand and need someone senior keeping it coherent without adding headcount yet. You need ongoing design work where each request requires judgment rather than execution, so a queue would produce confident wrong answers. Or you are between \"we have no designer\" and \"we can justify a $200k hire,\" which is where most Series A companies actually live for four to six quarters.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it breaks.** It is genuinely bad at volume. If you need fifty ad variants a month, a retainer is the most expensive way to buy that and a subscription is the correct instrument. You are also renting a slice of a team, so you do not get someone in your standups every morning; if design is on your critical path daily, you want a hire. And retainers quietly become expensive when nobody is scoping them: $6,000 a month for work you could have briefed to a freelancer twice a year is waste.",
+      },
+      {
+        type: "paragraph",
+        text: "**Red flags.** No stated scope or output expectation. No named senior. A retainer proposed when what you described was one project. Any agency that will not tell you what happens to unused capacity.",
+      },
+      { type: "heading", text: "In-house" },
+      {
+        type: "paragraph",
+        text: "**What it costs.** The average US product designer salary is $146,087, with other sources between $119,000 and $144,000, and a senior product designer around $145,000 before benefits, equity, and equipment. Brand designers run $86,650 to $108,211.",
+      },
+      {
+        type: "paragraph",
+        text: "But base salary is the smaller half of the story. The true first-year cost of a design hire is 1.4x to 2.4x base, which is roughly $180,000 to $240,000 on a $120,000 hire, once you load a 30 to 40% benefits burden, recruiting costs, and the quarter or more they spend ramping before shipping anything you would put in front of a buyer.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it genuinely wins.** After the brand exists. An in-house designer is the best possible steward of a system: they hold context, they are in the standups, they ship weekly with the product team, and they stop brand entropy before it starts. For product velocity there is no substitute, and no retainer or subscription will ever match someone who is in the room.",
+      },
+      {
+        type: "paragraph",
+        text: "**Where it breaks.** Ramp time is the killer when you have a deadline. If your Series B narrative freezes in eight weeks, a hire who becomes productive in month four does not solve your problem. And one person cannot credibly span brand strategy, product UI, and web production; they will be excellent at one, competent at the second, and quietly drowning in the third.",
+      },
+      {
+        type: "paragraph",
+        text: "**Red flags in your own thinking.** Hiring a designer to figure out your positioning. Hiring one person and expecting three specialties. Hiring before there is a system for them to steward, which makes their first year an unsupported rebrand.",
+      },
+      { type: "heading", text: "Agency retainer vs design subscription" },
+      {
+        type: "paragraph",
+        text: "These two get compared constantly and they are not the same product.",
+      },
+      {
+        type: "table",
+        headers: ["", "Design subscription", "Agency retainer"],
+        rows: [
+          ["What you are buying", "Throughput", "Judgment"],
+          ["Cost", "$549–$10,000+/mo", "$5,000–15,000/mo market, ours from $6,000"],
+          ["Strategy", "No", "Yes"],
+          ["Model", "Request queue, flat fee or capped hours", "Scoped ongoing engagement"],
+          [
+            "Continuity",
+            "Varies. Designjoy is one senior designer, most are a pool",
+            "The team that built the thing",
+          ],
+          ["Best at", "Fifty variants of a known asset", "Ten decisions that each need an opinion"],
+          ["Worst at", "Anything requiring a point of view", "High-volume commodity production"],
+        ],
+      },
+      {
+        type: "paragraph",
+        text: "The honest test: count the decisions. If your next quarter of design work is mostly production against decided direction, a subscription is cheaper and faster, and you should buy one. If it is mostly judgment calls, a queue will hand you confident wrong answers and a retainer costs less than the rework.",
+      },
+      { type: "heading", text: "What AI did to design hiring" },
+      {
+        type: "paragraph",
+        text: "The freelance market split in half, and the numbers show it clearly.",
+      },
+      {
+        type: "paragraph",
+        text: "At the bottom, AI collapsed the floor. Producing a competent-looking page is now nearly free, which is why Upwork's median UX rate sits at $27 an hour and the entry tier is a race to the bottom. If what you are buying is execution of a decided idea, you have never had more leverage as a buyer.",
+      },
+      {
+        type: "paragraph",
+        text: "At the top, the opposite happened. Upwork's February 2026 In-Demand Skills report found freelancers working on AI-related projects earn 44% more per hour than those on non-AI work, and designers who use AI to build sites earn roughly 21% more per year than those who don't.",
+      },
+      {
+        type: "paragraph",
+        text: "So the same tool that made production cheap made judgment expensive. The scarce thing is no longer someone who can make a page. It is someone who knows which page to make, and can tell you that your positioning is the problem rather than your hero section.",
+      },
+      {
+        type: "paragraph",
+        text: "That is also why \"we built it with Claude Code over a weekend\" is now a category-wide problem rather than a clever shortcut. When everyone can produce the same competent page from the same prompts, the page stops differentiating and starts signaling that you are one of the two hundred companies that shipped it that quarter. There is more on that failure mode in our list of design agencies for AI startups.",
+      },
+      { type: "heading", text: "One founder who bought three of these four" },
+      {
+        type: "paragraph",
+        text: "In July 2026, David Walsh, a three-time founder and the CEO of Limelight, posted publicly about hiring us. We are about to quote a client complimenting us on our own page, so discount it accordingly. The reason it belongs here is not the compliment, it is that he has personally bought three of the four models on this list and said what he found:",
+      },
+      {
+        type: "paragraph",
+        text: "\"over the last 12 years, I've worked with: Big-name website agencies. 'Top-rated' Upwork freelancers. Designers with huge followings. And none came close.\"",
+      },
+      {
+        type: "paragraph",
+        text: "He found us through a cold email whose subject line was \"Most founders spend $50k on a sh*tty website that does f*ck all,\" which we will not defend as elegant, and then hired a four-person team: Daksh Aswal, Dhruv Gupta, Rinkesh Bist, and Krish Savani. He named all four in the post, which almost nobody does. ([Read it on LinkedIn](https://www.linkedin.com/posts/david-walsh-limelight_12-weeks-ago-i-hired-these-four-lads-from-share-7479919094905966592-_0LN/))",
+      },
+      {
+        type: "paragraph",
+        text: "What survives the discount is the shape of his comparison. Twelve years of buying history across the big agency, the top-rated freelancer, and the designer with the audience, and the deciding variable turned out to be none of the things those three categories sort on. Not budget tier, not platform, not follower count.",
+      },
+      {
+        type: "paragraph",
+        text: "His own conclusion was about geography, and it is the reason he wrote the post rather than just paying the invoice: \"There is talent everywhere. Don't let small minded thinking stop you from finding it.\"",
+      },
+      { type: "heading", text: "When you should not hire us" },
+      {
+        type: "paragraph",
+        text: "We lose all of these, and we should.",
+      },
+      {
+        type: "paragraph",
+        text: "**You are pre-PMF.** Use a template. A brand amplifies a position, and if the position is still moving you are paying to personify something that will change.",
+      },
+      {
+        type: "paragraph",
+        text: "**Your strategy is locked and the Figma is done.** Hire a freelancer at $2,000 to $8,000. We will spend your first week arguing with decisions you have already made, and you will resent paying for it.",
+      },
+      {
+        type: "paragraph",
+        text: "**You need high-volume commodity production.** Fifty ad variants a month is a subscription job. Our retainer is priced for judgment, not throughput, and buying it for volume is the most expensive way to get volume.",
+      },
+      {
+        type: "paragraph",
+        text: "**Your rebrand needs a committee.** We work founder-to-founder. Six stakeholders needing sign-off means hiring a Character- or Landor-tier firm at three to five times our number, whose process is built for it.",
+      },
+      {
+        type: "paragraph",
+        text: "**Your problem is pipeline volume.** Hire a growth agency. Design makes every impression land harder; it does not create impressions.",
+      },
+      {
+        type: "paragraph",
+        text: "**Design is on your critical path every day.** If someone needs to be in standup every morning making calls with the product team, hire in-house. A retainer is a slice of a team, and no slice beats a person in the room.",
+      },
+      { type: "heading", text: "FAQ" },
+      { type: "subheading", text: "Agency vs freelancer: which should a startup pick?" },
+      {
+        type: "paragraph",
+        text: "Freelancer if your strategy is locked and you need execution, at $2,000 to $8,000. Agency if the positioning is unsettled, there is a deadline, or the work spans brand and site and product at once, at $25,000 to $40,000 for a boutique sprint. The deciding question is whether you are buying hands or an opinion.",
+      },
+      { type: "subheading", text: "Is a design subscription worth it?" },
+      {
+        type: "paragraph",
+        text: "Yes, for steady high-volume production: ad variants, landing pages, deck templates, social assets. At $549 to $4,995 a month it is the cheapest way to buy throughput and nothing else competes on cost per asset. No, if you need positioning or a coherent system across many surfaces, because a request queue cannot produce a brand argument. For ongoing work that needs judgment rather than volume, an agency retainer from $6,000 a month is the closer fit.",
+      },
+      {
+        type: "subheading",
+        text: "What is the difference between an agency retainer and a design subscription?",
+      },
+      {
+        type: "paragraph",
+        text: "A subscription sells throughput through a request queue; a retainer sells judgment through a scoped ongoing engagement. Subscriptions run $549 to $10,000 and up per month, retainers $5,000 to $15,000, ours from $6,000. Count the decisions in your next quarter: mostly production against decided direction means buy a subscription, mostly judgment calls means a retainer costs less than the rework.",
+      },
+      { type: "subheading", text: "Should we hire an in-house designer or use an agency?" },
+      {
+        type: "paragraph",
+        text: "Hire in-house once the brand exists and needs stewarding, and when you ship product weekly. Use an agency when the brand does not exist yet or is wrong and there is a deadline, because a new hire takes three to six months to become productive. The common sequence that works: an agency sprint builds the system, a retainer holds it together, then a hire takes it over once the volume justifies $180,000 to $240,000 a year.",
+      },
+      { type: "subheading", text: "How much does a freelance designer cost in 2026?" },
+      {
+        type: "paragraph",
+        text: "Upwork's median UX rate is $27 an hour, with the entry tier clustered near $25. Mid-level remote designers run $45 to $85, the broader market averages around $65, and senior designers who can argue business impact charge $80 to $130 and up. Project work typically lands between $2,000 and $8,000.",
+      },
+      { type: "subheading", text: "What does a design subscription cost?" },
+      {
+        type: "paragraph",
+        text: "From $549 a month at ManyPixels' Advanced tier, $1,299 for a dedicated designer, $4,995 for Designjoy's unlimited plan, and $10,000 a month and up for Superside, which carries twelve-month commitments and a $120,000 annual minimum. Flat-fee unlimited suits unpredictable volume; capacity-based hours suit multi-discipline work.",
+      },
+      { type: "subheading", text: "What does a design agency retainer cost per month?" },
+      {
+        type: "paragraph",
+        text: "Mid-market retainers run $5,000 to $15,000 a month and enterprise reaches $15,000 to $50,000 and up. Named options: Focus Lab from $5,000 for execution and $10,000 for a brand team, Parallel $6,000 to $15,000, Superside effectively from $10,000. Ours starts at $4,000 with the same team that ships our sprints.",
+      },
+      { type: "subheading", text: "What does an in-house designer really cost?" },
+      {
+        type: "paragraph",
+        text: "Budget 1.4x to 2.4x base salary for the first year, which is roughly $180,000 to $240,000 on a $120,000 hire. The multiplier covers a 30 to 40% benefits load, recruiting, and the quarter or more of ramp before they ship anything buyer-facing. Average US product designer base is around $146,000.",
+      },
+      { type: "subheading", text: "Upwork designer vs design agency: what is the real difference?" },
+      {
+        type: "paragraph",
+        text: "Scope of responsibility. An Upwork designer at $27 an hour executes a brief and is not accountable for whether the brief was right. An agency is accountable for the argument, the execution, and the system that outlives both. If your brief is right, the Upwork designer is dramatically better value.",
+      },
+      { type: "subheading", text: "Can we just use AI instead of hiring anyone?" },
+      {
+        type: "paragraph",
+        text: "For production, increasingly yes, and pre-PMF that is the correct answer. The catch is that everyone else is doing it with the same models, so the output converges. If your buyers are comparing you to three alternatives, a site that looks like theirs is doing no work in that comparison.",
+      },
+      { type: "subheading", text: "Can we combine these options?" },
+      {
+        type: "paragraph",
+        text: "Usually the best answer, and it is what most of our clients end up doing. The pattern that works: a sprint to build the brand and system, a retainer or a subscription for the ongoing work depending on whether it needs judgment or volume, then an in-house hire once there is enough of both to justify the salary. The failure pattern is buying two of them for the same job and letting the handoff eat the story.",
+      },
+      { type: "subheading", text: "The bottom line" },
+      {
+        type: "paragraph",
+        text: "Cost is the wrong first question. Ask whether your positioning is settled. If it is, buy the cheapest competent production available, and at $27 an hour that floor has never been lower. If it isn't, that is the actual purchase, and it rules out three of the five options on this page.",
+      },
+      {
+        type: "paragraph",
+        text: "Then ask what the next quarter actually contains. Volume points at a subscription. Judgment points at a retainer. A deadline and an unsettled story point at a sprint. Daily product work points at a hire.",
+      },
+      {
+        type: "paragraph",
+        text: "Ours are $25,000 to $30,000 for a brand sprint, $25,000 to $40,000 with the website, and retainers from $6,000 a month with the same team, all on our pricing page. If another option above fits your situation better, take it. We would rather lose the call than the reputation.",
+      },
+      {
+        type: "paragraph",
+        text: "Rates verified July 2026 from Upwork's published rate data, provider pricing pages, and salary aggregators. Freelance and subscription pricing moves fast, so re-check before quoting any of it.",
+      },
+    ],
+  },
 ];
 
 /** "2026-07-07" -> "JUL 7, 2026" */

@@ -54,19 +54,36 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
   );
 }
 
-/** Splits paragraph text on `**highlighted**` markers and renders those
-    segments in white instead of the paragraph's default grey — a plain-text
-    convention so future paragraphs in lib/blog.ts can mark emphasis without
-    touching this component again. */
+/** Splits paragraph text on `**highlighted**` and `[text](url)` markers —
+    highlighted segments render in white instead of the paragraph's default
+    grey, and link segments render as an underlined link opening in a new
+    tab. A plain-text convention so future paragraphs in lib/blog.ts can mark
+    emphasis or link out without touching this component again. */
 function renderHighlightedText(text: string) {
-  return text.split(/(\*\*[^*]+\*\*)/g).map((segment, index) => {
-    const match = segment.match(/^\*\*([^*]+)\*\*$/);
-    if (!match) return segment;
-    return (
-      <strong key={index} className="font-medium text-white">
-        {match[1]}
-      </strong>
-    );
+  return text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g).map((segment, index) => {
+    const boldMatch = segment.match(/^\*\*([^*]+)\*\*$/);
+    if (boldMatch) {
+      return (
+        <strong key={index} className="font-medium text-white">
+          {boldMatch[1]}
+        </strong>
+      );
+    }
+    const linkMatch = segment.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+    if (linkMatch) {
+      return (
+        <a
+          key={index}
+          href={linkMatch[2]}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="font-medium text-white underline underline-offset-2 hover:text-white/70"
+        >
+          {linkMatch[1]}
+        </a>
+      );
+    }
+    return segment;
   });
 }
 
