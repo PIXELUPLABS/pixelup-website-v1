@@ -1535,8 +1535,8 @@ export const blogPosts: BlogPost[] = [
     categories: ["Design", "Branding"],
     image: "/media/blogs/blog-img-4.png",
     author: "Daksh, Founder at PIXELUP LABS",
-    publishedDate: "2026-07-27",
-    updatedDate: "2026-07-27",
+    publishedDate: "2026-07-31",
+    updatedDate: "2026-07-31",
     content: [
       {
         type: "paragraph",
