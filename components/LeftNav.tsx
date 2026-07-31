@@ -83,9 +83,9 @@ export function LeftNav({
 
       {/* Bottom group: callout + trusted strip + CTAs (pinned to bottom on desktop) */}
       <div className="flex flex-col gap-5 desk:mt-auto">
-        <div className="fade-up [animation-delay:250ms]">
+        {/* <div className="fade-up [animation-delay:250ms]">
           <LeadCallout />
-        </div>
+        </div> */}
         <div className="fade-up [animation-delay:300ms]">
           <TrustedStrip />
         </div>

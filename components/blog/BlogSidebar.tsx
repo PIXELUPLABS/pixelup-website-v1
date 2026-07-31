@@ -35,9 +35,9 @@ export function BlogSidebar() {
         </div>
       </div>
       <div className="hidden flex-col gap-5 desk:mt-auto desk:flex">
-        <div className="fade-up [animation-delay:350ms]">
+        {/* <div className="fade-up [animation-delay:350ms]">
           <LeadCallout />
-        </div>
+        </div> */}
         <div className="fade-up [animation-delay:400ms]">
           <TrustedStrip />
         </div>

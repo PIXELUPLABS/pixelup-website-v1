@@ -55,9 +55,9 @@ export function AuditCta() {
         data-tally-layout="modal"
         data-tally-width="600"
         data-tally-form-events-forwarding="1"
-        className={`${ctaButtonBase} w-full shrink-0 gap-8 bg-white text-black hover:bg-white/90 desk:w-auto`}
+        className={`${ctaButtonBase} w-full shrink-0 gap-8 font-display bg-white text-black hover:bg-white/90 desk:w-auto`}
       >
-        <span>GET YOUR FREE AUDIT</span>
+        <span className="font-display font-medium">GET YOUR FREE AUDIT</span>
         <ArrowIcon />
       </a>
     </>

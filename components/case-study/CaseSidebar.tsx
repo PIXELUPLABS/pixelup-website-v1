@@ -45,7 +45,7 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
               of the CTAs. gap-5 matches the callout/strip/CTA rhythm the other
               sidebars use. */}
           <div className="fade-up flex flex-col gap-5 px-5 [animation-delay:200ms]">
-            <LeadCallout />
+            {/* <LeadCallout /> */}
             <CtaButtons />
           </div>
         </div>
