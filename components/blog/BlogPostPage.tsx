@@ -17,7 +17,12 @@ function RelatedArticleCard({ post }: { post: BlogPost }) {
       <p className="text-[12px] font-medium uppercase text-label-grey">
         {formatBlogDate(post.publishedDate)}
       </p>
-      <div className="relative h-56.25 w-full desk:h-80">
+      {/* Same fix as the hero image and /blog's list cards: every blog
+          image shares the 2084x960 aspect ratio, so desktop sizes from
+          that instead of a fixed height — a fixed h-80 box was cropping
+          the image on wide viewports, where the card grows wider without
+          growing taller. */}
+      <div className="relative h-56.25 w-full desk:aspect-2084/960 desk:h-auto">
         <Image src={post.image} alt="" fill sizes="(min-width: 1200px) 25vw, 100vw" className="object-cover object-left" />
       </div>
       {/* Extra mt-2 on top of the card's gap-3 rhythm for the spacing
