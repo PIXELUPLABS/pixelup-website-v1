@@ -23,10 +23,15 @@ export function BlogList() {
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
-            className="group fade-up flex w-full flex-col py-4 desk:h-65 desk:flex-row"
+            className="group fade-up flex w-full flex-col py-4 desk:flex-row"
             style={{ animationDelay: `${Math.min(200 + index * 120, 800)}ms` }}
           >
-            <div className="relative h-65 w-full desk:h-full desk:w-[45%]">
+            {/* Every blog image shares the same 2084x960 aspect ratio (see
+                BlogPostPage). Sizing the desktop column from that ratio
+                instead of a fixed row height keeps the whole image visible
+                — a fixed h-65 box was cropping it on wide viewports, where
+                the row grows wider without growing taller. */}
+            <div className="relative h-65 w-full desk:aspect-2084/960 desk:h-auto desk:w-[45%]">
               <Image
                 src={post.image}
                 alt=""
@@ -35,7 +40,7 @@ export function BlogList() {
                 className="object-cover object-left"
               />
             </div>
-            <div className="flex w-full flex-col justify-between gap-4 pt-4 desk:h-full desk:w-[55%] desk:gap-0 desk:pt-0 desk:pl-5">
+            <div className="flex w-full flex-col justify-between gap-4 pt-4 desk:w-[55%] desk:gap-0 desk:pt-0 desk:pl-5">
               <div className="flex flex-col gap-1">
                 <div className="flex h-8.75 flex-wrap items-end gap-2">
                   {post.categories.map((item) => (
