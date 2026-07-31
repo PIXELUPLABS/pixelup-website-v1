@@ -66,7 +66,7 @@ export function Navbar() {
               rel="noopener noreferrer"
               className="flex items-center gap-1 rounded-none bg-accent px-3 py-2 font-display text-[12px] font-medium uppercase tracking-[-0.12px] text-white transition-colors hover:brightness-110"
             >
-              <span>Book a Call</span>
+              <span>Start a Conversation</span>
               <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
             </a>
           </div>

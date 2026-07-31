@@ -35,9 +35,9 @@ Confirms the exact pattern the notes template predicted before this file existed
 
 ## Color usage rules
 
-- **Only `color.brand.accent` (`#004aeb`) appears on this page** — a single use, as the "Start Your Project" button's background. `color.brand.highlight` (`#0658FC`) does not appear here at all; it's exclusive to `/explorations` and the blog post author box (see `DESIGN.md` §5/§7).
+- **Only `color.brand.accent` (`#004aeb`) appears on this page** — a single use, as the "Start a Conversation" button's background. `color.brand.highlight` (`#0658FC`) does not appear here at all; it's exclusive to `/explorations` and the blog post author box (see `DESIGN.md` §5/§7).
 - **Hairline dividers appear twice**: the navbar's `border-b`, and the vertical center rule between the sidebar and the project list (desktop only).
-- **No section gets a background fill.** Every element sits directly on the page's black base (`color.neutral.base`) except the two CTA buttons themselves (`color.neutral.button-dark` for Telegram, `color.brand.accent` for Start Your Project) and the decorative background-streak image, which fades to fully transparent by 85% down the page via `mask-image` — it never behaves like a "section background," just a top-of-page atmospheric effect.
+- **No section gets a background fill.** Every element sits directly on the page's black base (`color.neutral.base`) except the two CTA buttons themselves (`color.neutral.button-dark` for Telegram, `color.brand.accent` for Start a Conversation) and the decorative background-streak image, which fades to fully transparent by 85% down the page via `mask-image` — it never behaves like a "section background," just a top-of-page atmospheric effect.
 
 ## Responsive behavior notes
 

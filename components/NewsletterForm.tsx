@@ -47,7 +47,10 @@ export function NewsletterForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex w-full flex-col gap-5">
-      <div className="w-full border-b-[0.5px] border-hairline pb-2">
+      {/* focus-within, not focus: the hairline lives on this wrapper (the input
+          itself is borderless here, unlike AuditForm where the border is on the
+          field), so the accent underline has to react to the child's focus. */}
+      <div className="w-full border-b-[0.5px] border-hairline pb-2 focus-within:border-accent">
         <input
           type="text"
           placeholder="Your name"
@@ -58,7 +61,7 @@ export function NewsletterForm() {
           className={fieldClassName}
         />
       </div>
-      <div className="flex w-full items-center justify-between border-b-[0.5px] border-hairline pb-2">
+      <div className="flex w-full items-center justify-between border-b-[0.5px] border-hairline pb-2 focus-within:border-accent">
         <input
           type="email"
           placeholder="Enter your email"

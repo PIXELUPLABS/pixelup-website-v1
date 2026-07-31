@@ -63,7 +63,7 @@
     "tokens_used": ["color.neutral.hairline (border-r)", "breakpoint.desk"],
     "when_to_use": "Case study pages only (components/case-study/CaseStudyPage.tsx), one per page, paired with a <main> content column as a sibling (not nested).",
     "do_not": [
-      "Don't reuse LeftNav's raw desk:w-[26%] value elsewhere on a page that lacks the homepage's p-5 outer shell — this component's width is desk:w-[calc(26%-10.4px)], deliberately adjusted to render the same effective width as LeftNav on a page without that shell. Reuse this exact formula, not LeftNav's."
+      "Don't give this a width of its own — it's desk:w-[405px], the same flat value as LeftNav and the blog asides. It used to carry a calc(26%-10.4px) adjustment to match LeftNav's percentage width on a page without the homepage's p-5 shell; a fixed px width makes that compensation unnecessary, so keep all four sidebars on the identical value."
     ]
   },
 
@@ -104,21 +104,41 @@
   "CtaButtons": {
     "file": "components/CtaButtons.tsx",
     "category": "interactive",
-    "description": "The paired 'Chat on Telegram' + 'Start Your Project' buttons.",
+    "description": "The paired 'Chat on Telegram' + 'Start a Conversation' buttons.",
     "variants": {
       "telegramSolidBlack": "boolean prop. false (default) = translucent color.neutral.button-dark with a hover lighten (used in LeftNav/CaseSidebar). true = solid black, no hover lighten (used in Footer)."
     },
     "states": {
       "telegram:default": "bg-button-dark",
       "telegram:hover": "bg-white/12 (or stays black if telegramSolidBlack)",
-      "start-project:default": "bg-accent",
-      "start-project:hover": "brightness-110"
+      "start-conversation:default": "bg-accent",
+      "start-conversation:hover": "brightness-110"
     },
     "tokens_used": ["color.brand.accent", "color.neutral.button-dark", "radius.sm"],
     "when_to_use": "Anywhere the site's two primary CTAs need to appear together (currently: LeftNav, CaseSidebar, Footer).",
     "do_not": [
-      "Don't change 'Start Your Project' back into an internal <Link> to /call — it deliberately opens links.discoveryCall (an external Cal.com URL) in a new tab now.",
+      "Don't change 'Start a Conversation' back into an internal <Link> to /call — it deliberately opens links.discoveryCall (an external Cal.com URL) in a new tab now.",
       "Don't add a third button here — it's built for exactly two, laid out with flex-1 each."
+    ]
+  },
+
+  "LeadCallout": {
+    "file": "components/LeadCallout.tsx",
+    "category": "content",
+    "description": "Accent-blue objection callout with a 3px left rule, sitting directly above TrustedStrip in the hero sidebar.",
+    "variants": ["none — responsive only: 12px type throughout, in 10px of padding on mobile and 12px from the desk breakpoint up"],
+    "states": ["static — the fade-up entrance comes from the LeftNav wrapper, not this component"],
+    "tokens_used": [
+      "color.brand.accent (fill at 20%, left rule at full)",
+      "color.neutral.white",
+      "typography.font.display",
+      "typography.size.12",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "In every sidebar: LeftNav, BlogSidebar, BlogPostSidebar and CaseSidebar. It raises the objection the trusted-by logos answer, so it belongs immediately above TrustedStrip — or directly above CtaButtons in CaseSidebar, which has no strip.",
+    "do_not": [
+      "Don't pin it to a fixed height — padding plus a single 12px/120% line already produces it, and hardcoding it clips the second line at the widths where the copy wraps.",
+      "Don't pass the copy in from the call site — it's self-contained like TrustedStrip, so there's exactly one place to edit the line."
     ]
   },
 

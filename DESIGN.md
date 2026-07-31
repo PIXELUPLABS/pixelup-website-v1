@@ -51,7 +51,7 @@ No persona or ICP document exists in this repo. What follows is inferred from th
 | **Proof-driven** | Every case study result is a specific number + unit + timeframe + often a named source (investor, client), never a bare claim. |
 | **Systems-minded** | Copy repeatedly frames brand/product/website/sales as one designed system, and the reframe pattern ("not a ___ problem") shows up in every case study — this is a company that starts by re-diagnosing, not by producing assets. |
 | **Understated / restrained** | Visual system is near-monochrome black with a single accent blue, hairline dividers instead of cards or shadows (see §5, §7) — restraint as the design expression of the same directness found in the copy. |
-| **Founder-accessible** | "Chat on Telegram" is a first-class CTA, equal footing with "Start Your Project" — not a support-ticket afterthought. |
+| **Founder-accessible** | "Chat on Telegram" is a first-class CTA, equal footing with "Start Your Conversation" — not a support-ticket afterthought. |
 
 **Guideline:** any new copy or visual asset should be checkable against this table — if it can't point to a "because" in real client work, it's a guess, not on-brand yet.
 
@@ -109,7 +109,7 @@ Unlike a from-scratch brand, this codebase has real, working motion already — 
 ## 9. Layout Principles
 
 - **One custom breakpoint:** `desk` = 1200px (`75rem`). Tailwind's default `sm/md/lg/xl/2xl` are unused. Mobile-first throughout: unprefixed classes are the base/mobile state, `desk:` overrides apply at 1200px+.
-- **Sidebar width formula:** any hero/info sidebar sitting next to content should render at `LeftNav`'s width — `desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px]` — on a page that has the homepage's `p-5` outer shell, or `CaseSidebar`'s adjusted `desk:w-[calc(26%-10.4px)]` (same min/max) on a page without that shell (case studies, explorations-style full-bleed pages). These render the *same effective width*; don't reuse the raw `26%` formula on a shell-less page.
+- **Sidebar width:** any hero/info sidebar sitting next to content renders at a flat `desk:w-[405px] desk:shrink-0` — `LeftNav`, `BlogSidebar`, `BlogPostSidebar` and `CaseSidebar` all use exactly that, with no min/max clamp. This replaced a viewport-relative formula (`desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px]`, and `desk:w-[calc(26%-10.4px)]` on shell-less pages, where the `-10.4px` compensated for the homepage's missing `p-5`). A fixed px width needs no per-page compensation, so use the same value everywhere and don't reintroduce a percentage.
 - **Three page-shell patterns:** (1) page-level scroll with `p-5` outer shell + sticky sidebar (homepage, `/explorations`); (2) fixed-height internal-scroll shell, non-sticky sidebar (`/call`); (3) full-bleed, no outer shell, padding applied per-element instead (case studies, `/blog`).
 - **Spacing is Tailwind's default 4px scale, used directly** — no custom spacing tokens exist. Common gaps: 24px (`gap-6`, the most frequent section-to-section spacing), 32px (`py-8`, section breathing room), 20px (`gap-5`).
 - **The recurring gap+width overflow bug:** when two flex children have explicit percentage widths that already sum to 100% (a 50/50 or 76/24 split), don't also add a flex `gap` between them — it pushes the total past 100% and silently shrinks both. Use `flex-1` (+ `min-w-0`) instead. This exact mistake has been made and fixed three separate times in this codebase (`ArticleFilters`, `MoreProjects`, `ExplorationGallery`) — treat it as a known trap, not a one-off bug.
@@ -120,7 +120,7 @@ Unlike a from-scratch brand, this codebase has real, working motion already — 
 Full contracts (variants/states/tokens/do-nots) live in `components/component-contracts.json` — this is a condensed index. **Check that file before building anything new; if what you need isn't there, it's a component gap, not license to invent an ad hoc one-off.**
 
 - **LeftNav / CaseSidebar** — the two "hero sidebar" patterns (generic hero copy vs. case-study structured data). Never cross-use them.
-- **CtaButtons** — the paired "Chat on Telegram" / "Start Your Project" buttons, reused in three places (sidebar, case-study sidebar, footer).
+- **CtaButtons** — the paired "Chat on Telegram" / "Start Your Conversation" buttons, reused in three places (sidebar, case-study sidebar, footer).
 - **ProjectCard / MoreProjects** — homepage and end-of-case-study project cards, square corners, hover-scale media.
 - **SectionShell + CaseSection + CaseFaq** — the case-study Q&A pattern (heading left half / content right half + hairline rule). `CaseFaq`'s accordion + its `FAQPage` JSON-LD schema are shared between case studies and `/blog`.
 - **ArticleFilters / ExplorationGallery** — the two interactive, page-specific pill/toggle + gallery patterns (`/blog`, `/explorations`).
@@ -145,7 +145,7 @@ Structural rules derived from the real copy already in `lib/case-studies.ts`, no
 - **Description arc (4 paragraphs, consistent across all 3 case studies):** (1) what the client had / what we were brought in to do → (2) the specific gap or stakes that made this urgent → (3) the reframe sentence + systems framing → (4) the outcome, as a specific number + timeframe.
 - **A number is never bare.** Every stat pairs a figure with a unit and a timeframe or source (*"$25M Series A at a $180M valuation led by Benchmark"*, not "$25M raised"; *"26x in 11 months"*, not "26x growth"). Bare numbers don't appear anywhere in the real copy.
 - **FAQ answers are short, first-person plural, and unhedged.** *"Rarely."* *"No account managers, no layers, no surprises."* Direct answers, not marketing softening.
-- **CTAs are imperative and specific**, never generic ("Learn More"): *"CHAT ON TELEGRAM"*, *"START YOUR PROJECT"*, *"Book a discovery call."*
+- **CTAs are imperative and specific**, never generic ("Learn More"): *"CHAT ON TELEGRAM"*, *"START YOUR CONVERSATION"*, *"Book a discovery call."*
 
 ## 14. Things Never To Do
 

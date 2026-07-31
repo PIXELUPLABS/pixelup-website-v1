@@ -1,5 +1,6 @@
 import { Geist } from "next/font/google";
 import { CtaButtons } from "../CtaButtons";
+import { LeadCallout } from "../LeadCallout";
 import { TrustedStrip } from "../TrustedStrip";
 import { ArticleFilters } from "./ArticleFilters";
 
@@ -17,11 +18,11 @@ const geist = Geist({ subsets: ["latin"], weight: ["500"] });
  */
 export function BlogSidebar() {
   return (
-    <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:h-[calc(100vh-6.5rem)] desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0 desk:self-start">
+    <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:h-[calc(100vh-6.5rem)] desk:w-[405px] desk:shrink-0 desk:gap-0 desk:self-start">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           <h1
-            className={`${geist.className} fade-up tracking-display text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[54px]`}
+            className={`${geist.className} fade-up tracking-display text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[56px]`}
           >
             Articles
           </h1>
@@ -34,6 +35,9 @@ export function BlogSidebar() {
         </div>
       </div>
       <div className="hidden flex-col gap-5 desk:mt-auto desk:flex">
+        <div className="fade-up [animation-delay:350ms]">
+          <LeadCallout />
+        </div>
         <div className="fade-up [animation-delay:400ms]">
           <TrustedStrip />
         </div>

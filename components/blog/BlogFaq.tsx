@@ -3,7 +3,8 @@ import faqBg from "@/public/media/faq-bg.png";
 import { CaseFaq } from "@/components/case-study/CaseFaq";
 import { faqHeading, pixelupFaq } from "@/lib/case-studies";
 
-/** Standalone, full-width FAQ block for /blog — same shared pixelupFaq
+/** Standalone, full-width FAQ block for /blog and the homepage, on both
+    sitting directly above AuditForm — same shared pixelupFaq
     content and CaseFaq accordion as the case study pages. Heading in the
     left 45%, accordion in the right 55% (not SectionShell — that hardcodes
     case-study-sidebar-specific padding, see DESIGN.md §14). Matches
@@ -26,7 +27,6 @@ export function BlogFaq() {
           />
           <h2 className="relative tracking-display text-[24px] font-medium leading-tight text-white desk:text-[40px]">
             {faqHeading}
-            <span aria-hidden="true" className="ml-2 inline-block h-2 w-2 shrink-0 bg-[#0658FC] align-baseline" />
           </h2>
         </div>
         <div className="w-full desk:w-[55%] desk:pl-5">

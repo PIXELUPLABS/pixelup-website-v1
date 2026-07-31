@@ -1,3 +1,4 @@
+import { LeadCallout } from "./LeadCallout";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { TrustedStrip } from "./TrustedStrip";
@@ -42,7 +43,7 @@ export function LeftNav({
     // list of navigation links. Matches CaseSidebar's use of `aside` for the
     // same sidebar role on case study pages.
     <aside
-      className={`flex flex-col gap-8 desk:w-[26%] desk:min-w-[340px] desk:max-w-[460px] desk:gap-0 ${
+      className={`flex flex-col gap-8 desk:w-[405px] desk:shrink-0 desk:gap-0 ${
         sticky
           ? // Stuck offset = Navbar's height (h-16, 4rem) + the page shell's
             // p-5 top inset (1.25rem) = 5.25rem, so the nav sits flush below
@@ -80,8 +81,11 @@ export function LeftNav({
         </p>
       </div>
 
-      {/* Bottom group: trusted strip + CTAs (pinned to bottom on desktop) */}
+      {/* Bottom group: callout + trusted strip + CTAs (pinned to bottom on desktop) */}
       <div className="flex flex-col gap-5 desk:mt-auto">
+        <div className="fade-up [animation-delay:250ms]">
+          <LeadCallout />
+        </div>
         <div className="fade-up [animation-delay:300ms]">
           <TrustedStrip />
         </div>
