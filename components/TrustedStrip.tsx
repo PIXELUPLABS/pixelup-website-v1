@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import strip from "@/public/media/trusted-strip.png";
 
@@ -20,7 +22,17 @@ export function TrustedStrip() {
         {/* Each copy carries its own trailing gap so translateX(-50%) equals
             exactly one repeat period. gap/margin match the strip's internal
             logo spacing so the seams read like just another gap. */}
-        <div className="flex w-max animate-[marquee_30s_linear_infinite]">
+        <div
+          className="flex w-max animate-[marquee_30s_linear_infinite]"
+          onMouseEnter={(e) => {
+            const animation = e.currentTarget.getAnimations()[0];
+            if (animation) animation.playbackRate = 0.5;
+          }}
+          onMouseLeave={(e) => {
+            const animation = e.currentTarget.getAnimations()[0];
+            if (animation) animation.playbackRate = 1;
+          }}
+        >
           {[0, 1].map((i) => (
             <div
               key={i}

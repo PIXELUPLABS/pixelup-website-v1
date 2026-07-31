@@ -45,7 +45,7 @@ export function CtaButtons({
           telegramSolidBlack ? "bg-black" : "bg-button-dark hover:bg-white/[0.12]"
         }`}
       >
-        <span>CHAT ON TELEGRAM</span>
+        <span>START A CONVERSATION</span>
         <PaperPlaneIcon />
       </a>
       <a
@@ -54,7 +54,7 @@ export function CtaButtons({
         rel="noopener noreferrer"
         className={`${baseButton} bg-accent hover:brightness-110`}
       >
-        <span>START A CONVERSATION</span>
+        <span>BOOK A CALL</span>
         <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
       </a>
     </div>
