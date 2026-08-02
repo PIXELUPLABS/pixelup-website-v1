@@ -4,6 +4,8 @@ import { NewsletterForm } from "@/components/NewsletterForm";
 import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Vector.svg";
 
+const JOIN_THE_TEAM_URL = "https://tally.so/r/xXE7ry";
+
 const caseStudies = [
   { name: "Greptile", slug: "greptile" },
   { name: "Sainapse", slug: "sainapse" },
@@ -58,6 +60,14 @@ export function Footer() {
                 companies, written by Daksh. Two emails a month, no spam.
               </p>
               <NewsletterForm />
+              <a
+                href={JOIN_THE_TEAM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[14px] font-normal text-white hover:opacity-70"
+              >
+                Join the team
+              </a>
             </div>
           </div>
           <div className="flex w-full items-center border-t-[0.5px] border-hairline p-6">
