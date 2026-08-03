@@ -22,7 +22,7 @@ function PaperPlaneIcon() {
 // colorway is always the caller's job.
 export const ctaButtonBase =
   "flex items-center justify-between rounded-[2px] px-3 py-[11.5px] " +
-  "font-display text-[12px] tracking-[-0.12px] transition-colors";
+  "font-display text-[12px] font-medium tracking-[-0.12px] transition-colors";
 
 const baseButton = `${ctaButtonBase} flex-1 text-white`;
 

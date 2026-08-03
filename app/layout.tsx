@@ -48,34 +48,37 @@ export default function RootLayout({
       lang="en"
       className={`${interDisplay.variable} ${instrumentSans.variable} h-full antialiased`}
     >
-      {/* beforeInteractive is the only next/script strategy Next.js injects
-          into the initial HTML <head> — required here since the request was
-          for this script to live in <head>, not just load early. Only valid
-          in the root layout. */}
-      <Script
-        defer
-        data-website-id="dfid_swcipYZ3Rc55HGLL1A7A4"
-        data-domain="pixeluplabs.com"
-        src="https://datafa.st/js/script.js"
-        strategy="beforeInteractive"
-      />
-      {/* Google Analytics (gtag.js) — afterInteractive is Next.js's own
-          documented pattern for GA: it doesn't need to block the initial
-          render like the head-scoped script above does. */}
-      <Script
-        async
-        src="https://www.googletagmanager.com/gtag/js?id=G-M4JV6HF683"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-M4JV6HF683');
-        `}
-      </Script>
       <body className="min-h-full bg-base font-display text-white">
+        {/* These <Script>s live inside <body> per the next/script docs — as
+            direct children of <html> they're invalid DOM nesting, which
+            React 19 rejects ("<script> cannot be a child of <html>") and
+            which risks hydration errors. Placement doesn't change behavior:
+            beforeInteractive is always injected into the served <head>
+            regardless of where the component sits, so the datafast script
+            still lands there. Only valid in the root layout. */}
+        <Script
+          defer
+          data-website-id="dfid_swcipYZ3Rc55HGLL1A7A4"
+          data-domain="pixeluplabs.com"
+          src="https://datafa.st/js/script.js"
+          strategy="beforeInteractive"
+        />
+        {/* Google Analytics (gtag.js) — afterInteractive is Next.js's own
+            documented pattern for GA: it doesn't need to block the initial
+            render like the head-scoped script above does. */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-M4JV6HF683"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-M4JV6HF683');
+          `}
+        </Script>
         <DisableImageDrag />
         <Navbar />
         {children}
