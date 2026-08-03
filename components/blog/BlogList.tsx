@@ -11,10 +11,11 @@ import { useBlogFilter } from "./BlogFilterContext";
     divider with padding on both sides of the rule. */
 export function BlogList() {
   const { category } = useBlogFilter();
-  const posts =
-    category === "All"
-      ? blogPosts
-      : blogPosts.filter((post) => post.categories.includes(category));
+  const posts = [...blogPosts]
+    .sort(
+      (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime(),
+    )
+    .filter((post) => category === "All" || post.categories.includes(category));
 
   return (
     <section className="w-full">

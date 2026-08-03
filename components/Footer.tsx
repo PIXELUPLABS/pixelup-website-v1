@@ -12,6 +12,11 @@ const caseStudies = [
   { name: "Sully", slug: "sully" },
 ] as const;
 
+const quickLinks = [
+  { name: "Explorations", href: "/explorations" },
+  { name: "Blogs", href: "/blog" },
+] as const;
+
 // Outer <footer> has no padding of its own, ever — it always fills exactly
 // whatever container it's placed in, the same way every other section
 // (BlogList, AuditForm, CaseSection, ...) does. The inner div below is what
@@ -25,7 +30,7 @@ export function Footer() {
           cancels the page row's own p-5 there. */}
       <div className="relative pb-5 desk:h-full desk:px-5">
         <div className="flex h-full flex-col border-[0.5px] border-hairline desk:grid desk:grid-rows-[3fr_1fr]">
-          <div className="grid grid-cols-1 divide-y divide-hairline desk:grid-cols-3 desk:divide-x desk:divide-y-0">
+          <div className="grid grid-cols-1 divide-y divide-hairline desk:grid-cols-4 desk:divide-x desk:divide-y-0">
             <div className="flex flex-col gap-6 p-6 desk:h-full desk:justify-between">
               <div className="flex flex-col gap-6">
                 <Image src={navLogo} alt="PIXELUP LABS" className="h-8 w-8" />
@@ -34,6 +39,30 @@ export function Footer() {
                 </p>
               </div>
               <p className="text-[12px] font-normal text-white">©2026 PIXELUP LABS</p>
+            </div>
+            <div className="flex flex-col gap-8 p-6 desk:h-full">
+              <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
+                Quick Links
+              </p>
+              <div className="flex flex-col gap-2">
+                {quickLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className="text-[14px] font-normal text-white hover:opacity-70"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+                <a
+                  href={JOIN_THE_TEAM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[14px] font-normal text-white hover:opacity-70"
+                >
+                  Careers
+                </a>
+              </div>
             </div>
             <div className="flex flex-col gap-8 p-6 desk:h-full">
               <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
@@ -60,14 +89,6 @@ export function Footer() {
                 companies, written by Daksh. Two emails a month, no spam.
               </p>
               <NewsletterForm />
-              <a
-                href={JOIN_THE_TEAM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[14px] font-normal text-white hover:opacity-70"
-              >
-                Join the team
-              </a>
             </div>
           </div>
           <div className="flex w-full items-center border-t-[0.5px] border-hairline p-6">
