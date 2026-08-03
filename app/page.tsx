@@ -12,12 +12,12 @@ const schema = {
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://pixeluplabs.com/#organization",
+      "@id": "https://www.pixeluplabs.com/#organization",
       name: "PixelUp Labs",
-      url: "https://pixeluplabs.com/",
+      url: "https://www.pixeluplabs.com/",
       logo: {
         "@type": "ImageObject",
-        url: "https://pixeluplabs.com/media/nav-logo.svg",
+        url: "https://www.pixeluplabs.com/media/nav-logo.svg",
       },
       description:
         "We build brands, websites and products that command enterprise trust.",
@@ -32,10 +32,10 @@ const schema = {
     },
     {
       "@type": "WebSite",
-      "@id": "https://pixeluplabs.com/#website",
-      url: "https://pixeluplabs.com/",
+      "@id": "https://www.pixeluplabs.com/#website",
+      url: "https://www.pixeluplabs.com/",
       name: "PIXELUP LABS",
-      publisher: { "@id": "https://pixeluplabs.com/#organization" },
+      publisher: { "@id": "https://www.pixeluplabs.com/#organization" },
     },
   ],
 };
