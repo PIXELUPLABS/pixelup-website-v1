@@ -5,6 +5,7 @@ import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Vector.svg";
 
 const JOIN_THE_TEAM_URL = "https://tally.so/r/xXE7ry";
+const TESTIMONIALS_URL = "https://contra.com/daksh_aswal_dt5tfn27/reviews"
 
 const caseStudies = [
   { name: "Greptile", slug: "greptile" },
@@ -61,6 +62,14 @@ export function Footer() {
                   className="text-[14px] font-normal text-white hover:opacity-70"
                 >
                   Careers
+                </a>
+                <a
+                  href={TESTIMONIALS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[14px] font-normal text-white hover:opacity-70"
+                >
+                  Testimonials
                 </a>
               </div>
             </div>
