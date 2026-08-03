@@ -27,7 +27,11 @@ const instrumentSans = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://pixeluplabs.com"),
+  // www is the canonical host: Vercel 308-redirects the apex to www, so every
+  // absolute URL we emit (canonicals, og:url, sitemap, JSON-LD) must match it.
+  // Pointing these at the apex made canonicals resolve to a redirect, which
+  // Google discards — that split GSC reporting across both hosts.
+  metadataBase: new URL("https://www.pixeluplabs.com"),
   title: "PIXELUP LABS - Premium Brands and Websites",
   description:
     "We build brands, websites and products that command enterprise trust.",

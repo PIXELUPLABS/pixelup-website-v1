@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/case-studies";
 import { blogPosts } from "@/lib/blog";
 
-const BASE_URL = "https://pixeluplabs.com";
+// Must match metadataBase in app/layout.tsx — www, not the apex, which redirects.
+const BASE_URL = "https://www.pixeluplabs.com";
 
 /**
  * Served at /sitemap.xml (Next metadata route). Case study and blog post
