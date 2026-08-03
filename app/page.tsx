@@ -4,9 +4,11 @@ import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
 import { Showcase } from "@/components/Showcase";
 import { links } from "@/lib/projects";
+import { sitePublished, siteUpdated } from "@/lib/site-dates";
 
-// Structured data for search engines: the agency (Organization) and the site
-// itself (WebSite), cross-referenced by @id per Google's guidelines.
+// Structured data for search engines: the agency (Organization), the site
+// itself (WebSite), and this page (WebPage), cross-referenced by @id per
+// Google's guidelines.
 const schema = {
   "@context": "https://schema.org",
   "@graph": [
@@ -36,6 +38,23 @@ const schema = {
       url: "https://www.pixeluplabs.com/",
       name: "PIXELUP LABS",
       publisher: { "@id": "https://www.pixeluplabs.com/#organization" },
+    },
+    {
+      // The homepage itself. Its reason for existing is `dateModified`:
+      // without a date signal in JSON-LD, meta tags, or sitemap <lastmod>,
+      // crawlers and AI answer engines can't tell the page is current and
+      // discount it as undated. Bump siteUpdated.home in lib/site-dates.ts
+      // whenever the homepage content changes.
+      "@type": "WebPage",
+      "@id": "https://www.pixeluplabs.com/#webpage",
+      url: "https://www.pixeluplabs.com/",
+      name: "PIXELUP LABS - Premium Brands and Websites",
+      description:
+        "We build brands, websites and products that command enterprise trust.",
+      isPartOf: { "@id": "https://www.pixeluplabs.com/#website" },
+      about: { "@id": "https://www.pixeluplabs.com/#organization" },
+      datePublished: sitePublished,
+      dateModified: siteUpdated.home,
     },
   ],
 };

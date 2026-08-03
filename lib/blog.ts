@@ -1918,6 +1918,66 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
+// Must match metadataBase in app/layout.tsx — www, not the apex, which redirects.
+const BASE_URL = "https://www.pixeluplabs.com";
+
+/**
+ * BlogPosting structured data for one post, rendered by BlogPostPage.
+ *
+ * `datePublished` / `dateModified` are the point of it: posts already carried
+ * `publishedDate` / `updatedDate` but only rendered them as visible text,
+ * which crawlers and AI answer engines don't read as date signals. Article
+ * schema is also what makes a post eligible to be cited with a date attached.
+ */
+export function blogPostSchema(post: BlogPost) {
+  // "Daksh, Founder at PIXELUP LABS" -> name + jobTitle. Split on the first
+  // comma only, so a job title containing commas survives intact.
+  const commaIndex = post.author.indexOf(",");
+  const authorName =
+    commaIndex === -1 ? post.author : post.author.slice(0, commaIndex).trim();
+  const authorTitle =
+    commaIndex === -1 ? undefined : post.author.slice(commaIndex + 1).trim();
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${BASE_URL}/blog/${post.slug}#article`,
+    mainEntityOfPage: `${BASE_URL}/blog/${post.slug}`,
+    headline: post.title,
+    description: post.description,
+    image: `${BASE_URL}${post.image}`,
+    articleSection: post.categories,
+    datePublished: post.publishedDate,
+    dateModified: post.updatedDate,
+    author: {
+      "@type": "Person",
+      name: authorName,
+      ...(authorTitle ? { jobTitle: authorTitle } : {}),
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "PixelUp Labs",
+      url: `${BASE_URL}/`,
+      logo: {
+        "@type": "ImageObject",
+        url: `${BASE_URL}/media/nav-logo.svg`,
+      },
+    },
+  };
+}
+
+/**
+ * Newest `updatedDate` across all posts. The /blog index is only as fresh as
+ * its newest post, so it derives its freshness signals from this rather than
+ * carrying a hand-maintained date in lib/site-dates.ts — a new post updates
+ * the index automatically. ISO `YYYY-MM-DD` sorts lexicographically, which is
+ * why a plain string compare is safe here.
+ */
+export const blogIndexUpdated = blogPosts.reduce(
+  (latest, post) => (post.updatedDate > latest ? post.updatedDate : latest),
+  "",
+);
+
 /** "2026-07-07" -> "JUL 7, 2026" */
 export function formatBlogDate(date: string): string {
   return new Date(`${date}T00:00:00`)

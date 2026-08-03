@@ -3,7 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { AuditForm } from "@/components/AuditForm";
 import { Footer } from "@/components/Footer";
-import { blogPosts, formatBlogDate, type BlogContentBlock, type BlogPost } from "@/lib/blog";
+import {
+  blogPostSchema,
+  blogPosts,
+  formatBlogDate,
+  type BlogContentBlock,
+  type BlogPost,
+} from "@/lib/blog";
 import { BlogPostSidebar } from "./BlogPostSidebar";
 
 // Scoped to the "Related Articles" heading only — the rest of the site keeps font-display.
@@ -160,6 +166,10 @@ export function BlogPostPage({ post }: { post: BlogPost }) {
 
   return (
     <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema(post)) }}
+      />
       <BlogPostSidebar post={post} />
       {/* Divider between the aside and content columns, same treatment as /blog. */}
       <div

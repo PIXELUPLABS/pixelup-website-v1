@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/case-studies";
-import { blogPosts } from "@/lib/blog";
+import { blogIndexUpdated, blogPosts } from "@/lib/blog";
+import { siteUpdated } from "@/lib/site-dates";
 
 // Must match metadataBase in app/layout.tsx — www, not the apex, which redirects.
 const BASE_URL = "https://www.pixeluplabs.com";
@@ -9,36 +10,48 @@ const BASE_URL = "https://www.pixeluplabs.com";
  * Served at /sitemap.xml (Next metadata route). Case study and blog post
  * URLs are derived from lib/case-studies.ts and lib/blog.ts, so new ones
  * are picked up automatically.
+ *
+ * Every entry carries `lastModified`, which Next renders as `<lastmod>`.
+ * Without it, crawlers and AI answer engines have no way to tell whether a
+ * URL is current, so they treat it as undated and discount it. Dates come
+ * from lib/site-dates.ts (static routes) and each post's own `updatedDate`
+ * (blog) — see the note there on why this isn't `new Date()`.
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: `${BASE_URL}/`,
+      lastModified: siteUpdated.home,
       changeFrequency: "monthly",
       priority: 1,
     },
     {
       url: `${BASE_URL}/call`,
+      lastModified: siteUpdated.call,
       changeFrequency: "yearly",
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/explorations`,
+      lastModified: siteUpdated.explorations,
       changeFrequency: "monthly",
       priority: 0.7,
     },
     {
       url: `${BASE_URL}/blog`,
+      lastModified: blogIndexUpdated,
       changeFrequency: "weekly",
       priority: 0.8,
     },
     ...Object.values(caseStudies).map((study) => ({
       url: `${BASE_URL}/case-studies/${study.slug}`,
+      lastModified: siteUpdated.caseStudies,
       changeFrequency: "monthly" as const,
       priority: 0.9,
     })),
     ...blogPosts.map((post) => ({
       url: `${BASE_URL}/blog/${post.slug}`,
+      lastModified: post.updatedDate,
       changeFrequency: "monthly" as const,
       priority: 0.7,
     })),
