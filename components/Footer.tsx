@@ -14,7 +14,7 @@ const caseStudies = [
 
 const quickLinks = [
   { name: "Explorations", href: "/explorations" },
-  { name: "Blogs", href: "/blog" },
+  { name: "Blog", href: "/blog" },
 ] as const;
 
 // Outer <footer> has no padding of its own, ever — it always fills exactly
@@ -30,7 +30,7 @@ export function Footer() {
           cancels the page row's own p-5 there. */}
       <div className="relative pb-5 desk:h-full desk:px-5">
         <div className="flex h-full flex-col border-[0.5px] border-hairline desk:grid desk:grid-rows-[3fr_1fr]">
-          <div className="grid grid-cols-1 divide-y divide-hairline desk:grid-cols-4 desk:divide-x desk:divide-y-0">
+          <div className="grid grid-cols-1 divide-y divide-hairline desk:grid-cols-4 desk:divide-x-0 desk:divide-y-0">
             <div className="flex flex-col gap-6 p-6 desk:h-full desk:justify-between">
               <div className="flex flex-col gap-6">
                 <Image src={navLogo} alt="PIXELUP LABS" className="h-8 w-8" />
