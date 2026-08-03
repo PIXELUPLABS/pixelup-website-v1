@@ -21,6 +21,15 @@ export async function generateMetadata({
   return {
     title: `${post.title} - PIXELUP LABS`,
     alternates: { canonical: `/blog/${post.slug}` },
+    // og:type=article unlocks article:published_time / article:modified_time,
+    // the meta-tag freshness signal. Belt-and-braces with the BlogPosting
+    // JSON-LD in BlogPostPage — different crawlers read different ones.
+    openGraph: {
+      type: "article",
+      publishedTime: post.publishedDate,
+      modifiedTime: post.updatedDate,
+      authors: [post.author],
+    },
   };
 }
 
