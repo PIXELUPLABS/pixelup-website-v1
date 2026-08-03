@@ -40,7 +40,7 @@ export function Footer() {
               </div>
               <p className="text-[12px] font-normal text-white">©2026 PIXELUP LABS</p>
             </div>
-            <div className="flex flex-col gap-8 p-6 desk:h-full">
+            <div className="flex flex-col gap-8 p-6 desk:h-full desk:border-l-[0.5px] desk:border-hairline">
               <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
                 Quick Links
               </p>
@@ -80,7 +80,7 @@ export function Footer() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-8 p-6 desk:h-full">
+            <div className="flex flex-col gap-8 p-6 desk:h-full desk:border-l-[0.5px] desk:border-hairline">
               {/* No uppercase column label here (unlike the other two columns) —
                   the copy names the newsletter itself. text-pretty keeps the
                   last line from dropping to a single orphaned word. */}
