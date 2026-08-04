@@ -11,7 +11,11 @@ export type BlogContentBlock =
 export interface BlogPost {
   slug: string;
   title: string;
-  /** One-line excerpt — shown on /blog's "Related Articles" cards. */
+  /** SERP snippet. Emitted as <meta name="description"> and og:description by
+      app/blog/[slug]/page.tsx, and as the BlogPosting `description` in the
+      JSON-LD below. Written at ~150-160 characters, the length Google will
+      show before truncating. (It also feeds the "Related Articles" card
+      excerpt, currently commented out in BlogPostPage.) */
   description: string;
   categories: string[];
   image: string;
@@ -27,7 +31,7 @@ export const blogPosts: BlogPost[] = [
     title:
       "Best Design Agencies for AI Startups (2026): Who Designed Midjourney, Cursor, and Greptile",
     description:
-      "Ten studios compared with real prices, from MetaLab to Punchcut to us, and where each one loses.",
+      "Ten design agencies for AI startups compared on real 2026 prices, from basement.studio near $10k to MetaLab at $100k and up, plus where each one loses.",
     categories: ["Design"],
     image: "/media/blogs/blog-img-1.png",
     author: "Daksh, Founder at PIXELUP LABS",
@@ -296,7 +300,7 @@ export const blogPosts: BlogPost[] = [
       { type: "subheading", text: "PIXELUP LABS (us)" },
       {
         type: "paragraph",
-        text: "**Price:** brand sprint $25–30k · brand + website $25–40k · retainer from $4k/mo (full pricing) · **Timeline:** 2-week brand sprints, 3-week sites · **Stack:** Framer, Webflow, custom when the product needs it",
+        text: "**Price:** brand sprint $25–30k · brand + website $25–40k · retainer from $6k/mo · **Timeline:** 2-week brand sprints, 3-week sites · **Stack:** Framer, Webflow, custom when the product needs it",
       },
       {
         type: "paragraph",
@@ -593,7 +597,7 @@ export const blogPosts: BlogPost[] = [
     slug: "best-design-agencies-in-san-francisco",
     title: "Best Design Agencies in San Francisco (2026): 10 Compared, With Real Prices",
     description:
-      "Every studio here is actually headquartered in San Francisco, with real prices from $10k to $500k.",
+      "Ten San Francisco design agencies compared, all genuinely headquartered there, with real 2026 prices from $10k to $500k and why the same brief varies 25x.",
     categories: ["Design"],
     image: "/media/blogs/blog-img-2.png",
     author: "Daksh, Founder at PIXELUP LABS",
@@ -889,7 +893,7 @@ export const blogPosts: BlogPost[] = [
       { type: "subheading", text: "PIXELUP LABS (us)" },
       {
         type: "paragraph",
-        text: "**Lane:** brand and web under one roof · **Price:** brand sprint $25–30k · brand + website $25–40k · retainer from $4k/mo (full pricing)",
+        text: "**Lane:** brand and web under one roof · **Price:** brand sprint $25–30k · brand + website $25–40k · retainer from $6k/mo",
       },
       {
         type: "paragraph",
@@ -1210,7 +1214,7 @@ export const blogPosts: BlogPost[] = [
     slug: "what-a-startup-rebrand-and-website-cost",
     title: "What a Startup Rebrand and Website Cost in 2026: By Stage, With Our Own Prices",
     description:
-      "What a brand and website actually costs by stage, from a freelancer to a prestige studio.",
+      "What a startup brand and website cost in 2026, broken down by funding stage, from $2k with a freelancer to $500k at a network firm, with our own prices.",
     categories: ["Design", "Branding"],
     image: "/media/blogs/blog-img-3.png",
     author: "Daksh, Founder at PIXELUP LABS",
@@ -1432,12 +1436,12 @@ export const blogPosts: BlogPost[] = [
         items: [
           "Brand sprint: $25,000 to $30,000. Two weeks.",
           "Brand plus website: $25,000 to $40,000. Two to five weeks.",
-          "Retainer: from $4,000 per month. Same team that ships the sprints, continuously.",
+          "Retainer: from $6,000 per month. Same team that ships the sprints, continuously.",
         ],
       },
       {
         type: "paragraph",
-        text: "For comparison, on retainers: Designjoy is $4,995 per month, ManyPixels is $699, Focus Lab starts at $5,000 for execution and $10,000 for a brand team, Superside starts at $15,000, and Parallel's growth tier is $6,000 to $15,000. Ours starts at $4,000 for the team that did the sprint.",
+        text: "For comparison, on retainers: Focus Lab starts at $5,000 for execution and $10,000 for a brand team, Parallel's growth tier is $6,000 to $15,000, and Superside starts at $15,000. Ours starts at $6,000 for the team that did the sprint, which puts us at or near the floor of the retainer market rather than at the bottom of the whole list. Designjoy at $4,995 and ManyPixels at $699 are cheaper than we are, and both are subscriptions, so that comparison is throughput against judgment rather than like for like.",
       },
       {
         type: "paragraph",
@@ -1479,7 +1483,7 @@ export const blogPosts: BlogPost[] = [
       { type: "subheading", text: "What do design agency retainers cost per month?" },
       {
         type: "paragraph",
-        text: "Basic website maintenance runs $250 to $2,500 per month. A dedicated agency on standby is $2,000 to $6,000. Mid-market retainers run $5,000 to $15,000 and enterprise reaches $15,000 to $50,000 and up. Named options: ManyPixels $699, Designjoy $4,995, Focus Lab from $5,000, Superside from $15,000. Ours starts at $4,000.",
+        text: "Basic website maintenance runs $250 to $2,500 per month. A dedicated agency on standby is $2,000 to $6,000. Mid-market retainers run $5,000 to $15,000 and enterprise reaches $15,000 to $50,000 and up. Named options: ManyPixels $699, Designjoy $4,995, Focus Lab from $5,000, Superside from $15,000. Ours starts at $6,000.",
       },
       { type: "subheading", text: "How much should a funded startup invest in brand?" },
       {
@@ -1531,7 +1535,7 @@ export const blogPosts: BlogPost[] = [
     title:
       "Agency vs Freelancer vs Design Subscription vs In-House (2026): $27 an Hour to $240k a Year",
     description:
-      "Real 2026 prices for every design option, from a $27-an-hour freelancer to a $240k in-house hire, and which one to pick.",
+      "Agency, freelancer, design subscription, or in-house: real 2026 costs from $27 an hour to $240k a year, and which one fits your stage and deadline.",
     categories: ["Design", "Branding"],
     image: "/media/blogs/blog-img-4.png",
     author: "Daksh, Founder at PIXELUP LABS",

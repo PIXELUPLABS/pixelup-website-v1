@@ -20,12 +20,17 @@ export async function generateMetadata({
   if (!post) return {};
   return {
     title: `${post.title} - PIXELUP LABS`,
+    // Without this, every post inherits the site-wide description from
+    // app/layout.tsx, so all of /blog ships one duplicate snippet that
+    // describes the company instead of the article.
+    description: post.description,
     alternates: { canonical: `/blog/${post.slug}` },
     // og:type=article unlocks article:published_time / article:modified_time,
     // the meta-tag freshness signal. Belt-and-braces with the BlogPosting
     // JSON-LD in BlogPostPage — different crawlers read different ones.
     openGraph: {
       type: "article",
+      description: post.description,
       publishedTime: post.publishedDate,
       modifiedTime: post.updatedDate,
       authors: [post.author],
