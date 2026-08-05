@@ -79,7 +79,7 @@ export const projects: Project[] = [
     alt: "CTGT website design by PixelUp Labs",
     tagline: "Applied interpretability lab for regulated industries",
     services: ["Branding", "Website Design"],
-    year: "2025",
+    year: "2026",
   },
   {
     slug: "streamline",

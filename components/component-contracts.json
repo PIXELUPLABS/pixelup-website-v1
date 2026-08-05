@@ -75,11 +75,12 @@
       "scroll": "\"internal\" (default) = column scrolls independently inside a fixed-height shell. \"page\" = no internal scroll, used on the homepage so the page itself scrolls and the footer can appear below the fold."
     },
     "states": ["none — content is static per the projects data"],
-    "tokens_used": ["spacing (gap-6, 24px between cards)", "breakpoint.desk"],
+    "tokens_used": ["spacing (gap-8 / 32px between cards on mobile, gap-6 / 24px from desk up)", "breakpoint.desk"],
     "when_to_use": "Homepage only, currently — it IS the page's <main>, not a generic reusable list container.",
     "do_not": [
       "Don't render more than one per page (it's a <main> landmark).",
-      "Don't reuse this for a different image set (e.g. explorations) — that page has its own ExplorationGallery instead."
+      "Don't reuse this for a different image set (e.g. explorations) — that page has its own ExplorationGallery instead.",
+      "Don't lower the mobile gap toward ProjectCard's 12px media-to-info gap. It was 16px against that 12px and the column read as one undifferentiated stack — no card boundary was perceptible. The between-card gap has to stay clearly the largest vertical space in the column. Mobile being larger than desktop here is deliberate, not an oversight: mobile stacks the info into three lines, desktop keeps it to one row."
     ]
   },
 
@@ -102,7 +103,7 @@
       "radius: none (square corners are intentional, not an oversight)",
       "typography.size 20/24 (title), 14/16 (tagline), 12 (meta)",
       "color.neutral.white (title), color.neutral.body-grey (tagline), color.neutral.label-grey (meta)",
-      "spacing (gap-3 media-to-info, gap-2 stacked, gap-4/gap-8 within the row)",
+      "spacing (gap-3 media-to-info, gap-3 stacked info on mobile, gap-4/gap-8 within the desktop row)",
       "breakpoint.desk",
       "typography.font.mono (Geist Mono 500, via the font-mono utility) on the services/year meta row"
     ],

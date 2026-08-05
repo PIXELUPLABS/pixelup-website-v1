@@ -55,7 +55,7 @@ function ProjectInfo({ project }: { project: Project }) {
   if (!tagline && !hasServices && !year) return null;
 
   return (
-    <div className="flex flex-col items-start gap-2 desk:flex-row desk:items-end desk:justify-between desk:gap-4">
+    <div className="flex flex-col items-start gap-3 desk:flex-row desk:items-end desk:justify-between desk:gap-4">
       <div className="w-full min-w-0 desk:flex-1">
         <h3 className="text-[20px] font-medium leading-[1.2] tracking-[-0.02em] text-white desk:truncate desk:text-[24px]">
           {label}
@@ -108,8 +108,12 @@ export function ProjectCard({
   const entranceDelay = `${Math.min(200 + index * 120, 800)}ms`;
 
   // ~1008 x 584 on the live site → aspect ratio ≈ 1.73:1. Square corners, clipped.
-  // 12px between the media and the info row, inside the 24px Showcase gap that
-  // separates one card from the next.
+  //
+  // 12px between the media and the info row. That has to stay clearly smaller
+  // than the Showcase gap separating one card from the next (32px mobile, 24px
+  // desktop) — it's the only thing telling the eye which info belongs to which
+  // image. Raising it without raising Showcase's gap makes the column read as
+  // one continuous stack again.
   const inner = (
     <div className="flex flex-col gap-3">
       <div className="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
