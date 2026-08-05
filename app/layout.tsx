@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Sans } from "next/font/google";
+import { Geist_Mono, Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { DisableImageDrag } from "@/components/DisableImageDrag";
@@ -26,6 +26,19 @@ const instrumentSans = Instrument_Sans({
   display: "swap",
 });
 
+// Geist Mono backs the small uppercase meta labels (homepage card services/year).
+// Only 500 is used, so we pin that single static instance instead of pulling the
+// full variable axis. Note the variable name: unlike --font-display/--font-button
+// (custom Tailwind theme keys), --font-mono is a Tailwind v4 *built-in* key, so
+// next/font gets its own --font-geist-mono and app/globals.css points --font-mono
+// at it — self-referencing a built-in key inside @theme would be circular.
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+  weight: ["500"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   // www is the canonical host: Vercel 308-redirects the apex to www, so every
   // absolute URL we emit (canonicals, og:url, sitemap, JSON-LD) must match it.
@@ -46,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${interDisplay.variable} ${instrumentSans.variable} h-full antialiased`}
+      className={`${interDisplay.variable} ${instrumentSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-base font-display text-white">
         {/* These <Script>s live inside <body> per the next/script docs — as

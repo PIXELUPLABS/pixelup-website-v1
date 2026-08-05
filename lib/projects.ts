@@ -22,8 +22,28 @@ export interface Project {
   cardImage?: string;
   /** Optional logo mark rendered centered on top of the card media (e.g. Sainapse). */
   overlayLogo?: string;
+  /**
+   * One-line client descriptor under the card title in the homepage info block
+   * ("AI Native dev tool startup, Series A 25M"). Keep it to a single line —
+   * it truncates rather than wraps on desktop to protect the row rhythm.
+   */
+  tagline?: string;
+  /** Disciplines we shipped. Rendered uppercase, comma-joined, in the info block. */
+  services?: string[];
+  /** Year the work shipped, right-hand column of the info block. */
+  year?: string;
 }
 
+/**
+ * `tagline` / `services` / `year` feed the homepage card info block.
+ *
+ * Greptile's three values are verbatim from the approved design. Every other
+ * tagline is written from that client's own live site positioning (H1 + meta
+ * description, read Aug 2025) and carries no funding or valuation claim we
+ * can't source. `services` follow the discipline list Arjun supplied, mapped to
+ * the design's full names: Brand → "Branding", Web → "Website Design",
+ * Product → "Product Design".
+ */
 export const projects: Project[] = [
   {
     slug: "greptile",
@@ -33,6 +53,9 @@ export const projects: Project[] = [
     media: { type: "image", src: "/media/greptile.png" },
     alt: "Glowing green Greptile logo mark on a dark background, brand and product design by PixelUp Labs",
     cardImage: "/media/greptile/card.png",
+    tagline: "AI Native dev tool startup, Series A 25M",
+    services: ["Product Design", "Branding"],
+    year: "2025",
   },
   {
     slug: "henry-labs",
@@ -41,6 +64,11 @@ export const projects: Project[] = [
     external: true,
     media: { type: "video", src: "/media/henry-labs.mp4" },
     alt: "Henry Labs website motion reel, design by PixelUp Labs",
+    // Kept short on purpose: the three-discipline meta is the widest on the page,
+    // so this line has ~46 characters before it truncates at 1200px.
+    tagline: "Embedded checkout for agentic commerce",
+    services: ["Branding", "Website Design", "Product Design"],
+    year: "2026",
   },
   {
     slug: "ctgt",
@@ -49,6 +77,9 @@ export const projects: Project[] = [
     external: true,
     media: { type: "image", src: "/media/ctgt.png" },
     alt: "CTGT website design by PixelUp Labs",
+    tagline: "Applied interpretability lab for regulated industries",
+    services: ["Branding", "Website Design"],
+    year: "2025",
   },
   {
     slug: "streamline",
@@ -57,6 +88,9 @@ export const projects: Project[] = [
     external: true,
     media: { type: "image", src: "/media/streamline.png" },
     alt: "Streamline website design by PixelUp Labs",
+    tagline: "AI intake and workflow automation for in-house legal",
+    services: ["Branding", "Website Design"],
+    year: "2026",
   },
   {
     slug: "sainapse",
@@ -67,6 +101,9 @@ export const projects: Project[] = [
     alt: "Sainapse brand reveal motion loop, brand identity by PixelUp Labs",
     cardImage: "/media/sainapse/card.png",
     overlayLogo: "/media/sainapse.svg",
+    tagline: "AI customer intelligence for enterprise support teams",
+    services: ["Branding", "Website Design"],
+    year: "2025",
   },
   {
     slug: "reducto",
@@ -75,6 +112,10 @@ export const projects: Project[] = [
     external: true,
     media: { type: "image", src: "/media/reducto.png" },
     alt: "Reducto website design by PixelUp Labs",
+    tagline: "Agentic document platform for enterprise AI teams",
+    // Arjun flagged this pair as "ask Daksh" — confirm before it ships.
+    services: ["Product Design", "Website Design"],
+    year: "2025",
   },
   {
     slug: "valley",
@@ -83,6 +124,22 @@ export const projects: Project[] = [
     external: true,
     media: { type: "image", src: "/media/valley.png" },
     alt: "Valley website design by PixelUp Labs",
+    tagline: "AI outbound sales platform for B2B revenue teams",
+    services: ["Branding", "Website Design"],
+    year: "2025",
+  },
+  {
+    slug: "revyl",
+    label: "Revyl",
+    // revyl.ai 301s to revyl.com — link the destination directly, no redirect hop.
+    href: "https://revyl.com/",
+    external: true,
+    media: { type: "image", src: "/media/revyl.png" },
+    alt: "Revyl website design by PixelUp Labs",
+    // Same ~46-character ceiling as Henry Labs — three disciplines in the meta.
+    tagline: "Mobile testing infrastructure for AI agents",
+    services: ["Branding", "Website Design", "Product Design"],
+    year: "2025",
   },
   {
     slug: "sully",
@@ -92,15 +149,12 @@ export const projects: Project[] = [
     media: { type: "image", src: "/media/sully.png" },
     alt: "Sully.ai logo mark over a bright hospital corridor, website and motion design by PixelUp Labs",
     cardImage: "/media/sully/card.png",
+    tagline: "AI clinical agents for hospitals and health systems",
+    // Arjun's list says Brand + Web; the case study's `involvement` says
+    // Website / Product Pages / Motion / SEO with no branding. Following the list.
+    services: ["Branding", "Website Design"],
+    year: "2025",
   },
-  // {
-  //   slug: "revyl",
-  //   label: "Revyl",
-  //   href: "https://revyl.ai/",
-  //   external: true,
-  //   media: { type: "image", src: "/media/revyl.png" },
-  //   alt: "Revyl website design by PixelUp Labs",
-  // },
   // {
   //   slug: "synthio",
   //   label: "Synthio Labs",
@@ -109,6 +163,12 @@ export const projects: Project[] = [
   //   media: { type: "image", src: "/media/synthio.png" },
   //   alt: "Synthio Labs website design by PixelUp Labs",
   // },
+  //
+  // NOT YET ADDABLE — Pogo, Bland, Limelight, Zenact, and Autumn are on the
+  // intended showcase lineup but have no card media in /public/media and no
+  // confirmed live URL. Each needs a ~1008x584 image or mp4 plus its site link
+  // before it can become a card; the info-block copy can then be written from
+  // that site the same way as the entries above.
 ];
 
 /** Global CTA / social links used across the site. */

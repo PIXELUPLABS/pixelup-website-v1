@@ -20,6 +20,12 @@
   /* Fonts */
   --font-display: var(--font-display), "Inter", sans-serif;
   --font-button: var(--font-button), "Instrument Sans", sans-serif;
+  /* Overrides Tailwind's built-in ui-monospace stack for the `font-mono`
+     utility. Points at --font-geist-mono (set by next/font in app/layout.tsx)
+     rather than reusing the key name like the two custom fonts above — a
+     built-in key can't self-reference inside @theme without going circular. */
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
+    monospace;
 
   /* Custom breakpoint: two-column layout kicks in at ~1200px */
   --breakpoint-desk: 75rem; /* 1200px */
