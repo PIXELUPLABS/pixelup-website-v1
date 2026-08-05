@@ -12,12 +12,28 @@ const UPPER = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const LOWER = "abcdefghijklmnopqrstuvwxyz";
 
 /**
- * 8 ticks x 28ms ≈ 225ms, and the tick count is fixed rather than per-character
- * so every label finishes in the same time — otherwise "Explorations" would
- * still be churning long after "Blog" had settled.
+ * Timing. Tick counts are fixed rather than per-character so every label
+ * finishes together — otherwise "Explorations" would still be churning long
+ * after "Blog" had settled.
+ *
+ * HOLD_TICKS is why the first characters actually read as shuffling. Resolving
+ * left to right across the whole run means position 0's slice is over almost
+ * immediately — at 16 ticks it would be locked to its real letter within the
+ * first frame or two, which is under what the eye registers, so the label
+ * looked like it started already half-solved. Holding the entire label in
+ * scramble first gives every position the same visible churn before any of it
+ * starts landing.
  */
-const TICKS = 8;
-const TICK_MS = 28;
+const TICK_MS = 30;
+const HOLD_TICKS = 5; /* 150ms: whole label churning, nothing resolved yet */
+const RESOLVE_TICKS = 11; /* 330ms: resolving left to right */
+const TOTAL_TICKS = HOLD_TICKS + RESOLVE_TICKS; /* 480ms end to end */
+
+/** How many characters have landed by a given tick. */
+function resolvedBy(tick: number, length: number) {
+  if (tick <= HOLD_TICKS) return 0;
+  return Math.floor(((tick - HOLD_TICKS) / RESOLVE_TICKS) * length);
+}
 
 /** Every not-yet-resolved letter becomes a random one from its own case. */
 function scrambled(text: string, resolved: number) {
@@ -37,8 +53,9 @@ function scrambled(text: string, resolved: number) {
 }
 
 /**
- * A label that shuffles itself on hover, resolving left to right. Used for the
- * Navbar and Footer link labels.
+ * A label that shuffles itself on hover: the whole label churns briefly, then
+ * resolves left to right, 480ms end to end. Used for the Navbar and Footer link
+ * labels. Tune the feel via TICK_MS / HOLD_TICKS / RESOLVE_TICKS above.
  *
  * Hover-only on purpose — deliberately not wired to :focus-visible, because a
  * keyboard user landing on the link would otherwise watch the label churn at
@@ -77,14 +94,19 @@ export function ShuffleText({
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     if (timer.current) window.clearInterval(timer.current);
 
+    // First frame fires synchronously — waiting a full tick for it left a 30ms
+    // dead spot where the label still read as its resting self after the
+    // pointer had already landed.
+    setDisplay(scrambled(text, 0));
+
     let tick = 0;
     timer.current = window.setInterval(() => {
       tick += 1;
-      if (tick >= TICKS) {
+      if (tick >= TOTAL_TICKS) {
         settle();
         return;
       }
-      setDisplay(scrambled(text, Math.floor((tick / TICKS) * text.length)));
+      setDisplay(scrambled(text, resolvedBy(tick, text.length)));
     }, TICK_MS);
   }
 

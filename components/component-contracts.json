@@ -354,13 +354,14 @@
   "ShuffleText": {
     "file": "components/ShuffleText.tsx",
     "category": "interactive",
-    "description": "A text label that scrambles itself on hover and resolves left to right in ~225ms. Wraps a link's label; the link keeps all of its own styling and ShuffleText only owns the animation.",
+    "description": "A text label that scrambles itself on hover: the whole label churns for 150ms, then resolves left to right over 330ms (480ms total). Wraps a link's label; the link keeps all of its own styling and ShuffleText only owns the animation.",
     "variants": ["none — props are text (the label) and an optional className on the outer inline-block box"],
     "states": {
       "rest": "Renders `text` verbatim.",
-      "hover": "8 ticks at 28ms, each resolving another slice of the label left to right. Fixed tick count, so a long label and a short one finish together.",
+      "hover": "16 ticks at 30ms. The first frame fires synchronously on pointer-enter; HOLD_TICKS (5) hold the whole label in scramble, then RESOLVE_TICKS (11) resolve it left to right. Tick counts are fixed, not per-character, so a long label and a short one finish together.",
       "reduced_motion": "prefers-reduced-motion: reduce skips the animation entirely — the label just stays at rest."
     },
+    "tuning": "TICK_MS / HOLD_TICKS / RESOLVE_TICKS at the top of the file are the only knobs. Don't drop HOLD_TICKS to 0: resolving across the whole run locks the leading characters to their real letters within a frame or two, which is below what the eye registers, and the label then looks like it started already half-solved.",
     "tokens_used": ["none — inherits font, size and color from the link that wraps it"],
     "when_to_use": "Nav and footer text link labels. Currently: Navbar's desktop primary nav, and all four Footer link groups (Quick Links, Case Studies, Careers, Testimonials).",
     "do_not": [
