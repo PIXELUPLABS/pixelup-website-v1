@@ -6,16 +6,29 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "studio": "sanity dev",
+    "studio:build": "sanity build",
+    "sanity:typegen": "sanity schema extract --enforce-required-fields && sanity typegen generate",
+    "content:prepare": "sanity exec migration/scripts/prepare.ts",
+    "content:import": "sanity exec migration/scripts/import.ts --with-user-token",
+    "content:import:execute": "sanity exec migration/scripts/import.ts --with-user-token -- --execute",
+    "content:validate": "sanity exec migration/scripts/validate.ts --with-user-token"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",
     "@datafast/ai-crawl": "^1.0.9",
+    "@portabletext/react": "^7.0.1",
+    "@sanity/image-url": "^2.1.1",
+    "@sanity/vision": "^5.31.1",
     "@supabase/supabase-js": "^2.110.9",
     "framer-motion": "^12.42.2",
     "next": "16.2.9",
+    "next-sanity": "^13.3.1",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "sanity": "^5.31.1",
+    "styled-components": "^6.5.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

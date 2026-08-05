@@ -6,6 +6,7 @@ import { BlogList } from "@/components/blog/BlogList";
 import { BlogSidebar } from "@/components/blog/BlogSidebar";
 import { Footer } from "@/components/Footer";
 import { pixelupFaqSchema } from "@/lib/case-studies";
+import { getBlogPosts } from "@/sanity/lib/blog-data";
 
 export const metadata: Metadata = {
   title: "Blog - PIXELUP LABS",
@@ -14,7 +15,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/blog" },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getBlogPosts();
+
   return (
     <BlogFilterProvider>
       <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
@@ -29,7 +32,7 @@ export default function BlogPage() {
           className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
         />
         <main className="flex min-w-0 flex-1 flex-col gap-8">
-          <BlogList />
+          <BlogList posts={posts} />
           <BlogFaq />
           <AuditForm />
           {/* This row's own p-5 insets main's right edge from the true

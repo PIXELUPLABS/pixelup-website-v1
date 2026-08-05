@@ -1,15 +1,15 @@
 import type { MetadataRoute } from "next";
 import { caseStudies } from "@/lib/case-studies";
-import { blogIndexUpdated, blogPosts } from "@/lib/blog";
 import { siteUpdated } from "@/lib/site-dates";
+import { getBlogIndexUpdated, getBlogSitemapEntries } from "@/sanity/lib/blog-data";
 
 // Must match metadataBase in app/layout.tsx — www, not the apex, which redirects.
 const BASE_URL = "https://www.pixeluplabs.com";
 
 /**
  * Served at /sitemap.xml (Next metadata route). Case study and blog post
- * URLs are derived from lib/case-studies.ts and lib/blog.ts, so new ones
- * are picked up automatically.
+ * URLs are derived from lib/case-studies.ts and the active blog source, so
+ * newly published Sanity posts are picked up automatically after revalidation.
  *
  * Every entry carries `lastModified`, which Next renders as `<lastmod>`.
  * Without it, crawlers and AI answer engines have no way to tell whether a
@@ -17,7 +17,10 @@ const BASE_URL = "https://www.pixeluplabs.com";
  * from lib/site-dates.ts (static routes) and each post's own `updatedDate`
  * (blog) — see the note there on why this isn't `new Date()`.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogPosts = await getBlogSitemapEntries();
+  const blogIndexUpdated = getBlogIndexUpdated(blogPosts);
+
   return [
     {
       url: `${BASE_URL}/`,

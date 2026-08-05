@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     // Optimized images are immutable per URL — cache them for a year.
     minimumCacheTTL: 31536000,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        port: "",
+        pathname: "/images/**",
+      },
+    ],
   },
   async redirects() {
     // statusCode 301 (not `permanent: true`, which is 308) — explicitly

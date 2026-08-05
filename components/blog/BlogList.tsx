@@ -1,17 +1,18 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { blogPosts, formatBlogDate } from "@/lib/blog";
+import type { BlogPostData } from "@/sanity/lib/blog-types";
+import { formatBlogDate } from "@/sanity/lib/blog-utils";
+import { BlogImage } from "./BlogImage";
 import { useBlogFilter } from "./BlogFilterContext";
 
 /** Full-width blog container. Each blog row is itself full width, split 45%
     media / 55% info (no gap between them — the percentages already sum to
     100, see AGENTS.md's gap+width trap), rows separated by a hairline
     divider with padding on both sides of the rule. */
-export function BlogList() {
+export function BlogList({ posts }: { posts: BlogPostData[] }) {
   const { category } = useBlogFilter();
-  const posts = [...blogPosts]
+  const filteredPosts = [...posts]
     .sort(
       (a, b) => new Date(b.publishedDate).getTime() - new Date(a.publishedDate).getTime(),
     )
@@ -20,7 +21,7 @@ export function BlogList() {
   return (
     <section className="w-full">
       <div className="flex w-full flex-col divide-y divide-hairline">
-        {posts.map((post, index) => (
+        {filteredPosts.map((post, index) => (
           <Link
             key={post.slug}
             href={`/blog/${post.slug}`}
@@ -33,8 +34,8 @@ export function BlogList() {
                 — a fixed h-65 box was cropping it on wide viewports, where
                 the row grows wider without growing taller. */}
             <div className="relative h-65 w-full desk:aspect-2084/960 desk:h-auto desk:w-[45%]">
-              <Image
-                src={post.image}
+              <BlogImage
+                image={post.image}
                 alt=""
                 fill
                 sizes="(min-width: 1200px) 45vw, 100vw"
@@ -46,7 +47,7 @@ export function BlogList() {
                 <div className="flex h-8.75 flex-wrap items-end gap-2">
                   {post.categories.map((item) => (
                     <div key={item} className="flex items-end">
-                      <span className="h-1 w-1.5 shrink-0 bg-[#0658FC]" />
+                      <span className="h-1 w-1.5 shrink-0 bg-highlight" />
                       <span className="bg-label-grey/20 px-1 py-px text-[12px] font-medium uppercase text-white">
                         {item}
                       </span>

@@ -237,6 +237,20 @@
     ]
   },
 
+  "BlogImage": {
+    "file": "components/blog/BlogImage.tsx",
+    "category": "content",
+    "description": "Shared Next Image adapter for the temporary local blog-image fallback and Sanity image assets, including hotspot crops and LQIP placeholders.",
+    "variants": ["fill for fixed card frames", "intrinsic width and height for article heroes"],
+    "states": ["legacy local source", "Sanity CDN source", "Sanity blur placeholder when LQIP metadata exists"],
+    "tokens_used": [],
+    "when_to_use": "For blog index cards, article heroes, and related-article cards. It keeps image behavior identical while the CMS source is switched.",
+    "do_not": [
+      "Don't build Sanity CDN URLs directly in page components; pass the normalized BlogImage value here.",
+      "Don't omit the sizes prop when using fill, because Next Image needs it for correct responsive selection."
+    ]
+  },
+
   "ExplorationGallery": {
     "file": "components/explorations/ExplorationGallery.tsx",
     "category": "interactive",
