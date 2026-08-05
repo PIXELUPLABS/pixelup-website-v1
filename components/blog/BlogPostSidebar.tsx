@@ -1,4 +1,5 @@
-import { estimateReadTime, formatBlogDate, type BlogPost } from "@/lib/blog";
+import type { BlogPostData } from "@/sanity/lib/blog-types";
+import { estimateReadTime, formatBlogDate } from "@/sanity/lib/blog-utils";
 import { BackButton } from "../BackButton";
 import { CtaButtons } from "../CtaButtons";
 import { LeadCallout } from "../LeadCallout";
@@ -19,12 +20,12 @@ function MetaRow({ label, value }: { label: string; value: string }) {
  * with the site's trusted-strip + CTA buttons pinned to the bottom. Same
  * width/sticky treatment as BlogSidebar — different content, not a reuse.
  */
-export function BlogPostSidebar({ post }: { post: BlogPost }) {
+export function BlogPostSidebar({ post }: { post: BlogPostData }) {
   const metaRows = [
     { label: "Written by", value: post.author },
     { label: "Created on", value: formatBlogDate(post.publishedDate) },
     { label: "Updated on", value: formatBlogDate(post.updatedDate) },
-    { label: "Read time", value: estimateReadTime(post.content) },
+    { label: "Read time", value: estimateReadTime(post.body) },
   ];
 
   return (
