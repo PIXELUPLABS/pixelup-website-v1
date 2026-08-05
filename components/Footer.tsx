@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { ShuffleText } from "@/components/ShuffleText";
 import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Vector.svg";
 
@@ -50,26 +51,26 @@ export function Footer() {
                   <Link
                     key={link.name}
                     href={link.href}
-                    className="text-[14px] font-normal text-white hover:opacity-70"
+                    className="w-fit text-[14px] font-normal text-white"
                   >
-                    {link.name}
+                    <ShuffleText text={link.name} />
                   </Link>
                 ))}
                 <a
                   href={JOIN_THE_TEAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[14px] font-normal text-white hover:opacity-70"
+                  className="w-fit text-[14px] font-normal text-white"
                 >
-                  Careers
+                  <ShuffleText text="Careers" />
                 </a>
                 <a
                   href={TESTIMONIALS_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[14px] font-normal text-white hover:opacity-70"
+                  className="w-fit text-[14px] font-normal text-white"
                 >
-                  Testimonials
+                  <ShuffleText text="Testimonials" />
                 </a>
               </div>
             </div>
@@ -82,9 +83,9 @@ export function Footer() {
                   <Link
                     key={study.name}
                     href={`/case-studies/${study.slug}`}
-                    className="text-[14px] font-normal text-white hover:opacity-70"
+                    className="w-fit text-[14px] font-normal text-white"
                   >
-                    {study.name}
+                    <ShuffleText text={study.name} />
                   </Link>
                 ))}
               </div>

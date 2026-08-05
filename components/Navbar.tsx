@@ -7,6 +7,7 @@ import Script from "next/script";
 import { links } from "@/lib/projects";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
+import { ShuffleText } from "./ShuffleText";
 import { TallyPopupLink } from "./TallyPopupLink";
 
 export const navLinks: { label: string; href: string | null }[] = [
@@ -50,7 +51,7 @@ export function Navbar() {
                       : "text-white/70 hover:text-white"
                   }`}
                 >
-                  {item.label}
+                  <ShuffleText text={item.label} />
                 </Link>
               ) : (
                 <span

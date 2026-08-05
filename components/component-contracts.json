@@ -5,7 +5,7 @@
     "scope_note": "This covers /components only. Page templates that compose several of these (e.g. CaseStudyPage) are included too, tagged category: \"page_template\", since a future agent needs to know they exist before building a competing template from scratch.",
     "known_inconsistencies": [
       "Two near-identical blues in use: color.brand.accent (#004aeb, the 'real' token) and color.brand.highlight (#0658FC, used only on /explorations and the blog author box). Unresolved — see tokens.json.",
-      "Footer is currently disabled site-wide: both call sites (app/page.tsx and CaseStudyPage.tsx) have it commented out behind a 'TODO: re-enable when ready' note. It is documented below as if active since the component itself is intact and unchanged; check those call sites before assuming it renders anywhere."
+      "Navbar and MobileMenu keep two separate hand-maintained nav link lists; MobileMenu imports navLinks from Navbar but styles its own links, so link states have to be changed in both."
     ]
   },
 
@@ -18,7 +18,7 @@
       "default": "Transparent background, at the top of an unscrolled page.",
       "scrolled": "bg-base/90 + backdrop-blur once window.scrollY > 0.",
       "link:default": "text-white/70",
-      "link:hover": "text-white",
+      "link:hover": "text-white, plus the ShuffleText scramble on the label (see the ShuffleText entry). Desktop links only — MobileMenu's copies of the same links are not wired to it.",
       "link:active_route": "text-white (matches hover color) + aria-current=\"page\", determined via usePathname().",
       "link:disabled": "href: null renders a static, non-interactive text-white/30 span instead of a Link."
     },
@@ -204,12 +204,15 @@
   "Footer": {
     "file": "components/Footer.tsx",
     "category": "layout",
-    "description": "Site footer: giant Union wordmark, CtaButtons + nav links, copyright/social row. Shared between the homepage and case study pages.",
-    "status": "Currently disabled site-wide — both render call sites have it commented out pending a TODO. The component itself is intact.",
+    "description": "Site footer: four columns (brand/copyright, Quick Links, Case Studies, newsletter blurb + NewsletterForm) over a full-width Union wordmark row.",
+    "status": "Live. Rendered on app/page.tsx, app/blog/page.tsx, app/explorations/page.tsx, app/call/page.tsx, blog/BlogPostPage.tsx and case-study/CaseStudyPage.tsx.",
     "variants": ["none"],
-    "states": ["none — static content"],
-    "tokens_used": ["color.neutral.hairline", "color.neutral.white"],
-    "when_to_use": "Once per page, as the very last element, on pages that scroll to a natural end (currently: homepage, case study pages, when re-enabled).",
+    "states": {
+      "link:default": "text-white at 14px.",
+      "link:hover": "The ShuffleText scramble on the label, and nothing else — the old hover:opacity-70 dim was removed when the shuffle went in. Every link is w-fit so its box hugs its text, which keeps the click target and the shuffle's hover target identical."
+    },
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "color.neutral.label-grey", "typography.size.14"],
+    "when_to_use": "Once per page, as the very last element, on pages that scroll to a natural end.",
     "do_not": [
       "Don't re-enable it without checking the background-image blur/z-index fix made for it earlier (Footer needed position: relative so it paints correctly above the page's background-image layers).",
       "Its own <footer> requires relative positioning to stack correctly above absolutely-positioned page background layers — don't remove that."
@@ -345,6 +348,26 @@
     "when_to_use": "Rendered once by app/case-studies/[slug]/page.tsx per case study. Also renders the FAQPage JSON-LD schema.",
     "do_not": [
       "Don't build a competing case-study template — add a new CaseStudy entry to lib/case-studies.ts instead; this template handles layout for all of them."
+    ]
+  },
+
+  "ShuffleText": {
+    "file": "components/ShuffleText.tsx",
+    "category": "interactive",
+    "description": "A text label that scrambles itself on hover and resolves left to right in ~225ms. Wraps a link's label; the link keeps all of its own styling and ShuffleText only owns the animation.",
+    "variants": ["none — props are text (the label) and an optional className on the outer inline-block box"],
+    "states": {
+      "rest": "Renders `text` verbatim.",
+      "hover": "8 ticks at 28ms, each resolving another slice of the label left to right. Fixed tick count, so a long label and a short one finish together.",
+      "reduced_motion": "prefers-reduced-motion: reduce skips the animation entirely — the label just stays at rest."
+    },
+    "tokens_used": ["none — inherits font, size and color from the link that wraps it"],
+    "when_to_use": "Nav and footer text link labels. Currently: Navbar's desktop primary nav, and all four Footer link groups (Quick Links, Case Studies, Careers, Testimonials).",
+    "do_not": [
+      "Don't use it on buttons or CTAs — those have their own bg/brightness hover states, and scrambling a call to action hurts legibility at the moment of decision.",
+      "Don't remove the invisible width-lock span: the random glyphs have different advance widths from the real ones, so without it every tick reflows the nav row and the footer columns.",
+      "Don't put it on a link whose box is wider than its text without adding w-fit to that link — the hover handlers sit on the text box, so the shuffle would only fire over part of the click target.",
+      "Don't wire it to :focus-visible — a keyboard user would get a churning label at the moment they're trying to read it."
     ]
   },
 
