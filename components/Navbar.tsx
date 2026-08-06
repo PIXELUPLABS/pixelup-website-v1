@@ -45,7 +45,7 @@ export function Navbar() {
                   key={item.label}
                   href={item.href}
                   aria-current={pathname === item.href ? "page" : undefined}
-                  className={`font-display text-[13px] font-medium uppercase tracking-[-0.02em] transition-colors ${
+                  className={`-mx-1.5 -my-1 px-0.5 py-[1px] font-display text-[13px] font-medium uppercase tracking-[-0.02em] transition-colors hover:bg-accent ${
                     pathname === item.href
                       ? "text-white"
                       : "text-white/70 hover:text-white"
