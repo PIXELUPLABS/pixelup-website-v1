@@ -18,7 +18,7 @@
       "default": "Transparent background, at the top of an unscrolled page.",
       "scrolled": "bg-base/90 + backdrop-blur once window.scrollY > 0.",
       "link:default": "text-white/70",
-      "link:hover": "text-white, a sharp-cornered (no radius) color.brand.accent background behind the label (-mx-1.5 -my-1 px-1.5 py-1, negative margins so the extra padding doesn't shift row spacing), plus the ShuffleText scramble on the label (see the ShuffleText entry). Desktop links only — MobileMenu's copies of the same links are not wired to it.",
+      "link:hover": "text-white, a sharp-cornered (no radius) color.brand.accent background behind the label (-mx-1.5 -my-1 px-0.5 py-px, negative margins so the extra padding doesn't shift row spacing). Desktop links only. ShuffleText was tried here and removed — a scrambled run's advance width doesn't match the real label, so it visibly spilled past the tight hover background.",
       "link:active_route": "text-white (matches hover color) + aria-current=\"page\", determined via usePathname().",
       "link:disabled": "href: null renders a static, non-interactive text-white/30 span instead of a Link."
     },
@@ -378,7 +378,7 @@
     },
     "tuning": "TICK_MS / HOLD_TICKS / RESOLVE_TICKS at the top of the file are the only knobs. Don't drop HOLD_TICKS to 0: resolving across the whole run locks the leading characters to their real letters within a frame or two, which is below what the eye registers, and the label then looks like it started already half-solved.",
     "tokens_used": ["none — inherits font, size and color from the link that wraps it"],
-    "when_to_use": "Nav and footer text link labels. Currently: Navbar's desktop primary nav, and all four Footer link groups (Quick Links, Case Studies, Careers, Testimonials).",
+    "when_to_use": "Nav and footer text link labels. Not currently used anywhere — pulled from Navbar's desktop primary nav and all four Footer link groups (Quick Links, Case Studies, Careers, Testimonials) because a scrambled run's advance width doesn't match the real label, which read as the text spilling out of Navbar's tight hover background. Component kept in case it's revisited with a fix (e.g. clipping the overlay to the locked width).",
     "do_not": [
       "Don't use it on buttons or CTAs — those have their own bg/brightness hover states, and scrambling a call to action hurts legibility at the moment of decision.",
       "Don't remove the invisible width-lock span: the random glyphs have different advance widths from the real ones, so without it every tick reflows the nav row and the footer columns.",
