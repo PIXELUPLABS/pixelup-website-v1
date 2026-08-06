@@ -179,9 +179,9 @@
     "variants": ["none"],
     "states": {
       "closed": "Hamburger icon.",
-      "open": "X icon, panel visible below the navbar."
+      "open": "X icon, panel visible below the navbar, plus a color.neutral.scrim overlay (fixed, below the panel's z-index) that dims the rest of the page — the page bg is already pure black so a scrim, not a darker solid, is what makes the open state read as darker."
     },
-    "tokens_used": ["radius.sm", "radius.md", "color.brand.accent"],
+    "tokens_used": ["radius.sm", "radius.md", "color.brand.accent", "color.neutral.scrim"],
     "when_to_use": "Inside Navbar only.",
     "do_not": [
       "Don't remove desk:hidden — this is the mobile-only counterpart to Navbar's desktop nav links.",
