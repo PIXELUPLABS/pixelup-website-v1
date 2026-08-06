@@ -96,7 +96,7 @@
     ],
     "states": {
       "default": "Static frame, aspect-[1008/584].",
-      "hover": "Media scales up 1.05x via group-hover, clipped by the frame. Info text is deliberately static — no hover state.",
+      "hover": "Media scales up 1.05x via group-hover, clipped by the frame. Info row is opacity-80 at rest, opacity-100 on its own :hover (not group-hover — only fires when the pointer is directly over the text block, independent of the media zoom).",
       "entrance": "fade-up with a staggered delay based on list index (capped at 800ms). The info row inherits the card's animation rather than having its own."
     },
     "tokens_used": [
