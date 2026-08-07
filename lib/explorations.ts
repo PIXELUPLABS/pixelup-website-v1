@@ -37,4 +37,6 @@ export const explorationBlocks: ExplorationBlock[] = [
   { kind: "full", src: "/media/explorations/img-45.webp" },
   { kind: "pair", srcs: ["/media/explorations/img-46.webp", "/media/explorations/img-47.webp"] },
   { kind: "full", src: "/media/explorations/img-50.webp" },
+  { kind: "full", src: "/media/explorations/img-52.webp" },
+  { kind: "pair", srcs: ["/media/explorations/img-51.webp", "/media/explorations/img-53.webp"] },
 ];
