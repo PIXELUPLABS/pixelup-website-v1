@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NewsletterForm } from "@/components/NewsletterForm";
-import { ShuffleText } from "@/components/ShuffleText";
 import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Vector.svg";
 
@@ -53,7 +52,7 @@ export function Footer() {
                     href={link.href}
                     className="w-fit text-[14px] font-normal text-white"
                   >
-                    <ShuffleText text={link.name} />
+                    {link.name}
                   </Link>
                 ))}
                 <a
@@ -62,7 +61,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="w-fit text-[14px] font-normal text-white"
                 >
-                  <ShuffleText text="Careers" />
+                  Careers
                 </a>
                 <a
                   href={TESTIMONIALS_URL}
@@ -70,7 +69,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="w-fit text-[14px] font-normal text-white"
                 >
-                  <ShuffleText text="Testimonials" />
+                  Testimonials
                 </a>
               </div>
             </div>
@@ -85,7 +84,7 @@ export function Footer() {
                     href={`/case-studies/${study.slug}`}
                     className="w-fit text-[14px] font-normal text-white"
                   >
-                    <ShuffleText text={study.name} />
+                    {study.name}
                   </Link>
                 ))}
               </div>

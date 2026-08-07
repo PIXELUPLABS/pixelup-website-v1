@@ -55,7 +55,7 @@ function ProjectInfo({ project }: { project: Project }) {
   if (!tagline && !hasServices && !year) return null;
 
   return (
-    <div className="flex flex-col items-start gap-3 desk:flex-row desk:items-end desk:justify-between desk:gap-4">
+    <div className="flex flex-col items-start gap-3 opacity-70 transition-opacity duration-300 hover:opacity-100 desk:flex-row desk:items-end desk:justify-between desk:gap-4">
       <div className="w-full min-w-0 desk:flex-1">
         <h3 className="text-[20px] font-medium leading-[1.2] tracking-[-0.02em] text-white desk:truncate desk:text-[24px]">
           {label}

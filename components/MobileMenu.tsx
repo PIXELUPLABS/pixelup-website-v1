@@ -33,6 +33,15 @@ export function MobileMenu() {
       </button>
 
       {open && (
+        <button
+          type="button"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+          className="fixed inset-x-0 top-16 bottom-0 z-10 bg-scrim"
+        />
+      )}
+
+      {open && (
         <div className="absolute inset-x-0 top-16 z-20 flex flex-col gap-2 border-t border-white/10 bg-black p-4">
           {navLinks.map((item) =>
             item.href ? (
