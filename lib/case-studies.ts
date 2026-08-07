@@ -579,8 +579,8 @@ const streamline: CaseStudy = {
         {
           kind: "full",
           slot: {
-            media: { type: "image", src: "/media/streamline/img-1.png" },
-            alt: "Streamline homepage hero 'In-house legal runs on Streamline' on a tablet held in hands",
+            media: { type: "image", src: "/media/streamline/img-5.png" },
+            alt: "Streamline website collage with desktop homepage, mobile mockup, and integration tiles",
           },
         },
         {
@@ -632,8 +632,8 @@ const streamline: CaseStudy = {
         {
           kind: "full",
           slot: {
-            media: { type: "image", src: "/media/streamline/img-5.png" },
-            alt: "Streamline website collage with desktop homepage, mobile mockup, and integration tiles",
+            media: { type: "image", src: "/media/streamline/img-1.png" },
+            alt: "Streamline homepage hero 'In-house legal runs on Streamline' on a tablet held in hands",
           },
         },
         {
