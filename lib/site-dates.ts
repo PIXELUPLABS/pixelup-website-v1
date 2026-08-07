@@ -21,7 +21,7 @@ export const siteUpdated = {
   call: "2026-07-28",
   explorations: "2026-07-29",
   /** Every case study lives in lib/case-studies.ts, so they share one date. */
-  caseStudies: "2026-07-29",
+  caseStudies: "2026-08-07",
 } as const;
 
 /** First public commit of the site — used as `datePublished` on the homepage. */
