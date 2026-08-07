@@ -531,4 +531,156 @@ const sully: CaseStudy = {
   ],
 };
 
-export const caseStudies = { greptile, sainapse, sully };
+const streamline: CaseStudy = {
+  slug: "streamline",
+  title: "Streamline: Enterprise Positioning for an AI Company Ready to Move Upmarket",
+  metaTitle: "Streamline Case Study - PIXELUP LABS",
+  metaDescription:
+    "How we repositioned Streamline AI for enterprise legal teams: a refreshed brand, sharper messaging, and a unified design system that scaled across more than 200 pages ahead of their PR launch.",
+  info: {
+    client: "Streamline (AI Platform for Legal Operations)",
+    year: "2026",
+    involvement: ["Brand Identity", "Positioning", "Website Design", "Design System"],
+    link: { label: "streamline.ai", href: "https://www.streamline.ai/" },
+  },
+  description: [
+    "Streamline AI had built a product capable of serving enterprise legal teams, but its brand and website reflected an earlier stage of the company.",
+    "The product had evolved significantly, but the website had not. Newer competitors with less capable products appeared more credible simply because they presented themselves better online.",
+    "As they prepared to expand into larger enterprise accounts and launch a new PR initiative, we partnered with them to reposition the business as the modern AI platform for legal operations.",
+    "This project was about aligning the company's digital presence with the quality of the product they had already built.",
+  ],
+  hero: {
+    media: { type: "image", src: "/media/streamline.png" },
+    alt: "Streamline serif wordmark over a collage of legal AI product cards with a woman working at a desk",
+  },
+  sections: [
+    {
+      heading: "How Did We Approach the Project?",
+      lead: "We focused on understanding the business before the visuals.\nOur focus:",
+      focus: [
+        {
+          title: "Aligning on the future",
+          sub: "Brand strategy anchored to the long-term vision",
+        },
+        {
+          title: "Understanding the competitive landscape",
+          sub: "Finding where competitors won on perception alone",
+        },
+        {
+          title: "Building the positioning",
+          sub: "Clear messaging, differentiators, and buyer personas",
+        },
+        {
+          title: "Designing a scalable system",
+          sub: "One brand system powering hundreds of pages",
+        },
+      ],
+      media: [
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-1.png" },
+            alt: "Streamline homepage hero 'In-house legal runs on Streamline' on a tablet held in hands",
+          },
+        },
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-2.png" },
+            alt: "Streamline 'Built for how modern legal teams work' website section on a green textured background",
+          },
+        },
+      ],
+    },
+    {
+      heading: "What Results Did Streamline Achieve?",
+      results: [
+        {
+          label: "Launch:",
+          text: "Refreshed brand shipped with the PR initiative",
+        },
+        {
+          label: "Customers:",
+          text: "Positive feedback on the new experience",
+        },
+        {
+          label: "Pipeline:",
+          text: "Stronger enterprise and Fortune 500 conversations",
+        },
+        {
+          label: "Scale:",
+          text: "One design system across 200+ pages",
+        },
+      ],
+      paragraphs: [
+        "The redesign was not just a visual update. It gave Streamline a digital presence that reflected the maturity of its product and supported its move toward larger enterprise customers.",
+      ],
+      media: [
+        {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/streamline/img-3.png" },
+              alt: "Streamline document knowledge graph and Slack AI conversation cards on a green glass background",
+            },
+            {
+              media: { type: "image", src: "/media/streamline/img-4.png" },
+              alt: "Streamline mobile integrations screen 'We work where your team already works'",
+            },
+          ],
+        },
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-5.png" },
+            alt: "Streamline website collage with desktop homepage, mobile mockup, and integration tiles",
+          },
+        },
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-6.png" },
+            alt: "Streamline integrations strip with Ironclad, Microsoft Teams, Slack, Salesforce, Jira, and DocuSign",
+            tone: "white",
+          },
+        },
+      ],
+    },
+    {
+      heading: "What Happened After Launch?",
+      paragraphs: [
+        "The website became more than a marketing asset. Using a shared design system, we rebuilt over 200 pages across product, feature, industry, team, and resource sections while maintaining consistency throughout the experience.",
+        "As the product continues to evolve, the team now has a scalable foundation that supports future launches, new messaging, and ongoing growth without needing to redesign the website from scratch.",
+      ],
+      media: [
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-7.png" },
+            alt: "Streamline 'Built for how modern legal teams work' team page on a tablet held in hands",
+          },
+        },
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-8.png" },
+            alt: "Streamline resources section 'Insight for legal operations leaders' on a green background",
+          },
+        },
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-9.png" },
+            alt: "Streamline resources page on a laptop resting on a stone slab",
+          },
+        },
+      ],
+    },
+  ],
+  moreProjects: [
+    { slug: "greptile", tags: "Branding & Product Design" },
+    { slug: "sully", tags: "Website & Motion Design" },
+  ],
+};
+
+export const caseStudies = { greptile, sainapse, sully, streamline };

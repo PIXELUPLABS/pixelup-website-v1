@@ -84,8 +84,8 @@ export const projects: Project[] = [
   {
     slug: "streamline",
     label: "Streamline",
-    href: "https://www.streamline.ai/",
-    external: true,
+    href: "/case-studies/streamline",
+    external: false,
     media: { type: "image", src: "/media/streamline.png" },
     alt: "Streamline website design by PixelUp Labs",
     tagline: "AI intake and workflow automation for in-house legal",
