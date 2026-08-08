@@ -9,7 +9,7 @@ const placeholderLogos = [
 ] as const;
 
 const logoFrameClassBySlug: Record<string, string> = {
-  "autumn-pricing": "h-[30.36px] w-[123.372px]",
+  "autumn-pricing": "h-[27.324px] w-[111.0348px]",
   bland: "h-[21.6px] w-[74.6182px]",
   ctgt: "h-[26.4px] w-[96.7074px]",
   conigma: "h-[30px] w-[122.5px]",
