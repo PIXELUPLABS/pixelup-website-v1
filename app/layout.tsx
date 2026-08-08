@@ -93,8 +93,13 @@ export default function RootLayout({
           `}
         </Script>
         <DisableImageDrag />
-        <Navbar />
-        {children}
+        {/* Caps the site at 1800px and centers it — on very large monitors the
+            page was stretching edge-to-edge, which broke the intended layout
+            proportions. Only binds above 1800px; no effect at smaller sizes. */}
+        <div className="mx-auto max-w-[1800px]">
+          <Navbar />
+          {children}
+        </div>
       </body>
     </html>
   );
