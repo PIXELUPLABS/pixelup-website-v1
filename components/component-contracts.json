@@ -412,8 +412,8 @@
   "ClientRow": {
     "file": "components/clients/ClientRow.tsx",
     "category": "content",
-    "description": "One hairline-separated client entry with a logo or temporary text wordmark, client name, niche, engagement summary, and optional internal case-study link.",
-    "variants": ["approved logo vs temporary text wordmark", "confirmed entry vs details-to-confirm placeholder", "with or without case-study link"],
+    "description": "One hairline-separated client entry with a logo, niche, engagement summary, and optional internal case-study link. Until every approved logo arrives, missing assets use a deterministic rotation of existing white client logos rather than text or initial blocks. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
+    "variants": ["approved logo vs duplicated-logo placeholder", "confirmed entry vs details-to-confirm placeholder", "with or without case-study link"],
     "states": {"entrance": "fade-up stagger capped at 600ms", "link:hover": "existing square blue accent treatment"},
     "tokens_used": ["color.neutral.hairline", "color.brand.accent", "color.neutral.label-grey", "typography.font.mono", "breakpoint.desk"],
     "when_to_use": "Inside ClientRoster only, driven by lib/clients.ts.",
