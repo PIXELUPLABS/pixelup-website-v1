@@ -8,6 +8,31 @@ const placeholderLogos = [
   "/media/logos/bland.svg",
 ] as const;
 
+const logoFrameClassBySlug: Record<string, string> = {
+  "autumn-pricing": "h-[30.36px] w-[123.372px]",
+  bland: "h-[21.6px] w-[74.6182px]",
+  ctgt: "h-[26.4px] w-[96.7074px]",
+  conigma: "h-[30px] w-[122.5px]",
+  "conscious-engines": "h-[18.5521px] w-[201.6px]",
+  dayflow: "h-[30px] w-[105.7522px]",
+  greptile: "h-[26.4px] w-[109.0065px]",
+  henrylabs: "h-6 w-[154.56px]",
+  "lasting-learn": "h-[23.6262px] w-[161.28px]",
+  "my-wonder": "h-[28.8px] w-[112.6286px]",
+  nfa: "h-[21.6px] w-[57.0857px]",
+  pogo: "h-[30.36px] w-[62.8138px]",
+  reducto: "h-6 w-[118.272px]",
+  revyl: "h-[26.4px] w-[96.8px]",
+  sainapse: "h-[25.8px] w-[142.8214px]",
+  streamline: "h-[29.04px] w-[141.4529px]",
+  sully: "h-6 w-[89.6px]",
+  "synthio-labs": "h-[26.9242px] w-[154.56px]",
+  umbra: "h-6 w-[89.6px]",
+  "vertera-health": "h-[26.4px] w-[102.2092px]",
+  zenact: "h-6 w-[107.52px]",
+  jumbo: "h-6 w-[107.52px]",
+};
+
 function splitForBalancedLastLine(text: string) {
   const words = text.trim().split(/\s+/);
   const trailingWords = words.splice(-3).join(" ");
@@ -20,17 +45,22 @@ function splitForBalancedLastLine(text: string) {
 
 function ClientIdentity({ client, index }: { client: Client; index: number }) {
   const isPlaceholderLogo = !client.logo;
+  const preservesSourceColors = ["conigma", "vertera-health"].includes(client.slug);
   const logo = client.logo ?? placeholderLogos[index % placeholderLogos.length];
+  const logoFrameClass =
+    logoFrameClassBySlug[client.slug] ?? "h-6 w-[134.4px]";
 
   return (
     <div className="flex min-w-0 items-center">
-      <div className="flex h-10 w-28 shrink-0 items-center">
+      <div className={`relative max-w-full shrink-0 ${logoFrameClass}`}>
         <Image
           src={logo}
           alt={isPlaceholderLogo ? "" : client.name}
-          width={160}
-          height={40}
-          className="max-h-8 w-auto max-w-full object-contain object-left opacity-80"
+          fill
+          sizes="202px"
+          className={`object-contain object-left ${
+            preservesSourceColors ? "" : "brightness-0 invert"
+          }`}
         />
         {isPlaceholderLogo && <span className="sr-only">{client.name} logo placeholder</span>}
       </div>
@@ -44,10 +74,10 @@ export function ClientRow({ client, index }: { client: Client; index: number }) 
 
   return (
     <li
-      className="fade-up grid grid-cols-1 gap-6 border-t-[0.5px] border-hairline py-6 desk:grid-cols-2 desk:items-center desk:gap-6 desk:py-4"
+      className="fade-up grid grid-cols-1 gap-6 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-2 desk:items-center desk:gap-6"
       style={{ animationDelay: entranceDelay }}
     >
-      <div className="flex min-w-0 flex-col gap-4 desk:gap-0">
+      <div className="flex min-w-0 flex-col gap-2.5">
         <ClientIdentity client={client} index={index} />
         <div className="flex flex-col gap-2 desk:gap-0">
           <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
