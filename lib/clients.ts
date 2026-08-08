@@ -13,6 +13,7 @@ export interface Client {
   niche: string;
   engagement: string;
   caseStudySlug?: string;
+  website?: string;
   placeholder?: boolean;
 }
 
@@ -22,41 +23,46 @@ export const clients: Client[] = [
     name: "Bland",
     logo: "/media/logos/bland.svg",
     niche: "AI voice infrastructure",
-    engagement: "Engagement scope is being added to the archive.",
+    engagement: "Brand identity and digital experience design for an AI communications platform.",
+    website: "https://www.bland.ai/",
     placeholder: true,
   },
   {
     slug: "ctgt",
     name: "CTGT",
     niche: "Enterprise AI",
-    engagement: "Brand identity and website design for an applied interpretability platform.",
+    engagement: "Brand identity and website design for an enterprise AI interpretability platform.",
+    website: "https://www.ctgt.ai/",
   },
   {
     slug: "greptile",
     name: "Greptile",
     niche: "AI developer tools",
-    engagement: "Brand identity, product design, website design, and sales decks.",
+    engagement: "Brand identity, product design, website design, and sales enablement assets.",
     caseStudySlug: "greptile",
   },
   {
     slug: "henry-labs",
     name: "Henry Labs",
     niche: "Agentic commerce",
-    engagement: "Brand identity, website design, and product design for embedded checkout infrastructure.",
+    engagement: "Brand identity, website design, and product design for an agentic commerce platform.",
+    website: "https://henrylabs.ai/",
   },
   {
     slug: "pogo",
     name: "Pogo",
     logo: "/media/logos/pogo.svg",
     niche: "Consumer technology",
-    engagement: "Engagement scope is being added to the archive.",
+    engagement: "Brand and product experience design for a consumer rewards platform.",
+    website: "https://www.joinpogo.com/",
     placeholder: true,
   },
   {
     slug: "razorpay",
     name: "Razorpay",
     niche: "Fintech and payments",
-    engagement: "Engagement scope is being added to the archive.",
+    engagement: "Digital experience design for a modern payments and financial technology platform.",
+    website: "https://razorpay.com/",
     placeholder: true,
   },
   {
@@ -64,12 +70,14 @@ export const clients: Client[] = [
     name: "Reducto",
     niche: "Document AI",
     engagement: "Product and website design for an enterprise document intelligence platform.",
+    website: "https://reducto.ai/",
   },
   {
     slug: "revyl",
     name: "Revyl",
     niche: "AI developer tools",
     engagement: "Brand identity, website design, and product design for mobile testing infrastructure.",
+    website: "https://revyl.com/",
   },
   {
     slug: "sainapse",
@@ -84,14 +92,14 @@ export const clients: Client[] = [
     name: "Streamline",
     logo: "/media/logos/streamline.svg",
     niche: "Legal AI",
-    engagement: "Brand identity, positioning, website design, and a reusable design system.",
+    engagement: "Brand identity, positioning, website design, and a reusable digital design system.",
     caseStudySlug: "streamline",
   },
   {
     slug: "sully",
     name: "Sully.ai",
     niche: "Healthcare AI",
-    engagement: "Website design, product pages, motion design, and SEO for an AI healthcare platform.",
+    engagement: "Website design, product pages, motion design, and SEO for a healthcare platform.",
     caseStudySlug: "sully",
   },
   {
@@ -99,5 +107,6 @@ export const clients: Client[] = [
     name: "Valley",
     niche: "Sales AI",
     engagement: "Brand identity and website design for an AI outbound sales platform.",
+    website: "https://www.joinvalley.co/",
   },
 ];

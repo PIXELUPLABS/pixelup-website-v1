@@ -31,10 +31,12 @@ function ClientIdentity({ client, index }: { client: Client; index: number }) {
 
 export function ClientRow({ client, index }: { client: Client; index: number }) {
   const entranceDelay = `${Math.min(100 + index * 70, 600)}ms`;
+  const actionClass =
+    "w-fit text-white underline decoration-white/30 underline-offset-4 transition-colors hover:bg-accent hover:no-underline";
 
   return (
     <li
-      className="fade-up grid grid-cols-1 gap-6 border-t-[0.5px] border-hairline py-6 desk:grid-cols-[1.1fr_0.75fr_1.55fr] desk:items-start"
+      className="fade-up grid grid-cols-1 gap-6 border-t-[0.5px] border-hairline py-6 desk:grid-cols-[0.8fr_0.8fr_1.2fr] desk:items-start"
       style={{ animationDelay: entranceDelay }}
     >
       <ClientIdentity client={client} index={index} />
@@ -59,13 +61,20 @@ export function ClientRow({ client, index }: { client: Client; index: number }) 
           {client.caseStudySlug && (
             <Link
               href={`/case-studies/${client.caseStudySlug}`}
-              className="w-fit text-white underline decoration-white/30 underline-offset-4 transition-colors hover:bg-accent hover:no-underline"
+              className={actionClass}
             >
               View case study
             </Link>
           )}
-          {client.placeholder && (
-            <span className="text-label-grey">Details to confirm</span>
+          {!client.caseStudySlug && client.website && (
+            <a
+              href={client.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={actionClass}
+            >
+              View website
+            </a>
           )}
         </div>
       </div>
