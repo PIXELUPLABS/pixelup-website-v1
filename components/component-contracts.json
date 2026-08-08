@@ -412,11 +412,11 @@
   "ClientRow": {
     "file": "components/clients/ClientRow.tsx",
     "category": "content",
-    "description": "One hairline-separated client entry with a logo, niche, engagement summary, and optional internal case-study link. Until every approved logo arrives, missing assets use a deterministic rotation of existing white client logos rather than text or initial blocks. Engagement descriptions are editorially kept to a similar 10–12 word range for consistent row rhythm. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
-    "variants": ["approved logo vs duplicated-logo placeholder", "internal case-study link vs external client-website link"],
-    "states": {"entrance": "fade-up stagger capped at 600ms", "link:hover": "existing square blue accent treatment"},
-    "tokens_used": ["color.neutral.hairline", "color.brand.accent", "color.neutral.label-grey", "typography.font.mono", "breakpoint.desk"],
+    "description": "One hairline-separated client entry with a logo, niche, and engagement summary. Until every approved logo arrives, missing assets use a deterministic rotation of existing white client logos rather than text or initial blocks. Engagement descriptions are editorially kept to a similar 10–12 word range, with the final three words kept together to prevent widow lines. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
+    "variants": ["approved logo vs duplicated-logo placeholder"],
+    "states": {"entrance": "fade-up stagger capped at 600ms"},
+    "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "breakpoint.desk"],
     "when_to_use": "Inside ClientRoster only, driven by lib/clients.ts.",
-    "do_not": ["Don't invent engagement results; update lib/clients.ts when approved information and logo assets arrive.", "Every row must end with either a case-study link or a client-website link.", "Keep engagement descriptions within the established 10–12 word range unless real approved copy requires otherwise."]
+    "do_not": ["Don't invent engagement results; update lib/clients.ts when approved information and logo assets arrive.", "Keep engagement descriptions within the established 10–12 word range unless real approved copy requires otherwise.", "Don't remove the final three-word nowrap group without rechecking the roster for one- or two-word widow lines."]
   }
 }

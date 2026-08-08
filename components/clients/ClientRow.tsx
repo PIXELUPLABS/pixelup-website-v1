@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { Client } from "@/lib/clients";
 
 const placeholderLogos = [
@@ -8,6 +7,16 @@ const placeholderLogos = [
   "/media/logos/sainapse.svg",
   "/media/logos/bland.svg",
 ] as const;
+
+function splitForBalancedLastLine(text: string) {
+  const words = text.trim().split(/\s+/);
+  const trailingWords = words.splice(-3).join(" ");
+
+  return {
+    leadingWords: words.join(" "),
+    trailingWords,
+  };
+}
 
 function ClientIdentity({ client, index }: { client: Client; index: number }) {
   const isPlaceholderLogo = !client.logo;
@@ -31,8 +40,7 @@ function ClientIdentity({ client, index }: { client: Client; index: number }) {
 
 export function ClientRow({ client, index }: { client: Client; index: number }) {
   const entranceDelay = `${Math.min(100 + index * 70, 600)}ms`;
-  const actionClass =
-    "w-fit text-white underline decoration-white/30 underline-offset-4 transition-colors hover:bg-accent hover:no-underline";
+  const balancedEngagement = splitForBalancedLastLine(client.engagement);
 
   return (
     <li
@@ -55,28 +63,11 @@ export function ClientRow({ client, index }: { client: Client; index: number }) 
           What we did
         </p>
         <p className="text-[14px] leading-[1.4] tracking-[-0.02em] text-white/80">
-          {client.engagement}
+          {balancedEngagement.leadingWords && (
+            <>{balancedEngagement.leadingWords}{" "}</>
+          )}
+          <span className="whitespace-nowrap">{balancedEngagement.trailingWords}</span>
         </p>
-        <div className="flex min-h-4 items-center gap-3 font-mono text-[12px] font-medium uppercase tracking-[0.04em]">
-          {client.caseStudySlug && (
-            <Link
-              href={`/case-studies/${client.caseStudySlug}`}
-              className={actionClass}
-            >
-              View case study
-            </Link>
-          )}
-          {!client.caseStudySlug && client.website && (
-            <a
-              href={client.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={actionClass}
-            >
-              View website
-            </a>
-          )}
-        </div>
       </div>
     </li>
   );
