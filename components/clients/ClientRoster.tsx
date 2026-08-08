@@ -6,7 +6,7 @@ export function ClientRoster({ clients }: { clients: Client[] }) {
     <section aria-label="Client roster" className="flex flex-col">
       <div
         aria-hidden="true"
-        className="hidden grid-cols-[0.8fr_0.8fr_1.2fr] gap-6 border-t-[0.5px] border-hairline py-4 font-mono text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey desk:grid"
+        className="hidden grid-cols-[0.8fr_0.8fr_1.2fr] gap-6 py-4 font-mono text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey desk:grid"
       >
         <p>Client · {clients.length.toString().padStart(2, "0")}</p>
         <p>Niche</p>
