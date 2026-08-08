@@ -1,11 +1,6 @@
-import { Geist } from "next/font/google";
 import { CtaButtons } from "../CtaButtons";
-import { LeadCallout } from "../LeadCallout";
 import { TrustedStrip } from "../TrustedStrip";
 import { ArticleFilters } from "./ArticleFilters";
-
-// Scoped to the "Articles" heading only — the rest of the site keeps font-display.
-const geist = Geist({ subsets: ["latin"], weight: ["500"] });
 
 /**
  * Blog's left aside: title/subheading + category filters, with the site's
@@ -22,7 +17,7 @@ export function BlogSidebar() {
       <div className="flex flex-col gap-6">
         <div className="flex flex-col gap-4">
           <h1
-            className={`${geist.className} fade-up tracking-display text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[56px]`}
+            className="fade-up font-display tracking-display text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[56px]"
           >
             Articles
           </h1>
