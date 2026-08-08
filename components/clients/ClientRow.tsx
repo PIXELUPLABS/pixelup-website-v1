@@ -44,25 +44,26 @@ export function ClientRow({ client, index }: { client: Client; index: number }) 
 
   return (
     <li
-      className="fade-up grid grid-cols-1 gap-6 border-t-[0.5px] border-hairline py-6 desk:grid-cols-[0.8fr_0.8fr_1.2fr] desk:items-start"
+      className="fade-up grid grid-cols-1 gap-6 border-t-[0.5px] border-hairline py-6 desk:grid-cols-2 desk:items-center desk:gap-6 desk:py-4"
       style={{ animationDelay: entranceDelay }}
     >
-      <ClientIdentity client={client} index={index} />
-
-      <div className="flex flex-col gap-2">
-        <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
-          Niche
-        </p>
-        <p className="text-[14px] leading-[1.4] tracking-[-0.02em] text-white/60">
-          {client.niche}
-        </p>
+      <div className="flex min-w-0 flex-col gap-4 desk:gap-0">
+        <ClientIdentity client={client} index={index} />
+        <div className="flex flex-col gap-2 desk:gap-0">
+          <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
+            Niche
+          </p>
+          <p className="text-[14px] leading-5 tracking-[-0.02em] text-white/60">
+            {client.niche}
+          </p>
+        </div>
       </div>
 
       <div className="flex min-w-0 flex-col gap-3">
         <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
           What we did
         </p>
-        <p className="text-[14px] leading-[1.4] tracking-[-0.02em] text-white/80">
+        <p className="text-[14px] leading-5 tracking-[-0.02em] text-white/60 desk:max-w-[363px]">
           {balancedEngagement.leadingWords && (
             <>{balancedEngagement.leadingWords}{" "}</>
           )}

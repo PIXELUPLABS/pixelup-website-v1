@@ -50,6 +50,7 @@ export default function ClientsPage() {
         <LeftNav
           sticky
           balanceHero
+          variant="clients"
           showTrustedStrip={false}
           heading="We help ambitious companies look ready for what comes next"
           subheading={

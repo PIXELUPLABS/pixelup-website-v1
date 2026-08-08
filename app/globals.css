@@ -32,6 +32,10 @@
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
     monospace;
 
+  /* Client-page typography supplied by the approved Figma layout. */
+  --tracking-clients-heading: -0.05em;
+  --tracking-clients-description: -0.013623em;
+
   /* Custom breakpoint: two-column layout kicks in at ~1200px */
   --breakpoint-desk: 75rem; /* 1200px */
 
@@ -78,6 +82,14 @@ svg {
    expressed in em so it scales proportionally at the 24px mobile size (≈ -0.88px). */
 .tracking-display {
   letter-spacing: -0.03667em;
+}
+
+.tracking-clients-heading {
+  letter-spacing: var(--tracking-clients-heading);
+}
+
+.tracking-clients-description {
+  letter-spacing: var(--tracking-clients-description);
 }
 
 /* Scrollable areas that shouldn't show a scrollbar (right showcase column). */

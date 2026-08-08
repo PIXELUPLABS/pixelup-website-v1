@@ -1,6 +1,3 @@
-import { LeadCallout } from "./LeadCallout";
-import { Logo } from "./Logo";
-import { MobileMenu } from "./MobileMenu";
 import { TrustedStrip } from "./TrustedStrip";
 import { CtaButtons } from "./CtaButtons";
 
@@ -23,6 +20,7 @@ export function LeftNav({
   showTrustedStrip = true,
   headingSize = "desk:text-[30px]",
   headingFontClassName = "",
+  variant = "default",
 }: {
   heading?: React.ReactNode;
   subheading?: React.ReactNode;
@@ -41,13 +39,20 @@ export function LeftNav({
   /** Extra className for the heading only (e.g. a next/font className) —
       defaults to inheriting the site's usual font-display. */
   headingFontClassName?: string;
+  /** The clients variant follows the dedicated Figma heading proportions
+      without changing the shared sidebar treatment on other pages. */
+  variant?: "default" | "clients";
 }) {
+  const isClientsVariant = variant === "clients";
+
   return (
     // `aside`, not `nav` — this is hero copy + trusted-strip + CTAs, not a
     // list of navigation links. Matches CaseSidebar's use of `aside` for the
     // same sidebar role on case study pages.
     <aside
-      className={`flex flex-col gap-8 desk:w-[405px] desk:shrink-0 desk:gap-0 ${
+      className={`flex flex-col gap-8 desk:shrink-0 desk:gap-0 ${
+        isClientsVariant ? "desk:w-[431px]" : "desk:w-[405px]"
+      } ${
         sticky
           ? // Stuck offset = Navbar's height (h-16, 4rem) + the page shell's
             // p-5 top inset (1.25rem) = 5.25rem, so the nav sits flush below
@@ -72,14 +77,22 @@ export function LeftNav({
       </div> */}
 
       {/* Hero */}
-      <div className="flex flex-col gap-4">
+      <div className={`flex flex-col ${isClientsVariant ? "gap-8" : "gap-4"}`}>
         <h1
-          className={`fade-up tracking-display max-w-[22ch] text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] ${headingSize} ${headingFontClassName} ${balanceHero ? "text-balance" : ""}`}
+          className={`fade-up text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] ${
+            isClientsVariant
+              ? "max-w-full tracking-clients-heading desk:text-[40px]"
+              : `tracking-display max-w-[22ch] ${headingSize}`
+          } ${headingFontClassName} ${balanceHero ? "text-balance" : ""}`}
         >
           {heading}
         </h1>
         <p
-          className={`fade-up max-w-[40ch] text-[16px] leading-[1.2] tracking-[-0.02em] text-muted-65 [animation-delay:200ms] ${balanceHero ? "text-pretty" : ""}`}
+          className={`fade-up text-[16px] [animation-delay:200ms] ${
+            isClientsVariant
+              ? "max-w-[400px] leading-[1.3] tracking-clients-description text-white/80"
+              : "max-w-[40ch] leading-[1.2] tracking-[-0.02em] text-muted-65"
+          } ${balanceHero ? "text-pretty" : ""}`}
         >
           {subheading}
         </p>

@@ -33,17 +33,18 @@
   "LeftNav": {
     "file": "components/LeftNav.tsx",
     "category": "layout",
-    "description": "Hero sidebar: heading, subheading, TrustedStrip, CtaButtons. Used on the homepage, /call, and /explorations, each passing its own heading/subheading copy.",
+    "description": "Hero sidebar: heading, subheading, TrustedStrip, CtaButtons. Used on the homepage, /call, /explorations, and /clients, each passing its own heading/subheading copy.",
     "variants": {
       "sticky": "boolean prop. true = pinned to the viewport, height calc(100vh-6.5rem) (used with page-level scroll, e.g. homepage, /explorations). false (default) = fills a fixed-height row (used by /call, which has its own internal-scroll shell).",
       "balanceHero": "boolean prop, applies text-balance/text-pretty for nicer line wrapping. Off by default because the homepage H1's line breaks were hand-tuned.",
       "headingSize": "string prop, Tailwind class override for desktop heading size (default desk:text-[30px]).",
-      "headingFontClassName": "string prop, extra className applied only to the <h1> — e.g. a next/font className to swap the heading's font on a single page without touching the site-wide font-display."
+      "headingFontClassName": "string prop, extra className applied only to the <h1> — e.g. a next/font className to swap the heading's font on a single page without touching the site-wide font-display.",
+      "variant": "default keeps the shared 405px sidebar and standard hero rhythm; clients uses the supplied Figma proportions: a responsive 431px desktop sidebar, 32px heading/description gap, 40px desktop heading, and 16px description."
     },
     "states": {
       "entrance": "fade-up animation on mount, staggered via inline animation-delay per child block."
     },
-    "tokens_used": ["typography.font.display (default)", "typography.tracking.display-tight", "color.neutral.white", "color.neutral.muted-65", "breakpoint.desk"],
+    "tokens_used": ["typography.font.display (default)", "typography.tracking.display-tight", "typography.tracking.clients-heading", "typography.tracking.clients-description", "color.neutral.white", "color.neutral.muted-65", "breakpoint.desk"],
     "when_to_use": "Any page that needs the site's \"hero sidebar\" pattern: big heading + subheading + trusted-by strip + CTA buttons, paired with a content column to its right.",
     "do_not": [
       "Don't confuse this with CaseSidebar — case study pages use a different, data-driven sidebar (client/year/involvement info) instead of this hero copy.",
@@ -63,7 +64,7 @@
     "tokens_used": ["color.neutral.hairline (border-r)", "breakpoint.desk"],
     "when_to_use": "Case study pages only (components/case-study/CaseStudyPage.tsx), one per page, paired with a <main> content column as a sibling (not nested).",
     "do_not": [
-      "Don't give this a width of its own — it's desk:w-[405px], the same flat value as LeftNav and the blog asides. It used to carry a calc(26%-10.4px) adjustment to match LeftNav's percentage width on a page without the homepage's p-5 shell; a fixed px width makes that compensation unnecessary, so keep all four sidebars on the identical value."
+      "Don't give this a width of its own — it stays desk:w-[405px], matching the default LeftNav and blog asides. The approved /clients LeftNav variant is the only 431px exception."
     ]
   },
 
@@ -401,10 +402,10 @@
   "ClientRoster": {
     "file": "components/clients/ClientRoster.tsx",
     "category": "content",
-    "description": "The /clients page column labels and ordered list of ClientRow entries. The page-level heading stays exclusively in the sidebar. Desktop uses equal Client and Niche columns plus a wider What We Did column (0.8fr / 0.8fr / 1.2fr), keeping the first two column starts balanced while giving long engagement copy more room.",
+    "description": "The /clients page column labels and ordered list of ClientRow entries. The page-level heading stays exclusively in the sidebar. Desktop follows the supplied Figma layout: a responsive two-column roster inset by 24px horizontally and 28px vertically, with Client name and What we did columns separated by a 24px gap.",
     "variants": ["none — the clients prop supplies the ordered roster"],
     "states": ["static server-rendered list"],
-    "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "breakpoint.desk"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.font.display", "breakpoint.desk"],
     "when_to_use": "Once on app/clients/page.tsx.",
     "do_not": ["Don't reuse Showcase or ProjectCard for the roster — those components are media-led portfolio entries, while this is an information-led client archive."]
   },
@@ -412,7 +413,7 @@
   "ClientRow": {
     "file": "components/clients/ClientRow.tsx",
     "category": "content",
-    "description": "One hairline-separated client entry with a logo, niche, and engagement summary. Until every approved logo arrives, missing assets use a deterministic rotation of existing white client logos rather than text or initial blocks. Engagement descriptions are editorially kept to a similar 10–12 word range, with the final three words kept together to prevent widow lines. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
+    "description": "One hairline-separated client entry. Desktop follows the supplied Figma structure: the logo and niche are stacked in the first half, and the engagement summary occupies the second half. Mobile stacks the same content with explicit Niche and What we did labels. Until every approved logo arrives, missing assets use a deterministic rotation of existing white client logos rather than text or initial blocks. Engagement descriptions are editorially kept to a similar 10–12 word range, with the final three words kept together to prevent widow lines. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
     "variants": ["approved logo vs duplicated-logo placeholder"],
     "states": {"entrance": "fade-up stagger capped at 600ms"},
     "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "breakpoint.desk"],
