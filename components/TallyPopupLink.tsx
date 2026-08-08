@@ -10,17 +10,11 @@ declare global {
 
 /**
  * A link that opens the perception audit form in Tally's modal popup, on the
- * page you're already on. Used by the Navbar CTA and the #audit section's
- * AuditCta — both must behave identically.
+ * page you're already on. Used by the #audit section's AuditCta.
  *
  * Why this exists instead of bare data-tally-* attributes: Tally's embed.js
  * binds one delegated document click listener, and until that script has
- * loaded, nothing intercepts the click — the href just navigates. The old
- * #audit button got away with it because it sits below the fold (embed.js is
- * loaded long before anyone scrolls there); the Navbar button is clickable the
- * instant the page paints, and a click in that window opened the hosted form
- * in a new tab. Verified by reproducing it headlessly: click at first paint →
- * new tab, click after load → modal.
+ * loaded, nothing intercepts the click — the href just navigates.
  *
  * So the loaded case still goes through Tally's own listener (we return
  * without preventDefault and let it do its thing, same as always), and only
@@ -56,7 +50,7 @@ export function TallyPopupLink({
         if (window.Tally) return;
 
         event.preventDefault();
-        // next/script (in Navbar) has already requested embed.js — poll until
+        // next/script in AuditCta has already requested embed.js — poll until
         // it lands, then open. Matches the data-tally-* config above.
         const started = Date.now();
         const poll = window.setInterval(() => {

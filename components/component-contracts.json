@@ -175,7 +175,7 @@
   "MobileMenu": {
     "file": "components/MobileMenu.tsx",
     "category": "interactive",
-    "description": "Hamburger button + dropdown panel (Telegram link, 'Start now' link), mobile only.",
+    "description": "Hamburger button + dropdown panel containing the primary navigation links, mobile only.",
     "variants": ["none"],
     "states": {
       "closed": "Hamburger icon.",
@@ -185,7 +185,7 @@
     "when_to_use": "Inside Navbar only.",
     "do_not": [
       "Don't remove desk:hidden — this is the mobile-only counterpart to Navbar's desktop nav links.",
-      "Its own link list is separate from Navbar's navLinks array — update both if adding a destination."
+      "It imports Navbar's navLinks array, so add or remove primary destinations there."
     ]
   },
 
@@ -401,7 +401,7 @@
   "ClientRoster": {
     "file": "components/clients/ClientRoster.tsx",
     "category": "content",
-    "description": "The /clients page roster header and ordered list of ClientRow entries. Desktop uses equal Client and Niche columns plus a wider What We Did column (0.8fr / 0.8fr / 1.2fr), keeping the first two column starts balanced while giving long engagement copy more room.",
+    "description": "The /clients page column labels and ordered list of ClientRow entries. The page-level heading stays exclusively in the sidebar. Desktop uses equal Client and Niche columns plus a wider What We Did column (0.8fr / 0.8fr / 1.2fr), keeping the first two column starts balanced while giving long engagement copy more room.",
     "variants": ["none — the clients prop supplies the ordered roster"],
     "states": ["static server-rendered list"],
     "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "breakpoint.desk"],

@@ -54,7 +54,7 @@ export function ClientRow({ client, index }: { client: Client; index: number }) 
         <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
           What we did
         </p>
-        <p className="text-[16px] leading-[1.4] tracking-[-0.02em] text-white/80">
+        <p className="text-[14px] leading-[1.4] tracking-[-0.02em] text-white/80">
           {client.engagement}
         </p>
         <div className="flex min-h-4 items-center gap-3 font-mono text-[12px] font-medium uppercase tracking-[0.04em]">

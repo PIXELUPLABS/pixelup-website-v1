@@ -1,13 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { ctaButtonBase } from "./CtaButtons";
 import { navLinks } from "./Navbar";
-import { TallyPopupLink } from "./TallyPopupLink";
-import { links } from "@/lib/projects";
 
 // Hamburger shown only on mobile (< desk). Toggles a small links panel.
 export function MobileMenu() {
@@ -65,30 +61,6 @@ export function MobileMenu() {
               </span>
             )
           )}
-          <div aria-hidden="true" className="border-t border-white/10" />
-          {/* Same CTA pair as the desktop Navbar (perception audit + book a
-              call), not the sidebars' CtaButtons — the dropdown replaces the
-              Navbar's hidden desk:flex nav, so it mirrors that. Closing the
-              panel on tap so the Tally modal isn't stacked over an open menu. */}
-          <div className="flex flex-col gap-2.5">
-            <TallyPopupLink
-              onClick={() => setOpen(false)}
-              className={`${ctaButtonBase} text-white uppercase bg-button-dark hover:bg-white/[0.12]`}
-            >
-              <span>GET A PERCEPTION AUDIT</span>
-              <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
-            </TallyPopupLink>
-            <a
-              href={links.discoveryCall}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className={`${ctaButtonBase} text-white uppercase bg-accent hover:brightness-110`}
-            >
-              <span>BOOK A CALL</span>
-              <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
-            </a>
-          </div>
         </div>
       )}
     </div>
