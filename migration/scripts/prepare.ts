@@ -53,7 +53,7 @@ const authorValues = [...new Set(blogPosts.map((post) => post.author))]
 if (authorValues.length !== 1) {
   errors.push(`Expected one shared legacy author, found ${authorValues.length}.`)
 }
-const authorValue = authorValues[0] || 'PixelUp Labs'
+const authorValue = authorValues[0] || 'PIXELUP LABS'
 const parsedAuthor = splitAuthor(authorValue)
 const authorId = `author.${slugify(parsedAuthor.name)}`
 const author: PreparedDocument = {

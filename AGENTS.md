@@ -4,6 +4,13 @@
 This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+## Brand naming — repository-wide hard rule
+
+- Always write the brand name as **PIXELUP LABS** in visible copy, metadata, alt text, ARIA labels, structured data, CMS defaults, documentation, comments, and other human-readable text.
+- Never use mixed-case, title-case, pluralized, or otherwise misspelled variations of the brand name.
+- Lowercase technical identifiers that cannot use spaces—such as `pixeluplabs.com`, URLs, email addresses, social handles, package names, filenames, and code identifiers—are exempt.
+- Run `npm run check:brand` before shipping copy or code changes. The regular `npm run lint` command also runs this check.
+
 ## AI Page Generation
 
 Operating instructions for any AI agent generating a website page in this repo. The design system is the source of truth — these rules exist to make sure it's actually followed, not just read.

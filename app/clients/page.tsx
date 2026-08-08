@@ -9,7 +9,7 @@ import { sitePublished, siteUpdated } from "@/lib/site-dates";
 export const metadata: Metadata = {
   title: "Clients - PIXELUP LABS",
   description:
-    "Explore the companies PixelUp Labs has partnered with across brand, website, and product design.",
+    "Explore the companies PIXELUP LABS has partnered with across brand, website, and product design.",
   alternates: { canonical: "/clients" },
 };
 
@@ -20,7 +20,7 @@ const schema = {
   url: "https://www.pixeluplabs.com/clients/",
   name: "Clients - PIXELUP LABS",
   description:
-    "Companies PixelUp Labs has partnered with across brand, website, and product design.",
+    "Companies PIXELUP LABS has partnered with across brand, website, and product design.",
   datePublished: sitePublished,
   dateModified: siteUpdated.clients,
   isPartOf: { "@id": "https://www.pixeluplabs.com/#website" },

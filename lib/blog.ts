@@ -1960,7 +1960,7 @@ export function blogPostSchema(post: BlogPost) {
     },
     publisher: {
       "@type": "Organization",
-      name: "PixelUp Labs",
+      name: "PIXELUP LABS",
       url: `${BASE_URL}/`,
       logo: {
         "@type": "ImageObject",

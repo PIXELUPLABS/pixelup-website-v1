@@ -33,7 +33,7 @@ export function blogPostSchema(post: BlogPostData) {
     },
     publisher: {
       '@type': 'Organization',
-      name: 'PixelUp Labs',
+      name: 'PIXELUP LABS',
       url: `${BASE_URL}/`,
       logo: {
         '@type': 'ImageObject',

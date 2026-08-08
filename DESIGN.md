@@ -6,7 +6,7 @@ reference_landing_page_notes: ./reference/landing-page-notes.md
 status: draft — sourced from the live codebase (copy, code, config); validate against the real brand guideline before treating as final
 ---
 
-# Design System — PixelUp Labs
+# Design System — PIXELUP LABS
 
 Source of truth for any agent generating or editing a page in this repo. Read this file, `tokens/tokens.json`, and `components/component-contracts.json` before writing markup. If `reference/landing-page.html` exists, treat it as the canonical example of everything below applied at once.
 
@@ -14,7 +14,7 @@ Everything in this file is sourced directly from real copy, real component code,
 
 ## 1. Brand Overview
 
-PixelUp Labs is a design agency for startups, positioned against a specific gap: startups with strong technology but a brand/product surface that doesn't yet look credible to the enterprise buyers, investors, and Fortune 500 customers they're trying to close. The one-line mission repeats near-verbatim in three separate places in the codebase (root metadata, the homepage's Organization schema, and the first FAQ answer):
+PIXELUP LABS is a design agency for startups, positioned against a specific gap: startups with strong technology but a brand/product surface that doesn't yet look credible to the enterprise buyers, investors, and Fortune 500 customers they're trying to close. The one-line mission repeats near-verbatim in three separate places in the codebase (root metadata, the homepage's Organization schema, and the first FAQ answer):
 
 > "We build brands, websites and products that command enterprise trust."
 

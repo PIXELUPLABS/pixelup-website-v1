@@ -1,7 +1,7 @@
 /**
  * Confirmed client roster for /clients.
  *
- * Copy is supplied by the PixelUp Labs team. Logo paths point to approved
+ * Copy is supplied by the PIXELUP LABS team. Logo paths point to approved
  * vector exports; Grovio is the only current entry awaiting its final SVG.
  */
 export interface Client {

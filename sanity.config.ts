@@ -9,7 +9,7 @@ import {structure} from './sanity/structure'
 
 export default defineConfig({
   name: 'pixelup-blog',
-  title: 'PixelUp Labs Blog',
+  title: 'PIXELUP LABS Blog',
   projectId,
   dataset,
   plugins: [

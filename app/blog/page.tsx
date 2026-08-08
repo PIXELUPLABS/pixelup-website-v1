@@ -11,7 +11,7 @@ import { getBlogPosts } from "@/sanity/lib/blog-data";
 export const metadata: Metadata = {
   title: "Blog - PIXELUP LABS",
   description:
-    "Insights on brand, product and website design from the PixelUp Labs team.",
+    "Insights on brand, product and website design from the PIXELUP LABS team.",
   alternates: { canonical: "/blog" },
 };
 

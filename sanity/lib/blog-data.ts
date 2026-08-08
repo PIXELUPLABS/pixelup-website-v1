@@ -46,7 +46,7 @@ function normalizePost(post: SanityPost): BlogPostData | null {
     return null
   }
 
-  const authorName = post.author?.name || 'PixelUp Labs'
+  const authorName = post.author?.name || 'PIXELUP LABS'
   const author = post.author?.role ? `${authorName}, ${post.author.role}` : authorName
   const seoImage = normalizeImage(post.seo?.image)
 
