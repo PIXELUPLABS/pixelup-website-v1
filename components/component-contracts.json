@@ -396,5 +396,27 @@
     "tokens_used": [],
     "when_to_use": "app/call/page.tsx only.",
     "do_not": ["Don't change calLink/namespace without updating the matching getCalApi namespace call — they must match."]
+  },
+
+  "ClientRoster": {
+    "file": "components/clients/ClientRoster.tsx",
+    "category": "content",
+    "description": "The /clients page roster header, desktop column labels, and ordered list of ClientRow entries.",
+    "variants": ["none — the clients prop supplies the ordered roster"],
+    "states": ["static server-rendered list"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "breakpoint.desk"],
+    "when_to_use": "Once on app/clients/page.tsx.",
+    "do_not": ["Don't reuse Showcase or ProjectCard for the roster — those components are media-led portfolio entries, while this is an information-led client archive."]
+  },
+
+  "ClientRow": {
+    "file": "components/clients/ClientRow.tsx",
+    "category": "content",
+    "description": "One hairline-separated client entry with a logo or temporary text wordmark, client name, niche, engagement summary, and optional internal case-study link.",
+    "variants": ["approved logo vs temporary text wordmark", "confirmed entry vs details-to-confirm placeholder", "with or without case-study link"],
+    "states": {"entrance": "fade-up stagger capped at 600ms", "link:hover": "existing square blue accent treatment"},
+    "tokens_used": ["color.neutral.hairline", "color.brand.accent", "color.neutral.label-grey", "typography.font.mono", "breakpoint.desk"],
+    "when_to_use": "Inside ClientRoster only, driven by lib/clients.ts.",
+    "do_not": ["Don't invent engagement results or hide placeholder status; update lib/clients.ts when approved information and logo assets arrive."]
   }
 }

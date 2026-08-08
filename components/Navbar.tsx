@@ -13,6 +13,7 @@ export const navLinks: { label: string; href: string | null }[] = [
   // { label: "About", href: null },
   // { label: "YC Partner", href: null },
   { label: "Explorations", href: "/explorations" },
+  { label: "Clients", href: "/clients" },
   // { label: "Services", href: null },
   { label: "Blog", href: "/blog" },
 ];
@@ -37,7 +38,7 @@ export function Navbar() {
       <header className="sticky top-0 z-30 h-16 border-b-[0.5px] border-hairline bg-base">
         <div className="flex h-full items-center justify-between gap-6 px-4 desk:px-5">
           <Logo />
-          <nav aria-label="Primary" className="hidden items-center gap-7 desk:flex">
+          <nav aria-label="Primary" className="hidden items-center gap-6 desk:flex">
             {navLinks.map((item) =>
               item.href ? (
                 <Link
@@ -88,4 +89,3 @@ export function Navbar() {
     </>
   );
 }
-

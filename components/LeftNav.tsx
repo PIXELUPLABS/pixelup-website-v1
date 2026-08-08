@@ -20,6 +20,7 @@ export function LeftNav({
   subheading = defaultSubheading,
   balanceHero = false,
   sticky = false,
+  showTrustedStrip = true,
   headingSize = "desk:text-[30px]",
   headingFontClassName = "",
 }: {
@@ -32,6 +33,9 @@ export function LeftNav({
       that use native page scroll (e.g. the homepage, so the footer can sit
       below the fold) rather than an internal-scroll shell. */
   sticky?: boolean;
+  /** The /clients roster is the proof element itself, so it omits the
+      otherwise-repeated logo marquee while keeping the sidebar CTAs. */
+  showTrustedStrip?: boolean;
   /** Desktop heading size override — defaults to the homepage/`/call` size. */
   headingSize?: string;
   /** Extra className for the heading only (e.g. a next/font className) —
@@ -86,9 +90,11 @@ export function LeftNav({
         {/* <div className="fade-up [animation-delay:250ms]">
           <LeadCallout />
         </div> */}
-        <div className="fade-up [animation-delay:300ms]">
-          <TrustedStrip />
-        </div>
+        {showTrustedStrip && (
+          <div className="fade-up [animation-delay:300ms]">
+            <TrustedStrip />
+          </div>
+        )}
         <div className="fade-up [animation-delay:400ms]">
           <CtaButtons />
         </div>

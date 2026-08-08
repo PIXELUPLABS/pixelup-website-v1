@@ -15,6 +15,7 @@ const caseStudies = [
 
 const quickLinks = [
   { name: "Explorations", href: "/explorations" },
+  { name: "Clients", href: "/clients" },
   { name: "Blog", href: "/blog" },
 ] as const;
 
