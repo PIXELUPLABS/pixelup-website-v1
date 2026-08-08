@@ -74,22 +74,21 @@ export function ClientRow({ client, index }: { client: Client; index: number }) 
 
   return (
     <li
-      className="fade-up grid grid-cols-1 gap-6 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-2 desk:items-center desk:gap-6"
+      className="fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-[1.6fr_0.6fr_0.8fr] desk:items-start desk:gap-6"
       style={{ animationDelay: entranceDelay }}
     >
-      <div className="flex min-w-0 flex-col gap-2.5">
-        <ClientIdentity client={client} index={index} />
-        <div className="flex flex-col gap-2 desk:gap-0">
-          <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
-            Niche
-          </p>
-          <p className="text-[14px] leading-5 tracking-[-0.02em] text-white/60">
-            {client.niche}
-          </p>
-        </div>
+      <ClientIdentity client={client} index={index} />
+
+      <div className="mt-2.5 flex min-w-0 flex-col gap-2 desk:mt-0 desk:gap-0">
+        <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
+          Niche
+        </p>
+        <p className="text-[14px] leading-5 tracking-[-0.02em] text-white/60">
+          {client.niche}
+        </p>
       </div>
 
-      <div className="flex min-w-0 flex-col gap-3">
+      <div className="mt-6 flex min-w-0 flex-col gap-3 desk:mt-0">
         <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
           What we did
         </p>
