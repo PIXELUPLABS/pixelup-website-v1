@@ -8,29 +8,35 @@ const placeholderLogos = [
   "/media/logos/bland.svg",
 ] as const;
 
+/**
+ * Every logo frame shares the same h-7 (28px) height so the roster reads as
+ * one even row. Width is still each logo's own natural aspect ratio at that
+ * height (recalculated from the original per-logo bounding boxes) so nothing
+ * gets stretched or squished — only the box height was ever unequal.
+ */
 const logoFrameClassBySlug: Record<string, string> = {
-  "autumn-pricing": "h-[27.324px] w-[111.0348px]",
-  bland: "h-[21.6px] w-[74.6182px]",
-  ctgt: "h-[26.4px] w-[96.7074px]",
-  conigma: "h-[30px] w-[122.5px]",
-  "conscious-engines": "h-[18.5521px] w-[201.6px]",
-  dayflow: "h-[30px] w-[105.7522px]",
-  greptile: "h-[26.4px] w-[109.0065px]",
-  henrylabs: "h-6 w-[154.56px]",
-  "lasting-learn": "h-[23.6262px] w-[161.28px]",
-  "my-wonder": "h-[28.8px] w-[112.6286px]",
-  nfa: "h-[21.6px] w-[57.0857px]",
-  pogo: "h-[30.36px] w-[62.8138px]",
-  reducto: "h-6 w-[118.272px]",
-  revyl: "h-[26.4px] w-[96.8px]",
-  sainapse: "h-[25.8px] w-[142.8214px]",
-  streamline: "h-[29.04px] w-[141.4529px]",
-  sully: "h-6 w-[89.6px]",
-  "synthio-labs": "h-[26.9242px] w-[154.56px]",
-  umbra: "h-6 w-[89.6px]",
-  "vertera-health": "h-[26.4px] w-[102.2092px]",
-  zenact: "h-6 w-[107.52px]",
-  jumbo: "h-6 w-[107.52px]",
+  "autumn-pricing": "h-7 w-[113.7817px]",
+  bland: "h-7 w-[96.7273px]",
+  ctgt: "h-7 w-[102.5682px]",
+  conigma: "h-7 w-[114.3333px]",
+  "conscious-engines": "h-7 w-[172.032px]",
+  dayflow: "h-7 w-[98.702px]",
+  greptile: "h-7 w-[115.612px]",
+  henrylabs: "h-7 w-[180.32px]",
+  "lasting-learn": "h-7 w-[191.1392px]",
+  "my-wonder": "h-7 w-[109.4667px]",
+  nfa: "h-7 w-[74px]",
+  pogo: "h-7 w-[57.9312px]",
+  reducto: "h-7 w-[137.984px]",
+  revyl: "h-7 w-[102.6667px]",
+  sainapse: "h-7 w-[155.0004px]",
+  streamline: "h-7 w-[136.3928px]",
+  sully: "h-7 w-[104.5333px]",
+  "synthio-labs": "h-7 w-[160.734px]",
+  umbra: "h-7 w-[104.5333px]",
+  "vertera-health": "h-7 w-[108.404px]",
+  zenact: "h-7 w-[125.44px]",
+  jumbo: "h-7 w-[125.44px]",
 };
 
 function splitForBalancedLastLine(text: string) {
@@ -48,7 +54,7 @@ function ClientIdentity({ client, index }: { client: Client; index: number }) {
   const preservesSourceColors = ["conigma", "vertera-health"].includes(client.slug);
   const logo = client.logo ?? placeholderLogos[index % placeholderLogos.length];
   const logoFrameClass =
-    logoFrameClassBySlug[client.slug] ?? "h-6 w-[134.4px]";
+    logoFrameClassBySlug[client.slug] ?? "h-7 w-[156.8px]";
 
   return (
     <div className="flex min-w-0 flex-col items-start gap-2">
