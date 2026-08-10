@@ -53,7 +53,11 @@ export function CaseFaq({ items }: { items: FaqItem[] }) {
                 <span className="text-[16px] leading-[1.5] text-white transition-opacity duration-200 group-hover:opacity-60">
                   {item.q}
                 </span>
-                <span className="transition-opacity duration-200 group-hover:opacity-60">
+                <span
+                  className={`flex h-4.5 w-8 shrink-0 items-center justify-center transition-colors duration-200 group-hover:opacity-60 ${
+                    open ? "bg-accent" : "bg-[#3E3E3E]"
+                  }`}
+                >
                   <PlusMinusIcon open={open} />
                 </span>
               </button>

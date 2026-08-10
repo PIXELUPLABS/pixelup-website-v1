@@ -15,8 +15,8 @@
   --color-accent: #004aeb;
   --color-highlight: #0658fc;
   --color-button-dark: rgba(242, 243, 247, 0.08);
-  /* Hairline dividers on case study pages — blue-grey 0.5px rules (#344973 @ 45%). */
-  --color-hairline: rgba(52, 73, 115, 0.45);
+  /* Hairline dividers used as separator borders site-wide — white 0.5px rules (#FFFFFF @ 10%). */
+  --color-hairline: rgba(255, 255, 255, 0.1);
   /* Full-viewport dimming overlay behind an open mobile menu — page bg is
      already pure black, so this scrim (not a darker solid) is what makes the
      open state read as "darker" than the default page. */
