@@ -51,7 +51,7 @@ function ClientIdentity({ client, index }: { client: Client; index: number }) {
     logoFrameClassBySlug[client.slug] ?? "h-6 w-[134.4px]";
 
   return (
-    <div className="flex min-w-0 items-center">
+    <div className="flex min-w-0 flex-col items-start gap-2">
       <div className={`relative max-w-full shrink-0 ${logoFrameClass}`}>
         <Image
           src={logo}
@@ -64,6 +64,9 @@ function ClientIdentity({ client, index }: { client: Client; index: number }) {
         />
         {isPlaceholderLogo && <span className="sr-only">{client.name} logo placeholder</span>}
       </div>
+      {client.fundingNote && (
+        <p className="text-[14px] leading-[1.3] text-label-grey">{client.fundingNote}</p>
+      )}
     </div>
   );
 }

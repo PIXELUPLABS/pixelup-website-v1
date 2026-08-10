@@ -10,6 +10,17 @@ export interface Client {
   logo?: string;
   niche: string;
   engagement: string;
+  /**
+   * Short funding/stat line rendered under the client's logo in the roster
+   * (e.g. "$25M Series A", "YC-backed (W24)", "Bootstrapped"). Sourced from
+   * public reporting (Crunchbase, TechCrunch, YC's own directory, the
+   * client's own funding announcement) as of Aug 2026 — same no-unsourced-
+   * claims bar as lib/projects.ts taglines. Left undefined where no public
+   * figure/round could be confirmed, or where the company name was too
+   * generic to confirm a match with confidence — no line renders in that
+   * case rather than guessing.
+   */
+  fundingNote?: string;
 }
 
 export const clients: Client[] = [
@@ -28,6 +39,7 @@ export const clients: Client[] = [
     niche: "AI Billing",
     engagement:
       "Full brand identity + marketing website with dev handoff + social assets.",
+    fundingNote: "$7M YC-backed (S25)",
   },
   {
     slug: "bland",
@@ -36,6 +48,7 @@ export const clients: Client[] = [
     niche: "Voice AI",
     engagement:
       "Visual direction + landing-page redesign + case-study and blog templates + product UI + positioning deck.",
+    fundingNote: "$50M Series C",
   },
   {
     slug: "ctgt",
@@ -44,15 +57,16 @@ export const clients: Client[] = [
     niche: "AI Governance",
     engagement:
       "Brand identity + website + Policy Engine storyboards + pitch slides + social assets.",
+    fundingNote: "$7.2M Seed",
   },
-  {
-    slug: "my-wonder",
-    name: "My Wonder",
-    logo: "/media/logos/clients/my-wonder.svg",
-    niche: "Kids Edtech",
-    engagement:
-      "E-commerce website spanning landing, catalogue, PDP, and waitlist + full companion app UI.",
-  },
+  // {
+  //   slug: "my-wonder",
+  //   name: "My Wonder",
+  //   logo: "/media/logos/clients/my-wonder.svg",
+  //   niche: "Kids Edtech",
+  //   engagement:
+  //     "E-commerce website spanning landing, catalogue, PDP, and waitlist + full companion app UI.",
+  // },
   {
     slug: "conigma",
     name: "Conigma",
@@ -61,14 +75,14 @@ export const clients: Client[] = [
     engagement:
       "Full brand identity + marketing website, grounded in a competitor teardown.",
   },
-  {
-    slug: "conscious-engines",
-    name: "Conscious Engines",
-    logo: "/media/logos/clients/conscious-engines.svg",
-    niche: "AI Inference",
-    engagement:
-      "Brand strategy + identity + end-to-end Felix assistant app design.",
-  },
+  // {
+  //   slug: "conscious-engines",
+  //   name: "Conscious Engines",
+  //   logo: "/media/logos/clients/conscious-engines.svg",
+  //   niche: "AI Inference",
+  //   engagement:
+  //     "Brand strategy + identity + end-to-end Felix assistant app design.",
+  // },
   {
     slug: "dayflow",
     name: "DayFlow",
@@ -76,6 +90,7 @@ export const clients: Client[] = [
     niche: "Developer Productivity",
     engagement:
       "Brand + product UI + website + launch assets, including Product Hunt kit and app icon.",
+    fundingNote: "$4.5M YC-backed (S24)",
   },
   {
     slug: "nfa",
@@ -91,13 +106,15 @@ export const clients: Client[] = [
     niche: "AI Code Review",
     engagement:
       "2026 brand refresh + design system + website system + pitch deck + ongoing marketing.",
+    fundingNote: "$25M Series A",
   },
-  {
-    slug: "grovio",
-    name: "Grovio.ai",
-    niche: "AI Marketing",
-    engagement: "Engagement scaffolded — no design work delivered yet.",
-  },
+  // {
+  //   slug: "grovio",
+  //   name: "Grovio.ai",
+  //   niche: "AI Marketing",
+  //   engagement: "Engagement scaffolded - no design work delivered yet.",
+  //   fundingNote: "$32M Series A",
+  // },
   {
     slug: "henrylabs",
     name: "Henrylabs",
@@ -128,6 +145,7 @@ export const clients: Client[] = [
     niche: "Fintech AI",
     engagement:
       "Complete branding package + landing page, from wireframes to final design.",
+    fundingNote: "$3.2M YC-backed (W24)",
   },
   {
     slug: "pogo",
@@ -135,6 +153,7 @@ export const clients: Client[] = [
     logo: "/media/logos/pogo.svg",
     niche: "Consumer Research",
     engagement: "Full multi-page website with 9+ pages and developer handoff.",
+    fundingNote: "$12.3M Seed",
   },
   {
     slug: "reducto",
@@ -143,6 +162,7 @@ export const clients: Client[] = [
     niche: "Document AI",
     engagement:
       "Website redesign + brand assets + icon library + product UI + animated handoff.",
+    fundingNote: "$24.5M Series A",
   },
   {
     slug: "revyl",
@@ -151,6 +171,7 @@ export const clients: Client[] = [
     niche: "AI Testing",
     engagement:
       "Brand guidelines + website + product UI redesign + component library.",
+    fundingNote: "$1.1M YC-backed (F24)",
   },
   {
     slug: "sainapse",
@@ -158,6 +179,7 @@ export const clients: Client[] = [
     logo: "/media/logos/sainapse.svg",
     niche: "Customer Support AI",
     engagement: "Complete brand + website sprint through the 2.0 handoff.",
+    fundingNote: "$3.5M Seed",
   },
   {
     slug: "streamline",
@@ -166,6 +188,7 @@ export const clients: Client[] = [
     niche: "Legal AI",
     engagement:
       "Full brand identity, including logo and brandbook + complete website handoff.",
+    fundingNote: "$8.6M Series A",
   },
   {
     slug: "sully",
@@ -173,6 +196,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/sully.svg",
     niche: "Healthcare AI",
     engagement: "2025 rebrand + complete website redesign.",
+    fundingNote: "$22M Series A",
   },
   {
     slug: "synthio-labs",
@@ -181,6 +205,7 @@ export const clients: Client[] = [
     niche: "Pharma Voice AI",
     engagement:
       "Brand + full V2 website + Jarvis product UI + whitepapers + RFP decks.",
+    fundingNote: "$5M Seed",
   },
   {
     slug: "umbra",
@@ -188,6 +213,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/umbra.svg",
     niche: "Crypto Privacy",
     engagement: "Landing-page design + supporting brand assets.",
+    fundingNote: "$155M ICO",
   },
   {
     slug: "valley",
@@ -196,6 +222,7 @@ export const clients: Client[] = [
     niche: "AI Sales",
     engagement:
       "Brand identity + website + final sales deck, through handoff.",
+    fundingNote: "$2M Pre-Seed",
   },
   {
     slug: "vertera-health",
@@ -220,6 +247,7 @@ export const clients: Client[] = [
     niche: "AI Testing",
     engagement:
       "Brand identity + full website across landing, pricing, blog, and mobile + handoff.",
+    fundingNote: "Bootstrapped",
   },
   {
     slug: "jumbo",
