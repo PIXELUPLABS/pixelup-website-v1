@@ -214,7 +214,7 @@ export const clients: Client[] = [
     niche: "Compliance AI",
     engagement:
       "Full brand identity, 7-page marketing website, and sales deck, with Webflow development",
-    fundingNote: "$500K YC-backed (F25)",
+    fundingNote: "$500K YC-backed (F25) · Acquired",
   },
   // {
   //   slug: "my-wonder",
