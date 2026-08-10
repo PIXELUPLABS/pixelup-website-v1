@@ -67,14 +67,14 @@ export const clients: Client[] = [
   //   engagement:
   //     "E-commerce website spanning landing, catalogue, PDP, and waitlist + full companion app UI.",
   // },
-  {
-    slug: "conigma",
-    name: "Conigma",
-    logo: "/media/logos/clients/conigma.svg",
-    niche: "GTM Automation",
-    engagement:
-      "Full brand identity + marketing website, grounded in a competitor teardown.",
-  },
+  // {
+  //   slug: "conigma",
+  //   name: "Conigma",
+  //   logo: "/media/logos/clients/conigma.svg",
+  //   niche: "GTM Automation",
+  //   engagement:
+  //     "Full brand identity + marketing website, grounded in a competitor teardown.",
+  // },
   // {
   //   slug: "conscious-engines",
   //   name: "Conscious Engines",
@@ -92,13 +92,13 @@ export const clients: Client[] = [
       "Brand + product UI + website + launch assets, including Product Hunt kit and app icon.",
     fundingNote: "$4.5M YC-backed (S24)",
   },
-  {
-    slug: "nfa",
-    name: "NFA",
-    logo: "/media/logos/clients/nfa.svg",
-    niche: "Crypto Trading",
-    engagement: "Complete Dub Dub-to-NFA rebrand + new landing page.",
-  },
+  // {
+  //   slug: "nfa",
+  //   name: "NFA",
+  //   logo: "/media/logos/clients/nfa.svg",
+  //   niche: "Crypto Trading",
+  //   engagement: "Complete Dub Dub-to-NFA rebrand + new landing page.",
+  // },
   {
     slug: "greptile",
     name: "Greptile",
@@ -123,13 +123,13 @@ export const clients: Client[] = [
     engagement:
       "Brand identity + landing page with handoff + dashboard UI + checkout flow.",
   },
-  {
-    slug: "lasting-learn",
-    name: "Lasting Learn",
-    logo: "/media/logos/clients/lasting-learn.svg",
-    niche: "AI Tutoring",
-    engagement: "Brand guidelines + logo + marketing landing page.",
-  },
+  // {
+  //   slug: "lasting-learn",
+  //   name: "Lasting Learn",
+  //   logo: "/media/logos/clients/lasting-learn.svg",
+  //   niche: "AI Tutoring",
+  //   engagement: "Brand guidelines + logo + marketing landing page.",
+  // },
   {
     slug: "limelight",
     name: "Limelight",
@@ -137,6 +137,7 @@ export const clients: Client[] = [
     niche: "Marketing AI",
     engagement:
       "Full brand + website + illustrations + animation storyboards, through handoff.",
+    fundingNote: "$3.1M Seed",
   },
   {
     slug: "monumint",
@@ -153,7 +154,7 @@ export const clients: Client[] = [
     logo: "/media/logos/pogo.svg",
     niche: "Consumer Research",
     engagement: "Full multi-page website with 9+ pages and developer handoff.",
-    fundingNote: "$12.3M Seed",
+    fundingNote: "$32M",
   },
   {
     slug: "reducto",
@@ -162,7 +163,7 @@ export const clients: Client[] = [
     niche: "Document AI",
     engagement:
       "Website redesign + brand assets + icon library + product UI + animated handoff.",
-    fundingNote: "$24.5M Series A",
+    fundingNote: "$75M Series B",
   },
   {
     slug: "revyl",
@@ -171,7 +172,7 @@ export const clients: Client[] = [
     niche: "AI Testing",
     engagement:
       "Brand guidelines + website + product UI redesign + component library.",
-    fundingNote: "$1.1M YC-backed (F24)",
+    fundingNote: "$1.5M YC-backed (F24)",
   },
   {
     slug: "sainapse",
@@ -224,14 +225,14 @@ export const clients: Client[] = [
       "Brand identity + website + final sales deck, through handoff.",
     fundingNote: "$2M Pre-Seed",
   },
-  {
-    slug: "vertera-health",
-    name: "Vertera Health",
-    logo: "/media/logos/clients/vertera-health.svg",
-    niche: "Digital Health",
-    engagement:
-      "UI audit + app UI + landing page + App Store screenshots + pitch deck.",
-  },
+  // {
+  //   slug: "vertera-health",
+  //   name: "Vertera Health",
+  //   logo: "/media/logos/clients/vertera-health.svg",
+  //   niche: "Digital Health",
+  //   engagement:
+  //     "UI audit + app UI + landing page + App Store screenshots + pitch deck.",
+  // },
   {
     slug: "workers-io",
     name: "Workers.io",
@@ -256,5 +257,6 @@ export const clients: Client[] = [
     niche: "Fantasy Gaming",
     engagement:
       "Ongoing product retainer covering full app UI, brand refresh, design system, landing page, and store creatives.",
+    fundingNote: "$1.5M Pre-Seed",
   },
 ];
