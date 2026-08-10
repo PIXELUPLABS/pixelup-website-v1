@@ -58,14 +58,14 @@ export const clients: Client[] = [
       "Website redesign + brand assets + icon library + product UI + animated handoff.",
     fundingNote: "$75M Series B",
   },
-  {
-    slug: "umbra",
-    name: "Umbra",
-    logo: "/media/logos/clients/umbra.svg",
-    niche: "Crypto Privacy",
-    engagement: "Landing-page design + supporting brand assets.",
-    fundingNote: "$155M ICO",
-  },
+  // {
+  //   slug: "umbra",
+  //   name: "Umbra",
+  //   logo: "/media/logos/clients/umbra.svg",
+  //   niche: "Crypto Privacy",
+  //   engagement: "Landing-page design + supporting brand assets.",
+  //   fundingNote: "$155M ICO",
+  // },
   {
     slug: "sully",
     name: "Sully.ai",
