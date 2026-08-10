@@ -31,6 +31,7 @@ export const clients: Client[] = [
     niche: "Compliance AI",
     engagement:
       "Full brand identity + 7-page marketing website + sales deck, through dev handoff.",
+    fundingNote: "$500K YC-backed (F25)",
   },
   {
     slug: "autumn-pricing",
@@ -122,6 +123,7 @@ export const clients: Client[] = [
     niche: "Agentic Commerce",
     engagement:
       "Brand identity + landing page with handoff + dashboard UI + checkout flow.",
+    fundingNote: "Private",
   },
   // {
   //   slug: "lasting-learn",
@@ -240,6 +242,7 @@ export const clients: Client[] = [
     niche: "AI Coding Agents",
     engagement:
       "Brand identity V1 + website + product UI + design system handoff.",
+    fundingNote: "Private",
   },
   {
     slug: "zenact",
