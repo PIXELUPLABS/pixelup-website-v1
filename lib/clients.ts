@@ -37,7 +37,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/greptile.svg",
     niche: "AI Code Review",
     engagement:
-      "2026 brand refresh + design system + website system + pitch deck + ongoing marketing.",
+      "2026 brand refresh, design system, pitch deck, and ongoing marketing assets",
     fundingNote: "$25M Series A",
   },
   {
@@ -46,7 +46,7 @@ export const clients: Client[] = [
     logo: "/media/logos/bland.svg",
     niche: "Voice AI",
     engagement:
-      "Visual direction + landing-page redesign + case-study and blog templates + product UI + positioning deck.",
+      "New visual direction, landing page redesign, product UI screens, and positioning deck",
     fundingNote: "$50M Series C",
   },
   {
@@ -55,7 +55,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/reducto.svg",
     niche: "Document AI",
     engagement:
-      "Website redesign + brand assets + icon library + product UI + animated handoff.",
+      "Website redesign, brand assets, icon library, and product UI, through animated handoff",
     fundingNote: "$75M Series B",
   },
   // {
@@ -71,7 +71,7 @@ export const clients: Client[] = [
     name: "Sully.ai",
     logo: "/media/logos/clients/sully.svg",
     niche: "Healthcare AI",
-    engagement: "2025 rebrand + complete website redesign.",
+    engagement: "Full 2025 rebrand with new identity, guidelines, and website redesign",
     fundingNote: "$22M Series A",
   },
   {
@@ -79,7 +79,7 @@ export const clients: Client[] = [
     name: "Pogo",
     logo: "/media/logos/pogo.svg",
     niche: "Consumer Research",
-    engagement: "Full multi-page website with 9+ pages and developer handoff.",
+    engagement: "Full multi-page marketing website, through dev handoff",
     fundingNote: "$32M",
   },
   {
@@ -88,7 +88,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/ctgt.svg",
     niche: "AI Governance",
     engagement:
-      "Brand identity + website + Policy Engine storyboards + pitch slides + social assets.",
+      "Brand identity, marketing website, product storyboards, and pitch deck, through final handoff",
     fundingNote: "$7.2M Seed",
   },
   {
@@ -97,7 +97,7 @@ export const clients: Client[] = [
     logo: "/media/logos/streamline.svg",
     niche: "Legal AI",
     engagement:
-      "Full brand identity, including logo and brandbook + complete website handoff.",
+      "Full brand identity, brandbook, and complete marketing website, through dev handoff",
     fundingNote: "$8.6M Series A",
   },
   {
@@ -106,7 +106,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/dayflow.svg",
     niche: "Developer Productivity",
     engagement:
-      "Brand + product UI + website + launch assets, including Product Hunt kit and app icon.",
+      "Brand identity, product UI, marketing website, and full launch asset kit",
     fundingNote: "Private",
   },
   {
@@ -115,7 +115,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/synthio-labs.svg",
     niche: "Pharma Voice AI",
     engagement:
-      "Brand + full V2 website + Jarvis product UI + whitepapers + RFP decks.",
+      "Brand direction, full website, product UI, whitepapers, and sales decks",
     fundingNote: "$5M Seed",
   },
   {
@@ -124,7 +124,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/monumint.svg",
     niche: "Fintech AI",
     engagement:
-      "Complete branding package + landing page, from wireframes to final design.",
+      "Complete branding package and landing page, from wireframes to final",
     fundingNote: "$3.2M YC-backed (W24)",
   },
   {
@@ -133,7 +133,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/revyl.svg",
     niche: "AI Testing",
     engagement:
-      "Brand guidelines + website + product UI redesign + component library.",
+      "Brand guidelines, marketing website, product UI redesign, and component library",
     fundingNote: "$1.5M YC-backed (F24)",
   },
   {
@@ -142,7 +142,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/autumn-pricing.svg",
     niche: "AI Billing",
     engagement:
-      "Full brand identity + marketing website with dev handoff + social assets.",
+      "Full brand identity, marketing website, and social brand assets, through dev handoff",
     fundingNote: "$7M YC-backed (S25)",
   },
   {
@@ -151,7 +151,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/valley.svg",
     niche: "AI Sales",
     engagement:
-      "Brand identity + website + final sales deck, through handoff.",
+      "Brand identity, marketing website, and final sales deck, through handoff",
     fundingNote: "$3.1M Pre-Seed",
   },
   {
@@ -160,7 +160,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/zenact.svg",
     niche: "AI Testing",
     engagement:
-      "Brand identity + full website across landing, pricing, blog, and mobile + handoff.",
+      "Brand identity and full marketing website, with finalized copy and dev handoff",
     fundingNote: "Bootstrapped",
   },
   {
@@ -169,7 +169,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/henrylabs.svg",
     niche: "Agentic Commerce",
     engagement:
-      "Brand identity + landing page with handoff + dashboard UI + checkout flow.",
+      "Brand identity, landing page, dashboard UI, and checkout flow, through dev handoff",
     fundingNote: "Private",
   },
   {
@@ -177,7 +177,7 @@ export const clients: Client[] = [
     name: "Sainapse",
     logo: "/media/logos/sainapse.svg",
     niche: "Customer Support AI",
-    engagement: "Complete brand + website sprint through the 2.0 handoff.",
+    engagement: "Complete brand and website sprint, from moodboards to 2.0 dev handoff",
     fundingNote: "Private",
   },
   {
@@ -186,7 +186,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/limelight.svg",
     niche: "Marketing AI",
     engagement:
-      "Full brand + website + illustrations + animation storyboards, through handoff.",
+      "Brand identity, marketing website, illustrations, and animation storyboards, through handoff",
     fundingNote: "$2M Seed",
   },
   {
@@ -195,7 +195,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/workers-io.svg",
     niche: "AI Coding Agents",
     engagement:
-      "Brand identity V1 + website + product UI + design system handoff.",
+      "Brand identity, marketing website, product UI, and design system, through handoff",
     fundingNote: "Private",
   },
   {
@@ -204,7 +204,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/jumbo.svg",
     niche: "Fantasy Gaming",
     engagement:
-      "Ongoing product retainer covering full app UI, brand refresh, design system, landing page, and store creatives.",
+      "Ongoing retainer - full app UI, brand refresh, design system, and marketing creatives",
     fundingNote: "$1.5M Pre-Seed",
   },
   {
@@ -213,7 +213,7 @@ export const clients: Client[] = [
     logo: "/media/logos/clients/audrion.svg",
     niche: "Compliance AI",
     engagement:
-      "Full brand identity + 7-page marketing website + sales deck, through dev handoff.",
+      "Full brand identity, 7-page marketing website, and sales deck, through dev handoff",
     fundingNote: "$500K YC-backed (F25)",
   },
   // {
