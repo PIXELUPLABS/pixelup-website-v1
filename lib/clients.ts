@@ -58,6 +58,15 @@ export const clients: Client[] = [
       "Website redesign, brand assets, icon library, and product UI, through animated handoff",
     fundingNote: "$75M Series B",
   },
+  {
+    slug: "streamline",
+    name: "Streamline.ai",
+    logo: "/media/logos/streamline.svg",
+    niche: "Legal AI",
+    engagement:
+      "Full brand identity, brandbook, and complete marketing website, through dev handoff",
+    fundingNote: "$8.6M Series A",
+  },
   // {
   //   slug: "umbra",
   //   name: "Umbra",
@@ -83,6 +92,15 @@ export const clients: Client[] = [
     fundingNote: "$32M",
   },
   {
+    slug: "valley",
+    name: "Valley",
+    logo: "/media/logos/clients/valley.svg",
+    niche: "AI Sales",
+    engagement:
+      "Brand identity, marketing website, and final sales deck, through handoff",
+    fundingNote: "$3.1M Pre-Seed",
+  },
+  {
     slug: "ctgt",
     name: "CTGT",
     logo: "/media/logos/clients/ctgt.svg",
@@ -92,13 +110,75 @@ export const clients: Client[] = [
     fundingNote: "$7.2M Seed",
   },
   {
-    slug: "streamline",
-    name: "Streamline.ai",
-    logo: "/media/logos/streamline.svg",
-    niche: "Legal AI",
+    slug: "autumn-pricing",
+    name: "Autumn Pricing",
+    logo: "/media/logos/clients/autumn-pricing.svg",
+    niche: "AI Billing",
     engagement:
-      "Full brand identity, brandbook, and complete marketing website, through dev handoff",
-    fundingNote: "$8.6M Series A",
+      "Full brand identity, marketing website, and social brand assets, through dev handoff",
+    fundingNote: "$7M YC-backed (S25)",
+  },
+  {
+    slug: "monumint",
+    name: "Monumint",
+    logo: "/media/logos/clients/monumint.svg",
+    niche: "Fintech AI",
+    engagement:
+      "Complete branding package and landing page, from wireframes to final",
+    fundingNote: "$3.2M YC-backed (W24)",
+  },
+  {
+    slug: "sainapse",
+    name: "Sainapse",
+    logo: "/media/logos/sainapse.svg",
+    niche: "Customer Support AI",
+    engagement: "Complete brand and website sprint, from moodboards to 2.0 dev handoff",
+    fundingNote: "Private",
+  },
+  {
+    slug: "limelight",
+    name: "Limelight",
+    logo: "/media/logos/clients/limelight.svg",
+    niche: "Marketing AI",
+    engagement:
+      "Brand identity, marketing website, illustrations, and animation storyboards, through handoff",
+    fundingNote: "$2M Seed",
+  },
+  {
+    slug: "revyl",
+    name: "Revyl",
+    logo: "/media/logos/clients/revyl.svg",
+    niche: "AI Testing",
+    engagement:
+      "Brand guidelines, marketing website, product UI redesign, and component library",
+    fundingNote: "$1.5M YC-backed (F24)",
+  },
+  {
+    slug: "zenact",
+    name: "Zenact",
+    logo: "/media/logos/clients/zenact.svg",
+    niche: "AI Testing",
+    engagement:
+      "Brand identity and full marketing website, with finalized copy and dev handoff",
+    fundingNote: "Private",
+  },
+  {
+    slug: "henrylabs",
+    name: "Henrylabs",
+    logo: "/media/logos/clients/henrylabs.svg",
+    niche: "Agentic Commerce",
+    engagement:
+      "Brand identity, landing page, dashboard UI, and checkout flow, through dev handoff",
+    fundingNote: "Private",
+  },
+  {
+    slug: "jumbo",
+    name: "Jumbo",
+    logo: "/media/logos/clients/jumbo.svg",
+    niche: "Fantasy Gaming",
+    engagement:
+      "Ongoing retainer - full app UI, brand refresh, design system, and marketing creatives",
+    fundingNote: "$1.5M Pre-Seed",
   },
   {
     slug: "dayflow",
@@ -119,77 +199,6 @@ export const clients: Client[] = [
     fundingNote: "$5M Seed",
   },
   {
-    slug: "monumint",
-    name: "Monumint",
-    logo: "/media/logos/clients/monumint.svg",
-    niche: "Fintech AI",
-    engagement:
-      "Complete branding package and landing page, from wireframes to final",
-    fundingNote: "$3.2M YC-backed (W24)",
-  },
-  {
-    slug: "revyl",
-    name: "Revyl",
-    logo: "/media/logos/clients/revyl.svg",
-    niche: "AI Testing",
-    engagement:
-      "Brand guidelines, marketing website, product UI redesign, and component library",
-    fundingNote: "$1.5M YC-backed (F24)",
-  },
-  {
-    slug: "autumn-pricing",
-    name: "Autumn Pricing",
-    logo: "/media/logos/clients/autumn-pricing.svg",
-    niche: "AI Billing",
-    engagement:
-      "Full brand identity, marketing website, and social brand assets, through dev handoff",
-    fundingNote: "$7M YC-backed (S25)",
-  },
-  {
-    slug: "valley",
-    name: "Valley",
-    logo: "/media/logos/clients/valley.svg",
-    niche: "AI Sales",
-    engagement:
-      "Brand identity, marketing website, and final sales deck, through handoff",
-    fundingNote: "$3.1M Pre-Seed",
-  },
-  {
-    slug: "zenact",
-    name: "Zenact",
-    logo: "/media/logos/clients/zenact.svg",
-    niche: "AI Testing",
-    engagement:
-      "Brand identity and full marketing website, with finalized copy and dev handoff",
-    fundingNote: "Bootstrapped",
-  },
-  {
-    slug: "henrylabs",
-    name: "Henrylabs",
-    logo: "/media/logos/clients/henrylabs.svg",
-    niche: "Agentic Commerce",
-    engagement:
-      "Brand identity, landing page, dashboard UI, and checkout flow, through dev handoff",
-    fundingNote: "Private",
-  },
-  {
-    slug: "sainapse",
-    name: "Sainapse",
-    logo: "/media/logos/sainapse.svg",
-    niche: "Customer Support AI",
-    engagement: "Complete brand and website sprint, from moodboards to 2.0 dev handoff",
-    fundingNote: "Private",
-  },
-  {
-    slug: "limelight",
-    name: "Limelight",
-    logo: "/media/logos/clients/limelight.svg",
-    niche: "Marketing AI",
-    engagement:
-      "Brand identity, marketing website, illustrations, and animation storyboards, through handoff",
-    fundingNote: "$2M Seed",
-  },
-  {
     slug: "workers-io",
     name: "Workers.io",
     logo: "/media/logos/clients/workers-io.svg",
@@ -197,15 +206,6 @@ export const clients: Client[] = [
     engagement:
       "Brand identity, marketing website, product UI, and design system, through handoff",
     fundingNote: "Private",
-  },
-  {
-    slug: "jumbo",
-    name: "Jumbo",
-    logo: "/media/logos/clients/jumbo.svg",
-    niche: "Fantasy Gaming",
-    engagement:
-      "Ongoing retainer - full app UI, brand refresh, design system, and marketing creatives",
-    fundingNote: "$1.5M Pre-Seed",
   },
   {
     slug: "audrion",
