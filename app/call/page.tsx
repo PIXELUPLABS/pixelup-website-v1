@@ -6,7 +6,7 @@ import { LeftNav } from "@/components/LeftNav";
 export const metadata: Metadata = {
   title: "Book a Call - PIXELUP LABS",
   description:
-    "Book a discovery call with PixelUp Labs: brands, websites and products that command enterprise trust.",
+    "Book a discovery call with PIXELUP LABS: brands, websites and products that command enterprise trust.",
   alternates: { canonical: "/call" },
 };
 

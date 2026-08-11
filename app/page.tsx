@@ -15,7 +15,7 @@ const schema = {
     {
       "@type": "Organization",
       "@id": "https://www.pixeluplabs.com/#organization",
-      name: "PixelUp Labs",
+      name: "PIXELUP LABS",
       url: "https://www.pixeluplabs.com/",
       logo: {
         "@type": "ImageObject",

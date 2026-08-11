@@ -1,4 +1,3 @@
-import { Geist } from "next/font/google";
 import Link from "next/link";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { AuditForm } from "@/components/AuditForm";
@@ -8,9 +7,6 @@ import type { BlogPostData } from "@/sanity/lib/blog-types";
 import { formatBlogDate } from "@/sanity/lib/blog-utils";
 import { BlogImage } from "./BlogImage";
 import { BlogPostSidebar } from "./BlogPostSidebar";
-
-// Scoped to the "Related Articles" heading only — the rest of the site keeps font-display.
-const geist = Geist({ subsets: ["latin"], weight: ["500"] });
 
 /** One "Related Articles" card — date, image, category tag, heading,
     description, "Read Article". Links to the related post. */
@@ -191,7 +187,7 @@ export function BlogPostPage({
           {/* gap-8 on `main` (32px) gives the spacing above this rule too. */}
           <div aria-hidden="true" className="w-full border-t-[0.5px] border-hairline" />
           <h2
-            className={`${geist.className} text-[24px] font-medium leading-tight text-white desk:text-[48px]`}
+            className="font-display text-[24px] font-medium leading-tight text-white desk:text-[48px]"
           >
             Related Articles
           </h2>

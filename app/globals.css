@@ -15,8 +15,8 @@
   --color-accent: #004aeb;
   --color-highlight: #0658fc;
   --color-button-dark: rgba(242, 243, 247, 0.08);
-  /* Hairline dividers on case study pages — blue-grey 0.5px rules (#344973 @ 45%). */
-  --color-hairline: rgba(52, 73, 115, 0.45);
+  /* Hairline dividers used as separator borders site-wide — white 0.5px rules (#FFFFFF @ 10%). */
+  --color-hairline: rgba(255, 255, 255, 0.1);
   /* Full-viewport dimming overlay behind an open mobile menu — page bg is
      already pure black, so this scrim (not a darker solid) is what makes the
      open state read as "darker" than the default page. */
@@ -31,6 +31,10 @@
      built-in key can't self-reference inside @theme without going circular. */
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo,
     monospace;
+
+  /* Client-page typography supplied by the approved Figma layout. */
+  --tracking-clients-heading: -0.05em;
+  --tracking-clients-description: -0.013623em;
 
   /* Custom breakpoint: two-column layout kicks in at ~1200px */
   --breakpoint-desk: 75rem; /* 1200px */
@@ -78,6 +82,14 @@ svg {
    expressed in em so it scales proportionally at the 24px mobile size (≈ -0.88px). */
 .tracking-display {
   letter-spacing: -0.03667em;
+}
+
+.tracking-clients-heading {
+  letter-spacing: var(--tracking-clients-heading);
+}
+
+.tracking-clients-description {
+  letter-spacing: var(--tracking-clients-description);
 }
 
 /* Scrollable areas that shouldn't show a scrollbar (right showcase column). */

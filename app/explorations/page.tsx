@@ -11,7 +11,7 @@ const geist = Geist({ subsets: ["latin"], weight: ["500", "600"] });
 export const metadata: Metadata = {
   title: "Explorations - PIXELUP LABS",
   description:
-    "Explorations from PixelUp Labs — brands, websites and products that command enterprise trust.",
+    "Explorations from PIXELUP LABS — brands, websites and products that command enterprise trust.",
   alternates: { canonical: "/explorations" },
 };
 

@@ -41,7 +41,7 @@ export function TrustedStrip() {
             >
               <Image
                 src={strip}
-                alt={i === 0 ? "Logos of YC companies PixelUp Labs has worked with" : ""}
+                alt={i === 0 ? "Logos of YC companies PIXELUP LABS has worked with" : ""}
                 className="h-6 w-auto opacity-70"
                 priority
               />

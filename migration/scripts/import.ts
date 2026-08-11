@@ -34,7 +34,7 @@ async function main() {
   for (const post of prepared.posts) {
     const asset = await client.assets.upload('image', createReadStream(post.imagePath), {
       filename: post.imageFilename,
-      source: {id: String(post.document.sourceId), name: 'PixelUp Labs legacy blog'},
+      source: {id: String(post.document.sourceId), name: 'PIXELUP LABS legacy blog'},
     })
     await client.createOrReplace({
       ...post.document,

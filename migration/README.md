@@ -1,4 +1,4 @@
-# PixelUp Labs blog migration
+# PIXELUP LABS blog migration
 
 This migration ports only the four existing published articles from `lib/blog.ts` into the Sanity `production` dataset. Public URLs remain `https://www.pixeluplabs.com/blog/<slug>`; Sanity is the editing backend, not a public blog host.
 

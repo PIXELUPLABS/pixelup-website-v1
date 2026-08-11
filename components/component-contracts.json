@@ -33,17 +33,18 @@
   "LeftNav": {
     "file": "components/LeftNav.tsx",
     "category": "layout",
-    "description": "Hero sidebar: heading, subheading, TrustedStrip, CtaButtons. Used on the homepage, /call, and /explorations, each passing its own heading/subheading copy.",
+    "description": "Hero sidebar: heading, subheading, TrustedStrip, CtaButtons. Used on the homepage, /call, /explorations, and /clients, each passing its own heading/subheading copy.",
     "variants": {
       "sticky": "boolean prop. true = pinned to the viewport, height calc(100vh-6.5rem) (used with page-level scroll, e.g. homepage, /explorations). false (default) = fills a fixed-height row (used by /call, which has its own internal-scroll shell).",
       "balanceHero": "boolean prop, applies text-balance/text-pretty for nicer line wrapping. Off by default because the homepage H1's line breaks were hand-tuned.",
       "headingSize": "string prop, Tailwind class override for desktop heading size (default desk:text-[30px]).",
-      "headingFontClassName": "string prop, extra className applied only to the <h1> — e.g. a next/font className to swap the heading's font on a single page without touching the site-wide font-display."
+      "headingFontClassName": "string prop, extra className applied only to the <h1> — e.g. a next/font className to swap the heading's font on a single page without touching the site-wide font-display.",
+      "variant": "default keeps the shared 405px sidebar and standard hero rhythm; clients uses the supplied Figma proportions: a responsive 431px desktop sidebar, 32px heading/description gap, 40px desktop heading, and 16px description."
     },
     "states": {
       "entrance": "fade-up animation on mount, staggered via inline animation-delay per child block."
     },
-    "tokens_used": ["typography.font.display (default)", "typography.tracking.display-tight", "color.neutral.white", "color.neutral.muted-65", "breakpoint.desk"],
+    "tokens_used": ["typography.font.display (default)", "typography.tracking.display-tight", "typography.tracking.clients-heading", "typography.tracking.clients-description", "color.neutral.white", "color.neutral.muted-65", "breakpoint.desk"],
     "when_to_use": "Any page that needs the site's \"hero sidebar\" pattern: big heading + subheading + trusted-by strip + CTA buttons, paired with a content column to its right.",
     "do_not": [
       "Don't confuse this with CaseSidebar — case study pages use a different, data-driven sidebar (client/year/involvement info) instead of this hero copy.",
@@ -63,7 +64,7 @@
     "tokens_used": ["color.neutral.hairline (border-r)", "breakpoint.desk"],
     "when_to_use": "Case study pages only (components/case-study/CaseStudyPage.tsx), one per page, paired with a <main> content column as a sibling (not nested).",
     "do_not": [
-      "Don't give this a width of its own — it's desk:w-[405px], the same flat value as LeftNav and the blog asides. It used to carry a calc(26%-10.4px) adjustment to match LeftNav's percentage width on a page without the homepage's p-5 shell; a fixed px width makes that compensation unnecessary, so keep all four sidebars on the identical value."
+      "Don't give this a width of its own — it stays desk:w-[405px], matching the default LeftNav and blog asides. The approved /clients LeftNav variant is the only 431px exception."
     ]
   },
 
@@ -175,7 +176,7 @@
   "MobileMenu": {
     "file": "components/MobileMenu.tsx",
     "category": "interactive",
-    "description": "Hamburger button + dropdown panel (Telegram link, 'Start now' link), mobile only.",
+    "description": "Hamburger button + dropdown panel containing the primary navigation links, mobile only.",
     "variants": ["none"],
     "states": {
       "closed": "Hamburger icon.",
@@ -185,7 +186,7 @@
     "when_to_use": "Inside Navbar only.",
     "do_not": [
       "Don't remove desk:hidden — this is the mobile-only counterpart to Navbar's desktop nav links.",
-      "Its own link list is separate from Navbar's navLinks array — update both if adding a destination."
+      "It imports Navbar's navLinks array, so add or remove primary destinations there."
     ]
   },
 
@@ -396,5 +397,27 @@
     "tokens_used": [],
     "when_to_use": "app/call/page.tsx only.",
     "do_not": ["Don't change calLink/namespace without updating the matching getCalApi namespace call — they must match."]
+  },
+
+  "ClientRoster": {
+    "file": "components/clients/ClientRoster.tsx",
+    "category": "content",
+    "description": "The /clients page column labels and ordered list of ClientRow entries. The page-level heading stays exclusively in the sidebar. Desktop restores the three-column roster from the supplied reference: Client, Niche, and What we did, using a 1.6fr / 0.6fr / 0.8fr ratio so the logo column is the largest. The roster remains inset by 24px horizontally and 28px vertically, with 24px gaps between columns.",
+    "variants": ["none — the clients prop supplies the ordered roster"],
+    "states": ["static server-rendered list"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.font.display", "breakpoint.desk"],
+    "when_to_use": "Once on app/clients/page.tsx.",
+    "do_not": ["Don't reuse Showcase or ProjectCard for the roster — those components are media-led portfolio entries, while this is an information-led client archive."]
+  },
+
+  "ClientRow": {
+    "file": "components/clients/ClientRow.tsx",
+    "category": "content",
+    "description": "One hairline-separated client entry with 25px top padding and 40px bottom padding at every viewport. Desktop uses three aligned columns: the dominant logo column, Niche, and What we did. Both text columns render at 60% white opacity. Mobile stacks the same content, preserves the approved 10px logo-to-niche gap, and keeps explicit Niche and What we did labels. Approved vectors render pure white inside optically audited contain frames, preserving their original aspect ratios without transform scaling. Vertera Health and Conigma are intentional color exceptions. Vertera preserves its white wordmark and outer icon with black petals against the white icon background. Conigma preserves its original wordmark shape in white, with a white rounded icon tile and black inner star. The default frame remains 134.4px by 24px. Per-logo width changes are applied to the rendered mark—not merely to unused frame space—by pairing each requested width with a sufficient proportional height in logoFrameClassBySlug. The current optical adjustments cover Autumn Pricing, Bland, CTGT, Conigma, Conscious Engines, DayFlow, Greptile, Henrylabs, Lasting Learn, My Wonder, NFA, Pogo, Reducto, Revyl, Sainapse, Streamline, Sully, Synthio Labs, Umbra, Vertera Health, Zenact, and Jumbo. Grovio currently uses the established accessible duplicated-logo placeholder because its SVG was not included. The final three engagement words stay together to prevent widow lines. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
+    "variants": ["approved logo vs duplicated-logo placeholder"],
+    "states": {"entrance": "fade-up stagger capped at 600ms"},
+    "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "spacing.base", "breakpoint.desk"],
+    "when_to_use": "Inside ClientRoster only, driven by lib/clients.ts.",
+    "do_not": ["Don't substitute a different company's logo for Grovio as if it were approved; replace its accessible placeholder when the real SVG arrives.", "Don't replace the width variants with transform scaling; width-only sizing preserves the requested 24px height and 10px gap.", "Don't apply the pure-white filter to Vertera Health or Conigma because it removes the contrast inside their icon marks.", "Don't remove the shared contain frame, pure-white treatment for the other logos, or per-logo width adjustments without rechecking every supplied logo together.", "Don't remove the final three-word nowrap group without rechecking the roster for one- or two-word widow lines."]
   }
 }

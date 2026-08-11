@@ -1,9 +1,10 @@
+import Script from "next/script";
 import { ctaButtonBase } from "@/components/CtaButtons";
 import { TallyPopupLink } from "@/components/TallyPopupLink";
 
 // Split out of AuditForm so the section's own markup stays uncluttered. The
-// button itself is TallyPopupLink (shared with the Navbar CTA), which owns all
-// of the popup behavior — see the note there.
+// button itself is TallyPopupLink, which owns all of the popup behavior — see
+// the note there.
 
 // The site's arrow glyph. Inlined rather than using /media/Container.svg because
 // that asset hardcodes fill="white", which would be invisible on a white button.
@@ -22,11 +23,8 @@ function ArrowIcon() {
 export function AuditCta() {
   return (
     <>
-      {/* embed.js is no longer loaded here — the Navbar CTA needs it on every
-          route, so it loads once there and this button rides on that. See the
-          note in components/Navbar.tsx.
-
-          gap-8 rather than relying on justify-between alone: the side nav's
+      <Script src="https://tally.so/widgets/embed.js" strategy="afterInteractive" />
+      {/* gap-8 rather than relying on justify-between alone: the side nav's
           buttons are flex-1 inside a narrow column, so justify-between does the
           spacing there. This one is content-width on desktop, so it needs an
           explicit gap. */}

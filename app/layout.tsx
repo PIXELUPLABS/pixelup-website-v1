@@ -95,8 +95,12 @@ export default function RootLayout({
         <DisableImageDrag />
         {/* Caps the site at 1800px and centers it — on very large monitors the
             page was stretching edge-to-edge, which broke the intended layout
-            proportions. Only binds above 1800px; no effect at smaller sizes. */}
-        <div className="mx-auto max-w-[1800px]">
+            proportions. Only binds above 1800px; no effect at smaller sizes.
+            The hairline side borders only kick in past that same breakpoint
+            (min-[1800px]:) — below it the div already spans the full
+            viewport, so a border there would just be a stray line glued to
+            the screen edge instead of framing the centered column. */}
+        <div className="mx-auto max-w-[1800px] min-[1800px]:border-x-[0.5px] min-[1800px]:border-hairline">
           <Navbar />
           {children}
         </div>
