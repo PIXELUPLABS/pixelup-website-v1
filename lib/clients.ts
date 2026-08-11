@@ -89,7 +89,7 @@ export const clients: Client[] = [
     logo: "/media/logos/pogo.svg",
     niche: "Consumer Research",
     engagement: "Full multi-page marketing website, with Webflow development",
-    fundingNote: "$32M",
+    fundingNote: "$32M Raised",
   },
   {
     slug: "valley",
