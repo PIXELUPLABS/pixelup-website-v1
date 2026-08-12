@@ -10,6 +10,7 @@ export const navLinks: { label: string; href: string | null }[] = [
   // { label: "YC Partner", href: null },
   { label: "Explorations", href: "/explorations" },
   { label: "Clients", href: "/clients" },
+  { label: "Case Studies", href: "/case-studies" },
   // { label: "Services", href: null },
   { label: "Blog", href: "/blog" },
 ];
