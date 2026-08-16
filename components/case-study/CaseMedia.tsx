@@ -29,6 +29,32 @@ export function CaseMediaSlot({
     return <div className={`w-full ${aspect} ${toneClass[tone]}`} />;
   }
 
+  if (slot.media.type === "image" && slot.intrinsicSize) {
+    return (
+      <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
+        <Image
+          src={slot.media.src}
+          alt={slot.alt ?? ""}
+          width={slot.intrinsicSize.width}
+          height={slot.intrinsicSize.height}
+          sizes={sizes}
+          priority={priority}
+          className="h-auto w-full"
+        />
+        {slot.overlayLogo && (
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <img
+              src={slot.overlayLogo}
+              alt=""
+              aria-hidden="true"
+              className="w-[18%]"
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className={`relative w-full overflow-hidden ${aspect} ${toneClass[tone]}`}>
       {slot.media.type === "video" ? (

@@ -17,6 +17,11 @@ export interface MediaSlot {
   media?: ProjectMedia;
   alt?: string;
   tone?: MediaTone;
+  /** Render an image at full width with its source aspect ratio instead of cropping it. */
+  intrinsicSize?: {
+    width: number;
+    height: number;
+  };
   /** Logo mark rendered centered on top of the media (as on the homepage cards). */
   overlayLogo?: string;
 }
@@ -831,13 +836,13 @@ const henryLabs: CaseStudy = {
       media: [
         {
           kind: "full",
-          aspect: "wide",
           slot: {
             media: {
               type: "image",
               src: "/media/henry-labs/figjam-user-personas.png",
             },
             alt: "Henry Labs FigJam research board mapping partner and shopper personas",
+            intrinsicSize: { width: 2940, height: 1616 },
           },
         },
         {
@@ -859,13 +864,13 @@ const henryLabs: CaseStudy = {
       media: [
         {
           kind: "full",
-          aspect: "wide",
           slot: {
             media: {
               type: "image",
               src: "/media/henry-labs/figjam-checkout-flow.png",
             },
             alt: "Henry Labs FigJam board mapping the audited checkout and shopper flows",
+            intrinsicSize: { width: 2940, height: 1616 },
           },
         },
         {
