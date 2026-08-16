@@ -108,7 +108,7 @@ export interface CaseStudy {
  * Shared FAQ shown on every case study page: about PixelUp itself, written
  * to resolve the objections prospects most often bring to a first call.
  */
-export const faqHeading = "Frequently Answered Question";
+export const faqHeading = "Frequently answered question";
 
 export const pixelupFaq: FaqItem[] = [
   {
@@ -715,19 +715,19 @@ const streamline: CaseStudy = {
 
 const henryLabs: CaseStudy = {
   slug: "henrylabs",
-  title: "We Came to Brand Henry Labs. Then We Designed the Product Too.",
-  metaTitle: "Henry Labs Brand, Website and Product Case Study",
+  title: "We came to brand Henry Labs. Then we designed the product too.",
+  metaTitle: "Henry Labs brand, website and product case study",
   metaDescription:
     "See how PIXELUP LABS designed Henry Labs' brand, website, dashboard and checkout experience for a startup building agentic commerce infrastructure.",
   info: {
     client: "Henry Labs",
     year: "2026",
     involvement: [
-      "Brand Identity",
+      "Brand identity",
       "Positioning",
-      "Website Design and Build",
-      "Product Design",
-      "Design System",
+      "Website design and build",
+      "Product design",
+      "Design system",
       "Motion",
     ],
     funding: "Approximately $1M [confirm with Henry Labs before publishing]",
@@ -762,7 +762,7 @@ const henryLabs: CaseStudy = {
   ],
   sections: [
     {
-      heading: "You Do Not Hand Checkout to a Company You Do Not Trust.",
+      heading: "You do not hand checkout to a company you do not trust.",
       headingSize: "small",
       paragraphs: [
         "That is the real design problem with Henry Labs.",
@@ -789,7 +789,7 @@ const henryLabs: CaseStudy = {
       ],
     },
     {
-      heading: "Kill the Redirect. Own the Checkout.",
+      heading: "Kill the redirect. Own the checkout.",
       headingSize: "compact",
       paragraphs: [
         "Henry Labs takes a shopper from discovery to cart to payment without sending them to another website.",
@@ -819,7 +819,7 @@ const henryLabs: CaseStudy = {
       ],
     },
     {
-      heading: "Nobody Opens a Dashboard to Hunt for Data.",
+      heading: "Nobody opens a dashboard to hunt for data.",
       headingSize: "small",
       paragraphs: [
         "Henrylabs' partners opened the product to answer three questions.",
@@ -837,7 +837,7 @@ const henryLabs: CaseStudy = {
       ],
     },
     {
-      heading: "The Partner Was Not the Shopper.",
+      heading: "The partner was not the shopper.",
       paragraphs: [
         "Partners wanted to know if Henrylabs was making them money.",
         "Shoppers wanted to buy something without thinking about the infrastructure making it possible.",
@@ -854,7 +854,7 @@ const henryLabs: CaseStudy = {
       ],
     },
     {
-      heading: "What We Shipped",
+      heading: "What we shipped",
       bullets: [
         "Brand identity and positioning",
         "Website copy, design and build",
@@ -866,18 +866,12 @@ const henryLabs: CaseStudy = {
       ],
       media: [
         {
-          kind: "pair",
+          kind: "full",
           aspect: "wide",
-          slots: [
-            {
-              media: { type: "image", src: "/media/henry-labs/frame-2147244047.avif" },
-              alt: "Henry Labs website displayed on a laptop against an orange landscape",
-            },
-            {
-              media: { type: "image", src: "/media/henry-labs/frame-2147244048.avif" },
-              alt: "Henry Labs mobile website displayed on a phone against a dark chain-link backdrop",
-            },
-          ],
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/68.avif" },
+            alt: "Henry Labs brand posters, positioning and website screens shown as one work wall",
+          },
         },
       ],
     },
@@ -899,16 +893,16 @@ const henryLabs: CaseStudy = {
             alt: "Henry Labs mobile website and brand mark over the launch landscape",
           },
           {
-            media: { type: "image", src: "/media/henry-labs/asset-2.avif" },
-            alt: "Henry Labs own your checkout call to action over the launch landscape",
+            media: { type: "image", src: "/media/henry-labs/frame-2147244047.avif" },
+            alt: "Henry Labs website use cases displayed on a laptop against an orange landscape",
           },
         ],
       },
     ],
   },
   moreProjects: [
-    { slug: "streamline", tags: "Branding, Positioning & Website Design" },
-    { slug: "greptile", tags: "Branding & Product Design" },
+    { slug: "streamline", tags: "Branding, positioning & website design" },
+    { slug: "greptile", tags: "Branding & product design" },
   ],
   publication: {
     status: "draft",
