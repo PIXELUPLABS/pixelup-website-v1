@@ -1,4 +1,4 @@
-import type { ProjectMedia } from "./projects";
+import { links, type ProjectMedia } from "./projects";
 
 /**
  * Case study page content, mirroring the Figma case study template
@@ -96,6 +96,11 @@ export interface CaseStudy {
     headingSize?: "default" | "compact" | "small";
     paragraphs: string[];
     media?: MediaBlock[];
+  };
+  /** Optional page-specific CTA rendered after the closing media and before the FAQ. */
+  endCta?: {
+    label: string;
+    href: string;
   };
   moreProjects: MoreProjectRef[];
   publication: {
@@ -899,6 +904,10 @@ const henryLabs: CaseStudy = {
         ],
       },
     ],
+  },
+  endCta: {
+    label: "Book a call",
+    href: links.discoveryCall,
   },
   moreProjects: [
     { slug: "streamline", tags: "Branding, positioning & website design" },

@@ -1,9 +1,11 @@
+import Image from "next/image";
 import {
   faqHeading,
   pixelupFaq,
   pixelupFaqSchema,
   type CaseStudy,
 } from "@/lib/case-studies";
+import { ctaButtonBase } from "../CtaButtons";
 import { Footer } from "../Footer";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
@@ -92,6 +94,26 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                     <CaseMediaBlock key={index} block={block} />
                   ))}
                 </>
+              )}
+
+              {study.endCta && (
+                <div className="border-t-[0.5px] border-hairline p-6">
+                  <a
+                    href={study.endCta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${ctaButtonBase} w-full bg-accent text-white hover:brightness-110`}
+                  >
+                    <span>{study.endCta.label}</span>
+                    <Image
+                      src="/media/Container.svg"
+                      alt=""
+                      width={14}
+                      height={14}
+                      aria-hidden="true"
+                    />
+                  </a>
+                </div>
               )}
 
               <SectionShell heading={faqHeading} headingSize="compact" topRule>
