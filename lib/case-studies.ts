@@ -842,7 +842,7 @@ const henryLabs: CaseStudy = {
               src: "/media/henry-labs/figjam-user-personas.png",
             },
             alt: "Henry Labs FigJam research board mapping partner and shopper personas",
-            intrinsicSize: { width: 2940, height: 1616 },
+            intrinsicSize: { width: 5594, height: 3062 },
           },
         },
         {
@@ -870,7 +870,7 @@ const henryLabs: CaseStudy = {
               src: "/media/henry-labs/figjam-checkout-flow.png",
             },
             alt: "Henry Labs FigJam board mapping the audited checkout and shopper flows",
-            intrinsicSize: { width: 2940, height: 1616 },
+            intrinsicSize: { width: 5594, height: 3062 },
           },
         },
         {
