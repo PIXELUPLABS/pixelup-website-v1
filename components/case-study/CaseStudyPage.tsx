@@ -77,7 +77,11 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
 
               {study.closing && (
                 <>
-                  <SectionShell heading={study.closing.heading} topRule>
+                  <SectionShell
+                    heading={study.closing.heading}
+                    headingSize={study.closing.headingSize}
+                    topRule
+                  >
                     {study.closing.paragraphs.map((paragraph) => (
                       <p key={paragraph} className="text-[16px] leading-[1.5] text-white">
                         {paragraph}
@@ -90,7 +94,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                 </>
               )}
 
-              <SectionShell heading={faqHeading} topRule>
+              <SectionShell heading={faqHeading} headingSize="compact" topRule>
                 <CaseFaq items={pixelupFaq} />
               </SectionShell>
 

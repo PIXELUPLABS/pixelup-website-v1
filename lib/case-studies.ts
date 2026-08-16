@@ -48,6 +48,8 @@ export interface ResultRow {
 
 export interface CaseSection {
   heading: string;
+  /** Reduce long desktop headings so they stay within two lines. */
+  headingSize?: "default" | "compact" | "small";
   /** Lead paragraph above the list/rows. Line breaks are preserved. */
   lead?: string;
   /** "Clarity over cleverness / Making complex workflows simple" pairs. */
@@ -91,6 +93,7 @@ export interface CaseStudy {
   sections: CaseSection[];
   closing?: {
     heading: string;
+    headingSize?: "default" | "compact" | "small";
     paragraphs: string[];
     media?: MediaBlock[];
   };
@@ -759,6 +762,7 @@ const henryLabs: CaseStudy = {
   sections: [
     {
       heading: "You Do Not Hand Checkout to a Company You Do Not Trust.",
+      headingSize: "small",
       paragraphs: [
         "That is the real design problem with Henry Labs.",
         "A platform is trusting Henrylabs with the transaction, the customer data and a piece of its revenue. A nice logo was not going to be enough.",
@@ -783,6 +787,7 @@ const henryLabs: CaseStudy = {
     },
     {
       heading: "Kill the Redirect. Own the Checkout.",
+      headingSize: "compact",
       paragraphs: [
         "Henry Labs takes a shopper from discovery to cart to payment without sending them to another website.",
         "That was the website story. Not a long explanation of commerce infrastructure.",
@@ -812,6 +817,7 @@ const henryLabs: CaseStudy = {
     },
     {
       heading: "Nobody Opens a Dashboard to Hunt for Data.",
+      headingSize: "small",
       paragraphs: [
         "Henrylabs' partners opened the product to answer three questions.",
         "How much did we sell? How much traffic came through? Who sent it?",
@@ -875,6 +881,7 @@ const henryLabs: CaseStudy = {
   ],
   closing: {
     heading: "The brand got us in the door. The product became most of the job.",
+    headingSize: "small",
     paragraphs: [
       "By the end, the website, dashboard and checkout finally looked like they came from the same company.",
       "Brand, website and product by PIXELUP LABS. 2026.",

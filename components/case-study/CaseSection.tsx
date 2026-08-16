@@ -4,7 +4,7 @@ import { SectionShell } from "./SectionShell";
 /** Text section variants: lead + focus list, metric rows, or plain paragraphs. */
 export function CaseSection({ section }: { section: CaseSectionData }) {
   return (
-    <SectionShell heading={section.heading}>
+    <SectionShell heading={section.heading} headingSize={section.headingSize}>
       {section.lead && (
         <p className="whitespace-pre-line text-[16px] leading-[1.5] text-white">
           {section.lead}

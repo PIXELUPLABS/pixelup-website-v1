@@ -275,7 +275,8 @@
     "category": "layout",
     "description": "Case study Q&A section wrapper: uppercase heading in the left half, full-width hairline rule, content in the right half (aligned to the vertical center rule).",
     "variants": {
-      "topRule": "boolean. Adds a full-width hairline above the section (used for the FAQ block)."
+      "topRule": "boolean. Adds a full-width hairline above the section (used for the FAQ block).",
+      "headingSize": "default keeps the 48px desktop heading; compact uses 32px and small uses 24px for longer headings that must stay within two lines."
     },
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline", "typography.tracking.display-tight", "breakpoint.desk"],
