@@ -116,7 +116,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                 </div>
               )}
 
-              <SectionShell heading={faqHeading} headingSize="compact" topRule>
+              <SectionShell heading={faqHeading} topRule>
                 <CaseFaq items={pixelupFaq} />
               </SectionShell>
 

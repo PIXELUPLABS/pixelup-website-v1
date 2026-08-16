@@ -768,7 +768,6 @@ const henryLabs: CaseStudy = {
   sections: [
     {
       heading: "You do not hand checkout to a company you do not trust.",
-      headingSize: "small",
       paragraphs: [
         "That is the real design problem with Henry Labs.",
         "A platform is trusting Henrylabs with the transaction, the customer data and a piece of its revenue. A nice logo was not going to be enough.",
@@ -795,7 +794,6 @@ const henryLabs: CaseStudy = {
     },
     {
       heading: "Kill the redirect. Own the checkout.",
-      headingSize: "compact",
       paragraphs: [
         "Henry Labs takes a shopper from discovery to cart to payment without sending them to another website.",
         "That was the website story. Not a long explanation of commerce infrastructure.",
@@ -825,7 +823,6 @@ const henryLabs: CaseStudy = {
     },
     {
       heading: "Nobody opens a dashboard to hunt for data.",
-      headingSize: "small",
       paragraphs: [
         "Henrylabs' partners opened the product to answer three questions.",
         "How much did we sell? How much traffic came through? Who sent it?",
@@ -905,7 +902,6 @@ const henryLabs: CaseStudy = {
   ],
   closing: {
     heading: "The brand got us in the door. The product became most of the job.",
-    headingSize: "small",
     paragraphs: [
       "By the end, the website, dashboard and checkout finally looked like they came from the same company.",
       "Brand, website and product by PIXELUP LABS. 2026.",
