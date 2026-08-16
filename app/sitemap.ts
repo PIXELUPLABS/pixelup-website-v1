@@ -52,12 +52,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     },
-    ...Object.values(caseStudies).map((study) => ({
-      url: `${BASE_URL}/case-studies/${study.slug}`,
-      lastModified: siteUpdated.caseStudies,
-      changeFrequency: "monthly" as const,
-      priority: 0.9,
-    })),
+    ...Object.values(caseStudies)
+      .filter((study) => study.publication.status === "published")
+      .map((study) => ({
+        url: `${BASE_URL}/case-studies/${study.slug}`,
+        lastModified: siteUpdated.caseStudies,
+        changeFrequency: "monthly" as const,
+        priority: 0.9,
+      })),
     ...blogPosts.map((post) => ({
       url: `${BASE_URL}/blog/${post.slug}`,
       lastModified: post.updatedDate,

@@ -49,6 +49,9 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
             <div className="fade-up [animation-delay:300ms]">
               <CaseMediaBlock block={{ kind: "full", slot: study.hero }} priority />
             </div>
+            {study.introMedia?.map((block, index) => (
+              <CaseMediaBlock key={index} block={block} />
+            ))}
           </div>
 
           {/* Everything below the hero shares the faint center rule from the
@@ -71,6 +74,16 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                   ))}
                 </div>
               ))}
+
+              {study.closing && (
+                <SectionShell heading={study.closing.heading} topRule>
+                  {study.closing.paragraphs.map((paragraph) => (
+                    <p key={paragraph} className="text-[16px] leading-[1.5] text-white">
+                      {paragraph}
+                    </p>
+                  ))}
+                </SectionShell>
+              )}
 
               <SectionShell heading={faqHeading} topRule>
                 <CaseFaq items={pixelupFaq} />

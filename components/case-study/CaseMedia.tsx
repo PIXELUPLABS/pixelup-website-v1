@@ -92,7 +92,7 @@ export function CaseMediaBlock({
         <div key={i} className="min-w-0 flex-1">
           <CaseMediaSlot
             slot={slot}
-            aspect="aspect-[576/548]"
+            aspect={block.aspect === "wide" ? "aspect-video" : "aspect-[576/548]"}
             sizes="(min-width: 1200px) 40vw, 100vw"
           />
         </div>

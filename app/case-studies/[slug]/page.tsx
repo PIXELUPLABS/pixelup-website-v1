@@ -24,6 +24,10 @@ export async function generateMetadata({
     title: study.metaTitle,
     description: study.metaDescription,
     alternates: { canonical: `/case-studies/${study.slug}` },
+    robots:
+      study.publication.status === "published"
+        ? undefined
+        : { index: false, follow: false },
   };
 }
 
