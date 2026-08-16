@@ -97,7 +97,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
               )}
 
               {study.endCta && (
-                <div className="border-t-[0.5px] border-hairline p-6">
+                <div className="border-t-[0.5px] border-hairline p-6 desk:hidden">
                   <a
                     href={study.endCta.href}
                     target="_blank"
