@@ -82,7 +82,11 @@ export function CaseMediaBlock({
   if (block.kind === "full") {
     return (
       <div className="px-6 desk:p-6">
-        <CaseMediaSlot slot={block.slot} aspect="aspect-[1160/696]" priority={priority} />
+        <CaseMediaSlot
+          slot={block.slot}
+          aspect={block.aspect === "wide" ? "aspect-video" : "aspect-[1160/696]"}
+          priority={priority}
+        />
       </div>
     );
   }

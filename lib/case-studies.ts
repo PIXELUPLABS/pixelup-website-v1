@@ -23,7 +23,12 @@ export interface MediaSlot {
 
 /** A row of imagery between sections: one full-bleed slot or a side-by-side pair. */
 export type MediaBlock =
-  | { kind: "full"; slot: MediaSlot }
+  | {
+      kind: "full";
+      slot: MediaSlot;
+      /** Preserve landscape assets instead of using the default full-width crop. */
+      aspect?: "standard" | "wide";
+    }
   | {
       kind: "pair";
       slots: [MediaSlot, MediaSlot];
@@ -785,21 +790,23 @@ const henryLabs: CaseStudy = {
       ],
       media: [
         {
-          kind: "pair",
+          kind: "full",
           aspect: "wide",
-          slots: [
-            {
-              media: { type: "image", src: "/media/henry-labs/58.avif" },
-              alt: "Henry Labs identity and positioning presented on a large conference screen",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/58.avif" },
+            alt: "Henry Labs identity and positioning presented on a large conference screen",
+          },
+        },
+        {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/frame-2147244046.avif",
             },
-            {
-              media: {
-                type: "image",
-                src: "/media/henry-labs/frame-2147244046.avif",
-              },
-              alt: "Henry Labs website displayed on a laptop against a black and silver landscape",
-            },
-          ],
+            alt: "Henry Labs website displayed on a laptop against a black and silver landscape",
+          },
         },
       ],
     },

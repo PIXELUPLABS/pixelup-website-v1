@@ -304,10 +304,11 @@
   "CaseMedia": {
     "file": "components/case-study/CaseMedia.tsx",
     "category": "content",
-    "description": "CaseMediaSlot (single image/video frame with tone placeholder fills) + CaseMediaBlock (\"full\" 1160x696 frame or \"pair\" of 576x548 frames). Pair blocks can opt into a landscape 16:9 aspect for supplied wide showcase assets.",
+    "description": "CaseMediaSlot (single image/video frame with tone placeholder fills) + CaseMediaBlock (\"full\" 1160x696 frame or \"pair\" of 576x548 frames). Full and pair blocks can opt into a landscape 16:9 aspect for supplied wide showcase assets.",
     "variants": {
       "tone": "\"white\" | \"faint\" | \"green\" — placeholder fill shown when a slot has no real media yet.",
       "kind": "\"full\" | \"pair\", passed via MediaBlock.",
+      "full aspect": "standard keeps the approved 1160/696 crop; wide uses 16:9 at full width.",
       "pair aspect": "standard keeps the approved 576/548 crop; wide uses 16:9 without changing the pair spacing or responsive stack."
     },
     "states": ["priority prop: true = loading=\"eager\" + fetchPriority=\"high\" (the case hero image only); false = lazy."],
