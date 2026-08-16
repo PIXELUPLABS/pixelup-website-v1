@@ -834,6 +834,17 @@ const henryLabs: CaseStudy = {
       media: [
         {
           kind: "full",
+          aspect: "wide",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/figjam-user-personas.png",
+            },
+            alt: "Henry Labs FigJam research board mapping partner and shopper personas",
+          },
+        },
+        {
+          kind: "full",
           slot: {
             media: { type: "image", src: "/media/henry-labs/70.avif" },
             alt: "Henry Labs website feature section for building, monetizing and optimizing agentic commerce",
@@ -849,6 +860,17 @@ const henryLabs: CaseStudy = {
         "So we designed the dashboard for one job and the checkout for the other. The type, components and interaction rules stayed consistent, but the hierarchy changed with the user.",
       ],
       media: [
+        {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/figjam-checkout-flow.png",
+            },
+            alt: "Henry Labs FigJam board mapping the audited checkout and shopper flows",
+          },
+        },
         {
           kind: "full",
           slot: {
