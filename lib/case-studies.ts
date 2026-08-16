@@ -753,9 +753,10 @@ const henryLabs: CaseStudy = {
   introMedia: [
     {
       kind: "full",
+      aspect: "wide",
       slot: {
-        media: { type: "image", src: "/media/henry-labs/68.avif" },
-        alt: "Henry Labs brand and website system shown across desktop and campaign applications",
+        media: { type: "image", src: "/media/henry-labs/64.avif" },
+        alt: "Henry Labs wordmark over a blue and orange mountain landscape",
       },
     },
   ],
@@ -770,18 +771,20 @@ const henryLabs: CaseStudy = {
       ],
       media: [
         {
-          kind: "pair",
+          kind: "full",
           aspect: "wide",
-          slots: [
-            {
-              media: { type: "image", src: "/media/henry-labs/65.avif" },
-              alt: "Henry Labs positioning posters using the mountain imagery and angular brand mark",
-            },
-            {
-              media: { type: "image", src: "/media/henry-labs/66.avif" },
-              alt: "Henry Labs execution layer positioning beside an illuminated shopping cart",
-            },
-          ],
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/65.avif" },
+            alt: "Henry Labs positioning posters using the mountain imagery and angular brand mark",
+          },
+        },
+        {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/66.avif" },
+            alt: "Henry Labs execution layer positioning beside an illuminated shopping cart",
+          },
         },
       ],
     },
