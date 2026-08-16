@@ -76,13 +76,18 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
               ))}
 
               {study.closing && (
-                <SectionShell heading={study.closing.heading} topRule>
-                  {study.closing.paragraphs.map((paragraph) => (
-                    <p key={paragraph} className="text-[16px] leading-[1.5] text-white">
-                      {paragraph}
-                    </p>
+                <>
+                  <SectionShell heading={study.closing.heading} topRule>
+                    {study.closing.paragraphs.map((paragraph) => (
+                      <p key={paragraph} className="text-[16px] leading-[1.5] text-white">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </SectionShell>
+                  {study.closing.media?.map((block, index) => (
+                    <CaseMediaBlock key={index} block={block} />
                   ))}
-                </SectionShell>
+                </>
               )}
 
               <SectionShell heading={faqHeading} topRule>

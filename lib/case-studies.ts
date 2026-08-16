@@ -87,6 +87,7 @@ export interface CaseStudy {
   closing?: {
     heading: string;
     paragraphs: string[];
+    media?: MediaBlock[];
   };
   moreProjects: MoreProjectRef[];
   publication: {
@@ -705,7 +706,7 @@ const streamline: CaseStudy = {
 };
 
 const henryLabs: CaseStudy = {
-  slug: "henry-labs",
+  slug: "henrylabs",
   title: "We Came to Brand Henry Labs. Then We Designed the Product Too.",
   metaTitle: "Henry Labs Brand, Website and Product Case Study",
   metaDescription:
@@ -755,7 +756,7 @@ const henryLabs: CaseStudy = {
       heading: "You Do Not Hand Checkout to a Company You Do Not Trust.",
       paragraphs: [
         "That is the real design problem with Henry Labs.",
-        "A platform is trusting Henry with the transaction, the customer data and a piece of its revenue. A nice logo was not going to be enough.",
+        "A platform is trusting Henrylabs with the transaction, the customer data and a piece of its revenue. A nice logo was not going to be enough.",
         "The company needed to look as serious as the infrastructure it was building. So we learnt the product, mapped the category and built the identity from there.",
       ],
       media: [
@@ -773,13 +774,6 @@ const henryLabs: CaseStudy = {
             },
           ],
         },
-        {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/henry-labs/58.avif" },
-            alt: "Henry Labs identity and positioning presented on a large conference screen",
-          },
-        },
       ],
     },
     {
@@ -795,12 +789,15 @@ const henryLabs: CaseStudy = {
           aspect: "wide",
           slots: [
             {
-              media: { type: "image", src: "/media/henry-labs/69.avif" },
-              alt: "Henry Labs website call to action asking visitors to own their checkout",
+              media: { type: "image", src: "/media/henry-labs/58.avif" },
+              alt: "Henry Labs identity and positioning presented on a large conference screen",
             },
             {
-              media: { type: "image", src: "/media/henry-labs/70.avif" },
-              alt: "Henry Labs website feature section for building, monetizing and optimizing agentic commerce",
+              media: {
+                type: "image",
+                src: "/media/henry-labs/frame-2147244046.avif",
+              },
+              alt: "Henry Labs website displayed on a laptop against a black and silver landscape",
             },
           ],
         },
@@ -809,20 +806,36 @@ const henryLabs: CaseStudy = {
     {
       heading: "Nobody Opens a Dashboard to Hunt for Data.",
       paragraphs: [
-        "Henry's partners opened the product to answer three questions.",
+        "Henrylabs' partners opened the product to answer three questions.",
         "How much did we sell? How much traffic came through? Who sent it?",
         "The old dashboard buried sales, traffic and referrals. We helped plan the roadmap and designed V1 around putting those answers first.",
       ],
-      media: [],
+      media: [
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/70.avif" },
+            alt: "Henry Labs website feature section for building, monetizing and optimizing agentic commerce",
+          },
+        },
+      ],
     },
     {
       heading: "The Partner Was Not the Shopper.",
       paragraphs: [
-        "Partners wanted to know if Henry was making them money.",
+        "Partners wanted to know if Henrylabs was making them money.",
         "Shoppers wanted to buy something without thinking about the infrastructure making it possible.",
         "So we designed the dashboard for one job and the checkout for the other. The type, components and interaction rules stayed consistent, but the hierarchy changed with the user.",
       ],
-      media: [],
+      media: [
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/69.avif" },
+            alt: "Henry Labs website call to action asking visitors to own their checkout",
+          },
+        },
+      ],
     },
     {
       heading: "What We Shipped",
@@ -837,13 +850,6 @@ const henryLabs: CaseStudy = {
       ],
       media: [
         {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/henry-labs/frame-2147244046.avif" },
-            alt: "Henry Labs website displayed on a laptop against a black and silver landscape",
-          },
-        },
-        {
           kind: "pair",
           aspect: "wide",
           slots: [
@@ -857,20 +863,6 @@ const henryLabs: CaseStudy = {
             },
           ],
         },
-        {
-          kind: "pair",
-          aspect: "wide",
-          slots: [
-            {
-              media: { type: "image", src: "/media/henry-labs/asset-1.avif" },
-              alt: "Henry Labs mobile website and brand mark over the launch landscape",
-            },
-            {
-              media: { type: "image", src: "/media/henry-labs/asset-2.avif" },
-              alt: "Henry Labs own your checkout call to action over the launch landscape",
-            },
-          ],
-        },
       ],
     },
   ],
@@ -879,6 +871,22 @@ const henryLabs: CaseStudy = {
     paragraphs: [
       "By the end, the website, dashboard and checkout finally looked like they came from the same company.",
       "Brand, website and product by PIXELUP LABS. 2026.",
+    ],
+    media: [
+      {
+        kind: "pair",
+        aspect: "wide",
+        slots: [
+          {
+            media: { type: "image", src: "/media/henry-labs/asset-1.avif" },
+            alt: "Henry Labs mobile website and brand mark over the launch landscape",
+          },
+          {
+            media: { type: "image", src: "/media/henry-labs/asset-2.avif" },
+            alt: "Henry Labs own your checkout call to action over the launch landscape",
+          },
+        ],
+      },
     ],
   },
   moreProjects: [

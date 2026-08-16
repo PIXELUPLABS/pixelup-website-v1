@@ -58,7 +58,7 @@ export const projects: Project[] = [
     year: "2025",
   },
   {
-    slug: "henry-labs",
+    slug: "henrylabs",
     label: "Henry Labs",
     href: "https://henrylabs.ai",
     external: true,

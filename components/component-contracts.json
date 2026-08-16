@@ -358,7 +358,7 @@
   "CaseStudyPage": {
     "file": "components/case-study/CaseStudyPage.tsx",
     "category": "page_template",
-    "description": "Full case study page template: CaseSidebar + main content column (title, hero, optional opening media, CaseSection/CaseMedia loop, optional closing statement, CaseFaq, MoreProjects, Footer).",
+    "description": "Full case study page template: CaseSidebar + main content column (title, hero, optional opening media, CaseSection/CaseMedia loop, optional closing statement with follow-on media, CaseFaq, MoreProjects, Footer).",
     "variants": ["study prop (CaseStudy) drives all content; draft studies remain directly previewable but are noindex and excluded from the sitemap"],
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline (center vertical rule)", "breakpoint.desk"],

@@ -6,9 +6,7 @@
  * Sourcing:
  * - `whatWeDid` is each client's `engagement` line from `lib/clients.ts`
  *   (the /clients roster), the team's own approved scope-of-work copy —
- *   not new copy invented here. lib/clients.ts uses the slug "henrylabs"
- *   for the project this file (and lib/projects.ts) key as "henry-labs";
- *   same company, just a slug mismatch between the two files.
+ *   not new copy invented here.
  * - Sainapse / Sully / Streamline stats are pulled verbatim or
  *   near-verbatim from their real case studies in `lib/case-studies.ts` —
  *   no new claims invented here.
@@ -67,9 +65,8 @@ export const caseStudyShowcase: CaseStudyShowcaseEntry[] = [
     stat: "One design system shipped across 200+ pages",
   },
   {
-    slug: "henry-labs",
+    slug: "henrylabs",
     niche: "Consumer AI",
-    // lib/clients.ts keys this same client as "henrylabs".
     whatWeDid: "Brand identity, landing page, and product reskin (dashboard + checkout), with Webflow development",
     // No funding badge — see file header note.
   },
