@@ -572,10 +572,10 @@ const sully: CaseStudy = {
 
 const streamline: CaseStudy = {
   slug: "streamline",
-  title: "Streamline: Enterprise Positioning for an AI Company Ready to Move Upmarket",
-  metaTitle: "Streamline Case Study - PIXELUP LABS",
+  title: "We repositioned Streamline for enterprise, then scaled the brand across 200 pages.",
+  metaTitle: "Streamline brand, positioning and website case study",
   metaDescription:
-    "How we repositioned Streamline AI for enterprise legal teams: a refreshed brand, sharper messaging, and a unified design system that scaled across more than 200 pages ahead of their PR launch.",
+    "See how PIXELUP LABS repositioned Streamline for enterprise legal teams and built a brand, website and design system that scaled across more than 200 pages.",
   info: {
     client: "Streamline (AI Platform for Legal Operations)",
     year: "2026",
