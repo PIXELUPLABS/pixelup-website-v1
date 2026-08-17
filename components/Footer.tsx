@@ -9,6 +9,7 @@ const TESTIMONIALS_URL = "https://contra.com/daksh_aswal_dt5tfn27/reviews"
 
 const caseStudies = [
   { name: "Greptile", slug: "greptile" },
+  { name: "Henry Labs", slug: "henrylabs" },
   { name: "Sainapse", slug: "sainapse" },
   { name: "Sully", slug: "sully" },
   { name: "Streamline", slug: "streamline" },
