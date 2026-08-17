@@ -13,11 +13,13 @@ export const metadata: Metadata = {
 export default function CaseStudiesPage() {
   return (
     <div className="relative flex flex-col gap-8 p-4 desk:p-5">
-      <header className="flex flex-col gap-4">
+      <header className="flex w-fit flex-col gap-4">
         <h1 className="fade-up font-display tracking-display text-[24px] font-medium leading-[1.1] text-white [animation-delay:100ms] desk:text-[56px]">
-          Real projects, real outcomes
+          Real projects,
+          <br />
+          real outcomes
         </h1>
-        <p className="fade-up max-w-[60ch] text-[16px] leading-[1.3] tracking-[-0.02em] text-muted-65 [animation-delay:200ms]">
+        <p className="fade-up text-[16px] leading-[1.3] tracking-[-0.02em] text-muted-65 [animation-delay:200ms]">
           A closer look at the brand, product and website engagements that
           took ambitious startups from overlooked to enterprise-ready.
         </p>

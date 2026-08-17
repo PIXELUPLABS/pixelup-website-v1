@@ -105,25 +105,20 @@ function CaseStudyRow({ row, index }: { row: ShowcaseRow; index: number }) {
         )}
       </div>
       <div className="flex w-full flex-col justify-between gap-4 pt-4 desk:w-[38%] desk:gap-0 desk:pt-0 desk:pl-5">
+        <p className="text-[24px] font-medium leading-tight text-white/80 transition-opacity duration-200 group-hover:opacity-60 desk:text-[28px]">
+          {project.label}
+        </p>
         <div className="flex flex-col gap-2">
-          <div className="flex h-8.75 flex-wrap items-end gap-2">
-            <Tag label={entry.niche} />
-            {entry.fundingBadge && <Tag label={entry.fundingBadge} />}
+          <div className="flex flex-wrap items-end gap-2">
+            <Tag label={entry.fundingBadge ?? "Private"} />
           </div>
-          <p className="text-[24px] font-medium leading-tight text-white/80 transition-opacity duration-200 group-hover:opacity-60 desk:text-[28px]">
-            {project.label}
+          <p className="text-[12px] font-medium uppercase text-label-grey">
+            {entry.stat ?? project.year}
           </p>
         </div>
-        <p className="pb-1 text-[12px] font-medium uppercase text-label-grey">
-          {entry.stat ?? project.year}
-        </p>
       </div>
       <div className="flex w-full flex-col gap-2 pt-4 desk:w-[37%] desk:pt-0 desk:pl-5">
-        {/* Same h-8.75 items-end box as the tags row opposite it, so both
-            columns' content starts at the same top offset. */}
-        <div className="flex h-8.75 items-end">
-          <p className="text-[12px] font-medium uppercase text-label-grey">What We Did</p>
-        </div>
+        <p className="text-[12px] font-medium uppercase text-label-grey">What We Did</p>
         <p className="max-w-[40ch] text-[14px] leading-[1.3] tracking-[-0.02em] text-body-grey desk:text-[16px]">
           {entry.whatWeDid}
         </p>
@@ -179,7 +174,7 @@ export function CaseStudyList({ entries }: { entries: CaseStudyShowcaseEntry[] }
   return (
     <section className="flex w-full flex-col gap-8">
       <div className="flex flex-col gap-[10px]">
-        <p className="text-[12px] font-medium uppercase text-label-grey">Niche:</p>
+        {/* <p className="text-[12px] font-medium uppercase text-label-grey">Niche:</p> */}
         <div className="flex flex-wrap gap-2">
           {niches.map((niche) => (
             <NichePill
