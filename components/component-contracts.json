@@ -275,7 +275,8 @@
     "category": "layout",
     "description": "Case study Q&A section wrapper: uppercase heading in the left half, full-width hairline rule, content in the right half (aligned to the vertical center rule).",
     "variants": {
-      "topRule": "boolean. Adds a full-width hairline above the section (used for the FAQ block)."
+      "topRule": "boolean. Adds a full-width hairline above the section (used for the FAQ block).",
+      "headingSize": "default keeps the 48px desktop heading; compact uses 32px and small uses 24px for longer headings that must stay within two lines."
     },
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline", "typography.tracking.display-tight", "breakpoint.desk"],
@@ -304,10 +305,13 @@
   "CaseMedia": {
     "file": "components/case-study/CaseMedia.tsx",
     "category": "content",
-    "description": "CaseMediaSlot (single image/video frame with tone placeholder fills) + CaseMediaBlock (\"full\" 1160x696 frame or \"pair\" of 576x548 frames).",
+    "description": "CaseMediaSlot (single image/video frame with tone placeholder fills) + CaseMediaBlock (\"full\" 1160x696 frame or \"pair\" of 576x548 frames). Full and pair blocks can opt into a landscape 16:9 aspect for supplied wide showcase assets. Image slots with intrinsicSize render at 100% width and automatic height so source screenshots remain uncropped.",
     "variants": {
       "tone": "\"white\" | \"faint\" | \"green\" — placeholder fill shown when a slot has no real media yet.",
-      "kind": "\"full\" | \"pair\", passed via MediaBlock."
+      "kind": "\"full\" | \"pair\", passed via MediaBlock.",
+      "intrinsicSize": "Optional source width and height for uncropped images rendered at 100% width with automatic height.",
+      "full aspect": "standard keeps the approved 1160/696 crop; wide uses 16:9 at full width.",
+      "pair aspect": "standard keeps the approved 576/548 crop; wide uses 16:9 without changing the pair spacing or responsive stack."
     },
     "states": ["priority prop: true = loading=\"eager\" + fetchPriority=\"high\" (the case hero image only); false = lazy."],
     "tokens_used": ["aspect ratios 1160/696 (full), 576/548 (pair)"],
@@ -320,8 +324,8 @@
   "CaseSection": {
     "file": "components/case-study/CaseSection.tsx",
     "category": "content",
-    "description": "Renders a CaseStudy section's lead paragraph, focus list, results rows, and/or paragraphs, inside a SectionShell.",
-    "variants": ["content is conditional on which optional fields (lead/focus/results/paragraphs) exist on the section data"],
+    "description": "Renders a CaseStudy section's lead paragraph, focus list, results rows, paragraphs, and/or numbered shipped-work list inside a SectionShell.",
+    "variants": ["content is conditional on which optional fields (lead/focus/results/paragraphs/bullets) exist on the section data"],
     "states": ["none"],
     "tokens_used": ["typography.size.16"],
     "when_to_use": "Case study pages only, once per CaseSection entry in a CaseStudy's sections array.",
@@ -331,8 +335,8 @@
   "ClientInfo": {
     "file": "components/case-study/ClientInfo.tsx",
     "category": "content",
-    "description": "Client / Year / Involvement / Link rows with hairline dividers. Lives in CaseSidebar on desktop, under the title on mobile.",
-    "variants": ["none"],
+    "description": "Client / Year / Involvement / optional Funding / Link rows with hairline dividers. Lives in CaseSidebar on desktop, under the title on mobile. One or more external links may share the final row.",
+    "variants": ["funding row renders only when supplied", "single link uses the label Link; multiple links use Links and stack vertically"],
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline"],
     "when_to_use": "Case study pages only.",
@@ -357,8 +361,8 @@
   "CaseStudyPage": {
     "file": "components/case-study/CaseStudyPage.tsx",
     "category": "page_template",
-    "description": "Full case study page template: background image, CaseSidebar + main content column (title, hero, CaseSection/CaseMedia loop, CaseFaq, MoreProjects, Footer).",
-    "variants": ["none — study prop (CaseStudy) drives all content"],
+    "description": "Full case study page template: CaseSidebar + main content column (title, hero, optional opening media, CaseSection/CaseMedia loop, optional closing statement with follow-on media, CaseFaq, MoreProjects, Footer).",
+    "variants": ["study prop (CaseStudy) drives all content; draft studies remain directly previewable but are noindex and excluded from the sitemap"],
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline (center vertical rule)", "breakpoint.desk"],
     "when_to_use": "Rendered once by app/case-studies/[slug]/page.tsx per case study. Also renders the FAQPage JSON-LD schema.",

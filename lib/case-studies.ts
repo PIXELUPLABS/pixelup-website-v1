@@ -1,4 +1,4 @@
-import type { ProjectMedia } from "./projects";
+import { links, type ProjectMedia } from "./projects";
 
 /**
  * Case study page content, mirroring the Figma case study template
@@ -17,14 +17,29 @@ export interface MediaSlot {
   media?: ProjectMedia;
   alt?: string;
   tone?: MediaTone;
+  /** Render an image at full width with its source aspect ratio instead of cropping it. */
+  intrinsicSize?: {
+    width: number;
+    height: number;
+  };
   /** Logo mark rendered centered on top of the media (as on the homepage cards). */
   overlayLogo?: string;
 }
 
 /** A row of imagery between sections: one full-bleed slot or a side-by-side pair. */
 export type MediaBlock =
-  | { kind: "full"; slot: MediaSlot }
-  | { kind: "pair"; slots: [MediaSlot, MediaSlot] };
+  | {
+      kind: "full";
+      slot: MediaSlot;
+      /** Preserve landscape assets instead of using the default full-width crop. */
+      aspect?: "standard" | "wide";
+    }
+  | {
+      kind: "pair";
+      slots: [MediaSlot, MediaSlot];
+      /** Preserve landscape assets instead of using the default near-square crop. */
+      aspect?: "standard" | "wide";
+    };
 
 export interface FocusItem {
   title: string;
@@ -38,6 +53,8 @@ export interface ResultRow {
 
 export interface CaseSection {
   heading: string;
+  /** Reduce long desktop headings so they stay within two lines. */
+  headingSize?: "default" | "compact" | "small";
   /** Lead paragraph above the list/rows. Line breaks are preserved. */
   lead?: string;
   /** "Clarity over cleverness / Making complex workflows simple" pairs. */
@@ -45,6 +62,7 @@ export interface CaseSection {
   /** "Week 1: …" metric rows. */
   results?: ResultRow[];
   paragraphs?: string[];
+  bullets?: string[];
   /** Imagery rendered after this section. */
   media: MediaBlock[];
 }
@@ -69,20 +87,38 @@ export interface CaseStudy {
     client: string;
     year: string;
     involvement: string[];
-    link: { label: string; href: string };
+    funding?: string;
+    links: { label: string; href: string }[];
   };
   /** Long-form intro shown in the desktop sidebar (hidden on mobile, per Figma). */
   description: string[];
   hero: MediaSlot;
+  /** Optional visual immediately after the hero, before the first story section. */
+  introMedia?: MediaBlock[];
   sections: CaseSection[];
+  closing?: {
+    heading: string;
+    headingSize?: "default" | "compact" | "small";
+    paragraphs: string[];
+    media?: MediaBlock[];
+  };
+  /** Optional page-specific CTA rendered after the closing media and before the FAQ. */
+  endCta?: {
+    label: string;
+    href: string;
+  };
   moreProjects: MoreProjectRef[];
+  publication: {
+    status: "draft" | "published";
+    blockers?: string[];
+  };
 }
 
 /**
  * Shared FAQ shown on every case study page: about PixelUp itself, written
  * to resolve the objections prospects most often bring to a first call.
  */
-export const faqHeading = "Frequently Answered Question";
+export const faqHeading = "Frequently answered question";
 
 export const pixelupFaq: FaqItem[] = [
   {
@@ -143,7 +179,7 @@ const greptile: CaseStudy = {
     client: "Greptile (AI code review platform)",
     year: "2025",
     involvement: ["Brand Identity", "Product Design", "Website", "Sales Decks"],
-    link: { label: "greptile.com", href: "https://greptile.com" },
+    links: [{ label: "greptile.com", href: "https://greptile.com" }],
   },
   description: [
     "We partnered with Greptile to evolve their AI code review platform into an enterprise-ready system.",
@@ -281,6 +317,7 @@ const greptile: CaseStudy = {
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },
     { slug: "sully", tags: "Website & Motion Design" },
   ],
+  publication: { status: "published" },
 };
 
 const sainapse: CaseStudy = {
@@ -293,7 +330,7 @@ const sainapse: CaseStudy = {
     client: "Sainapse (AI Customer Support Platform)",
     year: "2025",
     involvement: ["Brand Identity", "Website Design"],
-    link: { label: "sainapse.ai", href: "https://sainapse.ai" },
+    links: [{ label: "sainapse.ai", href: "https://sainapse.ai" }],
   },
   description: [
     "After seven years and 2M+ production tickets, Sainapse had proven technology, but a brand that couldn't keep pace. Their identity felt fragmented, technical, and hard to explain.",
@@ -406,6 +443,7 @@ const sainapse: CaseStudy = {
     { slug: "sully", tags: "Website & Motion Design" },
     { slug: "greptile", tags: "Branding & Product Design" },
   ],
+  publication: { status: "published" },
 };
 
 const sully: CaseStudy = {
@@ -418,7 +456,7 @@ const sully: CaseStudy = {
     client: "Sully (AI Healthcare Platform)",
     year: "2025",
     involvement: ["Website Design", "Product Pages", "Motion Design", "SEO"],
-    link: { label: "sully.ai", href: "https://sully.ai" },
+    links: [{ label: "sully.ai", href: "https://sully.ai" }],
   },
   description: [
     "Sully was scaling fast, $0.5M to $5M ARR in 9 months, but their website wasn't keeping up.",
@@ -529,6 +567,7 @@ const sully: CaseStudy = {
     { slug: "greptile", tags: "Branding & Product Design" },
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },
   ],
+  publication: { status: "published" },
 };
 
 const streamline: CaseStudy = {
@@ -541,7 +580,7 @@ const streamline: CaseStudy = {
     client: "Streamline (AI Platform for Legal Operations)",
     year: "2026",
     involvement: ["Brand Identity", "Positioning", "Website Design", "Design System"],
-    link: { label: "streamline.ai", href: "https://www.streamline.ai/" },
+    links: [{ label: "streamline.ai", href: "https://www.streamline.ai/" }],
   },
   description: [
     "Streamline AI had built a product capable of serving enterprise legal teams, but its brand and website reflected an earlier stage of the company.",
@@ -681,6 +720,231 @@ const streamline: CaseStudy = {
     { slug: "greptile", tags: "Branding & Product Design" },
     { slug: "sully", tags: "Website & Motion Design" },
   ],
+  publication: { status: "published" },
 };
 
-export const caseStudies = { greptile, sainapse, sully, streamline };
+const henryLabs: CaseStudy = {
+  slug: "henrylabs",
+  title: "We built the Henry Labs brand, then carried it across every touchpoint.",
+  metaTitle: "Henry Labs brand, website and product case study",
+  metaDescription:
+    "See how PIXELUP LABS designed Henry Labs' brand, website, dashboard and checkout experience for a startup building agentic commerce infrastructure.",
+  info: {
+    client: "Henry Labs",
+    year: "2026",
+    involvement: [
+      "Brand identity",
+      "Positioning",
+      "Website design and build",
+      "Product design",
+      "Design system",
+      "Motion",
+    ],
+    funding: "Approximately $1M [confirm with Henry Labs before publishing]",
+    links: [
+      { label: "henrylabs.ai", href: "https://www.henrylabs.ai/" },
+      { label: "@henrylabs on X", href: "https://x.com/henrylabs" },
+    ],
+  },
+  description: [
+    "Henry Labs is building the checkout layer for agentic commerce.",
+    "They brought us in for the brand. Then we got into the product and the job got bigger.",
+    "We ended up designing the website, partner dashboard, consumer checkout and the design system used across them.",
+    "Here is the work.",
+  ],
+  hero: {
+    media: {
+      type: "video",
+      src: "/media/henry-labs.mp4",
+      poster: "/media/henry-labs/64.avif",
+    },
+    alt: "Henry Labs animated brand reveal",
+  },
+  introMedia: [
+    {
+      kind: "full",
+      aspect: "wide",
+      slot: {
+        media: { type: "image", src: "/media/henry-labs/64.avif" },
+        alt: "Henry Labs wordmark over a blue and orange mountain landscape",
+      },
+    },
+  ],
+  sections: [
+    {
+      heading: "You do not hand checkout to a company you do not trust.",
+      paragraphs: [
+        "That is the real design problem with Henry Labs.",
+        "A platform is trusting Henrylabs with the transaction, the customer data and a piece of its revenue. A nice logo was not going to be enough.",
+        "The company needed to look as serious as the infrastructure it was building. So we learnt the product, mapped the category and built the identity from there.",
+      ],
+      media: [
+        {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/65.avif" },
+            alt: "Henry Labs positioning posters using the mountain imagery and angular brand mark",
+          },
+        },
+        {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/66.avif" },
+            alt: "Henry Labs execution layer positioning beside an illuminated shopping cart",
+          },
+        },
+      ],
+    },
+    {
+      heading: "Kill the redirect. Own the checkout.",
+      paragraphs: [
+        "Henry Labs takes a shopper from discovery to cart to payment without sending them to another website.",
+        "That was the website story. Not a long explanation of commerce infrastructure.",
+        "We wrote and designed the page around the actual flow: product data, universal cart, embedded checkout and the analytics that come after. The product is technical. The pitch did not need to be.",
+      ],
+      media: [
+        {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/58.avif" },
+            alt: "Henry Labs identity and positioning presented on a large conference screen",
+          },
+        },
+        {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/frame-2147244046.avif",
+            },
+            alt: "Henry Labs website displayed on a laptop against a black and silver landscape",
+          },
+        },
+      ],
+    },
+    {
+      heading: "Nobody opens a dashboard to hunt for data.",
+      paragraphs: [
+        "Henrylabs' partners opened the product to answer three questions.",
+        "How much did we sell? How much traffic came through? Who sent it?",
+        "The old dashboard buried sales, traffic and referrals. We helped plan the roadmap and designed V1 around putting those answers first.",
+      ],
+      media: [
+        {
+          kind: "full",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/figjam-user-personas.png",
+            },
+            alt: "Henry Labs FigJam research board mapping partner and shopper personas",
+            intrinsicSize: { width: 5594, height: 3062 },
+          },
+        },
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/70.avif" },
+            alt: "Henry Labs website feature section for building, monetizing and optimizing agentic commerce",
+          },
+        },
+      ],
+    },
+    {
+      heading: "The partner was not the shopper.",
+      paragraphs: [
+        "Partners wanted to know if Henrylabs was making them money.",
+        "Shoppers wanted to buy something without thinking about the infrastructure making it possible.",
+        "So we designed the dashboard for one job and the checkout for the other. The type, components and interaction rules stayed consistent, but the hierarchy changed with the user.",
+      ],
+      media: [
+        {
+          kind: "full",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/figjam-checkout-flow.png",
+            },
+            alt: "Henry Labs FigJam board mapping the audited checkout and shopper flows",
+            intrinsicSize: { width: 5594, height: 3062 },
+          },
+        },
+        {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/69.avif" },
+            alt: "Henry Labs website call to action asking visitors to own their checkout",
+          },
+        },
+      ],
+    },
+    {
+      heading: "What we shipped",
+      bullets: [
+        "Brand identity and positioning",
+        "Website copy, design and build",
+        "GTM and brand assets",
+        "Partner dashboard",
+        "Consumer checkout",
+        "Product roadmap and design system",
+        "Motion and showcase video",
+      ],
+      media: [
+        {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/68.avif" },
+            alt: "Henry Labs brand posters, positioning and website screens shown as one work wall",
+          },
+        },
+      ],
+    },
+  ],
+  closing: {
+    heading: "The brand got us in the door. The product became most of the job.",
+    paragraphs: [
+      "By the end, the website, dashboard and checkout finally looked like they came from the same company.",
+      "Brand, website and product by PIXELUP LABS. 2026.",
+    ],
+    media: [
+      {
+        kind: "pair",
+        aspect: "wide",
+        slots: [
+          {
+            media: { type: "image", src: "/media/henry-labs/asset-1.avif" },
+            alt: "Henry Labs mobile website and brand mark over the launch landscape",
+          },
+          {
+            media: { type: "image", src: "/media/henry-labs/frame-2147244047.avif" },
+            alt: "Henry Labs website use cases displayed on a laptop against an orange landscape",
+          },
+        ],
+      },
+    ],
+  },
+  endCta: {
+    label: "Book a call",
+    href: links.discoveryCall,
+  },
+  moreProjects: [
+    { slug: "streamline", tags: "Branding, positioning & website design" },
+    { slug: "greptile", tags: "Branding & product design" },
+  ],
+  publication: {
+    status: "draft",
+    blockers: [
+      "Confirm the approximately $1M funding figure directly with Henry Labs.",
+      "Add two approved Slack reactions with names and roles.",
+      "Confirm which dashboard and checkout screens can be public.",
+      "Add a measurable result only if Henry Labs approves the claim.",
+    ],
+  },
+};
+
+export const caseStudies = { greptile, sainapse, sully, streamline, henryLabs };

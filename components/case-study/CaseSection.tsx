@@ -4,7 +4,7 @@ import { SectionShell } from "./SectionShell";
 /** Text section variants: lead + focus list, metric rows, or plain paragraphs. */
 export function CaseSection({ section }: { section: CaseSectionData }) {
   return (
-    <SectionShell heading={section.heading}>
+    <SectionShell heading={section.heading} headingSize={section.headingSize}>
       {section.lead && (
         <p className="whitespace-pre-line text-[16px] leading-[1.5] text-white">
           {section.lead}
@@ -37,6 +37,19 @@ export function CaseSection({ section }: { section: CaseSectionData }) {
           {paragraph}
         </p>
       ))}
+
+      {section.bullets && (
+        <ul className="flex list-none flex-col gap-2 text-[16px] leading-[1.35] text-white">
+          {section.bullets.map((item, index) => (
+            <li key={item} className="flex gap-3">
+              <span aria-hidden="true" className="text-white/40">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </SectionShell>
   );
 }

@@ -30,7 +30,7 @@ function InfoRow({
 }
 
 /**
- * Client / Year / Involvement / Link rows with hairline dividers.
+ * Client / Year / Involvement / Links rows with hairline dividers.
  * Lives in the sidebar on desktop and under the title on mobile.
  */
 export function ClientInfo({
@@ -56,16 +56,22 @@ export function ClientInfo({
           ))}
         </div>
       </InfoRow>
-      <InfoRow label="Link">
-        <a
-          href={info.link.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 hover:opacity-70"
-        >
-          {info.link.label}
-          <ArrowOutwardIcon />
-        </a>
+      {info.funding && <InfoRow label="Funding">{info.funding}</InfoRow>}
+      <InfoRow label={info.links.length === 1 ? "Link" : "Links"}>
+        <div className="flex flex-col gap-1.5">
+          {info.links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex w-fit items-center gap-1 hover:opacity-70"
+            >
+              {link.label}
+              <ArrowOutwardIcon />
+            </a>
+          ))}
+        </div>
       </InfoRow>
     </div>
   );

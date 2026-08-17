@@ -58,10 +58,10 @@ export const projects: Project[] = [
     year: "2025",
   },
   {
-    slug: "henry-labs",
+    slug: "henrylabs",
     label: "Henry Labs",
-    href: "https://henrylabs.ai",
-    external: true,
+    href: "/case-studies/henrylabs",
+    external: false,
     media: { type: "video", src: "/media/henry-labs.mp4" },
     alt: "Henry Labs website motion reel, design by PIXELUP LABS",
     // Kept short on purpose: the three-discipline meta is the widest on the page,

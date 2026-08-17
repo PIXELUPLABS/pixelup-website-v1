@@ -29,6 +29,32 @@ export function CaseMediaSlot({
     return <div className={`w-full ${aspect} ${toneClass[tone]}`} />;
   }
 
+  if (slot.media.type === "image" && slot.intrinsicSize) {
+    return (
+      <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
+        <Image
+          src={slot.media.src}
+          alt={slot.alt ?? ""}
+          width={slot.intrinsicSize.width}
+          height={slot.intrinsicSize.height}
+          sizes={sizes}
+          priority={priority}
+          className="h-auto w-full"
+        />
+        {slot.overlayLogo && (
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <img
+              src={slot.overlayLogo}
+              alt=""
+              aria-hidden="true"
+              className="w-[18%]"
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className={`relative w-full overflow-hidden ${aspect} ${toneClass[tone]}`}>
       {slot.media.type === "video" ? (
@@ -82,7 +108,11 @@ export function CaseMediaBlock({
   if (block.kind === "full") {
     return (
       <div className="px-6 desk:p-6">
-        <CaseMediaSlot slot={block.slot} aspect="aspect-[1160/696]" priority={priority} />
+        <CaseMediaSlot
+          slot={block.slot}
+          aspect={block.aspect === "wide" ? "aspect-video" : "aspect-[1160/696]"}
+          priority={priority}
+        />
       </div>
     );
   }
@@ -92,7 +122,7 @@ export function CaseMediaBlock({
         <div key={i} className="min-w-0 flex-1">
           <CaseMediaSlot
             slot={slot}
-            aspect="aspect-[576/548]"
+            aspect={block.aspect === "wide" ? "aspect-video" : "aspect-[576/548]"}
             sizes="(min-width: 1200px) 40vw, 100vw"
           />
         </div>

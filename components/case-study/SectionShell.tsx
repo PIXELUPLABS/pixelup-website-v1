@@ -9,12 +9,21 @@ export function SectionShell({
   heading,
   children,
   topRule = false,
+  headingSize = "default",
 }: {
   heading: string;
   children: React.ReactNode;
   /** Full-width hairline above the section (Figma: the FAQ block). */
   topRule?: boolean;
+  /** Use a reduced desktop size when a heading needs to stay within two lines. */
+  headingSize?: "default" | "compact" | "small";
 }) {
+  const headingSizeClass = {
+    default: "desk:text-[48px]",
+    compact: "desk:text-[32px]",
+    small: "desk:text-[24px]",
+  }[headingSize];
+
   return (
     <section
       className={`w-full ${topRule ? "border-t-[0.5px] border-hairline" : ""}`}
@@ -23,7 +32,9 @@ export function SectionShell({
           section = 24px of visual space above the heading, equal to the 24px
           below it. With a rule, the heading needs the full 24px under it. */}
       <div className={`p-6 desk:w-1/2 ${topRule ? "" : "pt-2"}`}>
-        <h2 className="text-balance text-[24px] font-medium leading-tight tracking-[-0.02em] text-white desk:text-[48px]">
+        <h2
+          className={`text-balance text-[24px] font-medium leading-tight tracking-[-0.02em] text-white ${headingSizeClass}`}
+        >
           {heading}
         </h2>
       </div>

@@ -110,7 +110,7 @@ export function MoreProjects({ refs }: { refs: MoreProjectRef[] }) {
     <section className="w-full border-t-[0.5px] border-hairline">
       <div className="p-6">
         <h2 className="max-w-[536px] text-balance text-[24px] font-medium leading-tight tracking-[-0.02em] text-white desk:text-[48px]">
-          More Projects
+          More projects
         </h2>
       </div>
       {/* Cards span the full content width, split evenly by the page center
