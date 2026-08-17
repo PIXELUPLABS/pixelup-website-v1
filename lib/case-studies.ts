@@ -937,7 +937,7 @@ const henryLabs: CaseStudy = {
     { slug: "greptile", tags: "Branding & product design" },
   ],
   publication: {
-    status: "draft",
+    status: "published",
     blockers: [
       "Confirm the approximately $1M funding figure directly with Henry Labs.",
       "Add two approved Slack reactions with names and roles.",
