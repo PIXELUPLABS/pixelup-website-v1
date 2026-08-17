@@ -725,7 +725,7 @@ const streamline: CaseStudy = {
 
 const henryLabs: CaseStudy = {
   slug: "henrylabs",
-  title: "We came to brand Henry Labs. Then we designed the product too.",
+  title: "We built the Henry Labs brand, then carried it across every touchpoint.",
   metaTitle: "Henry Labs brand, website and product case study",
   metaDescription:
     "See how PIXELUP LABS designed Henry Labs' brand, website, dashboard and checkout experience for a startup building agentic commerce infrastructure.",
