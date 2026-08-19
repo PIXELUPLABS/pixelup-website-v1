@@ -1660,7 +1660,7 @@ export const blogPosts: BlogPost[] = [
       { type: "heading", text: "Design subscription" },
       {
         type: "paragraph",
-        text: "**What it costs.** The market spans $549 a month to over $10,000. ManyPixels starts at $549 for its Advanced plan, with a dedicated designer from $1,299. Designjoy is a single plan at $4,995, founded by Brett Williams in 2017 and still run entirely by him, which means one consistent senior designer rather than a rotating pool. Superside advertises from around $5,000, but client reports put real engagements at $10,000 a month scaling past $100,000, on twelve-month commitments with a $120,000 annual minimum.",
+        text: "**What it costs.** The market spans $549 a month to $15,000 and up. ManyPixels starts at $549 for its Advanced plan, with a dedicated designer from $1,299. Designjoy is a single plan at $4,995, founded by Brett Williams in 2017 and still run entirely by him, which means one consistent senior designer rather than a rotating pool. Superside starts at $15,000 a month on a twelve-month commitment, which is $180,000 a year at the floor.",
       },
       {
         type: "paragraph",
@@ -1706,11 +1706,11 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "**What it costs.** Market retainers run $5,000 to $15,000 a month at mid-market and $15,000 to $50,000 at enterprise. Named: Focus Lab starts at $5,000 for design execution and $10,000 for a dedicated brand team, Parallel's growth tier is $6,000 to $15,000, and Superside effectively starts at $10,000. Ours starts at $6,000 a month, and it is the same team that ships our sprints rather than a separate delivery pool.",
+        text: "**What it costs.** Market retainers run $5,000 to $15,000 a month at mid-market and $15,000 to $50,000 at enterprise. Named: Focus Lab starts at $5,000 for design execution and $10,000 for a dedicated brand team, Parallel's growth tier is $6,000 to $15,000, and Superside starts at $15,000. Ours starts at $6,000 a month, and it is the same team that ships our sprints rather than a separate delivery pool.",
       },
       {
         type: "paragraph",
-        text: "That puts an agency retainer in the middle of the market rather than at the bottom of it. Designjoy at $4,995 and ManyPixels at $549 are cheaper than we are, and both are subscriptions, so that comparison is throughput against judgment rather than like for like. Against actual retainers we sit at or near the floor: Focus Lab's execution tier is $5,000 and its dedicated brand team is $10,000, Parallel's growth tier starts at $6,000, Superside effectively starts at $10,000. And at $72,000 a year, a retainer is roughly a third of what a first design hire really costs.",
+        text: "That puts an agency retainer in the middle of the market rather than at the bottom of it. Designjoy at $4,995 and ManyPixels at $549 are cheaper than we are, and both are subscriptions, so that comparison is throughput against judgment rather than like for like. Against actual retainers we sit at or near the floor: Focus Lab's execution tier is $5,000 and its dedicated brand team is $10,000, Parallel's growth tier starts at $6,000, Superside starts at $15,000. And at $72,000 a year, a retainer is roughly a third of what a first design hire really costs.",
       },
       {
         type: "paragraph",
@@ -1874,12 +1874,12 @@ export const blogPosts: BlogPost[] = [
       { type: "subheading", text: "What does a design subscription cost?" },
       {
         type: "paragraph",
-        text: "From $549 a month at ManyPixels' Advanced tier, $1,299 for a dedicated designer, $4,995 for Designjoy's unlimited plan, and $10,000 a month and up for Superside, which carries twelve-month commitments and a $120,000 annual minimum. Flat-fee unlimited suits unpredictable volume; capacity-based hours suit multi-discipline work.",
+        text: "From $549 a month at ManyPixels' Advanced tier, $1,299 for a dedicated designer, $4,995 for Designjoy's unlimited plan, and $15,000 a month and up for Superside, which carries a twelve-month commitment. Flat-fee unlimited suits unpredictable volume; capacity-based hours suit multi-discipline work.",
       },
       { type: "subheading", text: "What does a design agency retainer cost per month?" },
       {
         type: "paragraph",
-        text: "Mid-market retainers run $5,000 to $15,000 a month and enterprise reaches $15,000 to $50,000 and up. Named options: Focus Lab from $5,000 for execution and $10,000 for a brand team, Parallel $6,000 to $15,000, Superside effectively from $10,000. Ours starts at $4,000 with the same team that ships our sprints.",
+        text: "Mid-market retainers run $5,000 to $15,000 a month and enterprise reaches $15,000 to $50,000 and up. Named options: Focus Lab from $5,000 for execution and $10,000 for a brand team, Parallel $6,000 to $15,000, Superside from $15,000. Ours starts at $6,000 with the same team that ships our sprints.",
       },
       { type: "subheading", text: "What does an in-house designer really cost?" },
       {
@@ -1916,7 +1916,7 @@ export const blogPosts: BlogPost[] = [
       },
       {
         type: "paragraph",
-        text: "Rates verified July 2026 from Upwork's published rate data, provider pricing pages, and salary aggregators. Freelance and subscription pricing moves fast, so re-check before quoting any of it.",
+        text: "Rates verified July 2026, Superside re-verified August 2026, from Upwork's published rate data, provider pricing pages, and salary aggregators. Freelance and subscription pricing moves fast, so re-check before quoting any of it.",
       },
     ],
   },

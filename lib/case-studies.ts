@@ -118,7 +118,7 @@ export interface CaseStudy {
  * Shared FAQ shown on every case study page: about PixelUp itself, written
  * to resolve the objections prospects most often bring to a first call.
  */
-export const faqHeading = "Frequently answered question";
+export const faqHeading = "Frequently asked questions";
 
 export const pixelupFaq: FaqItem[] = [
   {
@@ -174,7 +174,7 @@ const greptile: CaseStudy = {
   title: "Greptile: YC W24 to $25M Series A in 6 Months",
   metaTitle: "Greptile Case Study - PIXELUP LABS",
   metaDescription:
-    "How we partnered with Greptile to evolve their AI code review platform into an enterprise-ready system, doubling demo requests in week one and helping set up a $25M Series A.",
+    "How we evolved Greptile's AI code review platform into an enterprise-ready system, doubling demo requests in week one and helping set up a $25M Series A.",
   info: {
     client: "Greptile (AI code review platform)",
     year: "2025",
@@ -325,7 +325,7 @@ const sainapse: CaseStudy = {
   title: "Sainapse: From Technical Product to Enterprise Standard",
   metaTitle: "Sainapse Case Study - PIXELUP LABS",
   metaDescription:
-    "A complete system rebuild for Sainapse's agentic AI support platform: brand voice, visual identity, and web presence designed together ahead of their general availability launch.",
+    "A full system rebuild for Sainapse's agentic AI support platform: brand voice, visual identity and web presence, designed together ahead of its GA launch.",
   info: {
     client: "Sainapse (AI Customer Support Platform)",
     year: "2025",
@@ -451,7 +451,7 @@ const sully: CaseStudy = {
   title: "Sully: From Liability to Deal Closer in 11 Months",
   metaTitle: "Sully Case Study - PIXELUP LABS",
   metaDescription:
-    "How we turned Sully's website from an enterprise liability into a deal closer, with motion-driven explainers that helped scale 26x and support a $32M+ raise at a $150M valuation.",
+    "How we turned Sully's website into a deal closer with motion-driven explainers, alongside 26x scale and a $32M+ raise at a $150M valuation.",
   info: {
     client: "Sully (AI Healthcare Platform)",
     year: "2025",
@@ -573,9 +573,9 @@ const sully: CaseStudy = {
 const streamline: CaseStudy = {
   slug: "streamline",
   title: "We repositioned Streamline for enterprise, then scaled the brand across 200 pages.",
-  metaTitle: "Streamline brand, positioning and website case study",
+  metaTitle: "Streamline Case Study - PIXELUP LABS",
   metaDescription:
-    "See how PIXELUP LABS repositioned Streamline for enterprise legal teams and built a brand, website and design system that scaled across more than 200 pages.",
+    "PIXELUP LABS repositioned Streamline for enterprise legal teams and built a brand, website and design system that scaled across more than 200 pages.",
   info: {
     client: "Streamline (AI Platform for Legal Operations)",
     year: "2026",
@@ -726,7 +726,7 @@ const streamline: CaseStudy = {
 const henryLabs: CaseStudy = {
   slug: "henrylabs",
   title: "We built the Henry Labs brand, then carried it across every touchpoint.",
-  metaTitle: "Henry Labs brand, website and product case study",
+  metaTitle: "Henry Labs Case Study - PIXELUP LABS",
   metaDescription:
     "See how PIXELUP LABS designed Henry Labs' brand, website, dashboard and checkout experience for a startup building agentic commerce infrastructure.",
   info: {
@@ -740,7 +740,7 @@ const henryLabs: CaseStudy = {
       "Design system",
       "Motion",
     ],
-    funding: "Approximately $1M [confirm with Henry Labs before publishing]",
+    funding: "Private",
     links: [
       { label: "henrylabs.ai", href: "https://www.henrylabs.ai/" },
       { label: "@henrylabs on X", href: "https://x.com/henrylabs" },
@@ -939,7 +939,7 @@ const henryLabs: CaseStudy = {
   publication: {
     status: "published",
     blockers: [
-      "Confirm the approximately $1M funding figure directly with Henry Labs.",
+      "Funding reads \"Private\": confirm a figure directly with Henry Labs before publishing one.",
       "Add two approved Slack reactions with names and roles.",
       "Confirm which dashboard and checkout screens can be public.",
       "Add a measurable result only if Henry Labs approves the claim.",
