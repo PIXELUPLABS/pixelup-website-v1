@@ -7,6 +7,21 @@ import { getBlogIndexUpdated, getBlogSitemapEntries } from "@/sanity/lib/blog-da
 const BASE_URL = "https://www.pixeluplabs.com";
 
 /**
+ * Re-generate at most hourly. Next caches `sitemap.ts` indefinitely by default
+ * (it is a Route Handler), so without this the blog `<lastmod>` values freeze
+ * at whatever the last deploy baked in: a Sanity publish updates the article
+ * but the sitemap keeps advertising the old date until something triggers a
+ * rebuild. That happened on 2026-08-19 — the agency-vs article was corrected
+ * in Sanity and the sitemap still claimed 2026-08-05.
+ *
+ * The revalidate webhook's `revalidatePath('/sitemap.xml')` did not clear it
+ * either, so this is the durable fix. Valid because Cache Components is not
+ * enabled in next.config.ts; under Cache Components this export is removed
+ * (Next 16) and the equivalent is `'use cache'` + `cacheLife`.
+ */
+export const revalidate = 3600;
+
+/**
  * Served at /sitemap.xml (Next metadata route). Case study and blog post
  * URLs are derived from lib/case-studies.ts and the active blog source, so
  * newly published Sanity posts are picked up automatically after revalidation.
