@@ -22,18 +22,26 @@
  * been edited in the Studio since 2026-08-19 the script aborts instead of
  * writing something wrong. It is idempotent: a second run finds nothing to do.
  *
- * Usage:
- *   node scripts/fix-audit-2026-08-19.mjs --dry-run     # show the diff only
+ * Usage, in order of preference:
+ *
+ *   # 1. With an Editor token (best: attributable, reusable, CI-friendly)
+ *   SANITY_API_WRITE_TOKEN=sk... node scripts/fix-audit-2026-08-19.mjs --dry-run
  *   SANITY_API_WRITE_TOKEN=sk... node scripts/fix-audit-2026-08-19.mjs
  *
- * A read token is enough for --dry-run. Writing needs a token with Editor
- * permissions (Sanity project → API → Tokens).
+ *   # 2. With the logged-in CLI user's own credentials, no token needed.
+ *   #    Note this attributes the edit to that Sanity user, not a service token.
+ *   DRY_RUN=1 npx sanity exec scripts/fix-audit-2026-08-19.mjs --with-user-token
+ *   npx sanity exec scripts/fix-audit-2026-08-19.mjs --with-user-token
+ *
+ * `sanity exec` swallows script flags, so DRY_RUN=1 is the env equivalent of
+ * --dry-run. A dry run asks the API to validate the whole transaction without
+ * writing, so it also proves whether the credentials can actually write.
  */
 import fs from 'node:fs'
 import path from 'node:path'
 import {createClient} from '@sanity/client'
 
-const DRY_RUN = process.argv.includes('--dry-run')
+const DRY_RUN = process.argv.includes('--dry-run') || process.env.DRY_RUN === '1'
 
 /** Minimal .env.local reader — the script runs outside Next's env loading. */
 function readEnvFile(file) {
@@ -53,29 +61,49 @@ function readEnvFile(file) {
 const fileEnv = readEnvFile(path.join(process.cwd(), '.env.local'))
 const env = {...fileEnv, ...process.env}
 
-const token = DRY_RUN
-  ? env.SANITY_API_WRITE_TOKEN || env.SANITY_API_READ_TOKEN
-  : env.SANITY_API_WRITE_TOKEN
-
-if (!token) {
-  console.error(
-    DRY_RUN
-      ? 'No token found. Set SANITY_API_READ_TOKEN in .env.local (or SANITY_API_WRITE_TOKEN).'
-      : 'SANITY_API_WRITE_TOKEN is required to write.\n' +
-          'The token in .env.local is read-only (Viewer). Create an Editor token at\n' +
-          'sanity.io/manage → project t106usbm → API → Tokens, then re-run:\n' +
-          '  SANITY_API_WRITE_TOKEN=sk... node scripts/fix-audit-2026-08-19.mjs',
-  )
-  process.exit(1)
-}
-
-const client = createClient({
+const clientConfig = {
   projectId: env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   dataset: env.NEXT_PUBLIC_SANITY_DATASET,
   apiVersion: '2024-10-01',
   useCdn: false,
-  token,
-})
+}
+
+/**
+ * Three credential sources, in descending order of preference. The read token
+ * is last and dry-run only — it cannot write, which the dry run will say out
+ * loud rather than discovering at commit time.
+ */
+async function resolveClient() {
+  if (env.SANITY_API_WRITE_TOKEN) {
+    return {client: createClient({...clientConfig, token: env.SANITY_API_WRITE_TOKEN}), via: 'SANITY_API_WRITE_TOKEN'}
+  }
+
+  // Only resolvable when run through `sanity exec --with-user-token`.
+  try {
+    const {getCliClient} = await import('sanity/cli')
+    const cliClient = getCliClient({apiVersion: clientConfig.apiVersion})
+    if (cliClient?.config()?.token) {
+      return {client: cliClient.withConfig({useCdn: false}), via: 'sanity CLI user token'}
+    }
+  } catch {
+    // Not running under `sanity exec`; fall through.
+  }
+
+  if (DRY_RUN && env.SANITY_API_READ_TOKEN) {
+    return {client: createClient({...clientConfig, token: env.SANITY_API_READ_TOKEN}), via: 'SANITY_API_READ_TOKEN (read-only)'}
+  }
+
+  console.error(
+    'No write credentials found. Either:\n' +
+      '  SANITY_API_WRITE_TOKEN=sk... node scripts/fix-audit-2026-08-19.mjs\n' +
+      'or, using the logged-in CLI user:\n' +
+      '  npx sanity exec scripts/fix-audit-2026-08-19.mjs --with-user-token',
+  )
+  process.exit(1)
+}
+
+const {client, via} = await resolveClient()
+console.log(`Authenticated via ${via}.`)
 
 const LIVE = {
   cost: '/blog/what-a-startup-rebrand-and-website-cost',
@@ -173,6 +201,7 @@ const PLAN = [
         find: 'If your problem is the fast upmarket reset, ',
         replace:
           'If your problem is the fast upmarket reset, our price is on this page — $25k–$40k, 2–5 weeks by scope — so you can disqualify us before a call. If another agency here fits the job better, hire them.',
+        doneWhen: 'our price is on this page',
       },
       {unlink: 'l015', dropSpans: ['s279', 's280']},
     ],
@@ -219,11 +248,20 @@ function applyEdits(doc, edits) {
       const block = blockOfSpan.get(edit.span)
       if (!block) throw new Error(`${doc.slug}: span ${edit.span} not found`)
       const span = block.children.find((c) => c._key === edit.span)
+      // Usually "find is gone" means the edit landed. That breaks when `find`
+      // is a prefix of `replace` (the rewritten sentence still starts with the
+      // clause we matched on), so those edits carry an explicit `doneWhen`
+      // marker instead — without it the edit would re-apply and duplicate copy.
+      const alreadyApplied = edit.doneWhen
+        ? span.text.includes(edit.doneWhen)
+        : !span.text.includes(edit.find) && span.text.includes(edit.replace)
+
+      if (alreadyApplied) {
+        skipped.push(`${doc.slug} span ${edit.span}: already applied`)
+        continue
+      }
+
       if (!span.text.includes(edit.find)) {
-        if (span.text.includes(edit.replace)) {
-          skipped.push(`${doc.slug} span ${edit.span}: already applied`)
-          continue
-        }
         throw new Error(
           `${doc.slug}: span ${edit.span} no longer contains the expected text.\n` +
             `  expected: ${edit.find}\n  actual:   ${span.text}`,
@@ -306,7 +344,17 @@ if (!patched) {
 }
 
 if (DRY_RUN) {
-  console.log(`\n--dry-run: ${patched} document(s) would be patched. Nothing was written.`)
+  // dryRun asks the API to validate the real transaction and discard it, so
+  // this also answers "can these credentials write?" before we rely on it.
+  try {
+    await tx.commit({dryRun: true, returnDocuments: false})
+    console.log(`\nDry run: ${patched} document(s) would be patched. Nothing was written.`)
+    console.log('Credentials CAN write — re-run without DRY_RUN to commit.')
+  } catch (error) {
+    console.log(`\nDry run: ${patched} document(s) would be patched. Nothing was written.`)
+    console.error(`\nCredentials CANNOT write (${error.statusCode}): ${error.message.split('\n')[0]}`)
+    process.exit(1)
+  }
   process.exit(0)
 }
 

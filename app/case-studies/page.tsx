@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { CaseStudyList } from "@/components/case-studies/CaseStudyList";
 import { Footer } from "@/components/Footer";
 import { caseStudyShowcase } from "@/lib/case-studies-showcase";
@@ -8,9 +9,24 @@ export const metadata: Metadata = {
   description:
     "Real brand, product and website engagements PIXELUP LABS has shipped for ambitious startups — proof, not promises.",
   alternates: { canonical: "/case-studies" },
+  robots: { index: false, follow: false },
 };
 
+/**
+ * Hidden from production 2026-08-19: this listing is not ready to be public.
+ * It was reachable (HTTP 200) but absent from the sitemap, so it was live
+ * without being announced. The route now 404s while the layout below is kept
+ * intact — delete the `notFound()` call to bring it back.
+ *
+ * Only this index is hidden. The five /case-studies/[slug] pages stay live and
+ * stay in the sitemap; they are the proof assets the rest of the site links to.
+ *
+ * Deliberately not added to robots.txt as a Disallow: a 404 is what tells
+ * Google to drop the URL, and a Disallow would prevent it from ever seeing it.
+ */
 export default function CaseStudiesPage() {
+  notFound();
+
   return (
     <div className="relative flex flex-col gap-8 p-4 desk:p-5">
       <header className="flex w-fit flex-col gap-4">
