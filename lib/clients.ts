@@ -80,7 +80,7 @@ export const clients: Client[] = [
     name: "Sully.ai",
     logo: "/media/logos/clients/sully.svg",
     niche: "Healthcare AI",
-    engagement: "Complete 2025 rebrand covering new identity, guidelines, and website redesign, with Framer development",
+    engagement: "Covering new identity, guidelines, and website redesign, with Framer development",
     fundingNote: "$22M Series A",
   },
   {

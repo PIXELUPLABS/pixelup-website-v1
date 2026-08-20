@@ -83,7 +83,7 @@ export function ClientRow({ client, index }: { client: Client; index: number }) 
 
   return (
     <li
-      className="fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-[1.6fr_0.6fr_0.8fr] desk:items-start desk:gap-6"
+      className="fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-[45%_0.6fr_0.8fr] desk:items-start desk:gap-5"
       style={{ animationDelay: entranceDelay }}
     >
       <ClientIdentity client={client} index={index} />
