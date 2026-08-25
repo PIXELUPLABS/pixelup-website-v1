@@ -196,6 +196,18 @@ export const projects: Project[] = [
     services: ["Branding", "Website Design", "Webflow Development"],
     year: "2026",
   },
+  {
+    slug: "monumint",
+    label: "Monumint",
+    href: "https://monumint.ai/",
+    external: true,
+    media: { type: "image", src: "/media/monumint.jpg" },
+    alt: "Monumint website on a laptop mockup, design by PIXELUP LABS",
+    // Verbatim from monumint.ai's live H1.
+    tagline: "Conversational AI for finance institutions",
+    services: ["Branding", "Website Design", "Framer Development"],
+    // Year not confirmed yet — supply it to fill the info block's right column.
+  },
   // {
   //   slug: "synthio",
   //   label: "Synthio Labs",
