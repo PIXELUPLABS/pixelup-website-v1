@@ -62,7 +62,7 @@ function NichePill({
   );
 }
 
-/** Small uppercase chip, same treatment as BlogList's category tags. */
+/** Funding/status tag — same size/treatment as the blog list's category tag. */
 function Tag({ label }: { label: string }) {
   return (
     <div className="flex items-end">
@@ -105,20 +105,17 @@ function CaseStudyRow({ row, index }: { row: ShowcaseRow; index: number }) {
         )}
       </div>
       <div className="flex w-full flex-col justify-between gap-4 pt-4 desk:w-[38%] desk:gap-0 desk:pt-0 desk:pl-5">
-        <p className="text-[24px] font-medium leading-tight text-white/80 transition-opacity duration-200 group-hover:opacity-60 desk:text-[28px]">
-          {project.label}
-        </p>
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-wrap items-end gap-2">
-            <Tag label={entry.fundingBadge ?? "Private"} />
-          </div>
-          <p className="text-[12px] font-medium uppercase text-label-grey">
-            {entry.stat ?? project.year}
-          </p>
+        <h2 className="max-w-[30ch] text-balance text-[28px] font-medium leading-tight text-white/80 transition-opacity duration-200 group-hover:opacity-60">
+          {entry.title ?? project.label}
+        </h2>
+        <div className="flex flex-wrap items-end gap-2">
+          <Tag label={entry.badge ?? "Private"} />
         </div>
       </div>
-      <div className="flex w-full flex-col gap-2 pt-4 desk:w-[37%] desk:pt-0 desk:pl-5">
-        <p className="text-[12px] font-medium uppercase text-label-grey">What We Did</p>
+      <div className="flex w-full flex-col gap-2 pt-4 desk:w-[37%] desk:pt-0 desk:pl-10">
+        <p className="text-[12px] font-medium uppercase text-label-grey">
+          What We Did
+        </p>
         <p className="max-w-[40ch] text-[14px] leading-[1.3] tracking-[-0.02em] text-body-grey desk:text-[16px]">
           {entry.whatWeDid}
         </p>
@@ -145,31 +142,42 @@ function CaseStudyRow({ row, index }: { row: ShowcaseRow; index: number }) {
   }
 
   return (
-    <Link href={project.href} aria-label={project.label} className={className} style={style}>
+    <Link
+      href={project.href}
+      aria-label={project.label}
+      className={className}
+      style={style}
+    >
       {inner}
     </Link>
   );
 }
 
 /** Niche filter + full-width case study list for /case-studies. */
-export function CaseStudyList({ entries }: { entries: CaseStudyShowcaseEntry[] }) {
+export function CaseStudyList({
+  entries,
+}: {
+  entries: CaseStudyShowcaseEntry[];
+}) {
   const rows = useMemo<ShowcaseRow[]>(
     () =>
       entries.flatMap((entry) => {
         const project = projects.find((p) => p.slug === entry.slug);
         return project ? [{ project, entry }] : [];
       }),
-    [entries]
+    [entries],
   );
 
   const niches = useMemo(
     () => ["All", ...Array.from(new Set(rows.map((r) => r.entry.niche)))],
-    [rows]
+    [rows],
   );
 
   const [activeNiche, setActiveNiche] = useState("All");
   const filtered =
-    activeNiche === "All" ? rows : rows.filter((r) => r.entry.niche === activeNiche);
+    activeNiche === "All"
+      ? rows
+      : rows.filter((r) => r.entry.niche === activeNiche);
 
   return (
     <section className="flex w-full flex-col gap-8">
