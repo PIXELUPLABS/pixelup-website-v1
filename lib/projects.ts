@@ -180,6 +180,19 @@ export const projects: Project[] = [
     services: ["Branding", "Website Design", "Next.js Development"],
     // Year not confirmed yet — supply it to fill the info block's right column.
   },
+  {
+    slug: "pogo",
+    label: "Pogo",
+    href: "https://www.joinpogo.com/",
+    external: true,
+    media: { type: "image", src: "/media/pogo.jpg" },
+    alt: "Pogo mobile website on a phone held toward the camera, design by PIXELUP LABS",
+    // From the banner/site positioning: AI-powered interviews and surveys
+    // with purchase-verified audiences.
+    tagline: "AI interviews with purchase-verified audiences",
+    services: ["Branding", "Website Design", "Webflow Development"],
+    year: "2026",
+  },
   // {
   //   slug: "synthio",
   //   label: "Synthio Labs",
@@ -189,7 +202,7 @@ export const projects: Project[] = [
   //   alt: "Synthio Labs website design by PIXELUP LABS",
   // },
   //
-  // NOT YET ADDABLE — Pogo, Bland, and Limelight are on the intended showcase
+  // NOT YET ADDABLE — Bland and Limelight are on the intended showcase
   // lineup but have no card media in /public/media and no confirmed live URL.
   // Each needs a ~1008x584 image or mp4 plus its site link before it can
   // become a card; the info-block copy can then be written from that site the
