@@ -78,6 +78,78 @@ export interface MoreProjectRef {
   tags: string;
 }
 
+export interface CaseMetric {
+  value: string;
+  label: string;
+  detail: string;
+}
+
+export type CaseStoryBlock =
+  | {
+      kind: "context";
+      id: string;
+      heading: string;
+      items: { label: string; text: string }[];
+    }
+  | {
+      kind: "media";
+      id: string;
+      media: MediaBlock;
+    }
+  | {
+      kind: "challenge";
+      id: string;
+      index: string;
+      heading: string;
+      problem: string;
+      whyItMattered: string;
+      whatWeDid: string;
+      outcome: string;
+    }
+  | {
+      kind: "gallery";
+      id: string;
+      heading: string;
+      intro: string;
+      media: MediaBlock[];
+    }
+  | {
+      kind: "results";
+      id: string;
+      heading: string;
+      metrics: CaseMetric[];
+    }
+  | {
+      kind: "testimonial";
+      id: string;
+      heading: string;
+      quote: string;
+      person: {
+        name: string;
+        role: string;
+        company: string;
+        headshot?: string;
+      };
+      approvalPending?: boolean;
+    }
+  | {
+      kind: "afterLaunch";
+      id: string;
+      heading: string;
+      paragraphs: string[];
+    };
+
+export interface CaseStudyStory {
+  company: string;
+  statusBadge?: string;
+  headline: string;
+  summary: string;
+  highlights: CaseMetric[];
+  blocks: CaseStoryBlock[];
+  faqHeading: string;
+  faqs: FaqItem[];
+}
+
 export interface CaseStudy {
   slug: string;
   title: string;
@@ -95,6 +167,8 @@ export interface CaseStudy {
   hero: MediaSlot;
   /** Optional visual immediately after the hero, before the first story section. */
   introMedia?: MediaBlock[];
+  /** Optional richer editorial structure. Legacy sections remain the fallback. */
+  story?: CaseStudyStory;
   sections: CaseSection[];
   closing?: {
     heading: string;
@@ -191,6 +265,257 @@ const greptile: CaseStudy = {
     media: { type: "image", src: "/media/greptile/hero.png" },
     alt: "Glowing green Greptile logo mark on a dark background",
   },
+  story: {
+    company: "Greptile",
+    statusBadge: "YC W24 · Series A",
+    headline:
+      "We rebuilt Greptile for enterprise. Six months later, it raised a $25M Series A.",
+    summary:
+      "The product already worked. The brand and website made enterprise buyers work too hard to trust it. We fixed that gap across the product, site and sales story.",
+    highlights: [
+      { value: "2×", label: "Demo requests", detail: "In the first week" },
+      {
+        value: "180K+",
+        label: "Bugs caught post-ship",
+        detail: "By month one",
+      },
+      { value: "$25M", label: "Series A", detail: "Led by Benchmark" },
+      { value: "$180M", label: "Valuation", detail: "Within six months" },
+    ],
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading:
+          "Greptile had the technology enterprise teams needed, but not the trust signals.",
+        items: [
+          {
+            label: "Where Greptile was",
+            text: "Greptile had YC backing, real technical depth and a product that could review complex codebases.",
+          },
+          {
+            label: "What it needed",
+            text: "A system that could explain the product quickly and feel credible to larger engineering teams.",
+          },
+          {
+            label: "What was not working",
+            text: "The brand, website and product story felt fragmented. Buyers had to connect the value for themselves.",
+          },
+          {
+            label: "Why it mattered",
+            text: "As Greptile moved upmarket, every unclear touchpoint added friction to a sale built on trust.",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-billboard",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/greptile/img-3.png" },
+            alt: "Greptile Ship Faster billboard mockup on a city street",
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-poster",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/greptile/img-6.png" },
+            alt: "Greptile Bridge the gap brand poster",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-one",
+        index: "01",
+        heading: "Every touchpoint told a different Greptile story.",
+        problem:
+          "Greptile's technology had moved faster than the way the company presented itself. Brand, website and sales materials each told a slightly different story.",
+        whyItMattered:
+          "Enterprise buyers do not separate the product from the company behind it. An inconsistent signal makes a capable platform feel like a risk.",
+        whatWeDid:
+          "We rebuilt the identity, positioning, website and sales system together. Clarity, durability and trust became the filter for every decision.",
+        outcome:
+          "Greptile had one coherent system for product, sales and investor conversations instead of a set of disconnected deliverables.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-identity",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/greptile/img-1.png" },
+              alt: "Greptile brand color palette",
+              tone: "white",
+            },
+            {
+              media: { type: "image", src: "/media/greptile/img-2.png" },
+              alt: "Greptile brand type specimen",
+              tone: "white",
+            },
+          ],
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-social",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/greptile/img-9.png" },
+            alt: "Greptile social campaign series",
+            tone: "green",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-two",
+        index: "02",
+        heading: "Buyers saw the complexity before they saw the value.",
+        problem:
+          "AI code review crosses repositories, code context and review workflows. Showing all that complexity at once made the value harder to see.",
+        whyItMattered:
+          "If a buyer could not understand the workflow quickly, the demo had to explain the interface before it could prove the outcome.",
+        whatWeDid:
+          "We simplified the hierarchy, clarified key paths and carried the same visual logic from the website into the product experience.",
+        outcome:
+          "After launch, demo requests doubled in the first week and the product story gave sales a clearer starting point.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-product",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/greptile/img-4.png" },
+              alt: "Greptile mobile experience mockup held in hand",
+            },
+            {
+              media: { type: "image", src: "/media/greptile/img-5.png" },
+              alt: "Greptile sign-up screen on a laptop",
+            },
+          ],
+        },
+      },
+      {
+        kind: "results",
+        id: "results",
+        heading: "Results",
+        metrics: [
+          { value: "2×", label: "Demo requests", detail: "In the first week" },
+          {
+            value: "180K+",
+            label: "Bugs caught post-ship",
+            detail: "By month one",
+          },
+          { value: "$25M", label: "Series A", detail: "Led by Benchmark" },
+          { value: "$180M", label: "Valuation", detail: "Within six months" },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-results",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/greptile/img-10.png" },
+            alt: "Greptile product interface on a laptop",
+            tone: "green",
+          },
+        },
+      },
+      {
+        kind: "testimonial",
+        id: "testimonial",
+        heading: "What Greptile says about working with us.",
+        quote:
+          "A verified client quote will sit here once Greptile approves it.",
+        person: {
+          name: "Daksh Gupta",
+          role: "Co-founder",
+          company: "Greptile",
+          headshot: "/media/greptile/daksh-gupta.png",
+        },
+        approvalPending: true,
+      },
+      {
+        kind: "media",
+        id: "snapshot-card",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/greptile/card.png" },
+            alt: "Greptile brand mark on a green project card",
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "Then Greptile started sending other YC founders our way.",
+        paragraphs: [
+          "Greptile began referring us to other YC founders. One introduction turned into several, and the project became the foundation for longer-term work across the YC ecosystem.",
+          "Today, we work with multiple YC-backed teams to turn strong technology into clear, credible systems.",
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-after-launch",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/greptile/img-7.png" },
+              alt: "Greptile analytics dashboard on a studio display",
+            },
+            {
+              media: { type: "image", src: "/media/greptile/img-8.png" },
+              alt: "Greptile subway poster mockup",
+            },
+          ],
+        },
+      },
+    ],
+    faqHeading: "Frequently asked questions.",
+    faqs: [
+      {
+        q: "Do you start with strategy or visual design?",
+        a: "Strategy first. We align the audience, positioning and sales story before deciding what the visual system needs to do.",
+      },
+      {
+        q: "How involved does the client team need to be?",
+        a: "We need direct access to the people closest to the product and customer. Short, focused reviews keep decisions fast without turning the project into a full-time job for your team.",
+      },
+      {
+        q: "How do feedback and revisions work?",
+        a: "We work in tight review loops, explain the reason behind each direction and collect feedback in one place. That keeps revisions decisive instead of subjective.",
+      },
+      {
+        q: "Can you work with an existing brand system?",
+        a: "Yes. We keep what is useful, fix what is limiting the company and extend the system only where the project needs it.",
+      },
+      {
+        q: "Can you handle a large website project?",
+        a: "Yes. We break the site into repeatable page types and shared components, then ship in stages so scale does not create inconsistency.",
+      },
+      {
+        q: "Do you handle development and handoff?",
+        a: "We can design and build the site, or work with your engineering team. Either way, the handoff includes the system, responsive behavior and implementation guidance.",
+      },
+      {
+        q: "How does the work align with go-to-market?",
+        a: "We design the website, product story and sales assets as one system, so launch, demos and investor conversations reinforce the same position.",
+      },
+    ],
+  },
   sections: [
     {
       heading: "How Did We Approach the Project?",
@@ -241,7 +566,10 @@ const greptile: CaseStudy = {
     {
       heading: "What Results Did Greptile Achieve?",
       results: [
-        { label: "Week 1:", text: "Demo requests doubled immediately after launch" },
+        {
+          label: "Week 1:",
+          text: "Demo requests doubled immediately after launch",
+        },
         { label: "Month 1:", text: "180,000+ bugs caught post-ship" },
         {
           label: "Month 6:",
@@ -369,21 +697,38 @@ const sainapse: CaseStudy = {
         {
           kind: "pair",
           slots: [
-            { media: { type: "image", src: "/media/sainapse/img-1.png" }, alt: "Sainapse brand color palette swatches from dark to lavender", tone: "white" },
-            { media: { type: "image", src: "/media/sainapse/img-2.png" }, alt: "Sainapse Ronzino type specimen with agentic explainable AI tagline", tone: "white" },
+            {
+              media: { type: "image", src: "/media/sainapse/img-1.png" },
+              alt: "Sainapse brand color palette swatches from dark to lavender",
+              tone: "white",
+            },
+            {
+              media: { type: "image", src: "/media/sainapse/img-2.png" },
+              alt: "Sainapse Ronzino type specimen with agentic explainable AI tagline",
+              tone: "white",
+            },
           ],
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sainapse/img-3.png" }, alt: "Sainapse Rethink Enterprise Intelligence brand film on a cinema screen" },
+          slot: {
+            media: { type: "image", src: "/media/sainapse/img-3.png" },
+            alt: "Sainapse Rethink Enterprise Intelligence brand film on a cinema screen",
+          },
         },
       ],
     },
     {
       heading: "What Results Did Sainapse Achieve?",
       results: [
-        { label: "Month 1:", text: "Supported 2M+ tickets in production post-launch" },
-        { label: "Projection:", text: "On track to power 10M+ tickets by March 2026" },
+        {
+          label: "Month 1:",
+          text: "Supported 2M+ tickets in production post-launch",
+        },
+        {
+          label: "Projection:",
+          text: "On track to power 10M+ tickets by March 2026",
+        },
         {
           label: "Impact:",
           text: "Up to 93% deflection achieved across enterprise deployments",
@@ -400,13 +745,22 @@ const sainapse: CaseStudy = {
         {
           kind: "pair",
           slots: [
-            { media: { type: "image", src: "/media/sainapse/img-4.png" }, alt: "Sainapse mobile website hero on a phone against red fabric" },
-            { media: { type: "image", src: "/media/sainapse/img-5.png" }, alt: "Sainapse AI customer support whitepaper booklets lying on sand" },
+            {
+              media: { type: "image", src: "/media/sainapse/img-4.png" },
+              alt: "Sainapse mobile website hero on a phone against red fabric",
+            },
+            {
+              media: { type: "image", src: "/media/sainapse/img-5.png" },
+              alt: "Sainapse AI customer support whitepaper booklets lying on sand",
+            },
           ],
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sainapse/img-6.png" }, alt: "Sainapse website homepage on a laptop in tall grass" },
+          slot: {
+            media: { type: "image", src: "/media/sainapse/img-6.png" },
+            alt: "Sainapse website homepage on a laptop in tall grass",
+          },
         },
       ],
     },
@@ -420,21 +774,36 @@ const sainapse: CaseStudy = {
         {
           kind: "pair",
           slots: [
-            { media: { type: "image", src: "/media/sainapse/img-7.png" }, alt: "Sainapse enterprise customer support poster with moody surfer imagery" },
-            { media: { type: "image", src: "/media/sainapse/img-8.png" }, alt: "Sainapse Rethink Enterprise Intelligence tablet screen on a leather sofa" },
+            {
+              media: { type: "image", src: "/media/sainapse/img-7.png" },
+              alt: "Sainapse enterprise customer support poster with moody surfer imagery",
+            },
+            {
+              media: { type: "image", src: "/media/sainapse/img-8.png" },
+              alt: "Sainapse Rethink Enterprise Intelligence tablet screen on a leather sofa",
+            },
           ],
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sainapse/img-9.png" }, alt: "Sainapse Rethink Enterprise Intelligence framed billboard poster mockup" },
+          slot: {
+            media: { type: "image", src: "/media/sainapse/img-9.png" },
+            alt: "Sainapse Rethink Enterprise Intelligence framed billboard poster mockup",
+          },
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sainapse/img-10.png" }, alt: "Sainapse dark product page on a tablet held in hands" },
+          slot: {
+            media: { type: "image", src: "/media/sainapse/img-10.png" },
+            alt: "Sainapse dark product page on a tablet held in hands",
+          },
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sainapse/img-11.png" }, alt: "Sainapse dark dashboard UI displayed on a desktop monitor" },
+          slot: {
+            media: { type: "image", src: "/media/sainapse/img-11.png" },
+            alt: "Sainapse dark dashboard UI displayed on a desktop monitor",
+          },
         },
       ],
     },
@@ -494,13 +863,22 @@ const sully: CaseStudy = {
         {
           kind: "pair",
           slots: [
-            { media: { type: "image", src: "/media/sully/img-1.png" }, alt: "Sully.ai autonomous care network diagram on a floating tablet" },
-            { media: { type: "image", src: "/media/sully/img-2.png" }, alt: "Sully.ai AI Receptionist features page on a laptop" },
+            {
+              media: { type: "image", src: "/media/sully/img-1.png" },
+              alt: "Sully.ai autonomous care network diagram on a floating tablet",
+            },
+            {
+              media: { type: "image", src: "/media/sully/img-2.png" },
+              alt: "Sully.ai AI Receptionist features page on a laptop",
+            },
           ],
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sully/img-3.png" }, alt: "Sully.ai homepage hero projected on stage before an audience" },
+          slot: {
+            media: { type: "image", src: "/media/sully/img-3.png" },
+            alt: "Sully.ai homepage hero projected on stage before an audience",
+          },
         },
       ],
     },
@@ -528,13 +906,22 @@ const sully: CaseStudy = {
         {
           kind: "pair",
           slots: [
-            { media: { type: "image", src: "/media/sully/img-4.png" }, alt: "Sully.ai mobile homepage held in a hand against blue sky" },
-            { media: { type: "image", src: "/media/sully/img-5.png" }, alt: "Sully.ai appointments booking product page on a dark laptop" },
+            {
+              media: { type: "image", src: "/media/sully/img-4.png" },
+              alt: "Sully.ai mobile homepage held in a hand against blue sky",
+            },
+            {
+              media: { type: "image", src: "/media/sully/img-5.png" },
+              alt: "Sully.ai appointments booking product page on a dark laptop",
+            },
           ],
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sully/img-6.png" }, alt: "Sully.ai scribes-versus-dictation comparison page on a laptop" },
+          slot: {
+            media: { type: "image", src: "/media/sully/img-6.png" },
+            alt: "Sully.ai scribes-versus-dictation comparison page on a laptop",
+          },
         },
       ],
     },
@@ -548,17 +935,30 @@ const sully: CaseStudy = {
         {
           kind: "pair",
           slots: [
-            { media: { type: "image", src: "/media/sully/img-7.png" }, alt: "Sully.ai hospital impact stats page on a laptop" },
-            { media: { type: "image", src: "/media/sully/img-8.png" }, alt: "Sully.ai clinical co-pilot mobile screen on a leather chair" },
+            {
+              media: { type: "image", src: "/media/sully/img-7.png" },
+              alt: "Sully.ai hospital impact stats page on a laptop",
+            },
+            {
+              media: { type: "image", src: "/media/sully/img-8.png" },
+              alt: "Sully.ai clinical co-pilot mobile screen on a leather chair",
+            },
           ],
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sully/img-9.png" }, alt: "Sully.ai Partner with Sully Labs page on a phone" },
+          slot: {
+            media: { type: "image", src: "/media/sully/img-9.png" },
+            alt: "Sully.ai Partner with Sully Labs page on a phone",
+          },
         },
         {
           kind: "full",
-          slot: { media: { type: "image", src: "/media/sully/img-10.png" }, alt: "Sully.ai EPIC and EHR integrations explainer page on a laptop", tone: "white" },
+          slot: {
+            media: { type: "image", src: "/media/sully/img-10.png" },
+            alt: "Sully.ai EPIC and EHR integrations explainer page on a laptop",
+            tone: "white",
+          },
         },
       ],
     },
@@ -572,14 +972,20 @@ const sully: CaseStudy = {
 
 const streamline: CaseStudy = {
   slug: "streamline",
-  title: "We repositioned Streamline for enterprise, then scaled the brand across 200 pages.",
+  title:
+    "We repositioned Streamline for enterprise, then scaled the brand across 200 pages.",
   metaTitle: "Streamline Case Study - PIXELUP LABS",
   metaDescription:
     "PIXELUP LABS repositioned Streamline for enterprise legal teams and built a brand, website and design system that scaled across more than 200 pages.",
   info: {
     client: "Streamline (AI Platform for Legal Operations)",
     year: "2026",
-    involvement: ["Brand Identity", "Positioning", "Website Design", "Design System"],
+    involvement: [
+      "Brand Identity",
+      "Positioning",
+      "Website Design",
+      "Design System",
+    ],
     links: [{ label: "streamline.ai", href: "https://www.streamline.ai/" }],
   },
   description: [
@@ -725,7 +1131,8 @@ const streamline: CaseStudy = {
 
 const henryLabs: CaseStudy = {
   slug: "henrylabs",
-  title: "We built the Henry Labs brand, then carried it across every touchpoint.",
+  title:
+    "We built the Henry Labs brand, then carried it across every touchpoint.",
   metaTitle: "Henry Labs Case Study - PIXELUP LABS",
   metaDescription:
     "See how PIXELUP LABS designed Henry Labs' brand, website, dashboard and checkout experience for a startup building agentic commerce infrastructure.",
@@ -906,7 +1313,8 @@ const henryLabs: CaseStudy = {
     },
   ],
   closing: {
-    heading: "The brand got us in the door. The product became most of the job.",
+    heading:
+      "The brand got us in the door. The product became most of the job.",
     paragraphs: [
       "By the end, the website, dashboard and checkout finally looked like they came from the same company.",
       "Brand, website and product by PIXELUP LABS. 2026.",
@@ -921,7 +1329,10 @@ const henryLabs: CaseStudy = {
             alt: "Henry Labs mobile website and brand mark over the launch landscape",
           },
           {
-            media: { type: "image", src: "/media/henry-labs/frame-2147244047.avif" },
+            media: {
+              type: "image",
+              src: "/media/henry-labs/frame-2147244047.avif",
+            },
             alt: "Henry Labs website use cases displayed on a laptop against an orange landscape",
           },
         ],
@@ -939,7 +1350,7 @@ const henryLabs: CaseStudy = {
   publication: {
     status: "published",
     blockers: [
-      "Funding reads \"Private\": confirm a figure directly with Henry Labs before publishing one.",
+      'Funding reads "Private": confirm a figure directly with Henry Labs before publishing one.',
       "Add two approved Slack reactions with names and roles.",
       "Confirm which dashboard and checkout screens can be public.",
       "Add a measurable result only if Henry Labs approves the claim.",

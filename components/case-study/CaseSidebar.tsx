@@ -1,7 +1,7 @@
 import type { CaseStudy } from "@/lib/case-studies";
 import { BackButton } from "../BackButton";
 import { CtaButtons } from "../CtaButtons";
-import { LeadCallout } from "../LeadCallout";
+import { TrustedStrip } from "../TrustedStrip";
 import { ClientInfo } from "./ClientInfo";
 
 /**
@@ -13,6 +13,8 @@ import { ClientInfo } from "./ClientInfo";
  * Figma mobile draft.
  */
 export function CaseSidebar({ study }: { study: CaseStudy }) {
+  const description = study.story ? [study.story.summary] : study.description;
+
   return (
     // 405px, same as LeftNav and the blog asides. This used to be
     // calc(26% - 10.4px) — the viewport-relative math that made a percentage
@@ -27,11 +29,15 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
         <div className="no-scrollbar hidden desk:flex desk:min-h-0 desk:flex-1 desk:flex-col desk:justify-between desk:gap-8 desk:overflow-y-auto desk:pb-6 desk:pt-2">
           <div className="fade-up flex flex-col [animation-delay:100ms]">
             <div className="px-5 pb-3">
-              <BackButton label="Back to all projects" icon="arrow" />
+              <BackButton
+                href="/case-studies"
+                label="Back to all case studies"
+                icon="arrow"
+              />
             </div>
             <ClientInfo info={study.info} />
             <div className="flex flex-col gap-3 px-5 pt-3">
-              {study.description.map((paragraph) => (
+              {description.map((paragraph) => (
                 <p
                   key={paragraph}
                   className="text-[14px] leading-[1.35] tracking-[-0.01em] text-white"
@@ -41,11 +47,8 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
               ))}
             </div>
           </div>
-          {/* No TrustedStrip on this page, so the callout sits straight on top
-              of the CTAs. gap-5 matches the callout/strip/CTA rhythm the other
-              sidebars use. */}
           <div className="fade-up flex flex-col gap-5 px-5 [animation-delay:200ms]">
-            {/* <LeadCallout /> */}
+            <TrustedStrip />
             <CtaButtons />
           </div>
         </div>

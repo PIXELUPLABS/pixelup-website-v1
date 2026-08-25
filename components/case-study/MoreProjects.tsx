@@ -62,7 +62,12 @@ function ProjectCardSmall({
             homepage media (e.g. the Sainapse video). */}
         {!project.cardImage && project.overlayLogo && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <img src={project.overlayLogo} alt="" aria-hidden="true" className="w-[30%]" />
+            <img
+              src={project.overlayLogo}
+              alt=""
+              aria-hidden="true"
+              className="w-[30%]"
+            />
           </div>
         )}
       </div>
@@ -99,8 +104,14 @@ function ProjectCardSmall({
   );
 }
 
-/** "More projects" grid at the end of a case study. */
-export function MoreProjects({ refs }: { refs: MoreProjectRef[] }) {
+/** Related-project grid at the end of a case study. */
+export function MoreProjects({
+  refs,
+  heading = "More projects",
+}: {
+  refs: MoreProjectRef[];
+  heading?: string;
+}) {
   const cards = refs.flatMap((ref) => {
     const project = projects.find((p) => p.slug === ref.slug);
     return project ? [{ project, tags: ref.tags }] : [];
@@ -110,7 +121,7 @@ export function MoreProjects({ refs }: { refs: MoreProjectRef[] }) {
     <section className="w-full border-t-[0.5px] border-hairline">
       <div className="p-6">
         <h2 className="max-w-[536px] text-balance text-[24px] font-medium leading-tight tracking-[-0.02em] text-white desk:text-[48px]">
-          More projects
+          {heading}
         </h2>
       </div>
       {/* Cards span the full content width, split evenly by the page center

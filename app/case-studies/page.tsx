@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { CaseStudyList } from "@/components/case-studies/CaseStudyList";
 import { Footer } from "@/components/Footer";
 import { caseStudyShowcase } from "@/lib/case-studies-showcase";
@@ -12,21 +11,9 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-/**
- * Hidden from production 2026-08-19: this listing is not ready to be public.
- * It was reachable (HTTP 200) but absent from the sitemap, so it was live
- * without being announced. The route now 404s while the layout below is kept
- * intact — delete the `notFound()` call to bring it back.
- *
- * Only this index is hidden. The five /case-studies/[slug] pages stay live and
- * stay in the sitemap; they are the proof assets the rest of the site links to.
- *
- * Deliberately not added to robots.txt as a Disallow: a 404 is what tells
- * Google to drop the URL, and a Disallow would prevent it from ever seeing it.
- */
+/** Local index linked from every case-study detail page. It remains noindex
+ * until the listing is approved for publication. */
 export default function CaseStudiesPage() {
-  notFound();
-
   return (
     <div className="relative flex flex-col gap-8 p-4 desk:p-5">
       <header className="flex w-fit flex-col gap-4">
@@ -36,8 +23,8 @@ export default function CaseStudiesPage() {
           real outcomes
         </h1>
         <p className="fade-up text-[16px] leading-[1.3] tracking-[-0.02em] text-muted-65 [animation-delay:200ms]">
-          A closer look at the brand, product and website engagements that
-          took ambitious startups from overlooked to enterprise-ready.
+          A closer look at the brand, product and website engagements that took
+          ambitious startups from overlooked to enterprise-ready.
         </p>
         {/* <p className="fade-up text-[13px] font-medium uppercase tracking-[0.04em] text-white/50 [animation-delay:300ms]">
           Trusted by funded AI &amp; enterprise startups - from pre-seed to

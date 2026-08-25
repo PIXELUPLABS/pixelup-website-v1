@@ -20,7 +20,7 @@ export function CaseMediaSlot({
   /** aspect-* utility that sets the frame's proportion (from Figma). */
   aspect: string;
   sizes?: string;
-  /** Preload the image — for above-the-fold media (the case hero). */
+  /** Eager-load the image for above-the-fold media (the case hero). */
   priority?: boolean;
 }) {
   const tone = slot.tone ?? "faint";
@@ -38,7 +38,8 @@ export function CaseMediaSlot({
           width={slot.intrinsicSize.width}
           height={slot.intrinsicSize.height}
           sizes={sizes}
-          priority={priority}
+          loading={priority ? "eager" : undefined}
+          fetchPriority={priority ? "high" : undefined}
           className="h-auto w-full"
         />
         {slot.overlayLogo && (
@@ -56,7 +57,9 @@ export function CaseMediaSlot({
   }
 
   return (
-    <div className={`relative w-full overflow-hidden ${aspect} ${toneClass[tone]}`}>
+    <div
+      className={`relative w-full overflow-hidden ${aspect} ${toneClass[tone]}`}
+    >
       {slot.media.type === "video" ? (
         <video
           className="absolute inset-0 h-full w-full object-cover"
@@ -74,7 +77,8 @@ export function CaseMediaSlot({
           alt={slot.alt ?? ""}
           fill
           sizes={sizes}
-          priority={priority}
+          loading={priority ? "eager" : undefined}
+          fetchPriority={priority ? "high" : undefined}
           className="object-cover"
         />
       )}
@@ -110,7 +114,9 @@ export function CaseMediaBlock({
       <div className="px-6 desk:p-6">
         <CaseMediaSlot
           slot={block.slot}
-          aspect={block.aspect === "wide" ? "aspect-video" : "aspect-[1160/696]"}
+          aspect={
+            block.aspect === "wide" ? "aspect-video" : "aspect-[1160/696]"
+          }
           priority={priority}
         />
       </div>
@@ -122,7 +128,9 @@ export function CaseMediaBlock({
         <div key={i} className="min-w-0 flex-1">
           <CaseMediaSlot
             slot={slot}
-            aspect={block.aspect === "wide" ? "aspect-video" : "aspect-[576/548]"}
+            aspect={
+              block.aspect === "wide" ? "aspect-video" : "aspect-[576/548]"
+            }
             sizes="(min-width: 1200px) 40vw, 100vw"
           />
         </div>

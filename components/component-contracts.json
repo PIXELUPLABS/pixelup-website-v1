@@ -56,8 +56,10 @@
   "CaseSidebar": {
     "file": "components/case-study/CaseSidebar.tsx",
     "category": "layout",
-    "description": "Case-study-specific sidebar: back button, ClientInfo (client/year/involvement/link), long-form description, CtaButtons. Sticky on desktop.",
-    "variants": ["none — always the same shape, data comes from the CaseStudy object"],
+    "description": "Case-study-specific sidebar: back button, ClientInfo (client/year/involvement/link), TrustedStrip and CtaButtons. Legacy studies also show the long-form description. Sticky on desktop.",
+    "variants": [
+      "legacy = ClientInfo, description, TrustedStrip and CtaButtons; story = ClientInfo, TrustedStrip and CtaButtons because the narrative moves into the main column"
+    ],
     "states": {
       "mobile": "Renders nothing (client info moves under the title, description hidden) — see comment in file."
     },
@@ -166,7 +168,7 @@
     "variants": ["none"],
     "states": ["continuous CSS marquee animation, no interactive states"],
     "tokens_used": ["color.neutral.label-grey", "--animate-marquee (app/globals.css)"],
-    "when_to_use": "Inside LeftNav only, currently.",
+    "when_to_use": "Inside LeftNav and CaseSidebar, immediately above CtaButtons.",
     "do_not": [
       "Don't add a logo to only one of the two duplicated blocks — both copies must stay identical or the loop will visibly jump.",
       "The first copy carries real alt text; the duplicate is aria-hidden — keep that split when adding logos."
@@ -346,26 +348,63 @@
   "MoreProjects": {
     "file": "components/case-study/MoreProjects.tsx",
     "category": "content",
-    "description": "\"More Projects\" section at the end of a case study: two equal-width project cards with an overlay logo/title/tags.",
-    "variants": ["none — refs prop (MoreProjectRef[]) drives which projects show"],
+    "description": "Related-project section at the end of a case study: two equal-width project cards with an overlay logo/title/tags.",
+    "variants": [
+      "refs prop (MoreProjectRef[]) drives which projects show; optional heading prop defaults to More projects"
+    ],
     "states": {
       "card:hover": "Media scales up, same treatment as the homepage ProjectCard."
     },
-    "tokens_used": ["typography.size.20 (card title)", "color.neutral.hairline"],
+    "tokens_used": [
+      "typography.size.20 (card title)",
+      "color.neutral.hairline"
+    ],
     "when_to_use": "End of every case study page.",
     "do_not": [
       "Don't give the two cards a flex `gap` together with fixed widths that already sum to 100% — use flex-1, same fix as ArticleFilters/ExplorationGallery."
     ]
   },
 
+  "CaseStudyStory": {
+    "file": "components/case-study/CaseStudyStory.tsx",
+    "category": "content",
+    "description": "Richer editorial renderer for a case study with a proof-led hero, blog-style YC/funding status tag, context, critical challenges, work snapshots, gallery, results, approval-aware testimonial, after-launch narrative, process FAQ, related work and the Brand Perception CTA. It composes the existing CaseMediaBlock, SectionShell, CaseFaq, ClientInfo, MoreProjects and AuditForm components.",
+    "variants": [
+      "CaseStudy.story drives a discriminated union of context, media, challenge, gallery, results, testimonial and afterLaunch blocks"
+    ],
+    "states": [
+      "testimonial uses the left column for its section heading and the right column for the body-scale quote and attribution",
+      "testimonial approvalPending renders an explicit prototype-only label so draft client copy cannot be mistaken for approved copy"
+    ],
+    "tokens_used": [
+      "color.neutral.hairline",
+      "color.neutral.white",
+      "color.brand.accent through AuditForm",
+      "typography.font.display",
+      "typography.font.mono",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "Inside CaseStudyPage only, when the CaseStudy object supplies story data. Use the block union instead of creating a one-off route template.",
+    "do_not": [
+      "Don't render unapproved testimonial copy without approvalPending: true.",
+      "Don't add another primary CTA inside the story; AuditForm is the single page-level primary action.",
+      "Don't bypass CaseMediaBlock or SectionShell for patterns they already cover."
+    ]
+  },
+
   "CaseStudyPage": {
     "file": "components/case-study/CaseStudyPage.tsx",
     "category": "page_template",
-    "description": "Full case study page template: CaseSidebar + main content column (title, hero, optional opening media, CaseSection/CaseMedia loop, optional closing statement with follow-on media, CaseFaq, MoreProjects, Footer).",
-    "variants": ["study prop (CaseStudy) drives all content; draft studies remain directly previewable but are noindex and excluded from the sitemap"],
+    "description": "Full case study page shell: CaseSidebar + main content column + Footer. CaseStudy.story opts into CaseStudyStory; entries without story retain the legacy title, media, CaseSection, FAQ and MoreProjects renderer.",
+    "variants": [
+      "story = richer editorial block renderer; legacy = existing CaseSection loop; draft studies remain directly previewable but are noindex and excluded from the sitemap"
+    ],
     "states": ["none"],
-    "tokens_used": ["color.neutral.hairline (center vertical rule)", "breakpoint.desk"],
-    "when_to_use": "Rendered once by app/case-studies/[slug]/page.tsx per case study. Also renders the FAQPage JSON-LD schema.",
+    "tokens_used": [
+      "color.neutral.hairline (center vertical rule)",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "Rendered once by app/case-studies/[slug]/page.tsx per case study. The legacy variant renders the shared FAQPage JSON-LD schema; the story variant keeps process FAQs visible without emitting that schema.",
     "do_not": [
       "Don't build a competing case-study template — add a new CaseStudy entry to lib/case-studies.ts instead; this template handles layout for all of them."
     ]
@@ -417,7 +456,7 @@
   "ClientRow": {
     "file": "components/clients/ClientRow.tsx",
     "category": "content",
-    "description": "One hairline-separated client entry with 25px top padding and 40px bottom padding at every viewport. Desktop uses three aligned columns: the dominant logo column, Niche, and What we did. Both text columns render at 60% white opacity. Mobile stacks the same content, preserves the approved 10px logo-to-niche gap, and keeps explicit Niche and What we did labels. Approved vectors render pure white inside optically audited contain frames, preserving their original aspect ratios without transform scaling. Vertera Health and Conigma are intentional color exceptions. Vertera preserves its white wordmark and outer icon with black petals against the white icon background. Conigma preserves its original wordmark shape in white, with a white rounded icon tile and black inner star. The default frame remains 134.4px by 24px. Per-logo width changes are applied to the rendered mark—not merely to unused frame space—by pairing each requested width with a sufficient proportional height in logoFrameClassBySlug. The current optical adjustments cover Autumn Pricing, Bland, CTGT, Conigma, Conscious Engines, DayFlow, Greptile, Henrylabs, Lasting Learn, My Wonder, NFA, Pogo, Reducto, Revyl, Sainapse, Streamline, Sully, Synthio Labs, Umbra, Vertera Health, Zenact, and Jumbo. Grovio currently uses the established accessible duplicated-logo placeholder because its SVG was not included. The final three engagement words stay together to prevent widow lines. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
+    "description": "One hairline-separated client entry with 25px top padding and 40px bottom padding at every viewport. Desktop uses three aligned columns: the dominant logo column, Niche, and What we did. Both text columns render at 60% white opacity. Mobile stacks the same content, preserves the approved 10px logo-to-niche gap, and keeps explicit Niche and What we did labels. Approved vectors render pure white inside optically audited contain frames, preserving their original aspect ratios without transform scaling. Vertera Health and Conigma are intentional color exceptions. Vertera preserves its white wordmark and outer icon with black petals against the white icon background. Conigma preserves its original wordmark shape in white, with a white rounded icon tile and black inner star. The default frame remains 134.4px by 24px. Per-logo width changes are applied to the rendered mark—not merely to unused frame space—by pairing each requested width with a sufficient proportional height in logoFrameClassBySlug. The current optical adjustments cover Autumn Pricing, Bland, CTGT, Conigma, DayFlow, Greptile, Henrylabs, Lasting Learn, NFA, Pogo, Reducto, Revyl, Sainapse, Streamline, Sully, Synthio Labs, Umbra, Vertera Health, Zenact, and Jumbo. Grovio currently uses the established accessible duplicated-logo placeholder because its SVG was not included. The final three engagement words stay together to prevent widow lines. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
     "variants": ["approved logo vs duplicated-logo placeholder"],
     "states": {"entrance": "fade-up stagger capped at 600ms"},
     "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "spacing.base", "breakpoint.desk"],
