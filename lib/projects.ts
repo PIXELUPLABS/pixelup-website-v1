@@ -128,19 +128,22 @@ export const projects: Project[] = [
     services: ["Branding", "Website Design"],
     year: "2025",
   },
-  {
-    slug: "revyl",
-    label: "Revyl",
-    // revyl.ai 301s to revyl.com — link the destination directly, no redirect hop.
-    href: "https://revyl.com/",
-    external: true,
-    media: { type: "image", src: "/media/revyl.png" },
-    alt: "Revyl website design by PIXELUP LABS",
-    // Same ~46-character ceiling as Henry Labs — three disciplines in the meta.
-    tagline: "Mobile testing infrastructure for AI agents",
-    services: ["Branding", "Website Design", "Product Design"],
-    year: "2025",
-  },
+  // Revyl pulled from the showcase (Aug 2026). Note: while absent here, the
+  // /case-studies listing drops its Revyl row too — the row resolves its
+  // card through this array.
+  // {
+  //   slug: "revyl",
+  //   label: "Revyl",
+  //   // revyl.ai 301s to revyl.com — link the destination directly, no redirect hop.
+  //   href: "https://revyl.com/",
+  //   external: true,
+  //   media: { type: "image", src: "/media/revyl.png" },
+  //   alt: "Revyl website design by PIXELUP LABS",
+  //   // Same ~46-character ceiling as Henry Labs — three disciplines in the meta.
+  //   tagline: "Mobile testing infrastructure for AI agents",
+  //   services: ["Branding", "Website Design", "Product Design"],
+  //   year: "2025",
+  // },
   {
     slug: "sully",
     label: "Sully.ai",
