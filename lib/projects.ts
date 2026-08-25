@@ -181,7 +181,7 @@ export const projects: Project[] = [
     // Verbatim from useautumn.com's live H1.
     tagline: "The drop-in billing layer for AI startups",
     services: ["Branding", "Website Design", "Next.js Development"],
-    // Year not confirmed yet — supply it to fill the info block's right column.
+    year: "2025",
   },
   {
     slug: "pogo",
@@ -206,7 +206,7 @@ export const projects: Project[] = [
     // Verbatim from monumint.ai's live H1.
     tagline: "Conversational AI for finance institutions",
     services: ["Branding", "Website Design", "Framer Development"],
-    // Year not confirmed yet — supply it to fill the info block's right column.
+    year: "2026",
   },
   // {
   //   slug: "synthio",
