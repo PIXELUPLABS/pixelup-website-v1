@@ -146,8 +146,8 @@ export const projects: Project[] = [
     label: "Sully.ai",
     href: "/case-studies/sully",
     external: false,
-    media: { type: "image", src: "/media/sully.png" },
-    alt: "Sully.ai logo mark over a bright hospital corridor, website and motion design by PIXELUP LABS",
+    media: { type: "image", src: "/media/sully.jpg" },
+    alt: "Sully.ai homepage on a laptop mockup, website and motion design by PIXELUP LABS",
     cardImage: "/media/sully/card.png",
     tagline: "AI clinical agents for hospitals and health systems",
     // Arjun's list says Brand + Web; the case study's `involvement` says

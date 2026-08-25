@@ -834,8 +834,8 @@ const sully: CaseStudy = {
     "The impact was immediate. One explainer page directly contributed to closing a major enterprise contract, and within 11 months Sully scaled 26x, raising $32M+ at a $150M valuation.",
   ],
   hero: {
-    media: { type: "image", src: "/media/sully/hero.png" },
-    alt: "Sully.ai logo mark over a bright hospital corridor with clinicians",
+    media: { type: "image", src: "/media/sully.jpg" },
+    alt: "Sully.ai homepage hero on a laptop mockup, website design by PIXELUP LABS",
   },
   sections: [
     {
