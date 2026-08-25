@@ -8,6 +8,7 @@ import { MobileMenu } from "./MobileMenu";
 export const navLinks: { label: string; href: string | null }[] = [
   // { label: "About", href: null },
   // { label: "YC Partner", href: null },
+  { label: "Case Studies", href: "/case-studies" },
   { label: "Explorations", href: "/explorations" },
   { label: "Clients", href: "/clients" },
   // { label: "Services", href: null },
