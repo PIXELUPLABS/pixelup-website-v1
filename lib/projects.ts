@@ -155,6 +155,31 @@ export const projects: Project[] = [
     services: ["Branding", "Website Design"],
     year: "2025",
   },
+  {
+    slug: "zenact",
+    label: "Zenact",
+    href: "https://zenact.ai/",
+    external: true,
+    media: { type: "image", src: "/media/zenact.jpg" },
+    alt: "Zenact website design by PIXELUP LABS",
+    // From zenact.ai's live hero: AI agents play out natural-language
+    // journeys to test apps like real users.
+    tagline: "AI agents that test apps like real users",
+    services: ["Branding", "Website Design", "Webflow Development"],
+    year: "2026",
+  },
+  {
+    slug: "autumn",
+    label: "Autumn",
+    href: "https://useautumn.com/",
+    external: true,
+    media: { type: "image", src: "/media/autumn.png" },
+    alt: "Autumn website design by PIXELUP LABS",
+    // Verbatim from useautumn.com's live H1.
+    tagline: "The drop-in billing layer for AI startups",
+    services: ["Branding", "Website Design", "Next.js Development"],
+    // Year not confirmed yet — supply it to fill the info block's right column.
+  },
   // {
   //   slug: "synthio",
   //   label: "Synthio Labs",
@@ -164,11 +189,11 @@ export const projects: Project[] = [
   //   alt: "Synthio Labs website design by PIXELUP LABS",
   // },
   //
-  // NOT YET ADDABLE — Pogo, Bland, Limelight, Zenact, and Autumn are on the
-  // intended showcase lineup but have no card media in /public/media and no
-  // confirmed live URL. Each needs a ~1008x584 image or mp4 plus its site link
-  // before it can become a card; the info-block copy can then be written from
-  // that site the same way as the entries above.
+  // NOT YET ADDABLE — Pogo, Bland, and Limelight are on the intended showcase
+  // lineup but have no card media in /public/media and no confirmed live URL.
+  // Each needs a ~1008x584 image or mp4 plus its site link before it can
+  // become a card; the info-block copy can then be written from that site the
+  // same way as the entries above.
 ];
 
 /** Global CTA / social links used across the site. */
