@@ -12,6 +12,7 @@ export function AuditForm() {
   return (
     <section
       id="audit"
+      data-fast-scroll="audit_cta_viewed"
       // scroll-mt-16 matches the sticky Navbar's height (h-16) — without it,
       // #audit's anchor scroll lands the section flush at the true viewport
       // top, and the fixed navbar then covers that same 64px, hiding the top
