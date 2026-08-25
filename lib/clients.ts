@@ -217,28 +217,12 @@ export const clients: Client[] = [
     fundingNote: "$500K YC-backed (F25) · Acquired",
   },
   // {
-  //   slug: "my-wonder",
-  //   name: "My Wonder",
-  //   logo: "/media/logos/clients/my-wonder.svg",
-  //   niche: "Kids Edtech",
-  //   engagement:
-  //     "E-commerce website spanning landing, catalogue, PDP, and waitlist + full companion app UI.",
-  // },
-  // {
   //   slug: "conigma",
   //   name: "Conigma",
   //   logo: "/media/logos/clients/conigma.svg",
   //   niche: "GTM Automation",
   //   engagement:
   //     "Full brand identity + marketing website, grounded in a competitor teardown.",
-  // },
-  // {
-  //   slug: "conscious-engines",
-  //   name: "Conscious Engines",
-  //   logo: "/media/logos/clients/conscious-engines.svg",
-  //   niche: "AI Inference",
-  //   engagement:
-  //     "Brand strategy + identity + end-to-end Felix assistant app design.",
   // },
   // {
   //   slug: "nfa",
