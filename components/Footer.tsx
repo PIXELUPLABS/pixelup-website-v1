@@ -44,37 +44,49 @@ export function Footer() {
               </div>
               <p className="text-[12px] font-normal text-white">©2026 PIXELUP LABS</p>
             </div>
-            <div className="flex flex-col gap-8 p-6 desk:h-full desk:border-l-[0.5px] desk:border-hairline">
-              <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
-                Quick Links
-              </p>
-              <div className="flex flex-col gap-2">
-                {quickLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
+            <div className="flex flex-col gap-8 p-6 desk:h-full desk:justify-between desk:border-l-[0.5px] desk:border-hairline">
+              <div className="flex flex-col gap-8">
+                <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
+                  Quick Links
+                </p>
+                <div className="flex flex-col gap-2">
+                  {quickLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="w-fit text-[14px] font-normal text-white"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                  <a
+                    href={JOIN_THE_TEAM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-fit text-[14px] font-normal text-white"
                   >
-                    {link.name}
-                  </Link>
-                ))}
-                <a
-                  href={JOIN_THE_TEAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-fit text-[14px] font-normal text-white"
-                >
-                  Careers
-                </a>
-                <a
-                  href={TESTIMONIALS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-fit text-[14px] font-normal text-white"
-                >
-                  Testimonials
-                </a>
+                    Careers
+                  </a>
+                  <a
+                    href={TESTIMONIALS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-fit text-[14px] font-normal text-white"
+                  >
+                    Testimonials
+                  </a>
+                </div>
               </div>
+              {/* Pinned to the bottom-left of this column by the parent's
+                  desk:justify-between, and muted so it reads as a legal
+                  footnote rather than a sixth quick link. On mobile the
+                  column has no fixed height, so it simply follows the list. */}
+              <Link
+                href="/privacy"
+                className="w-fit text-[12px] font-normal text-white/60"
+              >
+                Privacy Policy
+              </Link>
             </div>
             <div className="flex flex-col gap-8 p-6 desk:h-full">
               <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
