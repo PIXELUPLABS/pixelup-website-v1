@@ -92,6 +92,23 @@ export default function RootLayout({
             gtag('config', 'G-M4JV6HF683');
           `}
         </Script>
+        {/* RB2B visitor de-anonymization. Same afterInteractive tier as
+            GA: it self-injects its own async <script>, so blocking the
+            initial render buys nothing. The guard bails if window.reb2b
+            already exists, which keeps client-side navigations from
+            loading a second copy. */}
+        <Script id="rb2b" strategy="afterInteractive">
+          {`
+            !function (key) {
+              if (window.reb2b) return;
+              window.reb2b = { loaded: true };
+              var s = document.createElement("script");
+              s.async = true;
+              s.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/" + key + ".js.gz";
+              document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
+            }("XOE9GH33QJOM");
+          `}
+        </Script>
         <DisableImageDrag />
         {/* Caps the site at 1800px and centers it — on very large monitors the
             page was stretching edge-to-edge, which broke the intended layout
