@@ -5,7 +5,7 @@ import {
   pixelupFaqSchema,
   type CaseStudy,
 } from "@/lib/case-studies";
-import { ctaButtonBase } from "../CtaButtons";
+import { ctaButtonBase, ctaButtonPadding } from "../CtaButtons";
 import { Footer } from "../Footer";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
@@ -102,7 +102,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
                     href={study.endCta.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`${ctaButtonBase} w-full bg-accent text-white hover:brightness-110`}
+                    className={`${ctaButtonBase} ${ctaButtonPadding} w-full bg-accent text-white hover:brightness-110`}
                   >
                     <span>{study.endCta.label}</span>
                     <Image

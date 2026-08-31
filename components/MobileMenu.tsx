@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { AuditNavCta } from "./AuditNavCta";
 import { navLinks } from "./Navbar";
 
 // Hamburger shown only on mobile (< desk). Toggles a small links panel.
@@ -61,6 +62,9 @@ export function MobileMenu() {
               </span>
             )
           )}
+          {/* Same CTA as the desktop nav, full width at the foot of the panel
+              and closing the menu on its way to the section. */}
+          <AuditNavCta className="mt-2 w-full" onNavigate={() => setOpen(false)} />
         </div>
       )}
     </div>

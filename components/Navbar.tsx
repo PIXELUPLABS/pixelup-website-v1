@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AuditNavCta } from "./AuditNavCta";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 
@@ -51,6 +52,7 @@ export function Navbar() {
               </span>
             )
           )}
+          <AuditNavCta />
         </nav>
         <MobileMenu />
       </div>
