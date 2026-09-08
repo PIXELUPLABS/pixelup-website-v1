@@ -53,7 +53,7 @@ function NichePill({
       onClick={onClick}
       className={`cursor-pointer rounded-none px-3 py-1 font-button text-[12px] font-semibold uppercase tracking-[-0.02em] transition-colors ${
         active
-          ? "border border-transparent bg-button-dark text-white"
+          ? "border border-transparent bg-accent text-white"
           : "border border-dashed border-hairline bg-transparent text-white/40 hover:bg-button-dark"
       }`}
     >
