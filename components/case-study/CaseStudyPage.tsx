@@ -107,9 +107,11 @@ function LegacyCaseStudy({ study }: { study: CaseStudy }) {
 
 /** Shared page shell with an optional richer story renderer and legacy fallback. */
 export function CaseStudyPage({ study }: { study: CaseStudy }) {
+  const useStoryLayout = study.detailLayout !== "legacy" && Boolean(study.story);
+
   return (
     <div className="relative">
-      {!study.story && (
+      {!useStoryLayout && (
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(pixelupFaqSchema) }}
@@ -119,7 +121,7 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
         <CaseSidebar study={study} />
 
         <main className="min-w-0 flex-1">
-          {study.story ? (
+          {useStoryLayout ? (
             <CaseStudyStory study={study} />
           ) : (
             <LegacyCaseStudy study={study} />

@@ -13,7 +13,11 @@ import { ClientInfo } from "./ClientInfo";
  * Figma mobile draft.
  */
 export function CaseSidebar({ study }: { study: CaseStudy }) {
-  const description = study.story ? [study.story.summary] : study.description;
+  const restoreLegacyDetail = study.detailLayout === "legacy";
+  const description =
+    study.story && !restoreLegacyDetail
+      ? [study.story.summary]
+      : study.description;
 
   return (
     // 405px, same as LeftNav and the blog asides. This used to be
@@ -48,7 +52,7 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
             </div>
           </div>
           <div className="fade-up flex flex-col gap-5 px-5 [animation-delay:200ms]">
-            <TrustedStrip />
+            {!restoreLegacyDetail && <TrustedStrip />}
             <CtaButtons />
           </div>
         </div>

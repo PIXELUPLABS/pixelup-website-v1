@@ -169,6 +169,8 @@ export interface CaseStudy {
   introMedia?: MediaBlock[];
   /** Optional richer editorial structure. Legacy sections remain the fallback. */
   story?: CaseStudyStory;
+  /** Explicitly keep the original detail-page renderer while retaining story data elsewhere. */
+  detailLayout?: "legacy" | "story";
   sections: CaseSection[];
   closing?: {
     heading: string;
@@ -265,6 +267,7 @@ const greptile: CaseStudy = {
     media: { type: "image", src: "/media/greptile/hero.png" },
     alt: "Glowing green Greptile logo mark on a dark background",
   },
+  detailLayout: "legacy",
   story: {
     company: "Greptile",
     statusBadge: "YC W24 · Series A",
