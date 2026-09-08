@@ -8,11 +8,9 @@ export const metadata: Metadata = {
   description:
     "Real brand, product and website engagements PIXELUP LABS has shipped for ambitious startups — proof, not promises.",
   alternates: { canonical: "/case-studies" },
-  robots: { index: false, follow: false },
 };
 
-/** Local index linked from every case-study detail page. It remains noindex
- * until the listing is approved for publication. */
+/** Case-study index linked from the global navigation and detail pages. */
 export default function CaseStudiesPage() {
   return (
     <div className="relative flex flex-col gap-8 p-4 desk:p-5">
@@ -23,8 +21,9 @@ export default function CaseStudiesPage() {
           real outcomes
         </h1>
         <p className="fade-up text-[16px] leading-[1.3] tracking-[-0.02em] text-muted-65 [animation-delay:200ms]">
-          A closer look at the brand, product and website engagements that took
-          ambitious startups from overlooked to enterprise-ready.
+          A closer look at the brand, product and website engagements that{" "}
+          <br className="hidden desk:block" />
+          took ambitious startups from overlooked to enterprise-ready.
         </p>
         {/* <p className="fade-up text-[13px] font-medium uppercase tracking-[0.04em] text-white/50 [animation-delay:300ms]">
           Trusted by funded AI &amp; enterprise startups - from pre-seed to
