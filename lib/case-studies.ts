@@ -70,6 +70,8 @@ export interface CaseSection {
 export interface FaqItem {
   q: string;
   a: string;
+  href?: string;
+  linkLabel?: string;
 }
 
 export interface MoreProjectRef {
@@ -211,7 +213,9 @@ export const pixelupFaq: FaqItem[] = [
   },
   {
     q: "How much does it cost?",
-    a: "Scope drives pricing, so we quote per engagement. Book a discovery call and you will leave with a clear recommendation and a straightforward quote.",
+    a: "Brand sprints are $15,000. Brand plus website projects run $25,000 to $40,000. Retainers start at $6,000 a month.",
+    href: "https://contra.com/daksh_aswal_dt5tfn27/services",
+    linkLabel: "See current services and pricing on Contra.",
   },
   {
     q: "What is it like to work with you?",

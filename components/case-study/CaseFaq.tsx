@@ -75,6 +75,19 @@ export function CaseFaq({ items }: { items: FaqItem[] }) {
                   }`}
                 >
                   {item.a}
+                  {item.href && item.linkLabel ? (
+                    <>
+                      {" "}
+                      <a
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-white underline underline-offset-2 transition-opacity hover:opacity-70"
+                      >
+                        {item.linkLabel}
+                      </a>
+                    </>
+                  ) : null}
                 </p>
               </div>
             </div>
