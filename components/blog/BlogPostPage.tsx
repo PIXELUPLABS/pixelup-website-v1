@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
-import { AuditForm } from "@/components/AuditForm";
 import { Footer } from "@/components/Footer";
 import { blogPostSchema } from "@/sanity/lib/blog-schema";
 import type { BlogPostData } from "@/sanity/lib/blog-types";
@@ -197,7 +196,6 @@ export function BlogPostPage({
             ))}
           </div>
         </div>
-        <AuditForm />
         {/* Same treatment as /blog's Footer wrapper — cancels the row's
             p-5 on this wrapper only, so Footer fills the extra space via
             its own w-full without needing any change to Footer itself. */}

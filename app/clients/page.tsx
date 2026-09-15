@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { AuditForm } from "@/components/AuditForm";
 import { BlogFaq } from "@/components/blog/BlogFaq";
 import { ClientRoster } from "@/components/clients/ClientRoster";
 import { Footer } from "@/components/Footer";
@@ -73,7 +72,6 @@ export default function ClientsPage() {
         <main className="flex min-w-0 flex-1 flex-col gap-8">
           <ClientRoster clients={clients} />
           <BlogFaq />
-          <AuditForm />
           <div className="-mx-4 -mb-4 desk:-mr-5 desk:-mb-5 desk:-ml-4">
             <Footer />
           </div>

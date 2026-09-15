@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { AuditForm } from "@/components/AuditForm";
 import type {
   CaseMetric,
   CaseStoryBlock,
@@ -325,7 +324,6 @@ export function CaseStudyStory({ study }: { study: CaseStudy }) {
           </SectionShell>
 
           <MoreProjects refs={study.moreProjects} heading="More case studies" />
-          <AuditForm />
         </div>
       </div>
     </>
