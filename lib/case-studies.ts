@@ -661,7 +661,7 @@ const sainapse: CaseStudy = {
     client: "Sainapse (AI Customer Support Platform)",
     year: "2025",
     involvement: ["Brand Identity", "Website Design"],
-    links: [{ label: "sainapse.ai", href: "https://sainapse.ai" }],
+    links: [{ label: "sainapse.ai", href: "https://sainapse-staging.webflow.io/" }],
   },
   description: [
     "After seven years and 2M+ production tickets, Sainapse had proven technology, but a brand that couldn't keep pace. Their identity felt fragmented, technical, and hard to explain.",
