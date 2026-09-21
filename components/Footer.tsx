@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { SocialLinks } from "@/components/SocialLinks";
 import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Vector.svg";
 
@@ -78,15 +79,9 @@ export function Footer() {
                 </div>
               </div>
               {/* Pinned to the bottom-left of this column by the parent's
-                  desk:justify-between, and muted so it reads as a legal
-                  footnote rather than a sixth quick link. On mobile the
-                  column has no fixed height, so it simply follows the list. */}
-              <Link
-                href="/privacy"
-                className="w-fit text-[12px] font-normal text-white/60"
-              >
-                Privacy Policy
-              </Link>
+                  desk:justify-between. On mobile the column has no fixed
+                  height, so the row simply follows the list. */}
+              <SocialLinks />
             </div>
             <div className="flex flex-col gap-8 p-6 desk:h-full">
               <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
@@ -104,15 +99,26 @@ export function Footer() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-8 p-6 desk:h-full desk:border-l-[0.5px] desk:border-hairline">
-              {/* No uppercase column label here (unlike the other two columns) —
-                  the copy names the newsletter itself. text-pretty keeps the
-                  last line from dropping to a single orphaned word. */}
-              <p className="text-pretty text-[14px] font-normal leading-[150%] text-white/60">
-                A newsletter on the design strategies that are working for enterprise
-                companies, written by Daksh. Two emails a month, no spam.
-              </p>
-              <NewsletterForm />
+            <div className="flex flex-col gap-8 p-6 desk:h-full desk:justify-between desk:border-l-[0.5px] desk:border-hairline">
+              <div className="flex flex-col gap-8">
+                {/* No uppercase column label here (unlike the other two columns) —
+                    the copy names the newsletter itself. text-pretty keeps the
+                    last line from dropping to a single orphaned word. */}
+                <p className="text-pretty text-[14px] font-normal leading-[150%] text-white/60">
+                  Design strategies that work for enterprise companies, written by
+                  Daksh. Two emails a month, no spam.
+                </p>
+                <NewsletterForm />
+              </div>
+              {/* Muted so it reads as a legal footnote under the signup rather
+                  than a link in the newsletter copy. Pinned to the bottom on
+                  desktop by justify-between; follows the form on mobile. */}
+              <Link
+                href="/privacy"
+                className="w-fit text-[12px] font-normal text-white/60"
+              >
+                Privacy Policy
+              </Link>
             </div>
           </div>
           <div className="flex w-full items-center border-t-[0.5px] border-hairline p-6">

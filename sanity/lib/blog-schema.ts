@@ -1,3 +1,4 @@
+import {authorProfileUrl} from './author-links'
 import {urlFor} from './image'
 import type {BlogImage, BlogPostData} from './blog-types'
 
@@ -14,6 +15,7 @@ export function blogPostSchema(post: BlogPostData) {
     commaIndex === -1 ? post.author : post.author.slice(0, commaIndex).trim()
   const authorTitle =
     commaIndex === -1 ? undefined : post.author.slice(commaIndex + 1).trim()
+  const authorUrl = authorProfileUrl(post.author)
 
   return {
     '@context': 'https://schema.org',
@@ -30,6 +32,7 @@ export function blogPostSchema(post: BlogPostData) {
       '@type': 'Person',
       name: authorName,
       ...(authorTitle ? {jobTitle: authorTitle} : {}),
+      ...(authorUrl ? {url: authorUrl, sameAs: [authorUrl]} : {}),
     },
     publisher: {
       '@type': 'Organization',

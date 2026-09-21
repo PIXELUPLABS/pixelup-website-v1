@@ -208,7 +208,7 @@
   "Footer": {
     "file": "components/Footer.tsx",
     "category": "layout",
-    "description": "Site footer: four columns (brand/copyright, Quick Links, Case Studies, newsletter blurb + NewsletterForm) over a full-width Union wordmark row.",
+    "description": "Site footer: four columns (brand/tagline + copyright, Quick Links with SocialLinks pinned below, Case Studies, newsletter blurb + NewsletterForm with Privacy Policy pinned below) over a full-width Union wordmark row.",
     "status": "Live. Rendered on app/page.tsx, app/blog/page.tsx, app/explorations/page.tsx, app/call/page.tsx, blog/BlogPostPage.tsx and case-study/CaseStudyPage.tsx.",
     "variants": ["none"],
     "states": {
