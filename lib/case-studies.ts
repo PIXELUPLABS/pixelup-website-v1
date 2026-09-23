@@ -83,7 +83,8 @@ export interface MoreProjectRef {
 export interface CaseMetric {
   value: string;
   label: string;
-  detail: string;
+  /** Optional muted sub-line under the label. */
+  detail?: string;
 }
 
 export type CaseStoryBlock =
@@ -977,6 +978,14 @@ const sully: CaseStudy = {
   publication: { status: "published" },
 };
 
+// Shared by the hero highlights and the Results block so the two never drift.
+const streamlineMetrics: CaseMetric[] = [
+  { value: "40+", label: "Unique page designs" },
+  { value: "200+", label: "Pages on one system" },
+  { value: "100+", label: "Touchpoints" },
+  { value: "F500", label: "Enterprise conversations" },
+];
+
 const streamline: CaseStudy = {
   slug: "streamline",
   title:
@@ -1004,6 +1013,186 @@ const streamline: CaseStudy = {
   hero: {
     media: { type: "image", src: "/media/streamline.png" },
     alt: "Streamline serif wordmark over a collage of legal AI product cards with a woman working at a desk",
+  },
+  story: {
+    company: "Streamline",
+    statusBadge: "Series A · Legal AI",
+    headline:
+      "We repositioned Streamline for enterprise, then scaled the brand across 200 pages.",
+    summary:
+      "Streamline was growing fast. The product was getting better, the company was moving into bigger accounts, and the old brand no longer fit. So we rebuilt it and made sure it could work across 100+ marketing, GTM and product touchpoints.",
+    highlights: streamlineMetrics,
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why the old brand was no longer a good fit.",
+        items: [
+          {
+            label: "Where Streamline was",
+            text: "Streamline had a mature AI platform built for enterprise legal teams. The product was getting better and the company was moving into bigger accounts.",
+          },
+          {
+            label: "What the market looked like",
+            text: "When we looked at the competition, some newer competitors simply looked more modern, more credible and more enterprise-ready.",
+          },
+          {
+            label: "How we found the gap",
+            text: "We went deep into the business: a brand workshop with the team, a study of the competitive landscape, a map of their buyers, and time spent understanding the product.",
+          },
+          {
+            label: "Why it mattered",
+            text: "The gap became obvious. Their brand system was holding them back, and that mattered even more because Streamline was selling to Chief Legal Officers, General Counsels, legal ops teams and legal teams inside large companies.",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-collage",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-5.png" },
+            alt: "Streamline website collage with desktop homepage, mobile mockup, and integration tiles",
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-modern-legal",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-2.png" },
+            alt: "Streamline 'Built for how modern legal teams work' website section on a green textured background",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-one",
+        index: "01",
+        heading: "Our first instinct was to make Streamline much bolder.",
+        problem:
+          "If the old brand was underselling the product, the new one needed to make a much stronger statement. So we explored three creative directions: more colour, more gradients, more conceptual imagery, more personality.",
+        whyItMattered:
+          "After the first round of feedback, we realised we had pushed too far. The new directions felt modern, but they no longer looked like a company built for enterprise legal teams. They were not lawyer-like.",
+        whatWeDid:
+          "The answer was not to make Streamline as different as possible. It was to make them feel modern without losing the trust their buyers expected. The question changed from how bold we could make Streamline to how modern we could make it without losing the maturity the product already had. The brief became: legal-tech serious, modern flavour.",
+        outcome:
+          "That principle guided every decision from there. Royal blue became the primary colour and leaf green the secondary. Neutrals did a lot of the work. Product and illustration supported the copy instead of overpowering it, and gradients and textures stayed but became more subtle.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-brand",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/streamline/img-3.png" },
+              alt: "Streamline document knowledge graph and Slack AI conversation cards on a green glass background",
+            },
+            {
+              media: { type: "image", src: "/media/streamline/img-4.png" },
+              alt: "Streamline mobile integrations screen 'We work where your team already works'",
+            },
+          ],
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-integrations",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-6.png" },
+            alt: "Streamline integrations strip with Ironclad, Microsoft Teams, Slack, Salesforce, Jira, and DocuSign",
+            tone: "white",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-two",
+        index: "02",
+        heading: "Getting the brand right was only half the job.",
+        problem:
+          "Finding the right visual direction solved the perception problem. The next challenge was making it work across the entire website and every marketing touchpoint.",
+        whyItMattered:
+          "Streamline did not need a five-page marketing site. The project grew to 40+ unique page designs, with the system extending across 200+ pages. A page written for a General Counsel had to tell a completely different story from an AI Contract Review page.",
+        whatWeDid:
+          "We turned the brand into a design system: reusable components, page structures, product templates, design rules and an illustration system that could stretch across the whole website. The illustrations had to support dozens of different ideas without making every page feel disconnected.",
+        outcome:
+          "By this point we were not just designing a new brand. We were building a system Streamline could keep using as the company grew.",
+      },
+      {
+        kind: "gallery",
+        id: "gallery-system",
+        heading: "One system, 200+ pages.",
+        intro:
+          "Product, feature, industry, team and resource pages all run on the same components, so a General Counsel page and an AI Contract Review page can tell different stories without looking like different companies.",
+        media: [
+          {
+            kind: "full",
+            slot: {
+              media: { type: "image", src: "/media/streamline/img-7.png" },
+              alt: "Streamline 'Built for how modern legal teams work' team page on a tablet held in hands",
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: { type: "image", src: "/media/streamline/img-8.png" },
+              alt: "Streamline resources section 'Insight for legal operations leaders' on a green background",
+            },
+          },
+        ],
+      },
+      {
+        kind: "results",
+        id: "results",
+        heading: "Results",
+        metrics: streamlineMetrics,
+      },
+      {
+        kind: "media",
+        id: "snapshot-homepage",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-1.png" },
+            alt: "Streamline homepage hero 'In-house legal runs on Streamline' on a tablet held in hands",
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Streamline ended up.",
+        paragraphs: [
+          "Streamline had much more than a new homepage. They had a brand that finally matched the maturity of the product behind it, a design system that could extend across all the touchpoints, and a website built around the perception they needed with enterprise legal buyers.",
+          "After launch, the team also reported positive customer feedback and stronger enterprise conversations, including with Fortune 500 companies. You can see the live site at streamline.ai.",
+          "If you recognised Streamline's problem in your own company, we should talk. We work with AI and B2B SaaS teams on brand, web and product design, helping them move upmarket.",
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-laptop",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-9.png" },
+            alt: "Streamline resources page on a laptop resting on a stone slab",
+          },
+        },
+      },
+    ],
+    faqHeading,
+    faqs: pixelupFaq,
+  },
+  endCta: {
+    label: "Book a call",
+    href: links.discoveryCall,
   },
   sections: [
     {

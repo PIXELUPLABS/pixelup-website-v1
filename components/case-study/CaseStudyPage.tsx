@@ -1,11 +1,9 @@
-import Image from "next/image";
 import {
   faqHeading,
   pixelupFaq,
   pixelupFaqSchema,
   type CaseStudy,
 } from "@/lib/case-studies";
-import { ctaButtonBase, ctaButtonPadding } from "../CtaButtons";
 import { Footer } from "../Footer";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
@@ -13,6 +11,7 @@ import { CaseSection } from "./CaseSection";
 import { CaseSidebar } from "./CaseSidebar";
 import { CaseStudyStory } from "./CaseStudyStory";
 import { ClientInfo } from "./ClientInfo";
+import { EndCta } from "./EndCta";
 import { MoreProjects } from "./MoreProjects";
 import { SectionShell } from "./SectionShell";
 
@@ -74,25 +73,7 @@ function LegacyCaseStudy({ study }: { study: CaseStudy }) {
             </>
           )}
 
-          {study.endCta && (
-            <div className="border-t-[0.5px] border-hairline p-6 desk:hidden">
-              <a
-                href={study.endCta.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`${ctaButtonBase} ${ctaButtonPadding} w-full bg-accent text-white hover:brightness-110`}
-              >
-                <span>{study.endCta.label}</span>
-                <Image
-                  src="/media/Container.svg"
-                  alt=""
-                  width={14}
-                  height={14}
-                  aria-hidden="true"
-                />
-              </a>
-            </div>
-          )}
+          {study.endCta && <EndCta endCta={study.endCta} />}
 
           <SectionShell heading={faqHeading} topRule>
             <CaseFaq items={pixelupFaq} />

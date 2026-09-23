@@ -8,18 +8,24 @@ import type {
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { ClientInfo } from "./ClientInfo";
+import { EndCta } from "./EndCta";
 import { MoreProjects } from "./MoreProjects";
 import { SectionShell } from "./SectionShell";
 
 function Metrics({
   metrics,
   usesSharedCenterRule = false,
+  bottomRule = true,
 }: {
   metrics: CaseMetric[];
   usesSharedCenterRule?: boolean;
+  /** Off when the next section's top rule would double it. */
+  bottomRule?: boolean;
 }) {
   return (
-    <div className="grid grid-cols-2 border-y-[0.5px] border-hairline desk:grid-cols-4">
+    <div
+      className={`grid grid-cols-2 border-t-[0.5px] border-hairline desk:grid-cols-4 ${bottomRule ? "border-b-[0.5px]" : ""}`}
+    >
       {metrics.map((metric, index) => {
         const mobileBorders = index % 2 === 1 ? "border-l-[0.5px]" : "";
         const mobileRows = index > 1 ? "border-t-[0.5px]" : "";
@@ -40,9 +46,11 @@ function Metrics({
               <p className="text-[14px] leading-[1.3] text-white">
                 {metric.label}
               </p>
-              <p className="text-[12px] leading-[1.3] text-white/60">
-                {metric.detail}
-              </p>
+              {metric.detail && (
+                <p className="text-[12px] leading-[1.3] text-white/60">
+                  {metric.detail}
+                </p>
+              )}
             </div>
           </div>
         );
@@ -96,7 +104,7 @@ function ContextBlock({
   block: Extract<CaseStoryBlock, { kind: "context" }>;
 }) {
   return (
-    <SectionShell heading={block.heading} topRule>
+    <SectionShell heading={block.heading} topRule contentInset="wide">
       <div className="flex flex-col divide-y-[0.5px] divide-hairline">
         {block.items.map((item) => (
           <div
@@ -173,7 +181,7 @@ function GalleryBlock({
 }) {
   return (
     <>
-      <SectionShell heading={block.heading} topRule>
+      <SectionShell heading={block.heading} topRule contentInset="wide">
         <p className="text-[16px] leading-[1.5] text-white">{block.intro}</p>
       </SectionShell>
       {block.media.map((media, index) => (
@@ -185,17 +193,28 @@ function GalleryBlock({
 
 function ResultsBlock({
   block,
+  flushNext,
 }: {
   block: Extract<CaseStoryBlock, { kind: "results" }>;
+  /** The next block opens with its own hairline: cancel the block gap and let
+   * that rule close the metrics, so the dividers run into it instead of
+   * stopping short (or doubling it with a second bottom border). */
+  flushNext: boolean;
 }) {
   return (
-    <section className="border-t-[0.5px] border-hairline">
+    <section
+      className={`border-t-[0.5px] border-hairline ${flushNext ? "-mb-6" : ""}`}
+    >
       <div className="p-6">
         <h2 className="text-[24px] font-medium leading-tight tracking-display text-white desk:text-[48px]">
           {block.heading}
         </h2>
       </div>
-      <Metrics metrics={block.metrics} usesSharedCenterRule />
+      <Metrics
+        metrics={block.metrics}
+        usesSharedCenterRule
+        bottomRule={!flushNext}
+      />
     </section>
   );
 }
@@ -263,9 +282,11 @@ function TestimonialBlock({
 function StoryBlock({
   block,
   challengeTotal,
+  nextOpensWithRule,
 }: {
   block: CaseStoryBlock;
   challengeTotal: number;
+  nextOpensWithRule: boolean;
 }) {
   switch (block.kind) {
     case "context":
@@ -277,12 +298,12 @@ function StoryBlock({
     case "gallery":
       return <GalleryBlock block={block} />;
     case "results":
-      return <ResultsBlock block={block} />;
+      return <ResultsBlock block={block} flushNext={nextOpensWithRule} />;
     case "testimonial":
       return <TestimonialBlock block={block} />;
     case "afterLaunch":
       return (
-        <SectionShell heading={block.heading} topRule>
+        <SectionShell heading={block.heading} topRule contentInset="wide">
           {block.paragraphs.map((paragraph) => (
             <p key={paragraph} className="text-[16px] leading-[1.5] text-white">
               {paragraph}
@@ -311,15 +332,27 @@ export function CaseStudyStory({ study }: { study: CaseStudy }) {
           className="absolute inset-y-0 left-1/2 hidden border-l-[0.5px] border-hairline desk:block"
         />
         <div className="relative flex flex-col gap-6">
-          {story.blocks.map((block) => (
-            <StoryBlock
-              key={block.id}
-              block={block}
-              challengeTotal={challengeTotal}
-            />
-          ))}
+          {story.blocks.map((block, index) => {
+            // Every block except media opens with a full-width hairline, and
+            // so does the FAQ that follows the last block.
+            const next = story.blocks[index + 1];
+            return (
+              <StoryBlock
+                key={block.id}
+                block={block}
+                challengeTotal={challengeTotal}
+                nextOpensWithRule={next?.kind !== "media"}
+              />
+            );
+          })}
 
-          <SectionShell heading={story.faqHeading} topRule>
+          {study.endCta && <EndCta endCta={study.endCta} />}
+
+          <SectionShell
+            heading={story.faqHeading}
+            topRule
+            contentInset="wide"
+          >
             <CaseFaq items={story.faqs} />
           </SectionShell>
 
