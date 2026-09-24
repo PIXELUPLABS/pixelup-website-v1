@@ -45,6 +45,22 @@ const nextConfig: NextConfig = {
         destination: "/",
         statusCode: 301,
       },
+      // Old or mistyped blog slugs that still get search impressions.
+      {
+        source: "/blog/best-b2b-ai-and-tech-startup-branding-agencies",
+        destination: "/blog/best-branding-agencies-b2b-ai-tech-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-design-adapters-for-ai-startups",
+        destination: "/blog/best-design-agencies-for-ai-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-design-agencies-ai-startups",
+        destination: "/blog/best-design-agencies-for-ai-startups",
+        statusCode: 301,
+      },
     ];
   },
 };
