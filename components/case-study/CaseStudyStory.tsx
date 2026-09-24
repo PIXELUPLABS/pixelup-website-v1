@@ -84,6 +84,7 @@ function StoryHero({
 
       <ClientInfo
         info={study.info}
+        publication={study.publication}
         className="fade-up [animation-delay:300ms] desk:hidden"
       />
 

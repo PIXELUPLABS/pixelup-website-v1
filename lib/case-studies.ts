@@ -189,12 +189,22 @@ export interface CaseStudy {
   moreProjects: MoreProjectRef[];
   publication: {
     status: "draft" | "published";
+    /** First day this study was public on the site (YYYY-MM-DD). */
+    publishedDate: string;
+    /**
+     * Last day this page's visible content changed (YYYY-MM-DD). Drives the
+     * "Updated" row, the Article JSON-LD `dateModified` and the sitemap
+     * `<lastmod>`. Bump it in the same commit as any content change to this
+     * study, including the shared FAQ when this page's layout renders it.
+     * Don't bump it for CSS-only changes (see lib/site-dates.ts).
+     */
+    updatedDate: string;
     blockers?: string[];
   };
 }
 
 /**
- * Shared FAQ shown on every case study page: about PixelUp itself, written
+ * Shared FAQ shown on every case study page: about PIXELUP LABS itself, written
  * to resolve the objections prospects most often bring to a first call.
  */
 export const faqHeading = "Frequently asked questions";
@@ -249,6 +259,45 @@ export const pixelupFaqSchema = {
     },
   })),
 };
+
+const BASE_URL = "https://www.pixeluplabs.com";
+
+/**
+ * Article structured data for one case study page, carrying the same
+ * `datePublished` / `dateModified` the page shows in its Published / Updated
+ * rows. Same shape as the blog's BlogPosting schema (sanity/lib/blog-schema.ts),
+ * with the studio as author since case studies aren't bylined.
+ */
+export function caseStudySchema(study: CaseStudy) {
+  const url = `${BASE_URL}/case-studies/${study.slug}`;
+  const organization = {
+    "@type": "Organization",
+    name: "PIXELUP LABS",
+    url: `${BASE_URL}/`,
+    logo: { "@type": "ImageObject", url: `${BASE_URL}/media/nav-logo.svg` },
+  };
+  const heroMedia = study.hero.media;
+  const image =
+    heroMedia?.type === "image"
+      ? `${BASE_URL}${heroMedia.src}`
+      : heroMedia?.type === "video" && heroMedia.poster
+        ? `${BASE_URL}${heroMedia.poster}`
+        : undefined;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${url}#article`,
+    mainEntityOfPage: url,
+    headline: study.title,
+    description: study.metaDescription,
+    ...(image ? { image } : {}),
+    datePublished: study.publication.publishedDate,
+    dateModified: study.publication.updatedDate,
+    author: organization,
+    publisher: organization,
+  };
+}
 
 const greptile: CaseStudy = {
   slug: "greptile",
@@ -653,7 +702,11 @@ const greptile: CaseStudy = {
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },
     { slug: "sully", tags: "Website & Motion Design" },
   ],
-  publication: { status: "published" },
+  publication: {
+    status: "published",
+    publishedDate: "2026-07-03",
+    updatedDate: "2026-09-15",
+  },
 };
 
 const sainapse: CaseStudy = {
@@ -820,7 +873,11 @@ const sainapse: CaseStudy = {
     { slug: "sully", tags: "Website & Motion Design" },
     { slug: "greptile", tags: "Branding & Product Design" },
   ],
-  publication: { status: "published" },
+  publication: {
+    status: "published",
+    publishedDate: "2026-07-03",
+    updatedDate: "2026-09-15",
+  },
 };
 
 const sully: CaseStudy = {
@@ -975,7 +1032,11 @@ const sully: CaseStudy = {
     { slug: "greptile", tags: "Branding & Product Design" },
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },
   ],
-  publication: { status: "published" },
+  publication: {
+    status: "published",
+    publishedDate: "2026-07-03",
+    updatedDate: "2026-09-15",
+  },
 };
 
 // Shared by the hero highlights and the Results block so the two never drift.
@@ -1322,7 +1383,11 @@ const streamline: CaseStudy = {
     { slug: "greptile", tags: "Branding & Product Design" },
     { slug: "sully", tags: "Website & Motion Design" },
   ],
-  publication: { status: "published" },
+  publication: {
+    status: "published",
+    publishedDate: "2026-08-07",
+    updatedDate: "2026-09-23",
+  },
 };
 
 const henryLabs: CaseStudy = {
@@ -1545,6 +1610,8 @@ const henryLabs: CaseStudy = {
   ],
   publication: {
     status: "published",
+    publishedDate: "2026-08-17",
+    updatedDate: "2026-09-15",
     blockers: [
       'Funding reads "Private": confirm a figure directly with Henry Labs before publishing one.',
       "Add two approved Slack reactions with names and roles.",

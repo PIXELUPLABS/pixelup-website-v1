@@ -1,4 +1,5 @@
 import {
+  caseStudySchema,
   faqHeading,
   pixelupFaq,
   pixelupFaqSchema,
@@ -26,6 +27,7 @@ function LegacyCaseStudy({ study }: { study: CaseStudy }) {
         </div>
         <ClientInfo
           info={study.info}
+          publication={study.publication}
           className="fade-up [animation-delay:200ms] desk:hidden"
         />
         <div className="fade-up [animation-delay:300ms]">
@@ -92,6 +94,10 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
 
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema(study)) }}
+      />
       {!useStoryLayout && (
         <script
           type="application/ld+json"

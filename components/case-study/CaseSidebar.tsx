@@ -39,7 +39,7 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
                 icon="arrow"
               />
             </div>
-            <ClientInfo info={study.info} />
+            <ClientInfo info={study.info} publication={study.publication} />
             <div className="flex flex-col gap-3 px-5 pt-3">
               {description.map((paragraph) => (
                 <p

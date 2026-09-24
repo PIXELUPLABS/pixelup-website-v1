@@ -83,7 +83,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       .filter((study) => study.publication.status === "published")
       .map((study) => ({
         url: `${BASE_URL}/case-studies/${study.slug}`,
-        lastModified: siteUpdated.caseStudies,
+        lastModified: study.publication.updatedDate,
         changeFrequency: "monthly" as const,
         priority: 0.9,
       })),

@@ -361,12 +361,14 @@
   "ClientInfo": {
     "file": "components/case-study/ClientInfo.tsx",
     "category": "content",
-    "description": "Client / Year / Involvement / optional Funding / Link rows with hairline dividers. Lives in CaseSidebar on desktop, under the title on mobile. One or more external links may share the final row.",
+    "description": "Client / Year / Involvement / optional Funding / Link rows, then Published / Updated date rows, with hairline dividers. Lives in CaseSidebar on desktop, under the title on mobile. One or more external links may share the Link row. Dates come from the study's `publication` and match its Article JSON-LD.",
     "variants": ["funding row renders only when supplied", "single link uses the label Link; multiple links use Links and stack vertically"],
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline"],
     "when_to_use": "Case study pages only.",
-    "do_not": []
+    "do_not": [
+      "Don't edit a study's content without bumping publication.updatedDate in the same commit."
+    ]
   },
 
   "MoreProjects": {
