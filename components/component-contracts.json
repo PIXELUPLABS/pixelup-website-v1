@@ -267,13 +267,14 @@
     "file": "components/blog/BlogImage.tsx",
     "category": "content",
     "description": "Shared Next Image adapter for the temporary local blog-image fallback and Sanity image assets, including hotspot crops and LQIP placeholders.",
-    "variants": ["fill for fixed card frames", "intrinsic width and height for article heroes"],
+    "variants": ["fill for fixed card frames", "intrinsic width and height for article heroes", "in-article image: the blogBody `articleImage` block, rendered by BlogPostPage as a figure at the source's own aspect ratio (max 1600px wide) with a 0.5px hairline border and an optional caption + source-site link"],
     "states": ["legacy local source", "Sanity CDN source", "Sanity blur placeholder when LQIP metadata exists"],
-    "tokens_used": [],
-    "when_to_use": "For blog index cards, article heroes, and related-article cards. It keeps image behavior identical while the CMS source is switched.",
+    "tokens_used": ["color.neutral.hairline (in-article image border)", "color.neutral.label-grey (in-article caption)"],
+    "when_to_use": "For blog index cards, article heroes, related-article cards, and images inside an article body (the `articleImage` block). It keeps image behavior identical while the CMS source is switched.",
     "do_not": [
       "Don't build Sanity CDN URLs directly in page components; pass the normalized BlogImage value here.",
-      "Don't omit the sizes prop when using fill, because Next Image needs it for correct responsive selection."
+      "Don't omit the sizes prop when using fill, because Next Image needs it for correct responsive selection.",
+      "Don't publish an in-article screenshot of a third-party site without its alt text, caption, `sourceUrl` and `capturedOn` date."
     ]
   },
 

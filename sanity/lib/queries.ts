@@ -49,6 +49,24 @@ export const BLOG_POST_QUERY = defineQuery(/* groq */ `
         _type,
         headers,
         rows[]{_key, _type, cells}
+      },
+      _type == "articleImage" => {
+        _key,
+        _type,
+        alt,
+        caption,
+        sourceUrl,
+        capturedOn,
+        crop,
+        hotspot,
+        asset->{
+          _id,
+          url,
+          metadata{
+            lqip,
+            dimensions{width, height}
+          }
+        }
       }
     }
   }

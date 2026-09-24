@@ -4,8 +4,22 @@ import { Footer } from "@/components/Footer";
 import { blogPostSchema } from "@/sanity/lib/blog-schema";
 import type { BlogPostData } from "@/sanity/lib/blog-types";
 import { formatBlogDate } from "@/sanity/lib/blog-utils";
+import type { SanityImageSource } from "@sanity/image-url";
 import { BlogImage } from "./BlogImage";
 import { BlogPostSidebar } from "./BlogPostSidebar";
+
+/** A `blogBody` image block, as projected by BLOG_POST_QUERY. */
+type ArticleImageValue = {
+  alt?: string;
+  caption?: string;
+  sourceUrl?: string;
+  capturedOn?: string;
+  asset?: {
+    _id?: string;
+    url?: string;
+    metadata?: { lqip?: string; dimensions?: { width?: number; height?: number } };
+  };
+};
 
 /** One "Related Articles" card — date, image, category tag, heading,
     description, "Read Article". Links to the related post. */
@@ -132,6 +146,55 @@ const portableTextComponents: PortableTextComponents = {
             </tbody>
           </table>
         </div>
+      );
+    },
+    articleImage: ({ value }) => {
+      const image = value as ArticleImageValue;
+      const dimensions = image.asset?.metadata?.dimensions;
+      if (!image.asset?._id || !dimensions?.width || !dimensions?.height) return null;
+      // Keep the source's own aspect ratio (screenshots aren't 2084x960 like
+      // the header images), capped at 1600px wide.
+      const width = Math.min(1600, dimensions.width);
+      const height = Math.round((width * dimensions.height) / dimensions.width);
+      let sourceLabel = "";
+      try {
+        sourceLabel = image.sourceUrl ? new URL(image.sourceUrl).hostname.replace(/^www\./, "") : "";
+      } catch {
+        sourceLabel = "";
+      }
+      return (
+        <figure className="flex w-full flex-col gap-2">
+          <BlogImage
+            image={{
+              kind: "sanity",
+              source: image as SanityImageSource,
+              alt: image.alt || "",
+              lqip: image.asset.metadata?.lqip,
+              width: dimensions.width,
+              height: dimensions.height,
+            }}
+            width={width}
+            height={height}
+            sizes="(min-width: 1200px) 70vw, 100vw"
+            className="h-auto w-full border-[0.5px] border-hairline"
+          />
+          {image.caption || sourceLabel ? (
+            <figcaption className="text-[12px] leading-[1.5] text-label-grey">
+              {image.caption}
+              {image.caption && sourceLabel ? " · " : null}
+              {sourceLabel ? (
+                <a
+                  href={image.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-white/70"
+                >
+                  {sourceLabel}
+                </a>
+              ) : null}
+            </figcaption>
+          ) : null}
+        </figure>
       );
     },
   },

@@ -20,7 +20,8 @@ function collectStrings(value: unknown): string[] {
 
 /** Rough reading time from Portable Text content at 200wpm. */
 export function estimateReadTime(body: PortableTextBlock[]): string {
-  const wordCount = collectStrings(body)
+  // Image alt text and captions aren't reading time.
+  const wordCount = collectStrings(body.filter((block) => block._type !== 'articleImage'))
     .join(' ')
     .split(/\s+/)
     .filter(Boolean).length
