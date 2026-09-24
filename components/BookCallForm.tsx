@@ -83,10 +83,9 @@ export function BookCallForm({
       onSubmit={handleSubmit}
       onFocus={warmCal}
       onPointerEnter={warmCal}
-      // Gap rather than a joined field + button: butted together, the two 2px
-      // radii notched the seam and the focus border wrapped into the button.
-      // 10px matches the gap between the stacked CTAs above.
-      className="flex gap-2.5"
+      // One joined control: only the outer corners are rounded, so the seam is
+      // a straight edge and the focus border doesn't curve into the button.
+      className="flex"
     >
       {/* 16px on mobile so iOS Safari doesn't zoom the page on focus. */}
       <input
@@ -97,11 +96,13 @@ export function BookCallForm({
         aria-label="Your work email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="min-w-0 flex-1 rounded-[2px] border-[0.5px] border-transparent bg-button-dark px-3 text-[16px] text-white placeholder:text-white/40 focus:border-accent focus:outline-none desk:text-[14px]"
+        className="min-w-0 flex-1 rounded-l-[2px] border-[0.5px] border-transparent bg-button-dark px-3 text-[16px] text-white placeholder:text-white/40 focus:border-accent focus:outline-none desk:text-[14px]"
       />
+      {/* rounded-l-none reliably beats the base's rounded-[2px]: Tailwind v4
+          emits the longhand corner utilities after the border-radius shorthand. */}
       <button
         type="submit"
-        className={`${ctaButtonBase} ${ctaButtonPadding} shrink-0 cursor-pointer gap-3 bg-accent text-white hover:brightness-110`}
+        className={`${ctaButtonBase} ${ctaButtonPadding} shrink-0 cursor-pointer gap-3 rounded-l-none bg-accent text-white hover:brightness-110`}
       >
         <span>{label}</span>
         <Image
