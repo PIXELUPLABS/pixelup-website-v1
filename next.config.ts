@@ -61,6 +61,26 @@ const nextConfig: NextConfig = {
         destination: "/blog/best-design-agencies-for-ai-startups",
         statusCode: 301,
       },
+      {
+        source: "/blog/best-b2b-ai-tech-startups-2026",
+        destination: "/blog/best-branding-agencies-b2b-ai-tech-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-branding-ai-tech-startups",
+        destination: "/blog/best-branding-agencies-b2b-ai-tech-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-design-agencies-b2b-ai-tech-startups",
+        destination: "/blog/best-branding-agencies-b2b-ai-tech-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/pixeluplabs",
+        destination: "/",
+        statusCode: 301,
+      },
     ];
   },
 };
