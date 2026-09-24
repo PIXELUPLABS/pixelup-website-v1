@@ -122,7 +122,7 @@ Unlike a from-scratch brand, this codebase has real, working motion already — 
 Full contracts (variants/states/tokens/do-nots) live in `components/component-contracts.json` — this is a condensed index. **Check that file before building anything new; if what you need isn't there, it's a component gap, not license to invent an ad hoc one-off.**
 
 - **LeftNav / CaseSidebar** — the two "hero sidebar" patterns (generic hero copy vs. case-study structured data). Never cross-use them.
-- **CtaButtons** — the paired "Chat on Telegram" / "Start Your Conversation" buttons, reused in three places (sidebar, case-study sidebar, footer).
+- **CtaButtons** — the stacked "Chat on Telegram" button and the Book a call form (email field + "Book a call" submit that opens the Cal.com popup), reused in the homepage, blog and case-study sidebars.
 - **ProjectCard / MoreProjects** — homepage and end-of-case-study project cards, square corners, hover-scale media.
 - **SectionShell + CaseSection + CaseFaq** — the case-study Q&A pattern (heading left half / content right half + hairline rule). `CaseFaq`'s accordion + its `FAQPage` JSON-LD schema are shared between case studies and `/blog`.
 - **ArticleFilters / ExplorationGallery** — the two interactive, page-specific pill/toggle + gallery patterns (`/blog`, `/explorations`).

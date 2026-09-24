@@ -123,21 +123,44 @@
   "CtaButtons": {
     "file": "components/CtaButtons.tsx",
     "category": "interactive",
-    "description": "The paired 'Chat on Telegram' + 'Start a Conversation' buttons.",
+    "description": "The stacked 'Chat on Telegram' button and the BookCallForm (email field + 'Book a call' submit).",
     "variants": {
       "telegramSolidBlack": "boolean prop. false (default) = translucent color.neutral.button-dark with a hover lighten (used in LeftNav/CaseSidebar). true = solid black, no hover lighten (used in Footer)."
     },
     "states": {
       "telegram:default": "bg-button-dark",
       "telegram:hover": "bg-white/12 (or stays black if telegramSolidBlack)",
-      "start-conversation:default": "bg-accent",
-      "start-conversation:hover": "brightness-110"
+      "book-call": "see BookCallForm"
     },
     "tokens_used": ["color.brand.accent", "color.neutral.button-dark", "radius.sm"],
-    "when_to_use": "Anywhere the site's two primary CTAs need to appear together (currently: LeftNav, CaseSidebar, Footer).",
+    "when_to_use": "Anywhere the site's two primary CTAs need to appear together (currently: LeftNav, CaseSidebar, BlogSidebar, BlogPostSidebar).",
     "do_not": [
-      "Don't change 'Start a Conversation' back into an internal <Link> to /call — it deliberately opens links.discoveryCall (an external Cal.com URL) in a new tab now.",
-      "Don't add a third button here — it's built for exactly two, laid out with flex-1 each."
+      "Don't turn 'Book a call' back into a plain link — it is the BookCallForm, which opens the Cal.com popup with the visitor's email prefilled.",
+      "Don't add a third CTA here — it's built for exactly two, stacked full width.",
+      "Import ctaButtonBase/ctaButtonPadding from components/cta-button-styles.ts in new code; CtaButtons only re-exports them for older importers."
+    ]
+  },
+
+  "BookCallForm": {
+    "file": "components/BookCallForm.tsx",
+    "category": "interactive",
+    "description": "One-row form: email field (color.neutral.button-dark fill) with the accent 'Book a call' submit on its right. Submitting opens the Cal.com booking popup (@calcom/embed-react modal, namespace 'discovery-popup') with the email prefilled.",
+    "variants": {
+      "label": "Button text. Defaults to 'BOOK A CALL' (sidebar); EndCta passes the case study's endCta.label.",
+      "bookingUrl": "cal.com booking URL. Defaults to links.discoveryCall; its path becomes the embed calLink."
+    },
+    "states": {
+      "input:focus": "0.5px color.brand.accent border",
+      "empty-submit": "Opens the popup without a prefill (email is optional).",
+      "invalid-email": "Blocked by the browser's type=\"email\" validation; no popup.",
+      "embed-blocked": "If Cal's embed.js fails to load, opens the hosted booking page in a new tab with ?email= instead.",
+      "submissions": "A non-empty email is also POSTed (fire-and-forget) to /api/book-call, which appends it with the page path to the 'Book a call' tab of the Website Leads Google Sheet (lib/leads-sheet.ts → scripts/apps-script/WebsiteLeads.gs). The popup never waits on it."
+    },
+    "tokens_used": ["color.brand.accent", "color.neutral.button-dark", "color.neutral.white", "radius.sm"],
+    "when_to_use": "Every 'Book a call' CTA: inside CtaButtons and the mobile case-study EndCta.",
+    "do_not": [
+      "Don't reuse the 'discovery' namespace — that belongs to the inline CalEmbed on /call.",
+      "Don't load the Cal embed on page load; it warms on the form's first focus or pointer enter."
     ]
   },
 
