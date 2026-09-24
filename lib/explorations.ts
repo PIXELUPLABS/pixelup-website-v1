@@ -5,6 +5,14 @@ export type ExplorationBlock =
   | { kind: "pair"; srcs: [string, string] };
 
 export const explorationBlocks: ExplorationBlock[] = [
+  { kind: "pair", srcs: ["/media/explorations/img-64.webp", "/media/explorations/img-65.webp"] },
+  { kind: "full", src: "/media/explorations/img-63.webp" },
+  { kind: "full", src: "/media/explorations/img-69.webp" },
+  { kind: "pair", srcs: ["/media/explorations/img-66.webp", "/media/explorations/img-67.webp"] },
+  { kind: "full", src: "/media/explorations/img-71.webp" },
+  { kind: "full", src: "/media/explorations/img-72.webp" },
+  { kind: "pair", srcs: ["/media/explorations/img-68.webp", "/media/explorations/img-70.webp"] },
+  { kind: "full", src: "/media/explorations/img-73.webp" },
   { kind: "pair", srcs: ["/media/explorations/img-48.webp", "/media/explorations/img-49.webp"] },
   { kind: "full", src: "/media/explorations/img-37.webp" },
   { kind: "full", src: "/media/explorations/img-38.webp" },
