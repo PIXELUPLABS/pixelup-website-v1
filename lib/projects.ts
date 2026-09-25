@@ -154,7 +154,7 @@ export const projects: Project[] = [
     cardImage: "/media/sully/card.png",
     tagline: "AI clinical agents for hospitals and health systems",
     // Arjun's list says Brand + Web; the case study's `involvement` says
-    // Website / Product Pages / Motion / SEO with no branding. Following the list.
+    // Website / Product Pages / Motion / Framer with no branding. Following the list.
     services: ["Branding", "Website Design"],
     year: "2025",
   },

@@ -24,7 +24,7 @@ export const siteUpdated = {
   privacy: "2026-08-31",
   /** The /case-studies index only. Each study carries its own published /
       updated dates on `publication` in lib/case-studies.ts. */
-  caseStudies: "2026-09-08",
+  caseStudies: "2026-09-25",
 } as const;
 
 /** First public commit of the site — used as `datePublished` on the homepage. */

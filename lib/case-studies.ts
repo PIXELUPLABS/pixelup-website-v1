@@ -193,8 +193,8 @@ export interface CaseStudy {
     publishedDate: string;
     /**
      * Last day this page's visible content changed (YYYY-MM-DD). Drives the
-     * "Updated" row, the Article JSON-LD `dateModified` and the sitemap
-     * `<lastmod>`. Bump it in the same commit as any content change to this
+     * Article JSON-LD `dateModified` and the sitemap `<lastmod>` (not shown
+     * on the page). Bump it in the same commit as any content change to this
      * study, including the shared FAQ when this page's layout renders it.
      * Don't bump it for CSS-only changes (see lib/site-dates.ts).
      */
@@ -264,8 +264,8 @@ const BASE_URL = "https://www.pixeluplabs.com";
 
 /**
  * Article structured data for one case study page, carrying the same
- * `datePublished` / `dateModified` the page shows in its Published / Updated
- * rows. Same shape as the blog's BlogPosting schema (sanity/lib/blog-schema.ts),
+ * `datePublished` / `dateModified` from its `publication`. The dates stay in
+ * the schema even though the page no longer shows them. Same shape as the blog's BlogPosting schema (sanity/lib/blog-schema.ts),
  * with the studio as author since case studies aren't bylined.
  */
 export function caseStudySchema(study: CaseStudy) {
@@ -718,7 +718,7 @@ const sainapse: CaseStudy = {
   info: {
     client: "Sainapse (AI Customer Support Platform)",
     year: "2025",
-    involvement: ["Brand Identity", "Website Design"],
+    involvement: ["Brand Identity", "Website Design", "Webflow Development"],
     links: [{ label: "sainapse.ai", href: "https://sainapse-staging.webflow.io/" }],
   },
   description: [
@@ -876,7 +876,7 @@ const sainapse: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-09-15",
+    updatedDate: "2026-09-25",
   },
 };
 
@@ -889,14 +889,19 @@ const sully: CaseStudy = {
   info: {
     client: "Sully (AI Healthcare Platform)",
     year: "2025",
-    involvement: ["Website Design", "Product Pages", "Motion Design", "SEO"],
+    involvement: [
+      "Website Design",
+      "Product Pages",
+      "Motion Design",
+      "Framer Development",
+    ],
     links: [{ label: "sully.ai", href: "https://sully.ai" }],
   },
   description: [
-    "Sully was scaling fast, $0.5M to $5M ARR in 9 months, but their website wasn't keeping up.",
-    "Enterprise buyers were landing on an outdated, inconsistent site that didn't match the product they were being sold. For a company closing $15M+ contracts with hospital executives, the website had become a liability.",
-    "We treated this as an enterprise credibility problem. Every page, motion sequence, and explainer was designed to help hospital executives understand complex AI workflows before the demo even started.",
-    "The impact was immediate. One explainer page directly contributed to closing a major enterprise contract, and within 11 months Sully scaled 26x, raising $32M+ at a $150M valuation.",
+    "Sully grew from $0.5M to $5M ARR in 9 months, but their website wasn't keeping up.",
+    "Enterprise buyers found an outdated site that didn't match the product, a liability when closing $15M+ hospital contracts.",
+    "Every page, motion sequence, and explainer was built to help hospital executives grasp complex AI workflows before the demo.",
+    "One explainer page helped close a major enterprise contract. Within 11 months, Sully scaled 26x and raised $32M+ at a $150M valuation.",
   ],
   hero: {
     media: { type: "image", src: "/media/sully.jpg" },
@@ -918,10 +923,6 @@ const sully: CaseStudy = {
         {
           title: "Consistent brand system",
           sub: "Unified design language across all touchpoints",
-        },
-        {
-          title: "Strategic SEO",
-          sub: "Fixed structure and performance to support enterprise discovery",
         },
       ],
       media: [
@@ -1035,7 +1036,7 @@ const sully: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-09-15",
+    updatedDate: "2026-09-25",
   },
 };
 
@@ -1062,6 +1063,7 @@ const streamline: CaseStudy = {
       "Positioning",
       "Website Design",
       "Design System",
+      "Webflow Development",
     ],
     links: [{ label: "streamline.ai", href: "https://www.streamline.ai/" }],
   },
@@ -1386,7 +1388,7 @@ const streamline: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-07",
-    updatedDate: "2026-09-23",
+    updatedDate: "2026-09-25",
   },
 };
 
@@ -1404,6 +1406,7 @@ const henryLabs: CaseStudy = {
       "Brand identity",
       "Positioning",
       "Website design and build",
+      "Webflow development",
       "Product design",
       "Design system",
       "Motion",
@@ -1611,7 +1614,7 @@ const henryLabs: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-17",
-    updatedDate: "2026-09-15",
+    updatedDate: "2026-09-25",
     blockers: [
       'Funding reads "Private": confirm a figure directly with Henry Labs before publishing one.',
       "Add two approved Slack reactions with names and roles.",

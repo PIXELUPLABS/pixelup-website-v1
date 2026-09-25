@@ -1,5 +1,4 @@
 import type { CaseStudy } from "@/lib/case-studies";
-import { formatBlogDate } from "@/sanity/lib/blog-utils";
 
 function ArrowOutwardIcon() {
   return (
@@ -31,18 +30,14 @@ function InfoRow({
 }
 
 /**
- * Client / Year / Involvement / Links rows with hairline dividers, then the
- * page's Published / Updated dates (same format as the blog's "Created on /
- * Updated on" rows, and the same dates as the Article JSON-LD).
+ * Client / Year / Involvement / Links rows with hairline dividers.
  * Lives in the sidebar on desktop and under the title on mobile.
  */
 export function ClientInfo({
   info,
-  publication,
   className = "",
 }: {
   info: CaseStudy["info"];
-  publication: CaseStudy["publication"];
   className?: string;
 }) {
   return (
@@ -77,16 +72,6 @@ export function ClientInfo({
             </a>
           ))}
         </div>
-      </InfoRow>
-      <InfoRow label="Published">
-        <time dateTime={publication.publishedDate}>
-          {formatBlogDate(publication.publishedDate)}
-        </time>
-      </InfoRow>
-      <InfoRow label="Updated">
-        <time dateTime={publication.updatedDate}>
-          {formatBlogDate(publication.updatedDate)}
-        </time>
       </InfoRow>
     </div>
   );

@@ -27,7 +27,6 @@ function LegacyCaseStudy({ study }: { study: CaseStudy }) {
         </div>
         <ClientInfo
           info={study.info}
-          publication={study.publication}
           className="fade-up [animation-delay:200ms] desk:hidden"
         />
         <div className="fade-up [animation-delay:300ms]">
