@@ -3,19 +3,21 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import type { ExplorationBlock } from "@/lib/explorations";
+import { containedExplorationSrcs, type ExplorationBlock } from "@/lib/explorations";
 
-const cardFrame = "relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]";
+const cardFrame = "relative w-full overflow-hidden bg-white/[0.03]";
 
 function ExplorationImage({
   src,
   priority,
   sizes,
+  aspectClassName = "aspect-[1008/584]",
   onOpen,
 }: {
   src: string;
   priority: boolean;
   sizes: string;
+  aspectClassName?: string;
   onOpen: (src: string) => void;
 }) {
   return (
@@ -23,7 +25,7 @@ function ExplorationImage({
       type="button"
       onClick={() => onOpen(src)}
       aria-label="Expand image"
-      className={`${cardFrame} block cursor-pointer`}
+      className={`${cardFrame} ${aspectClassName} block cursor-pointer`}
     >
       <Image
         src={src}
@@ -32,7 +34,7 @@ function ExplorationImage({
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : undefined}
         sizes={sizes}
-        className="object-cover"
+        className={containedExplorationSrcs.has(src) ? "object-contain" : "object-cover"}
       />
     </button>
   );
@@ -113,13 +115,20 @@ export function ExplorationGallery({ blocks }: { blocks: ExplorationBlock[] }) {
             onOpen={onOpen}
           />
         ) : (
-          <div key={block.srcs.join("-")} className="flex flex-col gap-2 desk:flex-row">
-            {block.srcs.map((src) => (
-              <div key={src} className="min-w-0 desk:flex-1">
+          <div key={`${index}-${block.srcs.join("-")}`} className="flex flex-col gap-2 desk:flex-row">
+            {/* Index in the key so a row can repeat the same image. */}
+            {block.srcs.map((src, srcIndex) => (
+              <div key={`${srcIndex}-${src}`} className="min-w-0 desk:flex-1">
                 <ExplorationImage
                   src={src}
                   priority={false}
-                  sizes="(min-width: 1200px) 35vw, 100vw"
+                  sizes={
+                    block.kind === "triple"
+                      ? "(min-width: 1200px) 24vw, 100vw"
+                      : "(min-width: 1200px) 35vw, 100vw"
+                  }
+                  // Triple rows use a square frame so square artwork (img-78) fills it with no letterboxing.
+                  aspectClassName={block.kind === "triple" ? "aspect-square" : undefined}
                   onOpen={onOpen}
                 />
               </div>

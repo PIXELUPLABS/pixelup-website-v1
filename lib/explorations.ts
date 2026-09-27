@@ -1,10 +1,48 @@
 // Ordered top-to-bottom exactly as they should render — "full" is one
-// full-width image, "pair" is two images side by side (50/50 on desktop).
+// full-width image, "pair" is two images side by side (50/50 on desktop),
+// "triple" is three images side by side (thirds on desktop).
 export type ExplorationBlock =
   | { kind: "full"; src: string }
-  | { kind: "pair"; srcs: [string, string] };
+  | { kind: "pair"; srcs: [string, string] }
+  | { kind: "triple"; srcs: [string, string, string] };
+
+// Images whose aspect ratio is far from the 1008/584 card frame (e.g. square
+// artwork). These render letterboxed with object-contain instead of being
+// cropped by object-cover.
+export const containedExplorationSrcs = new Set<string>(["/media/explorations/img-78.webp"]);
 
 export const explorationBlocks: ExplorationBlock[] = [
+  // { kind: "full", src: "/media/explorations/img-82.webp" },
+  // {
+  //   kind: "triple",
+  //   srcs: [
+  //     "/media/explorations/img-89.webp",
+  //     "/media/explorations/img-90.webp",
+  //     "/media/explorations/img-91.webp",
+  //   ],
+  // },
+  // {
+  //   kind: "triple",
+  //   srcs: [
+  //     "/media/explorations/img-77.webp",
+  //     "/media/explorations/img-78.webp",
+  //     "/media/explorations/img-79.webp",
+  //   ],
+  // },
+  { kind: "full", src: "/media/explorations/img-84.webp" },
+  { kind: "full", src: "/media/explorations/img-80.webp" },
+  { kind: "pair", srcs: ["/media/explorations/img-83.webp", "/media/explorations/img-85.webp"] },
+  // { kind: "pair", srcs: ["/media/explorations/img-78.webp", "/media/explorations/img-77.webp"] },
+  // {
+  //   kind: "triple",
+  //   srcs: [
+  //     "/media/explorations/img-74.webp",
+  //     "/media/explorations/img-75.webp",
+  //     "/media/explorations/img-76.webp",
+  //   ],
+  // },
+  { kind: "full", src: "/media/explorations/img-81.webp" },
+  { kind: "full", src: "/media/explorations/img-82.webp" },
   { kind: "pair", srcs: ["/media/explorations/img-64.webp", "/media/explorations/img-65.webp"] },
   { kind: "full", src: "/media/explorations/img-63.webp" },
   { kind: "full", src: "/media/explorations/img-69.webp" },
