@@ -3,9 +3,19 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { containedExplorationSrcs, type ExplorationBlock } from "@/lib/explorations";
+import {
+  containedExplorationSrcs,
+  type ExplorationAspect,
+  type ExplorationBlock,
+} from "@/lib/explorations";
 
 const cardFrame = "relative w-full overflow-hidden bg-white/[0.03]";
+
+// Written out in full so Tailwind generates each class.
+const aspectClassNames: Record<ExplorationAspect, string> = {
+  "1080/1390": "aspect-[1080/1390]",
+  "5/6": "aspect-[5/6]",
+};
 
 function ExplorationImage({
   src,
@@ -121,14 +131,21 @@ export function ExplorationGallery({ blocks }: { blocks: ExplorationBlock[] }) {
               <div key={`${srcIndex}-${src}`} className="min-w-0 desk:flex-1">
                 <ExplorationImage
                   src={src}
-                  priority={false}
+                  priority={index === 0}
                   sizes={
                     block.kind === "triple"
                       ? "(min-width: 1200px) 24vw, 100vw"
                       : "(min-width: 1200px) 35vw, 100vw"
                   }
-                  // Triple rows use a square frame so square artwork (img-78) fills it with no letterboxing.
-                  aspectClassName={block.kind === "triple" ? "aspect-square" : undefined}
+                  // Triple rows default to a square frame so square artwork (img-78) fills it with no
+                  // letterboxing; `aspect` swaps in the artwork's own shape for portrait posts.
+                  aspectClassName={
+                    block.aspect
+                      ? aspectClassNames[block.aspect]
+                      : block.kind === "triple"
+                        ? "aspect-square"
+                        : undefined
+                  }
                   onOpen={onOpen}
                 />
               </div>

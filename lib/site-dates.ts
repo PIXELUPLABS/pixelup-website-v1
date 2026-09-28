@@ -19,7 +19,7 @@
 export const siteUpdated = {
   home: "2026-09-25",
   call: "2026-07-28",
-  explorations: "2026-07-29",
+  explorations: "2026-09-28",
   clients: "2026-09-15",
   privacy: "2026-08-31",
   /** The /case-studies index only. Each study carries its own published /
