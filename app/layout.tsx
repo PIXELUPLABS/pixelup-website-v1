@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist_Mono, Instrument_Sans } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { DatafastVisitGoal } from "@/components/DatafastVisitGoal";
 import { DisableImageDrag } from "@/components/DisableImageDrag";
 import { Navbar } from "@/components/Navbar";
 import "./globals.css";
@@ -110,6 +111,7 @@ export default function RootLayout({
           `}
         </Script>
         <DisableImageDrag />
+        <DatafastVisitGoal />
         {/* Caps the site at 1800px and centers it — on very large monitors the
             page was stretching edge-to-edge, which broke the intended layout
             proportions. Only binds above 1800px; no effect at smaller sizes.

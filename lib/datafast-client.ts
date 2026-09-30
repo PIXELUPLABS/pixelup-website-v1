@@ -2,7 +2,7 @@ type DatafastMetadata = Record<string, string>;
 
 interface DatafastFunction {
   (goalName: string, metadata?: DatafastMetadata): void;
-  q?: IArguments[];
+  q?: ArrayLike<unknown>[];
 }
 
 declare global {
@@ -30,17 +30,34 @@ const ATTRIBUTION_QUERY_KEYS = [
   "utm_content",
 ] as const;
 
-export function trackDatafastGoal(goalName: string, metadata: DatafastMetadata = {}) {
-  if (typeof window === "undefined" || typeof window.datafast !== "function") return;
+/**
+ * DataFast's documented queue stub. A goal sent before script.js has loaded
+ * waits in window.datafast.q and goes out once the script loads, instead of
+ * being dropped. A no-op when the script (or the layout's copy of this stub)
+ * already defined window.datafast.
+ */
+function ensureDatafastQueue(): DatafastFunction {
+  if (typeof window.datafast !== "function") {
+    const queue: DatafastFunction = (...args) => {
+      (queue.q ??= []).push(args);
+    };
+    window.datafast = queue;
+  }
+  return window.datafast;
+}
 
+export function trackDatafastGoal(goalName: string, metadata: DatafastMetadata = {}) {
+  if (typeof window === "undefined") return;
+
+  const datafast = ensureDatafastQueue();
   const nonEmptyMetadata = Object.fromEntries(
     Object.entries(metadata).filter(([, value]) => value !== "")
   );
 
   if (Object.keys(nonEmptyMetadata).length > 0) {
-    window.datafast(goalName, nonEmptyMetadata);
+    datafast(goalName, nonEmptyMetadata);
   } else {
-    window.datafast(goalName);
+    datafast(goalName);
   }
 }
 
