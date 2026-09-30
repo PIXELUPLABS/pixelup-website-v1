@@ -3,6 +3,7 @@
 import { getCalApi } from "@calcom/embed-react";
 import Image from "next/image";
 import { useState } from "react";
+import { trackCalBookingGoals } from "@/lib/cal-booking-goals";
 import { links } from "@/lib/projects";
 import { ctaButtonBase, ctaButtonPadding } from "./cta-button-styles";
 
@@ -26,6 +27,9 @@ function warmCal() {
   calLoading = true;
   void getCalApi({ namespace: CAL_NAMESPACE }).then((api) => {
     api("ui", { ...calConfig, hideEventTypeDetails: false });
+    // Registered once per page: warmCal is guarded, and the listeners live as
+    // long as the namespace does.
+    trackCalBookingGoals(api, "popup");
     document
       .querySelector('script[src*="cal.com/embed/embed.js"]')
       ?.addEventListener("error", () => {
