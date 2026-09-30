@@ -1,15 +1,10 @@
-// Frame shape (width/height) for a pair or triple row of portrait artwork.
-// Without it, pairs use the 1008/584 card and triples a square, and both
-// crop with object-cover, which would cut the edges off tall posts.
-export type ExplorationAspect = "1080/1390" | "5/6";
-
 // Ordered top-to-bottom exactly as they should render — "full" is one
 // full-width image, "pair" is two images side by side (50/50 on desktop),
 // "triple" is three images side by side (thirds on desktop).
 export type ExplorationBlock =
   | { kind: "full"; src: string }
-  | { kind: "pair"; srcs: [string, string]; aspect?: ExplorationAspect }
-  | { kind: "triple"; srcs: [string, string, string]; aspect?: ExplorationAspect };
+  | { kind: "pair"; srcs: [string, string] }
+  | { kind: "triple"; srcs: [string, string, string] };
 
 // Images whose aspect ratio is far from the 1008/584 card frame (e.g. square
 // artwork). These render letterboxed with object-contain instead of being
@@ -17,75 +12,6 @@ export type ExplorationBlock =
 export const containedExplorationSrcs = new Set<string>(["/media/explorations/img-78.webp"]);
 
 export const explorationBlocks: ExplorationBlock[] = [
-  {
-    kind: "triple",
-    srcs: [
-      "/media/explorations/img-92.webp",
-      "/media/explorations/img-93.webp",
-      "/media/explorations/img-94.webp",
-    ],
-    aspect: "1080/1390",
-  },
-  {
-    kind: "triple",
-    srcs: [
-      "/media/explorations/img-95.webp",
-      "/media/explorations/img-96.webp",
-      "/media/explorations/img-97.webp",
-    ],
-    aspect: "1080/1390",
-  },
-  {
-    kind: "triple",
-    srcs: [
-      "/media/explorations/img-98.webp",
-      "/media/explorations/img-99.webp",
-      "/media/explorations/img-100.webp",
-    ],
-    aspect: "1080/1390",
-  },
-  {
-    kind: "triple",
-    srcs: [
-      "/media/explorations/img-101.webp",
-      "/media/explorations/img-102.webp",
-      "/media/explorations/img-103.webp",
-    ],
-    aspect: "1080/1390",
-  },
-  {
-    kind: "triple",
-    srcs: [
-      "/media/explorations/img-104.webp",
-      "/media/explorations/img-105.webp",
-      "/media/explorations/img-106.webp",
-    ],
-    aspect: "1080/1390",
-  },
-  {
-    kind: "triple",
-    srcs: [
-      "/media/explorations/img-107.webp",
-      "/media/explorations/img-108.webp",
-      "/media/explorations/img-109.webp",
-    ],
-    aspect: "1080/1390",
-  },
-  {
-    kind: "pair",
-    srcs: ["/media/explorations/img-110.webp", "/media/explorations/img-111.webp"],
-    aspect: "1080/1390",
-  },
-  {
-    kind: "pair",
-    srcs: ["/media/explorations/img-112.webp", "/media/explorations/img-113.webp"],
-    aspect: "5/6",
-  },
-  {
-    kind: "pair",
-    srcs: ["/media/explorations/img-114.webp", "/media/explorations/img-115.webp"],
-    aspect: "5/6",
-  },
   // { kind: "full", src: "/media/explorations/img-82.webp" },
   // {
   //   kind: "triple",
