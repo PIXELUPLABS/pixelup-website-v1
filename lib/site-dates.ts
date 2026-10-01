@@ -18,7 +18,7 @@
  */
 export const siteUpdated = {
   home: "2026-09-25",
-  call: "2026-07-28",
+  call: "2026-10-01",
   explorations: "2026-09-30",
   clients: "2026-09-15",
   privacy: "2026-08-31",

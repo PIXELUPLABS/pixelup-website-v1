@@ -105,6 +105,7 @@ Unlike a from-scratch brand, this codebase has real, working motion already — 
 
 - **Entrance:** `.fade-up` (defined in `app/globals.css`) — opacity 0→1 + translateY(10px)→0, `cubic-bezier(0.22, 0.61, 0.36, 1)`, 0.7s. Applied to hero copy, CTAs, and project cards, staggered via inline `animation-delay` (list items stagger by index, capped at 800ms so deep lists don't lag forever). Respects `prefers-reduced-motion: reduce` (animation disabled entirely).
 - **Continuous marquee:** the "Trusted by" logo strip scrolls via a duplicated-content `translateX(0 → -50%)` loop, 30s linear infinite (`--animate-marquee`).
+- **Testimonial cross-fade:** `TestimonialSlider` (`/call` sidebar) swaps quotes with a pure opacity cross-fade, 600ms on the fade-up easing. A thin progress bar (`@keyframes testimonial-progress`, a linear `scaleX` fill) times each quote by its length (6–12s); hover or focus pauses it, a click stops rotation, and reduced motion turns rotation off.
 - **Lightbox (framer-motion):** `/explorations` uses `AnimatePresence` for a click-to-expand image lightbox — backdrop fades in (`opacity 0→1`, 0.2s) with `backdrop-blur-md`, the expanded image fades + scales in (`scale 0.96→1`, 0.2s, `easeOut`). Prev/next navigation and Escape-to-close are wired to the same state.
 - **Interaction philosophy (inferred from the above, not written down elsewhere):** motion is short (≤0.7s), used for entrance and state-reveal, never decorative or bouncy — consistent with the restrained visual language in §5.
 
@@ -122,7 +123,8 @@ Unlike a from-scratch brand, this codebase has real, working motion already — 
 Full contracts (variants/states/tokens/do-nots) live in `components/component-contracts.json` — this is a condensed index. **Check that file before building anything new; if what you need isn't there, it's a component gap, not license to invent an ad hoc one-off.**
 
 - **LeftNav / CaseSidebar** — the two "hero sidebar" patterns (generic hero copy vs. case-study structured data). Never cross-use them.
-- **CtaButtons** — the stacked "Chat on Telegram" button and the Book a call form (email field + "Book a call" submit that opens the Cal.com popup), reused in the homepage, blog and case-study sidebars.
+- **CtaButtons** — the stacked "Chat on Telegram" button and the Book a call form (email field + "Book a call" submit that opens the Cal.com popup), reused in the homepage, blog and case-study sidebars. `/call` drops them entirely (`LeftNav showCtaButtons={false}`), since the inline Cal embed is already that page's one primary action.
+- **TestimonialSlider** — sidebar testimonial card (client wordmark, quote, name/role) that cross-fades between quotes, rendered through `LeftNav`'s `testimonials` prop directly below `TrustedStrip`. Flat `button-dark` fill and `radius.sm`, the sidebar's button surface. Quotes live in `lib/testimonials.ts`, pulled from Contra.
 - **ProjectCard / MoreProjects** — homepage and end-of-case-study project cards, square corners, hover-scale media.
 - **SectionShell + CaseSection + CaseFaq** — the case-study Q&A pattern (heading left half / content right half + hairline rule). `CaseFaq`'s accordion + its `FAQPage` JSON-LD schema are shared between case studies and `/blog`.
 - **ArticleFilters / ExplorationGallery** — the two interactive, page-specific pill/toggle + gallery patterns (`/blog`, `/explorations`).

@@ -39,7 +39,9 @@
       "balanceHero": "boolean prop, applies text-balance/text-pretty for nicer line wrapping. Off by default because the homepage H1's line breaks were hand-tuned.",
       "headingSize": "string prop, Tailwind class override for desktop heading size (default desk:text-[30px]).",
       "headingFontClassName": "string prop, extra className applied only to the <h1> — e.g. a next/font className to swap the heading's font on a single page without touching the site-wide font-display.",
-      "variant": "default keeps the shared 405px sidebar and standard hero rhythm; clients uses the supplied Figma proportions: a responsive 431px desktop sidebar, 32px heading/description gap, 40px desktop heading, and 16px description."
+      "variant": "default keeps the shared 405px sidebar and standard hero rhythm; clients uses the supplied Figma proportions: a responsive 431px desktop sidebar, 32px heading/description gap, 40px desktop heading, and 16px description.",
+      "testimonials": "Testimonial[] prop (lib/testimonials.ts). When set, a TestimonialSlider renders directly below TrustedStrip. /call passes callPageTestimonials.",
+      "showCtaButtons": "boolean prop, default true. /call sets it false: the page is already the booking embed, so the sidebar ends on the ticker + testimonial card instead of a competing action."
     },
     "states": {
       "entrance": "fade-up animation on mount, staggered via inline animation-delay per child block."
@@ -191,10 +193,38 @@
     "variants": ["none"],
     "states": ["continuous CSS marquee animation, no interactive states"],
     "tokens_used": ["color.neutral.label-grey", "--animate-marquee (app/globals.css)"],
-    "when_to_use": "Inside LeftNav and CaseSidebar, immediately above CtaButtons.",
+    "when_to_use": "Inside LeftNav and CaseSidebar, immediately above CtaButtons — or, on /call (no CTAs), immediately above TestimonialSlider.",
     "do_not": [
       "Don't add a logo to only one of the two duplicated blocks — both copies must stay identical or the loop will visibly jump.",
       "The first copy carries real alt text; the duplicate is aria-hidden — keep that split when adding logos."
+    ]
+  },
+
+  "TestimonialSlider": {
+    "file": "components/TestimonialSlider.tsx",
+    "category": "interactive",
+    "description": "Sidebar testimonial card: client wordmark, quote and name/role, cycling through several testimonials with a cross-fade. Three short progress bars in the top-right corner show which quote is up and how long it stays; clicking one jumps to it. Data lives in lib/testimonials.ts (all six Contra reviews, verbatim apart from the brand-name normalization and the Greptile quote, which is adapted to name the team).",
+    "variants": ["none — takes a Testimonial[]; a single testimonial renders without bars or rotation"],
+    "states": {
+      "rotating": "Default. The active bar fills over the slide's dwell time (~250ms a word, clamped to 6–12s) and its animationend advances to the next quote. aria-live is off.",
+      "paused": "Hovering the card or focusing a bar pauses the fill, and with it the rotation.",
+      "stopped": "Clicking a bar shows that quote and stops rotation for good: the active bar shows full, and aria-live switches to polite.",
+      "reduced-motion": "The fill animation is dropped, so the active bar shows full and nothing rotates on its own; bars still switch quotes.",
+      "transition": "Cross-fade only: opacity + visibility, 600ms, the fade-up easing. Hidden slides are visibility:hidden, so they are out of the accessibility tree."
+    },
+    "tokens_used": [
+      "color.neutral.button-dark (card fill, the sidebar's button surface)",
+      "radius.sm",
+      "color.neutral.white (quote, name, active bar)",
+      "color.neutral.label-grey (role)",
+      "typography.size.14 (quote, name), typography.size.12 (role)",
+      "@keyframes testimonial-progress (app/globals.css)"
+    ],
+    "when_to_use": "Through LeftNav's testimonials prop, where it sits directly below TrustedStrip. Currently /call only, which also drops CtaButtons.",
+    "do_not": [
+      "When a quote's wording is adapted, keep the Contra original in a comment beside it (see Greptile) so the attributed text can always be checked against what the client wrote.",
+      "Don't size the card to the active slide. All slides share one grid cell so the card holds the tallest quote's height and the sidebar never jumps between quotes. Mind that height when adding a long quote: the card is sized by the longest one, and the /call sidebar is a fixed viewport-height column.",
+      "Don't hotlink Contra avatars or logos. Wordmarks come from public/media/logos/clients and render white (brightness-0 invert, 70% opacity like the strip); per-mark heights live in logoHeightBySlug."
     ]
   },
 
@@ -489,5 +519,14 @@
     "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "spacing.base", "breakpoint.desk"],
     "when_to_use": "Inside ClientRoster only, driven by lib/clients.ts.",
     "do_not": ["Don't substitute a different company's logo for Grovio as if it were approved; replace its accessible placeholder when the real SVG arrives.", "Don't replace the width variants with transform scaling; width-only sizing preserves the requested 24px height and 10px gap.", "Don't apply the pure-white filter to Vertera Health or Conigma because it removes the contrast inside their icon marks.", "Don't remove the shared contain frame, pure-white treatment for the other logos, or per-logo width adjustments without rechecking every supplied logo together.", "Don't remove the final three-word nowrap group without rechecking the roster for one- or two-word widow lines."]
-  }
+  },
+
+  "_gaps": [
+    {
+      "gap": "Sidebar testimonial card",
+      "status": "Built as TestimonialSlider",
+      "detail": "CaseStudyStory's TestimonialBlock is a full-width two-column section with a 48px heading, too large for a 405px sidebar and built for one quote. TestimonialSlider was added for /call and is documented above.",
+      "closest_existing": "CaseStudyStory TestimonialBlock (quote + name/role pattern)"
+    }
+  ]
 }

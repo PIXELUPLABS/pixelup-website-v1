@@ -1,5 +1,7 @@
+import type { Testimonial } from "@/lib/testimonials";
 import { TrustedStrip } from "./TrustedStrip";
 import { CtaButtons } from "./CtaButtons";
+import { TestimonialSlider } from "./TestimonialSlider";
 
 // Homepage hero copy — pages like /call pass their own.
 const defaultHeading =
@@ -21,6 +23,8 @@ export function LeftNav({
   headingSize = "desk:text-[30px]",
   headingFontClassName = "",
   variant = "default",
+  testimonials,
+  showCtaButtons = true,
 }: {
   heading?: React.ReactNode;
   subheading?: React.ReactNode;
@@ -42,6 +46,11 @@ export function LeftNav({
   /** The clients variant follows the dedicated Figma heading proportions
       without changing the shared sidebar treatment on other pages. */
   variant?: "default" | "clients";
+  /** Cross-fading testimonial card below the trusted strip (/call). */
+  testimonials?: Testimonial[];
+  /** /call drops the CTAs: the page itself is the booking embed, so the
+      sidebar ends on proof instead of a competing action. */
+  showCtaButtons?: boolean;
 }) {
   const isClientsVariant = variant === "clients";
 
@@ -98,7 +107,8 @@ export function LeftNav({
         </p>
       </div>
 
-      {/* Bottom group: callout + trusted strip + CTAs (pinned to bottom on desktop) */}
+      {/* Bottom group: callout + trusted strip + testimonials + CTAs (pinned
+          to bottom on desktop) */}
       <div className="flex flex-col gap-5 desk:mt-auto">
         {/* <div className="fade-up [animation-delay:250ms]">
           <LeadCallout />
@@ -108,9 +118,16 @@ export function LeftNav({
             <TrustedStrip />
           </div>
         )}
-        <div className="fade-up [animation-delay:400ms]">
-          <CtaButtons />
-        </div>
+        {testimonials && testimonials.length > 0 && (
+          <div className="fade-up [animation-delay:350ms]">
+            <TestimonialSlider testimonials={testimonials} />
+          </div>
+        )}
+        {showCtaButtons && (
+          <div className="fade-up [animation-delay:400ms]">
+            <CtaButtons />
+          </div>
+        )}
       </div>
     </aside>
   );
