@@ -7,6 +7,7 @@ import unionMark from "@/public/media/Vector.svg";
 
 const JOIN_THE_TEAM_URL = "https://tally.so/r/xXE7ry";
 const TESTIMONIALS_URL = "https://contra.com/daksh_aswal_dt5tfn27/reviews"
+const DESIGN_FOR_B2B_URL = "https://designforb2b.com"
 
 const caseStudies = [
   { name: "Greptile", slug: "greptile" },
@@ -75,6 +76,16 @@ export function Footer() {
                     className="w-fit text-[14px] font-normal text-white"
                   >
                     Testimonials
+                  </a>
+                  {/* Our own directory site: no noreferrer, so its DataFast
+                      sees pixeluplabs.com as the referrer. */}
+                  <a
+                    href={DESIGN_FOR_B2B_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="w-fit text-[14px] font-normal text-white"
+                  >
+                    Best B2B Websites
                   </a>
                 </div>
               </div>
