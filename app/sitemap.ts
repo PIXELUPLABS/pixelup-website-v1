@@ -79,6 +79,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    // 301s to designforb2b.com (next.config.ts), so Search Console lists it
+    // under "Page with redirect" rather than as indexed.
+    {
+      url: `${BASE_URL}/designforb2b`,
+      lastModified: siteUpdated.designforb2b,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
     ...Object.values(caseStudies)
       .filter((study) => study.publication.status === "published")
       .map((study) => ({

@@ -81,6 +81,13 @@ const nextConfig: NextConfig = {
         destination: "/",
         statusCode: 301,
       },
+      // Branded shortcut to our B2B website directory. Also listed in
+      // app/sitemap.ts.
+      {
+        source: "/designforb2b",
+        destination: "https://designforb2b.com",
+        statusCode: 301,
+      },
     ];
   },
 };

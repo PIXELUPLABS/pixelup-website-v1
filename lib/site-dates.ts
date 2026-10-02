@@ -25,6 +25,8 @@ export const siteUpdated = {
   /** The /case-studies index only. Each study carries its own published /
       updated dates on `publication` in lib/case-studies.ts. */
   caseStudies: "2026-09-25",
+  /** /designforb2b is a redirect to designforb2b.com (next.config.ts). */
+  designforb2b: "2026-10-02",
 } as const;
 
 /** First public commit of the site — used as `datePublished` on the homepage. */
