@@ -106,15 +106,17 @@ export function BookCallForm({
           emits the longhand corner utilities after the border-radius shorthand. */}
       <button
         type="submit"
-        className={`${ctaButtonBase} ${ctaButtonPadding} shrink-0 cursor-pointer gap-3 rounded-l-none bg-accent text-white hover:brightness-110`}
+        className={`group ${ctaButtonBase} ${ctaButtonPadding} shrink-0 cursor-pointer gap-3 rounded-l-none bg-accent text-white hover:brightness-110`}
       >
         <span>{label}</span>
+        {/* Hover: the arrow nudges a few pixels to the right. */}
         <Image
           src="/media/Container.svg"
           alt=""
           width={14}
           height={14}
           aria-hidden="true"
+          className="transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-x-[3px] group-focus-visible:translate-x-[3px] motion-reduce:transition-none"
         />
       </button>
     </form>

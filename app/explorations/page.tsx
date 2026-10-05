@@ -3,7 +3,16 @@ import { Geist } from "next/font/google";
 import { ExplorationGallery } from "@/components/explorations/ExplorationGallery";
 import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
-import { explorationBlocks } from "@/lib/explorations";
+import { explorationBlocks, flattenExplorationBlocks } from "@/lib/explorations";
+import { readPublicImageDimensions } from "@/lib/imageDimensions";
+
+// Real dimensions are read at build time so the masonry columns can be
+// balanced on the server and every image reserves its exact space (no CLS).
+// Falls back to the old 1008x584 card ratio if a header can't be read.
+const explorationImages = flattenExplorationBlocks(explorationBlocks).map((src) => ({
+  src,
+  ...(readPublicImageDimensions(src) ?? { width: 1008, height: 584 }),
+}));
 
 // Scoped to this page's heading only — the rest of the site keeps font-display.
 const geist = Geist({ subsets: ["latin"], weight: ["500", "600"] });
@@ -48,9 +57,7 @@ export default function ExplorationsPage() {
         />
         {/* Same card frame + gap-6 (24px) stack as the homepage's ProjectCard list. */}
         <main className="flex min-w-0 flex-1 flex-col gap-8">
-          <div className="flex flex-col gap-2">
-            <ExplorationGallery blocks={explorationBlocks} />
-          </div>
+          <ExplorationGallery images={explorationImages} />
           {/* Same treatment as /blog's Footer wrapper — cancels the row's
               p-5 on this wrapper only, so Footer fills the extra space via
               its own w-full without needing any change to Footer itself. */}

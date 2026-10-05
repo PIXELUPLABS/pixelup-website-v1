@@ -3,40 +3,100 @@
 import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { containedExplorationSrcs, type ExplorationBlock } from "@/lib/explorations";
+
+export type ExplorationImageData = { src: string; width: number; height: number };
+
+// Pinterest-style masonry: equal-width columns, natural aspect ratios, even
+// gaps. 2 columns on mobile, 3 on desktop.
+const MOBILE_COLUMNS = 2;
+const DESKTOP_COLUMNS = 3;
 
 const cardFrame = "relative w-full overflow-hidden bg-white/[0.03]";
 
 function ExplorationImage({
-  src,
+  image,
   priority,
   sizes,
-  aspectClassName = "aspect-[1008/584]",
   onOpen,
 }: {
-  src: string;
+  image: ExplorationImageData;
   priority: boolean;
   sizes: string;
-  aspectClassName?: string;
-  onOpen: (src: string) => void;
+  onOpen: () => void;
 }) {
   return (
     <button
       type="button"
-      onClick={() => onOpen(src)}
+      onClick={onOpen}
       aria-label="Expand image"
-      className={`${cardFrame} ${aspectClassName} block cursor-pointer`}
+      className={`${cardFrame} block cursor-pointer`}
     >
       <Image
-        src={src}
+        src={image.src}
         alt=""
-        fill
+        width={image.width}
+        height={image.height}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : undefined}
         sizes={sizes}
-        className={containedExplorationSrcs.has(src) ? "object-contain" : "object-cover"}
+        className="block h-auto w-full"
       />
     </button>
+  );
+}
+
+/** Greedy masonry: each image (in order) goes into the currently shortest
+    column, measured in relative height (height / width), so reading order
+    stays roughly left-to-right, top-to-bottom. */
+function buildColumns(images: ExplorationImageData[], count: number) {
+  const columns = Array.from({ length: count }, () => ({
+    height: 0,
+    items: [] as number[],
+  }));
+  images.forEach((image, index) => {
+    const shortest = columns.reduce((min, column) => (column.height < min.height ? column : min));
+    shortest.items.push(index);
+    shortest.height += image.height / image.width;
+  });
+  return columns.map((column) => column.items);
+}
+
+/** One masonry layout. Mobile and desktop each render their own (toggled with
+    CSS), since column assignment depends on the column count; images in the
+    hidden layout are lazy and never load. */
+function MasonryColumns({
+  images,
+  count,
+  sizes,
+  className,
+  onOpen,
+}: {
+  images: ExplorationImageData[];
+  count: number;
+  sizes: string;
+  className: string;
+  onOpen: (index: number) => void;
+}) {
+  return (
+    <div className={`${className} items-start gap-2`}>
+      {buildColumns(images, count).map((indexes, columnIndex) => (
+        <div key={columnIndex} className="flex min-w-0 flex-1 flex-col gap-2">
+          {indexes.map((index) => (
+            <ExplorationImage
+              // Index in the key so the list can repeat the same image.
+              key={`${index}-${images[index].src}`}
+              image={images[index]}
+              // Only desktop's first row loads eagerly. Eager images load even
+              // inside the hidden layout, so mobile stays lazy to avoid
+              // fetching a second set (its top row is in view anyway).
+              priority={count === DESKTOP_COLUMNS && index < DESKTOP_COLUMNS}
+              sizes={sizes}
+              onOpen={() => onOpen(index)}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
 
@@ -75,8 +135,8 @@ function NavButton({ direction, onClick }: { direction: "prev" | "next"; onClick
 /** Renders the exploration images; clicking one opens it in an 80vw/80vh
     lightbox with the page blurred behind it, with prev/next arrows to
     step through every image on the page. */
-export function ExplorationGallery({ blocks }: { blocks: ExplorationBlock[] }) {
-  const flatSrcs = blocks.flatMap((block) => (block.kind === "full" ? [block.src] : block.srcs));
+export function ExplorationGallery({ images }: { images: ExplorationImageData[] }) {
+  const flatSrcs = images.map((image) => image.src);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const openSrc = openIndex === null ? null : flatSrcs[openIndex];
 
@@ -101,41 +161,22 @@ export function ExplorationGallery({ blocks }: { blocks: ExplorationBlock[] }) {
     };
   }, [openIndex]);
 
-  const onOpen = (src: string) => setOpenIndex(flatSrcs.indexOf(src));
-
   return (
     <>
-      {blocks.map((block, index) =>
-        block.kind === "full" ? (
-          <ExplorationImage
-            key={block.src}
-            src={block.src}
-            priority={index === 0}
-            sizes="(min-width: 1200px) 70vw, 100vw"
-            onOpen={onOpen}
-          />
-        ) : (
-          <div key={`${index}-${block.srcs.join("-")}`} className="flex flex-col gap-2 desk:flex-row">
-            {/* Index in the key so a row can repeat the same image. */}
-            {block.srcs.map((src, srcIndex) => (
-              <div key={`${srcIndex}-${src}`} className="min-w-0 desk:flex-1">
-                <ExplorationImage
-                  src={src}
-                  priority={false}
-                  sizes={
-                    block.kind === "triple"
-                      ? "(min-width: 1200px) 24vw, 100vw"
-                      : "(min-width: 1200px) 35vw, 100vw"
-                  }
-                  // Triple rows use a square frame so square artwork (img-78) fills it with no letterboxing.
-                  aspectClassName={block.kind === "triple" ? "aspect-square" : undefined}
-                  onOpen={onOpen}
-                />
-              </div>
-            ))}
-          </div>
-        )
-      )}
+      <MasonryColumns
+        images={images}
+        count={MOBILE_COLUMNS}
+        sizes="50vw"
+        className="flex desk:hidden"
+        onOpen={setOpenIndex}
+      />
+      <MasonryColumns
+        images={images}
+        count={DESKTOP_COLUMNS}
+        sizes="24vw"
+        className="hidden desk:flex"
+        onOpen={setOpenIndex}
+      />
 
       <AnimatePresence>
         {openSrc && (

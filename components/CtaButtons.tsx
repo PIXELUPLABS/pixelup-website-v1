@@ -1,6 +1,6 @@
 import { links } from "@/lib/projects";
 import { BookCallForm } from "./BookCallForm";
-import { ctaButtonBase, ctaButtonPadding } from "./cta-button-styles";
+import { ctaButtonBase, ctaButtonPadding, ctaIconMotion } from "./cta-button-styles";
 
 // Re-exported so existing importers (AuditCta, AuditNavCta) keep working.
 export { ctaButtonBase, ctaButtonPadding };
@@ -16,6 +16,25 @@ function PaperPlaneIcon() {
         strokeLinejoin="round"
       />
     </svg>
+  );
+}
+
+// Hover micro-interaction: the plane "sends" — it flies out to the top-right
+// while a second copy glides in from the bottom-left.
+function AnimatedPaperPlane() {
+  return (
+    <span aria-hidden="true" className="relative block h-[14px] w-[14px] shrink-0 overflow-hidden">
+      <span
+        className={`${ctaIconMotion} group-hover:translate-x-full group-hover:-translate-y-full group-focus-visible:translate-x-full group-focus-visible:-translate-y-full`}
+      >
+        <PaperPlaneIcon />
+      </span>
+      <span
+        className={`${ctaIconMotion} -translate-x-full translate-y-full group-hover:translate-x-0 group-hover:translate-y-0 group-focus-visible:translate-x-0 group-focus-visible:translate-y-0`}
+      >
+        <PaperPlaneIcon />
+      </span>
+    </span>
   );
 }
 
@@ -36,12 +55,12 @@ export function CtaButtons({
         href={links.telegram}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${baseButton} ${
+        className={`group ${baseButton} ${
           telegramSolidBlack ? "bg-black" : "bg-button-dark hover:bg-white/[0.12]"
         }`}
       >
         <span>CHAT ON TELEGRAM</span>
-        <PaperPlaneIcon />
+        <AnimatedPaperPlane />
       </a>
       <BookCallForm />
     </div>

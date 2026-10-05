@@ -13,5 +13,11 @@ export const ctaButtonBase =
   "flex items-center justify-between rounded-[2px] px-3 " +
   "font-display text-[12px] font-medium tracking-[-0.12px] transition-colors";
 
+/** Shared timing for CTA icon hover micro-interactions (the icon slides out
+    while a second copy slides in). Transitions, not keyframes, so leaving
+    mid-hover reverses smoothly instead of snapping. */
+export const ctaIconMotion =
+  "absolute inset-0 transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none";
+
 /** The standard full-size CTA height, used everywhere except the navbar. */
 export const ctaButtonPadding = "py-[11.5px]";
