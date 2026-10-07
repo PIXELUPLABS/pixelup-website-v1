@@ -88,8 +88,7 @@ const entries: CaseStudyShowcaseEntry[] = [
   {
     slug: "henrylabs",
     niche: "Consumer AI",
-    whatWeDid:
-      "Brand identity, Positioning, Website design and build, Webflow development, Product design, Design system, Motion",
+    whatWeDid: "Positioning, Brand, Website, Product, Webflow Development",
     // No funding badge — see file header note.
   },
   {

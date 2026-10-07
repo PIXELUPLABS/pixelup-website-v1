@@ -3,6 +3,20 @@ import { BackButton } from "../BackButton";
 import { CtaButtons } from "../CtaButtons";
 import { TrustedStrip } from "../TrustedStrip";
 import { ClientInfo } from "./ClientInfo";
+import { Emphasis, hasEmphasis } from "./Emphasis";
+
+/** Copy with `**phrase**` markers renders muted with white highlights. */
+function SidebarParagraph({ text }: { text: string }) {
+  if (!hasEmphasis(text)) {
+    return <p className="text-white">{text}</p>;
+  }
+
+  return (
+    <p className="text-muted-65">
+      <Emphasis text={text} />
+    </p>
+  );
+}
 
 /**
  * Case study left nav: project info (client / year / involvement / link +
@@ -40,14 +54,9 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
               />
             </div>
             <ClientInfo info={study.info} />
-            <div className="flex flex-col gap-3 px-5 pt-3">
+            <div className="flex flex-col gap-3 px-5 pt-3 text-[14px] leading-[1.35] tracking-[-0.01em]">
               {description.map((paragraph) => (
-                <p
-                  key={paragraph}
-                  className="text-[14px] leading-[1.35] tracking-[-0.01em] text-white"
-                >
-                  {paragraph}
-                </p>
+                <SidebarParagraph key={paragraph} text={paragraph} />
               ))}
             </div>
           </div>

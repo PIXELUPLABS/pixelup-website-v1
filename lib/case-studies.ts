@@ -1392,24 +1392,65 @@ const streamline: CaseStudy = {
   },
 };
 
+// Unlike Streamline, the hero highlights and the Results block differ: the
+// hero sums up our engagement, the Results block lists what Henry Labs
+// achieved publicly after the new brand launched on May 18, 2026.
+const henryLabsHighlights: CaseMetric[] = [
+  {
+    value: "3",
+    label: "Products on one system",
+    detail: "Website, dashboard, checkout",
+  },
+  { value: "2", label: "Engagements", detail: "Hired again a month in" },
+  {
+    value: "24 days",
+    label: "To a locked brand direction",
+    detail: "Kickoff to final pick",
+  },
+  {
+    value: "4 wks",
+    label: "Product design sprint",
+    detail: "Checkout + dashboard V1",
+  },
+];
+
+// Sources: Philip Qiu's public LinkedIn posts (Allowance, FASHIONOLOGY) and
+// Caplight's headcount tracking (team size).
+const henryLabsResults: CaseMetric[] = [
+  {
+    value: "10×",
+    label: "Stores on Allowance",
+    detail: "9 to 90 in two weeks, via Henry",
+  },
+  {
+    value: "YC",
+    label: "Startup launched on Henry",
+    detail: "Allowance (YC P26), Sep 2026",
+  },
+  { value: "2×", label: "Team size", detail: "4 to 8, May to June 2026" },
+  {
+    value: "1st",
+    label: "In-person activation",
+    detail: "FASHIONOLOGY, NYC, June 2026",
+  },
+];
+
 const henryLabs: CaseStudy = {
   slug: "henrylabs",
   title:
     "We built the Henry Labs brand, then carried it across every touchpoint.",
   metaTitle: "Henry Labs Case Study - PIXELUP LABS",
   metaDescription:
-    "See how PIXELUP LABS designed Henry Labs' brand, website, dashboard and checkout experience for a startup building agentic commerce infrastructure.",
+    "PIXELUP LABS built the brand, website, partner dashboard and checkout for Henry Labs, a founding member of the Agentic Commerce Consortium.",
   info: {
     client: "Henry Labs",
     year: "2026",
     involvement: [
-      "Brand identity",
       "Positioning",
-      "Website design and build",
-      "Webflow development",
-      "Product design",
-      "Design system",
-      "Motion",
+      "Brand",
+      "Website",
+      "Product",
+      "Webflow Development",
     ],
     funding: "Private",
     links: [
@@ -1426,10 +1467,247 @@ const henryLabs: CaseStudy = {
   hero: {
     media: {
       type: "video",
-      src: "/media/henry-labs.mp4",
-      poster: "/media/henry-labs/64.avif",
+      src: "/media/henry-labs/hero.mp4",
+      poster: "/media/henry-labs/hero-poster.jpg",
     },
-    alt: "Henry Labs animated brand reveal",
+    alt: "Henry Labs brand film showing the new identity across posters and brand applications",
+  },
+  story: {
+    company: "Henry Labs",
+    statusBadge: "Agentic commerce · Checkout",
+    headline:
+      "We built the Henry Labs brand, then carried it across every touchpoint.",
+    summary:
+      "Henry Labs builds the checkout layer for agentic commerce, used by AI shopping apps like Price.com and Aesthetic. Its one-click checkout was **cited by Visa** in December 2025, and it is a **founding member of the Agentic Commerce Consortium**, alongside Rye, Crossmint and Lithic.",
+    highlights: henryLabsHighlights,
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why the brand was behind the company.",
+        items: [
+          {
+            label: "Where Henry Labs was",
+            text: "Henry Labs builds checkout for AI shopping apps. **Visa had already cited their one-click checkout**, and they were a **founding member of the Agentic Commerce Consortium**.",
+          },
+          {
+            label: "What the market looked like",
+            text: "Agentic commerce was filling up fast with startups that all sounded the same. Platforms choosing a checkout partner **could not tell them apart**.",
+          },
+          {
+            label: "How we found the gap",
+            text: "A competitor analysis and a product deep dive showed what Henry Labs really sells: **an SDK platforms build on, not a shopping app**.",
+          },
+          {
+            label: "Why it mattered",
+            text: "Platforms trust Henry Labs with their transactions and revenue. The company had earned that trust. **The brand still looked early-stage.**",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-landscape",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/64.avif" },
+            alt: "Henry Labs wordmark over a blue and orange mountain landscape",
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-posters",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/65.avif" },
+            alt: "Henry Labs positioning posters using the mountain imagery and angular brand mark",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-one",
+        index: "01",
+        heading: "Shoppers see the Henry button. Platforms sign the contract.",
+        problem:
+          "Shoppers meet Henry Labs as a checkout button. Platforms meet it as infrastructure they trust with revenue. A shopper-first brand would look **forgettable to the actual buyer**.",
+        whyItMattered:
+          "The founders wanted **ethereal and technical, not consumer**. Too soft reads like a shopping app. Too cold looks like every payments API.",
+        whatWeDid:
+          "We designed **for the platform buyer first**. Landscape imagery and a sunset palette carried the ethereal. Precise type, grids and real product UI carried the technical.",
+        outcome:
+          "One identity **quiet enough to sit inside another company's checkout**, and **serious enough for a partner pitch**.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-execution-layer",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/66.avif" },
+            alt: "Henry Labs execution layer positioning beside an illuminated shopping cart",
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-conference",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/58.avif" },
+            alt: "Henry Labs identity and positioning presented on a large conference screen",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-two",
+        index: "02",
+        heading: "Then the brand project turned into a product project.",
+        problem:
+          "A month into the brand work, Henry Labs **asked us to design the product too**: checkout and the partner dashboard, in a four-week sprint.",
+        whyItMattered:
+          "Partners wanted sales, traffic and referrals at a glance. **The old dashboard buried all three.** Shoppers just wanted to buy.",
+        whatWeDid:
+          "We mapped both personas, audited the checkout flow and **designed checkout first, handing it to their engineers mid-sprint**.",
+        outcome:
+          "**One design system, two hierarchies.** Partners see revenue first. Shoppers see their cart.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-personas",
+        media: {
+          kind: "full",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/figjam-user-personas.png",
+            },
+            alt: "Henry Labs FigJam research board mapping partner and shopper personas",
+            intrinsicSize: { width: 5594, height: 3062 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-checkout-flow",
+        media: {
+          kind: "full",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/figjam-checkout-flow.png",
+            },
+            alt: "Henry Labs FigJam board mapping the audited checkout and shopper flows",
+            intrinsicSize: { width: 5594, height: 3062 },
+          },
+        },
+      },
+      {
+        kind: "gallery",
+        id: "gallery-system",
+        heading: "One brand, three products.",
+        intro:
+          "The website, partner dashboard and consumer checkout all run on **the same design system**, so a shopper at checkout and a partner checking revenue are looking at the same company. The website tells the story in the order a buyer needs it: product data, universal cart, embedded checkout, then the analytics that come after.",
+        media: [
+          {
+            kind: "full",
+            aspect: "wide",
+            slot: {
+              media: { type: "image", src: "/media/henry-labs/asset-2.avif" },
+              alt: "Henry Labs website hero 'Own your checkout.' over a glowing mountain landscape",
+            },
+          },
+          {
+            kind: "full",
+            aspect: "wide",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/henry-labs/frame-2147244046.avif",
+              },
+              alt: "Henry Labs website displayed on a laptop against a black and silver landscape",
+            },
+          },
+          {
+            kind: "full",
+            aspect: "wide",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/henry-labs/frame-2147244048.avif",
+              },
+              alt: "Henry Labs mobile features section on a phone framed by a torn chain-link fence",
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: { type: "image", src: "/media/henry-labs/70.avif" },
+              alt: "Henry Labs website feature section for building, monetizing and optimizing agentic commerce",
+            },
+          },
+        ],
+      },
+      {
+        kind: "results",
+        id: "results",
+        heading: "Results",
+        metrics: henryLabsResults,
+      },
+      {
+        kind: "media",
+        id: "snapshot-work-wall",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/68.avif" },
+            alt: "Henry Labs brand posters, positioning and website screens shown as one work wall",
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Henry Labs ended up.",
+        paragraphs: [
+          "Henry Labs now has a brand that **looks as serious as the infrastructure behind it**, a website that explains the product in the order buyers need it, and a design system its engineers build on directly.",
+          "The website went live in May 2026, and the checkout and dashboard were built in-house from our designs. Henry Labs CEO Phil Qiu shared it with one line: \"**We wanted a landing page that actually feels like that future rather than explaining it.**\" By September, Henry Labs was powering Allowance (YC P26), which went from **9 to 90 stores in two weeks**. You can see the live site at henrylabs.ai.",
+          "If you recognised Henry Labs' problem in your own company, **we should talk**. We work with AI and B2B SaaS teams on brand, web and product design, helping them look as credible as the product they have built.",
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-closing",
+        media: {
+          kind: "pair",
+          aspect: "wide",
+          slots: [
+            {
+              media: { type: "image", src: "/media/henry-labs/asset-1.avif" },
+              alt: "Henry Labs mobile website and brand mark over the launch landscape",
+            },
+            {
+              media: {
+                type: "image",
+                src: "/media/henry-labs/frame-2147244047.avif",
+              },
+              alt: "Henry Labs website use cases displayed on a laptop against an orange landscape",
+            },
+          ],
+        },
+      },
+    ],
+    faqHeading,
+    faqs: pixelupFaq,
   },
   introMedia: [
     {

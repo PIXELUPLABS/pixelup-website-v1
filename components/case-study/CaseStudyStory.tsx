@@ -8,11 +8,13 @@ import type {
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { ClientInfo } from "./ClientInfo";
+import { Emphasis } from "./Emphasis";
 import { EndCta } from "./EndCta";
 import { MoreProjects } from "./MoreProjects";
 import { SectionShell } from "./SectionShell";
 
-function Metrics({
+/** Hairline-divided metric cells. Also the /services hero trust strip. */
+export function Metrics({
   metrics,
   usesSharedCenterRule = false,
   bottomRule = true,
@@ -111,10 +113,12 @@ function ContextBlock({
             key={item.label}
             className="flex flex-col gap-2 py-4 first:pt-0 last:pb-0"
           >
-            <p className="text-[14px] leading-[1.3] tracking-[-0.01em] text-white/60">
+            <p className="text-[14px] leading-[1.3] tracking-[-0.01em] text-white">
               {item.label}
             </p>
-            <p className="text-[16px] leading-[1.5] text-white">{item.text}</p>
+            <p className="text-[16px] leading-[1.5] text-muted-65">
+              <Emphasis text={item.text} />
+            </p>
           </div>
         ))}
       </div>
@@ -161,11 +165,11 @@ function ChallengeBlock({
       <div className="divide-y-[0.5px] divide-hairline border-t-[0.5px] border-hairline">
         {details.map((detail) => (
           <div key={detail.label} className="grid desk:grid-cols-2">
-            <p className="p-6 pb-2 text-[14px] leading-[1.3] tracking-[-0.01em] text-white/60 desk:border-r-[0.5px] desk:border-hairline desk:pb-6">
+            <p className="p-6 pb-2 text-[14px] leading-[1.3] tracking-[-0.01em] text-white desk:border-r-[0.5px] desk:border-hairline desk:pb-6">
               {detail.label}
             </p>
-            <p className="p-6 pt-2 text-[16px] leading-[1.5] text-white desk:pt-6">
-              {detail.text}
+            <p className="p-6 pt-2 text-[16px] leading-[1.5] text-muted-65 desk:pt-6">
+              <Emphasis text={detail.text} />
             </p>
           </div>
         ))}
@@ -182,7 +186,9 @@ function GalleryBlock({
   return (
     <>
       <SectionShell heading={block.heading} topRule contentInset="wide">
-        <p className="text-[16px] leading-[1.5] text-white">{block.intro}</p>
+        <p className="text-[16px] leading-[1.5] text-muted-65">
+          <Emphasis text={block.intro} />
+        </p>
       </SectionShell>
       {block.media.map((media, index) => (
         <CaseMediaBlock key={index} block={media} />
@@ -305,8 +311,11 @@ function StoryBlock({
       return (
         <SectionShell heading={block.heading} topRule contentInset="wide">
           {block.paragraphs.map((paragraph) => (
-            <p key={paragraph} className="text-[16px] leading-[1.5] text-white">
-              {paragraph}
+            <p
+              key={paragraph}
+              className="text-[16px] leading-[1.5] text-muted-65"
+            >
+              <Emphasis text={paragraph} />
             </p>
           ))}
         </SectionShell>
