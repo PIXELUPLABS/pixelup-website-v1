@@ -236,35 +236,55 @@ function TestimonialBlock({
     return null;
   }
 
+  // Without a heading the label and quote read as one row on mobile, so the
+  // hairline between the two columns only appears with a heading.
+  const { heading } = block;
+
   return (
     <section className="border-t-[0.5px] border-hairline">
       <div className="grid desk:grid-cols-2">
-        <div className="flex flex-col gap-6 p-6 desk:border-r-[0.5px] desk:border-hairline">
+        <div
+          className={`flex flex-col gap-6 p-6 desk:border-r-[0.5px] desk:border-hairline ${heading ? "" : "pb-0 desk:pb-6"}`}
+        >
           <p className="font-mono text-[12px] uppercase leading-none tracking-wide text-white/40">
             Client testimonial
           </p>
-          <h2 className="max-w-[18ch] text-balance text-[24px] font-medium leading-tight tracking-display text-white desk:text-[48px]">
-            {block.heading}
-          </h2>
+          {heading && (
+            <h2 className="max-w-[18ch] text-balance text-[24px] font-medium leading-tight tracking-display text-white desk:text-[48px]">
+              {heading}
+            </h2>
+          )}
         </div>
-        <div className="flex flex-col gap-8 border-t-[0.5px] border-hairline p-6 desk:border-t-0">
+        <div
+          className={`flex flex-col gap-8 p-6 ${heading ? "border-t-[0.5px] border-hairline desk:border-t-0" : ""}`}
+        >
           {block.approvalPending && (
             <p className="w-fit border-[0.5px] border-hairline px-3 py-2 font-mono text-[12px] uppercase leading-none tracking-wide text-white/60">
               Prototype only · approval pending
             </p>
           )}
-          <div className="flex flex-col gap-6">
-            <blockquote className="max-w-[40ch] text-balance text-[20px] font-medium leading-[1.4] tracking-[-0.02em] text-white desk:text-[24px]">
+          <div className={`flex flex-col ${heading ? "gap-6" : "gap-5"}`}>
+            {/* Headingless rows stay at paragraph scale so the quote reads
+                as part of Results, not a pull quote. */}
+            <blockquote
+              className={
+                heading
+                  ? "max-w-[40ch] text-balance text-[20px] font-medium leading-[1.4] tracking-[-0.02em] text-white desk:text-[24px]"
+                  : "text-[16px] leading-[1.5] text-white"
+              }
+            >
               “{block.quote}”
             </blockquote>
-            <div className="flex items-center gap-4">
+            <div className={`flex items-center ${heading ? "gap-4" : "gap-3"}`}>
               {block.person.headshot && (
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-white/[0.04]">
+                <div
+                  className={`relative shrink-0 overflow-hidden rounded-full bg-white/[0.04] ${heading ? "h-16 w-16" : "h-10 w-10"}`}
+                >
                   <Image
                     src={block.person.headshot}
                     alt={`${block.person.name}, ${block.person.company}`}
                     fill
-                    sizes="64px"
+                    sizes={heading ? "64px" : "40px"}
                     className="object-cover"
                   />
                 </div>
