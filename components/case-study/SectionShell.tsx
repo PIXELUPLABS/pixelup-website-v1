@@ -3,13 +3,15 @@
  * half, full-width hairline right below it, then the content column on the
  * right half (its left edge on the vertical center rule). Heights are fully
  * content-driven — the blocks grow/shrink with their copy. Padding: 24px
- * around the heading, 24px top/bottom + 12px sides on the content column.
+ * around the heading, 24px top/bottom + 12px sides on the content column
+ * (24px sides with contentInset="wide").
  */
 export function SectionShell({
   heading,
   children,
   topRule = false,
   headingSize = "default",
+  contentInset = "compact",
 }: {
   heading: string;
   children: React.ReactNode;
@@ -17,6 +19,9 @@ export function SectionShell({
   topRule?: boolean;
   /** Use a reduced desktop size when a heading needs to stay within two lines. */
   headingSize?: "default" | "compact" | "small";
+  /** Desktop side padding of the content column: "compact" is the 12px from
+   * the Figma template; "wide" matches the 24px rows of the story layout. */
+  contentInset?: "compact" | "wide";
 }) {
   const headingSizeClass = {
     default: "desk:text-[48px]",
@@ -43,7 +48,9 @@ export function SectionShell({
         className="hidden w-full border-t-[0.5px] border-hairline desk:block"
       />
       <div className="flex desk:justify-end">
-        <div className="flex w-full flex-col gap-5 px-6 pb-6 desk:w-1/2 desk:px-3 desk:py-6">
+        <div
+          className={`flex w-full flex-col gap-5 px-6 pb-6 desk:w-1/2 desk:py-6 ${contentInset === "wide" ? "desk:px-6" : "desk:px-3"}`}
+        >
           {children}
         </div>
       </div>

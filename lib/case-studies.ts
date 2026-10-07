@@ -70,6 +70,8 @@ export interface CaseSection {
 export interface FaqItem {
   q: string;
   a: string;
+  href?: string;
+  linkLabel?: string;
 }
 
 export interface MoreProjectRef {
@@ -81,7 +83,8 @@ export interface MoreProjectRef {
 export interface CaseMetric {
   value: string;
   label: string;
-  detail: string;
+  /** Optional muted sub-line under the label. */
+  detail?: string;
 }
 
 export type CaseStoryBlock =
@@ -169,6 +172,8 @@ export interface CaseStudy {
   introMedia?: MediaBlock[];
   /** Optional richer editorial structure. Legacy sections remain the fallback. */
   story?: CaseStudyStory;
+  /** Explicitly keep the original detail-page renderer while retaining story data elsewhere. */
+  detailLayout?: "legacy" | "story";
   sections: CaseSection[];
   closing?: {
     heading: string;
@@ -209,7 +214,9 @@ export const pixelupFaq: FaqItem[] = [
   },
   {
     q: "How much does it cost?",
-    a: "Scope drives pricing, so we quote per engagement. Book a discovery call and you will leave with a clear recommendation and a straightforward quote.",
+    a: "Brand sprints are $15,000. Brand plus website projects run $25,000 to $40,000. Retainers start at $6,000 a month.",
+    href: "https://contra.com/daksh_aswal_dt5tfn27/services",
+    linkLabel: "See current services and pricing on Contra.",
   },
   {
     q: "What is it like to work with you?",
@@ -265,6 +272,7 @@ const greptile: CaseStudy = {
     media: { type: "image", src: "/media/greptile/hero.png" },
     alt: "Glowing green Greptile logo mark on a dark background",
   },
+  detailLayout: "legacy",
   story: {
     company: "Greptile",
     statusBadge: "YC W24 · Series A",
@@ -658,7 +666,7 @@ const sainapse: CaseStudy = {
     client: "Sainapse (AI Customer Support Platform)",
     year: "2025",
     involvement: ["Brand Identity", "Website Design"],
-    links: [{ label: "sainapse.ai", href: "https://sainapse.ai" }],
+    links: [{ label: "sainapse.ai", href: "https://sainapse-staging.webflow.io/" }],
   },
   description: [
     "After seven years and 2M+ production tickets, Sainapse had proven technology, but a brand that couldn't keep pace. Their identity felt fragmented, technical, and hard to explain.",
@@ -970,6 +978,14 @@ const sully: CaseStudy = {
   publication: { status: "published" },
 };
 
+// Shared by the hero highlights and the Results block so the two never drift.
+const streamlineMetrics: CaseMetric[] = [
+  { value: "40+", label: "Unique page designs" },
+  { value: "200+", label: "Pages on one system" },
+  { value: "100+", label: "Touchpoints" },
+  { value: "F500", label: "Enterprise conversations" },
+];
+
 const streamline: CaseStudy = {
   slug: "streamline",
   title:
@@ -997,6 +1013,186 @@ const streamline: CaseStudy = {
   hero: {
     media: { type: "image", src: "/media/streamline.png" },
     alt: "Streamline serif wordmark over a collage of legal AI product cards with a woman working at a desk",
+  },
+  story: {
+    company: "Streamline",
+    statusBadge: "Series A · Legal AI",
+    headline:
+      "We repositioned Streamline for enterprise, then scaled the brand across 200 pages.",
+    summary:
+      "Streamline was growing fast. The product was getting better, the company was moving into bigger accounts, and the old brand no longer fit. So we rebuilt it and made sure it could work across 100+ marketing, GTM and product touchpoints.",
+    highlights: streamlineMetrics,
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why the old brand was no longer a good fit.",
+        items: [
+          {
+            label: "Where Streamline was",
+            text: "Streamline had a mature AI platform built for enterprise legal teams. The product was getting better and the company was moving into bigger accounts.",
+          },
+          {
+            label: "What the market looked like",
+            text: "When we looked at the competition, some newer competitors simply looked more modern, more credible and more enterprise-ready.",
+          },
+          {
+            label: "How we found the gap",
+            text: "We went deep into the business: a brand workshop with the team, a study of the competitive landscape, a map of their buyers, and time spent understanding the product.",
+          },
+          {
+            label: "Why it mattered",
+            text: "The gap became obvious. Their brand system was holding them back, and that mattered even more because Streamline was selling to Chief Legal Officers, General Counsels, legal ops teams and legal teams inside large companies.",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-collage",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-5.png" },
+            alt: "Streamline website collage with desktop homepage, mobile mockup, and integration tiles",
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-modern-legal",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-2.png" },
+            alt: "Streamline 'Built for how modern legal teams work' website section on a green textured background",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-one",
+        index: "01",
+        heading: "Our first instinct was to make Streamline much bolder.",
+        problem:
+          "If the old brand was underselling the product, the new one needed to make a much stronger statement. So we explored three creative directions: more colour, more gradients, more conceptual imagery, more personality.",
+        whyItMattered:
+          "After the first round of feedback, we realised we had pushed too far. The new directions felt modern, but they no longer looked like a company built for enterprise legal teams. They were not lawyer-like.",
+        whatWeDid:
+          "The answer was not to make Streamline as different as possible. It was to make them feel modern without losing the trust their buyers expected. The question changed from how bold we could make Streamline to how modern we could make it without losing the maturity the product already had. The brief became: legal-tech serious, modern flavour.",
+        outcome:
+          "That principle guided every decision from there. Royal blue became the primary colour and leaf green the secondary. Neutrals did a lot of the work. Product and illustration supported the copy instead of overpowering it, and gradients and textures stayed but became more subtle.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-brand",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/streamline/img-3.png" },
+              alt: "Streamline document knowledge graph and Slack AI conversation cards on a green glass background",
+            },
+            {
+              media: { type: "image", src: "/media/streamline/img-4.png" },
+              alt: "Streamline mobile integrations screen 'We work where your team already works'",
+            },
+          ],
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-integrations",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-6.png" },
+            alt: "Streamline integrations strip with Ironclad, Microsoft Teams, Slack, Salesforce, Jira, and DocuSign",
+            tone: "white",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-two",
+        index: "02",
+        heading: "Getting the brand right was only half the job.",
+        problem:
+          "Finding the right visual direction solved the perception problem. The next challenge was making it work across the entire website and every marketing touchpoint.",
+        whyItMattered:
+          "Streamline did not need a five-page marketing site. The project grew to 40+ unique page designs, with the system extending across 200+ pages. A page written for a General Counsel had to tell a completely different story from an AI Contract Review page.",
+        whatWeDid:
+          "We turned the brand into a design system: reusable components, page structures, product templates, design rules and an illustration system that could stretch across the whole website. The illustrations had to support dozens of different ideas without making every page feel disconnected.",
+        outcome:
+          "By this point we were not just designing a new brand. We were building a system Streamline could keep using as the company grew.",
+      },
+      {
+        kind: "gallery",
+        id: "gallery-system",
+        heading: "One system, 200+ pages.",
+        intro:
+          "Product, feature, industry, team and resource pages all run on the same components, so a General Counsel page and an AI Contract Review page can tell different stories without looking like different companies.",
+        media: [
+          {
+            kind: "full",
+            slot: {
+              media: { type: "image", src: "/media/streamline/img-7.png" },
+              alt: "Streamline 'Built for how modern legal teams work' team page on a tablet held in hands",
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: { type: "image", src: "/media/streamline/img-8.png" },
+              alt: "Streamline resources section 'Insight for legal operations leaders' on a green background",
+            },
+          },
+        ],
+      },
+      {
+        kind: "results",
+        id: "results",
+        heading: "Results",
+        metrics: streamlineMetrics,
+      },
+      {
+        kind: "media",
+        id: "snapshot-homepage",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-1.png" },
+            alt: "Streamline homepage hero 'In-house legal runs on Streamline' on a tablet held in hands",
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Streamline ended up.",
+        paragraphs: [
+          "Streamline had much more than a new homepage. They had a brand that finally matched the maturity of the product behind it, a design system that could extend across all the touchpoints, and a website built around the perception they needed with enterprise legal buyers.",
+          "After launch, the team also reported positive customer feedback and stronger enterprise conversations, including with Fortune 500 companies. You can see the live site at streamline.ai.",
+          "If you recognised Streamline's problem in your own company, we should talk. We work with AI and B2B SaaS teams on brand, web and product design, helping them move upmarket.",
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-laptop",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/streamline/img-9.png" },
+            alt: "Streamline resources page on a laptop resting on a stone slab",
+          },
+        },
+      },
+    ],
+    faqHeading,
+    faqs: pixelupFaq,
+  },
+  endCta: {
+    label: "Book a call",
+    href: links.discoveryCall,
   },
   sections: [
     {
@@ -1129,23 +1325,65 @@ const streamline: CaseStudy = {
   publication: { status: "published" },
 };
 
+// Unlike Streamline, the hero highlights and the Results block differ: the
+// hero sums up our engagement, the Results block lists what Henry Labs
+// achieved publicly after the new brand launched on May 18, 2026.
+const henryLabsHighlights: CaseMetric[] = [
+  {
+    value: "3",
+    label: "Products on one system",
+    detail: "Website, dashboard, checkout",
+  },
+  { value: "2", label: "Engagements", detail: "Hired again a month in" },
+  {
+    value: "24 days",
+    label: "To a locked brand direction",
+    detail: "Kickoff to final pick",
+  },
+  {
+    value: "4 wks",
+    label: "Product design sprint",
+    detail: "Checkout + dashboard V1",
+  },
+];
+
+// Sources: Philip Qiu's public LinkedIn posts (Allowance, FASHIONOLOGY) and
+// Caplight's headcount tracking (team size).
+const henryLabsResults: CaseMetric[] = [
+  {
+    value: "10×",
+    label: "Stores on Allowance",
+    detail: "9 to 90 in two weeks, via Henry",
+  },
+  {
+    value: "YC",
+    label: "Startup launched on Henry",
+    detail: "Allowance (YC P26), Sep 2026",
+  },
+  { value: "2×", label: "Team size", detail: "4 to 8, May to June 2026" },
+  {
+    value: "1st",
+    label: "In-person activation",
+    detail: "FASHIONOLOGY, NYC, June 2026",
+  },
+];
+
 const henryLabs: CaseStudy = {
   slug: "henrylabs",
   title:
     "We built the Henry Labs brand, then carried it across every touchpoint.",
   metaTitle: "Henry Labs Case Study - PIXELUP LABS",
   metaDescription:
-    "See how PIXELUP LABS designed Henry Labs' brand, website, dashboard and checkout experience for a startup building agentic commerce infrastructure.",
+    "PIXELUP LABS built the brand, website, partner dashboard and checkout for Henry Labs, a founding member of the Agentic Commerce Consortium.",
   info: {
     client: "Henry Labs",
     year: "2026",
     involvement: [
-      "Brand identity",
       "Positioning",
-      "Website design and build",
-      "Product design",
-      "Design system",
-      "Motion",
+      "Brand",
+      "Website",
+      "Product",
+      "Webflow Development",
     ],
     funding: "Private",
     links: [
@@ -1162,10 +1400,247 @@ const henryLabs: CaseStudy = {
   hero: {
     media: {
       type: "video",
-      src: "/media/henry-labs.mp4",
-      poster: "/media/henry-labs/64.avif",
+      src: "/media/henry-labs/hero.mp4",
+      poster: "/media/henry-labs/hero-poster.jpg",
     },
-    alt: "Henry Labs animated brand reveal",
+    alt: "Henry Labs brand film showing the new identity across posters and brand applications",
+  },
+  story: {
+    company: "Henry Labs",
+    statusBadge: "Agentic commerce · Checkout",
+    headline:
+      "We built the Henry Labs brand, then carried it across every touchpoint.",
+    summary:
+      "Henry Labs builds the checkout layer for agentic commerce, used by AI shopping apps like Price.com and Aesthetic. Its one-click checkout was **cited by Visa** in December 2025, and it is a **founding member of the Agentic Commerce Consortium**, alongside Rye, Crossmint and Lithic.",
+    highlights: henryLabsHighlights,
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why the brand was behind the company.",
+        items: [
+          {
+            label: "Where Henry Labs was",
+            text: "Henry Labs builds checkout for AI shopping apps. **Visa had already cited their one-click checkout**, and they were a **founding member of the Agentic Commerce Consortium**.",
+          },
+          {
+            label: "What the market looked like",
+            text: "Agentic commerce was filling up fast with startups that all sounded the same. Platforms choosing a checkout partner **could not tell them apart**.",
+          },
+          {
+            label: "How we found the gap",
+            text: "A competitor analysis and a product deep dive showed what Henry Labs really sells: **an SDK platforms build on, not a shopping app**.",
+          },
+          {
+            label: "Why it mattered",
+            text: "Platforms trust Henry Labs with their transactions and revenue. The company had earned that trust. **The brand still looked early-stage.**",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-landscape",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/64.avif" },
+            alt: "Henry Labs wordmark over a blue and orange mountain landscape",
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-posters",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/65.avif" },
+            alt: "Henry Labs positioning posters using the mountain imagery and angular brand mark",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-one",
+        index: "01",
+        heading: "Shoppers see the Henry button. Platforms sign the contract.",
+        problem:
+          "Shoppers meet Henry Labs as a checkout button. Platforms meet it as infrastructure they trust with revenue. A shopper-first brand would look **forgettable to the actual buyer**.",
+        whyItMattered:
+          "The founders wanted **ethereal and technical, not consumer**. Too soft reads like a shopping app. Too cold looks like every payments API.",
+        whatWeDid:
+          "We designed **for the platform buyer first**. Landscape imagery and a sunset palette carried the ethereal. Precise type, grids and real product UI carried the technical.",
+        outcome:
+          "One identity **quiet enough to sit inside another company's checkout**, and **serious enough for a partner pitch**.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-execution-layer",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/66.avif" },
+            alt: "Henry Labs execution layer positioning beside an illuminated shopping cart",
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-conference",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/58.avif" },
+            alt: "Henry Labs identity and positioning presented on a large conference screen",
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-two",
+        index: "02",
+        heading: "Then the brand project turned into a product project.",
+        problem:
+          "A month into the brand work, Henry Labs **asked us to design the product too**: checkout and the partner dashboard, in a four-week sprint.",
+        whyItMattered:
+          "Partners wanted sales, traffic and referrals at a glance. **The old dashboard buried all three.** Shoppers just wanted to buy.",
+        whatWeDid:
+          "We mapped both personas, audited the checkout flow and **designed checkout first, handing it to their engineers mid-sprint**.",
+        outcome:
+          "**One design system, two hierarchies.** Partners see revenue first. Shoppers see their cart.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-personas",
+        media: {
+          kind: "full",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/figjam-user-personas.png",
+            },
+            alt: "Henry Labs FigJam research board mapping partner and shopper personas",
+            intrinsicSize: { width: 5594, height: 3062 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-checkout-flow",
+        media: {
+          kind: "full",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/henry-labs/figjam-checkout-flow.png",
+            },
+            alt: "Henry Labs FigJam board mapping the audited checkout and shopper flows",
+            intrinsicSize: { width: 5594, height: 3062 },
+          },
+        },
+      },
+      {
+        kind: "gallery",
+        id: "gallery-system",
+        heading: "One brand, three products.",
+        intro:
+          "The website, partner dashboard and consumer checkout all run on **the same design system**, so a shopper at checkout and a partner checking revenue are looking at the same company. The website tells the story in the order a buyer needs it: product data, universal cart, embedded checkout, then the analytics that come after.",
+        media: [
+          {
+            kind: "full",
+            aspect: "wide",
+            slot: {
+              media: { type: "image", src: "/media/henry-labs/asset-2.avif" },
+              alt: "Henry Labs website hero 'Own your checkout.' over a glowing mountain landscape",
+            },
+          },
+          {
+            kind: "full",
+            aspect: "wide",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/henry-labs/frame-2147244046.avif",
+              },
+              alt: "Henry Labs website displayed on a laptop against a black and silver landscape",
+            },
+          },
+          {
+            kind: "full",
+            aspect: "wide",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/henry-labs/frame-2147244048.avif",
+              },
+              alt: "Henry Labs mobile features section on a phone framed by a torn chain-link fence",
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: { type: "image", src: "/media/henry-labs/70.avif" },
+              alt: "Henry Labs website feature section for building, monetizing and optimizing agentic commerce",
+            },
+          },
+        ],
+      },
+      {
+        kind: "results",
+        id: "results",
+        heading: "Results",
+        metrics: henryLabsResults,
+      },
+      {
+        kind: "media",
+        id: "snapshot-work-wall",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/henry-labs/68.avif" },
+            alt: "Henry Labs brand posters, positioning and website screens shown as one work wall",
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Henry Labs ended up.",
+        paragraphs: [
+          "Henry Labs now has a brand that **looks as serious as the infrastructure behind it**, a website that explains the product in the order buyers need it, and a design system its engineers build on directly.",
+          "The website went live in May 2026, and the checkout and dashboard were built in-house from our designs. Henry Labs CEO Phil Qiu shared it with one line: \"**We wanted a landing page that actually feels like that future rather than explaining it.**\" By September, Henry Labs was powering Allowance (YC P26), which went from **9 to 90 stores in two weeks**. You can see the live site at henrylabs.ai.",
+          "If you recognised Henry Labs' problem in your own company, **we should talk**. We work with AI and B2B SaaS teams on brand, web and product design, helping them look as credible as the product they have built.",
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-closing",
+        media: {
+          kind: "pair",
+          aspect: "wide",
+          slots: [
+            {
+              media: { type: "image", src: "/media/henry-labs/asset-1.avif" },
+              alt: "Henry Labs mobile website and brand mark over the launch landscape",
+            },
+            {
+              media: {
+                type: "image",
+                src: "/media/henry-labs/frame-2147244047.avif",
+              },
+              alt: "Henry Labs website use cases displayed on a laptop against an orange landscape",
+            },
+          ],
+        },
+      },
+    ],
+    faqHeading,
+    faqs: pixelupFaq,
   },
   introMedia: [
     {
