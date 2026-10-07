@@ -121,13 +121,15 @@ export type CaseStoryBlock =
       kind: "results";
       id: string;
       heading: string;
-      metrics: CaseMetric[];
+      /** Omit to show the heading alone, so the testimonial row that follows
+       * is the result. */
+      metrics?: CaseMetric[];
     }
   | {
       kind: "testimonial";
       id: string;
       /** Omit for a quiet row with no section heading, placed right after
-       * Results so it closes the metrics. */
+       * Results so it closes that block. */
       heading?: string;
       quote: string;
       person: {
@@ -150,7 +152,8 @@ export interface CaseStudyStory {
   statusBadge?: string;
   headline: string;
   summary: string;
-  highlights: CaseMetric[];
+  /** Hero stat row under the headline. Omit to go straight to the hero media. */
+  highlights?: CaseMetric[];
   blocks: CaseStoryBlock[];
   faqHeading: string;
   faqs: FaqItem[];
@@ -1328,49 +1331,6 @@ const streamline: CaseStudy = {
   publication: { status: "published" },
 };
 
-// Unlike Streamline, the hero highlights and the Results block differ: the
-// hero sums up our engagement, the Results block lists what Henry Labs
-// achieved publicly after the new brand launched on May 18, 2026.
-const henryLabsHighlights: CaseMetric[] = [
-  {
-    value: "3",
-    label: "Products on one system",
-    detail: "Website, dashboard, checkout",
-  },
-  { value: "2", label: "Engagements", detail: "Hired again a month in" },
-  {
-    value: "24 days",
-    label: "To a locked brand direction",
-    detail: "Kickoff to final pick",
-  },
-  {
-    value: "4 wks",
-    label: "Product design sprint",
-    detail: "Checkout + dashboard V1",
-  },
-];
-
-// Sources: Philip Qiu's public LinkedIn posts (Allowance, FASHIONOLOGY) and
-// Caplight's headcount tracking (team size).
-const henryLabsResults: CaseMetric[] = [
-  {
-    value: "10×",
-    label: "Stores on Allowance",
-    detail: "9 to 90 in two weeks, via Henry",
-  },
-  {
-    value: "YC",
-    label: "Startup launched on Henry",
-    detail: "Allowance (YC P26), Sep 2026",
-  },
-  { value: "2×", label: "Team size", detail: "4 to 8, May to June 2026" },
-  {
-    value: "1st",
-    label: "In-person activation",
-    detail: "FASHIONOLOGY, NYC, June 2026",
-  },
-];
-
 const henryLabs: CaseStudy = {
   slug: "henrylabs",
   title:
@@ -1415,7 +1375,6 @@ const henryLabs: CaseStudy = {
       "We built the Henry Labs brand, then carried it across every touchpoint.",
     summary:
       "Henry Labs builds the checkout layer for agentic commerce, used by AI shopping apps like Price.com and Aesthetic. Its one-click checkout was **cited by Visa** in December 2025, and it is a **founding member of the Agentic Commerce Consortium**, alongside Rye, Crossmint and Lithic.",
-    highlights: henryLabsHighlights,
     blocks: [
       {
         kind: "context",
@@ -1596,11 +1555,10 @@ const henryLabs: CaseStudy = {
         kind: "results",
         id: "results",
         heading: "Results",
-        metrics: henryLabsResults,
       },
       // Faaris's public Contra review, shared with the /call slider through
-      // lib/testimonials.ts so the quote has one source. No heading: it reads
-      // as part of Results rather than a section of its own.
+      // lib/testimonials.ts so the quote has one source. No heading: it sits
+      // under the Results heading as the result itself.
       {
         kind: "testimonial",
         id: "testimonial",
@@ -1624,6 +1582,7 @@ const henryLabs: CaseStudy = {
           },
         },
       },
+      // Allowance figures: Philip Qiu's public LinkedIn posts.
       {
         kind: "afterLaunch",
         id: "after-launch",
