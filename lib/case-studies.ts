@@ -1,4 +1,5 @@
 import { links, type ProjectMedia } from "./projects";
+import { testimonials } from "./testimonials";
 
 /**
  * Case study page content, mirroring the Figma case study template
@@ -125,7 +126,9 @@ export type CaseStoryBlock =
   | {
       kind: "testimonial";
       id: string;
-      heading: string;
+      /** Omit for a quiet row with no section heading, placed right after
+       * Results so it closes the metrics. */
+      heading?: string;
       quote: string;
       person: {
         name: string;
@@ -1661,6 +1664,20 @@ const henryLabs: CaseStudy = {
         id: "results",
         heading: "Results",
         metrics: henryLabsResults,
+      },
+      // Faaris's public Contra review, shared with the /call slider through
+      // lib/testimonials.ts so the quote has one source. No heading: it reads
+      // as part of Results rather than a section of its own.
+      {
+        kind: "testimonial",
+        id: "testimonial",
+        quote: testimonials.henrylabs.quote,
+        person: {
+          name: testimonials.henrylabs.name,
+          role: testimonials.henrylabs.role,
+          company: testimonials.henrylabs.company,
+          headshot: "/media/henry-labs/faaris-hussain.jpg",
+        },
       },
       {
         kind: "media",

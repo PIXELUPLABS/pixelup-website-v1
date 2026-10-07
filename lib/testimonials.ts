@@ -4,9 +4,10 @@
  * all six written reviews; Contra counts seven because Greptile also left an
  * earlier rating-only review with no text.
  *
- * Quotes are verbatim with two exceptions: the two reviews that shorten the
+ * Quotes are verbatim with three exceptions: the two reviews that shorten the
  * brand name are normalized to PIXELUP LABS, per the repo-wide naming rule,
- * and Greptile's is adapted to name the team (original kept beside it). Roles
+ * Greptile's is adapted to name the team, and Henry Labs' em dash is split
+ * into a second sentence (originals kept beside both). Roles
  * are the title on each reviewer's own Contra profile. Newest first.
  */
 export interface Testimonial {
@@ -25,8 +26,10 @@ export interface Testimonial {
 export const testimonials = {
   henrylabs: {
     slug: "henrylabs",
+    // Em dash split into a second sentence. Contra original ends: "Fast,
+    // thoughtful, and easy to work with — highly recommend!"
     quote:
-      "PIXELUP LABS has been a great partner for us at Henry Labs. They handled our landing page redesign and core product design, and the output speaks for itself. Fast, thoughtful, and easy to work with — highly recommend!",
+      "PIXELUP LABS has been a great partner for us at Henry Labs. They handled our landing page redesign and core product design, and the output speaks for itself. Fast, thoughtful, and easy to work with. Highly recommend!",
     name: "Faaris Hussain",
     role: "COO",
     company: "Henry Labs",
