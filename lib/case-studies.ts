@@ -1554,11 +1554,11 @@ const henryLabs: CaseStudy = {
       {
         kind: "results",
         id: "results",
-        heading: "Results",
+        heading: "In their own words.",
       },
       // Faaris's public Contra review, shared with the /call slider through
       // lib/testimonials.ts so the quote has one source. No heading: it sits
-      // under the Results heading as the result itself.
+      // under the results block's heading as the result itself.
       {
         kind: "testimonial",
         id: "testimonial",
