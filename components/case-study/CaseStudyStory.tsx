@@ -89,9 +89,11 @@ function StoryHero({
         className="fade-up [animation-delay:300ms] desk:hidden"
       />
 
-      <div className="fade-up [animation-delay:400ms]">
-        <Metrics metrics={story.highlights} />
-      </div>
+      {story.highlights?.length ? (
+        <div className="fade-up [animation-delay:400ms]">
+          <Metrics metrics={story.highlights} />
+        </div>
+      ) : null}
 
       <div className="fade-up [animation-delay:500ms]">
         <CaseMediaBlock block={{ kind: "full", slot: study.hero }} priority />
@@ -216,11 +218,13 @@ function ResultsBlock({
           {block.heading}
         </h2>
       </div>
-      <Metrics
-        metrics={block.metrics}
-        usesSharedCenterRule
-        bottomRule={!flushNext}
-      />
+      {block.metrics?.length ? (
+        <Metrics
+          metrics={block.metrics}
+          usesSharedCenterRule
+          bottomRule={!flushNext}
+        />
+      ) : null}
     </section>
   );
 }
