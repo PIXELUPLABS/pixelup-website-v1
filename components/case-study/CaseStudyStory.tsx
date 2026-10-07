@@ -8,10 +8,24 @@ import type {
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { ClientInfo } from "./ClientInfo";
-import { Emphasis } from "./Emphasis";
+import { Emphasis, hasEmphasis } from "./Emphasis";
 import { EndCta } from "./EndCta";
 import { MoreProjects } from "./MoreProjects";
 import { SectionShell } from "./SectionShell";
+
+/**
+ * Row label and body copy colors for one story. A story written with
+ * `**phrase**` highlights (Henry Labs) mutes its body so the white phrases
+ * stand out, and lifts the labels to white. One without any (Streamline)
+ * keeps white body copy under grey labels.
+ */
+function copyTones(highlighted: boolean) {
+  return highlighted
+    ? { label: "text-white", body: "text-muted-65" }
+    : { label: "text-white/60", body: "text-white" };
+}
+
+type CopyTones = ReturnType<typeof copyTones>;
 
 /** Hairline-divided metric cells. Also the /services hero trust strip. */
 export function Metrics({
@@ -104,8 +118,10 @@ function StoryHero({
 
 function ContextBlock({
   block,
+  tones,
 }: {
   block: Extract<CaseStoryBlock, { kind: "context" }>;
+  tones: CopyTones;
 }) {
   return (
     <SectionShell heading={block.heading} topRule contentInset="wide">
@@ -115,10 +131,12 @@ function ContextBlock({
             key={item.label}
             className="flex flex-col gap-2 py-4 first:pt-0 last:pb-0"
           >
-            <p className="text-[14px] leading-[1.3] tracking-[-0.01em] text-white">
+            <p
+              className={`text-[14px] leading-[1.3] tracking-[-0.01em] ${tones.label}`}
+            >
               {item.label}
             </p>
-            <p className="text-[16px] leading-[1.5] text-muted-65">
+            <p className={`text-[16px] leading-[1.5] ${tones.body}`}>
               <Emphasis text={item.text} />
             </p>
           </div>
@@ -131,10 +149,12 @@ function ContextBlock({
 function ChallengeBlock({
   block,
   total,
+  tones,
 }: {
   block: Extract<CaseStoryBlock, { kind: "challenge" }>;
   /** How many challenge blocks the story has, so "01" reads as "01 / 02". */
   total: number;
+  tones: CopyTones;
 }) {
   const details = [
     { label: "Problem", text: block.problem },
@@ -167,10 +187,14 @@ function ChallengeBlock({
       <div className="divide-y-[0.5px] divide-hairline border-t-[0.5px] border-hairline">
         {details.map((detail) => (
           <div key={detail.label} className="grid desk:grid-cols-2">
-            <p className="p-6 pb-2 text-[14px] leading-[1.3] tracking-[-0.01em] text-white desk:border-r-[0.5px] desk:border-hairline desk:pb-6">
+            <p
+              className={`p-6 pb-2 text-[14px] leading-[1.3] tracking-[-0.01em] ${tones.label} desk:border-r-[0.5px] desk:border-hairline desk:pb-6`}
+            >
               {detail.label}
             </p>
-            <p className="p-6 pt-2 text-[16px] leading-[1.5] text-muted-65 desk:pt-6">
+            <p
+              className={`p-6 pt-2 text-[16px] leading-[1.5] ${tones.body} desk:pt-6`}
+            >
               <Emphasis text={detail.text} />
             </p>
           </div>
@@ -182,13 +206,15 @@ function ChallengeBlock({
 
 function GalleryBlock({
   block,
+  tones,
 }: {
   block: Extract<CaseStoryBlock, { kind: "gallery" }>;
+  tones: CopyTones;
 }) {
   return (
     <>
       <SectionShell heading={block.heading} topRule contentInset="wide">
-        <p className="text-[16px] leading-[1.5] text-muted-65">
+        <p className={`text-[16px] leading-[1.5] ${tones.body}`}>
           <Emphasis text={block.intro} />
         </p>
       </SectionShell>
@@ -313,20 +339,24 @@ function StoryBlock({
   block,
   challengeTotal,
   nextOpensWithRule,
+  tones,
 }: {
   block: CaseStoryBlock;
   challengeTotal: number;
   nextOpensWithRule: boolean;
+  tones: CopyTones;
 }) {
   switch (block.kind) {
     case "context":
-      return <ContextBlock block={block} />;
+      return <ContextBlock block={block} tones={tones} />;
     case "media":
       return <CaseMediaBlock block={block.media} />;
     case "challenge":
-      return <ChallengeBlock block={block} total={challengeTotal} />;
+      return (
+        <ChallengeBlock block={block} total={challengeTotal} tones={tones} />
+      );
     case "gallery":
-      return <GalleryBlock block={block} />;
+      return <GalleryBlock block={block} tones={tones} />;
     case "results":
       return <ResultsBlock block={block} flushNext={nextOpensWithRule} />;
     case "testimonial":
@@ -337,7 +367,7 @@ function StoryBlock({
           {block.paragraphs.map((paragraph) => (
             <p
               key={paragraph}
-              className="text-[16px] leading-[1.5] text-muted-65"
+              className={`text-[16px] leading-[1.5] ${tones.body}`}
             >
               <Emphasis text={paragraph} />
             </p>
@@ -355,6 +385,9 @@ export function CaseStudyStory({ study }: { study: CaseStudy }) {
   const challengeTotal = story.blocks.filter(
     (block) => block.kind === "challenge",
   ).length;
+  // One `**phrase**` anywhere in the copy switches the whole story to the
+  // highlighted tones, so labels and body never mix styles on one page.
+  const tones = copyTones(hasEmphasis(JSON.stringify(story.blocks)));
 
   return (
     <>
@@ -375,17 +408,14 @@ export function CaseStudyStory({ study }: { study: CaseStudy }) {
                 block={block}
                 challengeTotal={challengeTotal}
                 nextOpensWithRule={next?.kind !== "media"}
+                tones={tones}
               />
             );
           })}
 
           {study.endCta && <EndCta endCta={study.endCta} />}
 
-          <SectionShell
-            heading={story.faqHeading}
-            topRule
-            contentInset="wide"
-          >
+          <SectionShell heading={story.faqHeading} topRule contentInset="wide">
             <CaseFaq items={story.faqs} />
           </SectionShell>
 

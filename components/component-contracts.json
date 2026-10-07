@@ -433,6 +433,7 @@
       "testimonial uses the left column for its section heading and the right column for the body-scale quote and attribution",
       "testimonial without a heading is a quiet row (label left, quote right) for directly after results: the results block drops its bottom rule so the testimonial's top hairline closes the metrics",
       "hero highlights and results metrics are both optional: without highlights the headline runs straight into the hero media; results without metrics is its heading alone, so a headingless testimonial below it reads as the result (Henry Labs)",
+      "copy tones are per story: one `**phrase**` anywhere in the blocks mutes body copy (muted-65, white highlights) and lifts row labels to white; a story without markers keeps white body copy under white/60 labels (Streamline)",
       "testimonial approvalPending renders an explicit prototype-only label so draft client copy cannot be mistaken for approved copy"
     ],
     "tokens_used": [
