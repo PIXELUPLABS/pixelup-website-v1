@@ -1868,7 +1868,7 @@ const henryLabs: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-17",
-    updatedDate: "2026-09-25",
+    updatedDate: "2026-10-07",
     blockers: [
       'Funding reads "Private": confirm a figure directly with Henry Labs before publishing one.',
       "Add two approved Slack reactions with names and roles.",

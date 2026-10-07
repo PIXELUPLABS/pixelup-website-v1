@@ -203,7 +203,7 @@
   "TestimonialSlider": {
     "file": "components/TestimonialSlider.tsx",
     "category": "interactive",
-    "description": "Sidebar testimonial card: client wordmark, quote and name/role, cycling through several testimonials with a cross-fade. Three short progress bars in the top-right corner show which quote is up and how long it stays; clicking one jumps to it. Data lives in lib/testimonials.ts (all six Contra reviews, verbatim apart from the brand-name normalization and the Greptile quote, which is adapted to name the team).",
+    "description": "Sidebar testimonial card: client wordmark, quote and name/role, cycling through several testimonials with a cross-fade. Three short progress bars in the top-right corner show which quote is up and how long it stays; clicking one jumps to it. Data lives in lib/testimonials.ts (all six Contra reviews, verbatim apart from the brand-name normalization, the Greptile quote, which is adapted to name the team, and the Henry Labs em dash, split into a second sentence).",
     "variants": ["none — takes a Testimonial[]; a single testimonial renders without bars or rotation"],
     "states": {
       "rotating": "Default. The active bar fills over the slide's dwell time (~250ms a word, clamped to 6–12s) and its animationend advances to the next quote. aria-live is off.",
