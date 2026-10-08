@@ -17,7 +17,7 @@
  * and their sitemap entries use.
  */
 export const siteUpdated = {
-  home: "2026-09-25",
+  home: "2026-10-08",
   call: "2026-10-07",
   explorations: "2026-09-30",
   clients: "2026-09-15",

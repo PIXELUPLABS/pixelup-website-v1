@@ -71,6 +71,20 @@ export const projects: Project[] = [
     year: "2026",
   },
   {
+    slug: "replay",
+    label: "Replay",
+    // replay.ai 308s to www.replay.ai — link the destination directly, no redirect hop.
+    href: "https://www.replay.ai/",
+    external: true,
+    media: { type: "image", src: "/media/replay.jpg" },
+    alt: "Replay logo on a deep blue textured background, branding and website design by PIXELUP LABS",
+    // Verbatim from replay.ai's page title. Kept to 22 characters on purpose:
+    // four disciplines leave the tagline ~175px at the 1200px breakpoint.
+    tagline: "Data as growth capital",
+    services: ["Branding", "Website Design", "Product Design", "Next.js Development"],
+    year: "2026",
+  },
+  {
     slug: "ctgt",
     label: "CTGT",
     href: "https://www.ctgt.ai/",
