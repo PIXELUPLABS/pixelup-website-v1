@@ -5,7 +5,7 @@
 // setup notes are at the top of that file. Server-only: reads the secret from env.
 
 /** Must match the keys of FORMS in scripts/apps-script/WebsiteLeads.gs. */
-export type LeadsSheetForm = "bookCall" | "newsletter";
+export type LeadsSheetForm = "bookCall" | "newsletter" | "auditLeadMagnet";
 
 export type SaveResult = "saved" | "not-configured" | "failed";
 

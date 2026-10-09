@@ -524,12 +524,52 @@
     "do_not": ["Don't substitute a different company's logo for Grovio as if it were approved; replace its accessible placeholder when the real SVG arrives.", "Don't replace the width variants with transform scaling; width-only sizing preserves the requested 24px height and 10px gap.", "Don't apply the pure-white filter to Vertera Health or Conigma because it removes the contrast inside their icon marks.", "Don't remove the shared contain frame, pure-white treatment for the other logos, or per-logo width adjustments without rechecking every supplied logo together.", "Don't remove the final three-word nowrap group without rechecking the roster for one- or two-word widow lines."]
   },
 
+  "AuditLeadMagnet": {
+    "file": "components/blog/AuditLeadMagnet.tsx",
+    "category": "interactive",
+    "description": "Brand perception audit popup on /blog/[slug]. AuditForm's gradient + 10% pattern panel and a Daksh byline (photo avatar, public/media/daksh-avatar.jpg) on the left (a short band on top on mobile), the two-tone 'enterprise-ready' headline, then name / work email / website fields and the white audit button. Posts to /api/audit-lead, which appends name, email, website and the article path to the 'Brand Audit Lead Magnet' tab of the Website Leads sheet (lib/leads-sheet.ts → scripts/apps-script/WebsiteLeads.gs).",
+    "variants": [
+      "none — responsive only: centered 760px dialog from desk up, full-width bottom sheet below it"
+    ],
+    "states": {
+      "hidden": "Default. Opens once per page view, on the first of: the reader being both 25% down the page and 6s into the visit (checked on scroll, and once when the 6s are up), or exit intent (pointer leaves through the top edge) after 5s on fine-pointer devices.",
+      "suppressed": "localStorage 'pixelup:audit-popup': a dismissal keeps it away for 7 days, a submission for good.",
+      "forced": "?audit-popup=1 opens it on load for review, ignoring storage and skipping DataFast goals.",
+      "idle / submitting / error": "Same field treatment as NewsletterForm (hairline underline, accent on focus-within). Error copy in red-400, matching NewsletterForm.",
+      "success": "Thank-you copy with the submitted email, plus a dark 'Back to the article' button."
+    },
+    "tokens_used": [
+      "color.neutral.base",
+      "color.neutral.white (white/60 for secondary copy, same opacity step as AuditForm)",
+      "color.neutral.label-grey",
+      "color.neutral.hairline",
+      "color.neutral.scrim",
+      "color.neutral.button-dark",
+      "color.brand.accent (field focus only)",
+      "radius.sm",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "Blog posts only, mounted once in app/blog/[slug]/page.tsx.",
+    "do_not": [
+      "Don't mount it on more routes without deciding the trigger rules for them — it's tuned for long-form reading.",
+      "Don't recolor the submit to color.brand.accent — the audit keeps AuditCta's white colorway.",
+      "Don't add a box-shadow to lift it — the scrim and the 0.5px hairline border do that job."
+    ],
+    "analytics": "DataFast goals audit_popup_shown (with trigger), audit_popup_dismissed, audit_popup_submitted — each with the page path."
+  },
+
   "_gaps": [
     {
       "gap": "Sidebar testimonial card",
       "status": "Built as TestimonialSlider",
       "detail": "CaseStudyStory's TestimonialBlock is a full-width two-column section with a 48px heading, too large for a 405px sidebar and built for one quote. TestimonialSlider was added for /call and is documented above.",
       "closest_existing": "CaseStudyStory TestimonialBlock (quote + name/role pattern)"
+    },
+    {
+      "gap": "Modal dialog",
+      "status": "Built inside AuditLeadMagnet, not extracted",
+      "detail": "The site had no dialog primitive: the Tally popup is Tally's own, and the explorations lightbox is image-only. AuditLeadMagnet carries its own scrim, scroll lock, focus trap and Escape handling. Extract a shared Dialog shell if a second popup is ever needed.",
+      "closest_existing": "ExplorationGallery lightbox (backdrop blur), MobileMenu (color.neutral.scrim)"
     }
   ]
 }
