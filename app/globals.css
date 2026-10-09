@@ -73,6 +73,16 @@
   }
 }
 
+/* Explorations "Effect 2" CRT: a soft refresh band rolling down the screen. */
+@keyframes exploration-crt-roll {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
 /* TestimonialSlider's progress bar. Its animationend is what advances the
    slider, so pausing the animation (hover/focus) also pauses the rotation. */
 @keyframes testimonial-progress {
