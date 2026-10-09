@@ -12,6 +12,7 @@ export function flattenExplorationBlocks(blocks: ExplorationBlock[]): string[] {
 }
 
 export const explorationBlocks: ExplorationBlock[] = [
+  // --
   // { kind: "full", src: "/media/explorations/img-82.webp" },
   // {
   //   kind: "triple",
