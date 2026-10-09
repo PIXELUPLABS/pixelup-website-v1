@@ -8,6 +8,9 @@
  *     catches people who leave without booking.
  *   - "Newsletter": the footer signup (components/NewsletterForm.tsx →
  *     app/api/newsletter/route.ts). An email that is already listed is skipped.
+ *   - "Brand Audit Lead Magnet": perception audit requests from the blog-post
+ *     popup (components/blog/AuditLeadMagnet.tsx → app/api/audit-lead/route.ts),
+ *     with the article path in "Page".
  *
  * This is NOT part of the Next.js build. It runs on Google's servers, attached
  * to the spreadsheet. Paste it into the Apps Script editor bound to that sheet
@@ -52,6 +55,11 @@ const FORMS = {
     fields: ['name', 'email'],
     headers: ['Submitted at', 'Name', 'Email'],
     unique: 'email',
+  },
+  auditLeadMagnet: {
+    sheet: 'Brand Audit Lead Magnet',
+    fields: ['name', 'email', 'website', 'page'],
+    headers: ['Submitted at', 'Name', 'Email', 'Website', 'Page'],
   },
 };
 
