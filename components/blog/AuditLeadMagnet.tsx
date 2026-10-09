@@ -21,10 +21,10 @@ const STORAGE_KEY = "pixelup:audit-popup";
 /** A dismissal keeps it away this long; a submission keeps it away for good. */
 const DISMISS_DAYS = 7;
 /** Scroll-depth trigger: past this share of the article, after MIN_DWELL_MS. */
-const SCROLL_DEPTH = 0.4;
-const MIN_DWELL_MS = 12_000;
+const SCROLL_DEPTH = 0.25;
+const MIN_DWELL_MS = 6_000;
 /** Desktop exit intent only arms after this long, so a bounce doesn't trip it. */
-const EXIT_INTENT_DELAY_MS = 8_000;
+const EXIT_INTENT_DELAY_MS = 5_000;
 /** `?audit-popup=1` opens it straight away for review: storage is ignored and
     nothing is tracked or stored, though a submit still reaches the sheet. */
 const FORCE_PARAM = "audit-popup";

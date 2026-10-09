@@ -532,7 +532,7 @@
       "none — responsive only: centered 760px dialog from desk up, full-width bottom sheet below it"
     ],
     "states": {
-      "hidden": "Default. Opens once per page view, on the first of: the reader being both 40% down the page and 12s into the visit (checked on scroll, and once when the 12s are up), or exit intent (pointer leaves through the top edge) after 8s on fine-pointer devices.",
+      "hidden": "Default. Opens once per page view, on the first of: the reader being both 25% down the page and 6s into the visit (checked on scroll, and once when the 6s are up), or exit intent (pointer leaves through the top edge) after 5s on fine-pointer devices.",
       "suppressed": "localStorage 'pixelup:audit-popup': a dismissal keeps it away for 7 days, a submission for good.",
       "forced": "?audit-popup=1 opens it on load for review, ignoring storage and skipping DataFast goals.",
       "idle / submitting / error": "Same field treatment as NewsletterForm (hairline underline, accent on focus-within). Error copy in red-400, matching NewsletterForm.",
