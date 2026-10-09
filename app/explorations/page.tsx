@@ -1,21 +1,15 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import { ExplorationGallery } from "@/components/explorations/ExplorationGallery";
-import { Footer } from "@/components/Footer";
-import { LeftNav } from "@/components/LeftNav";
 import { explorationBlocks, flattenExplorationBlocks } from "@/lib/explorations";
 import { readPublicImageDimensions } from "@/lib/imageDimensions";
 
-// Real dimensions are read at build time so the masonry columns can be
-// balanced on the server and every image reserves its exact space (no CLS).
-// Falls back to the old 1008x584 card ratio if a header can't be read.
+// Real dimensions are read at build time so every card on the canvas is sized
+// to its true aspect ratio. Falls back to the old 1008x584 card ratio if a
+// header can't be read.
 const explorationImages = flattenExplorationBlocks(explorationBlocks).map((src) => ({
   src,
   ...(readPublicImageDimensions(src) ?? { width: 1008, height: 584 }),
 }));
-
-// Scoped to this page's heading only — the rest of the site keeps font-display.
-const geist = Geist({ subsets: ["latin"], weight: ["500", "600"] });
 
 export const metadata: Metadata = {
   title: "Explorations - PIXELUP LABS",
@@ -26,46 +20,17 @@ export const metadata: Metadata = {
 
 export default function ExplorationsPage() {
   return (
-    <>
-      <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
-        <LeftNav
-          sticky
-          heading={
-            <>
-              Concepts
-              <br />
-              We Killed
-              {/* <span className="ml-1 inline-block h-[6.54px] w-[6.54px] shrink-0 bg-[#0658FC] align-baseline" /> */}
-            </>
-          }
-          subheading={
-            <>
-              Gallery of ideas that lost the pitch but still
-              <br />
-              deserves a look. See how we think when no
-              <br />
-              one&apos;s watching the final cut.
-            </>
-          }
-          headingSize="desk:text-[56px]"
-          headingFontClassName={geist.className}
-        />
-        {/* Divider between the nav and content columns, same treatment as the homepage. */}
-        <div
-          aria-hidden="true"
-          className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
-        />
-        {/* Same card frame + gap-6 (24px) stack as the homepage's ProjectCard list. */}
-        <main className="flex min-w-0 flex-1 flex-col gap-8">
-          <ExplorationGallery images={explorationImages} />
-          {/* Same treatment as /blog's Footer wrapper — cancels the row's
-              p-5 on this wrapper only, so Footer fills the extra space via
-              its own w-full without needing any change to Footer itself. */}
-          <div className="-mx-4 -mb-4 desk:-mr-5 desk:-mb-5 desk:-ml-4">
-            <Footer />
-          </div>
-        </main>
-      </div>
-    </>
+    // Full-bleed canvas filling the viewport under the sticky h-16 Navbar.
+    // Wheel and drag pan the canvas, so the page itself never scrolls.
+    <main className="relative h-[calc(100svh-4rem)] overflow-hidden">
+      <h1 className="sr-only">Concepts We Killed — explorations from PIXELUP LABS</h1>
+      <ExplorationGallery images={explorationImages} />
+      <p
+        aria-hidden="true"
+        className="pointer-events-none absolute bottom-5 left-1/2 z-10 -translate-x-1/2 font-mono text-[12px] font-medium uppercase leading-none tracking-[0.04em] text-label-grey mix-blend-difference"
+      >
+        Scroll/drag to move
+      </p>
+    </main>
   );
 }

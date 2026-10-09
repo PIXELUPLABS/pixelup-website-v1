@@ -41,6 +41,13 @@
 
   /* Marquee animation for the "Trusted by" logo strip */
   --animate-marquee: marquee 30s linear infinite;
+  /* Soft spring (damping 0.9, i.e. Framer "bounce 0.1") sampled into a
+     linear() curve — fast start, long gentle settle. Use with ~600ms.
+     Generates the `ease-spring` utility. */
+  --ease-spring: linear(
+    0, 0.0523, 0.169, 0.3085, 0.4467, 0.5713, 0.6768, 0.7626, 0.8298, 0.881, 0.9191, 0.9466,
+    0.966, 0.9794, 0.9884, 0.9941, 0.9977, 0.9998, 1.0009, 1.0014, 1
+  );
 }
 
 @keyframes marquee {
@@ -49,6 +56,20 @@
   }
   to {
     transform: translateX(-50%);
+  }
+}
+
+/* /explorations canvas: each card fades and settles in on first load. */
+@keyframes exploration-card-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
   }
 }
 

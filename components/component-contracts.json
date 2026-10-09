@@ -311,7 +311,7 @@
   "ExplorationGallery": {
     "file": "components/explorations/ExplorationGallery.tsx",
     "category": "interactive",
-    "description": "Renders the /explorations image list (full-width and 50/50-pair blocks) plus the Grid/Zoom toggle, plus a click-to-expand lightbox (framer-motion fade/scale, backdrop blur, prev/next arrows, Escape/arrow-key nav, body scroll lock).",
+    "description": "Renders /explorations as a full-bleed infinite canvas: images scattered over a repeating tile that wraps in both axes, panned by wheel/trackpad or pointer drag with eased inertia, per-card velocity lag, pointer-follow parallax, a hover zoom/dim, and a staggered intro. Tabbing to a card glides it to center. Plus a click-to-expand lightbox (framer-motion fade/scale, backdrop blur, prev/next arrows, Escape/arrow-key nav, body scroll lock).",
     "variants": ["blocks prop: { kind: \"full\", src } | { kind: \"pair\", srcs: [a, b] }, ordered top-to-bottom exactly as rendered."],
     "states": {
       "view:grid": "Default. Derived (not separately tracked) from whether the lightbox is closed.",
