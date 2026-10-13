@@ -1,6 +1,7 @@
-import {revalidatePath} from 'next/cache'
+import {revalidatePath, revalidateTag} from 'next/cache'
 import {NextRequest, NextResponse} from 'next/server'
 import {parseBody} from 'next-sanity/webhook'
+import {SANITY_CACHE_TAG} from '@/sanity/lib/live'
 
 type BlogWebhookPayload = {
   operation?: 'create' | 'update' | 'delete'
@@ -61,6 +62,12 @@ export async function POST(request: NextRequest) {
       return new Response('Webhook source does not match this site.', {status: 403})
     }
 
+    // Expire every cached sanityFetch() read, not just the ones the paths below
+    // happen to reach: path revalidation alone left the sitemap's copy stale
+    // for days. `expire: 0` is Next 16's immediate expiry for webhooks; 'max'
+    // would serve one more stale render first.
+    revalidateTag(SANITY_CACHE_TAG, {expire: 0})
+
     revalidatePath('/blog')
     revalidatePath('/sitemap.xml')
     revalidatePath('/blog/[slug]', 'page')
@@ -72,6 +79,7 @@ export async function POST(request: NextRequest) {
       revalidated: true,
       operation: body.operation,
       documentType: body.documentType,
+      tags: [SANITY_CACHE_TAG],
       paths: ['/blog', '/blog/[slug]', '/sitemap.xml', ...slugs.map((slug) => `/blog/${slug}`)],
     })
   } catch (error) {
