@@ -20,7 +20,7 @@ export default function Footer() {
         <CopyEmail email={site.email} />
         <p className="foot__note" data-reveal="fade">
           <StatusDots />
-          <span>{site.status} right now. Say hello anyway.</span>
+          <span>{site.status} right now. Say hello.</span>
         </p>
       </div>
 

@@ -14,10 +14,11 @@ export const site = {
   tagline: 'A full service design studio.',
   description: 'We build brands, websites and products that command enterprise trust.',
   email: 'hello@pixeluplabs.com',
-  status: 'Not taking projects',
+  status: '2 slots available',
   socials: [
     { label: 'Contra', href: 'https://contra.com/daksh_aswal_dt5tfn27' },
     { label: 'X', href: 'https://x.com/dakshpixelup' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/dakshpixelup/' },
   ],
   legal: [
     { label: 'Privacy Policy', href: '#' },

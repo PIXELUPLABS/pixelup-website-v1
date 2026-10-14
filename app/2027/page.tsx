@@ -4,10 +4,8 @@ import Clients from '@/components/2027/Clients';
 import Footer from '@/components/2027/Footer';
 import Header from '@/components/2027/Header';
 import Hero from '@/components/2027/Hero';
-import News from '@/components/2027/News';
 import Services from '@/components/2027/Services';
 import Work from '@/components/2027/Work';
-import { getBlogRows } from '@/lib/2027/blog';
 import { site } from '@/lib/2027/site';
 
 const title = 'PIXELUP LABS - Premium Brands and Websites';
@@ -29,19 +27,16 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title, description: site.description },
 };
 
-export default async function Home2027() {
-  const posts = await getBlogRows();
-
+export default function Home2027() {
   return (
     <>
-      <Header blogCount={posts.length} />
+      <Header />
       <main>
         <Hero />
         <Work />
         <Clients />
         <About />
         <Services />
-        <News posts={posts.slice(0, 5)} total={posts.length} />
       </main>
       <Footer />
     </>

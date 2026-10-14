@@ -20,20 +20,3 @@ html:has(.v2027) body {
   font-size: revert;
   vertical-align: revert;
 }
-
-/* Blog rows are plain rows here (the articles are still on the old design), so they don't light up on hover. */
-@media (hover: hover) {
-  :where(.v2027) .news__link.is-static:hover {
-    color: inherit;
-  }
-  :where(.v2027) .news__link.is-static:hover::before {
-    transform: scaleY(0);
-  }
-  :where(.v2027) .news__link.is-static:hover .news__name {
-    transform: none;
-  }
-  :where(.v2027) .news__link.is-static:hover .news__type,
-  :where(.v2027) .news__link.is-static:hover .news__meta {
-    color: var(--fog);
-  }
-}

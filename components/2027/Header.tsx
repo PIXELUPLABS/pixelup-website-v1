@@ -2,13 +2,12 @@ import { site, work } from '@/lib/2027/site';
 import MenuToggle from './MenuToggle';
 import { ArrowSwap, Roll, StatusDots } from './ui';
 
-export default function Header({ blogCount }: { blogCount: number }) {
+export default function Header() {
   // Every link scrolls this page: the 2026 header's /work, /explorations and /blog are still the old design here.
   const links = [
     { label: 'Work', href: '#work', count: work.length },
     { label: 'About', href: '#about' },
     { label: 'Services', href: '#services' },
-    { label: 'Blog', href: '#news', count: blogCount },
   ];
 
   return (
