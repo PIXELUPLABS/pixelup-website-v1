@@ -1,0 +1,415 @@
+/* ---------------------------------------------------------------
+   Ported from daksh6131/pixelup-labs-website-2026 @ 9ff5dd4, src/styles/base.css.
+   The rules are unchanged; only the selectors are scoped to the /2027 page so
+   nothing here reaches the rest of the site:
+   - every selector is prefixed with :where(.v2027), which adds no specificity;
+   - rules keyed on the state classes the page's scripts put on <html>
+     (motion, is-scrolled, lenis…) keep them on <html> and apply only while
+     the page is mounted (:has(.v2027));
+   - body rules land on the .v2027 wrapper, which carries the Switzer font;
+   - keyframes are prefixed v2027-.
+   Adjustments for running inside this site's root layout live in shell.css.
+---------------------------------------------------------------- */
+/* ---------------------------------------------------------------
+   Tokens
+   Layout is the Figma 1440 canvas mapped onto the viewport: 1u = 1 design px.
+   Palette is strictly monochrome; colour only enters through the work
+   and through the mark inverting whatever passes beneath it.
+---------------------------------------------------------------- */
+:root:where(:has(.v2027)) {
+  --ink: #0c0c0c;
+  --panel: #111111;
+  --rule: #363636;
+  --fog: #a9a9a9;
+  --mute: #7c7c7c; /* 4.6:1 on --ink, the WCAG AA floor for body text */
+  --paper: #ffffff;
+
+  --vw: 100vw;
+  --u: calc(var(--vw) / 1440);
+  --pad: max(16px, calc(24 * var(--u)));
+  --track: -0.03em;
+
+  --fs-micro: clamp(10px, calc(10 * var(--u)), 13px);
+  --fs-m: clamp(16px, calc(22 * var(--u)), 30px);
+  --fs-logo: clamp(20px, calc(25 * var(--u)), 34px);
+  --fs-display: clamp(40px, calc(100 * var(--u)), 168px);
+  --fs-title: clamp(40px, calc(104 * var(--u)), 176px);
+  --fs-mega: clamp(36px, calc(116 * var(--u)), 190px);
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-io: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Tablets keep the desktop layout unit (the Figma-placed layouts depend on it) but not its type, which would
+   shrink to the 10px floor. Body sizes match phones; display sizes meet the desktop values at 1024px. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  :root:where(:has(.v2027)) {
+    --pad: 24px;
+    --fs-micro: 11px;
+    --fs-m: 17px;
+    --fs-logo: 22px;
+    --fs-display: 7vw;
+    --fs-title: 7.2vw;
+    --fs-mega: 8vw;
+  }
+}
+
+@media (max-width: 767px) {
+  :root:where(:has(.v2027)) {
+    --u: calc(var(--vw) / 390);
+    --pad: 16px;
+    --fs-micro: 12px;
+    --fs-m: 17px;
+    --fs-logo: 22px;
+    --fs-display: 11.4vw;
+    --fs-title: 10.4vw;
+    --fs-mega: 8.8vw;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Reset + type
+---------------------------------------------------------------- */
+:where(.v2027) *,
+:where(.v2027) *::before,
+:where(.v2027) *::after {
+  box-sizing: border-box;
+}
+
+/* Tracking is relative to each element's own size, so it is declared everywhere rather than inherited as a fixed length. */
+:where(.v2027) :where(*) {
+  letter-spacing: var(--track);
+}
+
+html:where(:has(.v2027)) {
+  background: var(--ink);
+  color: var(--paper);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+:where(.v2027) {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--ink);
+  font-family: var(--font-switzer), 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: var(--fs-micro);
+  font-weight: 400;
+  line-height: 1.28;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+:where(.v2027) h1,
+:where(.v2027) h2,
+:where(.v2027) h3,
+:where(.v2027) p,
+:where(.v2027) ul,
+:where(.v2027) ol {
+  margin: 0;
+}
+
+:where(.v2027) h1,
+:where(.v2027) h2,
+:where(.v2027) h3 {
+  font: inherit;
+}
+
+:where(.v2027) ul,
+:where(.v2027) ol {
+  padding: 0;
+  list-style: none;
+}
+
+:where(.v2027) a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:where(.v2027) img,
+:where(.v2027) svg,
+:where(.v2027) canvas {
+  display: block;
+}
+
+:where(.v2027) button {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+:where(.v2027) sup {
+  line-height: 0;
+}
+
+:where(.v2027) ::selection {
+  background: #2549e6;
+  color: #fff;
+}
+
+:where(.v2027) :focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+
+:where(.v2027) .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Lenis */
+html.lenis:where(:has(.v2027)),
+html.lenis :where(.v2027) {
+  height: auto;
+}
+.lenis:not(.lenis-autoToggle).lenis-stopped:where(:has(.v2027)) {
+  overflow: clip;
+}
+.lenis.lenis-smooth :where(.v2027) iframe {
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------------
+   Primitives
+---------------------------------------------------------------- */
+
+/* Line mask for rise reveals; padded so descenders survive the clip. */
+:where(.v2027) .mask {
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: top;
+  /* Room for descenders (g, p, y) at display sizes; the negative margin keeps layout unchanged. */
+  padding-bottom: 0.26em;
+  margin-bottom: -0.26em;
+}
+:where(.v2027) .mask > * {
+  display: inline-block;
+}
+/* Raised counts sit above the line box; give the mask headroom so they aren't clipped. */
+:where(.v2027) .mask:has(sup) {
+  padding-top: 0.5em;
+  margin-top: -0.5em;
+}
+
+/* Letter roll */
+:where(.v2027) .roll {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: top;
+  padding-bottom: 0.1em;
+  margin-bottom: -0.1em;
+}
+:where(.v2027) .roll__track {
+  display: inline-flex;
+}
+:where(.v2027) .roll__c {
+  position: relative;
+  display: inline-block;
+  white-space: pre;
+  transition: transform 0.65s var(--ease-out);
+  transition-delay: calc(var(--i) * 14ms);
+}
+:where(.v2027) .roll__c::after {
+  content: attr(data-c);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 0.1em;
+}
+:where(.v2027) :is(a, button):hover .roll__c,
+:where(.v2027) .card:hover .card__title .roll__c {
+  transform: translateY(calc(-100% - 0.1em));
+}
+
+/* Circled index, after the Figma's ① ② */
+:where(.v2027) .circ {
+  display: inline-grid;
+  place-items: center;
+  width: 1.22em;
+  height: 1.22em;
+  margin-right: 0.22em;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  font-size: 0.68em;
+  line-height: 1;
+  letter-spacing: 0;
+  vertical-align: 0.16em;
+  font-variant-numeric: tabular-nums;
+}
+
+:where(.v2027) .arrow-swap {
+  position: relative;
+  display: inline-flex;
+  flex: none;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  transform: rotate(var(--r, 0deg));
+}
+:where(.v2027) .arrow-swap svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.65s var(--ease-out);
+}
+:where(.v2027) .arrow-swap svg + svg {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-115%);
+}
+:where(.v2027) :is(a, button):hover .arrow-swap svg:first-child {
+  transform: translateX(115%);
+}
+:where(.v2027) :is(a, button):hover .arrow-swap svg + svg {
+  transform: translateX(0);
+}
+
+/* Underlined link that wipes out and back in on hover */
+:where(.v2027) .u-link {
+  position: relative;
+  display: inline-block;
+}
+:where(.v2027) .u-link::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+}
+:where(.v2027) a.u-link:hover::after,
+:where(.v2027) a:hover > .u-link::after {
+  animation: v2027-wipe 0.9s var(--ease-io);
+}
+
+@keyframes v2027-wipe {
+  0% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  45% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  55% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* ○ ● status */
+:where(.v2027) .status {
+  display: inline-flex;
+  align-items: center;
+  gap: max(4px, calc(5 * var(--u)));
+  color: var(--fog);
+  white-space: nowrap;
+}
+:where(.v2027) .status__dots {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+:where(.v2027) .status__dots i {
+  width: 5px;
+  height: 5px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+:where(.v2027) .status__dots i + i {
+  background: currentColor;
+  animation: v2027-blink 2.8s var(--ease-io) infinite;
+}
+:where(.v2027) .status__line {
+  display: block;
+  width: max(14px, calc(21 * var(--u)));
+  height: 1px;
+  background: currentColor;
+}
+
+@keyframes v2027-blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+
+
+/* ---------------------------------------------------------------
+   Initial states for the motion layer (only when JS + motion are on)
+---------------------------------------------------------------- */
+/* The above-the-fold intro runs in CSS from the first paint, so the headline never waits on JavaScript
+   (it's the page's Largest Contentful Paint). Below-the-fold reveals stay with GSAP. */
+@keyframes v2027-introRise {
+  from {
+    transform: translateY(130%);
+  }
+}
+@keyframes v2027-introFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@keyframes v2027-introLine {
+  from {
+    transform: scaleX(0);
+  }
+}
+.motion :where(.v2027) [data-intro='rise'] > * {
+  animation: v2027-introRise 1.25s var(--ease-out) 0.1s both;
+}
+.motion :where(.v2027) .hdr__nav [data-intro='rise'] > * {
+  animation-delay: 0.18s;
+}
+.motion :where(.v2027) .hdr__meta [data-intro='rise'] > * {
+  animation-delay: 0.26s;
+}
+.motion :where(.v2027) [data-intro='lines'] {
+  animation: v2027-introFade 1.2s var(--ease-out) 0.05s both;
+}
+.motion :where(.v2027) [data-intro='fade'] {
+  animation: v2027-introFade 1.3s var(--ease-out) 0.4s both;
+}
+.motion :where(.v2027) .hdr__line {
+  transform-origin: 0% 50%;
+  animation: v2027-introLine 1.4s var(--ease-io) 0.5s both;
+}
+.motion :where(.v2027) [data-reveal='rise'] > * {
+  transform: translateY(130%);
+}
+.motion :where(.v2027) [data-reveal='fade'] {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.v2027) *,
+  :where(.v2027) *::before,
+  :where(.v2027) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}

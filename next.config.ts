@@ -10,6 +10,8 @@ const nextConfig: NextConfig = {
     // Serve AVIF where supported (smaller than the WebP default), fall back
     // to WebP. Sources are large PNGs; the optimizer does the heavy lifting.
     formats: ["image/avif", "image/webp"],
+    // 75 is the default; /2027's work covers ask for 80 (components/2027/Work.tsx).
+    qualities: [75, 80],
     // Optimized images are immutable per URL — cache them for a year.
     minimumCacheTTL: 31536000,
     remotePatterns: [
