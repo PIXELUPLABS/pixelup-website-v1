@@ -527,7 +527,7 @@
   "AuditLeadMagnet": {
     "file": "components/blog/AuditLeadMagnet.tsx",
     "category": "interactive",
-    "description": "Brand perception audit popup on /blog/[slug]. AuditForm's gradient + 10% pattern panel and a Daksh byline (photo avatar, public/media/daksh-avatar.jpg) on the left (a short band on top on mobile), the two-tone 'enterprise-ready' headline, then name / work email / website fields and the white audit button. Posts to /api/audit-lead, which appends name, email, website and the article path to the 'Brand Audit Lead Magnet' tab of the Website Leads sheet (lib/leads-sheet.ts → scripts/apps-script/WebsiteLeads.gs).",
+    "description": "Brand perception audit popup on /blog/[slug]. AuditForm's gradient + 10% pattern panel and a Daksh byline (photo avatar, public/media/daksh-avatar.jpg) on the left (a short band on top on mobile), a one-line 'Do you look enterprise-ready?' headline, then name / work email / website fields and the black audit button on a light (white) column: the one light surface on an otherwise dark-only site, so it stands apart from the article behind it. The dialog has no border. The gradient PNG is 80% opaque, so the panel keeps its black (color.neutral.base) backing; only the copy column is white. Posts to /api/audit-lead, which appends name, email, website and the article path to the 'Brand Audit Lead Magnet' tab of the Website Leads sheet (lib/leads-sheet.ts → scripts/apps-script/WebsiteLeads.gs).",
     "variants": [
       "none — responsive only: centered 760px dialog from desk up, full-width bottom sheet below it"
     ],
@@ -535,16 +535,13 @@
       "hidden": "Default. Opens once per page view, on the first of: the reader being both 25% down the page and 6s into the visit (checked on scroll, and once when the 6s are up), or exit intent (pointer leaves through the top edge) after 5s on fine-pointer devices.",
       "suppressed": "localStorage 'pixelup:audit-popup': a dismissal keeps it away for 7 days, a submission for good.",
       "forced": "?audit-popup=1 opens it on load for review, ignoring storage and skipping DataFast goals.",
-      "idle / submitting / error": "Same field treatment as NewsletterForm (hairline underline, accent on focus-within). Error copy in red-400, matching NewsletterForm.",
-      "success": "Thank-you copy with the submitted email, plus a dark 'Back to the article' button."
+      "idle / submitting / error": "NewsletterForm's field treatment flipped for the light card: a black/20 underline (a 10% hairline all but disappears at 0.5px on white), accent on focus-within, black text with black/50 placeholders. Autofilled text is forced to color.neutral.base, since globals.css paints it white site-wide. Error copy in red-600 (red-400 is under 3:1 on white).",
+      "success": "Thank-you copy with the submitted email, plus a light 'Back to the article' button (black/[0.06] fill)."
     },
     "tokens_used": [
-      "color.neutral.base",
-      "color.neutral.white (white/60 for secondary copy, same opacity step as AuditForm)",
-      "color.neutral.label-grey",
-      "color.neutral.hairline",
+      "color.neutral.white (card surface; byline text on the gradient panel)",
+      "color.neutral.base (text, as black; black/60 for secondary copy and labels, the dark theme's white/60 step flipped)",
       "color.neutral.scrim",
-      "color.neutral.button-dark",
       "color.brand.accent (field focus only)",
       "radius.sm",
       "breakpoint.desk"
@@ -552,8 +549,8 @@
     "when_to_use": "Blog posts only, mounted once in app/blog/[slug]/page.tsx.",
     "do_not": [
       "Don't mount it on more routes without deciding the trigger rules for them — it's tuned for long-form reading.",
-      "Don't recolor the submit to color.brand.accent — the audit keeps AuditCta's white colorway.",
-      "Don't add a box-shadow to lift it — the scrim and the 0.5px hairline border do that job."
+      "Don't recolor the submit to color.brand.accent — the audit keeps the inverse of AuditCta's white colorway (black on the light card).",
+      "Don't add a box-shadow or border to lift it — the scrim behind the gradient panel and the white column does that job."
     ],
     "analytics": "DataFast goals audit_popup_shown (with trigger), audit_popup_dismissed, audit_popup_submitted — each with the page path."
   },

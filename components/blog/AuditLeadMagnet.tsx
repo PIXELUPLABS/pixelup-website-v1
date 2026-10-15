@@ -14,8 +14,14 @@ import dakshImg from "@/public/media/daksh-avatar.jpg";
 // to the "Brand Audit Lead Magnet" tab of the Website Leads sheet.
 //
 // Visually it's the AuditForm section folded into a dialog: the same gradient +
-// pattern panel and Daksh byline, the same two-tone headline, and the white
-// audit colorway on the button (accent stays with Book a call).
+// pattern panel and Daksh byline under a one-line headline, with the copy
+// and form on a light column so it stands apart from the dark article behind it.
+// The gradient PNG is 80% opaque, so the panel keeps the original black backing
+// (white behind it would wash the blue out); only the column is white. No
+// border. The site has no light
+// tokens, so the column uses the neutral white/base pair with the dark theme's
+// opacity steps flipped (white/60 there is black/60 here), and the audit button
+// takes the inverse of AuditCta's white colorway (accent stays with Book a call).
 
 const STORAGE_KEY = "pixelup:audit-popup";
 /** A dismissal keeps it away this long; a submission keeps it away for good. */
@@ -30,10 +36,13 @@ const EXIT_INTENT_DELAY_MS = 5_000;
 const FORCE_PARAM = "audit-popup";
 
 const fieldWrapClassName =
-  "w-full border-b-[0.5px] border-hairline pb-2 focus-within:border-accent";
-// 16px on mobile so iOS Safari doesn't zoom the page on focus.
+  "w-full border-b-[0.5px] border-black/20 pb-2 focus-within:border-accent";
+// 16px on mobile so iOS Safari doesn't zoom the page on focus. globals.css
+// paints autofilled text white site-wide, which would vanish on this light
+// card, hence the important fill override (a layered utility can't otherwise
+// beat that unlayered rule).
 const fieldClassName =
-  "w-full bg-transparent text-[16px] font-normal text-white placeholder:text-white/40 focus:outline-none desk:text-[14px]";
+  "w-full bg-transparent text-[16px] font-normal text-black placeholder:text-black/50 focus:outline-none desk:text-[14px] [&:-webkit-autofill]:[-webkit-text-fill-color:var(--color-base)]!";
 
 const initialValues = { name: "", email: "", website: "" };
 
@@ -235,11 +244,11 @@ export function AuditLeadMagnet() {
         aria-modal="true"
         aria-labelledby="audit-popup-title"
         aria-describedby="audit-popup-description"
-        className="fade-up relative flex max-h-[calc(100dvh-24px)] w-full flex-col overflow-y-auto border-t-[0.5px] border-hairline bg-base desk:max-h-[calc(100dvh-40px)] desk:w-190 desk:flex-row desk:overflow-hidden desk:border-[0.5px]"
+        className="fade-up relative flex max-h-[calc(100dvh-24px)] w-full flex-col overflow-y-auto desk:max-h-[calc(100dvh-40px)] desk:w-190 desk:flex-row desk:overflow-hidden"
       >
         {/* Left on desktop, a short band on top on mobile: AuditForm's
             gradient + 10% pattern, with the founder byline. */}
-        <div className="relative h-28 shrink-0 desk:h-auto desk:w-70">
+        <div className="relative h-28 shrink-0 bg-base desk:h-auto desk:w-70">
           <Image src={auditFormBg} alt="" fill sizes="(min-width: 1200px) 280px, 100vw" className="object-cover" />
           <Image src={auditFormPattern} alt="" fill className="object-cover opacity-10" />
           <div className="relative flex h-full items-end gap-3 p-5 desk:flex-col desk:items-start desk:justify-between desk:p-6">
@@ -253,12 +262,12 @@ export function AuditLeadMagnet() {
           </div>
         </div>
 
-        <div className="relative flex min-w-0 flex-1 flex-col gap-8 p-5 desk:p-8">
+        <div className="relative flex min-w-0 flex-1 flex-col gap-8 bg-white p-5 text-black desk:p-8">
           <button
             type="button"
             onClick={close}
             aria-label="Close"
-            className="absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center text-white/60 transition-colors hover:text-white desk:top-4 desk:right-4"
+            className="absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center text-black/60 transition-colors hover:text-black desk:top-4 desk:right-4"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
@@ -268,14 +277,14 @@ export function AuditLeadMagnet() {
           {status === "success" ? (
             <div className="flex flex-1 flex-col justify-between gap-8 pt-6">
               <div className="flex flex-col gap-3">
-                <p className="text-[12px] font-medium uppercase text-label-grey">Request received</p>
+                <p className="text-[12px] font-medium uppercase text-black/60">Request received</p>
                 <p
                   id="audit-popup-title"
-                  className="tracking-display text-[24px] font-medium leading-[120%] text-white desk:text-[28px]"
+                  className="tracking-display text-[24px] font-medium leading-[120%] text-black desk:text-[28px]"
                 >
                   Thanks{firstName ? `, ${firstName}` : ""}. We&apos;re on it.
                 </p>
-                <p id="audit-popup-description" className="text-[14px] leading-[150%] text-white/60">
+                <p id="audit-popup-description" className="text-[14px] leading-[150%] text-black/60">
                   We&apos;ll review your site the way an enterprise buyer would and send
                   the audit to {values.email.trim()}.
                 </p>
@@ -283,7 +292,7 @@ export function AuditLeadMagnet() {
               <button
                 type="button"
                 onClick={close}
-                className={`${ctaButtonBase} ${ctaButtonPadding} w-full cursor-pointer gap-8 bg-button-dark text-white hover:bg-white/[0.12]`}
+                className={`${ctaButtonBase} ${ctaButtonPadding} w-full cursor-pointer gap-8 bg-black/[0.06] text-black hover:bg-black/[0.1]`}
               >
                 <span>BACK TO THE ARTICLE</span>
                 <ArrowIcon />
@@ -293,22 +302,16 @@ export function AuditLeadMagnet() {
             <>
               {/* pr-8 keeps the copy clear of the close button. */}
               <div className="flex flex-col gap-3 pr-8">
-                <p className="text-[12px] font-medium uppercase text-label-grey">
+                <p className="text-[12px] font-medium uppercase text-black/60">
                   Brand perception audit
                 </p>
-                {/* Same two-tone line as the AuditForm section: setup at
-                    white/60, punch line at full white. */}
                 <p
                   id="audit-popup-title"
-                  className="tracking-display text-[24px] font-medium leading-[120%] text-white desk:text-[28px]"
+                  className="tracking-display text-[24px] font-medium leading-[120%] text-black desk:text-[28px]"
                 >
-                  <span className="text-white/60">
-                    Your product is <span className="inline-block">enterprise-ready.</span>
-                  </span>
-                  <br />
-                  Does your brand say so?
+                  Do you look <span className="inline-block">enterprise-ready?</span>
                 </p>
-                <p id="audit-popup-description" className="text-balance text-[14px] leading-[150%] text-white/60">
+                <p id="audit-popup-description" className="text-balance text-[14px] leading-[150%] text-black/60">
                   Send us your site. We&apos;ll review it the way an enterprise buyer
                   would, and tell you honestly what we&apos;d change.
                 </p>
@@ -369,17 +372,17 @@ export function AuditLeadMagnet() {
                   <button
                     type="submit"
                     disabled={status === "submitting"}
-                    className={`${ctaButtonBase} ${ctaButtonPadding} w-full cursor-pointer gap-8 bg-white text-black hover:bg-white/90 disabled:cursor-wait disabled:opacity-60`}
+                    className={`${ctaButtonBase} ${ctaButtonPadding} w-full cursor-pointer gap-8 bg-black text-white hover:bg-black/85 disabled:cursor-wait disabled:opacity-60`}
                   >
                     <span>{status === "submitting" ? "SENDING…" : "GET MY AUDIT"}</span>
                     <ArrowIcon />
                   </button>
                   {status === "error" ? (
-                    <p role="alert" className="text-[12px] text-red-400">
+                    <p role="alert" className="text-[12px] text-red-600">
                       Something went wrong. Please try again.
                     </p>
                   ) : (
-                    <p className="text-[12px] text-label-grey">No call needed.</p>
+                    <p className="text-[12px] text-black/60">No call needed.</p>
                   )}
                 </div>
               </form>
