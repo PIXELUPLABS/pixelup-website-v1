@@ -1910,7 +1910,7 @@ const fuseaiFaq: FaqItem = {
 // 12 Oct 2026), OK'd for use with his name.
 const fuseai: CaseStudy = {
   slug: "fuseai",
-  title: "We redesigned FuseAI's brand, website and product in 6 weeks.",
+  title: "We rebranded FuseAI for their next stage of growth.",
   metaTitle: "FuseAI Brand, Website and Product Design | PIXELUP LABS",
   metaDescription:
     "PIXELUP LABS designed FuseAI's brand, website and product UI in 2026. The brand was launch-ready in 17 days. FuseAI reports 20% higher trial conversion.",
@@ -1940,7 +1940,7 @@ const fuseai: CaseStudy = {
   story: {
     company: "FuseAI",
     statusBadge: "YC W25 · AI sales",
-    headline: "We redesigned FuseAI's brand, website and product in 6 weeks.",
+    headline: "We rebranded FuseAI for their next stage of growth.",
     // Founder backgrounds: FuseAI's YC company page, read 2026-10-16.
     summary:
       "FuseAI builds an **AI-native sales platform for modern revenue teams**, backed by Y Combinator (W25). Co-founder and CEO Saurav Bubber worked on GTM strategy and operations at Deel while it grew from $50M to $600M+ ARR. Co-founder and CTO Imogen Low co-founded Nwo.ai, later acquired by Growth Protocol.",
@@ -1968,7 +1968,7 @@ const fuseai: CaseStudy = {
           },
           {
             label: "What they asked us for",
-            text: "A brand refresh, a website and the product restyled before launch. The brief came down to three references: **F1 feel, Granola warmth, Superhuman speed.**",
+            text: "A brand refresh that could keep up with their growth, plus a website and the product restyled before launch. The brief came down to three references: **F1 feel, Granola warmth, Superhuman speed.**",
           },
           {
             label: "Why it mattered",
