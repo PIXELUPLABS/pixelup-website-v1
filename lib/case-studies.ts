@@ -25,6 +25,22 @@ export interface MediaSlot {
   };
   /** Logo mark rendered centered on top of the media (as on the homepage cards). */
   overlayLogo?: string;
+  /** Slack-style client message pinned top right on a full-width slot (under it on mobile). */
+  comment?: MediaComment;
+}
+
+/** A Slack-style message pinned to a full-width media slot. It types out once on scroll. */
+export interface MediaComment {
+  avatar: string;
+  name: string;
+  /** Sender's org, shown as Slack's badge on the avatar (its first letter). */
+  org?: string;
+  /** Timestamp as Slack shows it, e.g. "Sep 3rd at 3:37 AM". */
+  time?: string;
+  /** Leading @mention, shown as a Slack mention chip before the message. */
+  mention?: string;
+  quote: string;
+  reactions?: { emoji: string; count: number; mine?: boolean }[];
 }
 
 /** A row of imagery between sections: one full-bleed slot or a side-by-side pair. */
@@ -1809,4 +1825,330 @@ const henryLabs: CaseStudy = {
   },
 };
 
-export const caseStudies = { greptile, sainapse, sully, streamline, henryLabs };
+// Answers the page's target prompt ("who designed FuseAI's brand"), so it
+// leads the FuseAI FAQ ahead of the shared questions.
+const fuseaiFaq: FaqItem = {
+  q: "Who designed FuseAI's brand, website and product?",
+  a: "PIXELUP LABS designed FuseAI's brand refresh, website and product UI in 2026. The brand was ready for FuseAI's August launch 17 days after kickoff. The website (10+ pages) went live six weeks after the first design round, with the product UI days behind it. FuseAI's own team built the website in Framer and the product in code, and FuseAI reports free-to-paid trial conversion 20% higher since the redesign.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/fuseai-case-study.md
+// (approved 2026-10-16). Saurav's quotes, the 20% and the customer-feedback
+// line are his answers to our case-study questions in #fuseai-pixelup (10 and
+// 12 Oct 2026), OK'd for use with his name.
+const fuseai: CaseStudy = {
+  slug: "fuseai",
+  title: "We redesigned FuseAI's brand, website and product in 6 weeks.",
+  metaTitle: "FuseAI Brand, Website and Product Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS designed FuseAI's brand, website and product UI in 2026. The brand was launch-ready in 17 days. FuseAI reports 20% higher trial conversion.",
+  info: {
+    client: "FuseAI",
+    year: "2026",
+    // FuseAI's team built the site (Framer) and product (code), so design
+    // disciplines only.
+    involvement: [
+      "Brand Identity",
+      "Website Design",
+      "Product Design",
+      "Motion Design",
+    ],
+    links: [{ label: "fuseai.com", href: "https://fuseai.com/" }],
+  },
+  description: [
+    "PIXELUP LABS designed FuseAI's brand, website and product UI in 2026.",
+    "FuseAI, a YC W25 AI sales platform, had one launch date and three things to redesign.",
+    "The brand was ready on launch day, 17 days after kickoff. The website went live six weeks after the first design round, with the product UI days behind it.",
+    "FuseAI now reports free-to-paid trial conversion 20% higher.",
+  ],
+  hero: {
+    media: { type: "image", src: "/media/fuseai/logo-wall.avif" },
+    alt: "FuseAI's two-stripe mark on a concrete wall",
+  },
+  story: {
+    company: "FuseAI",
+    statusBadge: "YC W25 · AI sales",
+    headline: "We redesigned FuseAI's brand, website and product in 6 weeks.",
+    // Founder backgrounds: FuseAI's YC company page, read 2026-10-16.
+    summary:
+      "FuseAI builds an **AI-native sales platform for modern revenue teams**, backed by Y Combinator (W25). Co-founder and CEO Saurav Bubber worked on GTM strategy and operations at Deel while it grew from $50M to $600M+ ARR. Co-founder and CTO Imogen Low co-founded Nwo.ai, later acquired by Growth Protocol.",
+    // The first two are Saurav's answers (10 and 12 Oct 2026). 6 weeks runs
+    // from the first design round (27 Jul) to the website going live (9 Sep);
+    // from kickoff (24 Jul) it's closer to seven, so the label names the span.
+    highlights: [
+      { value: "20%", label: "Higher free-to-paid trial conversion" },
+      { value: "Improved", label: "Customer feedback on the product" },
+      { value: "6 weeks", label: "First design round to website live" },
+    ],
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did FuseAI need a brand refresh?",
+        items: [
+          {
+            label: "Where FuseAI was",
+            text: "FuseAI was heading into an August launch with a brand that wasn't ready for it. In Saurav Bubber's words: **\"We didn't have a design we liked.\"**",
+          },
+          {
+            // 21 = the -vs-fuse pages in fuseai.com/sitemap.xml, 2026-10-16.
+            label: "What FuseAI asks its buyers to do",
+            text: "Switch. FuseAI wants revenue teams to replace the data, enrichment and outreach tools they already pay for with **one platform run by AI agents**. Its site runs head-to-head pages against 21 sales tools, Apollo and ZoomInfo among them.",
+          },
+          {
+            label: "What they asked us for",
+            text: "A brand refresh, a website and the product restyled before launch. The brief came down to three references: **F1 feel, Granola warmth, Superhuman speed.**",
+          },
+          {
+            label: "Why it mattered",
+            text: "A sales team that switches platforms bets its quota on the new one. **Nobody makes that bet on a product that looks unfinished.**",
+          },
+        ],
+      },
+      // Mockups: Growth/Case studies/Fuse/visuals (Figma: Project showcase).
+      // Logo first, then branding, then website and product. Each pair shares
+      // one aspect ratio so the heights match.
+      {
+        kind: "media",
+        id: "snapshot-logo",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: {
+                type: "image",
+                src: "/media/fuseai/logo-construction.avif",
+              },
+              alt: "FuseAI's two-stripe mark on its construction grid",
+              intrinsicSize: { width: 1080, height: 730 },
+            },
+            {
+              media: { type: "image", src: "/media/fuseai/logo-lockup.avif" },
+              alt: "FuseAI logo lockup with its clear-space rules",
+              intrinsicSize: { width: 1080, height: 730 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-stationery",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: {
+                type: "image",
+                src: "/media/fuseai/business-cards.avif",
+              },
+              alt: "FuseAI business cards in mint and white",
+              intrinsicSize: { width: 1080, height: 1350 },
+            },
+            {
+              media: { type: "image", src: "/media/fuseai/tote.avif" },
+              alt: "FuseAI tote bag reading 'Agentic AI for modern sales teams'",
+              intrinsicSize: { width: 1074, height: 1342 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-adapt",
+        index: "01",
+        heading: "We adapted as the scope grew, and shipped it all in 6 weeks.",
+        problem:
+          "FuseAI needed a brand, a website and product UI, with a launch date already set. **Then the scope kept growing.** The website went from FuseAI's existing structure to 10+ pages, and the product picked up an onboarding rework, empty states and a dark mode.",
+        whyItMattered:
+          "Six weeks for a fixed scope is not the flex. **Six weeks while the scope keeps growing is.** FuseAI's own team was building the site and the product alongside us, so design couldn't be the thing they waited on.",
+        whatWeDid:
+          "We ran brand, website and product as overlapping tracks, with **the brand first, for launch day**. Pages went to FuseAI's Framer builder in batches while we designed the next ones, and product work started right after the brand handoff. New scope slotted into the next batch, and twice-weekly syncs with written recaps kept every decision moving.",
+        outcome:
+          "**The brand was ready on launch day**, 17 days after kickoff. The website went live six weeks after the first design round, with the product UI days behind it. All of it landed inside the 6–8 weeks we publish for brand and website alone.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-billboard",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: { type: "image", src: "/media/fuseai/billboard.avif" },
+            alt: "FuseAI 'Unified Revenue Engine' billboard",
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-posters",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: {
+                type: "image",
+                src: "/media/fuseai/subway-posters.avif",
+              },
+              alt: "FuseAI 'Prospect. Enrich. Engage. Fuse.' posters in a subway station",
+              intrinsicSize: { width: 1238, height: 1548 },
+            },
+            {
+              media: {
+                type: "image",
+                src: "/media/fuseai/poster-pipeline.avif",
+              },
+              alt: "FuseAI 'Less complexity, More pipeline.' poster",
+              intrinsicSize: { width: 1201, height: 1501 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-touchpoints",
+        index: "02",
+        heading: "The brand system had to work across every touchpoint.",
+        problem:
+          "FuseAI's buyers meet the brand on the website, in sales and social assets, and then every day inside the product. **A refresh that stops at the homepage** leaves everything else looking like the old company.",
+        whyItMattered:
+          "A rep who signs up from the new website and lands in an old-looking product meets two different companies. **And the free trial is where FuseAI turns a signup into a customer.**",
+        whatWeDid:
+          "We built one system and carried it everywhere: **the logo system and app icon, colour tokens and type**, sales and social assets, and 10+ website pages. In the product, we restyled the existing flows, reworked onboarding with autofill and skippable steps, and designed the empty states and a dark mode. FuseAI's engineer built it in code from the product tokens we handed over.",
+        outcome:
+          "Since the redesign, Saurav reports better customer feedback and **free-to-paid trial conversion 20% higher**. New screens start from the same tokens, so the brand holds as FuseAI keeps shipping.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-signup",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: {
+                type: "image",
+                src: "/media/fuseai/phone-homepage.avif",
+              },
+              alt: "FuseAI website hero on a phone",
+              intrinsicSize: { width: 1238, height: 1548 },
+            },
+            {
+              media: { type: "image", src: "/media/fuseai/laptop-login.avif" },
+              alt: "FuseAI login screen on a laptop",
+              intrinsicSize: { width: 1349, height: 1686 },
+            },
+          ],
+        },
+      },
+      // FuseAI's website footer animation (exported 2026-10-16; MP4 for
+      // Safari, poster = first frame). The pinned message is Saurav's 3 Sep
+      // 2026 Slack message about it (#fuseai-pixelup), verbatim, with its
+      // real reactions; avatar cropped from Arjun's capture.
+      {
+        kind: "media",
+        id: "snapshot-footer-animation",
+        media: {
+          kind: "full",
+          slot: {
+            media: {
+              type: "video",
+              src: "/media/fuseai/footer-animation.mp4",
+              poster: "/media/fuseai/footer-animation-poster.jpg",
+            },
+            alt: "FuseAI website footer animation cutting between F1 imagery, checkered flags and the Fuse wordmark",
+            intrinsicSize: { width: 1920, height: 550 },
+            comment: {
+              avatar: "/media/fuseai/saurav-bubber.png",
+              name: "Saurav Bubber",
+              org: "FuseAI",
+              time: "Sep 3rd at 3:37 AM",
+              mention: "Fahad",
+              quote:
+                "This is AMAZING - my favorite thing so far; Great work on this animation 🥳🥳🥳🥳",
+              reactions: [
+                { emoji: "🔥", count: 2 },
+                { emoji: "❤️", count: 1 },
+                { emoji: "🙌", count: 2, mine: true },
+              ],
+            },
+          },
+        },
+      },
+      {
+        kind: "results",
+        id: "results",
+        heading: "In their own words.",
+      },
+      // Saurav's answers to our three case-study questions, in order, from
+      // one message (#fuseai-pixelup, 10 Oct 2026), minus the "before" answer
+      // the context row quotes. "[PIXELUP LABS]" replaces his "pixel labs"
+      // and "[higher]" his "hire". OK'd for use with his name on 12 Oct.
+      {
+        kind: "testimonial",
+        id: "testimonial",
+        quote:
+          "[PIXELUP LABS] came and supported us building a high quality logo + brand + giving character to our website. Improved customer feedback and [higher] free to paid trial conversions on the product. Good creative judgement as a team with strong branding expertise.",
+        person: {
+          name: "Saurav Bubber",
+          role: "Co-founder & CEO",
+          company: "FuseAI",
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-closing",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/fuseai/subway-billboard.avif",
+            },
+            alt: "FuseAI '(FUSE*)' billboard above a subway escalator",
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where FuseAI ended up.",
+        paragraphs: [
+          "FuseAI launched with the new brand, then shipped a website and a product that look like the same company. **FuseAI's own team built both**: the website in Framer, the product in code. We handed over the Figma files, product tokens and animation exports.",
+          "**The 20% trial-conversion lift is FuseAI's own figure**, shared in October 2026.",
+          "One thing we changed after FuseAI: when a client's team builds, **we agree build QA and export formats for each platform at kickoff**. Framer, the browser and the product each want animation in a different format, and that's cheaper to settle at kickoff than after the first export.",
+          "If you need brand, website and product in four weeks with nothing traded off, nobody does that well, us included. We'll tell you on day one what ships for launch and what follows it. If your brand is already locked and you only need throughput, **a design subscription is cheaper**.",
+          "If you have a launch date and a brand that isn't ready for it, **we should talk**. PIXELUP LABS has shipped 35 projects for funded B2B and AI-native startups, rated 5.0 on every review. Our prices are public, and retainers start at $6k/mo.",
+          "Brand, website and product design by PIXELUP LABS, 2026.",
+        ],
+      },
+    ],
+    faqHeading,
+    faqs: [fuseaiFaq, ...pixelupFaq],
+  },
+  sections: [],
+  endCta: {
+    label: "Book a call",
+    href: links.discoveryCall,
+  },
+  moreProjects: [
+    { slug: "henrylabs", tags: "Branding, website & product design" },
+    { slug: "streamline", tags: "Branding, positioning & website design" },
+  ],
+  publication: {
+    status: "draft",
+    blockers: [
+      "Confirm with Saurav which product screens can be public.",
+      "Get Saurav's OK to quote his 3 Sep Slack message with his photo (the floating comment).",
+      "At publish: set both dates to the publish day, add the FuseAI card to lib/projects.ts and lib/case-studies-showcase.ts, and swap one Henry Labs 'More case studies' card to FuseAI.",
+    ],
+  },
+};
+
+export const caseStudies = {
+  greptile,
+  sainapse,
+  sully,
+  streamline,
+  henryLabs,
+  fuseai,
+};

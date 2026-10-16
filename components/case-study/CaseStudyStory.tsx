@@ -24,13 +24,18 @@ export function Metrics({
   /** Off when the next section's top rule would double it. */
   bottomRule?: boolean;
 }) {
+  // Three cells fill the row on desktop; on mobile the third spans both
+  // columns instead of leaving an empty cell beside it.
+  const threeUp = metrics.length === 3;
   return (
     <div
-      className={`grid grid-cols-2 border-t-[0.5px] border-hairline desk:grid-cols-4 ${bottomRule ? "border-b-[0.5px]" : ""}`}
+      className={`grid grid-cols-2 border-t-[0.5px] border-hairline ${threeUp ? "desk:grid-cols-3" : "desk:grid-cols-4"} ${bottomRule ? "border-b-[0.5px]" : ""}`}
     >
       {metrics.map((metric, index) => {
         const mobileBorders = index % 2 === 1 ? "border-l-[0.5px]" : "";
         const mobileRows = index > 1 ? "border-t-[0.5px]" : "";
+        const mobileSpan =
+          threeUp && index === 2 ? "col-span-2 desk:col-span-1" : "";
         const desktopBorders =
           index > 0 && !(usesSharedCenterRule && index === 2)
             ? "desk:border-l-[0.5px]"
@@ -39,7 +44,7 @@ export function Metrics({
         return (
           <div
             key={`${metric.value}-${metric.label}`}
-            className={`flex min-w-0 flex-col gap-4 border-hairline p-6 ${mobileBorders} ${mobileRows} ${desktopBorders} desk:border-t-0`}
+            className={`flex min-w-0 flex-col gap-4 border-hairline p-6 ${mobileBorders} ${mobileRows} ${mobileSpan} ${desktopBorders} desk:border-t-0`}
           >
             <p className="text-[32px] font-medium leading-none tracking-display text-white desk:text-[48px]">
               {metric.value}
@@ -192,9 +197,16 @@ function GalleryBlock({
           <Emphasis text={block.intro} />
         </p>
       </SectionShell>
-      {block.media.map((media, index) => (
-        <CaseMediaBlock key={index} block={media} />
-      ))}
+      {block.media.map((media, index) =>
+        index === 0 ? (
+          <CaseMediaBlock key={index} block={media} />
+        ) : (
+          // Same gutter between stacked gallery media as between story media.
+          <div key={index} className="-mt-4 desk:-mt-12">
+            <CaseMediaBlock block={media} />
+          </div>
+        ),
+      )}
     </>
   );
 }
@@ -313,16 +325,29 @@ function StoryBlock({
   block,
   challengeTotal,
   nextOpensWithRule,
+  followsMedia,
 }: {
   block: CaseStoryBlock;
   challengeTotal: number;
   nextOpensWithRule: boolean;
+  /** A media block straight after another one tightens to the pair gutter. */
+  followsMedia: boolean;
 }) {
   switch (block.kind) {
     case "context":
       return <ContextBlock block={block} />;
     case "media":
-      return <CaseMediaBlock block={block.media} />;
+      // Stacked media blocks would sit 72px apart on desktop (24px padding on
+      // each block + the 24px column gap) against a 24px gap inside a pair.
+      // Pull a follow-on block up so every gap between images matches the
+      // pair gutter: 24px on desktop, 8px on mobile where pairs stack.
+      return followsMedia ? (
+        <div className="-mt-4 desk:-mt-12">
+          <CaseMediaBlock block={block.media} />
+        </div>
+      ) : (
+        <CaseMediaBlock block={block.media} />
+      );
     case "challenge":
       return <ChallengeBlock block={block} total={challengeTotal} />;
     case "gallery":
@@ -369,12 +394,16 @@ export function CaseStudyStory({ study }: { study: CaseStudy }) {
             // Every block except media opens with a full-width hairline, and
             // so does the FAQ that follows the last block.
             const next = story.blocks[index + 1];
+            const previous = story.blocks[index - 1];
             return (
               <StoryBlock
                 key={block.id}
                 block={block}
                 challengeTotal={challengeTotal}
                 nextOpensWithRule={next?.kind !== "media"}
+                followsMedia={
+                  block.kind === "media" && previous?.kind === "media"
+                }
               />
             );
           })}

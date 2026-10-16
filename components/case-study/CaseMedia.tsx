@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { MediaBlock, MediaSlot, MediaTone } from "@/lib/case-studies";
+import { FloatingComment } from "./FloatingComment";
 
 // Placeholder fills matching the Figma frames: solid white boxes, near-black
 // empty frames, and the dark-green gradient panels.
@@ -52,6 +53,25 @@ export function CaseMediaSlot({
             />
           </div>
         )}
+      </div>
+    );
+  }
+
+  if (slot.media.type === "video" && slot.intrinsicSize) {
+    return (
+      <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
+        <video
+          className="block h-auto w-full"
+          src={slot.media.src}
+          poster={slot.media.poster}
+          width={slot.intrinsicSize.width}
+          height={slot.intrinsicSize.height}
+          aria-label={slot.alt}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
       </div>
     );
   }
@@ -110,15 +130,23 @@ export function CaseMediaBlock({
   priority?: boolean;
 }) {
   if (block.kind === "full") {
+    const slot = (
+      <CaseMediaSlot
+        slot={block.slot}
+        aspect={block.aspect === "wide" ? "aspect-video" : "aspect-[1160/696]"}
+        priority={priority}
+      />
+    );
     return (
       <div className="px-6 desk:p-6">
-        <CaseMediaSlot
-          slot={block.slot}
-          aspect={
-            block.aspect === "wide" ? "aspect-video" : "aspect-[1160/696]"
-          }
-          priority={priority}
-        />
+        {block.slot.comment ? (
+          <div className="relative">
+            {slot}
+            <FloatingComment comment={block.slot.comment} />
+          </div>
+        ) : (
+          slot
+        )}
       </div>
     );
   }
