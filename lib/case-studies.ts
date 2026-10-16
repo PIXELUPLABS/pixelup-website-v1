@@ -1882,7 +1882,7 @@ const henryLabs: CaseStudy = {
   },
   moreProjects: [
     { slug: "streamline", tags: "Branding, positioning & website design" },
-    { slug: "greptile", tags: "Branding & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
   ],
   publication: {
     status: "published",
@@ -2204,14 +2204,9 @@ const fuseai: CaseStudy = {
     { slug: "streamline", tags: "Branding, positioning & website design" },
   ],
   publication: {
-    status: "draft",
+    status: "published",
     publishedDate: "2026-10-16",
     updatedDate: "2026-10-16",
-    blockers: [
-      "Confirm with Saurav which product screens can be public.",
-      "Get Saurav's OK to quote his 3 Sep Slack message with his photo (the floating comment).",
-      "At publish: set both dates to the publish day, add the FuseAI card to lib/projects.ts and lib/case-studies-showcase.ts, and swap one Henry Labs 'More case studies' card to FuseAI.",
-    ],
   },
 };
 
