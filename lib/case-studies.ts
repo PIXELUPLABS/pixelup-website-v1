@@ -1944,13 +1944,12 @@ const fuseai: CaseStudy = {
     // Founder backgrounds: FuseAI's YC company page, read 2026-10-16.
     summary:
       "FuseAI builds an **AI-native sales platform for modern revenue teams**, backed by Y Combinator (W25). Co-founder and CEO Saurav Bubber worked on GTM strategy and operations at Deel while it grew from $50M to $600M+ ARR. Co-founder and CTO Imogen Low co-founded Nwo.ai, later acquired by Growth Protocol.",
-    // The first two are Saurav's answers (10 and 12 Oct 2026). 6 weeks runs
-    // from the first design round (27 Jul) to the website going live (9 Sep);
-    // from kickoff (24 Jul) it's closer to seven, so the label names the span.
+    // The 20% is Saurav's figure (12 Oct 2026). 6 weeks runs from the first
+    // design round (27 Jul) to the website going live (9 Sep), as the sidebar
+    // says; from kickoff (24 Jul) it's closer to seven, so never pair the two.
     highlights: [
       { value: "20%", label: "Higher free-to-paid trial conversion" },
-      { value: "Improved", label: "Customer feedback on the product" },
-      { value: "6 weeks", label: "First design round to website live" },
+      { value: "6 weeks", label: "Brand, website and product redesign" },
     ],
     blocks: [
       {
