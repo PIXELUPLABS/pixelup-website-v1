@@ -27,6 +27,9 @@ export interface MediaSlot {
   overlayLogo?: string;
   /** Slack-style client message pinned top right on a full-width slot (under it on mobile). */
   comment?: MediaComment;
+  /** Video only: play once from the start each time it scrolls into view
+   * (paused when it leaves, no loop) instead of autoplaying on a loop. */
+  playOnView?: boolean;
 }
 
 /** A Slack-style message pinned to a full-width media slot. It types out once on scroll. */
@@ -1908,26 +1911,24 @@ const fuseai: CaseStudy = {
       // Mockups: Growth/Case studies/Fuse/visuals (Figma: Project showcase).
       // Logo first, then branding, then website and product. Each pair shares
       // one aspect ratio so the heights match.
+      // The mark drawing itself on its construction grid: WebM (VP9, no
+      // audio) with an MP4 fallback, replaying from the start on each scroll-in.
       {
         kind: "media",
         id: "snapshot-logo",
         media: {
-          kind: "pair",
-          slots: [
-            {
-              media: {
-                type: "image",
-                src: "/media/fuseai/logo-construction.avif",
-              },
-              alt: "FuseAI's two-stripe mark on its construction grid",
-              intrinsicSize: { width: 1080, height: 730 },
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: {
+              type: "video",
+              src: "/media/fuseai/logo-grid.webm",
+              fallbackSrc: "/media/fuseai/logo-grid.mp4",
+              poster: "/media/fuseai/logo-grid-poster.jpg",
             },
-            {
-              media: { type: "image", src: "/media/fuseai/logo-lockup.avif" },
-              alt: "FuseAI logo lockup with its clear-space rules",
-              intrinsicSize: { width: 1080, height: 730 },
-            },
-          ],
+            alt: "FuseAI's two-stripe mark drawing itself on its construction grid",
+            playOnView: true,
+          },
         },
       },
       {
@@ -1962,9 +1963,9 @@ const fuseai: CaseStudy = {
         whyItMattered:
           "Six weeks for a fixed scope is not the flex. **Six weeks while the scope keeps growing is.** FuseAI's own team was building the site and the product alongside us, so design couldn't be the thing they waited on.",
         whatWeDid:
-          "We ran brand, website and product as overlapping tracks, with **the brand first, for launch day**. Pages went to FuseAI's Framer builder in batches while we designed the next ones, and product work started right after the brand handoff. New scope slotted into the next batch, and twice-weekly syncs with written recaps kept every decision moving.",
+          "We ran brand, website and product as overlapping tracks, with **the brand first, for launch day**. Pages went to FuseAI's Framer builder in batches, and new scope slotted into the next one.",
         outcome:
-          "**The brand was ready on launch day**, 17 days after kickoff. The website went live six weeks after the first design round, with the product UI days behind it. All of it landed inside the 6–8 weeks we publish for brand and website alone.",
+          "**The brand was ready on launch day**, 17 days after kickoff. The website went live six weeks after the first design round, the product UI a few days later.",
       },
       {
         kind: "media",
