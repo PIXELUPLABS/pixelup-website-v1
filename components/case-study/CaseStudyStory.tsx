@@ -24,12 +24,18 @@ export function Metrics({
   /** Off when the next section's top rule would double it. */
   bottomRule?: boolean;
 }) {
-  // Three cells fill the row on desktop; on mobile the third spans both
+  // Two or three cells fill the row on desktop; on mobile a third spans both
   // columns instead of leaving an empty cell beside it.
   const threeUp = metrics.length === 3;
+  const deskColumns =
+    metrics.length === 2
+      ? "desk:grid-cols-2"
+      : threeUp
+        ? "desk:grid-cols-3"
+        : "desk:grid-cols-4";
   return (
     <div
-      className={`grid grid-cols-2 border-t-[0.5px] border-hairline ${threeUp ? "desk:grid-cols-3" : "desk:grid-cols-4"} ${bottomRule ? "border-b-[0.5px]" : ""}`}
+      className={`grid grid-cols-2 border-t-[0.5px] border-hairline ${deskColumns} ${bottomRule ? "border-b-[0.5px]" : ""}`}
     >
       {metrics.map((metric, index) => {
         const mobileBorders = index % 2 === 1 ? "border-l-[0.5px]" : "";
