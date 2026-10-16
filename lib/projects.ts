@@ -81,9 +81,9 @@ export const projects: Project[] = [
     label: "FuseAI",
     href: "/case-studies/fuseai",
     external: false,
-    // The case study's closing mockup (#14), re-encoded from the full-size PNG.
-    media: { type: "image", src: "/media/fuseai.jpg" },
-    alt: "FuseAI '(FUSE*)' billboard above a subway escalator, brand, website and product design by PIXELUP LABS",
+    // Arjun's thumbnail (Fuse/visuals/image.png, 3840×2160), converted to WebP.
+    media: { type: "image", src: "/media/fuseai.webp" },
+    alt: "FuseAI's two-stripe mark on an off-white brand collage, brand, website and product design by PIXELUP LABS",
     // From fuseai.com's title and meta description, read 2026-10-16. Under the
     // ~46 characters the three-discipline meta leaves at 1200px, like Henry Labs.
     tagline: "AI sales platform for modern revenue teams",
