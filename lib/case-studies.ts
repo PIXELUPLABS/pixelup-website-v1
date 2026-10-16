@@ -42,6 +42,11 @@ export interface MediaComment {
   time?: string;
   /** Leading @mention, shown as a Slack mention chip before the message. */
   mention?: string;
+  /**
+   * Blur the @mention chip. The chip keeps its shape, but the name never
+   * reaches the browser: CaseMedia sends a same-length placeholder instead.
+   */
+  blurMention?: boolean;
   quote: string;
   reactions?: { emoji: string; count: number; mine?: boolean }[];
 }
@@ -2062,6 +2067,8 @@ const fuseai: CaseStudy = {
               org: "FuseAI",
               time: "Sep 3rd at 3:37 AM",
               mention: "Fahad",
+              // Arjun, 2026-10-16: blur the mention on the page.
+              blurMention: true,
               quote:
                 "This is AMAZING - my favorite thing so far; Great work on this animation 🥳🥳🥳🥳",
               reactions: [

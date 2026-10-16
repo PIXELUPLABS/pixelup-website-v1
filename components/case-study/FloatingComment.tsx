@@ -17,10 +17,15 @@ function graphemes(text: string): string[] {
 const TYPE_MS = 32;
 const WAIT_MS = 700;
 
-function Mention({ name }: { name: string }) {
+function Mention({ name, blurred }: { name: string; blurred?: boolean }) {
   return (
     <span className="rounded-[3px] bg-[#1D9BD1]/[0.15] px-0.5 text-[#1D9BD1]">
-      @{name}
+      {blurred ? (
+        // The chip stays crisp; only the handle inside it is blurred.
+        <span className="inline-block select-none blur-[3px]">@{name}</span>
+      ) : (
+        <>@{name}</>
+      )}
     </span>
   );
 }
@@ -79,7 +84,7 @@ export function FloatingComment({ comment }: { comment: MediaComment }) {
 
   const spoken = [
     `${comment.name}${comment.org ? `, ${comment.org}` : ""}${comment.time ? `, ${comment.time}` : ""}:`,
-    comment.mention ? `@${comment.mention}` : "",
+    comment.mention && !comment.blurMention ? `@${comment.mention}` : "",
     comment.quote,
   ]
     .filter(Boolean)
@@ -120,7 +125,10 @@ export function FloatingComment({ comment }: { comment: MediaComment }) {
             <p className="invisible col-start-1 row-start-1">
               {comment.mention && (
                 <>
-                  <Mention name={comment.mention} />{" "}
+                  <Mention
+                    name={comment.mention}
+                    blurred={comment.blurMention}
+                  />{" "}
                 </>
               )}
               {comment.quote}
@@ -140,7 +148,10 @@ export function FloatingComment({ comment }: { comment: MediaComment }) {
                 <>
                   {comment.mention && (
                     <>
-                      <Mention name={comment.mention} />{" "}
+                      <Mention
+                        name={comment.mention}
+                        blurred={comment.blurMention}
+                      />{" "}
                     </>
                   )}
                   {chars.slice(0, shown).join("")}
