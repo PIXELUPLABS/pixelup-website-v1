@@ -8,7 +8,13 @@
  */
 export type ProjectMedia =
   | { type: "image"; src: string }
-  | { type: "video"; src: string; poster?: string };
+  | {
+      type: "video";
+      src: string;
+      poster?: string;
+      /** MP4 fallback for browsers that can't play the main (WebM) source. */
+      fallbackSrc?: string;
+    };
 
 export interface Project {
   slug: string;
