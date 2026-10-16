@@ -1954,17 +1954,17 @@ const fuseai: CaseStudy = {
       },
       {
         kind: "challenge",
-        id: "challenge-adapt",
+        id: "challenge-touchpoints",
         index: "01",
-        heading: "We adapted as the scope grew, and shipped it all in 6 weeks.",
+        heading: "The brand system had to work across every touchpoint.",
         problem:
-          "FuseAI needed a brand, a website and product UI, with a launch date already set. **Then the scope kept growing.** The website went from FuseAI's existing structure to 10+ pages, and the product picked up an onboarding rework, empty states and a dark mode.",
+          "FuseAI's buyers meet the brand on the website, in sales and social assets, and then every day inside the product. **A refresh that stops at the homepage** leaves everything else looking like the old company.",
         whyItMattered:
-          "Six weeks for a fixed scope is not the flex. **Six weeks while the scope keeps growing is.** FuseAI's own team was building the site and the product alongside us, so design couldn't be the thing they waited on.",
+          "A rep who signs up from the new website and lands in an old-looking product meets two different companies. **And the free trial is where FuseAI turns a signup into a customer.**",
         whatWeDid:
-          "We ran brand, website and product as overlapping tracks, with **the brand first, for launch day**. Pages went to FuseAI's Framer builder in batches, and new scope slotted into the next one.",
+          "We built one system and carried it everywhere: **the logo system and app icon, colour tokens and type**, sales and social assets, and 10+ website pages. In the product, we restyled the existing flows, reworked onboarding with autofill and skippable steps, and designed the empty states and a dark mode. FuseAI's engineer built it in code from the product tokens we handed over.",
         outcome:
-          "**The brand was ready on launch day**, 17 days after kickoff. The website went live six weeks after the first design round, the product UI a few days later.",
+          "Since the redesign, Saurav reports better customer feedback and **free-to-paid trial conversion 20% higher**. New screens start from the same tokens, so the brand holds as FuseAI keeps shipping.",
       },
       {
         kind: "media",
@@ -2005,17 +2005,17 @@ const fuseai: CaseStudy = {
       },
       {
         kind: "challenge",
-        id: "challenge-touchpoints",
+        id: "challenge-adapt",
         index: "02",
-        heading: "The brand system had to work across every touchpoint.",
+        heading: "We adapted as the scope grew, and shipped it all in 6 weeks.",
         problem:
-          "FuseAI's buyers meet the brand on the website, in sales and social assets, and then every day inside the product. **A refresh that stops at the homepage** leaves everything else looking like the old company.",
+          "FuseAI needed a brand, a website and product UI, with a launch date already set. **Then the scope kept growing.** The website went from FuseAI's existing structure to 10+ pages, and the product picked up an onboarding rework, empty states and a dark mode.",
         whyItMattered:
-          "A rep who signs up from the new website and lands in an old-looking product meets two different companies. **And the free trial is where FuseAI turns a signup into a customer.**",
+          "Six weeks for a fixed scope is not the flex. **Six weeks while the scope keeps growing is.** FuseAI's own team was building the site and the product alongside us, so design couldn't be the thing they waited on.",
         whatWeDid:
-          "We built one system and carried it everywhere: **the logo system and app icon, colour tokens and type**, sales and social assets, and 10+ website pages. In the product, we restyled the existing flows, reworked onboarding with autofill and skippable steps, and designed the empty states and a dark mode. FuseAI's engineer built it in code from the product tokens we handed over.",
+          "We ran brand, website and product as overlapping tracks, with **the brand first, for launch day**. Pages went to FuseAI's Framer builder in batches, and new scope slotted into the next one.",
         outcome:
-          "Since the redesign, Saurav reports better customer feedback and **free-to-paid trial conversion 20% higher**. New screens start from the same tokens, so the brand holds as FuseAI keeps shipping.",
+          "**The brand was ready on launch day**, 17 days after kickoff. The website went live six weeks after the first design round, the product UI a few days later.",
       },
       {
         kind: "media",
