@@ -8,7 +8,13 @@
  */
 export type ProjectMedia =
   | { type: "image"; src: string }
-  | { type: "video"; src: string; poster?: string };
+  | {
+      type: "video";
+      src: string;
+      poster?: string;
+      /** MP4 fallback for browsers that can't play the main (WebM) source. */
+      fallbackSrc?: string;
+    };
 
 export interface Project {
   slug: string;
@@ -67,6 +73,20 @@ export const projects: Project[] = [
     // Kept short on purpose: the three-discipline meta is the widest on the page,
     // so this line has ~46 characters before it truncates at 1200px.
     tagline: "Embedded checkout for agentic commerce",
+    services: ["Branding", "Website Design", "Product Design"],
+    year: "2026",
+  },
+  {
+    slug: "fuseai",
+    label: "FuseAI",
+    href: "/case-studies/fuseai",
+    external: false,
+    // Arjun's thumbnail (Fuse/visuals/image.png, 3840×2160), converted to WebP.
+    media: { type: "image", src: "/media/fuseai.webp" },
+    alt: "FuseAI's two-stripe mark on an off-white brand collage, brand, website and product design by PIXELUP LABS",
+    // From fuseai.com's title and meta description, read 2026-10-16. Under the
+    // ~46 characters the three-discipline meta leaves at 1200px, like Henry Labs.
+    tagline: "AI sales platform for modern revenue teams",
     services: ["Branding", "Website Design", "Product Design"],
     year: "2026",
   },
