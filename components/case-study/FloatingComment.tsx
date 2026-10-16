@@ -19,16 +19,16 @@ const WAIT_MS = 700;
 
 function Mention({ name }: { name: string }) {
   return (
-    <span className="rounded-[3px] bg-[#1D9BD1]/10 px-0.5 text-[#1264A3]">
+    <span className="rounded-[3px] bg-[#1D9BD1]/[0.15] px-0.5 text-[#1D9BD1]">
       @{name}
     </span>
   );
 }
 
 /**
- * A Slack-style message pinned inside the top right of a full-width media
- * slot on desktop (24px in, the same as the media gutter) and sitting under
- * the media on mobile:
+ * A compact Slack-style message (dark theme) pinned inside the top right of
+ * a full-width media slot on desktop (12px in) and sitting under the media on
+ * mobile:
  * avatar with the sender's org badge, name, timestamp, an optional @mention,
  * the message and its reactions. The message types out once when the card
  * scrolls into view, after a short typing beat, then the reactions fade in.
@@ -88,33 +88,35 @@ export function FloatingComment({ comment }: { comment: MediaComment }) {
   return (
     <figure
       ref={ref}
-      className="mt-2 w-full rounded-xl border border-black/[0.08] bg-white px-4 pb-3 pt-3.5 text-[#1D1C1D] shadow-[0_2px_6px_rgba(16,24,40,0.08),0_24px_48px_-24px_rgba(16,24,40,0.45)] desk:absolute desk:top-6 desk:right-6 desk:mt-0 desk:w-[380px]"
+      className="mt-2 w-full rounded-lg border border-white/[0.1] bg-[#1A1D21] px-3 py-2.5 text-[#D1D2D3] shadow-[0_2px_6px_rgba(0,0,0,0.3),0_20px_40px_-20px_rgba(0,0,0,0.7)] desk:absolute desk:right-3 desk:top-3 desk:mt-0 desk:w-[300px]"
     >
       <span className="sr-only">{spoken}</span>
-      <div aria-hidden="true" className="flex gap-2.5">
-        <div className="relative size-9 shrink-0">
+      <div aria-hidden="true" className="flex gap-2">
+        <div className="relative size-7 shrink-0">
           <img
             src={comment.avatar}
             alt=""
-            width={36}
-            height={36}
-            className="size-9 rounded-lg object-cover"
+            width={28}
+            height={28}
+            className="size-7 rounded-md object-cover"
           />
           {comment.org && (
-            <span className="absolute -bottom-1 -right-1 flex size-4 items-center justify-center rounded-[4px] border-2 border-white bg-[#616061] text-[8px] font-bold leading-none text-white">
+            <span className="absolute -bottom-1 -right-1 flex size-3.5 items-center justify-center rounded-[3px] border-2 border-[#1A1D21] bg-[#616061] text-[7px] font-bold leading-none text-white">
               {comment.org.charAt(0)}
             </span>
           )}
         </div>
         <div className="min-w-0 flex-1">
           <p className="flex flex-wrap items-baseline gap-x-2 leading-tight">
-            <span className="text-[15px] font-bold">{comment.name}</span>
+            <span className="text-[13px] font-bold text-white">
+              {comment.name}
+            </span>
             {comment.time && (
-              <span className="text-[12px] text-[#616061]">{comment.time}</span>
+              <span className="text-[11px] text-[#ABABAD]">{comment.time}</span>
             )}
           </p>
           {/* The invisible copy holds the final size, so the card never grows while typing. */}
-          <div className="mt-1 grid text-[15px] leading-[22px]">
+          <div className="mt-0.5 grid text-[13px] leading-[19px]">
             <p className="invisible col-start-1 row-start-1">
               {comment.mention && (
                 <>
@@ -129,7 +131,7 @@ export function FloatingComment({ comment }: { comment: MediaComment }) {
                   {[0, 150, 300].map((delay) => (
                     <span
                       key={delay}
-                      className="size-1.5 animate-bounce rounded-full bg-black/30"
+                      className="size-1.5 animate-bounce rounded-full bg-white/30"
                       style={{ animationDelay: `${delay}ms` }}
                     />
                   ))}
@@ -143,7 +145,7 @@ export function FloatingComment({ comment }: { comment: MediaComment }) {
                   )}
                   {chars.slice(0, shown).join("")}
                   {phase === "typing" && (
-                    <span className="ml-px inline-block h-[1.05em] w-[2px] animate-pulse bg-[#1D1C1D] align-[-0.15em]" />
+                    <span className="ml-px inline-block h-[1.05em] w-[2px] animate-pulse bg-[#D1D2D3] align-[-0.15em]" />
                   )}
                 </>
               )}
@@ -151,18 +153,18 @@ export function FloatingComment({ comment }: { comment: MediaComment }) {
           </div>
           {comment.reactions && (
             <div
-              className={`mt-2 flex flex-wrap gap-1 ${phase === "done" ? "opacity-100 transition-opacity duration-300 motion-reduce:transition-none" : "opacity-0"}`}
+              className={`mt-1.5 flex flex-wrap gap-1 ${phase === "done" ? "opacity-100 transition-opacity duration-300 motion-reduce:transition-none" : "opacity-0"}`}
             >
               {comment.reactions.map((reaction) => (
                 <span
                   key={reaction.emoji}
-                  className={`inline-flex h-6 items-center gap-1 rounded-full border px-2 text-[12px] font-semibold ${
+                  className={`inline-flex h-5 items-center gap-1 rounded-full border px-1.5 text-[11px] font-semibold ${
                     reaction.mine
-                      ? "border-[#1D9BD1] bg-[#E8F5FA] text-[#1264A3]"
-                      : "border-black/[0.12] bg-black/[0.03] text-[#1D1C1D]"
+                      ? "border-[#1D9BD1] bg-[#1264A3] text-white"
+                      : "border-white/[0.12] bg-white/[0.06] text-[#D1D2D3]"
                   }`}
                 >
-                  <span className="text-[14px] leading-none">
+                  <span className="text-[12px] leading-none">
                     {reaction.emoji}
                   </span>
                   {reaction.count}
