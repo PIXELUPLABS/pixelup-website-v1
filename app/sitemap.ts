@@ -7,24 +7,25 @@ import { getBlogIndexUpdated, getBlogSitemapEntries } from "@/sanity/lib/blog-da
 const BASE_URL = "https://www.pixeluplabs.com";
 
 /**
- * Re-generate at most hourly. Next caches `sitemap.ts` indefinitely by default
- * (it is a Route Handler), so without this the blog `<lastmod>` values freeze
- * at whatever the last deploy baked in: a Sanity publish updates the article
- * but the sitemap keeps advertising the old date until something triggers a
- * rebuild. That happened on 2026-08-19 — the agency-vs article was corrected
- * in Sanity and the sitemap still claimed 2026-08-05.
+ * Render on every request. Next caches `sitemap.ts` by default (it is a Route
+ * Handler), and neither cache refresh tried so far kept blog `<lastmod>`
+ * current: the webhook's `revalidatePath('/sitemap.xml')` did not clear it
+ * (2026-08-19), and the `revalidate = 3600` that followed re-ran the route
+ * hourly but re-read the same cached Sanity result each time. On 2026-10-13
+ * the sitemap regenerated on schedule and still listed 2026-10-08 for 16 of
+ * 17 posts. getBlogSitemapEntries() now reads Sanity uncached, and crawlers
+ * fetch a sitemap rarely enough that per-request rendering is cheap.
  *
- * The revalidate webhook's `revalidatePath('/sitemap.xml')` did not clear it
- * either, so this is the durable fix. Valid because Cache Components is not
- * enabled in next.config.ts; under Cache Components this export is removed
- * (Next 16) and the equivalent is `'use cache'` + `cacheLife`.
+ * Valid because Cache Components is not enabled in next.config.ts; under
+ * Cache Components this export is removed (Next 16), and the uncached fetch
+ * alone keeps the route dynamic.
  */
-export const revalidate = 3600;
+export const dynamic = "force-dynamic";
 
 /**
  * Served at /sitemap.xml (Next metadata route). Case study and blog post
  * URLs are derived from lib/case-studies.ts and the active blog source, so
- * newly published Sanity posts are picked up automatically after revalidation.
+ * newly published Sanity posts appear on the next request.
  *
  * Every entry carries `lastModified`, which Next renders as `<lastmod>`.
  * Without it, crawlers and AI answer engines have no way to tell whether a
