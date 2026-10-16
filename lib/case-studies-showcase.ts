@@ -99,6 +99,17 @@ const entries: CaseStudyShowcaseEntry[] = [
     // No funding badge: the tag reads the case study's status badge, "YC W25 · AI sales".
   },
   {
+    slug: "replay",
+    // Licenses companies' de-identified operating data to frontier AI labs
+    // (replay.ai, read 2026-10-16), so it sits with Reducto.
+    niche: "AI Infrastructure",
+    // No /clients roster entry yet, so this follows the homepage card's services.
+    whatWeDid:
+      "Brand identity, marketing website, and product design, with Next.js development",
+    // No funding badge: no public round found (2026-10-16), and "Replay raises
+    // $5.7M" is replay.io, a different company. Private, the card's default tag.
+  },
+  {
     slug: "ctgt",
     niche: "Enterprise AI",
     whatWeDid:
