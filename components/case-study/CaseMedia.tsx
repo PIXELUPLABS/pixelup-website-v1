@@ -1,7 +1,20 @@
 import Image from "next/image";
-import type { MediaBlock, MediaSlot, MediaTone } from "@/lib/case-studies";
+import type {
+  MediaBlock,
+  MediaComment,
+  MediaSlot,
+  MediaTone,
+} from "@/lib/case-studies";
 import { FloatingComment } from "./FloatingComment";
 import { ScrollVideo } from "./ScrollVideo";
+
+/** FloatingComment is a client component, so its props ship to the browser.
+ * A blurred mention sends a same-length placeholder, never the real name. */
+function forClient(comment: MediaComment): MediaComment {
+  return comment.blurMention && comment.mention
+    ? { ...comment, mention: "x".repeat(comment.mention.length) }
+    : comment;
+}
 
 // Placeholder fills matching the Figma frames: solid white boxes, near-black
 // empty frames, and the dark-green gradient panels.
@@ -159,7 +172,7 @@ export function CaseMediaBlock({
         {block.slot.comment ? (
           <div className="relative">
             {slot}
-            <FloatingComment comment={block.slot.comment} />
+            <FloatingComment comment={forClient(block.slot.comment)} />
           </div>
         ) : (
           slot
