@@ -62,6 +62,28 @@ const entries: CaseStudyShowcaseEntry[] = [
     stat: "$25M raised at a $180M valuation, led by Benchmark",
   },
   {
+    slug: "henrylabs",
+    niche: "Consumer AI",
+    whatWeDid: "Positioning, Brand, Website, Product, Webflow Development",
+    // No funding badge — see file header note.
+  },
+  {
+    slug: "fuseai",
+    // Same bucket as Valley, the other AI sales platform on the list.
+    niche: "Enterprise AI",
+    whatWeDid: "Brand Identity, Website Design, Product Design, Motion Design",
+    // No funding badge: the tag reads the case study's status badge, "YC W25 · AI sales".
+  },
+  {
+    slug: "streamline",
+    niche: "Enterprise AI",
+    whatWeDid:
+      "Brand Identity, Positioning, Website Design, Design System, Webflow Development",
+    // $8.6M Series A led by Blumberg Capital, July 2025 (public announcement).
+    fundingBadge: "Series A",
+    stat: "One design system shipped across 200+ pages",
+  },
+  {
     slug: "sainapse",
     niche: "Enterprise AI",
     whatWeDid: "Brand Identity, Website Design, Webflow Development",
@@ -75,28 +97,6 @@ const entries: CaseStudyShowcaseEntry[] = [
     // Series A + $150M valuation confirmed via public funding coverage (Jan 2025).
     fundingBadge: "Series A",
     stat: "Scaled 26x in 11 months, raising $32M+ at a $150M valuation",
-  },
-  {
-    slug: "streamline",
-    niche: "Enterprise AI",
-    whatWeDid:
-      "Brand Identity, Positioning, Website Design, Design System, Webflow Development",
-    // $8.6M Series A led by Blumberg Capital, July 2025 (public announcement).
-    fundingBadge: "Series A",
-    stat: "One design system shipped across 200+ pages",
-  },
-  {
-    slug: "henrylabs",
-    niche: "Consumer AI",
-    whatWeDid: "Positioning, Brand, Website, Product, Webflow Development",
-    // No funding badge — see file header note.
-  },
-  {
-    slug: "fuseai",
-    // Same bucket as Valley, the other AI sales platform on the list.
-    niche: "Enterprise AI",
-    whatWeDid: "Brand Identity, Website Design, Product Design, Motion Design",
-    // No funding badge: the tag reads the case study's status badge, "YC W25 · AI sales".
   },
   {
     slug: "replay",
