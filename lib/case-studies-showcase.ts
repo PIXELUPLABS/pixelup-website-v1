@@ -92,6 +92,13 @@ const entries: CaseStudyShowcaseEntry[] = [
     // No funding badge — see file header note.
   },
   {
+    slug: "fuseai",
+    // Same bucket as Valley, the other AI sales platform on the list.
+    niche: "Enterprise AI",
+    whatWeDid: "Brand Identity, Website Design, Product Design, Motion Design",
+    // No funding badge: the tag reads the case study's status badge, "YC W25 · AI sales".
+  },
+  {
     slug: "ctgt",
     niche: "Enterprise AI",
     whatWeDid:

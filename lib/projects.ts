@@ -77,6 +77,20 @@ export const projects: Project[] = [
     year: "2026",
   },
   {
+    slug: "fuseai",
+    label: "FuseAI",
+    href: "/case-studies/fuseai",
+    external: false,
+    // The case study's closing mockup (#14), re-encoded from the full-size PNG.
+    media: { type: "image", src: "/media/fuseai.jpg" },
+    alt: "FuseAI '(FUSE*)' billboard above a subway escalator, brand, website and product design by PIXELUP LABS",
+    // From fuseai.com's title and meta description, read 2026-10-16. Under the
+    // ~46 characters the three-discipline meta leaves at 1200px, like Henry Labs.
+    tagline: "AI sales platform for modern revenue teams",
+    services: ["Branding", "Website Design", "Product Design"],
+    year: "2026",
+  },
+  {
     slug: "replay",
     label: "Replay",
     // replay.ai 308s to www.replay.ai — link the destination directly, no redirect hop.
