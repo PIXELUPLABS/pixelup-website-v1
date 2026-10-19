@@ -2217,6 +2217,267 @@ const fuseai: CaseStudy = {
   },
 };
 
+const varickFaq: FaqItem = {
+  q: "Who designed Varick's brand and website?",
+  a: "PIXELUP LABS designed Varick's brand identity, website and motion system in 2026: the V mark and wordmark, the navy-and-blue brand palette, the agent illustration system, the marketing website and a set of brand films.",
+};
+
+// MOCK case study (draft, noindex, not linked from /case-studies or the
+// sitemap). Copy is placeholder written from Varick's own site positioning;
+// there are no client quotes or metrics yet. Mockups are the Figma
+// "Varick — Case Study Mockups" sets 1 + 2; videos are rendered from the
+// brand kit's V and wordmark vectors and the live website frames.
+const varick: CaseStudy = {
+  slug: "varick",
+  title: "We built Varick a brand enterprise buyers trust on sight.",
+  metaTitle: "Varick Agents Brand, Website and Motion Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS designed Varick Agents' brand identity, website and motion system in 2026, for an AI agent company selling into Fortune 500 operations teams.",
+  info: {
+    client: "Varick Agents",
+    year: "2026",
+    involvement: [
+      "Brand Identity",
+      "Website Design",
+      "Illustration System",
+      "Motion Design",
+    ],
+    links: [{ label: "varickagents.com", href: "https://varickagents.com/" }],
+  },
+  description: [
+    "PIXELUP LABS designed Varick Agents' brand, website and motion system in 2026.",
+    "Varick builds custom AI agent systems inside Fortune 500 organizations and large enterprise teams.",
+    "The brand had to read as serious enough for a CFO and clear enough to explain what an agent actually does.",
+  ],
+  hero: {
+    media: {
+      type: "video",
+      src: "/media/varick/opener-loop.mp4",
+      poster: "/media/varick/opener-loop-poster.jpg",
+    },
+    alt: "Varick brand film: close-ups of the letterforms under construction, then the wordmark and V on a blue glow",
+    intrinsicSize: { width: 1920, height: 1080 },
+  },
+  story: {
+    company: "Varick Agents",
+    statusBadge: "Enterprise AI agents",
+    headline: "We built Varick a brand enterprise buyers trust on sight.",
+    summary:
+      "Varick Agents designs and deploys **custom AI agent systems inside Fortune 500 organizations** and large enterprise teams. It audits how work actually moves across systems, builds agents for that workflow, and runs them inside the tools a company already uses.",
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Varick need a new brand?",
+        items: [
+          {
+            label: "Where Varick was",
+            text: "Varick was selling a deep, consultative product with a brand that looked like every other AI startup. **Its buyers run finance, operations and revenue teams at enterprise scale.**",
+          },
+          {
+            label: "What Varick asks its buyers to do",
+            text: "Let an outside team redesign how work moves through their organization. In Varick's words: **\"Most AI pilots fail because they add another tool instead of changing how the work gets done.\"**",
+          },
+          {
+            label: "What they asked us for",
+            text: "A brand identity, a website and a way to show agents at work without the usual robot imagery. **Quiet, editorial and unmistakably enterprise.**",
+          },
+          {
+            label: "Why it mattered",
+            text: "An enterprise buyer decides in seconds whether a vendor looks like it will still be around next year. **A brand that looks unfinished loses the deal before the demo.**",
+          },
+        ],
+      },
+      // Mockups: Figma "Section 3" (node 2770:3812), in its order. Pair
+      // partners are cropped to one aspect ratio so their heights match.
+      {
+        kind: "media",
+        id: "snapshot-blade-sign",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/varick/blade-sign.avif" },
+            alt: "Varick wordmark on a navy blade sign beside a timber-clad doorway",
+            intrinsicSize: { width: 2035, height: 1064 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-window-hoodie",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/varick/window-v.avif" },
+              alt: "Varick V etched on a glass window with a tree behind it",
+              intrinsicSize: { width: 998, height: 909 },
+            },
+            {
+              media: { type: "image", src: "/media/varick/hoodie.avif" },
+              alt: "Navy Varick hoodie with the wordmark on the chest and the V on the cuff",
+              intrinsicSize: { width: 991, height: 903 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-trust",
+        index: "01",
+        heading: "The brand had to earn enterprise trust at first glance.",
+        problem:
+          "Varick's buyers meet dozens of AI vendors a quarter. **Most of them look interchangeable**: gradients, glowing orbs, a sans-serif wordmark.",
+        whyItMattered:
+          "Varick sells a months-long engagement inside a buyer's core operations. **It needs to look like a firm, not a feature.**",
+        whatWeDid:
+          "We drew a **serif V and wordmark** with the restraint of a consultancy and paired them with a deep navy and a single brand blue. The type system runs Season Mix for headlines and Inter for everything else.",
+        outcome:
+          "One mark that holds from a 16px favicon to a building-sized billboard, and **a palette that reads enterprise before a word is read.**",
+      },
+      {
+        kind: "media",
+        id: "snapshot-poster-concrete",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/varick/poster-concrete.avif" },
+            alt: "Varick 'Make Your Organization AI Native' V poster on a concrete wall",
+            intrinsicSize: { width: 1753, height: 1169 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-laptop-poster",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/varick/laptop-lap.avif" },
+              alt: "Varick website hero on a laptop in someone's lap",
+              intrinsicSize: { width: 864, height: 1172 },
+            },
+            {
+              media: { type: "image", src: "/media/varick/poster-brick.avif" },
+              alt: "Varick 'deploys AI agent systems inside Fortune 500 organizations' poster on sunlit brick",
+              intrinsicSize: { width: 865, height: 1174 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-agents",
+        index: "02",
+        heading: "We showed agents at work without a single robot.",
+        problem:
+          "\"AI agent\" means nothing to a CFO until they see one doing their team's work. **Stock AI imagery makes it worse**, not clearer.",
+        whyItMattered:
+          "Varick's pitch is that agents fit inside the systems a company already runs. **The visuals had to prove that in one look.**",
+        whatWeDid:
+          "We built an **illustration system from real product moments**: an agent's run log, a trigger-to-action workflow and an approval queue, set on the brand blue. The same pieces work on the website, in sales decks and on a billboard.",
+        outcome:
+          "Every illustration shows **a specific job being done**, so a prospect can picture it running in their own Salesforce, ERP or Slack.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-billboard-towers",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/varick/billboard-towers.avif" },
+            alt: "Varick 'Make Your Organization AI Native' billboard with glass towers",
+            intrinsicSize: { width: 1800, height: 1200 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-desk-cladding",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/varick/laptop-desk.avif" },
+              alt: "Varick 'How they run with agents' page on a laptop on a timber desk",
+              intrinsicSize: { width: 901, height: 1222 },
+            },
+            {
+              media: { type: "image", src: "/media/varick/billboard-cladding.avif" },
+              alt: "Varick 'AI agent systems inside Fortune 500' sign on a clad building",
+              intrinsicSize: { width: 901, height: 1222 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-website",
+        index: "03",
+        heading: "The website had to explain a consultative sale on its own.",
+        problem:
+          "Varick's process (audit, build, deploy, improve) usually takes a sales call to explain. **Most visitors never book that call.**",
+        whyItMattered:
+          "Enterprise buyers research alone long before they talk to sales. **The site is the first sales meeting.**",
+        whatWeDid:
+          "We designed the site around Varick's process and its industries, with **the illustration system doing the explaining** and case studies proving the outcome. Desktop and mobile were designed together.",
+        outcome:
+          "A buyer can follow **how Varick works, where it fits and what it delivered** before the first call.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-lightboxes-arcade",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/varick/subway-lightboxes.avif" },
+              alt: "Varick 'Only AI Native Orgs Will Survive' posters in subway lightboxes",
+              intrinsicSize: { width: 1080, height: 1350 },
+            },
+            {
+              media: { type: "image", src: "/media/varick/billboard-arcade.avif" },
+              alt: "Varick 'Deploy your first AI Agent' billboard in a brick arcade",
+              intrinsicSize: { width: 1014, height: 1268 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Varick ended up.",
+        paragraphs: [
+          "Varick now has **one system across every touchpoint**: the V mark and wordmark, a navy-and-blue palette, Season Mix and Inter, an illustration system built from real agent workflows, a marketing website for desktop and mobile, and a set of brand films.",
+          "If you sell AI into the enterprise and your brand still looks like a demo, **we should talk**. Our prices are public, and retainers start at $6k/mo.",
+          "Brand, website and motion design by PIXELUP LABS, 2026.",
+        ],
+      },
+    ],
+    faqHeading,
+    faqs: [varickFaq, ...pixelupFaq],
+  },
+  sections: [],
+  endCta: {
+    label: "Book a call",
+    href: links.discoveryCall,
+  },
+  moreProjects: [
+    { slug: "fuseai", tags: "Branding, website & product design" },
+    { slug: "henrylabs", tags: "Branding, website & product design" },
+  ],
+  publication: {
+    status: "draft",
+    publishedDate: "2026-10-19",
+    updatedDate: "2026-10-19",
+    blockers: [
+      "Mock: copy is placeholder, needs Varick's approval and real outcomes.",
+      "No client testimonial or metrics yet.",
+    ],
+  },
+};
+
 export const caseStudies = {
   greptile,
   sainapse,
@@ -2224,4 +2485,5 @@ export const caseStudies = {
   streamline,
   henryLabs,
   fuseai,
+  varick,
 };

@@ -91,6 +91,19 @@ export const projects: Project[] = [
     year: "2026",
   },
   {
+    slug: "varick",
+    label: "Varick Agents",
+    href: "/case-studies/varick",
+    external: false,
+    // Thumbnail frame from Figma Section 3 (node 2765:3804), 1600×900.
+    media: { type: "image", src: "/media/varick/plaque.avif" },
+    alt: "Varick wordmark on a blue glass plaque on a sunlit timber wall, brand, website and motion design by PIXELUP LABS",
+    // From varickagents.com's positioning ("AI agent systems inside Fortune 500").
+    tagline: "AI agent systems for the enterprise",
+    services: ["Branding", "Website Design", "Motion Design"],
+    year: "2026",
+  },
+  {
     slug: "replay",
     label: "Replay",
     // replay.ai 308s to www.replay.ai — link the destination directly, no redirect hop.
