@@ -9,25 +9,34 @@ const echo = [
   `PIXELUP LABS © ${new Date().getFullYear()}, all rights reserved`,
 ];
 
-export default function Footer() {
+type Props = {
+  /** `null` drops the eyebrow. */
+  eyebrow?: string | null;
+  email?: string;
+  note?: string;
+};
+
+export default function Footer({ eyebrow = 'New business', email = site.email, note = `${site.status} right now. Say hello.` }: Props = {}) {
   return (
     <footer className="foot" id="contact">
       <FooterGradient />
       <div className="foot__cta">
-        <p className="foot__eyebrow" data-reveal="fade">
-          New business
-        </p>
-        <CopyEmail email={site.email} />
+        {eyebrow && (
+          <p className="foot__eyebrow" data-reveal="fade">
+            {eyebrow}
+          </p>
+        )}
+        <CopyEmail email={email} />
         <p className="foot__note" data-reveal="fade">
           <StatusDots />
-          <span>{site.status} right now. Say hello.</span>
+          <span>{note}</span>
         </p>
       </div>
 
       <div className="foot__bar">
         <div className="foot__links">
-          <a href={`mailto:${site.email}`} className="u-link">
-            {site.email}
+          <a href={`mailto:${email}`} className="u-link">
+            {email}
           </a>
           {site.socials.map((s) => (
             <a key={s.label} href={s.href} className="foot__social" target="_blank" rel="noreferrer">

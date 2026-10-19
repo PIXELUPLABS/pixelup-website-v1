@@ -3,6 +3,9 @@
 import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 
+// Routes that bring their own header and full-viewport layout (see below).
+const OWN_SHELL = new Set(["/2027", "/process"]);
+
 /**
  * The shared shell around every page: the sticky Navbar inside a column
  * capped at 1800px.
@@ -14,15 +17,15 @@ import { Navbar } from "./Navbar";
  * the full viewport, so a border there would just be a stray line glued to
  * the screen edge instead of framing the centered column.
  *
- * /2027 (the next homepage, app/2027) brings its own header and lays itself
- * out on the full viewport, so it renders without either. Exact match only:
- * nothing exists below /2027, and an unmatched /2027/... URL serves the
- * prerendered 404, which has the frame.
+ * /2027 (the next homepage, app/2027) and /process (How we work, app/process)
+ * bring their own header and lay themselves out on the full viewport, so they
+ * render without either. Exact match only: nothing exists below them, and an
+ * unmatched URL under them serves the prerendered 404, which has the frame.
  */
 export function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
-  if (pathname === "/2027") return children;
+  if (OWN_SHELL.has(pathname)) return children;
 
   return (
     <div className="mx-auto max-w-[1800px] min-[1800px]:border-x-[0.5px] min-[1800px]:border-hairline">

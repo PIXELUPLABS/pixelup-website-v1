@@ -19,8 +19,16 @@ function cornerDock(vp: Viewport): Dock {
   return { x: vp.w * 0.78125, y: vp.h * 0.55, g, gap: 0, ...still, dots: 1 };
 }
 
-/** Where the mark rests before any section has claimed it: centred on the home hero, in the corner elsewhere. */
+/** Where the mark rests before any section has claimed it: centred on the home hero, beside a proposal's title, in the corner elsewhere. */
+let rest: { intro: HTMLElement; dock: (vp: Viewport) => Dock } | null = null;
+
 export function restDock(vp: Viewport): Dock {
+  const prop = document.querySelector<HTMLElement>('.prop-intro');
+  if (prop) {
+    // Runs every frame until the stops exist, so the fitted dock is kept and only re-measures on a resize.
+    if (rest?.intro !== prop) rest = { intro: prop, dock: proposalIntroDock(prop) };
+    return rest.dock(vp);
+  }
   return document.querySelector('.hero') ? heroDock(vp) : cornerDock(vp);
 }
 
@@ -125,11 +133,77 @@ function introDock(vp: Viewport): Dock {
   return { x: vp.w - g * 0.75, y: vp.h * 0.15, g, gap: 0, ...still, dots: 0.6 };
 }
 
+// The selection frame around the glyph, in glyph units (MarkScene's BOX_W / BOX_H): what has to fit.
+const FRAME_W = GLYPH_ASPECT + 0.36;
+const FRAME_H = 1.36;
+
+/** The right edge and top of an element's lines of text, in page coordinates. */
+function textBox(el: Element | null) {
+  if (!el) return null;
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  const r = range.getBoundingClientRect();
+  return { right: r.right, top: r.top + window.scrollY };
+}
+
+/**
+ * Proposals and How we work: the corner pose would sit on the meta row, so the mark (with its frame) is fitted into
+ * the space right of the intro copy (kicker, title, lede) and between the header and the meta row. Page coordinates,
+ * since the dock only applies at the top of the page; measured on first use and again whenever the viewport changes
+ * size, so a resize never mixes old positions with the new width. No room (narrow screens): the badge.
+ */
+function proposalIntroDock(intro: HTMLElement) {
+  let size = '';
+  let m = { left: 0, kickerRight: 0, kickerTop: 0, titleTop: 0, ceil: 0, floor: 0 };
+  const measure = (vp: Viewport) => {
+    if (size === `${vp.w}x${vp.h}`) return m;
+    size = `${vp.w}x${vp.h}`;
+    const kicker = textBox(intro.querySelector('.cs-kicker'));
+    const title = textBox(intro.querySelector('.cs-title'));
+    const lede = textBox(intro.querySelector('.cs-lede'));
+    const meta = intro.querySelector('.cs-meta');
+    const hdr = document.querySelector('.hdr');
+    m = {
+      left: Math.max(kicker?.right ?? 0, title?.right ?? 0, lede?.right ?? 0),
+      kickerRight: kicker?.right ?? 0,
+      kickerTop: kicker?.top ?? 0,
+      titleTop: title?.top ?? 0,
+      ceil: hdr ? hdr.getBoundingClientRect().bottom : 0,
+      floor: meta ? meta.getBoundingClientRect().top + window.scrollY : vp.h,
+    };
+    return m;
+  };
+  // 10% slack: the mark floats and its halves part a little around the dock.
+  const fit = (cap: number, w: number, h: number) => Math.min(cap, 0.9 * Math.min(w / FRAME_W, h / FRAME_H));
+  return (vp: Viewport): Dock => {
+    const base = introDock(vp);
+    const { left, kickerRight, kickerTop, titleTop, ceil, floor } = measure(vp);
+    if (vp.mobile) {
+      // Phones: the title runs full width. The mark sits beside the kicker (between the header and the title), or
+      // above it when a long kicker leaves no room beside it, whichever lets it be larger.
+      const beside = fit(base.g, vp.w - 16 - (kickerRight + 12), titleTop - ceil - 16);
+      const above = fit(base.g, vp.w - 32, kickerTop - ceil - 12);
+      const g = Math.max(beside, above);
+      if (g < 40) return base;
+      return { ...base, x: vp.w - 16 - (FRAME_W * g) / 2, y: beside >= above ? (ceil + titleTop) / 2 : (ceil + kickerTop) / 2, g };
+    }
+    const pad = Math.max(16, vp.w * (24 / 1440));
+    const x0 = left + pad * 2;
+    const x1 = vp.w - pad;
+    const y0 = ceil + pad;
+    const y1 = Math.min(floor, vp.h) - pad;
+    const g = fit(base.g, x1 - x0, y1 - y0);
+    if (g < 72) return badgeDock(vp);
+    return { ...base, x: (x0 + x1) / 2, y: (y0 + y1) / 2, g };
+  };
+}
+
 export function buildStops(vp: Viewport): DockStop[] {
   const collage = document.querySelector('[data-dock="collage"]');
   const intro = document.querySelector('.cs-intro, .blog-intro');
+  const prop = document.querySelector<HTMLElement>('.prop-intro');
   const home = document.querySelector('.hero');
-  const stops: DockStop[] = [{ at: 0, dock: collage ? collageDock : intro ? introDock : home ? heroDock : cornerDock }];
+  const stops: DockStop[] = [{ at: 0, dock: collage ? collageDock : prop ? proposalIntroDock(prop) : intro ? introDock : home ? heroDock : cornerDock }];
   const scrollY = window.scrollY;
   const work = document.getElementById('work');
   const news = document.getElementById('news');
