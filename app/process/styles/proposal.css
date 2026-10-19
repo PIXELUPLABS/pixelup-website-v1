@@ -737,3 +737,51 @@
     gap: 16px;
   }
 }
+
+/* ---------------------------------------------------------------
+   Print — How we work as the page itself, dark (scripts/pdf/how-we-work.mjs prints it as one tall page).
+   Scoped to this page; nothing here applies on screen.
+---------------------------------------------------------------- */
+@media print {
+  /* Keep the ink background and the footer gradient, which print drops by default. */
+  :root:where(:has(.v2027)):has(main[data-page='process']) {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  /* Paper has no scroll: every reveal shows its end state, whatever the motion layer left inline. */
+  :root:where(:has(.v2027)):has(main[data-page='process'])
+    :is([data-intro], [data-intro] > *, [data-reveal], [data-reveal='rise'] > *, [data-reveal='lines'] .line, [data-media]) {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
+  /* The WebGL mark and the cursor are screen-only. */
+  :root:where(:has(.v2027)):has(main[data-page='process']) :is(.mark, .cursor) {
+    display: none;
+  }
+  /* Fixed would repeat the header on every sheet: print it once, at the top of the document. */
+  :root:where(:has(.v2027)):has(main[data-page='process']) .hdr {
+    position: absolute;
+  }
+  /* Sticky has nothing to hold against on paper. */
+  :where(.v2027) main[data-page='process'] .prop-deliverables .cs-text__head {
+    position: static;
+  }
+  :where(.v2027) main[data-page='process'] :is(.ps__row, .cs-item, .prop-get__group li) {
+    break-inside: avoid;
+  }
+  /* Footer: the CSS gradient at full rise, with its grain, in place of the WebGL canvas.
+     100vh is the sheet's height in print (the whole page when printed as one), so hold it at a 1440 × 900 screen's. */
+  :where(.v2027) main[data-page='process'] + .foot {
+    min-height: calc(900 * var(--u));
+    background-position: 50% 100%;
+  }
+  :where(.v2027) main[data-page='process'] + .foot > .foot__gl {
+    display: none;
+  }
+  :where(.v2027) main[data-page='process'] + .foot::before {
+    opacity: 0.22;
+  }
+}
