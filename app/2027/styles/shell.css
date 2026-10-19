@@ -1,0 +1,22 @@
+/* ---------------------------------------------------------------
+   /2027 inside this site's root layout. base, chrome and sections.css
+   were written for a document of their own; these rules square them
+   with the root layout (Tailwind preflight, body classes) and with
+   what changed in the port. Loaded after them.
+---------------------------------------------------------------- */
+
+/* The root layout paints html and body #000. The page's ink is #0c0c0c, and the mark blends by difference
+   against whatever is underneath, so the whole canvas has to be ink. */
+html:has(.v2027),
+html:has(.v2027) body {
+  background: var(--ink);
+}
+
+/* Tailwind's preflight lifts every <sup> by 0.5em and shrinks it to 75%. The 2026 type was set against the
+   browser's own sup (the ® on the wordmark sets no offset of its own), so give that back. */
+:where(.v2027) sup {
+  position: revert;
+  top: revert;
+  font-size: revert;
+  vertical-align: revert;
+}

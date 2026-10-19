@@ -1,0 +1,640 @@
+/* ---------------------------------------------------------------
+   Ported from daksh6131/pixelup-labs-website-2026, src/styles/case.css, for /process.
+   The rules are unchanged; only the selectors are scoped the way app/2027/styles are,
+   so nothing here reaches the rest of the site: every selector is prefixed with
+   :where(.v2027), which adds no specificity; :root rules apply only while the page
+   is mounted (:has(.v2027)); .motion rules keep the class on <html>.
+---------------------------------------------------------------- */
+/* ---------------------------------------------------------------
+   Case studies — Figma 674:317
+   Intro in the space above the first frame (597u), then mocks in three frame types:
+   full 1392 × 835 · pair 690 × 656 (7u gutter) · centred portrait 676 × 843, stacked with 9u gaps.
+---------------------------------------------------------------- */
+:root:where(:has(.v2027)) {
+  --fs-body: clamp(14px, calc(15 * var(--u)), 19px);
+  --fs-h: clamp(26px, calc(44 * var(--u)), 72px);
+}
+@media (max-width: 767px) {
+  :root:where(:has(.v2027)) {
+    --fs-body: 15px;
+    --fs-h: 27px;
+  }
+}
+
+:where(.v2027) .cs-intro,
+:where(.v2027) .blog-intro {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  align-content: end;
+  row-gap: max(18px, calc(26 * var(--u)));
+  min-height: calc(597 * var(--u));
+  padding: max(110px, calc(150 * var(--u))) 0 max(32px, calc(56 * var(--u)));
+}
+:where(.v2027) .cs-intro > *,
+:where(.v2027) .blog-intro > * {
+  padding-inline: var(--pad);
+}
+:where(.v2027) .cs-kicker {
+  grid-column: 1 / 9;
+  color: var(--fog);
+  text-transform: uppercase;
+}
+:where(.v2027) .cs-title {
+  grid-column: 1 / 12;
+  font-size: clamp(34px, calc(64 * var(--u)), 104px);
+  font-weight: 400;
+  line-height: 1;
+  text-wrap: balance;
+}
+:where(.v2027) .cs-lede {
+  grid-column: 1 / 7;
+  max-width: 52ch;
+  color: var(--fog);
+  font-size: var(--fs-body);
+  line-height: 1.45;
+}
+
+/* Meta row sits on the header's columns: Work (56.25%), Blog (68.75%), Contact (81.25%) */
+:where(.v2027) .cs-meta {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  align-items: start;
+  margin: max(16px, calc(30 * var(--u))) 0 0;
+  padding: 14px 0 0 !important;
+  border-top: 1px solid var(--rule);
+}
+:where(.v2027) .cs-meta dt {
+  margin-bottom: 6px;
+  color: var(--fog);
+}
+:where(.v2027) .cs-meta dd {
+  margin: 0;
+}
+:where(.v2027) .cs-meta__cell--client {
+  grid-column: 1 / 10;
+  padding-left: var(--pad);
+}
+:where(.v2027) .cs-meta__cell--year {
+  grid-column: 10 / 12;
+  padding-left: calc(8 * var(--u));
+}
+:where(.v2027) .cs-meta__cell--scope {
+  grid-column: 12 / 14;
+  padding-left: calc(5 * var(--u));
+  padding-right: 12px;
+}
+:where(.v2027) .cs-meta__cell--link {
+  grid-column: 14 / -1;
+  padding-left: calc(62 * var(--u));
+  padding-right: var(--pad);
+}
+
+/* Mocks */
+:where(.v2027) .mocks {
+  display: flex;
+  flex-direction: column;
+  gap: calc(9 * var(--u));
+  padding: 0 var(--pad);
+}
+:where(.v2027) .mocks + .mocks {
+  margin-top: calc(9 * var(--u));
+}
+:where(.v2027) .mocks__row--half {
+  display: flex;
+  gap: calc(7 * var(--u));
+}
+/* Each frame's width is proportional to its aspect ratio, so a pair shares one height and neither image is cropped. */
+:where(.v2027) .mocks__row--half > .frame {
+  flex: var(--grow, 1.05) 1 0;
+  min-width: 0;
+}
+:where(.v2027) .frame {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: var(--panel);
+}
+:where(.v2027) .frame--full {
+  aspect-ratio: var(--ar, 1392 / 835);
+}
+:where(.v2027) .frame--half {
+  aspect-ratio: var(--ar, 690 / 656);
+}
+:where(.v2027) .frame--portrait {
+  width: calc(676 * var(--u));
+  margin: 0 auto;
+  aspect-ratio: var(--ar, 676 / 843);
+}
+:where(.v2027) .frame__zoom {
+  position: absolute;
+  inset: 0;
+}
+:where(.v2027) .frame img,
+:where(.v2027) .frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+:where(.v2027) .frame--logo .frame__zoom {
+  inset: 24%;
+}
+:where(.v2027) .frame--logo img {
+  object-fit: contain;
+}
+:where(.v2027) .frame--cover .frame__zoom {
+  position: relative;
+}
+:where(.v2027) .frame--cover img {
+  position: relative;
+  height: auto;
+}
+
+/* Section text: heading on the left half, copy from the Work column (56.25%) */
+:where(.v2027) .cs-section {
+  padding-top: max(80px, calc(150 * var(--u)));
+}
+:where(.v2027) .cs-text {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  row-gap: max(28px, calc(48 * var(--u)));
+  margin-bottom: max(40px, calc(72 * var(--u)));
+  padding: 0 var(--pad);
+}
+:where(.v2027) .cs-text--stats {
+  margin: max(48px, calc(96 * var(--u))) 0 0;
+}
+:where(.v2027) .cs-text__head {
+  grid-column: 1 / 9;
+}
+:where(.v2027) .cs-eyebrow {
+  margin-bottom: 18px;
+  color: var(--fog);
+  text-transform: uppercase;
+}
+:where(.v2027) .cs-eyebrow span {
+  margin-left: 10px;
+  color: var(--paper);
+  font-variant-numeric: tabular-nums;
+}
+:where(.v2027) .cs-heading {
+  max-width: 16ch;
+  font-size: var(--fs-h);
+  font-weight: 400;
+  line-height: 1.02;
+  text-wrap: balance;
+}
+:where(.v2027) .cs-text__body {
+  grid-column: 10 / -1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  font-size: var(--fs-body);
+  line-height: 1.5;
+}
+:where(.v2027) .cs-para {
+  color: #cfcfcf;
+}
+:where(.v2027) .cs-items,
+:where(.v2027) .cs-metrics {
+  margin: 0;
+}
+:where(.v2027) .cs-item,
+:where(.v2027) .cs-metric {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2.4fr);
+  gap: 16px;
+  padding: max(14px, calc(18 * var(--u))) 0;
+  border-top: 1px solid var(--rule);
+}
+:where(.v2027) .cs-item:last-child,
+:where(.v2027) .cs-metric:last-child {
+  border-bottom: 1px solid var(--rule);
+}
+:where(.v2027) .cs-item dt,
+:where(.v2027) .cs-metric dt {
+  padding-top: 0.35em;
+  color: var(--fog);
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+}
+:where(.v2027) .cs-metric dt {
+  color: var(--paper);
+}
+:where(.v2027) .cs-item dd,
+:where(.v2027) .cs-metric dd {
+  margin: 0;
+  color: #cfcfcf;
+}
+
+:where(.v2027) .cs-stats {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+:where(.v2027) .cs-stat {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 8px;
+  padding-top: 14px;
+}
+:where(.v2027) .cs-stat dd {
+  margin: 0;
+  font-size: clamp(40px, calc(96 * var(--u)), 160px);
+  line-height: 1;
+}
+:where(.v2027) .cs-stat dt {
+  color: var(--fog);
+}
+
+:where(.v2027) .cs-quote {
+  grid-column: 1 / 14;
+  margin: 0;
+}
+:where(.v2027) .cs-quote blockquote {
+  margin: 0;
+  font-size: clamp(22px, calc(40 * var(--u)), 64px);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+:where(.v2027) .cs-quote figcaption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: max(20px, calc(32 * var(--u)));
+}
+:where(.v2027) .cs-quote img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+:where(.v2027) .cs-quote__role {
+  color: var(--fog);
+}
+
+/* Next case */
+:where(.v2027) .cs-next {
+  padding: max(120px, calc(220 * var(--u))) var(--pad) max(40px, calc(80 * var(--u)));
+}
+:where(.v2027) .cs-next__label {
+  margin-bottom: 16px;
+  color: var(--fog);
+}
+:where(.v2027) .cs-next__link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--rule);
+}
+:where(.v2027) .cs-next__title {
+  font-size: var(--fs-mega);
+  line-height: 1;
+}
+:where(.v2027) .cs-next__sub {
+  color: var(--fog);
+}
+:where(.v2027) .cs-next__link .arrow-swap {
+  margin-left: auto;
+  font-size: clamp(20px, calc(40 * var(--u)), 64px);
+}
+
+@media (max-width: 767px) {
+  :where(.v2027) .cs-title,
+  :where(.v2027) .cs-lede,
+  :where(.v2027) .cs-kicker {
+    grid-column: 1 / -1;
+  }
+  :where(.v2027) .cs-meta {
+    row-gap: 16px;
+  }
+  :where(.v2027) .cs-meta__cell--client,
+  :where(.v2027) .cs-meta__cell--year,
+  :where(.v2027) .cs-meta__cell--scope,
+  :where(.v2027) .cs-meta__cell--link {
+    grid-column: span 8;
+    padding: 0 var(--pad);
+  }
+  :where(.v2027) .mocks__row--half {
+    flex-direction: column;
+  }
+  :where(.v2027) .mocks__row--half > .frame {
+    flex: none;
+  }
+  :where(.v2027) .frame--portrait {
+    width: 100%;
+  }
+  :where(.v2027) .cs-text__head,
+  :where(.v2027) .cs-text__body,
+  :where(.v2027) .cs-quote {
+    grid-column: 1 / -1;
+  }
+  :where(.v2027) .cs-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: 24px;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Blog
+---------------------------------------------------------------- */
+:where(.v2027) .blog-intro .cs-title {
+  grid-column: 1 / 12;
+}
+:where(.v2027) .blog-feature {
+  display: flex;
+  flex-direction: column;
+  gap: max(40px, calc(64 * var(--u)));
+  padding: 0 var(--pad);
+}
+:where(.v2027) .blog-feature__pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: max(40px, calc(64 * var(--u))) calc(7 * var(--u));
+}
+:where(.v2027) .post-card {
+  display: block;
+}
+:where(.v2027) .post-card__media {
+  position: relative;
+  margin: 0;
+  overflow: hidden;
+  background: var(--panel);
+}
+:where(.v2027) .post-card__media .frame__zoom {
+  position: relative;
+}
+:where(.v2027) .post-card__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 1.4s var(--ease-out);
+}
+:where(.v2027) .post-card__meta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 8px 24px;
+  margin-top: max(12px, calc(16 * var(--u)));
+}
+:where(.v2027) .post-card__title {
+  max-width: 38ch;
+  font-size: var(--fs-m);
+  font-weight: 400;
+  line-height: 1.1;
+}
+:where(.v2027) .post-card__title span {
+  background: linear-gradient(currentColor, currentColor) left bottom / 0% 1px no-repeat;
+  transition: background-size 0.7s var(--ease-out);
+}
+:where(.v2027) .post-card--full .post-card__title {
+  font-size: clamp(22px, calc(36 * var(--u)), 56px);
+}
+:where(.v2027) .post-card__info {
+  display: flex;
+  gap: 14px;
+  color: var(--fog);
+  white-space: nowrap;
+}
+@media (hover: hover) {
+  :where(.v2027) .post-card:hover .post-card__media img {
+    transform: scale(1.03);
+  }
+  :where(.v2027) .post-card:hover .post-card__title span {
+    background-size: 100% 1px;
+  }
+}
+@media (max-width: 767px) {
+  :where(.v2027) .blog-feature__pair {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  :where(.v2027) .post-card__meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+:where(.v2027) .index--blog {
+  padding-top: max(100px, calc(180 * var(--u)));
+}
+:where(.v2027) .index__cell--title {
+  max-width: calc(700 * var(--u));
+  white-space: normal;
+}
+/* The cover rises just above the hovered row, in the Type/Published columns, so it never sits on a title. */
+:where(.v2027) .cluster__img--cover {
+  top: auto;
+  bottom: 10px;
+  left: calc(660 * var(--u));
+  z-index: 4;
+  width: calc(250 * var(--u));
+  height: auto;
+  border-radius: 4px;
+  box-shadow: 0 24px 50px -16px rgba(0, 0, 0, 0.8);
+}
+:where(.v2027) .cluster__img--cover img {
+  position: relative;
+  display: block;
+  height: auto;
+}
+
+/* ---------------------------------------------------------------
+   Article — reading column on the 16-column grid
+---------------------------------------------------------------- */
+:where(.v2027) .article__title {
+  grid-column: 1 / 14;
+  font-size: clamp(32px, calc(58 * var(--u)), 96px);
+}
+:where(.v2027) .article__cover {
+  padding: 0 var(--pad);
+}
+:where(.v2027) .article__grid {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  padding: max(56px, calc(110 * var(--u))) var(--pad) 0;
+}
+:where(.v2027) .article__aside {
+  grid-column: 1 / 4;
+  grid-row: 1;
+}
+:where(.v2027) .article__aside > * {
+  position: sticky;
+  top: 110px;
+}
+:where(.v2027) .article__byline {
+  position: static;
+  margin-bottom: 28px;
+}
+:where(.v2027) .article__byline span {
+  display: block;
+  color: var(--fog);
+}
+:where(.v2027) .toc__label {
+  margin-bottom: 10px;
+  color: var(--fog);
+}
+:where(.v2027) .toc ol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+:where(.v2027) .toc li a {
+  color: var(--mute);
+  transition: color 0.3s;
+}
+:where(.v2027) .toc li.is-active a,
+:where(.v2027) .toc li a:hover {
+  color: var(--paper);
+}
+:where(.v2027) .article__body {
+  grid-column: 5 / 13;
+  grid-row: 1;
+  font-size: max(15px, calc(17 * var(--u)));
+  line-height: 1.6;
+}
+:where(.v2027) .article__body > * {
+  margin: 0 0 1.05em;
+}
+:where(.v2027) .article__p {
+  color: #d2d2d2;
+}
+:where(.v2027) .article__tldr {
+  padding: 16px 18px;
+  border-left: 1px solid var(--paper);
+  background: var(--panel);
+  color: var(--paper);
+}
+:where(.v2027) .article__h2 {
+  margin-top: 2.2em;
+  scroll-margin-top: 110px;
+  font-size: clamp(22px, calc(32 * var(--u)), 48px);
+  font-weight: 400;
+  line-height: 1.1;
+}
+:where(.v2027) .article__h3 {
+  margin-top: 1.6em;
+  font-size: var(--fs-m);
+  font-weight: 400;
+  line-height: 1.2;
+}
+:where(.v2027) .article__list {
+  padding-left: 1.2em;
+  color: #d2d2d2;
+}
+:where(.v2027) .article__list--ul {
+  list-style: square;
+}
+:where(.v2027) .article__list--ol {
+  list-style: decimal;
+}
+:where(.v2027) .article__list li + li {
+  margin-top: 0.5em;
+}
+:where(.v2027) .article__quote {
+  margin-left: 0;
+  font-size: var(--fs-m);
+  line-height: 1.3;
+}
+:where(.v2027) .article__link {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+:where(.v2027) .article__table-wrap {
+  overflow-x: auto;
+}
+:where(.v2027) .article__table {
+  width: 100%;
+  min-width: 560px;
+  border-collapse: collapse;
+  font-size: max(11px, calc(12 * var(--u)));
+  line-height: 1.45;
+}
+:where(.v2027) .article__table th {
+  padding: 0 14px 10px 0;
+  color: var(--fog);
+  font-weight: 400;
+  text-align: left;
+  text-transform: uppercase;
+  vertical-align: bottom;
+}
+:where(.v2027) .article__table td {
+  padding: 12px 14px 12px 0;
+  border-top: 1px solid var(--rule);
+  color: #d2d2d2;
+  vertical-align: top;
+}
+:where(.v2027) .article__table td:first-child {
+  color: var(--paper);
+}
+:where(.v2027) .article__figure {
+  margin: 2em 0;
+  /* The image settles from 1.2× on reveal; clip it so it never widens the page on phones. */
+  overflow: clip;
+}
+:where(.v2027) .article__figure img {
+  width: 100%;
+  height: auto;
+}
+:where(.v2027) .article__figure figcaption {
+  margin-top: 10px;
+  color: var(--fog);
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+}
+@media (min-width: 1024px) {
+  /* Figures break out of the reading column by one column each side; tables stay in-column */
+  :where(.v2027) .article__figure {
+    margin-inline: -12.5%;
+  }
+}
+:where(.v2027) .article__table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+}
+:where(.v2027) .article__table {
+  min-width: 0;
+  table-layout: fixed;
+}
+:where(.v2027) .article__table th,
+:where(.v2027) .article__table td {
+  overflow-wrap: anywhere;
+}
+/* Phones: five columns can't share 343px without breaking words mid-way. Give the table room and let it
+   scroll sideways, with a fade on the right edge as the cue that there's more. */
+@media (max-width: 767px) {
+  :where(.v2027) .article__table-wrap {
+    margin-right: calc(-1 * var(--pad));
+    padding-right: var(--pad);
+    -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+    mask-image: linear-gradient(90deg, #000 85%, transparent);
+  }
+  :where(.v2027) .article__table {
+    min-width: 600px;
+    table-layout: auto;
+  }
+  :where(.v2027) .article__table th,
+  :where(.v2027) .article__table td {
+    overflow-wrap: normal;
+  }
+}
+@media (max-width: 1023px) {
+  :where(.v2027) .article__aside {
+    display: none;
+  }
+  :where(.v2027) .article__body {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Motion initial states */
+.motion :where(.v2027) [data-reveal='lines'] {
+  visibility: hidden;
+}
+.motion :where(.v2027) [data-media] {
+  clip-path: inset(100% 0 0 0);
+}

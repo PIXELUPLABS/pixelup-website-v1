@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import Script from "next/script";
 import { DatafastVisitGoal } from "@/components/DatafastVisitGoal";
 import { DisableImageDrag } from "@/components/DisableImageDrag";
-import { Navbar } from "@/components/Navbar";
+import { SiteFrame } from "@/components/SiteFrame";
 import "./globals.css";
 
 // Inter Display — the real display face from the original Framer site,
@@ -58,9 +58,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // suppressHydrationWarning: /process's boot script (components/2027/Shell.tsx)
+    // adds its motion classes to <html> before React hydrates. It only covers
+    // this element's own attributes.
     <html
       lang="en"
       className={`${interDisplay.variable} ${instrumentSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full bg-base font-display text-white">
         {/* These <Script>s live inside <body> per the next/script docs — as
@@ -112,17 +116,9 @@ export default function RootLayout({
         </Script>
         <DisableImageDrag />
         <DatafastVisitGoal />
-        {/* Caps the site at 1800px and centers it — on very large monitors the
-            page was stretching edge-to-edge, which broke the intended layout
-            proportions. Only binds above 1800px; no effect at smaller sizes.
-            The hairline side borders only kick in past that same breakpoint
-            (min-[1800px]:) — below it the div already spans the full
-            viewport, so a border there would just be a stray line glued to
-            the screen edge instead of framing the centered column. */}
-        <div className="mx-auto max-w-[1800px] min-[1800px]:border-x-[0.5px] min-[1800px]:border-hairline">
-          <Navbar />
-          {children}
-        </div>
+        {/* The Navbar inside a column capped at 1800px; /process brings its
+            own header and full-viewport layout instead (see SiteFrame). */}
+        <SiteFrame>{children}</SiteFrame>
       </body>
     </html>
   );
