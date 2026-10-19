@@ -22,7 +22,12 @@ export default function ProcessPage() {
       <main data-page="process">
         <ProposalView p={p} />
       </main>
-      <Footer eyebrow={null} email={DAKSH} note="Anything you’d like covered on the call? Email Daksh." />
+      <Footer
+        eyebrow={null}
+        email={DAKSH}
+        note="Anything you’d like covered on the call? Email Daksh."
+        legal={[{ label: 'Privacy Policy', href: '/privacy' }]}
+      />
     </>
   );
 }

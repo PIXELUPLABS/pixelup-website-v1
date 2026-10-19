@@ -1,0 +1,21 @@
+/* ---------------------------------------------------------------
+   /process on the shared /2027 shell: adjustments for this page only.
+   Loaded after the scoped 2026 styles.
+---------------------------------------------------------------- */
+
+/* Without WebGL the mark falls back to its SVG, which the shell places large beside the hero. On this long read it
+   would sit over the copy for the whole page, so it takes the corner badge's place, as the WebGL mark does. */
+:where(.v2027):has(> main[data-page='process']) .mark.is-fallback .mark__fallback {
+  top: auto;
+  right: var(--pad);
+  bottom: 28px;
+  height: max(28px, 7vh);
+  transform: none;
+}
+@media (max-width: 767px) {
+  :where(.v2027):has(> main[data-page='process']) .mark.is-fallback .mark__fallback {
+    right: 16px;
+    bottom: 20px;
+    height: 5vh;
+  }
+}
