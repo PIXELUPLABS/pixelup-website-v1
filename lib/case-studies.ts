@@ -2020,23 +2020,22 @@ const fuseai: CaseStudy = {
       // Mockups: Growth/Case studies/Fuse/visuals (Figma: Project showcase).
       // Logo first, then branding, then website and product. Each pair shares
       // one aspect ratio so the heights match.
-      // The mark drawing itself on its construction grid: WebM (VP9, no
-      // audio) with an MP4 fallback, replaying from the start on each scroll-in.
+      // The mark drawing itself on its construction grid: Arjun's refined
+      // HTML/SVG loop (2026-10-20), embedded over its finished frame as the
+      // still. It restarts on each scroll-in and loops while in view.
       {
         kind: "media",
         id: "snapshot-logo",
         media: {
           kind: "full",
-          aspect: "wide",
           slot: {
             media: {
-              type: "video",
-              src: "/media/fuseai/logo-grid.webm",
-              fallbackSrc: "/media/fuseai/logo-grid.mp4",
-              poster: "/media/fuseai/logo-grid-poster.jpg",
+              type: "image",
+              src: "/media/fuseai/logo-grid-poster.png",
             },
             alt: "FuseAI's two-stripe mark drawing itself on its construction grid",
-            playOnView: true,
+            intrinsicSize: { width: 1920, height: 1080 },
+            embed: "/media/fuseai/logo-grid.html",
           },
         },
       },
