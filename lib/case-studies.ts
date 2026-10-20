@@ -403,10 +403,10 @@ const greptile: CaseStudy = {
     links: [{ label: "greptile.com", href: "https://greptile.com" }],
   },
   description: [
-    "We partnered with Greptile to evolve their AI code review platform into an enterprise-ready system.",
-    "Greptile had YC backing and strong technology, but gaps in product clarity and brand maturity surfaced as they moved upmarket, where trust is non-negotiable.",
-    "We treated the work as a system design problem: brand, product, website, and sales assets designed together, prioritizing clarity and trust at every touchpoint.",
-    "The impact was immediate. Demo requests doubled in week one, and within six months Greptile raised a $25M Series A at a $180M valuation led by Benchmark.",
+    "We partnered with Greptile to evolve their **AI code review platform into an enterprise-ready system**.",
+    "Greptile had YC backing and strong technology, but **gaps in product clarity and brand maturity** surfaced as they moved upmarket, where trust is non-negotiable.",
+    "We treated the work as **a system design problem**: brand, product, website, and sales assets designed together, prioritizing clarity and trust at every touchpoint.",
+    "The impact was immediate. **Demo requests doubled in week one**, and within six months Greptile raised **a $25M Series A at a $180M valuation** led by Benchmark.",
   ],
   // Frame 1.
   hero: {
@@ -441,19 +441,19 @@ const greptile: CaseStudy = {
         items: [
           {
             label: "Where Greptile was",
-            text: "Greptile had YC backing, real technical depth and a product that could review complex codebases.",
+            text: "Greptile had **YC backing, real technical depth and a product that could review complex codebases.**",
           },
           {
             label: "What it needed",
-            text: "A system that could explain the product quickly and feel credible to larger engineering teams.",
+            text: "A system that could **explain the product quickly and feel credible to larger engineering teams.**",
           },
           {
             label: "What was not working",
-            text: "The brand, website and product story felt fragmented. Buyers had to connect the value for themselves.",
+            text: "The brand, website and product story felt fragmented. **Buyers had to connect the value for themselves.**",
           },
           {
             label: "Why it mattered",
-            text: "As Greptile moved upmarket, every unclear touchpoint added friction to a sale built on trust.",
+            text: "As Greptile moved upmarket, **every unclear touchpoint added friction to a sale built on trust.**",
           },
         ],
       },
@@ -526,13 +526,13 @@ const greptile: CaseStudy = {
         index: "01",
         heading: "Every touchpoint told a different Greptile story.",
         problem:
-          "Greptile's technology had moved faster than the way the company presented itself. Brand, website and sales materials each told a slightly different story.",
+          "Greptile's technology had moved faster than the way the company presented itself. **Brand, website and sales materials each told a slightly different story.**",
         whyItMattered:
-          "Enterprise buyers do not separate the product from the company behind it. An inconsistent signal makes a capable platform feel like a risk.",
+          "Enterprise buyers do not separate the product from the company behind it. **An inconsistent signal makes a capable platform feel like a risk.**",
         whatWeDid:
-          "We rebuilt the identity, positioning, website and sales system together. Clarity, durability and trust became the filter for every decision.",
+          "We rebuilt **the identity, positioning, website and sales system together.** Clarity, durability and trust became the filter for every decision.",
         outcome:
-          "Greptile had one coherent system for product, sales and investor conversations instead of a set of disconnected deliverables.",
+          "Greptile had **one coherent system for product, sales and investor conversations** instead of a set of disconnected deliverables.",
       },
       // Frame 4, with its own Figma motion: the dot-matrix strips drift and
       // flicker behind the card (Figma's keyframes, 6 s loop).
@@ -581,13 +581,13 @@ const greptile: CaseStudy = {
         index: "02",
         heading: "Buyers saw the complexity before they saw the value.",
         problem:
-          "AI code review crosses repositories, code context and review workflows. Showing all that complexity at once made the value harder to see.",
+          "AI code review crosses repositories, code context and review workflows. **Showing all that complexity at once made the value harder to see.**",
         whyItMattered:
-          "If a buyer could not understand the workflow quickly, the demo had to explain the interface before it could prove the outcome.",
+          "If a buyer could not understand the workflow quickly, **the demo had to explain the interface before it could prove the outcome.**",
         whatWeDid:
-          "We simplified the hierarchy, clarified key paths and carried the same visual logic from the website into the product experience.",
+          "We **simplified the hierarchy, clarified key paths** and carried the same visual logic from the website into the product experience.",
         outcome:
-          "After launch, demo requests doubled in the first week and the product story gave sales a clearer starting point.",
+          "After launch, **demo requests doubled in the first week** and the product story gave sales a clearer starting point.",
       },
       // Frame 6, played as the stats loop film.
       {
@@ -701,9 +701,9 @@ const greptile: CaseStudy = {
         id: "after-launch",
         heading: "Then Greptile started sending other YC founders our way.",
         paragraphs: [
-          "Beyond metrics, our work became Greptile's internal standard for how they present themselves across product, sales, and investor touchpoints.",
-          "Greptile began referring us to other YC founders. One introduction turned into several, and this collaboration became the foundation for our long-term partnerships across the YC ecosystem.",
-          "Today, we work closely with multiple YC-backed teams, helping them translate strong technology into clear, credible systems.",
+          "Beyond metrics, our work became **Greptile's internal standard** for how they present themselves across product, sales, and investor touchpoints.",
+          "Greptile began **referring us to other YC founders**. One introduction turned into several, and this collaboration became the foundation for our long-term partnerships across the YC ecosystem.",
+          "Today, we work closely with **multiple YC-backed teams**, helping them translate strong technology into clear, credible systems.",
         ],
       },
     ],
