@@ -25,22 +25,98 @@ export interface MediaSlot {
   };
   /** Logo mark rendered centered on top of the media (as on the homepage cards). */
   overlayLogo?: string;
-  /** Slack-style client message pinned top right on a full-width slot (under it on mobile). */
+  /** Client message (Slack or X) pinned top right on a full-width slot (under it on mobile). */
   comment?: MediaComment;
   /** Video only: play once from the start each time it scrolls into view
    * (paused when it leaves, no loop) instead of autoplaying on a loop. */
   playOnView?: boolean;
+  /** With `playOnView`: keep looping while in view instead of stopping at the end. */
+  loop?: boolean;
+  /** Image with `intrinsicSize` only: an animated bar chart drawn over it. */
+  chart?: MediaChart;
+  /** Image with `intrinsicSize` only: layers that slide into it on scroll-in. */
+  layers?: MediaLayers;
 }
 
-/** A Slack-style message pinned to a full-width media slot. It types out once on scroll. */
+/**
+ * Image layers over a slot image exported without them. `moving` layers slide
+ * in from `from` and fade up once on scroll-in, inside `clip`; `overlay` sits
+ * above them inside the clip (e.g. a soft-light grain) and `front` above
+ * everything (e.g. an audience in front of a screen). Boxes are in the slot
+ * image's pixels, `at` is seconds from the start of the reveal.
+ */
+export interface MediaLayers {
+  clip: MediaBox;
+  /** Offset each moving layer starts at, in image pixels. */
+  from: { x: number; y?: number };
+  /** Seconds each moving layer takes to settle. */
+  duration: number;
+  moving: { src: string; box: MediaBox; at: number }[];
+  overlay?: { src: string; box: MediaBox; blend?: "soft-light" };
+  front?: { src: string; box: MediaBox };
+}
+
+/** x, y, width and height in the slot image's own pixels. */
+export type MediaBox = [number, number, number, number];
+
+/**
+ * Bar-chart columns layered over a mockup exported with its chart hidden,
+ * replaying the chart's Figma motion once on scroll-in: each column wipes
+ * open top-down and fades in, its bars drop in bottom-up, then its label
+ * slides in. Every `at` is seconds from the start of the reveal.
+ */
+export interface MediaChart {
+  /**
+   * Dashed "[" and "]" down each column's left and right edges, which stretch
+   * with the column as it opens. Lengths in image pixels; `dash` is Figma's
+   * dash (and gap) length, drawn with square caps.
+   */
+  brackets?: { width: number; stroke: number; dash: number; color: string };
+  columns: {
+    /** The column's clip box. */
+    box: MediaBox;
+    /** When the column starts opening. */
+    at: number;
+    label: { src: string; box: MediaBox; at: number };
+    caption: { src: string; box: MediaBox };
+    bar: { src: string; x: number; width: number; height: number };
+    /** Each bar's top edge and start time, top to bottom. */
+    bars: { y: number; at: number }[];
+  }[];
+}
+
+/**
+ * A client message pinned to a full-width media slot: a Slack message by
+ * default, or a public X post (`variant: "x"`). It types out once on scroll.
+ */
 export interface MediaComment {
-  avatar: string;
+  variant?: "slack" | "x";
+  /** Without one, the card shows the sender's initials. */
+  avatar?: string;
   name: string;
+  /** X only: the sender's handle, without the @. */
+  handle?: string;
+  /** X only: the post's URL. The X logo and the date link to it. */
+  href?: string;
+  /** X only: the blue verification check after the name. */
+  verified?: boolean;
+  /** X only: when it was posted (ISO 8601). Shown in the reader's time zone,
+   * as X does, after a UTC first render. */
+  datetime?: string;
+  /** X only: the counts under the post, as of the date in the entry's comment.
+   * Zero or missing counts show the icon alone, as X does. */
+  stats?: {
+    replies?: number;
+    reposts?: number;
+    likes?: number;
+    bookmarks?: number;
+    views?: number;
+  };
   /** Sender's org, shown as Slack's badge on the avatar (its first letter). */
   org?: string;
-  /** Timestamp as Slack shows it, e.g. "Sep 3rd at 3:37 AM". */
+  /** Timestamp as Slack shows it ("Sep 3rd at 3:37 AM") or X does ("Oct 15, 2026"). */
   time?: string;
-  /** Leading @mention, shown as a Slack mention chip before the message. */
+  /** Slack: a mention chip before the message. X: the "Replying to @…" line. */
   mention?: string;
   /**
    * Blur the @mention chip. The chip keeps its shape, but the name never
@@ -64,6 +140,17 @@ export type MediaBlock =
       slots: [MediaSlot, MediaSlot];
       /** Preserve landscape assets instead of using the default near-square crop. */
       aspect?: "standard" | "wide";
+    }
+  | {
+      /** Portrait images drifting left in an endless row across a panel (the
+       * "Trusted by" marquee, at poster scale). Every slot needs `media` and
+       * `intrinsicSize`. */
+      kind: "marquee";
+      slots: MediaSlot[];
+      /** Image behind the row, cropped to the panel. */
+      background?: MediaSlot;
+      /** Seconds for one full pass of the set. Defaults to 40. */
+      duration?: number;
     };
 
 export interface FocusItem {
@@ -162,6 +249,9 @@ export type CaseStoryBlock =
         company: string;
         headshot?: string;
       };
+      /** Where the quote was said publicly, linked after the company
+       * ("Founder & CEO, Replay, on X, 15 October 2026"). */
+      source?: { label: string; href: string };
       approvalPending?: boolean;
     }
   | {
@@ -169,6 +259,9 @@ export type CaseStoryBlock =
       id: string;
       heading: string;
       paragraphs: string[];
+      /** A closing sentence ending in an inline link, e.g. "Want to talk about
+       * your own brand? Book a call." */
+      cta?: { text: string; label: string; href: string };
     };
 
 export interface CaseStudyStory {
@@ -2217,6 +2310,443 @@ const fuseai: CaseStudy = {
   },
 };
 
+// Answers the page's target prompt ("who designed Replay's brand"), so it
+// leads the Replay FAQ ahead of the shared questions.
+const replayFaq: FaqItem = {
+  q: "Who designed Replay's brand and website?",
+  a: "PIXELUP LABS designed Replay's brand and website from scratch in 2026, then built the site. Companies license their work data to Replay (replay.ai) and get paid, and Replay licenses the cleaned data to AI labs. After launch, Replay asked PIXELUP LABS to design its product too, and Replay's own team now runs the site. Founder and CEO Brendan Mahony, on X: \"Best agency I've ever worked with.\"",
+};
+
+// Copy: Replay (Sunsethq)/Case Study/Final/replay-case-study.md (draft,
+// 2026-10-19), sources listed there. Brendan's quote is his public X reply to
+// @dakshpixelup (15 Oct 2026). Media slots without `media` are placeholders
+// until the mockups and videos land; each one's plan is in the comment above it.
+const replay: CaseStudy = {
+  slug: "replay",
+  title: "We built Replay a brand that can be trusted at first glance.",
+  metaTitle: "Replay Brand, Website and Product Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS built Replay's brand and website from scratch, then designed its product. Replay's founder: \"Best agency I've ever worked with.\"",
+  info: {
+    client: "Replay",
+    year: "2026",
+    // No funding row (FuseAI precedent): the investors sit in the sidebar summary.
+    // Arjun's list (2026-10-20). "Next.js", as on the homepage card.
+    involvement: [
+      "Branding",
+      "Web Design",
+      "Motion Design",
+      "Next.js Development",
+      "Product Design",
+    ],
+    // replay.ai 308s to www.replay.ai, as on the homepage card.
+    links: [{ label: "replay.ai", href: "https://www.replay.ai/" }],
+  },
+  description: [
+    "PIXELUP LABS designed Replay's brand and website from scratch in 2026, then built the site.",
+    "Companies license their work data to Replay (replay.ai) and get paid. Replay removes the personal details and licenses the data to AI labs. Companies have to trust Replay with that data, so it had to look established, not like another AI startup.",
+    "After launch, Replay asked PIXELUP LABS to design its product too.",
+    "Replay's founder, Brendan Mahony, on X: \"Best agency I've ever worked with.\"",
+  ],
+  // Mockups: Figma jfiQlmF7z1j3cq8BDFhuMT (Project showcase), section "Full
+  // set" 1907:13435, frames 1-11 top to bottom, exported 2026-10-20 at 1x
+  // (2920×1643 full width, 1440×1800 pairs). Videos: the four MP4s in
+  // Replay (Sunsethq)/Case Study/Final, re-encoded H.264 CRF 25 (the 16:9
+  // pair at 2560×1440 from their 4K masters).
+  hero: {
+    media: { type: "image", src: "/media/replay/billboard.avif" },
+    alt: "Replay billboard on an office tower reading 'Fund growth by licensing the data you already have.', brand identity by PIXELUP LABS",
+    intrinsicSize: { width: 2920, height: 1643 },
+  },
+  story: {
+    company: "Replay",
+    statusBadge: "AI data licensing",
+    headline: "We built Replay a brand that can be trusted at first glance.",
+    // Investors and run rate: Replay's Ashby postings (from 2026-07-20). The
+    // run rate is Replay's claim and predates our kickoff (2026-07-28), so it's
+    // attributed ("says") and never tied to our work. Founder line:
+    // replay.ai/about, signed Founder & CEO.
+    summary:
+      "Replay turns companies' work data into **AI training data**, and pays the companies for it. It's backed by Floodgate, Afore, Ludlow and Hustle Fund, and says it went from $0 to a multi-eight-figure run rate in months. Founder and CEO Brendan Mahony is a repeat founder who sold one company and built Sunset, which has helped thousands of founders wind down their companies.",
+    // No stat row: Arjun removed the two hero stats (2026-10-20).
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Replay need a new brand?",
+        items: [
+          {
+            label: "Where Replay was",
+            text: "Replay was just launching, with a new idea: get paid for data your company already has. **Nobody shares years of company data with a brand they don't trust.**",
+          },
+          {
+            label: "What Replay asks companies to do",
+            text: "Share years of emails, chats, tickets and code. Replay removes the personal details and licenses the cleaned data to AI labs. The company usually gets paid up front, plus a cut of every license.",
+          },
+          {
+            label: "What they asked us for",
+            text: "A brand from scratch and a new website. The site had to be built so Replay's own engineers could take it over.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**When someone offers to pay you for your data, your first thought is \"what's the catch?\"** The brand had to make Replay look trustworthy at first glance.",
+          },
+        ],
+      },
+      // Frame 2: the wordmark constructed from its vector outline.
+      {
+        kind: "media",
+        id: "snapshot-logo-loop",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: {
+              type: "video",
+              src: "/media/replay/logo-loop.mp4",
+              poster: "/media/replay/logo-loop-poster.jpg",
+            },
+            alt: "Replay's arch mark and serif wordmark drawn as vector outlines",
+            // Every animation on this page starts when it reaches the screen.
+            playOnView: true,
+            loop: true,
+          },
+        },
+      },
+      // Frames 3 and 4. The phone was exported with its payout chart hidden;
+      // the chart is redrawn over it from Figma layers 1907:10313/10323/10338
+      // and replays their motion (2s timeline) on scroll-in.
+      {
+        kind: "media",
+        id: "snapshot-engraving-payout",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/replay/engraving.avif" },
+              alt: "Replay poster pairing a Pegasus engraving with spreadsheet records, framed on a stone wall",
+              intrinsicSize: { width: 1440, height: 1800 },
+            },
+            {
+              media: { type: "image", src: "/media/replay/payout-phone.avif" },
+              alt: "Replay homepage on a phone: what companies get paid, from $10K+ for under 25 people to $1M+ for 100+ people",
+              intrinsicSize: { width: 1440, height: 1800 },
+              chart: {
+                // Figma 1907:10314/10322 and siblings: 19.1-wide frames with a
+                // 3.05 white/30% inside stroke, dashed 12.19, square caps.
+                brackets: { width: 19.14, stroke: 3.048, dash: 12.19, color: "rgb(255 255 255 / 0.3)" },
+                columns: [
+                  {
+                    box: [311, 744.3, 256.3, 707.9],
+                    at: 0.05,
+                    label: { src: "/media/replay/payout-chart/label-1.png", box: [333.6, 769.5, 136, 43], at: 0.5572 },
+                    caption: { src: "/media/replay/payout-chart/caption-1.png", box: [332, 1410.7, 160, 18] },
+                    bar: { src: "/media/replay/payout-chart/bar-1.png", x: 330.2, width: 219, height: 34 },
+                    bars: [
+                      { y: 1301.9, at: 0.4378 },
+                      { y: 1344.9, at: 0.3602 },
+                    ],
+                  },
+                  {
+                    box: [591.3, 744.3, 256.3, 707.9],
+                    at: 0.297,
+                    label: { src: "/media/replay/payout-chart/label-2.png", box: [614.1, 769.5, 167, 43], at: 1.0866 },
+                    caption: { src: "/media/replay/payout-chart/caption-2.png", box: [611.9, 1410.7, 210, 18] },
+                    bar: { src: "/media/replay/payout-chart/bar-2.png", x: 610.5, width: 219, height: 34 },
+                    bars: [
+                      { y: 1086.7, at: 0.9676 },
+                      { y: 1129.7, at: 0.9142 },
+                      { y: 1172.8, at: 0.8642 },
+                      { y: 1215.8, at: 0.8146 },
+                      { y: 1258.8, at: 0.7692 },
+                      { y: 1301.9, at: 0.7264 },
+                      { y: 1344.9, at: 0.6848 },
+                    ],
+                  },
+                  {
+                    box: [871.6, 744.3, 256.3, 707.9],
+                    at: 0.5474,
+                    label: { src: "/media/replay/payout-chart/label-3.png", box: [894.5, 769.5, 119, 43], at: 1.4362 },
+                    caption: { src: "/media/replay/payout-chart/caption-3.png", box: [892.4, 1410.7, 177, 18] },
+                    bar: { src: "/media/replay/payout-chart/bar-3.png", x: 890.7, width: 219, height: 34 },
+                    bars: [
+                      { y: 914.5, at: 1.3168 },
+                      { y: 957.6, at: 1.2668 },
+                      { y: 1000.6, at: 1.2222 },
+                      { y: 1043.6, at: 1.1722 },
+                      { y: 1086.7, at: 1.1226 },
+                      { y: 1129.7, at: 1.0774 },
+                      { y: 1172.8, at: 1.0278 },
+                      { y: 1215.8, at: 0.984 },
+                      { y: 1258.8, at: 0.9396 },
+                      { y: 1301.9, at: 0.8962 },
+                      { y: 1344.9, at: 0.8576 },
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-established",
+        index: "01",
+        heading: "Replay had to look established, not like another AI startup.",
+        problem:
+          "We showed Replay three different looks. It picked the one that felt like a bank: paper textures, calm and serious. **Then it asked us to make it about data, not money.**",
+        whyItMattered:
+          "Replay asks companies to trust it with years of their records. **When you're asking a company to license its data, looking like another AI startup works against you. Looking established works for you.**",
+        whatWeDid:
+          "We gave Replay a classic serif logo, the kind banks and archives use, and a symbol of data passing through a frame, like an official seal. The pages stay paper-white, with one blue used sparingly and a soft paper texture. Each font has one job: STK Bureau Serif for headlines, Geist for reading, Geist Mono for labels.",
+        outcome:
+          "The same look now runs across the website, social banners, email templates and the product designs in progress. Every rule is written down in a brand guide we handed over.",
+      },
+      // Frame 5, cropped in to a 2000-unit-wide window (x 444, y 207) so the
+      // screen leads. Its blocks were exported as their own layers (each over
+      // black and white, alpha recovered from the pair) and slide in up-left
+      // along the 30° isometric axis (dy = dx·tan 30°), as if extending out of
+      // the grid, inside the screen's right panel; the grain soft-lights over
+      // them as in Figma, and the audience stays in front.
+      {
+        kind: "media",
+        id: "snapshot-stage",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/replay/stage/base.avif" },
+            alt: "Replay keynote stage reading 'We're setting the standard' beside a 3D Replay mark",
+            intrinsicSize: { width: 2920, height: 1643 },
+            layers: {
+              clip: [1410, 217, 1131, 1214],
+              from: { x: 300, y: 173 },
+              duration: 0.7,
+              moving: [
+                { src: "/media/replay/stage/top-right.avif", box: [2218, 254, 323, 426], at: 0.08 },
+                { src: "/media/replay/stage/cube.avif", box: [1472, 349, 1069, 1082], at: 0 },
+                { src: "/media/replay/stage/bottom.avif", box: [1696, 1089, 780, 342], at: 0.16 },
+                { src: "/media/replay/stage/bottom-right.avif", box: [2330, 1038, 211, 363], at: 0.24 },
+              ],
+              overlay: { src: "/media/replay/stage/grain.avif", box: [1465, 217, 1076, 1214], blend: "soft-light" },
+              // Figma 1968:40, the updated people cut-out (2026-10-20).
+              front: { src: "/media/replay/stage/audience.avif", box: [0, 1215, 2920, 428] },
+            },
+          },
+        },
+      },
+      // Frames 6 and 7.
+      {
+        kind: "media",
+        id: "snapshot-records-yield",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: {
+                type: "video",
+                src: "/media/replay/records-illustration.mp4",
+                poster: "/media/replay/records-illustration-poster.jpg",
+              },
+              alt: "Isometric stack of a company's records, code, documents, tickets and messages, totalling 25M+ records",
+              intrinsicSize: { width: 1440, height: 1800 },
+              playOnView: true,
+              loop: true,
+            },
+            {
+              media: { type: "image", src: "/media/replay/yield-poster.avif" },
+              alt: "Replay street poster reading 'Yield on what you've already built.'",
+              intrinsicSize: { width: 1440, height: 1800 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-website",
+        index: "02",
+        heading:
+          "The website had to convince the whole C-suite on its own.",
+        problem:
+          "The person who finds Replay can't say yes alone. **They send the link around the leadership team, and each executive decides in seconds whether to trust it.**",
+        whyItMattered:
+          "The CFO wants to know what Replay pays. The lawyer wants to know what data leaves the company, who's liable and who owns it afterward.",
+        whatWeDid:
+          "The homepage builds up to the money: **what a company your size gets paid.** On the Data & Privacy page, we gave each legal question its own tab. Each tab shows a clear example, like an invoice email with the account number crossed out.",
+        outcome:
+          "**Replay's own team now runs the site and adds to it.** We built it and handed it over at launch. The homepage animation shows the kind of data Replay cleans: Slack threads, an inbox, code files, meeting transcripts and a contract PDF.",
+      },
+      // Frame 8: the homepage hero on a laptop. Brendan's public X reply is
+      // pinned over its top right and types out on scroll. "PIXELUP LABS"
+      // replaces his "Pixel" (Arjun, 2026-10-20).
+      {
+        kind: "media",
+        id: "snapshot-laptop-hero",
+        media: {
+          kind: "full",
+          aspect: "wide",
+          slot: {
+            media: {
+              type: "video",
+              src: "/media/replay/laptop-hero.mp4",
+              poster: "/media/replay/laptop-hero-poster.jpg",
+            },
+            alt: "Replay homepage on a laptop: 'Fund growth by licensing the data you already have.'",
+            playOnView: true,
+            loop: true,
+            // Avatar: Brendan's X profile photo, supplied by Arjun (2026-10-20).
+            // Verified, posted 2026-10-15 13:12:47 UTC; views as of 2026-10-20
+            // (api.fxtwitter.com). Refresh at publish. No action row (Arjun).
+            comment: {
+              variant: "x",
+              avatar: "/media/replay/brendan-mahony-x.jpg",
+              name: "Brendan Mahony",
+              handle: "bmaho2211",
+              verified: true,
+              time: "Oct 15, 2026",
+              datetime: "2026-10-15T13:12:47Z",
+              stats: { views: 2947 },
+              mention: "dakshpixelup",
+              quote:
+                "PIXELUP LABS nailed our brand + website + component library. Best agency I've ever worked with",
+              href: "https://x.com/bmaho2211/status/2110720543313768555",
+            },
+          },
+        },
+      },
+      // Frames 9 and 10. The signature plays once per scroll-in and rests
+      // signed.
+      {
+        kind: "media",
+        id: "snapshot-signature-valuation",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: {
+                type: "video",
+                src: "/media/replay/signature.mp4",
+                poster: "/media/replay/signature-poster.jpg",
+              },
+              alt: "Brendan Mahony's signature being written above 'Founder & CEO'",
+              intrinsicSize: { width: 1440, height: 1800 },
+              playOnView: true,
+            },
+            {
+              media: { type: "image", src: "/media/replay/laptop-valuation.avif" },
+              alt: "Replay on a laptop: 'Find out what your data is worth before you decide anything.'",
+              intrinsicSize: { width: 1440, height: 1800 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "results",
+        id: "results",
+        heading: "In their own words.",
+      },
+      // "PIXELUP LABS" replaces his "Pixel", without brackets (Arjun,
+      // 2026-10-20). Title per replay.ai/about.
+      {
+        kind: "testimonial",
+        id: "testimonial",
+        quote:
+          "PIXELUP LABS nailed our brand + website + component library. Best agency I've ever worked with.",
+        person: {
+          name: "Brendan Mahony",
+          role: "Founder & CEO",
+          company: "Replay",
+        },
+        source: {
+          label: "on X, 15 October 2026",
+          href: "https://x.com/bmaho2211/status/2110720543313768555",
+        },
+      },
+      // Frame 11: its ten posters, left to right, drifting across its paper
+      // background (exported with the posters hidden). Posters re-exported
+      // at 2x with their frame strokes off, then cropped 4px a side: the
+      // 574.9×821.3 frames left a half-covered edge row that Figma filled
+      // with canvas grey, which read as a stroke.
+      {
+        kind: "media",
+        id: "snapshot-posters",
+        media: {
+          kind: "marquee",
+          duration: 60,
+          background: {
+            media: { type: "image", src: "/media/replay/carousel-bg.avif" },
+          },
+          slots: [
+            "Replay billboard reading 'Yield on what you've already built.'",
+            "Replay mark poster: 'Real data, verified'",
+            "Replay sign in a dark lobby",
+            "Replay mark pressed into a blue wax seal",
+            "Station poster reading 'Data has quietly become an asset.'",
+            "Replay business cards",
+            "Replay binders labelled for code, sales conversations and product logs",
+            "Replay data license agreement in a folder and envelope",
+            "Replay app icon on a phone lock screen",
+            "Replay postage stamp",
+          ].map((alt, index) => ({
+            media: {
+              type: "image" as const,
+              src: `/media/replay/poster-${String(index + 1).padStart(2, "0")}.avif`,
+            },
+            alt,
+            intrinsicSize: { width: 1142, height: 1635 },
+          })),
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Replay ended up.",
+        // Concise, no sales pitch, one Book a call at the end (Arjun, 2026-10-20).
+        paragraphs: [
+          "Replay's brand rules live on a simple website, not a PDF: logos, colours, fonts, email templates, and files that AI coding tools can read.",
+          "After launch, Replay asked us to design its product too, starting with a component library. Replay's engineers build it, and the work is ongoing.",
+          "Replay chose its name and wrote its own copy. We designed the brand, built the site, and are now designing the product.",
+          "Branding, web design, motion design, Next.js development and product design by PIXELUP LABS, 2026.",
+        ],
+        // An inline link to the /call page, no email field (Arjun, 2026-10-20).
+        cta: {
+          text: "Want to talk about your own brand?",
+          label: "Book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    // "How long does a typical engagement take?" is left off this page only
+    // (approved in the brief, Varick precedent).
+    faqs: [
+      replayFaq,
+      ...pixelupFaq.filter(
+        (item) => item.q !== "How long does a typical engagement take?",
+      ),
+    ],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "fuseai", tags: "Branding, website & product design" },
+    { slug: "henrylabs", tags: "Branding, website & product design" },
+  ],
+  // A draft still renders at its URL (only noindex), so this stays on a branch
+  // and previews on staging until the blockers clear.
+  publication: {
+    status: "draft",
+    publishedDate: "2026-10-20",
+    updatedDate: "2026-10-20",
+    blockers: [
+      "Brendan reviews the page before anything merges to main.",
+      "Confirm Replay's STK Bureau Serif licence: the Figma mockups use the Regular-Trial cut, and replay-marketing app/layout.tsx calls the Regular cut a trial file.",
+      "Brendan OKs poster 6 (business cards with his email, X handle and a phone number).",
+      "Add Brendan's X avatar to the pinned post (it shows his initials until then).",
+      "At publish: set both dates to the publish day, re-point the Replay card in lib/projects.ts to /case-studies/replay, match its lib/case-studies-showcase.ts row to info.involvement, and swap Streamline for Replay in FuseAI's 'More case studies' (link only, no date bump).",
+    ],
+  },
+};
+
 export const caseStudies = {
   greptile,
   sainapse,
@@ -2224,4 +2754,5 @@ export const caseStudies = {
   streamline,
   henryLabs,
   fuseai,
+  replay,
 };

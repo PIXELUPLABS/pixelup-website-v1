@@ -5,7 +5,10 @@ import type {
   MediaSlot,
   MediaTone,
 } from "@/lib/case-studies";
+import { ChartReveal } from "./ChartReveal";
 import { FloatingComment } from "./FloatingComment";
+import { LayerReveal } from "./LayerReveal";
+import { MediaMarquee } from "./MediaMarquee";
 import { ScrollVideo } from "./ScrollVideo";
 
 /** FloatingComment is a client component, so its props ship to the browser.
@@ -57,6 +60,20 @@ export function CaseMediaSlot({
           fetchPriority={priority ? "high" : undefined}
           className="h-auto w-full"
         />
+        {slot.chart && (
+          <ChartReveal
+            chart={slot.chart}
+            width={slot.intrinsicSize.width}
+            height={slot.intrinsicSize.height}
+          />
+        )}
+        {slot.layers && (
+          <LayerReveal
+            layers={slot.layers}
+            width={slot.intrinsicSize.width}
+            height={slot.intrinsicSize.height}
+          />
+        )}
         {slot.overlayLogo && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <img
@@ -81,6 +98,7 @@ export function CaseMediaSlot({
             className="block h-auto w-full"
             width={slot.intrinsicSize.width}
             height={slot.intrinsicSize.height}
+            loop={slot.loop}
           />
         ) : (
           <video
@@ -109,6 +127,7 @@ export function CaseMediaSlot({
           media={slot.media}
           label={slot.alt}
           className="absolute inset-0 h-full w-full object-cover"
+          loop={slot.loop}
         />
       ) : slot.media.type === "video" ? (
         <video
@@ -147,10 +166,11 @@ export function CaseMediaSlot({
 }
 
 /**
- * A media row between sections: a single frame (1160×696 in Figma) or a
- * side-by-side pair (576×548 each) that stacks on mobile. On desktop each
- * block gets even 24px spacing on all sides (desk:p-6), same as the hero;
- * mobile keeps the original edge-to-edge px-6 treatment.
+ * A media row between sections: a single frame (1160×696 in Figma), a
+ * side-by-side pair (576×548 each) that stacks on mobile, or a marquee of
+ * portraits. On desktop each block gets even 24px spacing on all sides
+ * (desk:p-6), same as the hero; mobile keeps the original edge-to-edge px-6
+ * treatment.
  */
 export function CaseMediaBlock({
   block,
@@ -159,6 +179,9 @@ export function CaseMediaBlock({
   block: MediaBlock;
   priority?: boolean;
 }) {
+  if (block.kind === "marquee") {
+    return <MediaMarquee block={block} />;
+  }
   if (block.kind === "full") {
     const slot = (
       <CaseMediaSlot
