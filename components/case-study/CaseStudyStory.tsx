@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import type {
   CaseMetric,
@@ -317,6 +318,19 @@ function TestimonialBlock({
                 </p>
                 <p className="text-[14px] leading-[1.3] text-white/60">
                   {block.person.role}, {block.person.company}
+                  {block.source && (
+                    <>
+                      ,{" "}
+                      <a
+                        href={block.source.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="underline decoration-white/30 underline-offset-2 hover:text-white"
+                      >
+                        {block.source.label}
+                      </a>
+                    </>
+                  )}
                 </p>
               </div>
             </div>
@@ -373,6 +387,18 @@ function StoryBlock({
               <Emphasis text={paragraph} />
             </p>
           ))}
+          {block.cta && (
+            <p className={`text-[16px] leading-[1.5] ${tones.body}`}>
+              {block.cta.text}{" "}
+              <Link
+                href={block.cta.href}
+                className="text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
+              >
+                {block.cta.label}
+              </Link>
+              .
+            </p>
+          )}
         </SectionShell>
       );
   }

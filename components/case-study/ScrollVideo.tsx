@@ -7,10 +7,11 @@ const typeOf = (src: string) =>
   src.endsWith(".webm") ? "video/webm" : "video/mp4";
 
 /**
- * A muted, silent video that plays once from the start every time it scrolls
- * into view and pauses when it leaves, so readers always see it from the
- * beginning. No loop. With prefers-reduced-motion it never plays and rests on
- * its last frame (the finished design) instead of the poster.
+ * A muted, silent video that plays from the start every time it scrolls into
+ * view and pauses when it leaves, so readers always see it from the
+ * beginning. It plays once, or keeps looping while in view with `loop`. With
+ * prefers-reduced-motion it never plays and rests on its last frame (the
+ * finished design) instead of the poster.
  */
 export function ScrollVideo({
   media,
@@ -18,12 +19,14 @@ export function ScrollVideo({
   className,
   width,
   height,
+  loop = false,
 }: {
   media: Extract<ProjectMedia, { type: "video" }>;
   label?: string;
   className: string;
   width?: number;
   height?: number;
+  loop?: boolean;
 }) {
   const ref = useRef<HTMLVideoElement>(null);
 
@@ -64,6 +67,7 @@ export function ScrollVideo({
       width={width}
       height={height}
       aria-label={label}
+      loop={loop}
       muted
       playsInline
       preload="auto"
