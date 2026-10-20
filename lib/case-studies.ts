@@ -2137,42 +2137,6 @@ const fuseai: CaseStudy = {
           ],
         },
       },
-      // FuseAI's website footer animation (exported 2026-10-16; MP4 for
-      // Safari, poster = first frame). The pinned message is Saurav's 3 Sep
-      // 2026 Slack message about it (#fuseai-pixelup), verbatim, with its
-      // real reactions; avatar cropped from Arjun's capture.
-      {
-        kind: "media",
-        id: "snapshot-footer-animation",
-        media: {
-          kind: "full",
-          slot: {
-            media: {
-              type: "video",
-              src: "/media/fuseai/footer-animation.mp4",
-              poster: "/media/fuseai/footer-animation-poster.jpg",
-            },
-            alt: "FuseAI website footer animation cutting between F1 imagery, checkered flags and the Fuse wordmark",
-            intrinsicSize: { width: 1920, height: 550 },
-            comment: {
-              avatar: "/media/fuseai/saurav-bubber.png",
-              name: "Saurav Bubber",
-              org: "FuseAI",
-              time: "Sep 3rd at 3:37 AM",
-              mention: "Fahad",
-              // Arjun, 2026-10-16: blur the mention on the page.
-              blurMention: true,
-              quote:
-                "This is AMAZING - my favorite thing so far; Great work on this animation 🥳🥳🥳🥳",
-              reactions: [
-                { emoji: "🔥", count: 2 },
-                { emoji: "❤️", count: 1 },
-                { emoji: "🙌", count: 2, mine: true },
-              ],
-            },
-          },
-        },
-      },
       {
         kind: "results",
         id: "results",
@@ -2195,18 +2159,41 @@ const fuseai: CaseStudy = {
           headshot: "/media/fuseai/saurav-bubber.png",
         },
       },
+      // The subway billboard (#14) as a video mockup: Arjun's 2026-10-20
+      // render, cropped to the scene (white border and shadow removed) and
+      // re-encoded to H.264 with no audio; poster = first frame. The pinned
+      // message is Saurav's 3 Sep 2026 Slack message about the animation
+      // (#fuseai-pixelup), verbatim, with its real reactions; avatar cropped
+      // from Arjun's capture.
       {
         kind: "media",
         id: "snapshot-closing",
         media: {
           kind: "full",
-          aspect: "wide",
           slot: {
             media: {
-              type: "image",
-              src: "/media/fuseai/subway-billboard.avif",
+              type: "video",
+              src: "/media/fuseai/subway-billboard.mp4",
+              poster: "/media/fuseai/subway-billboard-poster.jpg",
             },
-            alt: "FuseAI '(FUSE*)' billboard above a subway escalator",
+            alt: "FuseAI's brand animation playing on a billboard above a subway escalator",
+            intrinsicSize: { width: 1628, height: 916 },
+            comment: {
+              avatar: "/media/fuseai/saurav-bubber.png",
+              name: "Saurav Bubber",
+              org: "FuseAI",
+              time: "Sep 3rd at 3:37 AM",
+              mention: "Fahad",
+              // Arjun, 2026-10-16: blur the mention on the page.
+              blurMention: true,
+              quote:
+                "This is AMAZING - my favorite thing so far; Great work on this animation 🥳🥳🥳🥳",
+              reactions: [
+                { emoji: "🔥", count: 2 },
+                { emoji: "❤️", count: 1 },
+                { emoji: "🙌", count: 2, mine: true },
+              ],
+            },
           },
         },
       },
