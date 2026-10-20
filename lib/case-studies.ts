@@ -176,6 +176,14 @@ export interface ResultRow {
   text: string;
 }
 
+/** A closing sentence ending in an inline link, e.g. "Want to talk about
+ * your own brand? Book a call." */
+export interface InlineCta {
+  text: string;
+  label: string;
+  href: string;
+}
+
 export interface CaseSection {
   heading: string;
   /** Reduce long desktop headings so they stay within two lines. */
@@ -188,6 +196,8 @@ export interface CaseSection {
   results?: ResultRow[];
   paragraphs?: string[];
   bullets?: string[];
+  /** Closing sentence with an inline link, after the copy (last section). */
+  cta?: InlineCta;
   /** Imagery rendered after this section. */
   media: MediaBlock[];
 }
@@ -272,9 +282,8 @@ export type CaseStoryBlock =
       id: string;
       heading: string;
       paragraphs: string[];
-      /** A closing sentence ending in an inline link, e.g. "Want to talk about
-       * your own brand? Book a call." */
-      cta?: { text: string; label: string; href: string };
+      /** Closing sentence with an inline link, after the paragraphs. */
+      cta?: InlineCta;
     };
 
 export interface CaseStudyStory {
@@ -760,6 +769,11 @@ const greptile: CaseStudy = {
           "Greptile began **referring us to other YC founders**. One introduction turned into several, and this collaboration became the foundation for our long-term partnerships across the YC ecosystem.",
           "Today, we work closely with **multiple YC-backed teams**, helping them translate strong technology into clear, credible systems.",
         ],
+        cta: {
+          text: "Want to talk about your own brand?",
+          label: "Book a call",
+          href: "/call",
+        },
       },
     ],
     faqHeading,
@@ -903,6 +917,11 @@ const sainapse: CaseStudy = {
         "The website shifted from explaining what the product does to demonstrating why it works. Sales conversations moved from technical justification to strategic value.",
         "The brand system became the foundation for all customer-facing materials, from pitch decks to product documentation.",
       ],
+      cta: {
+        text: "Want to talk about your own brand?",
+        label: "Book a call",
+        href: "/call",
+      },
       media: [
         {
           kind: "pair",
@@ -1069,6 +1088,11 @@ const sully: CaseStudy = {
         "Enterprise buyers began understanding the product before demos started. Sales conversations shifted from explaining workflows to discussing implementation.",
         "The motion-driven pages became internal references for how Sully communicates product value across all channels.",
       ],
+      cta: {
+        text: "Want to talk about your own brand?",
+        label: "Book a call",
+        href: "/call",
+      },
       media: [
         {
           kind: "pair",
@@ -1307,8 +1331,13 @@ const streamline: CaseStudy = {
         paragraphs: [
           "Streamline had much more than a new homepage. They had a brand that finally matched the maturity of the product behind it, a design system that could extend across all the touchpoints, and a website built around the perception they needed with enterprise legal buyers.",
           "After launch, the team also reported positive customer feedback and stronger enterprise conversations, including with Fortune 500 companies. You can see the live site at streamline.ai.",
-          "If you recognised Streamline's problem in your own company, we should talk. We work with AI and B2B SaaS teams on brand, web and product design, helping them move upmarket.",
+          "We work with AI and B2B SaaS teams on brand, web and product design, helping them move upmarket.",
         ],
+        cta: {
+          text: "If you recognised Streamline's problem in your own company,",
+          label: "book a call",
+          href: "/call",
+        },
       },
       {
         kind: "media",
@@ -1723,8 +1752,13 @@ const henryLabs: CaseStudy = {
         paragraphs: [
           "Henry Labs now has a brand that **looks as serious as the infrastructure behind it**, a website that explains the product in the order buyers need it, and a design system its engineers build on directly.",
           "The website went live in May 2026, and the checkout and dashboard were built in-house from our designs. Henry Labs CEO Phil Qiu shared it with one line: \"**We wanted a landing page that actually feels like that future rather than explaining it.**\" By September, Henry Labs was powering Allowance (YC P26), which went from **9 to 90 stores in two weeks**. You can see the live site at henrylabs.ai.",
-          "If you recognised Henry Labs' problem in your own company, **we should talk**. We work with AI and B2B SaaS teams on brand, web and product design, helping them look as credible as the product they have built.",
+          "We work with AI and B2B SaaS teams on brand, web and product design, helping them look as credible as the product they have built.",
         ],
+        cta: {
+          text: "If you recognised Henry Labs' problem in your own company,",
+          label: "book a call",
+          href: "/call",
+        },
       },
       {
         kind: "media",
@@ -2228,9 +2262,14 @@ const fuseai: CaseStudy = {
           "**The 20% trial-conversion lift is FuseAI's own figure**, shared in October 2026.",
           "One thing we changed after FuseAI: when a client's team builds, **we agree build QA and export formats for each platform at kickoff**. Framer, the browser and the product each want animation in a different format, and that's cheaper to settle at kickoff than after the first export.",
           "If you need brand, website and product in four weeks with nothing traded off, nobody does that well, us included. We'll tell you on day one what ships for launch and what follows it. If your brand is already locked and you only need throughput, **a design subscription is cheaper**.",
-          "If you have a launch date and a brand that isn't ready for it, **we should talk**. PIXELUP LABS has shipped 35 projects for funded B2B and AI-native startups, rated 5.0 on every review. Our prices are public, and retainers start at $6k/mo.",
+          "PIXELUP LABS has shipped 35 projects for funded B2B and AI-native startups, rated 5.0 on every review.",
           "Brand, website and product design by PIXELUP LABS, 2026.",
         ],
+        cta: {
+          text: "If you have a launch date and a brand that isn't ready for it,",
+          label: "book a call",
+          href: "/call",
+        },
       },
     ],
     faqHeading,
