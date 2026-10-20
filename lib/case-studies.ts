@@ -2260,6 +2260,8 @@ const fuseai: CaseStudy = {
           name: "Saurav Bubber",
           role: "Co-founder & CEO",
           company: "FuseAI",
+          // The photo from his pinned Slack message on this page (Arjun, 2026-10-20).
+          headshot: "/media/fuseai/saurav-bubber.png",
         },
       },
       {
@@ -2656,6 +2658,8 @@ const replay: CaseStudy = {
           name: "Brendan Mahony",
           role: "Founder & CEO",
           company: "Replay",
+          // Brendan's X profile photo, as on the pinned post.
+          headshot: "/media/replay/brendan-mahony-x.jpg",
         },
         source: {
           label: "on X, 15 October 2026",
