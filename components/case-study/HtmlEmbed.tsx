@@ -11,7 +11,16 @@ import { useEffect, useRef } from "react";
  * ("ready") once its first frame is drawn. The still carries the alt text, so
  * the frame is hidden from assistive tech and takes no pointer or focus.
  */
-export function HtmlEmbed({ src, title }: { src: string; title: string }) {
+export function HtmlEmbed({
+  src,
+  title,
+  playAt,
+}: {
+  src: string;
+  title: string;
+  /** Start once this share is in view and stop only once it's fully out. */
+  playAt?: number;
+}) {
   const ref = useRef<HTMLIFrameElement>(null);
 
   useEffect(() => {
@@ -35,26 +44,34 @@ export function HtmlEmbed({ src, title }: { src: string; title: string }) {
     window.addEventListener("message", onMessage);
     // In view: half of the frame showing, or (for a frame taller than twice
     // the window, such as a stacked 4:5 poster in a short window) half the
-    // window filled by it.
+    // window filled by it. With `playAt`, it starts at that share and keeps
+    // playing until the frame is fully out of view.
     const observer = new IntersectionObserver(
       ([entry]) => {
         const windowHeight = entry.rootBounds?.height ?? window.innerHeight;
         const next =
-          entry.isIntersecting &&
-          (entry.intersectionRatio >= 0.5 ||
-            entry.intersectionRect.height >= windowHeight / 2);
+          playAt !== undefined
+            ? entry.isIntersecting &&
+              (visible || entry.intersectionRatio >= playAt)
+            : entry.isIntersecting &&
+              (entry.intersectionRatio >= 0.5 ||
+                entry.intersectionRect.height >= windowHeight / 2);
         if (next === visible) return;
         visible = next;
         send();
       },
-      { threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1] },
+      {
+        threshold: Array.from(
+          new Set([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.75, 1, playAt ?? 0]),
+        ),
+      },
     );
     observer.observe(frame);
     return () => {
       observer.disconnect();
       window.removeEventListener("message", onMessage);
     };
-  }, []);
+  }, [playAt]);
 
   return (
     <iframe

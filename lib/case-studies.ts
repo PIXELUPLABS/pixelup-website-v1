@@ -43,6 +43,12 @@ export interface MediaSlot {
    * reduced-motion handling, and stays transparent until its first frame.
    */
   embed?: string;
+  /**
+   * With `embed`: start once this share of the frame is in view (e.g. 0.1)
+   * and keep playing until it's fully out of view. Without it, the embed
+   * plays while half of it is in view.
+   */
+  embedPlayAt?: number;
 }
 
 /**
@@ -2022,7 +2028,8 @@ const fuseai: CaseStudy = {
       // one aspect ratio so the heights match.
       // The mark drawing itself on its construction grid: Arjun's refined
       // HTML/SVG loop (2026-10-20), embedded over its finished frame as the
-      // still. It restarts on each scroll-in and loops while in view.
+      // still. It starts once 10% of it is in view, loops, and resets to its
+      // first frame once it's fully out of view (Arjun, 2026-10-20).
       {
         kind: "media",
         id: "snapshot-logo",
@@ -2036,6 +2043,7 @@ const fuseai: CaseStudy = {
             alt: "FuseAI's two-stripe mark drawing itself on its construction grid",
             intrinsicSize: { width: 1920, height: 1080 },
             embed: "/media/fuseai/logo-grid.html",
+            embedPlayAt: 0.1,
           },
         },
       },

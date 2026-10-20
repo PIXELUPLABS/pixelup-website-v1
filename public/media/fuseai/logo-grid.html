@@ -137,8 +137,9 @@
   }
 
   // ---- play ----
-  // Plays from the start each time half of it is in view and pauses when it
-  // leaves, looping while it stays. In the case study's iframe the parent says
+  // Starts once 10% of it is in view and loops until it's fully out of view,
+  // then snaps back to its first frame, so it always starts from 0. In the
+  // case study's iframe the parent says
   // when ("play" / "pause"; an observer in here hears about its scrolling
   // late); opened on its own, it watches for itself.
   const root = document.documentElement;
@@ -153,7 +154,7 @@
       on = v;
       if (v) root.classList.add('played');
       cancelAnimationFrame(raf);
-      if (!v) return;
+      if (!v) { render(-PRE, 0); return; }
       // Time from performance.now(), not the frame timestamp: inside an
       // iframe Chrome's frame timestamp can run seconds behind it.
       const t0 = performance.now();
@@ -172,7 +173,7 @@
       });
       parent.postMessage({ embed: 'ready' }, location.origin);
     } else {
-      new IntersectionObserver(([en]) => set(en.isIntersecting), { threshold: 0.5 }).observe(document.getElementById('fuse-loop'));
+      new IntersectionObserver(([en]) => set(en.isIntersecting && (on || en.intersectionRatio >= 0.1)), { threshold: [0, 0.1] }).observe(document.getElementById('fuse-loop'));
     }
   });
 })();
