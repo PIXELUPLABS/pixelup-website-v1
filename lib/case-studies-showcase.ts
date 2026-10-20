@@ -64,6 +64,17 @@ const entries: CaseStudyShowcaseEntry[] = [
     // No funding badge — see file header note.
   },
   {
+    slug: "replay",
+    // Licenses companies' de-identified operating data to frontier AI labs
+    // (replay.ai, read 2026-10-16), so it sits with Reducto. 3rd, above
+    // FuseAI (Arjun, 2026-10-20).
+    niche: "AI Infrastructure",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid:
+      "Branding, Web Design, Motion Design, Next.js Development, Product Design",
+    // No funding badge: the tag reads the case study's status badge, "AI data licensing".
+  },
+  {
     slug: "fuseai",
     // Same bucket as Valley, the other AI sales platform on the list.
     niche: "Enterprise AI",
@@ -92,17 +103,6 @@ const entries: CaseStudyShowcaseEntry[] = [
     // Series A + $150M valuation confirmed via public funding coverage (Jan 2025).
     fundingBadge: "Series A",
     stat: "Scaled 26x in 11 months, raising $32M+ at a $150M valuation",
-  },
-  {
-    slug: "replay",
-    // Licenses companies' de-identified operating data to frontier AI labs
-    // (replay.ai, read 2026-10-16), so it sits with Reducto.
-    niche: "AI Infrastructure",
-    // No /clients roster entry yet, so this follows the homepage card's services.
-    whatWeDid:
-      "Brand identity, marketing website, and product design, with Next.js development",
-    // No funding badge: no public round found (2026-10-16), and "Replay raises
-    // $5.7M" is replay.io, a different company. Private, the card's default tag.
   },
   {
     slug: "ctgt",
