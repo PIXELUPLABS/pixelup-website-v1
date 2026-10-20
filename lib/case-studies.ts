@@ -36,6 +36,13 @@ export interface MediaSlot {
   chart?: MediaChart;
   /** Image with `intrinsicSize` only: layers that slide into it on scroll-in. */
   layers?: MediaLayers;
+  /**
+   * Image with `intrinsicSize` only: a self-contained HTML animation (a page
+   * under /public, drawn at the image's aspect) played over the image, which
+   * stays underneath as its still. The page runs its own play-on-view and
+   * reduced-motion handling, and stays transparent until its first frame.
+   */
+  embed?: string;
 }
 
 /**
@@ -268,7 +275,10 @@ export interface CaseStudyStory {
   company: string;
   statusBadge?: string;
   headline: string;
-  summary: string;
+  /** Let the h1 fill the full column width instead of wrapping at 20ch. */
+  fullWidthHeadline?: boolean;
+  /** The desktop sidebar copy. Omit to show the study's `description`. */
+  summary?: string;
   /** Hero stat row under the headline. Omit to go straight to the hero media. */
   highlights?: CaseMetric[];
   blocks: CaseStoryBlock[];
@@ -422,6 +432,13 @@ export function caseStudySchema(study: CaseStudy) {
   };
 }
 
+// The story layout FuseAI and Replay use, filled only with copy Greptile's
+// case study already had (Arjun, 2026-10-20): the live page's results,
+// sidebar `description`, after-launch paragraphs and FAQ, plus the story copy
+// this entry carried for that layout (headline, context and challenges).
+// Mockups: Figma jfiQlmF7z1j3cq8BDFhuMT (Project showcase), section "Final
+// Set" 2024:4825, frames in order, exported 2026-10-20 at 1x (2920×1642
+// full width, 1440×1800 pairs), with the logo construction film second.
 const greptile: CaseStudy = {
   slug: "greptile",
   title: "Greptile: YC W24 to $25M Series A in 6 Months",
@@ -435,32 +452,34 @@ const greptile: CaseStudy = {
     links: [{ label: "greptile.com", href: "https://greptile.com" }],
   },
   description: [
-    "We partnered with Greptile to evolve their AI code review platform into an enterprise-ready system.",
-    "Greptile had YC backing and strong technology, but gaps in product clarity and brand maturity surfaced as they moved upmarket, where trust is non-negotiable.",
-    "We treated the work as a system design problem: brand, product, website, and sales assets designed together, prioritizing clarity and trust at every touchpoint.",
-    "The impact was immediate. Demo requests doubled in week one, and within six months Greptile raised a $25M Series A at a $180M valuation led by Benchmark.",
+    "We partnered with Greptile to evolve their **AI code review platform into an enterprise-ready system**.",
+    "Greptile had YC backing and strong technology, but **gaps in product clarity and brand maturity** surfaced as they moved upmarket, where trust is non-negotiable.",
+    "We treated the work as **a system design problem**: brand, product, website, and sales assets designed together, prioritizing clarity and trust at every touchpoint.",
+    "The impact was immediate. **Demo requests doubled in week one**, and within six months Greptile raised **a $25M Series A at a $180M valuation** led by Benchmark.",
   ],
+  // Frame 1.
   hero: {
-    media: { type: "image", src: "/media/greptile/hero.png" },
+    media: { type: "image", src: "/media/greptile/hero.avif" },
     alt: "Glowing green Greptile logo mark on a dark background",
+    intrinsicSize: { width: 2920, height: 1642 },
   },
-  detailLayout: "legacy",
   story: {
     company: "Greptile",
-    statusBadge: "YC W24 · Series A",
+    statusBadge: "YC W24 · Series B",
+    // Non-breaking spaces keep "Six months" and "$25M Series A." whole, so
+    // the full-width lines break at phrases.
     headline:
-      "We rebuilt Greptile for enterprise. Six months later, it raised a $25M Series A.",
-    summary:
-      "The product already worked. The brand and website made enterprise buyers work too hard to trust it. We fixed that gap across the product, site and sales story.",
+      "We rebuilt Greptile for enterprise. Six\u00a0months later, it raised a $25M\u00a0Series\u00a0A.",
+    fullWidthHeadline: true,
+    // Two of the legacy page's results rows, as the stat row at the top, with
+    // the figure pulled out as the value (Arjun, 2026-10-20). The bugs row
+    // is left out.
     highlights: [
-      { value: "2×", label: "Demo requests", detail: "In the first week" },
+      { value: "2×", label: "Demo requests immediately after launch" },
       {
-        value: "180K+",
-        label: "Bugs caught post-ship",
-        detail: "By month one",
+        value: "$25M",
+        label: "Series A raised at $180M valuation, led by Benchmark",
       },
-      { value: "$25M", label: "Series A", detail: "Led by Benchmark" },
-      { value: "$180M", label: "Valuation", detail: "Within six months" },
     ],
     blocks: [
       {
@@ -471,42 +490,83 @@ const greptile: CaseStudy = {
         items: [
           {
             label: "Where Greptile was",
-            text: "Greptile had YC backing, real technical depth and a product that could review complex codebases.",
+            text: "Greptile had **YC backing, real technical depth and a product that could review complex codebases.**",
           },
           {
             label: "What it needed",
-            text: "A system that could explain the product quickly and feel credible to larger engineering teams.",
+            text: "A system that could **explain the product quickly and feel credible to larger engineering teams.**",
           },
           {
             label: "What was not working",
-            text: "The brand, website and product story felt fragmented. Buyers had to connect the value for themselves.",
+            text: "The brand, website and product story felt fragmented. **Buyers had to connect the value for themselves.**",
           },
           {
             label: "Why it mattered",
-            text: "As Greptile moved upmarket, every unclear touchpoint added friction to a sale built on trust.",
+            text: "As Greptile moved upmarket, **every unclear touchpoint added friction to a sale built on trust.**",
           },
         ],
       },
+      // Second: the logo construction film (Dhruv, 2026-10-20). Each Motion
+      // film on this page runs as its own HTML page (public/media/greptile,
+      // built from the film's scenes), over its first frame or Figma still:
+      // vector and far lighter than a video export. Every animation on this
+      // page starts when it reaches the screen.
       {
         kind: "media",
-        id: "snapshot-billboard",
+        id: "snapshot-logo-construction",
         media: {
           kind: "full",
           slot: {
-            media: { type: "image", src: "/media/greptile/img-3.png" },
-            alt: "Greptile Ship Faster billboard mockup on a city street",
+            media: {
+              type: "image",
+              src: "/media/greptile/logo-construction-poster.jpg",
+            },
+            alt: "Greptile's mark and wordmark drawn as vector outlines, each detail cut into its final shape",
+            intrinsicSize: { width: 1920, height: 1080 },
+            embed: "/media/greptile/logo-construction.html",
           },
         },
       },
+      // Frame 2 (the wordmark animation) is hidden for now (Dhruv, 2026-10-20).
+      // Restore it by uncommenting the block; its files stay in /public.
+      // {
+      //   kind: "media",
+      //   id: "snapshot-wordmark",
+      //   media: {
+      //     kind: "full",
+      //     slot: {
+      //       media: { type: "image", src: "/media/greptile/wordmark.avif" },
+      //       alt: "The greptile wordmark filled with code, beside a Greptile review comment flagging a check-then-set race",
+      //       intrinsicSize: { width: 2920, height: 1642 },
+      //       // Code drifting through the letters while Greptile flags lines:
+      //       // the wordmark source animation (Dhruv, 2026-10-20), redrawn with
+      //       // the frame's own wordmark outline, textures and colours.
+      //       embed: "/media/greptile/wordmark.html",
+      //     },
+      //   },
+      // },
+      // Frame 3: the type and colour posters as their HTML animations, each
+      // played over its Figma still. The pages add the greptile lockup the
+      // stills carry and play from the start on each scroll-in.
       {
         kind: "media",
-        id: "snapshot-poster",
+        id: "snapshot-type-colour",
         media: {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/greptile/img-6.png" },
-            alt: "Greptile Bridge the gap brand poster",
-          },
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/greptile/review-poster.avif" },
+              alt: "Greptile type poster reading 'review.', with review notes in Geist Mono down a line-numbered gutter",
+              intrinsicSize: { width: 1440, height: 1800 },
+              embed: "/media/greptile/review-poster.html",
+            },
+            {
+              media: { type: "image", src: "/media/greptile/color-system.avif" },
+              alt: "Greptile's colour system as blocks that resize into each other: #107A4D, #06281B, #3E5D50, #42C583, #AEECC6 and #C5D5CE",
+              intrinsicSize: { width: 1440, height: 1800 },
+              embed: "/media/greptile/color-system.html",
+            },
+          ],
         },
       },
       {
@@ -515,43 +575,53 @@ const greptile: CaseStudy = {
         index: "01",
         heading: "Every touchpoint told a different Greptile story.",
         problem:
-          "Greptile's technology had moved faster than the way the company presented itself. Brand, website and sales materials each told a slightly different story.",
+          "Greptile's technology had moved faster than the way the company presented itself. **Brand, website and sales materials each told a slightly different story.**",
         whyItMattered:
-          "Enterprise buyers do not separate the product from the company behind it. An inconsistent signal makes a capable platform feel like a risk.",
+          "Enterprise buyers do not separate the product from the company behind it. **An inconsistent signal makes a capable platform feel like a risk.**",
         whatWeDid:
-          "We rebuilt the identity, positioning, website and sales system together. Clarity, durability and trust became the filter for every decision.",
+          "We rebuilt **the identity, positioning, website and sales system together.** Clarity, durability and trust became the filter for every decision.",
         outcome:
-          "Greptile had one coherent system for product, sales and investor conversations instead of a set of disconnected deliverables.",
+          "Greptile had **one coherent system for product, sales and investor conversations** instead of a set of disconnected deliverables.",
       },
+      // Frame 4, with its own Figma motion: the dot-matrix strips drift and
+      // flicker behind the card (Figma's keyframes, 6 s loop).
       {
         kind: "media",
-        id: "snapshot-identity",
+        id: "snapshot-vibe-check",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/greptile/vibe-check.avif" },
+            alt: "Greptile banner answering 'vibe coding?' with 'vibe check greptile.' over a dot-matrix lizard",
+            intrinsicSize: { width: 2920, height: 1643 },
+            embed: "/media/greptile/vibe-check.html",
+          },
+        },
+      },
+      // Frame 5, both posters with their own Figma motion (6 s loops), rebuilt
+      // from their layers.
+      {
+        kind: "media",
+        id: "snapshot-posters",
         media: {
           kind: "pair",
           slots: [
             {
-              media: { type: "image", src: "/media/greptile/img-1.png" },
-              alt: "Greptile brand color palette",
-              tone: "white",
+              media: {
+                type: "image",
+                src: "/media/greptile/watches-every-line.avif",
+              },
+              alt: "Greptile poster reading 'watches every line.' above a lizard, with a review card: 'No line left unread. Safe to merge.'",
+              intrinsicSize: { width: 1440, height: 1800 },
+              embed: "/media/greptile/watches-every-line.html",
             },
             {
-              media: { type: "image", src: "/media/greptile/img-2.png" },
-              alt: "Greptile brand type specimen",
-              tone: "white",
+              media: { type: "image", src: "/media/greptile/grep-trust.avif" },
+              alt: "Greptile terminal poster: '$ grep -r trust .' over a file list with a race condition flagged",
+              intrinsicSize: { width: 1440, height: 1800 },
+              embed: "/media/greptile/grep-trust.html",
             },
           ],
-        },
-      },
-      {
-        kind: "media",
-        id: "snapshot-social",
-        media: {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/greptile/img-9.png" },
-            alt: "Greptile social campaign series",
-            tone: "green",
-          },
         },
       },
       {
@@ -560,81 +630,119 @@ const greptile: CaseStudy = {
         index: "02",
         heading: "Buyers saw the complexity before they saw the value.",
         problem:
-          "AI code review crosses repositories, code context and review workflows. Showing all that complexity at once made the value harder to see.",
+          "AI code review crosses repositories, code context and review workflows. **Showing all that complexity at once made the value harder to see.**",
         whyItMattered:
-          "If a buyer could not understand the workflow quickly, the demo had to explain the interface before it could prove the outcome.",
+          "If a buyer could not understand the workflow quickly, **the demo had to explain the interface before it could prove the outcome.**",
         whatWeDid:
-          "We simplified the hierarchy, clarified key paths and carried the same visual logic from the website into the product experience.",
+          "We **simplified the hierarchy, clarified key paths** and carried the same visual logic from the website into the product experience.",
         outcome:
-          "After launch, demo requests doubled in the first week and the product story gave sales a clearer starting point.",
+          "After launch, **demo requests doubled in the first week** and the product story gave sales a clearer starting point.",
       },
+      // Frame 6, played as the stats loop film.
       {
         kind: "media",
-        id: "snapshot-product",
+        id: "snapshot-results-eye",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/greptile/stats-eye.avif" },
+            alt: "Greptile's results around a dot-matrix eye: 200% demo requests in week one, 180k+ bugs caught in month one, $25M Series A in month six",
+            intrinsicSize: { width: 2920, height: 1643 },
+            embed: "/media/greptile/stats-eye.html",
+          },
+        },
+      },
+      // Frame 7, its SDS cover played as the SDS film.
+      {
+        kind: "media",
+        id: "snapshot-app-icon-sds",
         media: {
           kind: "pair",
           slots: [
             {
-              media: { type: "image", src: "/media/greptile/img-4.png" },
-              alt: "Greptile mobile experience mockup held in hand",
+              media: { type: "image", src: "/media/greptile/app-icon.avif" },
+              alt: "Greptile app icon: the white mark on a green tile",
+              intrinsicSize: { width: 1440, height: 1800 },
             },
             {
-              media: { type: "image", src: "/media/greptile/img-5.png" },
-              alt: "Greptile sign-up screen on a laptop",
+              media: { type: "image", src: "/media/greptile/design-system.avif" },
+              alt: "Cover of the Greptile SDS, its design system, over columns of code",
+              intrinsicSize: { width: 1440, height: 1800 },
+              // The SDS film: code rows scrolling behind the claw cut-out.
+              embed: "/media/greptile/design-system.html",
             },
           ],
+        },
+      },
+      // Frame 8.
+      {
+        kind: "media",
+        id: "snapshot-subway",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/greptile/subway-poster.avif" },
+            alt: "Greptile poster in a subway car: a halftone lizard above a sign-up strip with a QR code",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
         },
       },
       {
         kind: "results",
         id: "results",
-        heading: "Results",
-        metrics: [
-          { value: "2×", label: "Demo requests", detail: "In the first week" },
-          {
-            value: "180K+",
-            label: "Bugs caught post-ship",
-            detail: "By month one",
-          },
-          { value: "$25M", label: "Series A", detail: "Led by Benchmark" },
-          { value: "$180M", label: "Valuation", detail: "Within six months" },
-        ],
+        heading: "In their own words.",
       },
-      {
-        kind: "media",
-        id: "snapshot-results",
-        media: {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/greptile/img-10.png" },
-            alt: "Greptile product interface on a laptop",
-            tone: "green",
-          },
-        },
-      },
+      // Daksh's Contra review, shared with the /call slider through
+      // lib/testimonials.ts so the quote has one source. No heading: it sits
+      // under the results block's heading as the result itself.
       {
         kind: "testimonial",
         id: "testimonial",
-        heading: "What Greptile says about working with us.",
-        quote:
-          "A verified client quote will sit here once Greptile approves it.",
+        quote: testimonials.greptile.quote,
         person: {
-          name: "Daksh Gupta",
-          role: "Co-founder",
-          company: "Greptile",
+          name: testimonials.greptile.name,
+          role: testimonials.greptile.role,
+          company: testimonials.greptile.company,
           headshot: "/media/greptile/daksh-gupta.png",
         },
-        approvalPending: true,
       },
+      // Frame 9, played as the dashboard film: the UI builds on the tablet,
+      // then keeps updating.
       {
         kind: "media",
-        id: "snapshot-card",
+        id: "snapshot-dashboard",
         media: {
           kind: "full",
           slot: {
-            media: { type: "image", src: "/media/greptile/card.png" },
-            alt: "Greptile brand mark on a green project card",
+            media: {
+              type: "image",
+              src: "/media/greptile/dashboard-tablet.avif",
+            },
+            alt: "Greptile dashboard on a tablet held in two hands: highlight of the week, comments per day, credit summary and monthly usage",
+            intrinsicSize: { width: 2920, height: 1642 },
+            embed: "/media/greptile/dashboard.html",
           },
+        },
+      },
+      // Frames 2145 and 2179 (added 2026-10-20), stills: the mobile site and a
+      // dashboard close-up.
+      {
+        kind: "media",
+        id: "snapshot-phone-dashboard",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/greptile/phone.avif" },
+              alt: "Greptile's mobile site on a phone: a dot-matrix '</>' above its purpose line and a 'Try for free' button",
+              intrinsicSize: { width: 1440, height: 1800 },
+            },
+            {
+              media: { type: "image", src: "/media/greptile/dashboard-detail.avif" },
+              alt: "Close-up of the Greptile dashboard: repositories with week-on-week change, and monthly usage as rows of green dots",
+              intrinsicSize: { width: 1440, height: 1800 },
+            },
+          ],
         },
       },
       {
@@ -642,185 +750,20 @@ const greptile: CaseStudy = {
         id: "after-launch",
         heading: "Then Greptile started sending other YC founders our way.",
         paragraphs: [
-          "Greptile began referring us to other YC founders. One introduction turned into several, and the project became the foundation for longer-term work across the YC ecosystem.",
-          "Today, we work with multiple YC-backed teams to turn strong technology into clear, credible systems.",
+          "Beyond metrics, our work became **Greptile's internal standard** for how they present themselves across product, sales, and investor touchpoints.",
+          "Greptile began **referring us to other YC founders**. One introduction turned into several, and this collaboration became the foundation for our long-term partnerships across the YC ecosystem.",
+          "Today, we work closely with **multiple YC-backed teams**, helping them translate strong technology into clear, credible systems.",
         ],
       },
-      {
-        kind: "media",
-        id: "snapshot-after-launch",
-        media: {
-          kind: "pair",
-          slots: [
-            {
-              media: { type: "image", src: "/media/greptile/img-7.png" },
-              alt: "Greptile analytics dashboard on a studio display",
-            },
-            {
-              media: { type: "image", src: "/media/greptile/img-8.png" },
-              alt: "Greptile subway poster mockup",
-            },
-          ],
-        },
-      },
     ],
-    faqHeading: "Frequently asked questions.",
-    faqs: [
-      {
-        q: "Do you start with strategy or visual design?",
-        a: "Strategy first. We align the audience, positioning and sales story before deciding what the visual system needs to do.",
-      },
-      {
-        q: "How involved does the client team need to be?",
-        a: "We need direct access to the people closest to the product and customer. Short, focused reviews keep decisions fast without turning the project into a full-time job for your team.",
-      },
-      {
-        q: "How do feedback and revisions work?",
-        a: "We work in tight review loops, explain the reason behind each direction and collect feedback in one place. That keeps revisions decisive instead of subjective.",
-      },
-      {
-        q: "Can you work with an existing brand system?",
-        a: "Yes. We keep what is useful, fix what is limiting the company and extend the system only where the project needs it.",
-      },
-      {
-        q: "Can you handle a large website project?",
-        a: "Yes. We break the site into repeatable page types and shared components, then ship in stages so scale does not create inconsistency.",
-      },
-      {
-        q: "Do you handle development and handoff?",
-        a: "We can design and build the site, or work with your engineering team. Either way, the handoff includes the system, responsive behavior and implementation guidance.",
-      },
-      {
-        q: "How does the work align with go-to-market?",
-        a: "We design the website, product story and sales assets as one system, so launch, demos and investor conversations reinforce the same position.",
-      },
-    ],
+    faqHeading,
+    faqs: pixelupFaq,
   },
-  sections: [
-    {
-      heading: "How Did We Approach the Project?",
-      lead: "We treated this as a system design problem, not surface polish.\nOur focus:",
-      focus: [
-        {
-          title: "Clarity over cleverness",
-          sub: "Making complex workflows simple",
-        },
-        {
-          title: "Durability over novelty",
-          sub: "Designs that scale without fragmentation",
-        },
-        {
-          title: "Trust signals",
-          sub: "Every decision reinforced reliability and maturity",
-        },
-        {
-          title: "Unified experience",
-          sub: "Aligned product, brand, and narrative into one coherent signal",
-        },
-      ],
-      media: [
-        {
-          kind: "pair",
-          slots: [
-            {
-              media: { type: "image", src: "/media/greptile/img-1.png" },
-              alt: "Greptile brand color palette",
-              tone: "white",
-            },
-            {
-              media: { type: "image", src: "/media/greptile/img-2.png" },
-              alt: "Greptile brand type specimen",
-              tone: "white",
-            },
-          ],
-        },
-        {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/greptile/img-3.png" },
-            alt: "Greptile 'Ship Faster' billboard mockup on a city street",
-          },
-        },
-      ],
-    },
-    {
-      heading: "What Results Did Greptile Achieve?",
-      results: [
-        {
-          label: "Week 1:",
-          text: "Demo requests doubled immediately after launch",
-        },
-        { label: "Month 1:", text: "180,000+ bugs caught post-ship" },
-        {
-          label: "Month 6:",
-          text: "$25M Series A raised at $180M valuation, led by Benchmark",
-        },
-      ],
-      paragraphs: [
-        "Beyond metrics, our work became Greptile's internal standard for how they present themselves across product, sales, and investor touchpoints.",
-      ],
-      media: [
-        {
-          kind: "pair",
-          slots: [
-            {
-              media: { type: "image", src: "/media/greptile/img-4.png" },
-              alt: "Greptile mobile experience mockup held in hand",
-            },
-            {
-              media: { type: "image", src: "/media/greptile/img-5.png" },
-              alt: "Greptile sign-up screen on a laptop",
-            },
-          ],
-        },
-        {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/greptile/img-6.png" },
-            alt: "Greptile 'Bridge the gap' brand poster",
-          },
-        },
-      ],
-    },
-    {
-      heading: "What Happened After Launch?",
-      paragraphs: [
-        "Greptile began referring us to other YC founders. One introduction turned into several, and this collaboration became the foundation for our long-term partnerships across the YC ecosystem.",
-        "Today, we work closely with multiple YC-backed teams, helping them translate strong technology into clear, credible systems.",
-      ],
-      media: [
-        {
-          kind: "pair",
-          slots: [
-            {
-              media: { type: "image", src: "/media/greptile/img-7.png" },
-              alt: "Greptile analytics dashboard on a studio display",
-            },
-            {
-              media: { type: "image", src: "/media/greptile/img-8.png" },
-              alt: "Greptile subway poster mockup",
-            },
-          ],
-        },
-        {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/greptile/img-9.png" },
-            alt: "Greptile Instagram post series",
-            tone: "green",
-          },
-        },
-        {
-          kind: "full",
-          slot: {
-            media: { type: "image", src: "/media/greptile/img-10.png" },
-            alt: "Greptile product interface on a laptop",
-            tone: "green",
-          },
-        },
-      ],
-    },
-  ],
+  sections: [],
+  endCta: {
+    label: "Book a call",
+    href: links.discoveryCall,
+  },
   moreProjects: [
     { slug: "sainapse", tags: "Branding, Website & Motion Design" },
     { slug: "sully", tags: "Website & Motion Design" },
@@ -828,7 +771,7 @@ const greptile: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-09-15",
+    updatedDate: "2026-10-20",
   },
 };
 

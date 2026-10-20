@@ -105,7 +105,11 @@ function StoryHero({
             </p>
           </div>
         )}
-        <h1 className="fade-up max-w-[20ch] text-balance text-[32px] font-medium leading-[1.05] tracking-display text-white [animation-delay:200ms] desk:text-[64px]">
+        <h1
+          // Balanced lines would stop well short of the column, so a
+          // full-width headline fills each line instead.
+          className={`fade-up ${story.fullWidthHeadline ? "text-pretty" : "max-w-[20ch] text-balance"} text-[32px] font-medium leading-[1.05] tracking-display text-white [animation-delay:200ms] desk:text-[64px]`}
+        >
           {story.headline}
         </h1>
       </section>

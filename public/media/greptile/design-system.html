@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greptile — SDS</title>
+<script>if(self!==top)document.documentElement.classList.add('embed')</script>
+<style>
+@font-face{font-family:'Geist';src:url(anim/fonts/geist.woff2) format('woff2');font-weight:1 1000;font-display:block}
+@font-face{font-family:'DM Mono';src:url(anim/fonts/dm-mono-500.woff2) format('woff2');font-weight:1 1000;font-display:block}
+html,body{margin:0;height:100%}
+html:not(.embed){background:#0c0d0c}
+body{display:grid;place-items:center;overflow:hidden}
+/* Embedded in the case study, the page stays transparent until its first
+   frame is drawn, so the still underneath it shows through. */
+#frame{position:relative;overflow:hidden;flex:none;opacity:0;transition:opacity .4s}
+/* It fades in over the still once it starts playing (with reduced motion, as
+   soon as its one frame is drawn), so it never sits on its first frame. */
+.ready.played #frame{opacity:1}
+@media (prefers-reduced-motion: reduce){.ready #frame{opacity:1}}
+#stage{position:absolute;left:0;top:0;width:1440px;height:1800px;transform-origin:0 0;overflow:hidden;background:#010101;--sans:'Geist', system-ui, sans-serif;--mono:'DM Mono', ui-monospace, monospace}
+#stage .scene{position:absolute;inset:0;overflow:hidden}
+#stage *,#stage *::before,#stage *::after{transition:none!important;animation:none!important}
+#stage { --ground:#010101; --main:#B2FFD5; --second:#FFFFFF; --accent:#1BE669; --crt:#DF1FCF; color:var(--second); font-family:var(--sans, system-ui, sans-serif) }
+.ground { position:absolute; inset:0; background:var(--ground); overflow:hidden }
+.words { position:absolute; margin:0; display:flex; flex-direction:column; gap:0 } .words > * { margin:0 }
+.line { font-family:var(--display, var(--sans, system-ui, sans-serif)); font-weight:500; line-height:normal }
+.panel { position:absolute; left:85.55px; top:102.96px; width:1268.357px; height:1268.357px; overflow:hidden; background:color-mix(in srgb, var(--main) 3.5%, var(--ground)) }
+.crt { position:absolute; left:0; right:0; top:-44px; bottom:0; background:repeating-linear-gradient(to bottom, var(--crt) 0 4px, transparent 4px 44px); mix-blend-mode:color-dodge; opacity:.3 }
+.fine { position:absolute; inset:0; background:repeating-linear-gradient(to bottom, var(--accent) 0 2px, transparent 2px 8.2px); mix-blend-mode:hard-light; opacity:.024 }
+.code { position:absolute; inset:0; opacity:.6; filter:blur(1.8px) }
+.codemask { position:absolute; left:0; top:0; width:1268.357px; height:1268.357px; mask-repeat:no-repeat; mask-size:1268.357px 1268.357px; -webkit-mask-repeat:no-repeat; -webkit-mask-size:1268.357px 1268.357px }
+.row { position:absolute; left:-232.54px; top:0; width:1733.42px; margin:0; white-space:pre; font-family:var(--mono, ui-monospace, monospace); font-weight:500; font-size:33.823px; line-height:44px; color:var(--main); transform-origin:0 100% }
+.band { position:absolute; left:0; top:0; width:100%; height:420px; mix-blend-mode:screen; background:linear-gradient(to bottom, transparent, color-mix(in srgb, var(--accent) 6%, transparent) 72%, color-mix(in srgb, var(--main) 11%, transparent) 97%, transparent) }
+.grain { position:absolute; inset:0; opacity:.3; background-size:576px 576px; image-rendering:pixelated }
+.title { left:0; top:1426px; width:1440px; align-items:center } .title .line { font-size:239.242px; letter-spacing:-14.3545px; opacity:.9; white-space:nowrap }
+.subline { left:0; top:1713px; width:1440px; align-items:center } .tag { font-weight:300; font-size:32.495px; letter-spacing:-1.9497px; line-height:normal; opacity:.4; white-space:nowrap }
+.marks { position:absolute; inset:0; width:100%; height:100%; overflow:visible } .marks path { fill:none; stroke:var(--second); stroke-width:2; opacity:.3 }
+</style>
+</head>
+<body>
+<div id="frame"><div id="stage"></div></div>
+<script>window.FILM={"w": 1440, "h": 1800, "rest": 0, "fonts": {"sans": "'Geist', system-ui, sans-serif", "mono": "'DM Mono', ui-monospace, monospace"}, "faces": ["500 20px 'Geist'", "500 20px 'DM Mono'"], "scenes": [{"id": "fall", "dur": 10}], "modules": {"scene-fall.js": "const P = 71.8735, Y0 = 1.06 - 71.8735, N = 19, SPAN = 19 * 71.8735, L = 10;\nconst TXT = [\n  'EFWEOFWNDVJDVDJVSDVJ DSVJKD VWJ KEWVJ EWVJK VKJ SDVDIJ DVEVUOEVNOIUEVIEVDVINOVNOVWE',\n  'WDJQWF V OEVBWEIVW KOBWRVBIWI ORBIOWBI0RGOPIWEVS KOD BWEPVSDPMO DGE0124240-6EVNIEWVNS',\n  'DVFVOREBMOTH5TEDE%RTYUU&D&TVUI(^%E^DTCUVYB 3RE9032T0EN0 90R923IJFWEIQOICONRGOINEWVNIA',\n  'R093FI0DNRERSDVN4EWFSDOV PMRTEDGPOVWEDFVOJBRESODFVOERSOF-MVNMERWFSO-CVPW,EP[\\u2018DVKL EWB',\n  'Q3R903GJ0ERVMNO-50ERF0C-, HFVDC4-HOMBFEWPOALSZEQR3QFEOMCPSAZXC NW-B FOENORBF OMV BW0W',\n  'ERG0-O5-6576UY0TGTYHTNRG0MV MLNMO 50RY02ERJ934ERJ9 FVJEIWSDFIHO4EIFVNIGOKVNIOIERG34I0'];\nconst ORDER = [3, 0, 1, 2, 3, 4, 0, 5, 1, 2, 4, 3, 0, 5, 1, 2, 3, 4, 5];\nconst CLAW = 'M634.96 174.65C686.54 331.43 728.66 703.01 485.05 937.22C749.50 743.97 893.30 469.35 885.25 12.67C785.51 74.50 676.79 146.24 634.88 174.38C525.30 241.51 405.87 319.36 359.84 349.90C416.56 519.95 463.03 923.64 195.21 1178.04C485.73 968.29 643.73 670.24 634.96 174.65Z';\nkit.scene('fall', {\n  init(kit) {\n    const root = kit.h('<div class=\"ground\"><\/div>');\n    kit.stage.append(root);\n    const panel = kit.h('<div class=\"panel\"><div class=\"crt\"><\/div><div class=\"fine\"><\/div><div class=\"code\"><div class=\"codemask\"><\/div><\/div><div class=\"band\"><\/div><\/div>');\n    root.append(panel);\n    this.crt = panel.querySelector('.crt').style;\n    this.band = panel.querySelector('.band').style;\n    const mask = panel.querySelector('.codemask');\n    const svg = \"<svg xmlns='http://www.w3.org/2000/svg' width='1268.357' height='1268.357' viewBox='0 0 1268.357 1268.357'><path fill='#000' fill-rule='evenodd' d='M-40 -40H1310V1310H-40Z \" + CLAW + \"'/><\/svg>\";\n    const url = 'url(data:image/svg+xml,' + encodeURIComponent(svg).replace(/'/g, '%27').replace(/\\(/g, '%28').replace(/\\)/g, '%29') + ')';\n    mask.style.maskImage = url; mask.style.webkitMaskImage = url;\n    this.rows = ORDER.map((o) => {\n      const el = kit.el('p', { class: 'row', text: TXT[o] });\n      el.style.textShadow = '0 0 8.456px #1BE669';\n      mask.append(el);\n      return el.style;\n    });\n    const r = kit.rng(4242);\n    const c = document.createElement('canvas'); c.width = 64; c.height = 64;\n    const x = c.getContext('2d'), img = x.createImageData(64, 64);\n    for (let p = 0; p < 4096; p++) {\n      const u = Math.max(1e-6, r()), v = r();\n      const g = Math.max(0, Math.min(255, 55 + 5 * Math.sqrt(-2 * Math.log(u)) * Math.cos(6.2832 * v)));\n      img.data[p * 4] = img.data[p * 4 + 1] = img.data[p * 4 + 2] = g; img.data[p * 4 + 3] = 255;\n    }\n    x.putImageData(img, 0, 0);\n    const grain = kit.h('<div class=\"grain\"><\/div>');\n    grain.style.backgroundImage = 'url(' + c.toDataURL('image/png') + ')';\n    root.append(grain);\n    root.append(kit.h('<div class=\"words title\"><h1 class=\"line\">Greptile SDS<\/h1><\/div>'));\n    root.append(kit.h('<div class=\"words subline\"><p class=\"tag\">/ship faster<\/p><\/div>'));\n    root.append(kit.h('<svg class=\"marks\" viewBox=\"0 0 1440 1800\"><path d=\"M88 39V71M72 55H104\"/><path d=\"M1352.2 40V72M1336.2 56H1368.2\"/><path d=\"M88 1418V1450M88 1434H104\"/><path d=\"M88 1722V1754M88 1738H104\"/><path d=\"M1352.2 1419V1451M1352.2 1435H1336.2\"/><path d=\"M1352.2 1723V1755M1352.2 1739H1336.2\"/><\/svg>'));\n  },\n  render(t) {\n    const s = (t / L) * SPAN;\n    for (let k = 0; k < N; k++) {\n      let y = Y0 + P * k + s;\n      y = ((y - Y0) % SPAN + SPAN) % SPAN + Y0;\n      this.rows[k].transform = 'translateY(' + y.toFixed(2) + 'px)';\n    }\n    this.crt.transform = 'translateY(' + (((t / L) * 220) % 44).toFixed(2) + 'px)';\n    this.band.transform = 'translateY(' + (-420 + ((t % 2.5) / 2.5) * 1688).toFixed(1) + 'px)';\n  },\n});\n"}, "assets": {}};</script>
+<script>
+// motion-lite: the part of the Motion player's kit these films call, so each
+// film runs as a plain page. Everything on screen stays a pure function of t.
+(function () {
+  const F = window.FILM;
+  const stage = document.getElementById('stage');
+  const frame = document.getElementById('frame');
+  const clamp01 = (x) => (x < 0 ? 0 : x > 1 ? 1 : x);
+  const rng = (seed) => {
+    let s = seed | 0;
+    return () => {
+      s = (s + 0x6d2b79f5) | 0;
+      let t = Math.imul(s ^ (s >>> 15), 1 | s);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+  const defs = {};
+  const kit = {
+    W: F.w,
+    H: F.h,
+    stage,
+    fonts: F.fonts,
+    clamp01,
+    clamp: (x, a, b) => Math.min(b, Math.max(a, x)),
+    seg: (t, a, b) => clamp01((t - a) / (b - a)),
+    lerp: (a, b, p) => a + (b - a) * p,
+    smoothstep: (a, b, x) => { const p = clamp01((x - a) / (b - a)); return p * p * (3 - 2 * p); },
+    eo: (x) => 1 - Math.pow(1 - clamp01(x), 3),
+    ei: (x) => Math.pow(clamp01(x), 3),
+    eio: (x) => { x = clamp01(x); return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; },
+    eob: (x, o = 1.4) => { x = clamp01(x) - 1; return 1 + (o + 1) * x * x * x + o * x * x; },
+    rng,
+    esc: (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]),
+    el(tag, o = {}, kids = []) {
+      const e = document.createElement(tag);
+      if (o.class) e.className = o.class;
+      if (o.style) e.style.cssText = o.style;
+      if (o.text != null) e.textContent = o.text;
+      if (o.html != null) e.innerHTML = o.html;
+      if (o.attrs) for (const k in o.attrs) e.setAttribute(k, o.attrs[k]);
+      kids.forEach((k) => e.append(k));
+      return e;
+    },
+    h(html) {
+      const t = document.createElement('template');
+      t.innerHTML = html.trim();
+      return t.content.firstElementChild;
+    },
+    css(text) {
+      const s = document.createElement('style');
+      s.textContent = text;
+      this.stage.append(s);
+      return s;
+    },
+    module: (n) => (n in F.modules ? F.modules[n] : null),
+    json: (n) => JSON.parse(F.modules[n]),
+    assets: {
+      url: (n) => F.assets[n],
+      has: (n) => n in F.assets,
+      list: () => Object.keys(F.assets),
+    },
+    typing: { times: [] },
+    // Characters land at an uneven, seeded pace, a little slower on spaces.
+    typist(text, t0, cps, seed = 7) {
+      const r = rng(seed), times = [];
+      let t = t0;
+      for (const ch of text) {
+        times.push(t);
+        t += ((0.55 + 0.9 * r()) * (ch === ' ' || ch === '\n' ? 1.6 : 1)) / cps;
+      }
+      kit.typing.times.push(...times);
+      const count = (tt) => { let n = 0; while (n < times.length && times[n] <= tt) n++; return n; };
+      return { times, end: t, count, at: (tt) => text.slice(0, count(tt)) };
+    },
+    score() {},
+    scene(id, def) { defs[id] = def; },
+    // One stage layer per scene, shown only during its span of the film.
+    scenes() {
+      let t = 0;
+      const list = F.scenes.map((s) => { const o = { ...s, start: t }; t += s.dur; return o; });
+      const duration = t;
+      return {
+        width: F.w,
+        height: F.h,
+        duration,
+        init() {
+          list.forEach((s) => {
+            s.def = defs[s.id];
+            s.root = kit.el('div', { class: 'scene' });
+            stage.append(s.root);
+            s.kit = Object.assign(Object.create(kit), { stage: s.root, start: s.start, dur: s.dur });
+            if (s.def.init) s.def.init.call(s.def, s.kit);
+          });
+        },
+        render(T) {
+          list.forEach((s, i) => {
+            const on = T >= s.start && (T < s.start + s.dur || i === list.length - 1);
+            if (s.on !== on) { s.on = on; s.root.style.display = on ? '' : 'none'; }
+            if (on) s.def.render.call(s.def, T - s.start, s.kit);
+          });
+        },
+      };
+    },
+  };
+  const run = (name) => { if (F.modules[name] != null) new Function('kit', F.modules[name])(kit); };
+
+  function fit() {
+    const s = Math.min(innerWidth / F.w, innerHeight / F.h);
+    frame.style.width = F.w * s + 'px';
+    frame.style.height = F.h * s + 'px';
+    stage.style.transform = 'scale(' + s + ')';
+  }
+
+  Promise.all(F.faces.map((f) => document.fonts.load(f).catch(() => {})))
+    .then(() => document.fonts.ready)
+    .then(() => {
+      run('shared.js');
+      F.scenes.forEach((s) => run('scene-' + s.id + '.js'));
+      const cut = kit.scenes();
+      cut.init();
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      cut.render(reduce ? F.rest : 0);
+      fit();
+      addEventListener('resize', fit);
+      document.documentElement.classList.add('ready');
+      if (reduce) return;
+      // Plays from the start each time half the film is in view, and stops when
+      // it leaves. In the case study's iframe the page says when ("play" /
+      // "pause"; an observer in here hears about its scrolling late); opened on
+      // its own, it watches for itself.
+      let raf = 0, on = false;
+      const set = (v) => {
+        if (v === on) return;
+        on = v;
+        if (v) document.documentElement.classList.add('played');
+        cancelAnimationFrame(raf);
+        if (!v) return;
+        // Time from performance.now(), not the frame timestamp: inside an
+        // iframe Chrome's frame timestamp can run seconds behind it, which
+        // held the film on its first frame.
+        const t0 = performance.now();
+        const loop = () => {
+          cut.render(((performance.now() - t0) / 1000) % cut.duration);
+          raf = requestAnimationFrame(loop);
+        };
+        raf = requestAnimationFrame(loop);
+      };
+      if (self !== top) {
+        addEventListener('message', (e) => {
+          if (e.origin === location.origin && e.data && e.data.embed) set(e.data.embed === 'play');
+        });
+        parent.postMessage({ embed: 'ready' }, location.origin);
+      } else {
+        new IntersectionObserver(([e]) => set(e.isIntersecting), { threshold: 0.5 }).observe(frame);
+      }
+    });
+})();
+</script>
+</body>
+</html>
