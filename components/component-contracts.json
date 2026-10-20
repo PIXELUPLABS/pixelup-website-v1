@@ -532,7 +532,7 @@
       "none — responsive only: centered 760px dialog from desk up, full-width bottom sheet below it"
     ],
     "states": {
-      "hidden": "Default. Opens once per page view, on the first of: the reader being both 25% down the page and 6s into the visit (checked on scroll, and once when the 6s are up), or exit intent (pointer leaves through the top edge) after 5s on fine-pointer devices.",
+      "hidden": "Default. Opens on exit intent only, once per page view, after 5s on the page. Fine pointers: the pointer leaves through the top edge (trigger 'exit_intent'). Touch screens: the page flicks back up by 75% of a screen within 300ms (trigger 'exit_intent_mobile').",
       "suppressed": "localStorage 'pixelup:audit-popup': a dismissal keeps it away for 7 days, a submission for good.",
       "forced": "?audit-popup=1 opens it on load for review, ignoring storage and skipping DataFast goals.",
       "idle / submitting / error": "NewsletterForm's field treatment flipped for the light card: a black/20 underline (a 10% hairline all but disappears at 0.5px on white), accent on focus-within, black text with black/50 placeholders. Autofilled text is forced to color.neutral.base, since globals.css paints it white site-wide. Error copy in red-600 (red-400 is under 3:1 on white).",

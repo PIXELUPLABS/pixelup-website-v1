@@ -26,11 +26,12 @@ import dakshImg from "@/public/media/daksh-avatar.jpg";
 const STORAGE_KEY = "pixelup:audit-popup";
 /** A dismissal keeps it away this long; a submission keeps it away for good. */
 const DISMISS_DAYS = 7;
-/** Scroll-depth trigger: past this share of the article, after MIN_DWELL_MS. */
-const SCROLL_DEPTH = 0.25;
-const MIN_DWELL_MS = 6_000;
-/** Desktop exit intent only arms after this long, so a bounce doesn't trip it. */
+/** Exit intent only arms after this long, so a bounce doesn't trip it. */
 const EXIT_INTENT_DELAY_MS = 5_000;
+/** Touch exit intent: the page flicked back up by this share of a screen
+    within FLICK_WINDOW_MS. Slow re-reading scrolls never cover that much. */
+const FLICK_DISTANCE = 0.75;
+const FLICK_WINDOW_MS = 300;
 /** `?audit-popup=1` opens it straight away for review: storage is ignored and
     nothing is tracked or stored, though a submit still reaches the sheet. */
 const FORCE_PARAM = "audit-popup";
@@ -86,7 +87,7 @@ export function AuditLeadMagnet() {
   /** Opened via FORCE_PARAM: kept out of DataFast and localStorage. */
   const forcedRef = useRef(false);
 
-  const show = useCallback((trigger: "scroll" | "exit_intent" | "forced") => {
+  const show = useCallback((trigger: "exit_intent" | "exit_intent_mobile" | "forced") => {
     if (shownRef.current) return;
     shownRef.current = true;
     forcedRef.current = trigger === "forced";
@@ -100,9 +101,10 @@ export function AuditLeadMagnet() {
     }
   }, []);
 
-  // Triggers: scroll depth (after a minimum dwell) on every device, plus exit
-  // intent on desktop pointers. Whichever fires first wins; it shows once per
-  // page view at most.
+  // Exit intent only, once per page view at most. Desktop pointers: leaving the
+  // window through the top edge. Touch screens have no pointer to leave with,
+  // so a fast flick back up the page (toward the address bar and tabs) stands
+  // in for it.
   useEffect(() => {
     if (new URLSearchParams(window.location.search).has(FORCE_PARAM)) {
       show("forced");
@@ -111,35 +113,33 @@ export function AuditLeadMagnet() {
     if (isSuppressed()) return;
 
     const startedAt = Date.now();
+    const armed = () => Date.now() - startedAt >= EXIT_INTENT_DELAY_MS;
 
-    const checkDepth = () => {
-      const doc = document.documentElement;
-      const scrollable = doc.scrollHeight - window.innerHeight;
-      if (scrollable > 0 && window.scrollY / scrollable >= SCROLL_DEPTH) show("scroll");
-    };
+    if (window.matchMedia("(pointer: fine)").matches) {
+      const onMouseOut = (event: MouseEvent) => {
+        // Leaving through the top edge, toward the tabs or address bar.
+        if (armed() && !event.relatedTarget && event.clientY <= 0) show("exit_intent");
+      };
+      document.addEventListener("mouseout", onMouseOut);
+      return () => document.removeEventListener("mouseout", onMouseOut);
+    }
 
+    // Scroll positions from the last FLICK_WINDOW_MS, oldest first.
+    let samples: { y: number; t: number }[] = [];
     const onScroll = () => {
-      if (Date.now() - startedAt >= MIN_DWELL_MS) checkDepth();
+      const t = performance.now();
+      const y = window.scrollY;
+      samples = samples.filter((sample) => t - sample.t <= FLICK_WINDOW_MS);
+      samples.push({ y, t });
+      if (!armed()) return;
+      // Measured from the deepest point in the window, so a flick that
+      // reverses a downward scroll counts from where it turned.
+      const deepest = Math.max(...samples.map((sample) => sample.y));
+      if (deepest - y >= window.innerHeight * FLICK_DISTANCE) show("exit_intent_mobile");
     };
 
-    // A reader who passed the depth mark early and has stopped scrolling would
-    // otherwise wait for their next scroll, so check once when the dwell ends.
-    const dwellTimer = window.setTimeout(checkDepth, MIN_DWELL_MS);
-
-    const onMouseOut = (event: MouseEvent) => {
-      if (Date.now() - startedAt < EXIT_INTENT_DELAY_MS) return;
-      // Leaving through the top edge, toward the tabs or address bar.
-      if (!event.relatedTarget && event.clientY <= 0) show("exit_intent");
-    };
-
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
     window.addEventListener("scroll", onScroll, { passive: true });
-    if (finePointer) document.addEventListener("mouseout", onMouseOut);
-    return () => {
-      window.clearTimeout(dwellTimer);
-      window.removeEventListener("scroll", onScroll);
-      document.removeEventListener("mouseout", onMouseOut);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, [show]);
 
   const close = useCallback(() => {
