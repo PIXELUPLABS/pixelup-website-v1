@@ -75,7 +75,13 @@ export function CaseMediaSlot({
             height={slot.intrinsicSize.height}
           />
         )}
-        {slot.embed && <HtmlEmbed src={slot.embed} title={slot.alt ?? ""} />}
+        {slot.embed && (
+          <HtmlEmbed
+            src={slot.embed}
+            title={slot.alt ?? ""}
+            playAt={slot.embedPlayAt}
+          />
+        )}
         {slot.overlayLogo && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <img
