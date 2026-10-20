@@ -2669,8 +2669,7 @@ const replay: CaseStudy = {
   // and previews on staging until the blockers clear.
   publication: {
     status: "draft",
-    publishedDate: "2026-10-20",
-    updatedDate: "2026-10-20",
+    // Staging's CaseStudy type has no publication dates; main's entry sets them.
     blockers: [
       "Brendan reviews the page before anything merges to main.",
       "Confirm Replay's STK Bureau Serif licence: the Figma mockups use the Regular-Trial cut, and replay-marketing app/layout.tsx calls the Regular cut a trial file.",

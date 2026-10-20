@@ -388,7 +388,7 @@ function StoryBlock({
             </p>
           ))}
           {block.cta && (
-            <p className={`text-[16px] leading-[1.5] ${tones.body}`}>
+            <p className="text-[16px] leading-[1.5] text-muted-65">
               {block.cta.text}{" "}
               <Link
                 href={block.cta.href}
