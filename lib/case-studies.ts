@@ -2381,11 +2381,11 @@ const replay: CaseStudy = {
           },
           {
             label: "What Replay asks companies to do",
-            text: "Share years of emails, chats, tickets and code. Replay removes the personal details and licenses the cleaned data to AI labs. The company usually gets paid up front, plus a cut of every license.",
+            text: "Share years of emails, chats, tickets and code. Replay removes the personal details and licenses the cleaned data to AI labs. The company usually **gets paid up front, plus a cut of every license.**",
           },
           {
             label: "What they asked us for",
-            text: "A brand from scratch and a new website. The site had to be built so Replay's own engineers could take it over.",
+            text: "**A brand from scratch and a new website.** The site had to be built so Replay's own engineers could take it over.",
           },
           {
             label: "Why it mattered",
@@ -2499,9 +2499,9 @@ const replay: CaseStudy = {
         whyItMattered:
           "Replay asks companies to trust it with years of their records. **When you're asking a company to license its data, looking like another AI startup works against you. Looking established works for you.**",
         whatWeDid:
-          "We gave Replay a classic serif logo, the kind banks and archives use, and a symbol of data passing through a frame, like an official seal. The pages stay paper-white, with one blue used sparingly and a soft paper texture. Each font has one job: STK Bureau Serif for headlines, Geist for reading, Geist Mono for labels.",
+          "We gave Replay a **classic serif logo**, the kind banks and archives use, and a **symbol of data passing through a frame**, like an official seal. The pages stay **paper-white, with one blue used sparingly** and a soft paper texture. Each font has one job: **STK Bureau Serif for headlines, Geist for reading, Geist Mono for labels.**",
         outcome:
-          "The same look now runs across the website, social banners, email templates and the product designs in progress. Every rule is written down in a brand guide we handed over.",
+          "The same look now runs across **the website, social banners, email templates and the product designs** in progress. Every rule is written down in **a brand guide we handed over.**",
       },
       // Frame 5, cropped in to a 2000-unit-wide window (x 444, y 207) so the
       // screen leads. Its blocks were exported as their own layers (each over
@@ -2570,9 +2570,9 @@ const replay: CaseStudy = {
         problem:
           "The person who finds Replay can't say yes alone. **They send the link around the leadership team, and each executive decides in seconds whether to trust it.**",
         whyItMattered:
-          "The CFO wants to know what Replay pays. The lawyer wants to know what data leaves the company, who's liable and who owns it afterward.",
+          "The CFO wants to know **what Replay pays.** The lawyer wants to know **what data leaves the company, who's liable and who owns it afterward.**",
         whatWeDid:
-          "The homepage builds up to the money: **what a company your size gets paid.** On the Data & Privacy page, we gave each legal question its own tab. Each tab shows a clear example, like an invoice email with the account number crossed out.",
+          "The homepage builds up to the money: **what a company your size gets paid.** On the Data & Privacy page, we gave **each legal question its own tab.** Each tab shows a clear example, like an invoice email with the account number crossed out.",
         outcome:
           "**Replay's own team now runs the site and adds to it.** We built it and handed it over at launch. The homepage animation shows the kind of data Replay cleans: Slack threads, an inbox, code files, meeting transcripts and a contract PDF.",
       },
@@ -2703,9 +2703,9 @@ const replay: CaseStudy = {
         heading: "And this is where Replay ended up.",
         // Concise, no sales pitch, one Book a call at the end (Arjun, 2026-10-20).
         paragraphs: [
-          "Replay's brand rules live on a simple website, not a PDF: logos, colours, fonts, email templates, and files that AI coding tools can read.",
-          "After launch, Replay asked us to design its product too, starting with a component library. Replay's engineers build it, and the work is ongoing.",
-          "Replay chose its name and wrote its own copy. We designed the brand, built the site, and are now designing the product.",
+          "Replay's brand rules live on **a simple website, not a PDF**: logos, colours, fonts, email templates, and **files that AI coding tools can read.**",
+          "After launch, Replay asked us to **design its product too**, starting with **a component library.** Replay's engineers build it, and the work is ongoing.",
+          "Replay chose its name and wrote its own copy. We **designed the brand, built the site, and are now designing the product.**",
           "Branding, web design, motion design, Next.js development and product design by PIXELUP LABS, 2026.",
         ],
         // An inline link to the /call page, no email field (Arjun, 2026-10-20).
