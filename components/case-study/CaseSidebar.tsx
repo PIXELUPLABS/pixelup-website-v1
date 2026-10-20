@@ -29,7 +29,7 @@ function SidebarParagraph({ text }: { text: string }) {
 export function CaseSidebar({ study }: { study: CaseStudy }) {
   const restoreLegacyDetail = study.detailLayout === "legacy";
   const description =
-    study.story && !restoreLegacyDetail
+    study.story?.summary && !restoreLegacyDetail
       ? [study.story.summary]
       : study.description;
 

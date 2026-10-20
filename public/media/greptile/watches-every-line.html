@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greptile — watches every line</title>
+<script>if(self!==top)document.documentElement.classList.add('embed')</script>
+<style>
+@font-face{font-family:'Geist';src:url(anim/fonts/geist.woff2) format('woff2');font-weight:1 1000;font-display:block}
+@font-face{font-family:'Geist Mono';src:url(anim/fonts/geist-mono.woff2) format('woff2');font-weight:1 1000;font-display:block}
+html,body{margin:0;height:100%}
+html:not(.embed){background:#e4e3da}
+body{display:grid;place-items:center;overflow:hidden}
+/* Embedded in the case study, it fades in over the still once it starts
+   playing (with reduced motion, once its one frame is drawn). */
+#frame{position:relative;overflow:hidden;flex:none;opacity:0;transition:opacity .4s}
+.ready.played #frame{opacity:1}
+@media (prefers-reduced-motion: reduce){.ready #frame{opacity:1}}
+#stage{position:absolute;left:0;top:0;width:1440px;height:1800px;transform-origin:0 0;overflow:hidden}
+#stage *{box-sizing:border-box}
+#stage p{margin:0;white-space:pre}
+.a{position:absolute}
+.tex{position:absolute}
+.tex i{position:absolute;inset:0;background-repeat:repeat}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.sans{font-family:'Geist',system-ui,sans-serif}
+.ln{left:0;line-height:normal}
+.card{left:903px;top:1405px;width:473px;padding:26px 30px;display:flex;flex-direction:column;gap:52px;overflow:hidden;background:#0c0d0c;box-shadow:2px 4px 2px 0 rgba(0,0,0,.35)}
+.bar{flex:1 0 0;height:8px;min-width:1px;background:rgba(66,197,131,.24);border:.5px solid rgba(66,197,131,.18);display:block}
+.bar.on{background:#42c583;border-color:rgba(0,0,0,.5)}
+</style>
+</head>
+<body>
+<div id="frame"><div id="stage">
+<div class="a" style="inset:0;background:#f2f1ea"></div>
+<p class="a mono" data-n="1968:28292" style="left:292px;top:804px;font-weight:500;font-size:17px;letter-spacing:1.7px;color:#0e9663">L.0186</p>
+<svg class="a" data-n="1968:28295" style="left:383px;top:814px;width:294px;height:2px;overflow:visible" viewBox="0 0 294 2"><path id="eye leader" d="M0 1H5.10417M294 1H288.896M13.2708 1H23.4792M31.6458 1H41.8542M50.0208 1H60.2292M68.3958 1H78.6042M86.7708 1H96.9792M105.146 1H115.354M123.521 1H133.729M141.896 1H152.104M160.271 1H170.479M178.646 1H188.854M197.021 1H207.229M215.396 1H225.604M233.771 1H243.979M252.146 1H262.354M270.521 1H280.729" stroke-width="2" stroke="#0E9663"/></svg>
+<div class="a" data-n="2002:2112" style="left:376px;top:810px;width:10px;height:10px;background:#139564"></div>
+<div class="tex" style="left:-4px;top:1.11px;width:1448.841px;height:1809.664px;mix-blend-mode:exclusion"><i style="background:url(anim/grid-a.webp) 0 0/1678.6572px 839.3286px"></i><i style="background:url(anim/grid-b.webp) 0 0/999.2008px 666.1339px"></i></div>
+<svg class="a" style="left:-1739px;top:574px;width:3002px;height:2961px" viewBox="0 0 3002 2961"><path d="M0 0H1476.25H1516.75L3002 1485V2961H1476.25L0 1485V0Z" fill="#0E9663"/></svg>
+<div class="tex" style="left:-926.752px;top:1022.808px;width:1560.824px;height:1809.664px;transform:rotate(45.01deg)"><i style="background:url(anim/grid-a.webp) 0 0/1678.6572px 839.3286px"></i><i style="background:url(anim/grid-b.webp) 0 0/999.2008px 666.1339px"></i></div>
+<img class="a" src="anim/watches-lizard.webp" alt="" style="left:79px;top:520px;width:1453.387px;height:2180.08px;object-fit:cover">
+<div class="a mono" style="left:52px;top:0;font-size:15px;color:#b9bab1">
+<p class="a mono ln" data-n="1968:28223" style="top:70px">001</p>
+<p class="a mono ln" data-n="1968:28224" style="top:110px">002</p>
+<p class="a mono ln" data-n="1968:28225" style="top:150px">003</p>
+<p class="a mono ln" data-n="1968:28226" style="top:190px">004</p>
+<p class="a mono ln" data-n="1968:28227" style="top:230px">005</p>
+<p class="a mono ln" data-n="1968:28228" style="top:270px">006</p>
+<p class="a mono ln" data-n="1968:28229" style="top:310px">007</p>
+<p class="a mono ln" data-n="1968:28230" style="top:350px">008</p>
+<p class="a mono ln" data-n="1968:28231" style="top:390px">009</p>
+<p class="a mono ln" data-n="1968:28232" style="top:430px">010</p>
+<p class="a mono ln" data-n="1968:28233" style="top:470px">011</p>
+<p class="a mono ln" data-n="1968:28234" style="top:510px">012</p>
+<p class="a mono ln" data-n="1968:28235" style="top:550px">013</p>
+<p class="a mono ln" data-n="1968:28236" style="top:590px">014</p>
+<p class="a mono ln" data-n="1968:28237" style="top:630px">015</p>
+<p class="a mono ln" data-n="1968:28238" style="top:670px">016</p>
+<p class="a mono ln" data-n="1968:28239" style="top:710px">017</p>
+<p class="a mono ln" data-n="1968:28240" style="top:750px">018</p>
+<p class="a mono ln" data-n="1968:28241" style="top:790px">019</p>
+<p class="a mono ln" data-n="1968:28242" style="top:830px">020</p>
+<p class="a mono ln" data-n="1968:28243" style="top:870px">021</p>
+<p class="a mono ln" data-n="1968:28244" style="top:910px">022</p>
+<p class="a mono ln" data-n="1968:28245" style="top:950px">023</p>
+<p class="a mono ln" data-n="1968:28246" style="top:990px">024</p>
+<p class="a mono ln" data-n="1968:28247" style="top:1030px">025</p>
+<p class="a mono ln" data-n="1968:28248" style="top:1070px">026</p>
+<p class="a mono ln" data-n="1968:28249" style="top:1110px">027</p>
+<p class="a mono ln" data-n="1968:28250" style="top:1150px">028</p>
+<p class="a mono ln" data-n="1968:28251" style="top:1190px">029</p>
+<p class="a mono ln" data-n="1968:28252" style="top:1230px">030</p>
+<p class="a mono ln" data-n="1968:28253" style="top:1270px">031</p>
+<p class="a mono ln" data-n="1968:28254" style="top:1310px">032</p>
+<p class="a mono ln" data-n="1968:28255" style="top:1350px">033</p>
+<p class="a mono ln" data-n="1968:28256" style="top:1390px">034</p>
+<p class="a mono ln" data-n="1968:28257" style="top:1430px">035</p>
+<p class="a mono ln" data-n="1968:28258" style="top:1470px">036</p>
+<p class="a mono ln" data-n="1968:28259" style="top:1510px">037</p>
+<p class="a mono ln" data-n="1968:28260" style="top:1550px">038</p>
+<p class="a mono ln" data-n="1968:28261" style="top:1590px">039</p>
+<p class="a mono ln" data-n="1968:28262" style="top:1630px">040</p>
+<p class="a mono ln" data-n="1968:28263" style="top:1670px">041</p>
+<p class="a mono ln" data-n="1968:28264" style="top:1710px">042</p>
+</div>
+<div class="a" style="left:110px;top:0;width:1px;height:1800px;background:#dcdcd3"></div>
+<div class="a sans" style="left:110px;top:96px;font-weight:500;font-size:206px;letter-spacing:-14.42px;line-height:.88;color:#0c0d0c"><p>watches</p><p>every line.</p></div>
+<p class="a mono" style="left:989px;top:151px;font-weight:500;font-size:20px;letter-spacing:2.4px;color:#0c0d0c">GREPTILE  /  AI CODE REVIEW</p>
+<div class="a mono" style="right:64px;top:180px;font-size:20px;letter-spacing:1.6px;line-height:30px;color:#5d625c;text-align:right"><p>READS THE WHOLE REPO,</p><p>NOT JUST THE DIFF.</p></div>
+<div class="a card" data-n="1968:28274">
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div data-n="1968:28275" style="display:flex;gap:12px;align-items:center">
+      <div style="width:29.387px;height:29.387px;display:grid;place-items:center"><svg viewBox="0 0 17.56 24" style="width:17.56px;height:24px;transform:rotate(-45deg)">
+<g id="mark">
+<path d="M17.56 11.3479L16.0068 11.5284C14.446 11.7082 12.9898 12.4144 11.8781 13.5254L11.3817 14.0196L10.8718 13.8345C9.52012 13.3426 8.03986 13.3426 6.68823 13.8345L6.17601 14.0196L5.68184 13.5254C4.56788 12.4144 3.11395 11.7082 1.55021 11.5284L0 11.3479L5.17187 4.34299L6.17601 0H11.3817L12.3881 4.34299L17.56 11.3479Z" fill="#42C583"/>
+<path d="M4.67469 14.6942L4.05792 15.3561C2.79804 16.7048 1.53742 18.0519 0.276796 19.4005C0.499436 17.921 0.721324 16.4408 0.940955 14.9583L1.22903 13.0395L1.3727 13.0553C1.90899 13.1177 2.42873 13.2591 2.91764 13.4735C3.05152 13.5307 3.17939 13.5938 3.30726 13.6615C3.77811 13.9128 4.21211 14.2339 4.59421 14.613L4.67469 14.6942Z" fill="#42C583"/>
+<path d="M12.9921 14.9222V14.9222L12.8304 14.7469L12.9658 14.613C13.3456 14.2339 13.7819 13.9128 14.2527 13.6615C14.3783 13.5938 14.5085 13.5307 14.6393 13.4735H14.6423C15.1313 13.2591 15.6931 13.1124 16.2264 13.05L16.5769 15.3847C16.7785 16.7236 16.9771 18.0624 17.1786 19.4005C15.7819 17.9075 14.3859 16.4152 12.9921 14.9222Z" fill="#42C583"/>
+<path d="M11.3734 15.654C10.5107 18.4363 9.64573 21.2178 8.77999 24C8.39865 22.771 8.01655 21.5449 7.63445 20.3189L6.18353 15.654L7.21399 15.2802C7.71568 15.0974 8.2437 15.0056 8.77999 15.0056C9.31629 15.0056 9.84129 15.0974 10.346 15.2802L11.3734 15.654Z" fill="#42C583"/>
+</g>
+</svg></div>
+      <p class="mono" style="font-weight:500;font-size:18px;letter-spacing:1.44px;color:#42c583">GREPTILE</p>
+    </div>
+    <div class="sans" data-n="1968:28278" style="font-size:38px;letter-spacing:-1.14px;line-height:1;color:#fff"><p>No line left unread. </p><p>Safe to merge.</p></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end;width:100%">
+    <div style="display:flex;gap:8px;width:100%">
+      <i class="bar on" data-n="1968:28280"></i><i class="bar on" data-n="1968:28281"></i><i class="bar on" data-n="1968:28282"></i><i class="bar"></i><i class="bar"></i>
+    </div>
+    <p class="mono" data-n="2002:2113" style="font-weight:500;font-size:14px;letter-spacing:1.12px;color:#42c583;opacity:.5">3/5 FILES REVIEWED</p>
+  </div>
+</div>
+<div class="a" style="left:0;top:0;width:1440px;height:1802px;mix-blend-mode:exclusion;opacity:.06"><img src="anim/watches-noise.webp" alt="" style="width:100%;height:100%;object-fit:cover;mix-blend-mode:hard-light;display:block"></div>
+</div></div>
+<script>
+(function () {
+  // Figma's keyframes per layer: values, times (s) and per-segment easing.
+  const TRACKS = {"1968:28223":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.4002,0.48,1.1502000000000001,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28224":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.4698,0.5502,1.2198,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28225":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.54,0.6198,1.29,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28226":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.6102,0.6900000000000001,1.3602,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28227":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.6798,0.7602,1.4298000000000002,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28228":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.75,0.8298000000000001,1.5,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28229":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.8201999999999999,0.8999999999999999,1.5701999999999998,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28230":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.8897999999999999,0.9702000000000001,1.6398,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28231":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,0.96,1.0398,1.71,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28232":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.0302,1.1099999999999999,1.7802000000000002,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28233":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.0997999999999999,1.1802000000000001,1.8498,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28234":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.17,1.2498,1.92,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28235":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.2402,1.32,1.9902,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28236":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.3098,1.3901999999999999,2.0598,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28237":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.3800000000000001,1.4598,2.13,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28238":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.4502,1.53,2.2002,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28239":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.5198,1.6002,2.2698,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28240":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.59,1.6698,2.34,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28241":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.6602000000000001,1.7399999999999998,2.4102,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28242":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.7298,1.8102,2.4798,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28243":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.7999999999999998,1.8798000000000001,2.55,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28244":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.8701999999999999,1.9500000000000002,2.6201999999999996,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28245":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,1.9398,2.0202,2.6898,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28246":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.0100000000000002,2.0898,2.7600000000000002,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28247":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.0802,2.16,2.8302,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28248":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.1498,2.2302,2.8998,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28249":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.2199999999999998,2.2998,2.9699999999999998,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28250":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.2902,2.37,3.0402000000000005,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28251":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.3598,2.4402,3.1098,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28252":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.43,2.5098000000000003,3.18,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28253":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.5002,2.58,3.2501999999999995,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28254":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.5698,2.6502,3.3198,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28255":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.64,2.7197999999999998,3.3899999999999997,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28256":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.7102,2.79,3.4602,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28257":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.7798,2.8602,3.5298000000000003,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28258":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.8499999999999996,2.9298,3.5999999999999996,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28259":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.9202000000000004,3.0,3.6702000000000004,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28260":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,2.9898000000000002,3.0702000000000003,3.7398,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28261":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,3.06,3.1398,3.81,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28262":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,3.1302000000000003,3.21,3.8802000000000003,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28263":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,3.1997999999999998,3.2802,3.9497999999999998,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28264":[{"p":"color","v":["#B9BAB1","#B9BAB1","#0E9663","#B9BAB1","#B9BAB1"],"t":[0,3.2700000000000005,3.3498,4.0200000000000005,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28292":[{"p":"opacity","v":[0,0,1,1,1,0,0],"t":[0,1.6500000000000001,1.9998,5.4498,8.4498,8.85,9],"e":["linear","easeOut",[0.5,0,0.5,1],"linear","easeIn","linear","linear"]},{"p":"translate","v":["14px 0px","14px 0px","0px 0px","0px 0px"],"t":[0,1.6500000000000001,2.0999999999999996,9],"e":["linear",[0.16,1,0.3,1],"linear","linear"]}],"1968:28295":[{"p":"opacity","v":[0,0,1,1,1,0,0],"t":[0,1.6998,1.7502,5.4498,8.4498,8.85,9],"e":["linear","easeOut",[0.5,0,0.5,1],"linear","easeIn","linear","linear"]},{"p":"scale","v":["0.001 1","0.001 1","1 1","1 1"],"t":[0,1.6998,2.3502,9],"e":["linear",[0.16,1,0.3,1],"linear","linear"]},{"p":"translate","v":["-146.853px 0px","-146.853px 0px","0px 0px","0px 0px"],"t":[0,1.6998,2.3502,9],"e":["linear",[0.16,1,0.3,1],"linear","linear"]}],"2002:2112":[{"p":"opacity","v":[0,0,1,1,1,0,0],"t":[0,1.6002,1.7202000000000002,5.4498,8.4498,8.85,9],"e":["linear","easeOut",[0.5,0,0.5,1],"linear","easeIn","linear","linear"]},{"p":"scale","v":["0.3 0.3","0.3 0.3","1.4 1.4","1 1","1 1"],"t":[0,1.6002,1.8198,2.0999999999999996,9],"e":["linear","easeOut","easeInOut","linear","linear"]}],"1968:28274":[{"p":"opacity","v":[0,0,1,1,1,0,0],"t":[0,0.30000000000000004,0.8502,5.4498,8.4498,8.85,9],"e":["linear","easeOut",[0.5,0,0.5,1],"linear","easeIn","linear","linear"]},{"p":"translate","v":["0px 28px","0px 28px","0px 0px","0px -10px","0px -6px","0px -6px","0px -18px","0px -18px"],"t":[0,0.30000000000000004,1.0499999999999998,3.3000000000000003,5.4498,8.4498,8.85,9],"e":["linear",[0.16,1,0.3,1],"easeInOut","easeInOut","linear","easeIn","linear","linear"]},{"p":"boxShadow","v":["2px 4px 2px 0px rgba(0, 0, 0, 0.35)","2px 4px 2px 0px rgba(0, 0, 0, 0.35)","2px 14px 16px 0px rgba(0, 0, 0, 0.35)","2px 8px 8px 0px rgba(0, 0, 0, 0.35)","2px 8px 8px 0px rgba(0, 0, 0, 0.35)","2px 8px 8px 0px rgba(0, 0, 0, 0.35)"],"t":[0,1.0499999999999998,3.3000000000000003,5.4498,8.4498,9],"e":["linear","easeInOut","easeInOut","linear","linear","linear"]}],"1968:28275":[{"p":"opacity","v":[0,0,1,1],"t":[0,0.6000000000000001,0.9498,9],"e":["linear","easeOut","linear","linear"]}],"1968:28278":[{"p":"opacity","v":[0,0,1,1],"t":[0,0.75,1.1502000000000001,9],"e":["linear","easeOut","linear","linear"]},{"p":"translate","v":["0px 10px","0px 10px","0px 0px","0px 0px"],"t":[0,0.75,1.2000000000000002,9],"e":["linear",[0.16,1,0.3,1],"linear","linear"]}],"1968:28280":[{"p":"opacity","v":[0.25,0.25,1,1],"t":[0,1.35,1.5701999999999998,9],"e":["linear","easeOut","linear","linear"]}],"1968:28281":[{"p":"opacity","v":[0.25,0.25,1,1],"t":[0,1.6002,1.8198,9],"e":["linear","easeOut","linear","linear"]}],"1968:28282":[{"p":"opacity","v":[0.25,0.25,1,1],"t":[0,1.8498,2.07,9],"e":["linear","easeOut","linear","linear"]}],"2002:2113":[{"p":"opacity","v":[0,0,0.5,0.5],"t":[0,1.9500000000000002,2.2998,9],"e":["linear","easeOut","linear","linear"]}]}, DUR = 9;
+  const EASE = { linear: 'linear', easeIn: 'ease-in', easeOut: 'ease-out', easeInOut: 'ease-in-out' };
+  const ease = (e) => (Array.isArray(e) && typeof e[0] === 'number' ? 'cubic-bezier(' + e.join(',') + ')' : EASE[e] || 'linear');
+  const frame = document.getElementById('frame'), stage = document.getElementById('stage');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anims = [];
+  if (!reduce) {
+    for (const id in TRACKS) {
+      const el = stage.querySelector('[data-n="' + id + '"]');
+      if (!el) continue;
+      for (const tr of TRACKS[id]) {
+        const kf = tr.v.map((v, i) => ({ offset: tr.t[i] / DUR, [tr.p]: v, easing: ease(tr.e[i]) }));
+        const a = el.animate(kf, { duration: DUR * 1000, iterations: Infinity });
+        a.pause();
+        anims.push(a);
+      }
+    }
+  }
+  function fit() {
+    const s = Math.min(innerWidth / 1440, innerHeight / 1800);
+    frame.style.width = 1440 * s + 'px';
+    frame.style.height = 1800 * s + 'px';
+    stage.style.transform = 'scale(' + s + ')';
+  }
+  fit();
+  addEventListener('resize', fit);
+  const images = [...stage.querySelectorAll('img')].map((im) => im.decode().catch(() => {}));
+  Promise.all([document.fonts.load("500 20px 'Geist'"), document.fonts.load("400 20px 'Geist Mono'"), ...images])
+    .catch(() => {}).then(() => document.fonts.ready).then(() => {
+      document.documentElement.classList.add('ready');
+      if (reduce) return;
+      // Plays from the start each time half the poster is in view, and stops
+      // when it leaves. In the case study's iframe the page says when ("play" /
+      // "pause"; an observer in here hears about its scrolling late); opened on
+      // its own, it watches for itself.
+      let on = false;
+      const set = (v) => {
+        if (v === on) return;
+        on = v;
+        if (v) document.documentElement.classList.add('played');
+        anims.forEach((a) => { if (v) { a.currentTime = 0; a.play(); } else a.pause(); });
+      };
+      if (self !== top) {
+        addEventListener('message', (e) => {
+          if (e.origin === location.origin && e.data && e.data.embed) set(e.data.embed === 'play');
+        });
+        parent.postMessage({ embed: 'ready' }, location.origin);
+      } else {
+        new IntersectionObserver(([e]) => set(e.isIntersecting), { threshold: 0.5 }).observe(frame);
+      }
+    });
+})();
+</script>
+</body>
+</html>

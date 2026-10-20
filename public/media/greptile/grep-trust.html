@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Greptile — grep -r trust</title>
+<script>if(self!==top)document.documentElement.classList.add('embed')</script>
+<style>
+@font-face{font-family:'Geist';src:url(anim/fonts/geist.woff2) format('woff2');font-weight:1 1000;font-display:block}
+@font-face{font-family:'Geist Mono';src:url(anim/fonts/geist-mono.woff2) format('woff2');font-weight:1 1000;font-display:block}
+html,body{margin:0;height:100%}
+html:not(.embed){background:#0c0d0c}
+body{display:grid;place-items:center;overflow:hidden}
+/* Embedded in the case study, it fades in over the still once it starts
+   playing (with reduced motion, once its one frame is drawn). */
+#frame{position:relative;overflow:hidden;flex:none;opacity:0;transition:opacity .4s}
+.ready.played #frame{opacity:1}
+@media (prefers-reduced-motion: reduce){.ready #frame{opacity:1}}
+#stage{position:absolute;left:0;top:0;width:1440px;height:1800px;transform-origin:0 0;overflow:hidden}
+#stage *{box-sizing:border-box}
+#stage p{margin:0;white-space:pre}
+.a{position:absolute}
+.tex{position:absolute}
+.tex i{position:absolute;inset:0;background-repeat:repeat}
+.mono{font-family:'Geist Mono',ui-monospace,monospace}
+.sans{font-family:'Geist',system-ui,sans-serif}
+.row{font-size:27px;line-height:normal}
+</style>
+</head>
+<body>
+<div id="frame"><div id="stage">
+<div class="a" style="inset:0;background:#0c0d0c"></div>
+<div class="a" style="inset:0;background:linear-gradient(to bottom,#000,#0e9663);mix-blend-mode:color-dodge"></div>
+<img class="a" src="anim/grep-ascii.webp" alt="" style="left:0;top:0;width:1440px;height:1800px;opacity:.22">
+<div class="tex" style="left:0;top:0;width:1440px;height:1800px;mix-blend-mode:plus-lighter;opacity:.4"><i style="background:url(anim/grid-a.webp) 0 0/1720.8001px 860.4px"></i><i style="background:url(anim/grid-b.webp) 0 0/1026.0px 684.0px"></i></div>
+<p class="a mono" style="left:96px;top:110px;font-size:24px;letter-spacing:.48px;color:#6f7a72">~/acme/payments-api  (main)</p>
+<div class="a mono" style="left:84px;top:150px;font-weight:500;font-size:156px;letter-spacing:-9.36px;line-height:170px;color:#fff"><p><span style="color:#42c583">$</span> grep -r</p><p>  <span style="color:#aeecc6">trust</span> .</p></div>
+<div class="a" data-n="1995:89" style="left:861px;top:342px;width:22px;height:130px;background:#aeecc6"></div>
+<div class="a" data-n="1995:90" style="left:84px;top:592px;width:1272px;height:52px;background:#aeecc6"></div>
+<p class="a mono row" style="left:104px;top:600px;font-weight:500;color:#06281b">src/refunds/handler.ts:58</p>
+<p class="a mono row" style="left:1028px;top:600px;font-weight:500;color:#06281b">[!!] race condition</p>
+<p class="a mono row" style="left:104px;top:654px;font-weight:400;color:#c4ccc6">src/refunds/ttl.ts:12</p>
+<p class="a mono row" data-n="1995:94" style="left:1060px;top:654px;font-weight:500;color:#eefbf3">[!]  magic number</p>
+<p class="a mono row" style="left:104px;top:708px;font-weight:400;color:#c4ccc6">src/ledger/ledger.ts:214</p>
+<p class="a mono row" data-n="1995:96" style="left:1271px;top:708px;font-weight:500;color:#42c583">[ok]</p>
+<p class="a mono row" style="left:104px;top:762px;font-weight:400;color:#c4ccc6">src/middleware/retry.ts:41</p>
+<p class="a mono row" data-n="1995:98" style="left:1271px;top:762px;font-weight:500;color:#42c583">[ok]</p>
+<p class="a mono row" style="left:104px;top:816px;font-weight:400;color:#c4ccc6">src/auth/session.ts:88</p>
+<p class="a mono row" data-n="1995:100" style="left:1271px;top:816px;font-weight:500;color:#42c583">[ok]</p>
+<p class="a mono row" style="left:104px;top:870px;font-weight:400;color:#c4ccc6">src/routes.ts:19</p>
+<p class="a mono row" data-n="1995:102" style="left:1271px;top:870px;font-weight:500;color:#42c583">[ok]</p>
+<p class="a mono row" style="left:104px;top:924px;font-weight:400;color:#c4ccc6">test/handler.test.ts:7</p>
+<p class="a mono row" data-n="1995:104" style="left:1271px;top:924px;font-weight:500;color:#42c583">[ok]</p>
+<p class="a mono row" style="left:104px;top:978px;font-weight:400;color:#c4ccc6">docs/rfc-019.md</p>
+<p class="a mono row" data-n="1995:106" style="left:1125px;top:978px;font-weight:500;color:#42c583">[ok]  context</p>
+<p class="a mono" data-n="1995:107" style="left:104px;top:1052px;font-size:22px;letter-spacing:.44px;color:#42c583">8 matches  ·  14 call sites traced  ·  41s  ·  confidence 4/5</p>
+<div class="a" style="left:84px;top:1544px;width:1272px;height:1px;background:rgba(255,255,255,.14)"></div>
+<div class="a" style="left:76.53px;top:1580.53px;width:146.937px;height:146.937px;display:grid;place-items:center"><svg viewBox="0 0 87.7999 120" style="width:87.8px;height:120px;transform:rotate(-45deg)">
+<g id="greptile mark">
+<path d="M87.7999 56.7394L80.0339 57.642C72.2302 58.5408 64.9492 62.0722 59.3908 67.6269L56.9086 70.0978L54.3588 69.1726C47.6006 66.7131 40.1993 66.7131 33.4411 69.1726L30.88 70.0978L28.4092 67.6269C22.8394 62.0722 15.5698 58.5408 7.75103 57.642L0 56.7394L25.8593 21.7149L30.88 0H56.9086L61.9406 21.7149L87.7999 56.7394Z" fill="#AEECC6"/>
+<path d="M23.3735 73.4712L20.2896 76.7808C13.9902 83.5239 7.6871 90.2595 1.38398 97.0026C2.49718 89.6051 3.60662 82.2038 4.70478 74.7913L6.14517 65.1974L6.86348 65.2764C9.54494 65.5886 12.1437 66.2956 14.5882 67.3674C15.2576 67.6533 15.897 67.9692 16.5363 68.3076C18.8906 69.5638 21.0606 71.1696 22.971 73.0651L23.3735 73.4712Z" fill="#AEECC6"/>
+<path d="M64.9605 74.6108V74.6108L64.1519 73.7345L64.8289 73.0651C66.7281 71.1696 68.9094 69.5638 71.2636 68.3076C71.8917 67.9692 72.5423 67.6533 73.1967 67.3674H73.2117C75.6563 66.2956 78.4656 65.5622 81.132 65.2501L82.8846 76.9237C83.8924 83.6179 84.8853 90.3121 85.8932 97.0026C78.9094 89.5374 71.9293 82.076 64.9605 74.6108Z" fill="#AEECC6"/>
+<path d="M56.8672 78.27C52.5536 92.1813 48.2287 106.089 43.9 120C41.9932 113.855 40.0827 107.725 38.1722 101.595L30.9176 78.27L36.07 76.4009C38.5784 75.487 41.2185 75.0282 43.9 75.0282C46.5814 75.0282 49.2065 75.487 51.73 76.4009L56.8672 78.27Z" fill="#AEECC6"/>
+</g>
+</svg></div>
+<p class="a sans" style="left:236px;top:1564px;font-weight:500;font-size:150px;letter-spacing:-9px;line-height:normal;color:#fff">greptile</p>
+<div class="a mono" style="right:96px;top:1655px;width:363px;font-weight:500;font-size:20px;letter-spacing:2px;line-height:30px;color:#aeecc6;text-align:right"><p>AI CODE REVIEW THAT READS</p><p>THE WHOLE REPO.</p></div>
+<div class="a" style="inset:0;background:url(anim/noise.webp) 0 0/1200px 1200px;mix-blend-mode:overlay;opacity:.45"></div>
+</div></div>
+<script>
+(function () {
+  // Figma's keyframes per layer: values, times (s) and per-segment easing.
+  const TRACKS = {"1995:89":[{"p":"opacity","v":[1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1,1,0,0,1],"t":[0,0.5994,0.6000000000000001,1.1994,1.2000000000000002,1.7993999999999999,1.7999999999999998,2.3994,2.4000000000000004,2.9994,3.0,3.5994,3.5999999999999996,4.1994,4.199999999999999,4.7994,4.800000000000001,5.3994,5.4,5.9994,6],"e":["linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear","linear"]}],"1995:90":[{"p":"width","v":["1272px","1272px","1px","1272px","1272px"],"t":[0,2.2691999999999997,2.2698,2.7498,6],"e":[[0.5,0,0.5,1],"linear","easeOut","linear","linear"]}],"1995:94":[{"p":"opacity","v":[1,1,0,0,0.45,0.45,1,1],"t":[0,0.8994,0.8999999999999999,1.0194,1.02,1.0992,1.0997999999999999,6],"e":["linear","linear","linear","linear","linear","linear","linear","linear"]}],"1995:96":[{"p":"opacity","v":[1,1,0,0,0.45,0.45,1,1],"t":[0,1.0091999999999999,1.0098,1.1292,1.1298,1.2096,1.2102,6],"e":["linear","linear","linear","linear","linear","linear","linear","linear"]}],"1995:98":[{"p":"opacity","v":[1,1,0,0,0.45,0.45,1,1],"t":[0,1.1196,1.1202,1.2396,1.2402,1.3194000000000001,1.32,6],"e":["linear","linear","linear","linear","linear","linear","linear","linear"]}],"1995:100":[{"p":"opacity","v":[1,1,0,0,0.45,0.45,1,1],"t":[0,1.2294,1.23,1.3494,1.35,1.4292,1.4298000000000002,6],"e":["linear","linear","linear","linear","linear","linear","linear","linear"]}],"1995:102":[{"p":"opacity","v":[1,1,0,0,0.45,0.45,1,1],"t":[0,1.3392,1.3397999999999999,1.4592,1.4598,1.5396,1.5402,6],"e":["linear","linear","linear","linear","linear","linear","linear","linear"]}],"1995:104":[{"p":"opacity","v":[1,1,0,0,0.45,0.45,1,1],"t":[0,1.4496,1.4502,1.5695999999999999,1.5701999999999998,1.6494,1.6500000000000001,6],"e":["linear","linear","linear","linear","linear","linear","linear","linear"]}],"1995:106":[{"p":"opacity","v":[1,1,0,0,0.45,0.45,1,1],"t":[0,1.5594000000000001,1.56,1.6793999999999998,1.6800000000000002,1.7592,1.7598,6],"e":["linear","linear","linear","linear","linear","linear","linear","linear"]}],"1995:107":[{"p":"opacity","v":[1,1,0,0,1,1],"t":[0,0.7992000000000001,0.7998000000000001,1.8498,2.2002,6],"e":["linear","linear",[0.5,0,0.5,1],"easeOut","linear","linear"]}]}, DUR = 6;
+  const EASE = { linear: 'linear', easeIn: 'ease-in', easeOut: 'ease-out', easeInOut: 'ease-in-out' };
+  const ease = (e) => (Array.isArray(e) && typeof e[0] === 'number' ? 'cubic-bezier(' + e.join(',') + ')' : EASE[e] || 'linear');
+  const frame = document.getElementById('frame'), stage = document.getElementById('stage');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const anims = [];
+  if (!reduce) {
+    for (const id in TRACKS) {
+      const el = stage.querySelector('[data-n="' + id + '"]');
+      if (!el) continue;
+      for (const tr of TRACKS[id]) {
+        const kf = tr.v.map((v, i) => ({ offset: tr.t[i] / DUR, [tr.p]: v, easing: ease(tr.e[i]) }));
+        const a = el.animate(kf, { duration: DUR * 1000, iterations: Infinity });
+        a.pause();
+        anims.push(a);
+      }
+    }
+  }
+  function fit() {
+    const s = Math.min(innerWidth / 1440, innerHeight / 1800);
+    frame.style.width = 1440 * s + 'px';
+    frame.style.height = 1800 * s + 'px';
+    stage.style.transform = 'scale(' + s + ')';
+  }
+  fit();
+  addEventListener('resize', fit);
+  const images = [...stage.querySelectorAll('img')].map((im) => im.decode().catch(() => {}));
+  Promise.all([document.fonts.load("500 20px 'Geist'"), document.fonts.load("400 20px 'Geist Mono'"), ...images])
+    .catch(() => {}).then(() => document.fonts.ready).then(() => {
+      document.documentElement.classList.add('ready');
+      if (reduce) return;
+      // Plays from the start each time half the poster is in view, and stops
+      // when it leaves. In the case study's iframe the page says when ("play" /
+      // "pause"; an observer in here hears about its scrolling late); opened on
+      // its own, it watches for itself.
+      let on = false;
+      const set = (v) => {
+        if (v === on) return;
+        on = v;
+        if (v) document.documentElement.classList.add('played');
+        anims.forEach((a) => { if (v) { a.currentTime = 0; a.play(); } else a.pause(); });
+      };
+      if (self !== top) {
+        addEventListener('message', (e) => {
+          if (e.origin === location.origin && e.data && e.data.embed) set(e.data.embed === 'play');
+        });
+        parent.postMessage({ embed: 'ready' }, location.origin);
+      } else {
+        new IntersectionObserver(([e]) => set(e.isIntersecting), { threshold: 0.5 }).observe(frame);
+      }
+    });
+})();
+</script>
+</body>
+</html>
