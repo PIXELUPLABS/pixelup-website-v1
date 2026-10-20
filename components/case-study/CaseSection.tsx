@@ -1,4 +1,5 @@
 import type { CaseSection as CaseSectionData } from "@/lib/case-studies";
+import { InlineCta } from "./InlineCta";
 import { SectionShell } from "./SectionShell";
 
 /** Text section variants: lead + focus list, metric rows, or plain paragraphs. */
@@ -49,6 +50,13 @@ export function CaseSection({ section }: { section: CaseSectionData }) {
             </li>
           ))}
         </ul>
+      )}
+
+      {section.cta && (
+        <InlineCta
+          cta={section.cta}
+          className="text-[16px] leading-[1.5] text-white"
+        />
       )}
     </SectionShell>
   );

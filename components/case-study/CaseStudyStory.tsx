@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import type {
   CaseMetric,
@@ -11,6 +10,7 @@ import { CaseMediaBlock } from "./CaseMedia";
 import { ClientInfo } from "./ClientInfo";
 import { Emphasis, hasEmphasis } from "./Emphasis";
 import { EndCta } from "./EndCta";
+import { InlineCta } from "./InlineCta";
 import { MoreProjects } from "./MoreProjects";
 import { SectionShell } from "./SectionShell";
 
@@ -422,16 +422,10 @@ function StoryBlock({
             </p>
           ))}
           {block.cta && (
-            <p className={`text-[16px] leading-[1.5] ${tones.body}`}>
-              {block.cta.text}{" "}
-              <Link
-                href={block.cta.href}
-                className="text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
-              >
-                {block.cta.label}
-              </Link>
-              .
-            </p>
+            <InlineCta
+              cta={block.cta}
+              className={`text-[16px] leading-[1.5] ${tones.body}`}
+            />
           )}
         </SectionShell>
       );
