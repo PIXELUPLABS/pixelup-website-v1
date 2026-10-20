@@ -12,6 +12,7 @@ const DESIGN_FOR_B2B_URL = "https://designforb2b.com"
 const caseStudies = [
   { name: "Greptile", slug: "greptile" },
   { name: "Henry Labs", slug: "henrylabs" },
+  { name: "Replay", slug: "replay" },
   { name: "FuseAI", slug: "fuseai" },
   { name: "Sainapse", slug: "sainapse" },
   { name: "Sully", slug: "sully" },

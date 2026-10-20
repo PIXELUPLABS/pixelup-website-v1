@@ -17,14 +17,14 @@
  * and their sitemap entries use.
  */
 export const siteUpdated = {
-  home: "2026-10-16",
+  home: "2026-10-20",
   call: "2026-10-07",
   explorations: "2026-09-30",
   clients: "2026-09-15",
   privacy: "2026-08-31",
   /** The /case-studies index only. Each study carries its own published /
       updated dates on `publication` in lib/case-studies.ts. */
-  caseStudies: "2026-10-16",
+  caseStudies: "2026-10-20",
   /** /designforb2b is a redirect to designforb2b.com (next.config.ts). */
   designforb2b: "2026-10-02",
 } as const;

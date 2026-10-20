@@ -2303,7 +2303,7 @@ const fuseai: CaseStudy = {
   },
   moreProjects: [
     { slug: "henrylabs", tags: "Branding, website & product design" },
-    { slug: "streamline", tags: "Branding, positioning & website design" },
+    { slug: "replay", tags: "Branding, web design & product design" },
   ],
   publication: {
     status: "published",
@@ -2735,19 +2735,13 @@ const replay: CaseStudy = {
     { slug: "fuseai", tags: "Branding, website & product design" },
     { slug: "henrylabs", tags: "Branding, website & product design" },
   ],
-  // A draft still renders at its URL (only noindex), so this stays on a branch
-  // and previews on staging until the blockers clear.
+  // Published 2026-10-20 on Arjun's call, ahead of Brendan's review. Still
+  // open: Brendan's OK on poster 6 (his email and phone number), his review of
+  // the page, Replay's STK Bureau Serif licence, and refreshing the X views.
   publication: {
-    status: "draft",
+    status: "published",
     publishedDate: "2026-10-20",
     updatedDate: "2026-10-20",
-    blockers: [
-      "Brendan reviews the page before anything merges to main.",
-      "Confirm Replay's STK Bureau Serif licence: the Figma mockups use the Regular-Trial cut, and replay-marketing app/layout.tsx calls the Regular cut a trial file.",
-      "Brendan OKs poster 6 (business cards with his email, X handle and a phone number).",
-      "Add Brendan's X avatar to the pinned post (it shows his initials until then).",
-      "At publish: set both dates to the publish day, re-point the Replay card in lib/projects.ts to /case-studies/replay, match its lib/case-studies-showcase.ts row to info.involvement, and swap Streamline for Replay in FuseAI's 'More case studies' (link only, no date bump).",
-    ],
   },
 };
 
