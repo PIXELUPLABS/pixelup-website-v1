@@ -7,6 +7,7 @@ import type {
 } from "@/lib/case-studies";
 import { ChartReveal } from "./ChartReveal";
 import { FloatingComment } from "./FloatingComment";
+import { HtmlEmbed } from "./HtmlEmbed";
 import { LayerReveal } from "./LayerReveal";
 import { MediaMarquee } from "./MediaMarquee";
 import { ScrollVideo } from "./ScrollVideo";
@@ -74,6 +75,7 @@ export function CaseMediaSlot({
             height={slot.intrinsicSize.height}
           />
         )}
+        {slot.embed && <HtmlEmbed src={slot.embed} title={slot.alt ?? ""} />}
         {slot.overlayLogo && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <img
