@@ -2151,21 +2151,24 @@ const fuseai: CaseStudy = {
         media: {
           kind: "pair",
           slots: [
+            // Arjun's replacements (2026-10-20). #13 is trimmed 12px a side
+            // to 1171x1548 so both posters share one shape and the pair's
+            // heights match.
             {
               media: {
                 type: "image",
-                src: "/media/fuseai/subway-posters.avif",
+                src: "/media/fuseai/poster-agentic.avif",
               },
-              alt: "FuseAI 'Prospect. Enrich. Engage. Fuse.' posters in a subway station",
-              intrinsicSize: { width: 1238, height: 1548 },
+              alt: "FuseAI 'Agentic' poster and a prospecting product poster on a subway platform",
+              intrinsicSize: { width: 1171, height: 1548 },
             },
             {
               media: {
                 type: "image",
-                src: "/media/fuseai/poster-pipeline.avif",
+                src: "/media/fuseai/poster-buying-signals.avif",
               },
-              alt: "FuseAI 'Less complexity, More pipeline.' poster",
-              intrinsicSize: { width: 1201, height: 1501 },
+              alt: "FuseAI 'Identify Buying Signals' poster",
+              intrinsicSize: { width: 1171, height: 1548 },
             },
           ],
         },
