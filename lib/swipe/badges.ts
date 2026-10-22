@@ -145,4 +145,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 195,
     height: 42,
   },
+  {
+    // Free launches require this badge to stay listed.
+    name: "Nick Launches",
+    href: "https://nicklaunches.com/",
+    src: "https://nicklaunches.com/badges/featured-dark.png",
+    width: 192,
+    height: 44,
+  },
 ];
