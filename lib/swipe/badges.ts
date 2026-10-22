@@ -81,4 +81,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 160,
     height: 44,
   },
+  {
+    // TheSaaSDir sister site. Free plan: 1 dofollow link; the badge is required.
+    name: "TheDevToolsDir",
+    href: "https://thedevtoolsdir.com/product/swipe-by-pixelup-labs?ref=badge",
+    src: "https://thedevtoolsdir.com/badge/swipe-by-pixelup-labs.svg",
+    width: 160,
+    height: 44,
+  },
 ];
