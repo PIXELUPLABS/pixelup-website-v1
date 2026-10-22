@@ -162,10 +162,42 @@ export const directoryBadges: DirectoryBadge[] = [
     height: 44,
   },
   {
-    // TheSaaSDir sister site. Free plan: 1 dofollow link; the badge is required.
-    name: "SaaSLineup saaslineup.com",
-    href: "https:///product/swipe-by-pixelup-labs?ref=badge",
-    src: "https:///badge/swipe-by-pixelup-labs.svg",
+    // TheSaaSDir sister site (SaaS). Free plan: 1 dofollow link; the badge is required.
+    name: "SaaSLineup",
+    href: "https://saaslineup.com/product/swipe-by-pixelup-labs?ref=badge",
+    src: "https://saaslineup.com/badge/swipe-by-pixelup-labs.svg",
+    width: 160,
+    height: 44,
+  },
+  {
+    // TheSaaSDir sister site (AI tools). Free plan: 1 dofollow link; the badge is required.
+    name: "TheAIToolsDir",
+    href: "https://theaitoolsdir.com/product/swipe-by-pixelup-labs?ref=badge",
+    src: "https://theaitoolsdir.com/badge/swipe-by-pixelup-labs.svg",
+    width: 160,
+    height: 44,
+  },
+  {
+    // TheSaaSDir sister site (dev tools). Free plan: 1 dofollow link; the badge is required.
+    name: "TheDevToolsIndex",
+    href: "https://thedevtoolsindex.com/product/swipe-by-pixelup-labs?ref=badge",
+    src: "https://thedevtoolsindex.com/badge/swipe-by-pixelup-labs.svg",
+    width: 160,
+    height: 44,
+  },
+  {
+    // TheSaaSDir sister site (dev tools). Free plan: 1 dofollow link; the badge is required.
+    name: "TheDevToolsList",
+    href: "https://thedevtoolslist.com/product/swipe-by-pixelup-labs?ref=badge",
+    src: "https://thedevtoolslist.com/badge/swipe-by-pixelup-labs.svg",
+    width: 160,
+    height: 44,
+  },
+  {
+    // TheSaaSDir sister site (micro-SaaS). Free plan: 1 dofollow link; the badge is required.
+    name: "TheMicroSaaSDir",
+    href: "https://themicrosaasdir.com/product/swipe-by-pixelup-labs?ref=badge",
+    src: "https://themicrosaasdir.com/badge/swipe-by-pixelup-labs.svg",
     width: 160,
     height: 44,
   },
