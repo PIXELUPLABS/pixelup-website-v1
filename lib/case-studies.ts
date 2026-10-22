@@ -2262,7 +2262,7 @@ const fuseai: CaseStudy = {
           "**The 20% trial-conversion lift is FuseAI's own figure**, shared in October 2026.",
           "One thing we changed after FuseAI: when a client's team builds, **we agree build QA and export formats for each platform at kickoff**. Framer, the browser and the product each want animation in a different format, and that's cheaper to settle at kickoff than after the first export.",
           "If you need brand, website and product in four weeks with nothing traded off, nobody does that well, us included. We'll tell you on day one what ships for launch and what follows it. If your brand is already locked and you only need throughput, **a design subscription is cheaper**.",
-          "PIXELUP LABS has shipped 35 projects for funded B2B and AI-native startups, rated 5.0 on every review.",
+          "PIXELUP LABS has shipped 35 projects for funded B2B and AI-native startups. Every public review is 5.0: eight on Contra and one on Clutch.",
           "Brand, website and product design by PIXELUP LABS, 2026.",
         ],
         cta: {
