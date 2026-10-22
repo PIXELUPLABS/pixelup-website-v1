@@ -887,16 +887,14 @@ export function SwipeExplorer({
               }}
               onFocus={(event) => warmFrom(event.target)}
             >
-              {visiblePosts.map((post, index) => {
+              {/* Only the shown page renders, not all 189 with `hidden`: each card
+                  is ~3 KB of HTML, and some directory badge checkers refuse
+                  pages over ~500 KB. */}
+              {visiblePosts.slice(0, visibleCount).map((post, index) => {
                 const creator = creatorsById.get(post.creator);
                 if (!creator) return null;
                 return (
-                  <li
-                    key={post.id}
-                    data-post-id={post.id}
-                    data-platform={post.platform}
-                    hidden={index >= visibleCount}
-                  >
+                  <li key={post.id} data-post-id={post.id} data-platform={post.platform}>
                     <div
                       className="fade-up h-full"
                       style={index < 12 ? { animationDelay: `${Math.min(150 + index * 30, 400)}ms` } : undefined}
