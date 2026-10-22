@@ -148,7 +148,7 @@ export const directoryBadges: DirectoryBadge[] = [
   {
     // Free launches require this badge to stay listed.
     name: "Nick Launches",
-    href: "https://nicklaunches.com/",
+    href: "https://nicklaunches.com/products/swipe-by-pixelup-labs/",
     src: "https://nicklaunches.com/badges/featured-dark.png",
     width: 192,
     height: 44,
