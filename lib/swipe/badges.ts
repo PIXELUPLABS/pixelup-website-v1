@@ -40,4 +40,13 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 220,
     height: 48,
   },
+  {
+    // Free plan: manual review within 2 weeks; the backlink is required.
+    // 54px tall per their snippet; width from the 481.56x160.97 SVG viewBox.
+    name: "Turbo0",
+    href: "https://turbo0.com/item/swipe-by-pixelup-labs",
+    src: "https://img.turbo0.com/badge-listed-dark.svg",
+    width: 162,
+    height: 54,
+  },
 ];
