@@ -10,9 +10,9 @@ import { swipeCategories, swipePosts } from "@/lib/swipe/posts";
 
 /*
  * Swipe by PIXELUP LABS: a swipe file of the best-performing design posts on
- * X and LinkedIn, built to be listed on tool directories. Deliberately an
- * orphan page: it's not in app/sitemap.ts, nothing on the site links here,
- * and it's noindex (see metadata.robots below).
+ * X and LinkedIn, built to be listed on tool directories. Indexable and in
+ * app/sitemap.ts since 2026-10-22, but still no internal links to it from
+ * the rest of the site.
  *
  * Every post opens as the real thing through X's or LinkedIn's official embed
  * (components/swipe/SwipePostEmbed.tsx). The titles and summaries in the
@@ -31,13 +31,10 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/swipe" },
-  // Kept out of Google's index on purpose: the page exists for directory
-  // listings, not search. follow stays on so its links still count.
-  // Don't add a robots.txt Disallow: Google has to crawl it to see this.
   robots: {
-    index: false,
+    index: true,
     follow: true,
-    googleBot: { index: false, follow: true },
+    googleBot: { index: true, follow: true },
   },
   openGraph: {
     title,

@@ -68,6 +68,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    // Linked only from tool directories, so the sitemap is how Google finds it.
+    {
+      url: `${BASE_URL}/swipe`,
+      lastModified: siteUpdated.swipe,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
     {
       url: `${BASE_URL}/privacy`,
       lastModified: siteUpdated.privacy,
