@@ -23,4 +23,12 @@ export interface DirectoryBadge {
   height: number;
 }
 
-export const directoryBadges: DirectoryBadge[] = [];
+export const directoryBadges: DirectoryBadge[] = [
+  {
+    name: "Findly.tools",
+    href: "https://findly.tools/swipe-by-pixelup-labs?utm_source=swipe-by-pixelup-labs",
+    src: "https://findly.tools/badges/findly-tools-badge-dark.svg",
+    width: 175,
+    height: 55,
+  },
+];
