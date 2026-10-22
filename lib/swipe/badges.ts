@@ -137,4 +137,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 190,
     height: 44,
   },
+  {
+    // OpenHunts Club badge: skips the ~60-week free launch queue; dofollow only if we place top 3.
+    name: "OpenHunts",
+    href: "https://openhunts.com",
+    src: "https://cdn.openhunts.com/badges/club.webp",
+    width: 195,
+    height: 42,
+  },
 ];
