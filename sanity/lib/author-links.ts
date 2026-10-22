@@ -1,10 +1,12 @@
 /**
- * Public profile URLs for post authors, keyed by the author's first name as it
- * appears before the comma in the "Written by" string ("Daksh, Founder at
- * PIXELUP LABS" -> "Daksh"). Kept local so the blog detail page can link the
- * byline without a Sanity schema change.
+ * Public profile URLs for post authors, keyed by the author's name as it
+ * appears before the comma in the "Written by" string ("Daksh Aswal, Founder at
+ * PIXELUP LABS" -> "Daksh Aswal"). Kept local so the blog detail page can link
+ * the byline without a Sanity schema change. Keep the old first-name key so a
+ * rename in Sanity never drops the link.
  */
 const AUTHOR_PROFILE_URLS: Record<string, string> = {
+  'Daksh Aswal': 'https://www.linkedin.com/in/dakshpixelup/',
   Daksh: 'https://www.linkedin.com/in/dakshpixelup/',
 }
 
