@@ -89,4 +89,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 160,
     height: 44,
   },
+  {
+    // Free plan: dofollow DR 68 link with this badge; ~329-day review queue (filed Oct 22, 2026).
+    name: "SaaSCity",
+    href: "https://saascity.io",
+    src: "https://saascity.io/badges/featured-dark.svg",
+    width: 150,
+    height: 54,
+  },
 ];
