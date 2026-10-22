@@ -65,4 +65,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 148,
     height: 40,
   },
+  {
+    // Free (one product). Human review; the dofollow link unlocks once approved with this badge live.
+    name: "IndieAscent",
+    href: "https://indieascent.com/p/swipe-by-pixelup-labs?ia_badge=1",
+    src: "https://indieascent.com/badge/standard-dark.svg",
+    width: 200,
+    height: 54,
+  },
 ];
