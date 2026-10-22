@@ -31,4 +31,13 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 175,
     height: 55,
   },
+  {
+    // Free launch, scheduled for Mar 8-14, 2027. The product page 404s until
+    // then; dofollow only while this badge stays live (re-checked weekly).
+    name: "ScrollLaunch",
+    href: "https://www.scrolllaunch.com/products/swipe-by-pixelup-labs?ref=badge",
+    src: "https://www.scrolllaunch.com/api/badge/swipe-by-pixelup-labs?variant=launched&theme=dark",
+    width: 220,
+    height: 48,
+  },
 ];
