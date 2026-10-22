@@ -113,4 +113,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 160,
     height: 44,
   },
+  {
+    // Free plan: dofollow link, instant publish once this badge is verified.
+    name: "SaasDB",
+    href: "https://saasdb.net",
+    src: "https://saasdb.net/badge/featured-dark.svg",
+    width: 180,
+    height: 54,
+  },
 ];
