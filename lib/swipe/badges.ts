@@ -49,4 +49,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 162,
     height: 54,
   },
+  {
+    // Free. The listing goes live with a dofollow link once they find this badge.
+    name: "EasyDoFollow",
+    href: "https://easydofollow.dev/design/swipe-by-pixelup-labs",
+    src: "https://easydofollow.dev/badge/easydofollow-badge-dark.svg",
+    width: 188,
+    height: 56,
+  },
 ];
