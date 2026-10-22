@@ -73,4 +73,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 200,
     height: 54,
   },
+  {
+    // Free plan: 1 dofollow link; the badge is required (Verify Badge, then Submit Product).
+    name: "TheSaaSDir",
+    href: "https://thesaasdir.com/product/swipe-by-pixelup-labs?ref=badge",
+    src: "https://thesaasdir.com/badge/swipe-by-pixelup-labs.svg",
+    width: 160,
+    height: 44,
+  },
 ];
