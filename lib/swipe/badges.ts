@@ -161,4 +161,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 146,
     height: 44,
   },
+  {
+    // TheSaaSDir sister site. Free plan: 1 dofollow link; the badge is required.
+    name: "SaaSLineup saaslineup.com",
+    href: "https:///product/swipe-by-pixelup-labs?ref=badge",
+    src: "https:///badge/swipe-by-pixelup-labs.svg",
+    width: 160,
+    height: 44,
+  },
 ];
