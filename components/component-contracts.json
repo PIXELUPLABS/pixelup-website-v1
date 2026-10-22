@@ -555,6 +555,183 @@
     "analytics": "DataFast goals audit_popup_shown (with trigger), audit_popup_dismissed, audit_popup_submitted — each with the page path."
   },
 
+  "SectionNav": {
+    "file": "components/SectionNav.tsx",
+    "category": "interactive",
+    "description": "In-page section index with scroll-spy (the last section whose top has passed 30% of the viewport is active). Smooth-scrolls on click unless reduced motion is on, and keeps the hash via replaceState, same as AuditNavCta.",
+    "variants": {
+      "list": "Desktop sidebar: hairline-divided rows in ClientInfo's rhythm (px-5 py-3, 14px), mono index, square color.brand.accent marker on the active row. Optional per-item count (mono 12px white/40) before the marker, used on /swipe.",
+      "strip": "Mobile only (desk:hidden): sticky under the Navbar (top-16), horizontal scroll of the /case-studies NichePill look, active pill in color.brand.accent and centered within the strip."
+    },
+    "states": {
+      "item:default": "list: text-white/60, index white/40; strip: dashed hairline border, text-white/40",
+      "item:hover": "list: text-white; strip: bg-button-dark",
+      "item:active": "aria-current=\"location\". list: text-white + accent marker; strip: bg-accent text-white"
+    },
+    "tokens_used": [
+      "color.brand.accent",
+      "color.neutral.hairline",
+      "color.neutral.button-dark",
+      "typography.font.mono",
+      "typography.font.button",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "Long single pages with named sections (currently /swipe). Sections need matching ids and a scroll-mt that clears the Navbar (and any sticky strip below desk).",
+    "do_not": [
+      "Don't call scrollIntoView on the active pill — it scrolls the page as well as the strip. The strip scrolls itself with scrollTo.",
+      "Don't render the strip on desktop; the sidebar list covers it there."
+    ]
+  },
+
+  "SwipeExplorer": {
+    "file": "components/swipe/SwipeExplorer.tsx",
+    "category": "interactive",
+    "description": "The whole /swipe tool on one state model. Desk: the 405px sticky sidebar holds the server-rendered intro slot, search (⌘K / '/'), Platform and Category pills, a Creator chip when one is selected, Clear filters, the SectionNav index (Posts / Creators with counts) and the MADE BY PIXELUP LABS button pinned to the bottom. Below desk the intro sits in flow and the controls move to a sticky filter strip under the Navbar (toggle pills, a search row, a 'Creators 93' jump). Main: #posts (FeedBar with H2, live count and Newest / Most liked sort; or the creator profile header when a creator is selected), a 1 / 2 / 3-column hairline grid paginated 24 at a time with the HTML hidden attribute (all 189 summaries stay in the server HTML), then #creators (all 93 as dense rows, never paginated), then the page's children (DirectoryBadges + Footer). Cards open SwipePostViewer. URL state: ?post=<id> (pushState on open, replaceState on prev/next, popped on close) and ?creator=<id> (replaceState), read once after hydration and on popstate.",
+    "status": "Local draft (/swipe stays local until approved).",
+    "variants": ["none"],
+    "states": {
+      "pill:default": "Dashed hairline border, text-white/40 (ArticleFilters' pill).",
+      "pill:active": "bg-button-dark text-white, aria-pressed. Never accent.",
+      "search:focus": "Hairline border lifts to white/40.",
+      "profile": "creatorId set: profile header (CreatorMonogram lg, name, role/@handle, '30 posts · 65K likes when picked · since 2022', profile circles, prev/next creator, sort) replaces the FeedBar.",
+      "empty": "One row per list: 'No posts match …' + Clear filters + 'Try a creator:', or the profile's 'has no {Category} posts on {Platform}' line + Show all."
+    },
+    "tokens_used": [
+      "color.neutral.hairline",
+      "color.neutral.button-dark",
+      "color.neutral.label-grey",
+      "typography.font.mono",
+      "typography.font.button",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "app/swipe/page.tsx only, fed by lib/swipe/posts.ts and lib/swipe/creators.ts.",
+    "do_not": [
+      "Don't use color.brand.accent for pills or tags; on /swipe the accent is SectionNav's marker and the viewer's Copy prompt only.",
+      "Don't render a creator's own post text. Cards show our title + summary; the real post appears only through the official embed in SwipePostViewer.",
+      "Don't read searchParams in app/swipe/page.tsx: the route must stay static, URL state is client-side here."
+    ]
+  },
+
+  "SwipePostCard": {
+    "file": "components/swipe/SwipePostCard.tsx",
+    "category": "content",
+    "description": "One post cell, content only (the grid draws the rules): CreatorMonogram + name (z-10 button that selects the creator) + handle/role, a mono eyebrow 'Format / Hook' with 'New · Oct 19' or 'Sep 2025' on the right, our 2-line title, our 2-line summary, and a footer with the 'View post' cue (platform glyph) and likes at pick time. The title button's stretched ::after makes the whole cell open the viewer.",
+    "status": "Local draft.",
+    "variants": ["none"],
+    "states": {
+      "hover/focus-visible": "Cell fills bg-button-dark; 'View post' lifts to white.",
+      "new": "Posts within 14 days of the newest pick show 'New' in white (not accent)."
+    },
+    "tokens_used": ["color.neutral.button-dark", "color.neutral.label-grey", "typography.font.mono", "typography.font.button"],
+    "when_to_use": "Inside SwipeExplorer's post grid only.",
+    "do_not": [
+      "Don't add a border or radius; the grid owns the rules.",
+      "Don't put per-card Open post / Copy prompt links back: they live in the viewer."
+    ]
+  },
+
+  "SwipeCreatorCard": {
+    "file": "components/swipe/SwipeCreatorCard.tsx",
+    "category": "content",
+    "description": "One dense creator row (~68px): CreatorMonogram, name, and '{N} posts · @handle' (or role). The whole row toggles that creator's filter via the name button's stretched ::after. id=creator-<slug> is a plain anchor. Profile links live in the profile header and the viewer, and as sameAs in the page JSON-LD.",
+    "status": "Local draft.",
+    "variants": ["none"],
+    "states": {
+      "selected": "bg-button-dark fill, aria-pressed on the button."
+    },
+    "tokens_used": ["color.neutral.button-dark", "color.neutral.label-grey"],
+    "when_to_use": "Inside SwipeExplorer's creator grid only.",
+    "do_not": ["Don't swap the monogram for photos without asking: initials-only was an explicit decision."]
+  },
+
+  "SwipePostViewer": {
+    "file": "components/swipe/SwipePostViewer.tsx",
+    "category": "interactive",
+    "description": "The post viewer on the shared Dialog. Desk: 960×800 panel, 360px info column (creator row with profile circles, 20px title, 'What it covers', Category / Format / Opening move / Picked rows) beside the embed well; header bar with prev/next circles (the explorations lightbox style), '12 / 189' counter and close. Below desk: a bottom sheet with one scroll body and a pinned action bar. Actions: COPY PROMPT (the page's single accent CTA, lib/swipe/format.ts buildPrompt) and Open on X/LinkedIn. ←/→ step through the list the viewer opened from, wrapping at the ends.",
+    "status": "Local draft.",
+    "variants": ["desk centred panel", "mobile bottom sheet"],
+    "states": {
+      "copied": "Button reads PROMPT COPIED for 2s; announced via an sr-only aria-live span."
+    },
+    "tokens_used": ["color.brand.accent", "color.neutral.hairline", "color.neutral.label-grey", "color.neutral.scrim", "radius.full"],
+    "when_to_use": "Once, inside SwipeExplorer.",
+    "do_not": ["Don't show our stored like/comment counts next to a live embed (the embed has live ones); they appear only in the embed fallback, labelled 'when picked'."]
+  },
+
+  "SwipePostEmbed": {
+    "file": "components/swipe/SwipePostEmbed.tsx",
+    "category": "content",
+    "description": "The real post through the platform's official embed. X: widgets.js (injected once, on first hover/focus/open, never on page load) createTweet with theme dark, dnt, conversation none, rendered into a per-run host node so a late async render from a cleaned-up run can't stack a second copy. LinkedIn: the official embed iframe at 504px on the black well, fixed 600px tall (LinkedIn never reports its height). Placeholder while loading; flat fallback (reason, stats when picked, Open on …) when the post isn't embeddable, the script is blocked, or nothing renders within 8s; a late render still swaps in. warmEmbed(platform) preconnects and preloads on mouse hover / keyboard focus, never on touch. Render with key={post.id}.",
+    "status": "Local draft. Verified in headless Chrome: X dark embed and LinkedIn embed both render; the in-app preview pane suppresses third-party iframes, so check embeds in a real browser.",
+    "variants": ["x", "linkedin", "fallback"],
+    "states": {
+      "loading": "32px platform circle + 'Loading the post from X'.",
+      "ready": "Embed fades in (fade-up, 0.25s).",
+      "failed / unavailable / not-embeddable": "Fallback with the matching reason."
+    },
+    "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono"],
+    "when_to_use": "Inside SwipePostViewer only. lib/swipe/embeds.ts lists posts that can't be embedded.",
+    "do_not": [
+      "Don't put embeds in the grid: one live embed at a time, inside the viewer.",
+      "Don't hide the X target with display:none while loading; widgets.js measures its width."
+    ]
+  },
+
+  "Dialog": {
+    "file": "components/Dialog.tsx",
+    "category": "primitive",
+    "description": "The site's shared modal shell on the native <dialog> (showModal: top layer above the Navbar, focus containment, Escape, inert page). Bottom sheet below desk, centred panel from desk sized by the caller's className. Backdrop color.neutral.scrim + backdrop-blur-md (the ExplorationGallery lightbox treatment); flat black panel, square corners, no shadow, 0.5px hairline edge (documented deviation: a black panel on a scrimmed black page needs an edge and shadows are banned). Locks page scroll while open. Escape and backdrop clicks route through onClose.",
+    "status": "Used by SwipePostViewer. AuditLeadMagnet still has its own hand-rolled dialog; move it here next time it's touched.",
+    "variants": ["mobile bottom sheet", "desk centred panel"],
+    "states": {},
+    "tokens_used": ["color.neutral.scrim", "color.neutral.hairline", "color.neutral.base"],
+    "when_to_use": "Any new popup on the site.",
+    "do_not": ["Don't build another one-off scrim/focus trap; extend this instead."]
+  },
+
+  "SwipeGlyphs": {
+    "file": "components/swipe/SwipeGlyphs.tsx",
+    "category": "primitive",
+    "description": "PlatformIcon (the X / LinkedIn marks from SocialLinks, currentColor) and CreatorMonogram (initials in a full circle on button-dark with a hairline edge; md 36px, lg 48px).",
+    "status": "Local draft.",
+    "variants": [
+      "CreatorMonogram size: md | lg"
+    ],
+    "states": {},
+    "tokens_used": [
+      "color.neutral.button-dark",
+      "color.neutral.hairline",
+      "typography.font.mono",
+      "radius.full"
+    ],
+    "when_to_use": "The /swipe cards. Reusable anywhere a person needs an avatar without a photo.",
+    "do_not": [
+      "Don't color-code monograms per person; the page stays monochrome."
+    ]
+  },
+
+  "DirectoryBadges": {
+    "file": "components/swipe/DirectoryBadges.tsx",
+    "category": "layout",
+    "description": "'Featured on' strip directly above the /swipe Footer, in the Footer's own frame (pt-6 pb-5 desk:px-5, hairline box). Renders lib/swipe/badges.ts as dofollow links (rel=noopener) around plain <img> badges, since directory badge hosts vary and next/image would need each in remotePatterns. Empty list: nothing in production, a dashed placeholder in development.",
+    "status": "Local draft; badge list empty until listings go live.",
+    "variants": [
+      "none"
+    ],
+    "states": {
+      "empty:dev": "Dashed placeholder explaining where to add badges.",
+      "empty:prod": "Renders nothing."
+    },
+    "tokens_used": [
+      "color.neutral.hairline",
+      "color.neutral.label-grey"
+    ],
+    "when_to_use": "/swipe only, once, directly above Footer.",
+    "do_not": [
+      "Don't add rel=nofollow; directories usually require a followed badge link."
+    ]
+  },
+
   "_gaps": [
     {
       "gap": "Sidebar testimonial card",
@@ -564,9 +741,33 @@
     },
     {
       "gap": "Modal dialog",
-      "status": "Built inside AuditLeadMagnet, not extracted",
+      "status": "Extracted as components/Dialog.tsx (used by /swipe); AuditLeadMagnet not migrated yet",
       "detail": "The site had no dialog primitive: the Tally popup is Tally's own, and the explorations lightbox is image-only. AuditLeadMagnet carries its own scrim, scroll lock, focus trap and Escape handling. Extract a shared Dialog shell if a second popup is ever needed.",
       "closest_existing": "ExplorationGallery lightbox (backdrop blur), MobileMenu (color.neutral.scrim)"
+    },
+    {
+      "gap": "Filterable card feed with search",
+      "status": "Built as SwipeExplorer (/swipe)",
+      "detail": "ArticleFilters is a placeholder that doesn't filter, and nothing combined pills, search and a card grid. SwipeExplorer keeps ArticleFilters' pill look and SectionHeader/SectionNav for structure. If /blog's filters ever go live, extract the Pill and the hairline grid from it.",
+      "closest_existing": "ArticleFilters (pills), ExplorationGallery (grid), BlogList"
+    },
+    {
+      "gap": "Person card / avatar without a photo",
+      "status": "Built as SwipeCreatorCard + CreatorMonogram",
+      "detail": "ClientRow is logo-based, and the blog author box is one-off. The /swipe creator directory needed 93 people with profile links and no photos.",
+      "closest_existing": "ClientRow (roster row), SocialLinks (profile buttons)"
+    },
+    {
+      "gap": "Badge / logo row that links out",
+      "status": "Built as DirectoryBadges",
+      "detail": "TrustedStrip is a marquee of client logos, not linked, and not meant to hold third-party badges that need their exact image and a followed link.",
+      "closest_existing": "TrustedStrip"
+    },
+    {
+      "gap": "Responsive grid columns past desk",
+      "status": "Open: deviation on /swipe",
+      "detail": "The /swipe grids use arbitrary min-[560px] / min-[700px] / min-[1500px] steps besides desk, because 189 cards in one column at tablet width, or two columns at 1800px, read badly. SiteFrame's min-[1800px] is the only precedent. Decide whether to formalize a second breakpoint.",
+      "closest_existing": "SiteFrame (min-[1800px])"
     }
   ]
 }
