@@ -57,4 +57,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 188,
     height: 56,
   },
+  {
+    // Free plan: 1 dofollow link, review within 72h; the backlink is required.
+    name: "Twelve Tools",
+    href: "https://twelve.tools",
+    src: "https://twelve.tools/badge2-dark.svg",
+    width: 148,
+    height: 40,
+  },
 ];
