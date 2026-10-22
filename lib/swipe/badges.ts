@@ -129,4 +129,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 139,
     height: 44,
   },
+  {
+    // Free plan: dofollow while this badge stays (re-checked every two weeks); live Nov 14, 2026.
+    name: "MarketingDB",
+    href: "https://marketingdb.live",
+    src: "https://marketingdb.live/badge.svg",
+    width: 190,
+    height: 44,
+  },
 ];
