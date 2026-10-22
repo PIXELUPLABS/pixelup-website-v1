@@ -121,4 +121,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 180,
     height: 54,
   },
+  {
+    // Free plan: listing link turns dofollow once this badge is verified; listing hides if it disappears.
+    name: "neeed.directory",
+    href: "https://neeed.directory",
+    src: "https://neeed.directory/badges/neeed-badge-dark.svg",
+    width: 139,
+    height: 44,
+  },
 ];
