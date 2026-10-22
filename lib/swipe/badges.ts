@@ -153,4 +153,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 192,
     height: 44,
   },
+  {
+    // Dofollow while this badge stays (re-checked weekly). Their checker needs the exact alt "Featured on MakeItLast" and the root href.
+    name: "MakeItLast",
+    href: "https://www.makeitla.st/",
+    src: "https://www.makeitla.st/badge/makeitlast-badge-dark.svg?v=3",
+    width: 146,
+    height: 44,
+  },
 ];
