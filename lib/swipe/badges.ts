@@ -97,4 +97,12 @@ export const directoryBadges: DirectoryBadge[] = [
     width: 150,
     height: 54,
   },
+  {
+    // Free with a mutual dofollow backlink; their bot checks for this badge.
+    name: "LaunchPaddock",
+    href: "https://launchpaddock.com/directory/swipe-by-pixelup-labs",
+    src: "https://launchpaddock.com/badge.svg",
+    width: 186,
+    height: 54,
+  },
 ];
