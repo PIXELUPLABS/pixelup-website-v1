@@ -1,0 +1,44 @@
+# Submits the pages a production deploy changed to IndexNow, so Bing recrawls
+# them within minutes of going live. Vercel reports every deploy back to GitHub
+# as a deployment status; this runs on the successful Production one, when the
+# new build is already serving www.pixeluplabs.com. See scripts/indexnow.mjs
+# for how it picks URLs. Blog posts are submitted from the Sanity webhook.
+#
+# Run it by hand from the Actions tab to submit specific pages, or --all.
+name: IndexNow
+
+on:
+  deployment_status:
+  workflow_dispatch:
+    inputs:
+      args:
+        description: "Paths or URLs, space-separated, or --all. Blank = site routes changed in the last 2 days."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  submit:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+       github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            package.json
+            lib/indexnow.ts
+            scripts/indexnow.mjs
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      # Passed through env, not inlined, so the input can't inject shell.
+      - run: npm run indexnow -- $ARGS
+        env:
+          ARGS: ${{ inputs.args }}
