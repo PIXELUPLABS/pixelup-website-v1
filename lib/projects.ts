@@ -105,6 +105,20 @@ export const projects: Project[] = [
     year: "2026",
   },
   {
+    slug: "avartha",
+    label: "Avartha",
+    // 5th, between FuseAI and CTGT. The case study is still a draft (noindex).
+    href: "/case-studies/avartha",
+    external: false,
+    // The case study's hero image.
+    media: { type: "image", src: "/media/avartha/l-night.avif" },
+    alt: "Avartha wordmark on a gold billboard above a city street at night, brand identity by PIXELUP LABS",
+    // Avartha's own line, as quoted in the case study.
+    tagline: "Frontier intelligence at real-time latency",
+    services: ["Branding", "Website Design"],
+    year: "2026",
+  },
+  {
     slug: "ctgt",
     label: "CTGT",
     href: "https://www.ctgt.ai/",

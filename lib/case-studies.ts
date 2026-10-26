@@ -49,6 +49,9 @@ export interface MediaSlot {
    * plays while half of it is in view.
    */
   embedPlayAt?: number;
+  /** Image only: more images (same size as `media`) that crossfade in turn
+   * with it, each held for `interval` ms (default 1500). */
+  crossfade?: { srcs: string[]; interval?: number };
 }
 
 /**
@@ -150,7 +153,7 @@ export type MediaBlock =
     }
   | {
       kind: "pair";
-      slots: [MediaSlot, MediaSlot];
+      slots: [MediaSlot, MediaSlot] | [MediaSlot, MediaSlot, MediaSlot];
       /** Preserve landscape assets instead of using the default near-square crop. */
       aspect?: "standard" | "wide";
     }
@@ -163,6 +166,14 @@ export type MediaBlock =
       /** Image behind the row, cropped to the panel. */
       background?: MediaSlot;
       /** Seconds for one full pass of the set. Defaults to 40. */
+      duration?: number;
+    }
+  | {
+      /** One wide strip image (with intrinsicSize) scrolling left edge to
+       * edge in an endless loop, e.g. a row of medallions or lockups. */
+      kind: "strip";
+      slot: MediaSlot;
+      /** Seconds per loop. Defaults to 40. */
       duration?: number;
     };
 
@@ -2663,6 +2674,1167 @@ const replay: CaseStudy = {
   },
 };
 
+const avarthaFaq: FaqItem = {
+  q: "Who designed Avartha's brand?",
+  a: "PIXELUP LABS is designing Avartha's brand identity in 2026: strategy and moodboards, two visual directions, the logo and wordmark, an illustration and glyph system, deck and memo templates, and website explorations.",
+};
+
+// Process-breakdown case study (draft, noindex). Copy is drawn from the
+// #avartha-pixelup Slack channel and the strategy slides in the Avartha work
+// file (Figma uDOSTCE4ZboAeFweoQdKUR, page "Case Study"). The engagement is
+// still running, so nothing here is a client quote or a result.
+const avartha: CaseStudy = {
+  slug: "avartha",
+  title: "Process breakdown: building Avartha's brand for real-time AI.",
+  metaTitle: "Avartha Brand Identity Process Breakdown | PIXELUP LABS",
+  metaDescription:
+    "How PIXELUP LABS is building Avartha's brand: moodboards, two directions, an Art Deco × technical system, isometrics, charts, deck and website.",
+  info: {
+    client: "Avartha",
+    year: "2026",
+    involvement: [
+      "Brand Strategy",
+      "Brand Identity",
+      "Illustration System",
+      "Deck & Memo Design",
+      "Website Design",
+    ],
+    links: [{ label: "avartha.ai", href: "https://avartha.ai/" }],
+  },
+  description: [
+    "PIXELUP LABS is designing Avartha's brand identity in 2026.",
+    "Avartha builds the serving layer for real-time multimodal AI: frontier intelligence at real-time latency.",
+    "This is the process so far: the moodboards, the two directions, the system we built from the winner and the turn it took toward technical confidence.",
+  ],
+  hero: {
+    media: { type: "image", src: "/media/avartha/l-night.avif" },
+    alt: "Avartha wordmark on a gold billboard above a city street at night",
+    intrinsicSize: { width: 2787, height: 2030 },
+  },
+  story: {
+    company: "Avartha",
+    statusBadge: "Real-time AI inference",
+    headline: "Process breakdown: building Avartha's brand for real-time AI.",
+    summary:
+      "Avartha builds **the serving layer for real-time multimodal AI**, with speech, model and voice co-designed for latency. Its line says it plainly: **frontier intelligence at real-time latency.**",
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "What was the brief?",
+        items: [
+          {
+            label: "Where Avartha was",
+            text: "Avartha had investor materials due, a memo and a deck, and **no identity to put on them**. The brand, the logo and the templates all had to land inside a four-week sprint.",
+          },
+          {
+            label: "What Avartha does",
+            text: "Avartha is **the serving layer for real-time multimodal AI**: speech-to-text, the model and text-to-speech co-designed for latency, so a voice agent can answer before the pause feels awkward.",
+          },
+          {
+            label: "What they asked us for",
+            text: "A brand identity, a logo and wordmark, deck and memo templates, an illustration system, and a component library with a design.md the team could build from.",
+          },
+          {
+            label: "Why it mattered",
+            text: "Avartha did not want to read as **just another AI API** you plug a model into. It wanted to look like the high-performance infrastructure layer powering real-time AI.",
+          }
+        ],
+      },
+      {
+        kind: "gallery",
+        id: "gallery-words",
+        heading: "We started with words, not pictures.",
+        intro: "Our brand workshop turned into a page of keywords: **frontier intelligence, timeless, engineering-first, latency, gold circuits**. The name means a cycle, a form that builds itself from its own rule, and the founders wanted a hint of Indian lineage. Our first rule: **lineage as character, never as ornament.**",
+        media: [],
+      },
+      {
+        kind: "afterLaunch",
+        id: "writeup-moodboards",
+        heading: "Two moodboards, two bets on the same company.",
+        paragraphs: [
+          "Before drawing a single logo we wanted to agree on a feeling. The workshop gave us the words; the moodboards turned them into two distinct bets on how Avartha should come across in the room with an investor or an engineering lead.",
+          "Both started from the same constraints. **Lineage as character, never as ornament.** Indian, not Greek, structure. Premium without the usual AI gradient. And a brand that could carry the weight of a technical claim like **frontier intelligence at real-time latency**.",
+          "Where they differed was in how loud the heritage got and what material carried it: sculpted gold or earthy terracotta. We presented them side by side so the founders could react to a direction, not a detail.",
+        ]
+      },
+      {
+        kind: "gallery",
+        id: "moodboard-1",
+        heading: "Moodboard 1: Art Deco sculpture meets Indic craft.",
+        intro: "Expressive type balancing Indic and modern, clean layouts that let the message lead, and art direction drawn from **Art Deco sculpture, bidriware and kolam line drawings**. Repetition carried through colour and gradient, in tones that sit between Art Deco and India.",
+        media: [
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/d1-moodboard.avif",
+              },
+              alt: "Moodboard 1: Art Deco sculpture, bidriware, kolam and gold textures",
+              intrinsicSize: {
+                width: 1920,
+                height: 1080,
+              }
+            },
+          }
+        ],
+      },
+      {
+        kind: "gallery",
+        id: "moodboard-2",
+        heading: "Moodboard 2: terracotta, jali and ikat.",
+        intro: "An earthier route: the textures of **Indian terracotta and architecture**, maximalist modern Indian typography in editorial layouts, and forms taken from **ikat weaves and architectural jali**. The aim was a specialist inference company with roots, not another Indian startup.",
+        media: [
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/d2-moodboard.avif",
+              },
+              alt: "Moodboard 2: terracotta, jali screens, ikat and Indian architecture",
+              intrinsicSize: {
+                width: 1920,
+                height: 1080,
+              }
+            },
+          }
+        ],
+      },
+      {
+        kind: "afterLaunch",
+        id: "writeup-iteration-1",
+        heading: "Iteration 1: two directions, one deck.",
+        paragraphs: [
+          "A moodboard is easy to like and hard to judge. So for the first review we took both directions onto **the same deck content**: the title slide, the line, the recursion story, a poster and a wordmark lockup. The founders could compare Avartha against Avartha, not mood against mood.",
+          "Direction 1 led with gold relief sculpture and an expressive serif and Direction 2 with deep blue, cream and terracotta textures.",
+          "The call was quick: **Direction 1 was the clear winner.** The agreed next step was to extend it into two or three logo concepts and test it on the touchpoints that mattered most, the landing page, the deck and posters.",
+        ]
+      },
+      {
+        kind: "gallery",
+        id: "iteration-1-d1",
+        heading: "Direction 1: gold relief and an expressive serif.",
+        intro: "Gold relief panels, a sun and a horse in silver, and type that carries the line on its own.",
+        media: [
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-wallstone.avif",
+                },
+                alt: "Direction 1 poster: vertical Avartha wordmark with a gold relief tile, framed on a stone wall",
+                intrinsicSize: {
+                  width: 1628,
+                  height: 2326,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-folder.avif",
+                },
+                alt: "Direction 1 poster: 'Frontier intelligence at real-time time' with a gold relief tile, set in an open presentation folder",
+                intrinsicSize: {
+                  width: 1530,
+                  height: 2186,
+                }
+              },
+            ]
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-d1-slide.avif",
+              },
+              alt: "Direction 1 slide: oversized 'Frontier intelligence at real-time' type beside a silver sun",
+              intrinsicSize: {
+                width: 2065,
+                height: 1314,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-d1-horse.avif",
+              },
+              alt: "Direction 1 slide: silver horse sculpture on a dark green field",
+              intrinsicSize: {
+                width: 2880,
+                height: 1471,
+              }
+            },
+          }
+        ],
+      },
+      {
+        kind: "gallery",
+        id: "iteration-1-d2",
+        heading: "Direction 2: blue, cream and terracotta.",
+        intro: "Ikat and jali forms doing the decorating, on a deep blue. The founders later asked to see **key slides in this blue** too, so Direction 2 went onto the same content as Direction 1 for a direct comparison: a title slide over a blue facade, the recursion story beside a terracotta jali pattern and new posters in blue, cream and rust. The blue stayed in the toolkit and comes back as the dark ground of the final direction.",
+        media: [
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-d2-blue.avif",
+              },
+              alt: "Direction 2: Avartha wordmark on deep blue",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-d2-1.avif",
+                },
+                alt: "Direction 2 poster: 'Frontier intelligence at real-time latency' on navy with line arcs",
+                intrinsicSize: {
+                  width: 960,
+                  height: 1284,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-d2-2.avif",
+                },
+                alt: "Direction 2 poster: sculptural terracotta wave on cream",
+                intrinsicSize: {
+                  width: 960,
+                  height: 1284,
+                }
+              },
+            ]
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-d2-3.avif",
+                },
+                alt: "Direction 2 poster: red ikat bird beside the recursion story",
+                intrinsicSize: {
+                  width: 1026,
+                  height: 1284,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-tall.avif",
+                },
+                alt: "Direction 2 poster: Avartha wordmark over a sculptural wave, in a street lightbox",
+                intrinsicSize: {
+                  width: 1558,
+                  height: 1950,
+                }
+              },
+            ]
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-b-tower.avif",
+              },
+              alt: "Direction 2 title slide: 'Frontier intelligence at real-time latency' over a blue glass facade",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-b-ikat.avif",
+                },
+                alt: "Direction 2 poster: blue ikat bird beside the recursion story",
+                intrinsicSize: {
+                  width: 722,
+                  height: 964,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-b-pattern.avif",
+                },
+                alt: "Direction 2 poster: 'Frontier intelligence at real-time latency' over a blue arch pattern",
+                intrinsicSize: {
+                  width: 722,
+                  height: 964,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-b-arch.avif",
+                },
+                alt: "Direction 2 poster: Avartha wordmark under a jali star window on rust",
+                intrinsicSize: {
+                  width: 722,
+                  height: 964,
+                }
+              },
+            ]
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-b-arch.avif",
+              },
+              alt: "Direction 2 slide: a jali star window on a rust field",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-b-pattern.avif",
+              },
+              alt: "Direction 2 slide: 'Frontier intelligence at real-time latency' on cream beside a terracotta pattern",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          }
+        ],
+      },
+      {
+        kind: "afterLaunch",
+        id: "writeup-iteration-2",
+        heading: "Iteration 2: Direction 1, pushed further.",
+        paragraphs: [
+          "Picking a direction is the easy part. **A direction only counts once it works on a real deck, a memo and a poster**, and Avartha's investor materials were already going out on the new brand.",
+          "So we took Direction 1 further on the same content. The sun and the horse turned into **posters, cards and lockups**, the recursion story got its own typographic layouts, and we tried the poster system in navy, green, rust and black.",
+          "We also tried a character: figures drawn from Indian sculpture and folk tales, led by **a lion, an eagle and the sun** in silver and gold. They looked good in isolation, but each one needed an explanation to connect it to an inference company.",
+        ]
+      },
+      {
+        kind: "gallery",
+        id: "iteration-2",
+        heading: "Sun, horse and the characters.",
+        intro: "The lion, the eagle and the sun take turns in the same poster format. Everything else sits on shared content, so each change is easy to compare.",
+        media: [
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-fade-1.avif",
+                },
+                alt: "Character posters crossfading: a silver lion, a silver eagle and a silver sun, each over the recursion story",
+                intrinsicSize: {
+                  width: 1600,
+                  height: 2400,
+                },
+                crossfade: {
+                  srcs: [
+                    "/media/avartha/p-fade-2.avif",
+                    "/media/avartha/p-fade-3.avif",
+                  ],
+                  interval: 1500,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-lion-gold.avif",
+                },
+                alt: "Character poster: gold lion over 'Frontier intelligence at real-time time'",
+                intrinsicSize: {
+                  width: 1800,
+                  height: 2700,
+                }
+              },
+            ]
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-x1-1.avif",
+                },
+                alt: "Direction 1 extension poster: 'Real-time latency' on black and gold linework",
+                intrinsicSize: {
+                  width: 1039,
+                  height: 1314,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-kiosk.avif",
+                },
+                alt: "Direction 1 extension poster: 'Intelligence per millisecond' with a gold sun figure, in a street kiosk",
+                intrinsicSize: {
+                  width: 1479,
+                  height: 1870,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-x4-1.avif",
+                },
+                alt: "Direction 1 extension poster: sun figure over a wall of credits",
+                intrinsicSize: {
+                  width: 1039,
+                  height: 1314,
+                }
+              },
+            ]
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-x3.avif",
+              },
+              alt: "Direction 1 extension slide: oversized 'Frontier intelligence' type beside a silver sun",
+              intrinsicSize: {
+                width: 2065,
+                height: 1314,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-x4.avif",
+              },
+              alt: "Direction 1 extension slide: horse and sun mark on a gold field",
+              intrinsicSize: {
+                width: 2065,
+                height: 1314,
+              }
+            },
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-conversation.avif",
+                },
+                alt: "'The conversation' poster: a silver horse over the recursion story",
+                intrinsicSize: {
+                  width: 1589,
+                  height: 2383,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-eagle-gold.avif",
+                },
+                alt: "Character poster: a gold eagle on cream over the recursion story",
+                intrinsicSize: {
+                  width: 1600,
+                  height: 2399,
+                }
+              },
+            ]
+          },
+        ]
+      },
+      {
+        kind: "afterLaunch",
+        id: "writeup-iteration-3",
+        heading: "Iteration 3: the heritage at full volume.",
+        paragraphs: [
+          "Next we explored how far the heritage could go. **Cream and gold leaf, a lotus mark, a peacock and a horse** framed Avartha's claims, like 'intelligence that arrives late is just another pause in the conversation', in an ornate, editorial voice.",
+          "Seen across a full set of touchpoints, **the heritage and decoration had started to dominate.** Ornate type, jali patterns and imagery read as historical and elegant, while the technical side had almost nowhere to live.",
+          "That was the useful lesson of the round. Avartha sells **latency, throughput and reliability**, and the brand had to look like it could measure them.",
+        ]
+      },
+      {
+        kind: "gallery",
+        id: "iteration-3",
+        heading: "Lotus, peacock and gold leaf.",
+        intro: "Slides and posters from the extended explorations, on cream and black.",
+        media: [
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-e-lotus.avif",
+              },
+              alt: "Gold lotus mark on cream with gold leaf edges",
+              intrinsicSize: {
+                width: 2880,
+                height: 1454,
+              }
+            },
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-e-late.avif",
+                },
+                alt: "Poster: 'Intelligence that arrives late is just another pause in the conversations'",
+                intrinsicSize: {
+                  width: 1017,
+                  height: 1454,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-e-frontier.avif",
+                },
+                alt: "Poster: oversized 'Frontier intelligence at real-time time' type with gold leaf edges",
+                intrinsicSize: {
+                  width: 919,
+                  height: 1314,
+                }
+              },
+            ]
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-e-throughput.avif",
+              },
+              alt: "Slide: 'Throughput, latency, reliability, cost, headcount' beside the lotus mark",
+              intrinsicSize: {
+                width: 2069,
+                height: 1448,
+              }
+            },
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-e-recursion.avif",
+                },
+                alt: "Poster: a gold eagle over the recursion story on cream",
+                intrinsicSize: {
+                  width: 1017,
+                  height: 1454,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-e-structure.avif",
+                },
+                alt: "Poster: 'Frontier intelligence', structure not ornament, with the lotus mark on navy",
+                intrinsicSize: {
+                  width: 1017,
+                  height: 1454,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-e-conversation.avif",
+                },
+                alt: "Poster: 'The conversation' with a gold horse and sun",
+                intrinsicSize: {
+                  width: 1017,
+                  height: 1454,
+                }
+              },
+            ]
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/s-e-sun.avif",
+                },
+                alt: "Square post: a silver sun in a dark medallion on navy",
+                intrinsicSize: {
+                  width: 1441,
+                  height: 1441,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/s-e-frontier.avif",
+                },
+                alt: "Square post: 'Frontier intelligence at real-time latency' on cream with the lotus mark",
+                intrinsicSize: {
+                  width: 1441,
+                  height: 1441,
+                }
+              },
+            ]
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-e-peacock.avif",
+              },
+              alt: "Slide: a white peacock between the words 'picture' and 'ornament' on black",
+              intrinsicSize: {
+                width: 2756,
+                height: 1307,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-e-trident.avif",
+              },
+              alt: "Slide: Avartha wordmark beside a gold trident on black",
+              intrinsicSize: {
+                width: 2058,
+                height: 1430,
+              }
+            },
+          }
+        ],
+      },
+      {
+        kind: "afterLaunch",
+        id: "writeup-iteration-4",
+        heading: "Iteration 4: Art Deco × technical.",
+        paragraphs: [
+          "Together with the founders we locked the foundation: the coil mark, and a direction we called **Art Deco × technical**. Art Deco, after all, was a celebration of machinery and progress. The brand should feel like that: calm technical confidence, strong typography and precise geometry, in light and dark.",
+          "Gold, silver and obsidian became the materials, and every graphic got a job. **A point is compute, a line is a stream, an unbroken line is the serving layer, a loop is a completed turn.** The most important new piece was the isometric illustration: **Avartha's cascaded stack in exploded view**, speech-to-text, model and text-to-speech as layers of one serving system.",
+          "The characters survived only as small relief medallions. We pulled back the Indic ornament and brought **voice and real-time interaction** into the visual language through signals, charts and flow. Charts carry Avartha's proof, so they got the same care as the logo.",
+          "We also changed how we review. Every round is now judged on the same set of real touchpoints, a website section, a deck slide, social and a blog post, in both modes, shared a day ahead so each call ends with what is settled and what needs another pass.",
+        ]
+      },
+      {
+        kind: "gallery",
+        id: "iteration-4",
+        heading: "Coil, stack and signals.",
+        intro: "The coil mark on posters and signage, the exploded stack and the relief medallions, then the deck and website.",
+        media: [
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-wallpanel.avif",
+              },
+              alt: "'Real time' sign with the gold coil mark on a sunlit stucco wall",
+              intrinsicSize: {
+                width: 2880,
+                height: 1891,
+              }
+            },
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-board.avif",
+                },
+                alt: "'One serving layer for real-time multimodal AI' poster with the gold coil mark, on a street wall",
+                intrinsicSize: {
+                  width: 1224,
+                  height: 1883,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-lightbox.avif",
+                },
+                alt: "'Multimodal capabilities' poster with an isometric stack, in a street lightbox",
+                intrinsicSize: {
+                  width: 1431,
+                  height: 2202,
+                }
+              },
+            ]
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-triple.avif",
+              },
+              alt: "Three lightboxes: 'Production teaches the model', 'Co-designed from the silicon up' and '14x lower first audio latency'",
+              intrinsicSize: {
+                width: 2168,
+                height: 1400,
+              }
+            },
+          },
+          {
+            kind: "strip",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/m-medals.avif",
+              },
+              alt: "Relief medallions in silver and gold: a peacock, dancers, a horseman, a guardian figure and the sun",
+              intrinsicSize: {
+                width: 5029,
+                height: 720,
+              }
+            },
+            duration: 45,
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-peacock.avif",
+              },
+              alt: "Gold peacock illustration on a technical grid",
+              intrinsicSize: {
+                width: 2880,
+                height: 1366,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-millisecond.avif",
+              },
+              alt: "'Every millisecond, accounted for.' time-to-first-token chart slide",
+              intrinsicSize: {
+                width: 2880,
+                height: 1458,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-vajra.avif",
+              },
+              alt: "'Inside Vajra' radial diagram around the Avartha mark",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-voice.avif",
+              },
+              alt: "'Winning the voice market' typographic slide with a gold relief tile",
+              intrinsicSize: {
+                width: 2880,
+                height: 1337,
+              }
+            },
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-ft-2.avif",
+                },
+                alt: "Poster: vertical Avartha wordmark with a silver relief tile",
+                intrinsicSize: {
+                  width: 790,
+                  height: 1159,
+                }
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-window.avif",
+                },
+                alt: "Poster: 'Frontier intelligence at real-time latency' with a gold relief tile, in a shop window",
+                intrinsicSize: {
+                  width: 1474,
+                  height: 2160,
+                }
+              },
+            ]
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-ft-mid.avif",
+              },
+              alt: "Oversized 'Frontier intelligence at real-time latency' type on dark green",
+              intrinsicSize: {
+                width: 1821,
+                height: 1159,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-frontier-poster.avif",
+              },
+              alt: "'Frontier intelligence at real-time latency' typographic poster with gold bars",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-quote.avif",
+              },
+              alt: "Deck quote slide: 'For decades technologists have teased us with the dream'",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-three-ways-deck.avif",
+              },
+              alt: "Deck slide: 'Three ways to consume Avartha' with three relief medallions on cream",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-web-hero.avif",
+              },
+              alt: "Website hero: 'Enabling real-time intelligence'",
+              intrinsicSize: {
+                width: 2880,
+                height: 1665,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "video",
+                src: "/media/avartha/v-stack-poster.mp4",
+                poster: "/media/avartha/v-stack-poster-poster.avif",
+              },
+              alt: "Website section: the exploded isometric stack assembling under 'Every generated token feeds the next'",
+              intrinsicSize: {
+                width: 1440,
+                height: 1406,
+              },
+              playOnView: true,
+            }
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-web-4.avif",
+              },
+              alt: "Website section: 'Every millisecond, accounted for.' latency chart",
+              intrinsicSize: {
+                width: 2880,
+                height: 1620,
+              }
+            },
+          }
+        ],
+      },
+      {
+        kind: "afterLaunch",
+        id: "writeup-iteration-5",
+        heading: "Iteration 5: the final direction.",
+        paragraphs: [
+          "The latest round is one of the final directions. It takes Art Deco × technical onto **a deep navy ground** and lets the exploded stack lead: every layer carries a number, a label and a measurement.",
+          "We animated the stack in Figma for social and the website. **Layers drop into place one at a time, the way a response is assembled token by token**, and the labels arrive last, like readings on a trace.",
+          "The same system runs through social, the deck, the latency chart and out-of-home, down to a single line, **'Run it on your workload'**, on a navy door.",
+        ]
+      },
+      {
+        kind: "gallery",
+        id: "iteration-5",
+        heading: "Stack, signals and launch.",
+        intro: "The exploded stack in motion, then the launch posts, slides and out-of-home.",
+        media: [
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "video",
+                src: "/media/avartha/v-stack-token.mp4",
+                poster: "/media/avartha/v-stack-token-poster.avif",
+              },
+              alt: "'Every token feeds the next' slide: the isometric stack assembles layer by layer",
+              intrinsicSize: {
+                width: 2034,
+                height: 1294,
+              },
+              playOnView: true,
+            }
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "video",
+                  src: "/media/avartha/v-stack-frontier.mp4",
+                  poster: "/media/avartha/v-stack-frontier-poster.avif",
+                },
+                alt: "Poster: the exploded stack assembles over oversized 'Frontier intelligence' type",
+                intrinsicSize: {
+                  width: 1368,
+                  height: 1698,
+                },
+                playOnView: true,
+              },
+              {
+                media: {
+                  type: "video",
+                  src: "/media/avartha/v-stack-multimodal.mp4",
+                  poster: "/media/avartha/v-stack-multimodal-poster.avif",
+                },
+                alt: "'Multimodal capabilities' poster: the stack assembles layer by layer on cream",
+                intrinsicSize: {
+                  width: 1440,
+                  height: 1786,
+                },
+                playOnView: true,
+              }
+            ],
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-frontier-dark.avif",
+              },
+              alt: "Slide: oversized 'Frontier intelligence at real-time latency' type on navy",
+              intrinsicSize: {
+                width: 1944,
+                height: 1312,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-millisecond-dark.avif",
+              },
+              alt: "Slide: 'Every millisecond, accounted for.' latency chart on navy",
+              intrinsicSize: {
+                width: 2034,
+                height: 1309,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-tablet.avif",
+              },
+              alt: "'Three ways to consume Avartha' on a tablet resting on a linen cushion",
+              intrinsicSize: {
+                width: 2880,
+                height: 1878,
+              }
+            },
+          },
+          {
+            kind: "full",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/l-token-light.avif",
+              },
+              alt: "Slide: 'Every token feeds the next' with the stack in silver and gold on cream",
+              intrinsicSize: {
+                width: 2060,
+                height: 1311,
+              }
+            },
+          },
+          {
+            kind: "pair",
+            slots: [
+              {
+                media: {
+                  type: "video",
+                  src: "/media/avartha/v-stack-linkedin.mp4",
+                  poster: "/media/avartha/v-stack-linkedin-poster.avif",
+                },
+                alt: "LinkedIn post: the stack assembles inside the launch carousel",
+                intrinsicSize: {
+                  width: 1432,
+                  height: 1810,
+                },
+                playOnView: true,
+              },
+              {
+                media: {
+                  type: "image",
+                  src: "/media/avartha/p-doorway.avif",
+                },
+                alt: "'Run it on your workload' poster on navy, set in a stone doorway",
+                intrinsicSize: {
+                  width: 2028,
+                  height: 2564,
+                }
+              },
+            ]
+          },
+          {
+            kind: "strip",
+            slot: {
+              media: {
+                type: "image",
+                src: "/media/avartha/m-logos.avif",
+              },
+              alt: "System lockups: open weights, the Avartha wordmark, the real-time inference badge, the AVC mark and the full lockup",
+              intrinsicSize: {
+                width: 7457,
+                height: 608,
+              }
+            },
+            duration: 35,
+          }
+        ],
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "Where Avartha is now.",
+        paragraphs: [
+          "This one is still in progress. **The direction is locked as Art Deco × technical**: deep navy, gold and silver, the layered isometric stack, the glyph system and voice-led radial geometry.",
+          "Next up is a focused round on the logo and wordmark, an accent palette for charts and actions in light mode, then the component library and design.md the team will build from.",
+          "Brand identity, deck, memo and website design by PIXELUP LABS, 2026.",
+        ],
+        cta: {
+          text: "Want to talk about your own brand?",
+          label: "Book a call",
+          href: "/call",
+        },
+      },
+      {
+        kind: "media",
+        id: "closing-workload",
+        media: {
+          kind: "full",
+          slot: {
+            media: {
+              type: "image",
+              src: "/media/avartha/l-workload.avif",
+            },
+            alt: "'Run it on your workload.' slide: the coil mark above a silver ornament with benchmark readings, on navy",
+            intrinsicSize: {
+              width: 2847,
+              height: 1591,
+            }
+          },
+        }
+      },
+    ],
+    faqHeading,
+    faqs: [avarthaFaq, ...pixelupFaq],
+  },
+  sections: [],
+  endCta: {
+    label: "Book a call",
+    href: links.discoveryCall,
+  },
+  moreProjects: [
+    { slug: "fuseai", tags: "Branding, website & product design" },
+    { slug: "henrylabs", tags: "Branding, website & product design" },
+  ],
+  publication: {
+    status: "draft",
+    // Staging's CaseStudy type has no publication dates; main's entry sets them.
+    blockers: [
+      "Engagement still in progress: final logo, wordmark and palette not locked.",
+      "Needs Avartha's approval before publishing; no client quotes or results yet.",
+    ],
+  },
+};
+
 export const caseStudies = {
   greptile,
   sainapse,
@@ -2671,4 +3843,5 @@ export const caseStudies = {
   henryLabs,
   fuseai,
   replay,
+  avartha,
 };
