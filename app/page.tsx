@@ -2,8 +2,12 @@ import { BlogFaq } from "@/components/blog/BlogFaq";
 import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
 import { Showcase } from "@/components/Showcase";
+import { withOpenGraph } from "@/lib/open-graph";
 import { links } from "@/lib/projects";
 import { sitePublished, siteUpdated } from "@/lib/site-dates";
+
+// Title, description and canonical come from app/layout.tsx.
+export const generateMetadata = withOpenGraph({}, "/");
 
 // The canonical entity paragraph (proof-bank.md in the article workspace),
 // used verbatim everywhere PIXELUP LABS is described: this page's visible

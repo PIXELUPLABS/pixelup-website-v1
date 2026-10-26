@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ExplorationGallery } from "@/components/explorations/ExplorationGallery";
 import { explorationBlocks, flattenExplorationBlocks } from "@/lib/explorations";
 import { readPublicImageDimensions } from "@/lib/imageDimensions";
+import { withOpenGraph } from "@/lib/open-graph";
 
 // Real dimensions are read at build time so every card on the canvas is sized
 // to its true aspect ratio. Falls back to the old 1008x584 card ratio if a
@@ -11,12 +12,14 @@ const explorationImages = flattenExplorationBlocks(explorationBlocks).map((src) 
   ...(readPublicImageDimensions(src) ?? { width: 1008, height: 584 }),
 }));
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Explorations - PIXELUP LABS",
   description:
     "Explorations from PIXELUP LABS — brands, websites and products that command enterprise trust.",
   alternates: { canonical: "/explorations" },
 };
+
+export const generateMetadata = withOpenGraph(metadata, "/explorations");
 
 export default function ExplorationsPage() {
   return (

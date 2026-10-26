@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
 import { sitePublished, siteUpdated } from "@/lib/site-dates";
+import { withOpenGraph } from "@/lib/open-graph";
 
 /**
  * CONFIRM BEFORE THIS GOES LIVE — these three values are the only things on
@@ -35,12 +36,14 @@ const schema = {
   about: { "@id": "https://www.pixeluplabs.com/#organization" },
 };
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Privacy Policy - PIXELUP LABS",
   description:
     "How PIXELUP LABS collects, uses and shares information about visitors to pixeluplabs.com.",
   alternates: { canonical: "/privacy" },
 };
+
+export const generateMetadata = withOpenGraph(metadata, "/privacy");
 
 /**
  * Section wrapper for this page only. The site has no long-form prose

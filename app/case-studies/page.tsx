@@ -2,13 +2,16 @@ import type { Metadata } from "next";
 import { CaseStudyList } from "@/components/case-studies/CaseStudyList";
 import { Footer } from "@/components/Footer";
 import { caseStudyShowcase } from "@/lib/case-studies-showcase";
+import { withOpenGraph } from "@/lib/open-graph";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Case Studies - PIXELUP LABS",
   description:
     "Real brand, product and website engagements PIXELUP LABS has shipped for ambitious startups — proof, not promises.",
   alternates: { canonical: "/case-studies" },
 };
+
+export const generateMetadata = withOpenGraph(metadata, "/case-studies");
 
 /** Case-study index linked from the global navigation and detail pages. */
 export default function CaseStudiesPage() {

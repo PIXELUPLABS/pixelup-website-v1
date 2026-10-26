@@ -35,6 +35,7 @@ export async function generateMetadata({
     // JSON-LD in BlogPostPage — different crawlers read different ones.
     openGraph: {
       type: "article",
+      url: `/blog/${post.slug}`,
       title: post.seo.title,
       description: post.seo.description,
       publishedTime: post.publishedDate,

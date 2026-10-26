@@ -6,13 +6,16 @@ import { LeftNav } from "@/components/LeftNav";
 import { pixelupFaqSchema } from "@/lib/case-studies";
 import { clients } from "@/lib/clients";
 import { sitePublished, siteUpdated } from "@/lib/site-dates";
+import { withOpenGraph } from "@/lib/open-graph";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Clients - PIXELUP LABS",
   description:
     "Explore the companies PIXELUP LABS has partnered with across brand, website, and product design.",
   alternates: { canonical: "/clients" },
 };
+
+export const generateMetadata = withOpenGraph(metadata, "/clients");
 
 const schema = {
   "@context": "https://schema.org",

@@ -50,6 +50,9 @@ export const metadata: Metadata = {
   description:
     "We build brands, websites and products that command enterprise trust.",
   alternates: { canonical: "/" },
+  // og:type only. og:url is per route (lib/open-graph.ts): set here, every
+  // route that doesn't override it would claim to be the homepage.
+  openGraph: { type: "website" },
 };
 
 export default function RootLayout({

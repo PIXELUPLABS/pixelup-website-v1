@@ -6,13 +6,16 @@ import { BlogSidebar } from "@/components/blog/BlogSidebar";
 import { Footer } from "@/components/Footer";
 import { pixelupFaqSchema } from "@/lib/case-studies";
 import { getBlogPosts } from "@/sanity/lib/blog-data";
+import { withOpenGraph } from "@/lib/open-graph";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Blog - PIXELUP LABS",
   description:
     "Insights on brand, product and website design from the PIXELUP LABS team.",
   alternates: { canonical: "/blog" },
 };
+
+export const generateMetadata = withOpenGraph(metadata, "/blog");
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();

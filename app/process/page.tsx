@@ -3,17 +3,20 @@ import Footer from '@/components/2027/Footer';
 import Header from '@/components/2027/Header';
 import ProposalView from '@/components/2027/proposal/ProposalView';
 import { howWeWork as p } from '@/lib/2027/process';
+import { withOpenGraph } from '@/lib/open-graph';
 
 // A standalone page shared by link with leads before the discovery call: no site nav, not in search or the sitemap.
 // The footer is the 2026 homepage's, with Daksh's address; the header's ask is a question for the call.
 const DAKSH = 'daksh@pixeluplabs.com';
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: 'How we work - PIXELUP LABS',
   description: p.lede,
   robots: { index: false, follow: false },
   alternates: { canonical: '/process' },
 };
+
+export const generateMetadata = withOpenGraph(metadata, '/process');
 
 export default function ProcessPage() {
   return (

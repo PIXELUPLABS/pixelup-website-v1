@@ -9,6 +9,8 @@ export const metadata: Metadata = {
   description:
     "Book a discovery call with PIXELUP LABS: brands, websites and products that command enterprise trust.",
   alternates: { canonical: "/call" },
+  // No `images`: app/call/opengraph-image.jpg fills it (see lib/open-graph.ts).
+  openGraph: { type: "website", url: "/call" },
 };
 
 export default function CallPage() {
