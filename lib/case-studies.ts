@@ -372,7 +372,7 @@ export const pixelupFaq: FaqItem[] = [
   },
   {
     q: "How long does a typical engagement take?",
-    a: "We work on startup timelines. Most engagements ship in weeks, not months, and we regularly deliver under hard deadlines like fundraise announcements and launch dates.",
+    a: "Brand sprints take 2–4 weeks. Brand plus website projects take 6–8 weeks from kickoff to launch. We regularly deliver under hard deadlines like fundraise announcements and launch dates.",
   },
   {
     q: "How much does it cost?",
@@ -795,7 +795,7 @@ const greptile: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-10-20",
+    updatedDate: "2026-10-27",
   },
 };
 
@@ -971,7 +971,7 @@ const sainapse: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-09-25",
+    updatedDate: "2026-10-27",
   },
 };
 
@@ -1136,7 +1136,7 @@ const sully: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-09-25",
+    updatedDate: "2026-10-27",
   },
 };
 
@@ -1493,7 +1493,7 @@ const streamline: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-07",
-    updatedDate: "2026-09-25",
+    updatedDate: "2026-10-27",
   },
 };
 
@@ -1972,7 +1972,7 @@ const henryLabs: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-17",
-    updatedDate: "2026-10-07",
+    updatedDate: "2026-10-27",
     blockers: [
       'Funding reads "Private": confirm a figure directly with Henry Labs before publishing one.',
       "Add two approved Slack reactions with names and roles.",
@@ -2291,7 +2291,7 @@ const fuseai: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-10-16",
-    updatedDate: "2026-10-16",
+    updatedDate: "2026-10-27",
   },
 };
 
