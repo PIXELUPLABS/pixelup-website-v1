@@ -22,7 +22,9 @@ const dryRun = args.includes("--dry-run");
 const all = args.includes("--all");
 const daysIndex = args.indexOf("--days");
 const days = daysIndex === -1 ? 2 : Number(args[daysIndex + 1]);
-const explicit = args.filter((arg, i) => !arg.startsWith("--") && i !== daysIndex + 1);
+// Skip the value after --days only when --days is given; with daysIndex -1 the
+// old `i !== daysIndex + 1` check dropped the first path.
+const explicit = args.filter((arg, i) => !arg.startsWith("--") && (daysIndex === -1 || i !== daysIndex + 1));
 
 const fail = (message, ...hints) => {
   console.error(`✗ ${message}`);
