@@ -23,6 +23,7 @@ const quickLinks = [
   { name: "Explorations", href: "/explorations" },
   { name: "Clients", href: "/clients" },
   { name: "Blog", href: "/blog" },
+  { name: "FAQ", href: "/faq" },
 ] as const;
 
 // Outer <footer> has no padding of its own, ever — it always fills exactly
