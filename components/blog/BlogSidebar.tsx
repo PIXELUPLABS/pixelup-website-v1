@@ -11,7 +11,7 @@ import { ArticleFilters } from "./ArticleFilters";
  * stretch row. Sticky-on-a-nested-div inside an items-start row never gets a
  * tall enough containing block to stay pinned — it was scrolling with main.
  */
-export function BlogSidebar() {
+export function BlogSidebar({ categories }: { categories: string[] }) {
   return (
     <aside className="flex flex-col gap-8 desk:sticky desk:top-21 desk:h-[calc(100vh-6.5rem)] desk:w-[405px] desk:shrink-0 desk:gap-0 desk:self-start">
       <div className="flex flex-col gap-6">
@@ -26,7 +26,7 @@ export function BlogSidebar() {
           </p> */}
         </div>
         <div className="fade-up [animation-delay:300ms]">
-          <ArticleFilters />
+          <ArticleFilters categories={categories} />
         </div>
       </div>
       <div className="hidden flex-col gap-5 desk:mt-auto desk:flex">

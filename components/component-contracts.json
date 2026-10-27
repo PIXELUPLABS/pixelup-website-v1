@@ -279,7 +279,7 @@
   "ArticleFilters": {
     "file": "components/blog/ArticleFilters.tsx",
     "category": "interactive",
-    "description": "\"Filter\" (category pills: All/Branding/Design/Development) + \"Display\" (List/Grid pills) row on /blog.",
+    "description": "\"Filter\" category pills on /blog: All, then every category the posts carry (Sanity `category` docs, most-used first, via blogCategories in sanity/lib/blog-utils.ts). Filters BlogList client-side through BlogFilterContext. The \"Display\" (List/Grid) row is commented out.",
     "variants": ["Display column is hidden on mobile (desk:flex only) — only Filter shows there."],
     "states": {
       "pill:default": "bg-white text-black",
@@ -287,7 +287,7 @@
       "pill:hover (inactive only)": "bg-white/80"
     },
     "tokens_used": ["color.brand.accent", "radius.lg", "color.neutral.white"],
-    "when_to_use": "Top of /blog only, currently a visual/interactive placeholder — it doesn't yet actually filter the article list below it.",
+    "when_to_use": "Top of /blog only. Add or rename categories in Sanity, not here: the pill list is derived from the posts, so a category no post uses doesn't get a pill.",
     "do_not": [
       "Don't add a flex `gap` between the two columns without removing their percentage widths (or vice versa) — gap + width summing to 100% overflows the row. Use flex-1 if a gap is needed, matching the fix already applied here."
     ]

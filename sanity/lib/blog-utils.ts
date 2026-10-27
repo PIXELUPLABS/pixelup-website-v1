@@ -7,6 +7,18 @@ export function formatBlogDate(date: string): string {
     .toUpperCase()
 }
 
+/** Every category the posts carry, most-used first (ties alphabetical), so a
+    category added in Sanity becomes a /blog filter without a code change. */
+export function blogCategories(posts: {categories: string[]}[]): string[] {
+  const counts = new Map<string, number>()
+  for (const post of posts) {
+    for (const category of post.categories) counts.set(category, (counts.get(category) || 0) + 1)
+  }
+  return [...counts]
+    .sort(([a, countA], [b, countB]) => countB - countA || a.localeCompare(b))
+    .map(([category]) => category)
+}
+
 function collectStrings(value: unknown): string[] {
   if (typeof value === 'string') return [value]
   if (Array.isArray(value)) return value.flatMap(collectStrings)
