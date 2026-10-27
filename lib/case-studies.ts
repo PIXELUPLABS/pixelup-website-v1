@@ -204,7 +204,11 @@ export interface CaseSection {
 
 export interface FaqItem {
   q: string;
+  /** Plain text. On /faq it may also carry blank-line paragraphs, "- " list
+      lines and inline [label](href) links (rendered by CaseFaq). */
   a: string;
+  /** Anchor id for deep links (/faq#<id>). */
+  id?: string;
   href?: string;
   linkLabel?: string;
 }

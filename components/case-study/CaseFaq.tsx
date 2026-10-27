@@ -1,7 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState, type ReactNode } from "react";
 import type { FaqItem } from "@/lib/case-studies";
+
+const linkClass = "text-white underline underline-offset-2 transition-opacity hover:opacity-70";
+
+/** Inline `[label](href)` links inside an answer. Site paths stay in the tab;
+    anything absolute opens a new one, like the trailing href/linkLabel link. */
+function renderInline(text: string): ReactNode[] {
+  return text.split(/(\[[^\]]+\]\([^)\s]+\))/g).map((part, i) => {
+    const link = part.match(/^\[([^\]]+)\]\(([^)\s]+)\)$/);
+    if (!link) return <Fragment key={i}>{part}</Fragment>;
+    const [, label, href] = link;
+    const external = /^https?:\/\//.test(href);
+    return (
+      <a
+        key={i}
+        href={href}
+        className={linkClass}
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+      >
+        {label}
+      </a>
+    );
+  });
+}
+
+type AnswerBlock = { list: boolean; lines: string[] };
+
+/** An answer's blocks: blank lines separate paragraphs, and consecutive lines
+    starting with "- " become a list. A plain one-line answer (every FAQ before
+    /faq) renders as a single paragraph, exactly as it did before. */
+function answerBlocks(text: string) {
+  const blocks: AnswerBlock[] = [];
+  for (const chunk of text.split(/\n\s*\n/)) {
+    // A blank line always starts a new block, so `current` resets per chunk.
+    let current: AnswerBlock | null = null;
+    for (const raw of chunk.split("\n")) {
+      const line = raw.trim();
+      if (!line) continue;
+      const list = line.startsWith("- ");
+      const body = list ? line.slice(2) : line;
+      if (current && current.list === list) {
+        current.lines.push(body);
+      } else {
+        current = { list, lines: [body] };
+        blocks.push(current);
+      }
+    }
+  }
+  return blocks;
+}
 
 function PlusMinusIcon({ open }: { open: boolean }) {
   return (
@@ -30,16 +79,27 @@ function PlusMinusIcon({ open }: { open: boolean }) {
   );
 }
 
-/** FAQ accordion — one item open at a time, first item open by default (as in Figma). */
-export function CaseFaq({ items }: { items: FaqItem[] }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+/** FAQ accordion — one item open at a time, first item open by default (as in Figma).
+    `defaultOpenIndex` lets /faq open a deep-linked question instead (null opens none). */
+export function CaseFaq({
+  items,
+  defaultOpenIndex = 0,
+}: {
+  items: FaqItem[];
+  defaultOpenIndex?: number | null;
+}) {
+  const [openIndex, setOpenIndex] = useState<number | null>(defaultOpenIndex);
 
   return (
     <div className="flex flex-col divide-y-[0.5px] divide-hairline">
       {items.map((item, index) => {
         const open = openIndex === index;
         return (
-          <div key={item.q} className="py-3 first:pt-0 last:pb-0">
+          <div
+            key={item.q}
+            id={item.id}
+            className={`py-3 first:pt-0 last:pb-0 ${item.id ? "scroll-mt-24" : ""}`}
+          >
             {/* h3 wraps the button (headings can't nest inside <button>) so
                 each question is a real heading in the page outline — matches
                 the FAQPage schema's Question/Answer pairs. */}
@@ -69,26 +129,41 @@ export function CaseFaq({ items }: { items: FaqItem[] }) {
               }`}
             >
               <div className="overflow-hidden">
-                <p
-                  className={`pt-3 text-[16px] leading-[1.5] text-white/60 transition-opacity duration-300 ${
+                <div
+                  className={`flex flex-col gap-3 pt-3 text-[16px] leading-[1.5] text-white/60 transition-opacity duration-300 ${
                     open ? "opacity-100" : "opacity-0"
                   }`}
                 >
-                  {item.a}
-                  {item.href && item.linkLabel ? (
-                    <>
-                      {" "}
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white underline underline-offset-2 transition-opacity hover:opacity-70"
-                      >
-                        {item.linkLabel}
-                      </a>
-                    </>
-                  ) : null}
-                </p>
+                  {answerBlocks(item.a).map((block, b, all) => {
+                    if (block.list) {
+                      return (
+                        <ul key={b} className="flex list-disc flex-col gap-1 pl-5 marker:text-white/30">
+                          {block.lines.map((line, l) => (
+                            <li key={l}>{renderInline(line)}</li>
+                          ))}
+                        </ul>
+                      );
+                    }
+                    return (
+                      <p key={b}>
+                        {renderInline(block.lines.join(" "))}
+                        {b === all.length - 1 && item.href && item.linkLabel ? (
+                          <>
+                            {" "}
+                            <a
+                              href={item.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={linkClass}
+                            >
+                              {item.linkLabel}
+                            </a>
+                          </>
+                        ) : null}
+                      </p>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
