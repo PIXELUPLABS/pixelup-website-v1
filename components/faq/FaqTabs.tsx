@@ -75,8 +75,8 @@ export function FaqTabsProvider({
   return <FaqTabsContext.Provider value={value}>{children}</FaqTabsContext.Provider>;
 }
 
-/** Sharp-edged pill tabs, blue when active like the /case-studies tabs; a vertical list on desktop. */
-export function FaqTabList({ tabs }: { tabs: { id: string; label: string; count: number }[] }) {
+/** The /blog filter pills (ArticleFilters) as tabs, blue when active like the /case-studies tabs. */
+export function FaqTabList({ tabs }: { tabs: { id: string; label: string }[] }) {
   const { active, select } = useFaqTabs();
   const refs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -104,8 +104,8 @@ export function FaqTabList({ tabs }: { tabs: { id: string; label: string; count:
       <div
         role="tablist"
         aria-label="FAQ topics"
-        aria-orientation="vertical"
-        className="flex flex-wrap gap-2 desk:flex-col desk:flex-nowrap desk:gap-1.5"
+        aria-orientation="horizontal"
+        className="flex flex-wrap gap-2"
       >
         {tabs.map((tab, index) => {
           const selected = tab.id === active;
@@ -123,14 +123,13 @@ export function FaqTabList({ tabs }: { tabs: { id: string; label: string; count:
               tabIndex={selected ? 0 : -1}
               onClick={() => select(tab.id)}
               onKeyDown={(event) => onKeyDown(event, index)}
-              className={`flex cursor-pointer items-center gap-2 rounded-none px-3 py-1 text-left font-button text-[12px] font-semibold uppercase tracking-[-0.02em] transition-colors desk:w-full desk:justify-between desk:py-2 ${
+              className={`cursor-pointer rounded-none px-3 py-1 font-button text-[12px] font-semibold uppercase tracking-[-0.02em] transition-colors ${
                 selected
                   ? "border border-transparent bg-accent text-white"
                   : "border border-dashed border-hairline bg-transparent text-white/40 hover:bg-button-dark"
               }`}
             >
-              <span>{tab.label}</span>
-              <span className="tabular-nums opacity-60">{tab.count}</span>
+              {tab.label}
             </button>
           );
         })}
