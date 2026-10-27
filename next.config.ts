@@ -47,6 +47,12 @@ const nextConfig: NextConfig = {
         destination: "/",
         statusCode: 301,
       },
+      // Cost guide moved to a rebrand-only page on a new slug (2026-10-27).
+      {
+        source: "/blog/what-a-startup-rebrand-and-website-cost",
+        destination: "/blog/startup-rebrand-cost",
+        statusCode: 301,
+      },
     ];
   },
 };
