@@ -64,11 +64,7 @@ export default function FaqPage() {
               </div>
               <div className="fade-up max-w-[405px] [animation-delay:300ms]">
                 <FaqTabList
-                  tabs={faqCategories.map((c) => ({
-                    id: c.id,
-                    label: c.label,
-                    count: c.items.length,
-                  }))}
+                  tabs={faqCategories.map((c) => ({ id: c.id, label: c.label }))}
                 />
               </div>
             </div>
