@@ -2,7 +2,6 @@
 
 import { useBlogFilter } from "./BlogFilterContext";
 
-const categories = ["All", "Branding", "Design"];
 // const displayModes = ["List", "Grid"]; // Display filter hidden for now.
 
 /** Sharp-edged filter pill: transparent + hairline border, filled with the
@@ -32,7 +31,9 @@ function Pill({
   );
 }
 
-export function ArticleFilters() {
+/** `categories` comes from the posts themselves (blogCategories), so the
+    pills always match the tags on the list below. */
+export function ArticleFilters({ categories }: { categories: string[] }) {
   const { category, setCategory } = useBlogFilter();
   // const [display, setDisplay] = useState(displayModes[0]); // Display filter hidden for now.
 
@@ -41,7 +42,7 @@ export function ArticleFilters() {
       <div className="flex flex-col gap-[10px]">
         <p className="text-[12px] font-medium uppercase text-label-grey">Filters:</p>
         <div className="flex flex-wrap gap-2">
-          {categories.map((item) => (
+          {["All", ...categories].map((item) => (
             <Pill
               key={item}
               label={item}

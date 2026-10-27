@@ -6,6 +6,7 @@ import { BlogSidebar } from "@/components/blog/BlogSidebar";
 import { Footer } from "@/components/Footer";
 import { pixelupFaqSchema } from "@/lib/case-studies";
 import { getBlogPosts } from "@/sanity/lib/blog-data";
+import { blogCategories } from "@/sanity/lib/blog-utils";
 import { withOpenGraph } from "@/lib/open-graph";
 
 const metadata: Metadata = {
@@ -27,7 +28,7 @@ export default async function BlogPage() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(pixelupFaqSchema) }}
         />
-        <BlogSidebar />
+        <BlogSidebar categories={blogCategories(posts)} />
         {/* Divider between the aside and content columns, same treatment as the homepage. */}
         <div
           aria-hidden="true"
