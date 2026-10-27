@@ -17,10 +17,10 @@
  * and their sitemap entries use.
  */
 export const siteUpdated = {
-  home: "2026-10-20",
+  home: "2026-10-27",
   call: "2026-10-07",
   explorations: "2026-09-30",
-  clients: "2026-09-15",
+  clients: "2026-10-27",
   privacy: "2026-08-31",
   /** /faq: lib/faq.ts. Also its FAQPage `datePublished` (first published with this date). */
   faq: "2026-10-27",
