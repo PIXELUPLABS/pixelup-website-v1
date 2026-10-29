@@ -52,6 +52,13 @@ export interface MediaSlot {
   /** Image only: more images (same size as `media`) that crossfade in turn
    * with it, each held for `interval` ms (default 1500). */
   crossfade?: { srcs: string[]; interval?: number };
+  /** With `intrinsicSize`: CSS px of the media hidden past the frame's right
+   * edge, to cover a hairline baked into the export. */
+  hideRight?: number;
+  /** Image or video with `intrinsicSize`: scales the media up in its frame
+   * so this many CSS px are hidden past every edge (covers an inner border
+   * baked into the export). */
+  hideEdges?: number;
 }
 
 /**
@@ -2709,7 +2716,8 @@ const avantra: CaseStudy = {
   hero: {
     media: { type: "image", src: "/media/avantra/l-night.avif" },
     alt: "Avantra wordmark on a gold billboard above a city street at night",
-    intrinsicSize: { width: 2787, height: 2030 },
+    intrinsicSize: { width: 2786, height: 2029 },
+    hideEdges: 2,
   },
   story: {
     company: "Avantra",
@@ -2775,7 +2783,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 1920,
                 height: 1080,
-              }
+              },
+              hideEdges: 2,
             },
           }
         ],
@@ -2797,7 +2806,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 1920,
                 height: 1080,
-              }
+              },
+              hideEdges: 2,
             },
           }
         ],
@@ -2828,9 +2838,10 @@ const avantra: CaseStudy = {
                 },
                 alt: "Direction 1 poster: vertical Avantra wordmark with a gold relief tile, framed on a stone wall",
                 intrinsicSize: {
-                  width: 1628,
+                  width: 1627,
                   height: 2326,
-                }
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -2841,7 +2852,8 @@ const avantra: CaseStudy = {
                 intrinsicSize: {
                   width: 1530,
                   height: 2186,
-                }
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -2854,9 +2866,10 @@ const avantra: CaseStudy = {
               },
               alt: "Direction 1 slide: oversized 'Frontier intelligence at real-time' type beside a silver sun",
               intrinsicSize: {
-                width: 2065,
-                height: 1314,
-              }
+                width: 2057,
+                height: 1308,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -2870,7 +2883,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1471,
-              }
+              },
+              hideEdges: 2,
             },
           }
         ],
@@ -2890,9 +2904,10 @@ const avantra: CaseStudy = {
               },
               alt: "Direction 2: Avantra wordmark on deep blue",
               intrinsicSize: {
-                width: 2880,
+                width: 2878,
                 height: 1620,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -2907,7 +2922,8 @@ const avantra: CaseStudy = {
                 intrinsicSize: {
                   width: 960,
                   height: 1284,
-                }
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -2918,7 +2934,8 @@ const avantra: CaseStudy = {
                 intrinsicSize: {
                   width: 960,
                   height: 1284,
-                }
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -2934,7 +2951,8 @@ const avantra: CaseStudy = {
                 intrinsicSize: {
                   width: 1026,
                   height: 1284,
-                }
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -2944,8 +2962,9 @@ const avantra: CaseStudy = {
                 alt: "Direction 2 poster: Avantra wordmark over a sculptural wave, in a street lightbox",
                 intrinsicSize: {
                   width: 1558,
-                  height: 1950,
-                }
+                  height: 1949,
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -2960,7 +2979,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1620,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -2974,8 +2994,9 @@ const avantra: CaseStudy = {
                 alt: "Direction 2 poster: blue ikat bird beside the recursion story",
                 intrinsicSize: {
                   width: 722,
-                  height: 964,
-                }
+                  height: 962,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -2985,8 +3006,9 @@ const avantra: CaseStudy = {
                 alt: "Direction 2 poster: 'Frontier intelligence at real-time latency' over a blue arch pattern",
                 intrinsicSize: {
                   width: 722,
-                  height: 964,
-                }
+                  height: 962,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -2996,8 +3018,9 @@ const avantra: CaseStudy = {
                 alt: "Direction 2 poster: Avantra wordmark under a jali star window on rust",
                 intrinsicSize: {
                   width: 722,
-                  height: 964,
-                }
+                  height: 962,
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3012,7 +3035,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1620,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3026,7 +3050,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1620,
-              }
+              },
+              hideEdges: 2,
             },
           }
         ],
@@ -3057,7 +3082,7 @@ const avantra: CaseStudy = {
                 },
                 alt: "Character posters crossfading: a silver lion, a silver eagle and a silver sun, each over the recursion story",
                 intrinsicSize: {
-                  width: 1600,
+                  width: 1594,
                   height: 2400,
                 },
                 crossfade: {
@@ -3066,7 +3091,8 @@ const avantra: CaseStudy = {
                     "/media/avantra/p-fade-3.avif",
                   ],
                   interval: 1500,
-                }
+                },
+                hideRight: 2,
               },
               {
                 media: {
@@ -3077,7 +3103,8 @@ const avantra: CaseStudy = {
                 intrinsicSize: {
                   width: 1800,
                   height: 2700,
-                }
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3092,8 +3119,9 @@ const avantra: CaseStudy = {
                 alt: "Direction 1 extension poster: 'Real-time latency' on black and gold linework",
                 intrinsicSize: {
                   width: 1039,
-                  height: 1314,
-                }
+                  height: 1313,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3103,8 +3131,9 @@ const avantra: CaseStudy = {
                 alt: "Direction 1 extension poster: 'Intelligence per millisecond' with a gold sun figure, in a street kiosk",
                 intrinsicSize: {
                   width: 1479,
-                  height: 1870,
-                }
+                  height: 1869,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3114,8 +3143,9 @@ const avantra: CaseStudy = {
                 alt: "Direction 1 extension poster: sun figure over a wall of credits",
                 intrinsicSize: {
                   width: 1039,
-                  height: 1314,
-                }
+                  height: 1313,
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3128,9 +3158,10 @@ const avantra: CaseStudy = {
               },
               alt: "Direction 1 extension slide: oversized 'Frontier intelligence' type beside a silver sun",
               intrinsicSize: {
-                width: 2065,
-                height: 1314,
-              }
+                width: 2057,
+                height: 1308,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3142,9 +3173,10 @@ const avantra: CaseStudy = {
               },
               alt: "Direction 1 extension slide: horse and sun mark on a gold field",
               intrinsicSize: {
-                width: 2065,
+                width: 2062,
                 height: 1314,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3157,9 +3189,10 @@ const avantra: CaseStudy = {
                 },
                 alt: "'The conversation' poster: a silver horse over the recursion story",
                 intrinsicSize: {
-                  width: 1589,
-                  height: 2383,
-                }
+                  width: 1587,
+                  height: 2380,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3168,9 +3201,10 @@ const avantra: CaseStudy = {
                 },
                 alt: "Character poster: a gold eagle on cream over the recursion story",
                 intrinsicSize: {
-                  width: 1600,
-                  height: 2399,
-                }
+                  width: 1598,
+                  height: 2397,
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3203,7 +3237,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1454,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3217,8 +3252,9 @@ const avantra: CaseStudy = {
                 alt: "Poster: 'Intelligence that arrives late is just another pause in the conversations'",
                 intrinsicSize: {
                   width: 1017,
-                  height: 1454,
-                }
+                  height: 1453,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3228,8 +3264,9 @@ const avantra: CaseStudy = {
                 alt: "Poster: oversized 'Frontier intelligence at real-time time' type with gold leaf edges",
                 intrinsicSize: {
                   width: 919,
-                  height: 1314,
-                }
+                  height: 1310,
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3242,9 +3279,10 @@ const avantra: CaseStudy = {
               },
               alt: "Slide: 'Throughput, latency, reliability, cost, headcount' beside the lotus mark",
               intrinsicSize: {
-                width: 2069,
-                height: 1448,
-              }
+                width: 2068,
+                height: 1447,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3258,8 +3296,9 @@ const avantra: CaseStudy = {
                 alt: "Poster: a gold eagle over the recursion story on cream",
                 intrinsicSize: {
                   width: 1017,
-                  height: 1454,
-                }
+                  height: 1453,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3269,8 +3308,9 @@ const avantra: CaseStudy = {
                 alt: "Poster: 'Frontier intelligence', structure not ornament, with the lotus mark on navy",
                 intrinsicSize: {
                   width: 1017,
-                  height: 1454,
-                }
+                  height: 1453,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3280,8 +3320,9 @@ const avantra: CaseStudy = {
                 alt: "Poster: 'The conversation' with a gold horse and sun",
                 intrinsicSize: {
                   width: 1017,
-                  height: 1454,
-                }
+                  height: 1453,
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3295,9 +3336,10 @@ const avantra: CaseStudy = {
                 },
                 alt: "Square post: a silver sun in a dark medallion on navy",
                 intrinsicSize: {
-                  width: 1441,
-                  height: 1441,
-                }
+                  width: 1440,
+                  height: 1438,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3306,9 +3348,10 @@ const avantra: CaseStudy = {
                 },
                 alt: "Square post: 'Frontier intelligence at real-time latency' on cream with the lotus mark",
                 intrinsicSize: {
-                  width: 1441,
-                  height: 1441,
-                }
+                  width: 1440,
+                  height: 1438,
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3321,9 +3364,10 @@ const avantra: CaseStudy = {
               },
               alt: "Slide: a white peacock between the words 'picture' and 'ornament' on black",
               intrinsicSize: {
-                width: 2756,
-                height: 1307,
-              }
+                width: 2753,
+                height: 1306,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3335,9 +3379,10 @@ const avantra: CaseStudy = {
               },
               alt: "Slide: Avantra wordmark beside a gold trident on black",
               intrinsicSize: {
-                width: 2058,
-                height: 1430,
-              }
+                width: 2054,
+                height: 1426,
+              },
+              hideEdges: 2,
             },
           }
         ],
@@ -3370,7 +3415,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1891,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3385,7 +3431,8 @@ const avantra: CaseStudy = {
                 intrinsicSize: {
                   width: 1224,
                   height: 1883,
-                }
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3396,7 +3443,8 @@ const avantra: CaseStudy = {
                 intrinsicSize: {
                   width: 1431,
                   height: 2202,
-                }
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3411,7 +3459,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2168,
                 height: 1400,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3438,9 +3487,10 @@ const avantra: CaseStudy = {
               },
               alt: "Gold peacock illustration on a technical grid",
               intrinsicSize: {
-                width: 2880,
-                height: 1366,
-              }
+                width: 2879,
+                height: 1365,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3452,9 +3502,10 @@ const avantra: CaseStudy = {
               },
               alt: "'Every millisecond, accounted for.' time-to-first-token chart slide",
               intrinsicSize: {
-                width: 2880,
+                width: 2876,
                 height: 1458,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3468,7 +3519,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1620,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3481,8 +3533,9 @@ const avantra: CaseStudy = {
               alt: "'Winning the voice market' typographic slide with a gold relief tile",
               intrinsicSize: {
                 width: 2880,
-                height: 1337,
-              }
+                height: 1335,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3495,9 +3548,10 @@ const avantra: CaseStudy = {
                 },
                 alt: "Poster: vertical Avantra wordmark with a silver relief tile",
                 intrinsicSize: {
-                  width: 790,
-                  height: 1159,
-                }
+                  width: 789,
+                  height: 1158,
+                },
+                hideEdges: 2,
               },
               {
                 media: {
@@ -3508,7 +3562,8 @@ const avantra: CaseStudy = {
                 intrinsicSize: {
                   width: 1474,
                   height: 2160,
-                }
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3521,9 +3576,10 @@ const avantra: CaseStudy = {
               },
               alt: "Oversized 'Frontier intelligence at real-time latency' type on dark green",
               intrinsicSize: {
-                width: 1821,
-                height: 1159,
-              }
+                width: 1820,
+                height: 1158,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3535,9 +3591,10 @@ const avantra: CaseStudy = {
               },
               alt: "'Frontier intelligence at real-time latency' typographic poster with gold bars",
               intrinsicSize: {
-                width: 2880,
-                height: 1620,
-              }
+                width: 2876,
+                height: 1616,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3551,7 +3608,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1620,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3565,7 +3623,8 @@ const avantra: CaseStudy = {
               intrinsicSize: {
                 width: 2880,
                 height: 1620,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3577,9 +3636,10 @@ const avantra: CaseStudy = {
               },
               alt: "Website hero: 'Enabling real-time intelligence'",
               intrinsicSize: {
-                width: 2880,
+                width: 2879,
                 height: 1665,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3592,9 +3652,10 @@ const avantra: CaseStudy = {
               },
               alt: "Website section: the exploded isometric stack assembling under 'Every generated token feeds the next'",
               intrinsicSize: {
-                width: 1440,
-                height: 1406,
+                width: 1392,
+                height: 1358,
               },
+              hideEdges: 2,
               playOnView: true,
             }
           },
@@ -3607,9 +3668,10 @@ const avantra: CaseStudy = {
               },
               alt: "Website section: 'Every millisecond, accounted for.' latency chart",
               intrinsicSize: {
-                width: 2880,
+                width: 2879,
                 height: 1620,
-              }
+              },
+              hideEdges: 2,
             },
           }
         ],
@@ -3643,6 +3705,7 @@ const avantra: CaseStudy = {
                 width: 2034,
                 height: 1294,
               },
+              hideEdges: 2,
               playOnView: true,
             }
           },
@@ -3660,6 +3723,7 @@ const avantra: CaseStudy = {
                   width: 1368,
                   height: 1698,
                 },
+                hideEdges: 2,
                 playOnView: true,
               },
               {
@@ -3673,6 +3737,7 @@ const avantra: CaseStudy = {
                   width: 1440,
                   height: 1786,
                 },
+                hideEdges: 2,
                 playOnView: true,
               }
             ],
@@ -3686,9 +3751,10 @@ const avantra: CaseStudy = {
               },
               alt: "Slide: oversized 'Frontier intelligence at real-time latency' type on navy",
               intrinsicSize: {
-                width: 1944,
+                width: 1943,
                 height: 1312,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3700,9 +3766,10 @@ const avantra: CaseStudy = {
               },
               alt: "Slide: 'Every millisecond, accounted for.' latency chart on navy",
               intrinsicSize: {
-                width: 2034,
-                height: 1309,
-              }
+                width: 2033,
+                height: 1308,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3714,9 +3781,10 @@ const avantra: CaseStudy = {
               },
               alt: "'Three ways to consume Avantra' on a tablet resting on a linen cushion",
               intrinsicSize: {
-                width: 2880,
+                width: 2879,
                 height: 1878,
-              }
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3728,9 +3796,10 @@ const avantra: CaseStudy = {
               },
               alt: "Slide: 'Every token feeds the next' with the stack in silver and gold on cream",
               intrinsicSize: {
-                width: 2060,
-                height: 1311,
-              }
+                width: 2059,
+                height: 1310,
+              },
+              hideEdges: 2,
             },
           },
           {
@@ -3747,6 +3816,7 @@ const avantra: CaseStudy = {
                   width: 1432,
                   height: 1810,
                 },
+                hideEdges: 2,
                 playOnView: true,
               },
               {
@@ -3756,9 +3826,10 @@ const avantra: CaseStudy = {
                 },
                 alt: "'Run it on your workload' poster on navy, set in a stone doorway",
                 intrinsicSize: {
-                  width: 2028,
+                  width: 2027,
                   height: 2564,
-                }
+                },
+                hideEdges: 2,
               },
             ]
           },
@@ -3806,9 +3877,10 @@ const avantra: CaseStudy = {
             },
             alt: "'Run it on your workload.' slide: the coil mark above a silver ornament with benchmark readings, on navy",
             intrinsicSize: {
-              width: 2847,
-              height: 1591,
-            }
+              width: 2845,
+              height: 1590,
+            },
+            hideEdges: 2,
           },
         }
       },

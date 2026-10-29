@@ -44,6 +44,10 @@ export function CaseMediaSlot({
   priority?: boolean;
 }) {
   const tone = slot.tone ?? "faint";
+  // Media widened past the frame, which clips it, so its right edge is hidden.
+  const hideRight = slot.hideRight
+    ? { width: `calc(100% + ${slot.hideRight}px)` }
+    : undefined;
 
   if (!slot.media) {
     return <div className={`w-full ${aspect} ${toneClass[tone]}`} />;
@@ -52,14 +56,16 @@ export function CaseMediaSlot({
   if (slot.media.type === "image" && slot.intrinsicSize && slot.crossfade) {
     return (
       <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
-        <CrossfadeImages
-          srcs={[slot.media.src, ...slot.crossfade.srcs]}
-          alt={slot.alt ?? ""}
-          width={slot.intrinsicSize.width}
-          height={slot.intrinsicSize.height}
-          sizes={sizes}
-          interval={slot.crossfade.interval}
-        />
+        <div style={hideRight}>
+          <CrossfadeImages
+            srcs={[slot.media.src, ...slot.crossfade.srcs]}
+            alt={slot.alt ?? ""}
+            width={slot.intrinsicSize.width}
+            height={slot.intrinsicSize.height}
+            sizes={sizes}
+            interval={slot.crossfade.interval}
+          />
+        </div>
       </div>
     );
   }
@@ -67,16 +73,41 @@ export function CaseMediaSlot({
   if (slot.media.type === "image" && slot.intrinsicSize) {
     return (
       <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
-        <Image
-          src={slot.media.src}
-          alt={slot.alt ?? ""}
-          width={slot.intrinsicSize.width}
-          height={slot.intrinsicSize.height}
-          sizes={sizes}
-          loading={priority ? "eager" : undefined}
-          fetchPriority={priority ? "high" : undefined}
-          className="h-auto w-full"
-        />
+        {slot.hideEdges ? (
+          // The spacer keeps the frame at the image's aspect; the image
+          // overhangs it by hideEdges on every side and is clipped.
+          <div
+            style={{
+              aspectRatio: `${slot.intrinsicSize.width} / ${slot.intrinsicSize.height}`,
+            }}
+          >
+            <div className="absolute" style={{ inset: -slot.hideEdges }}>
+              <Image
+                src={slot.media.src}
+                alt={slot.alt ?? ""}
+                width={slot.intrinsicSize.width}
+                height={slot.intrinsicSize.height}
+                sizes={sizes}
+                loading={priority ? "eager" : undefined}
+                fetchPriority={priority ? "high" : undefined}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        ) : (
+          <div style={hideRight}>
+            <Image
+              src={slot.media.src}
+              alt={slot.alt ?? ""}
+              width={slot.intrinsicSize.width}
+              height={slot.intrinsicSize.height}
+              sizes={sizes}
+              loading={priority ? "eager" : undefined}
+              fetchPriority={priority ? "high" : undefined}
+              className="h-auto w-full"
+            />
+          </div>
+        )}
         {slot.chart && (
           <ChartReveal
             chart={slot.chart}
@@ -113,30 +144,47 @@ export function CaseMediaSlot({
   }
 
   if (slot.media.type === "video" && slot.intrinsicSize) {
+    const { media, intrinsicSize } = slot;
+    const video = (className: string) =>
+      slot.playOnView ? (
+        <ScrollVideo
+          media={media}
+          label={slot.alt}
+          className={className}
+          width={intrinsicSize.width}
+          height={intrinsicSize.height}
+          loop={slot.loop}
+        />
+      ) : (
+        <video
+          className={className}
+          src={media.src}
+          poster={media.poster}
+          width={intrinsicSize.width}
+          height={intrinsicSize.height}
+          aria-label={slot.alt}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      );
     return (
       <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
-        {slot.playOnView ? (
-          <ScrollVideo
-            media={slot.media}
-            label={slot.alt}
-            className="block h-auto w-full"
-            width={slot.intrinsicSize.width}
-            height={slot.intrinsicSize.height}
-            loop={slot.loop}
-          />
+        {slot.hideEdges ? (
+          // Same as the image: the spacer sets the frame, the video
+          // overhangs it by hideEdges on every side.
+          <div
+            style={{
+              aspectRatio: `${intrinsicSize.width} / ${intrinsicSize.height}`,
+            }}
+          >
+            <div className="absolute" style={{ inset: -slot.hideEdges }}>
+              {video("block h-full w-full object-cover")}
+            </div>
+          </div>
         ) : (
-          <video
-            className="block h-auto w-full"
-            src={slot.media.src}
-            poster={slot.media.poster}
-            width={slot.intrinsicSize.width}
-            height={slot.intrinsicSize.height}
-            aria-label={slot.alt}
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
+          <div style={hideRight}>{video("block h-auto w-full")}</div>
         )}
       </div>
     );
