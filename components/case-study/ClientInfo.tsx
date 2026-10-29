@@ -57,22 +57,24 @@ export function ClientInfo({
         </div>
       </InfoRow>
       {info.funding && <InfoRow label="Funding">{info.funding}</InfoRow>}
-      <InfoRow label={info.links.length === 1 ? "Link" : "Links"}>
-        <div className="flex flex-col gap-1.5">
-          {info.links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex w-fit items-center gap-1 hover:opacity-70"
-            >
-              {link.label}
-              <ArrowOutwardIcon />
-            </a>
-          ))}
-        </div>
-      </InfoRow>
+      {info.links.length > 0 && (
+        <InfoRow label={info.links.length === 1 ? "Link" : "Links"}>
+          <div className="flex flex-col gap-1.5">
+            {info.links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex w-fit items-center gap-1 hover:opacity-70"
+              >
+                {link.label}
+                <ArrowOutwardIcon />
+              </a>
+            ))}
+          </div>
+        </InfoRow>
+      )}
     </div>
   );
 }

@@ -22,13 +22,14 @@ const switzer = localFont({
 // and falls back to static content if the motion layer never boots.
 const boot = `(function(d){var c=d.documentElement.classList;c.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){c.add('motion');setTimeout(function(){if(!c.contains('motion-live'))c.remove('motion')},5000)}})(document)`;
 
-export default function Shell2027({ children }: { children: ReactNode }) {
+// `mark={false}` leaves out the 3D mark: its docks follow the homepage's scroll, and the case study layout has none.
+export default function Shell2027({ children, mark = true }: { children: ReactNode; mark?: boolean }) {
   return (
     <div className={`v2027 ${switzer.variable}`}>
       <script dangerouslySetInnerHTML={{ __html: boot }} />
       {children}
       {/* Outside the page so the mark could stay docked across routes, as it does on the 2026 site. */}
-      <MarkCanvas />
+      {mark && <MarkCanvas />}
       <Cursor />
       <Experience />
     </div>

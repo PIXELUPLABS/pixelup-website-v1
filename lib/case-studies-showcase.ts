@@ -86,6 +86,16 @@ const entries: CaseStudyShowcaseEntry[] = [
     // No funding badge: the tag reads the case study's status badge, "YC W25 · AI sales".
   },
   {
+    slug: "avantra",
+    // Serving layer for real-time multimodal AI, so it sits with Reducto and
+    // Replay. 5th, below FuseAI.
+    niche: "AI Infrastructure",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid:
+      "Brand Strategy, Brand Identity, Illustration System, Deck & Memo Design, Website Design",
+    // No funding badge: the tag reads the case study's status badge, "Real-time AI inference".
+  },
+  {
     slug: "streamline",
     niche: "Enterprise AI",
     whatWeDid:

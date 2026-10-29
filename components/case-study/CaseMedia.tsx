@@ -6,6 +6,7 @@ import type {
   MediaTone,
 } from "@/lib/case-studies";
 import { ChartReveal } from "./ChartReveal";
+import { CrossfadeImages } from "./CrossfadeImages";
 import { FloatingComment } from "./FloatingComment";
 import { HtmlEmbed } from "./HtmlEmbed";
 import { LayerReveal } from "./LayerReveal";
@@ -43,24 +44,70 @@ export function CaseMediaSlot({
   priority?: boolean;
 }) {
   const tone = slot.tone ?? "faint";
+  // Media widened past the frame, which clips it, so its right edge is hidden.
+  const hideRight = slot.hideRight
+    ? { width: `calc(100% + ${slot.hideRight}px)` }
+    : undefined;
 
   if (!slot.media) {
     return <div className={`w-full ${aspect} ${toneClass[tone]}`} />;
   }
 
+  if (slot.media.type === "image" && slot.intrinsicSize && slot.crossfade) {
+    return (
+      <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
+        <div style={hideRight}>
+          <CrossfadeImages
+            srcs={[slot.media.src, ...slot.crossfade.srcs]}
+            alt={slot.alt ?? ""}
+            width={slot.intrinsicSize.width}
+            height={slot.intrinsicSize.height}
+            sizes={sizes}
+            interval={slot.crossfade.interval}
+          />
+        </div>
+      </div>
+    );
+  }
+
   if (slot.media.type === "image" && slot.intrinsicSize) {
     return (
       <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
-        <Image
-          src={slot.media.src}
-          alt={slot.alt ?? ""}
-          width={slot.intrinsicSize.width}
-          height={slot.intrinsicSize.height}
-          sizes={sizes}
-          loading={priority ? "eager" : undefined}
-          fetchPriority={priority ? "high" : undefined}
-          className="h-auto w-full"
-        />
+        {slot.hideEdges ? (
+          // The spacer keeps the frame at the image's aspect; the image
+          // overhangs it by hideEdges on every side and is clipped.
+          <div
+            style={{
+              aspectRatio: `${slot.intrinsicSize.width} / ${slot.intrinsicSize.height}`,
+            }}
+          >
+            <div className="absolute" style={{ inset: -slot.hideEdges }}>
+              <Image
+                src={slot.media.src}
+                alt={slot.alt ?? ""}
+                width={slot.intrinsicSize.width}
+                height={slot.intrinsicSize.height}
+                sizes={sizes}
+                loading={priority ? "eager" : undefined}
+                fetchPriority={priority ? "high" : undefined}
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        ) : (
+          <div style={hideRight}>
+            <Image
+              src={slot.media.src}
+              alt={slot.alt ?? ""}
+              width={slot.intrinsicSize.width}
+              height={slot.intrinsicSize.height}
+              sizes={sizes}
+              loading={priority ? "eager" : undefined}
+              fetchPriority={priority ? "high" : undefined}
+              className="h-auto w-full"
+            />
+          </div>
+        )}
         {slot.chart && (
           <ChartReveal
             chart={slot.chart}
@@ -97,30 +144,47 @@ export function CaseMediaSlot({
   }
 
   if (slot.media.type === "video" && slot.intrinsicSize) {
+    const { media, intrinsicSize } = slot;
+    const video = (className: string) =>
+      slot.playOnView ? (
+        <ScrollVideo
+          media={media}
+          label={slot.alt}
+          className={className}
+          width={intrinsicSize.width}
+          height={intrinsicSize.height}
+          loop={slot.loop}
+        />
+      ) : (
+        <video
+          className={className}
+          src={media.src}
+          poster={media.poster}
+          width={intrinsicSize.width}
+          height={intrinsicSize.height}
+          aria-label={slot.alt}
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
+      );
     return (
       <div className={`relative w-full overflow-hidden ${toneClass[tone]}`}>
-        {slot.playOnView ? (
-          <ScrollVideo
-            media={slot.media}
-            label={slot.alt}
-            className="block h-auto w-full"
-            width={slot.intrinsicSize.width}
-            height={slot.intrinsicSize.height}
-            loop={slot.loop}
-          />
+        {slot.hideEdges ? (
+          // Same as the image: the spacer sets the frame, the video
+          // overhangs it by hideEdges on every side.
+          <div
+            style={{
+              aspectRatio: `${intrinsicSize.width} / ${intrinsicSize.height}`,
+            }}
+          >
+            <div className="absolute" style={{ inset: -slot.hideEdges }}>
+              {video("block h-full w-full object-cover")}
+            </div>
+          </div>
         ) : (
-          <video
-            className="block h-auto w-full"
-            src={slot.media.src}
-            poster={slot.media.poster}
-            width={slot.intrinsicSize.width}
-            height={slot.intrinsicSize.height}
-            aria-label={slot.alt}
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
+          <div style={hideRight}>{video("block h-auto w-full")}</div>
         )}
       </div>
     );
@@ -190,6 +254,9 @@ export function CaseMediaBlock({
   if (block.kind === "marquee") {
     return <MediaMarquee block={block} />;
   }
+  if (block.kind === "strip") {
+    return <CaseStrip block={block} />;
+  }
   if (block.kind === "full") {
     const slot = (
       <CaseMediaSlot
@@ -220,10 +287,54 @@ export function CaseMediaBlock({
             aspect={
               block.aspect === "wide" ? "aspect-video" : "aspect-[576/548]"
             }
-            sizes="(min-width: 1200px) 40vw, 100vw"
+            sizes={
+              block.slots.length === 3
+                ? "(min-width: 1200px) 27vw, 100vw"
+                : "(min-width: 1200px) 40vw, 100vw"
+            }
           />
         </div>
       ))}
+    </div>
+  );
+}
+
+/**
+ * An endless horizontal strip, edge to edge. The strip image is rendered
+ * twice and the track slides by half its width, so the loop has no seam
+ * (same `marquee` keyframes as the "Trusted by" logo strip). Reduced motion
+ * keeps it still.
+ */
+function CaseStrip({
+  block,
+}: {
+  block: Extract<MediaBlock, { kind: "strip" }>;
+}) {
+  const { slot, duration = 40 } = block;
+  if (slot.media?.type !== "image" || !slot.intrinsicSize) return null;
+  const { width, height } = slot.intrinsicSize;
+  const { src } = slot.media;
+  return (
+    <div className="px-6 desk:p-6">
+      <div className="overflow-hidden" role="img" aria-label={slot.alt}>
+        <div
+          className="flex w-max animate-[marquee_linear_infinite] motion-reduce:animate-none"
+          style={{ animationDuration: `${duration}s` }}
+        >
+          {[0, 1].map((copy) => (
+            <Image
+              key={copy}
+              src={src}
+              alt=""
+              aria-hidden="true"
+              width={width}
+              height={height}
+              sizes="200vw"
+              className="h-32 w-auto max-w-none desk:h-48"
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
