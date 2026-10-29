@@ -105,15 +105,15 @@ export const projects: Project[] = [
     year: "2026",
   },
   {
-    slug: "avartha",
-    label: "Avartha",
+    slug: "avantra",
+    label: "Avantra",
     // 5th, between FuseAI and CTGT. The case study is still a draft (noindex).
-    href: "/case-studies/avartha",
+    href: "/case-studies/avantra",
     external: false,
     // The case study's hero image.
-    media: { type: "image", src: "/media/avartha/l-night.avif" },
-    alt: "Avartha wordmark on a gold billboard above a city street at night, brand identity by PIXELUP LABS",
-    // Avartha's own line, as quoted in the case study.
+    media: { type: "image", src: "/media/avantra/l-night.avif" },
+    alt: "Avantra wordmark on a gold billboard above a city street at night, brand identity by PIXELUP LABS",
+    // Avantra's own line, as quoted in the case study.
     tagline: "Frontier intelligence at real-time latency",
     services: ["Branding", "Website Design"],
     year: "2026",

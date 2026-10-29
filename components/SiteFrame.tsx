@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { Navbar } from "./Navbar";
 
 // Routes that bring their own header and full-viewport layout (see below).
-const OWN_SHELL = new Set(["/2027", "/process"]);
+const OWN_SHELL = new Set(["/2027", "/process", "/next/case-studies/avantra"]);
 
 /**
  * The shared shell around every page: the sticky Navbar inside a column
@@ -17,8 +17,9 @@ const OWN_SHELL = new Set(["/2027", "/process"]);
  * the full viewport, so a border there would just be a stray line glued to
  * the screen edge instead of framing the centered column.
  *
- * /2027 (the next homepage, app/2027) and /process (How we work, app/process)
- * bring their own header and lay themselves out on the full viewport, so they
+ * /2027 (the next homepage, app/2027), /process (How we work, app/process)
+ * and /next/case-studies/avantra (the 2026 case study layout, app/next) bring
+ * their own header and lay themselves out on the full viewport, so they
  * render without either. Exact match only: nothing exists below them, and an
  * unmatched URL under them serves the prerendered 404, which has the frame.
  */

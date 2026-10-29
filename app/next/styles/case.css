@@ -1,0 +1,675 @@
+/* ---------------------------------------------------------------
+   The 2026 site's new case study layout (/next/case-studies/replay on
+   pixelup-labs-website-2026.vercel.app), ported from its stylesheet as
+   read on 2026-10-22. The rules are unchanged apart from:
+   - every selector is scoped to the 2026 shell with :where(.v2027), as in
+     app/2027/styles, and the .nx page tokens it relied on are declared on
+     .ncs itself, mapped onto the shell's tokens (base.css);
+   - the type is the shell's Switzer and the numbers Geist Mono (the 2026
+     site sets them in Helvetica and JetBrains Mono, which this repo does
+     not ship);
+   - the line-split intro states are left out (nothing here starts hidden);
+   - additions for this port are marked "port:" (captions, crossfade,
+     marquee, video frames).
+---------------------------------------------------------------- */
+
+:where(.v2027) .ncs {
+  --nu: var(--u);
+  --nx-grey: var(--fog);
+  --nx-mono: var(--font-geist-mono), ui-monospace, 'SF Mono', Menlo, monospace;
+  --hx-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* port: clears the shell's fixed header (.hdr: 26u of padding over its 30u type row, 56px at 1440). */
+  --ncs-hh: max(46px, calc(56 * var(--nu)));
+  --ncs-hdr: var(--ncs-hh);
+  --m: calc(18 * var(--nu));
+  --g: calc(12 * var(--nu));
+  --c: calc((var(--vw, 100vw) - 2 * var(--m) - 15 * var(--g)) / 16 + var(--g));
+  --ncs-bar: max(40px, calc(44 * var(--nu)));
+  --bar-x: 6px;
+  --ncs-top: calc(var(--ncs-hdr) + var(--ncs-bar) + 18 * var(--nu));
+  --body: max(12px, calc(13 * var(--nu)));
+  --lab: max(11px, calc(11 * var(--nu)));
+  --num: max(10px, calc(11 * var(--nu)));
+  --copy: #cfcfcf;
+  --hdr-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  padding-bottom: calc(96 * var(--nu));
+}
+:where(.v2027) .ncs :where(p, dl, dd, figure, blockquote, h1, h2) {
+  margin: 0;
+}
+:where(.v2027) :is(.ncs-bar, .ncs-top, .ncs-row, .ncs-next) {
+  column-gap: var(--g);
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  display: grid;
+}
+:where(.v2027) :is(.ncs-lab, .ncs-meta dt, .ncs-next__lab, .ncs-bar__now) {
+  color: var(--nx-grey);
+  font-size: var(--lab);
+  text-transform: uppercase;
+  font-weight: 400;
+  line-height: 1.3;
+}
+:where(.v2027) :where(.ncs-lab, .ncs-lab *, .ncs-meta dt, .ncs-next__lab, .ncs-bar__now, .ncs-bar__now *) {
+  letter-spacing: 0.01em;
+}
+:where(.v2027) :is(.ncs-mono, .ncs-lab__n, .ncs-next__count) {
+  color: var(--paper);
+  font-family: var(--nx-mono);
+  font-size: var(--num);
+  font-weight: 400;
+  line-height: 1.3;
+}
+:where(.v2027) :where(.ncs-mono, .ncs-lab__n, .ncs-lab__n *, .ncs-next__count) {
+  letter-spacing: 0;
+}
+:where(.v2027) .ncs-hr {
+  background: var(--rule);
+  transform-origin: 0;
+  height: 1px;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Sticky case bar: close, client, current chapter, website, reading progress. */
+:where(.v2027) .ncs-bar {
+  top: var(--ncs-hdr);
+  z-index: 30;
+  height: var(--ncs-bar);
+  padding: 0 var(--m);
+  background: var(--ink);
+  align-items: center;
+  font-size: 12px;
+  line-height: 1;
+  position: sticky;
+}
+:where(.v2027) .ncs-bar::before {
+  content: '';
+  height: var(--ncs-hh);
+  background: var(--ink);
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+}
+:where(.v2027) :is(.ncs-bar__close, .ncs-bar__site) {
+  align-self: stretch;
+  align-items: center;
+  gap: calc(8 * var(--nu));
+  width: max-content;
+  min-width: 44px;
+  padding: 0;
+  display: inline-flex;
+}
+:where(.v2027) .ncs-bar__close {
+  margin-left: calc(var(--bar-x) - var(--m));
+  grid-column: 1/5;
+}
+:where(.v2027) :is(.ncs-bar__close, .ncs-bar__site) .arrow-swap {
+  font-size: 0.8em;
+}
+:where(.v2027) .ncs-bar__client {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  grid-column: 5/8;
+  width: max-content;
+  max-width: 100%;
+  overflow: hidden;
+}
+:where(.v2027) .ncs-bar__chapter {
+  height: 1.3em;
+  font-size: var(--lab);
+  grid-column: 10/13;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+:where(.v2027) .ncs-bar__now {
+  align-items: baseline;
+  gap: calc(12 * var(--nu));
+  white-space: nowrap;
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+:where(.v2027) .ncs-bar__now:empty {
+  display: none;
+}
+:where(.v2027) .ncs-bar__site {
+  margin-right: calc(var(--bar-x) - var(--m));
+  grid-column: 13/17;
+  justify-self: end;
+}
+:where(.v2027) .ncs-bar__rule {
+  right: var(--bar-x);
+  bottom: 0;
+  left: var(--bar-x);
+  background: var(--rule);
+  transform-origin: 0;
+  height: 1px;
+  display: block;
+  position: absolute;
+}
+:where(.v2027) .ncs-bar__fill {
+  background: var(--paper);
+  transform-origin: 0;
+  display: block;
+  position: absolute;
+  inset: 0;
+  transform: scaleX(0);
+}
+
+/* Title and meta. */
+:where(.v2027) .ncs-top {
+  margin-top: calc(var(--ncs-hh) + 56 * var(--nu));
+  padding: 0 var(--m);
+  align-items: start;
+}
+:where(.v2027) .ncs-title {
+  font-size: calc(56 * var(--nu));
+  text-wrap: balance;
+  grid-column: 1/13;
+  font-weight: 500;
+  line-height: 1;
+}
+:where(.v2027) .ncs-st {
+  padding: 0 var(--m);
+  font-size: calc(64 * var(--nu));
+  text-wrap: balance;
+  font-weight: 500;
+  line-height: 1.02;
+}
+:where(.v2027) :where(.ncs-title, .ncs-title *, .ncs-st, .ncs-st *) {
+  letter-spacing: -0.045em;
+}
+:where(.v2027) .ncs-meta {
+  row-gap: calc(18 * var(--nu));
+  padding-top: calc(6 * var(--nu));
+  font-size: var(--body);
+  grid-column: 14/17;
+  line-height: 1.35;
+  display: grid;
+}
+:where(.v2027) .ncs-meta dt {
+  margin-bottom: calc(3 * var(--nu));
+}
+:where(.v2027) .ncs-meta dd span {
+  display: block;
+}
+
+/* Hero and lede. */
+:where(.v2027) .ncs-hero {
+  margin-top: calc(64 * var(--nu));
+  padding: 0 var(--m);
+}
+:where(.v2027) .ncs-lede {
+  width: calc(7 * var(--c) - var(--g));
+  margin: calc(80 * var(--nu)) var(--m) 0;
+  font-size: max(20px, calc(32 * var(--nu)));
+  text-wrap: pretty;
+  font-weight: 400;
+  line-height: 1.12;
+}
+:where(.v2027) :where(.ncs-lede, .ncs-lede *) {
+  letter-spacing: -0.03em;
+}
+
+/* Frames: a fixed-aspect panel the media fills. */
+:where(.v2027) .ncs-frame {
+  background: var(--panel);
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+:where(.v2027) .ncs-frame__zoom {
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+:where(.v2027) .ncs-frame__img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+
+/* Chapters: a statement, then a sticky text column beside a column of frames. */
+:where(.v2027) .ncs-ch {
+  margin-top: calc(120 * var(--nu));
+}
+:where(.v2027) .ncs-ch--ov {
+  margin-top: calc(64 * var(--nu));
+}
+:where(.v2027) .ncs-st + * {
+  margin-top: calc(48 * var(--nu));
+}
+:where(.v2027) .ncs-row {
+  padding: 0 var(--m);
+  align-items: start;
+}
+:where(.v2027) .ncs-row--l > .ncs-tb {
+  grid-area: 1/1/auto/8;
+}
+:where(.v2027) .ncs-row--l > .ncs-mc {
+  grid-area: 1/9/auto/17;
+}
+:where(.v2027) .ncs-row--r > .ncs-tb {
+  grid-area: 1/10/auto/17;
+}
+:where(.v2027) .ncs-row--r > .ncs-mc {
+  grid-area: 1/1/auto/9;
+}
+:where(.v2027) .ncs-tb {
+  top: var(--ncs-top);
+  position: sticky;
+}
+:where(.v2027) .ncs-lab {
+  align-items: baseline;
+  gap: calc(12 * var(--nu));
+  margin-bottom: calc(14 * var(--nu));
+  display: flex;
+}
+:where(.v2027) .ncs-lab__n {
+  vertical-align: top;
+  display: inline-block;
+  overflow: hidden;
+}
+:where(.v2027) .ncs-sub {
+  margin-bottom: calc(12 * var(--nu));
+  color: var(--paper);
+  font-size: var(--body);
+  font-weight: 500;
+  line-height: 1.4;
+}
+:where(.v2027) .ncs-cols {
+  columns: 2;
+  column-gap: calc(var(--c) + var(--g));
+  color: var(--copy);
+  font-size: var(--body);
+  line-height: 1.5;
+}
+:where(.v2027) :where(.ncs-cols, .ncs-cols *, .ncs-sub) {
+  letter-spacing: -0.005em;
+}
+:where(.v2027) .ncs-cols p {
+  break-inside: auto;
+  orphans: 2;
+  widows: 2;
+  margin-bottom: 1em;
+}
+:where(.v2027) .ncs-cols strong {
+  color: var(--paper);
+  font-weight: 500;
+}
+:where(.v2027) .ncs-it {
+  margin-bottom: calc(14 * var(--nu));
+  break-inside: avoid;
+}
+:where(.v2027) .ncs-it dt {
+  color: var(--paper);
+  font-weight: 500;
+}
+:where(.v2027) .ncs-mc {
+  gap: var(--g);
+  flex-direction: column;
+  display: flex;
+}
+:where(.v2027) .ncs-pair {
+  align-items: flex-start;
+  gap: var(--g);
+  display: flex;
+}
+:where(.v2027) .ncs-pair > .ncs-frame {
+  flex: 1;
+  width: auto;
+  min-width: 0;
+}
+:where(.v2027) .ncs-row--t > .ncs-tb {
+  grid-column: 1/-1;
+  grid-template-columns: subgrid;
+  align-items: start;
+  display: grid;
+  position: static;
+}
+:where(.v2027) .ncs-row--t .ncs-lab {
+  grid-area: 1/1/auto/8;
+}
+:where(.v2027) .ncs-row--t .ncs-tb > :not(.ncs-lab) {
+  grid-column: 10/17;
+}
+
+/* port: a gallery's heading and caption above its frames in the media column. */
+:where(.v2027) .ncs-cap {
+  display: grid;
+  gap: calc(4 * var(--nu));
+  padding-top: calc(24 * var(--nu));
+  font-size: var(--body);
+  line-height: 1.4;
+}
+:where(.v2027) .ncs-mc > .ncs-cap:first-child {
+  padding-top: 0;
+}
+:where(.v2027) .ncs-cap__t {
+  color: var(--paper);
+  font-weight: 500;
+}
+:where(.v2027) .ncs-cap__d {
+  color: var(--nx-grey);
+  max-width: 60ch;
+}
+:where(.v2027) :where(.ncs-cap, .ncs-cap *) {
+  letter-spacing: -0.005em;
+}
+
+/* port: frames that crossfade through a set of images. */
+:where(.v2027) .ncs-xf {
+  transition: opacity 0.7s ease-in-out;
+}
+
+/* port: an endless strip; the track holds the strip twice and slides by half. */
+:where(.v2027) .ncs-marq {
+  overflow: hidden;
+  background: var(--panel);
+}
+:where(.v2027) .ncs-marq__track {
+  display: flex;
+  width: max-content;
+  animation: v2027-ncs-marquee var(--dur, 40s) linear infinite;
+}
+:where(.v2027) .ncs-marq__track img {
+  height: calc(160 * var(--nu));
+  width: auto;
+  max-width: none;
+}
+@keyframes v2027-ncs-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Next project. */
+:where(.v2027) .ncs-next {
+  margin: calc(160 * var(--nu)) var(--m) 0;
+  padding: calc(16 * var(--nu)) 0 calc(24 * var(--nu));
+  align-items: start;
+  position: relative;
+}
+:where(.v2027) .ncs-next__lab {
+  grid-area: 1/1/auto/5;
+}
+:where(.v2027) .ncs-next__count {
+  grid-area: 1/5/auto/9;
+}
+:where(.v2027) .ncs-next__thumb {
+  grid-area: 1/9/3/17;
+}
+:where(.v2027) .ncs-next__line {
+  color: var(--paper);
+  font-size: max(18px, calc(24 * var(--nu)));
+  text-wrap: pretty;
+  grid-area: 2/1/auto/8;
+  align-self: end;
+  line-height: 1.2;
+}
+:where(.v2027) .ncs-next__name {
+  margin-top: calc(40 * var(--nu));
+  font-size: calc(168 * var(--nu));
+  text-transform: uppercase;
+  white-space: nowrap;
+  grid-area: 3/1/auto/-1;
+  font-weight: 700;
+  line-height: 0.8;
+}
+:where(.v2027) :where(.ncs-next__name, .ncs-next__name *) {
+  letter-spacing: -0.055em;
+}
+:where(.v2027) .ncs-next__name .roll {
+  margin-top: -0.04em;
+  padding-top: 0.04em;
+}
+:where(.v2027) .ncs-next .ncs-frame__img {
+  transition: transform 0.7s var(--hx-out);
+  transform: scale(1.06);
+}
+@media (hover: hover) {
+  :where(.v2027) .ncs-next:hover .ncs-frame__img {
+    transform: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  :where(.v2027) .ncs-cols {
+    columns: 1;
+  }
+}
+
+@media (max-width: 1023px) {
+  :where(.v2027) .ncs {
+    --m: 16px;
+    --g: 12px;
+    --ncs-bar: 44px;
+    --bar-x: 12px;
+    --body: 13px;
+    --lab: 11px;
+    --num: 10px;
+  }
+  :where(.v2027) .ncs-bar__chapter {
+    display: none;
+  }
+  :where(.v2027) :is(.ncs-bar__close, .ncs-bar__site) {
+    gap: 8px;
+  }
+  :where(.v2027) .ncs-top {
+    margin-top: calc(var(--ncs-hh) + 40px);
+    row-gap: 24px;
+  }
+  :where(.v2027) .ncs-title {
+    grid-column: 1/-1;
+    font-size: 40px;
+    line-height: 1.02;
+  }
+  :where(.v2027) .ncs-meta {
+    grid-column: 1/-1;
+    grid-template-columns: calc(6 * var(--c) - var(--g)) calc(6 * var(--c) - var(--g)) minmax(0, 1fr);
+    gap: 20px var(--g);
+    padding-top: 0;
+  }
+  :where(.v2027) .ncs-hero {
+    margin-top: 40px;
+  }
+  :where(.v2027) .ncs-lede {
+    width: calc(12 * var(--c) - var(--g));
+    margin-top: 48px;
+    font-size: 24px;
+    line-height: 1.15;
+  }
+  :where(.v2027) .ncs-ch {
+    margin-top: 80px;
+  }
+  :where(.v2027) .ncs-ch--ov {
+    margin-top: 56px;
+  }
+  :where(.v2027) .ncs-st {
+    font-size: 40px;
+  }
+  :where(.v2027) .ncs-st + * {
+    margin-top: 32px;
+  }
+  :where(.v2027) :is(.ncs-row--l, .ncs-row--r) > .ncs-tb {
+    grid-area: 1/1/auto/13;
+    position: static;
+  }
+  :where(.v2027) :is(.ncs-row--l, .ncs-row--r) > .ncs-mc {
+    grid-area: 2/1/auto/-1;
+    margin-top: 32px;
+  }
+  :where(.v2027) .ncs-lab {
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  :where(.v2027) .ncs-sub {
+    margin-bottom: 12px;
+  }
+  :where(.v2027) .ncs-it {
+    margin-bottom: 14px;
+  }
+  :where(.v2027) .ncs-row--t .ncs-lab {
+    grid-column: 1/-1;
+  }
+  :where(.v2027) .ncs-row--t .ncs-tb > :not(.ncs-lab) {
+    grid-column: 1/13;
+  }
+  :where(.v2027) .ncs-marq__track img {
+    height: 120px;
+  }
+  :where(.v2027) .ncs-next {
+    margin-top: 120px;
+    padding: 16px 0 24px;
+  }
+  :where(.v2027) :is(.ncs-next__thumb, .ncs-next__line) {
+    grid-column: 9/17;
+  }
+  :where(.v2027) .ncs-next__line {
+    margin-top: 10px;
+  }
+  :where(.v2027) .ncs-next__name {
+    margin-top: 32px;
+    font-size: 96px;
+  }
+}
+
+@media (max-width: 767px) {
+  :where(.v2027) .ncs {
+    /* port: the shell header on phones (16px padding over its type row). */
+    --ncs-hh: 48px;
+    --g: 10px;
+  }
+  :where(.v2027) .ncs-bar__close {
+    grid-column: 1/9;
+  }
+  :where(.v2027) .ncs-bar__client {
+    display: none;
+  }
+  :where(.v2027) .ncs-bar__site {
+    grid-column: 9/17;
+  }
+  :where(.v2027) .ncs-top {
+    margin-top: calc(var(--ncs-hh) + 32px);
+    row-gap: 28px;
+  }
+  :where(.v2027) .ncs-title {
+    font-size: 30px;
+    line-height: 1.04;
+  }
+  :where(.v2027) :where(.ncs-title, .ncs-title *) {
+    letter-spacing: -0.04em;
+  }
+  :where(.v2027) .ncs-meta {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  :where(.v2027) .ncs-meta > div {
+    grid-template-columns: calc(5 * var(--c) - var(--g)) minmax(0, 1fr);
+    column-gap: var(--g);
+    border-top: 1px solid var(--rule);
+    padding: 12px 0;
+    display: grid;
+  }
+  :where(.v2027) .ncs-meta > div:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+  :where(.v2027) .ncs-meta dt {
+    margin: 0;
+    padding-top: 0.15em;
+  }
+  :where(.v2027) .ncs-hero {
+    margin-top: 32px;
+  }
+  :where(.v2027) .ncs-lede {
+    grid-column: 1/-1;
+    width: auto;
+    margin-top: 40px;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+  :where(.v2027) .ncs-ch {
+    margin-top: 72px;
+  }
+  :where(.v2027) .ncs-ch--ov {
+    margin-top: 48px;
+  }
+  :where(.v2027) .ncs-st {
+    font-size: 28px;
+    line-height: 1.06;
+  }
+  :where(.v2027) .ncs-st + * {
+    margin-top: 24px;
+  }
+  :where(.v2027) :is(.ncs-row--l > .ncs-tb, .ncs-row--r > .ncs-tb, .ncs-row--t .ncs-tb > :not(.ncs-lab)) {
+    grid-column: 1/-1;
+  }
+  :where(.v2027) :is(.ncs-row--l, .ncs-row--r) > .ncs-mc {
+    margin-top: 24px;
+  }
+  :where(.v2027) .ncs-cols {
+    columns: 1;
+  }
+  :where(.v2027) .ncs-pair {
+    flex-direction: column;
+  }
+  :where(.v2027) .ncs-pair > .ncs-frame {
+    flex: none;
+    width: 100%;
+  }
+  :where(.v2027) .ncs-marq__track img {
+    height: 88px;
+  }
+  :where(.v2027) .ncs-next {
+    row-gap: 0;
+    margin-top: 96px;
+  }
+  :where(.v2027) .ncs-next__lab {
+    grid-column: 1/9;
+  }
+  :where(.v2027) .ncs-next__count {
+    grid-column: 9/17;
+    justify-self: end;
+  }
+  :where(.v2027) :is(.ncs-next__thumb, .ncs-next__line) {
+    grid-column: 1/-1;
+  }
+  :where(.v2027) .ncs-next__thumb {
+    grid-row: 2;
+    margin-top: 16px;
+  }
+  :where(.v2027) .ncs-next__line {
+    grid-row: 3;
+    align-self: start;
+    margin-top: 12px;
+    font-size: 17px;
+  }
+  :where(.v2027) .ncs-next__name {
+    font-size: calc(52 * var(--u));
+    grid-row: 4;
+    margin-top: 24px;
+    line-height: 0.86;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :where(.v2027) .ncs-next .ncs-frame__img {
+    transition: none;
+    transform: none;
+  }
+  :where(.v2027) .ncs-marq__track {
+    animation: none;
+  }
+  :where(.v2027) .ncs-xf {
+    transition: none;
+  }
+}
