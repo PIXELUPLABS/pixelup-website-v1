@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Instrument_Sans } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
 import { DatafastVisitGoal } from "@/components/DatafastVisitGoal";
@@ -19,11 +19,15 @@ const interDisplay = localFont({
   display: "swap",
 });
 
-// Instrument Sans is used only for button labels.
-const instrumentSans = Instrument_Sans({
+// Instrument Sans is used only for button labels. Self-hosted: Google Fonts
+// sometimes serves it from /l/font?kit=…&skey=… URLs, which next/font/google
+// can't resolve under Turbopack, failing the build. This is Google's own latin
+// subset (variable, so one file covers 500 and 600).
+const instrumentSans = localFont({
   variable: "--font-button",
-  subsets: ["latin"],
-  weight: ["500", "600"],
+  src: "./fonts/InstrumentSans-latin.woff2",
+  weight: "500 600",
+  style: "normal",
   display: "swap",
 });
 
