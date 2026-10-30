@@ -118,7 +118,7 @@ export default function RootLayout({
               s.async = true;
               s.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/" + key + ".js.gz";
               document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
-            }("5NRP9H3XYXO1");
+            }("W6Z57HDJJ5OX");
           `}
         </Script>
         <DisableImageDrag />
