@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { Footer } from "@/components/Footer";
-import { blogPostSchema } from "@/sanity/lib/blog-schema";
+import { blogPostGraph, serializeJsonLd } from "@/sanity/lib/blog-structured-data";
 import type { BlogPostData } from "@/sanity/lib/blog-types";
 import { formatBlogDate } from "@/sanity/lib/blog-utils";
 import type { SanityImageSource } from "@sanity/image-url";
@@ -212,9 +212,10 @@ export function BlogPostPage({
 }) {
   return (
     <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
+      {/* One graph: BlogPosting, breadcrumb, and the FAQ and agency list when the body has them. */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema(post)) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogPostGraph(post)) }}
       />
       <BlogPostSidebar post={post} />
       {/* Divider between the aside and content columns, same treatment as /blog. */}

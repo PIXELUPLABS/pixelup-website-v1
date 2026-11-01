@@ -2,7 +2,7 @@ import {authorProfileUrl} from './author-links'
 import {urlFor} from './image'
 import type {BlogImage, BlogPostData} from './blog-types'
 
-const BASE_URL = 'https://www.pixeluplabs.com'
+export const BASE_URL = 'https://www.pixeluplabs.com'
 
 export function blogImageUrl(image: BlogImage, width = 2084, height = 960): string {
   if (image.kind === 'legacy') return `${BASE_URL}${image.src}`
