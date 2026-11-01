@@ -36,7 +36,6 @@ export function BlogList({ posts }: { posts: BlogPostData[] }) {
             <div className="relative h-65 w-full desk:aspect-2084/960 desk:h-auto desk:w-[45%]">
               <BlogImage
                 image={post.image}
-                alt=""
                 fill
                 sizes="(min-width: 1200px) 45vw, 100vw"
                 className="object-cover object-left"

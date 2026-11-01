@@ -21,7 +21,10 @@ export function TrustedStrip() {
       <div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
         {/* Each copy carries its own trailing gap so translateX(-50%) equals
             exactly one repeat period. gap/margin match the strip's internal
-            logo spacing so the seams read like just another gap. */}
+            logo spacing so the seams read like just another gap. Both copies
+            carry the same alt (Bing's site scan reports alt="" as missing);
+            the duplicate's wrapper is aria-hidden, so screen readers read
+            the logos once. */}
         <div
           className="flex w-max animate-[marquee_30s_linear_infinite]"
           onMouseEnter={(e) => {
@@ -41,7 +44,7 @@ export function TrustedStrip() {
             >
               <Image
                 src={strip}
-                alt={i === 0 ? "Logos: Razorpay, Pogo, Bland, Sainapse, Greptile, Revyl and Streamline" : ""}
+                alt="Logos: Razorpay, Pogo, Bland, Sainapse, Greptile, Revyl and Streamline"
                 className="h-6 w-auto opacity-70"
                 priority
               />

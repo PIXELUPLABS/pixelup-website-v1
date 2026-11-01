@@ -35,7 +35,7 @@ function RelatedArticleCard({ post }: { post: BlogPostData }) {
           the image on wide viewports, where the card grows wider without
           growing taller. */}
       <div className="relative h-56.25 w-full desk:aspect-2084/960 desk:h-auto">
-        <BlogImage image={post.image} alt="" fill sizes="(min-width: 1200px) 25vw, 100vw" className="object-cover object-left" />
+        <BlogImage image={post.image} fill sizes="(min-width: 1200px) 25vw, 100vw" className="object-cover object-left" />
       </div>
       {/* Extra mt-2 on top of the card's gap-3 rhythm for the spacing
           called out between the image and the tag. */}
@@ -231,7 +231,6 @@ export function BlogPostPage({
         <div className="fade-up w-full [animation-delay:100ms]">
           <BlogImage
             image={post.image}
-            alt=""
             width={2084}
             height={960}
             priority
