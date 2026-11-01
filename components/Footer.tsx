@@ -136,7 +136,7 @@ export function Footer() {
             </div>
           </div>
           <div className="flex w-full items-center border-t-[0.5px] border-hairline p-6">
-            <Image src={unionMark} alt="" className="h-auto w-full" />
+            <Image src={unionMark} alt="PIXELUP LABS" className="h-auto w-full" />
           </div>
         </div>
       </div>

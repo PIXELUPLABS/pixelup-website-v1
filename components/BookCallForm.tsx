@@ -109,10 +109,12 @@ export function BookCallForm({
         className={`group ${ctaButtonBase} ${ctaButtonPadding} shrink-0 cursor-pointer gap-3 rounded-l-none bg-accent text-white hover:brightness-110`}
       >
         <span>{label}</span>
-        {/* Hover: the arrow nudges a few pixels to the right. */}
+        {/* Hover: the arrow nudges a few pixels to the right. Real alt even
+            though it's aria-hidden: Bing's site scan reports alt="" as
+            missing, and aria-hidden keeps screen readers off it. */}
         <Image
           src="/media/Container.svg"
-          alt=""
+          alt="Arrow"
           width={14}
           height={14}
           aria-hidden="true"

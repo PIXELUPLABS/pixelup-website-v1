@@ -27,6 +27,8 @@ export function BlogImage({
   priority?: boolean
   className?: string
 }) {
+  // Omit `alt` to use the image's own alt from Sanity. Passing alt="" overrides
+  // it, and Bing's site scan reports an empty alt as a missing one.
   const imageAlt = alt ?? image.alt
 
   if (image.kind === 'legacy') {

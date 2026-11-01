@@ -17,9 +17,12 @@ export function BlogFaq() {
     <section className="w-full border-t-[0.5px] border-hairline py-8">
       <div className="flex w-full flex-col gap-6 desk:flex-row desk:gap-0">
         <div className="relative w-full overflow-hidden desk:w-[45%] desk:pr-5">
+          {/* Decorative, so aria-hidden; still a real alt because Bing's
+              site scan reports alt="" as missing. */}
           <Image
             src={faqBg}
-            alt=""
+            alt="Background pattern"
+            aria-hidden="true"
             fill
             sizes="(min-width: 1200px) 45vw, 100vw"
             className="scale-110 object-cover -translate-x-20 -translate-y-12"

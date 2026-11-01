@@ -196,7 +196,7 @@
     "when_to_use": "Inside LeftNav and CaseSidebar, immediately above CtaButtons — or, on /call (no CTAs), immediately above TestimonialSlider.",
     "do_not": [
       "Don't add a logo to only one of the two duplicated blocks — both copies must stay identical or the loop will visibly jump.",
-      "The first copy carries real alt text; the duplicate is aria-hidden — keep that split when adding logos."
+      "Both copies carry the same real alt text (Bing's site scan reports alt=\"\" as missing); the duplicate's wrapper is aria-hidden so screen readers read the logos once — keep that when adding logos."
     ]
   },
 
@@ -304,6 +304,7 @@
     "do_not": [
       "Don't build Sanity CDN URLs directly in page components; pass the normalized BlogImage value here.",
       "Don't omit the sizes prop when using fill, because Next Image needs it for correct responsive selection.",
+      "Don't pass alt=\"\" for a Sanity image: omit alt so the image's own Sanity alt is used. An explicit empty alt overrides it, and Bing's site scan reports it as missing.",
       "Don't publish an in-article screenshot of a third-party site without its alt text, caption, `sourceUrl` and `capturedOn` date."
     ]
   },
