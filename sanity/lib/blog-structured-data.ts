@@ -18,8 +18,7 @@ type ListGroup = {level: 2 | 3; parent: number; domains: Map<number, string>}
 const FAQ_HEADINGS = new Set(['faq', 'frequently asked questions'])
 // "<Name> homepage hero (<domain>), captured <date>": the alt on every list entry's screenshot.
 const HERO_ALT = /^.+?\s+homepage hero \(([a-z0-9-]+(?:\.[a-z0-9-]+)+)\)/i
-const SITE_MENTION = /(?:^|\W)Site:\s*(?:https?:\/\/)?([A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+)/
-const NUMBERED = /^\d+\.\s+/
+const NUMBERED = /^(\d+)\.\s+/
 const NAME_CONNECTORS = new Set(['and', 'the', 'for'])
 
 function plain(value: unknown): string {
@@ -117,7 +116,7 @@ function answerText(nodes: BodyNode[], endsPost: boolean) {
     .reduce((text, part) => (text ? `${endsSentence(text) ? text : `${text}.`} ${part}` : part), '')
 }
 
-function faqPage(nodes: BodyNode[], url: string) {
+function faqPage(nodes: BodyNode[], url: string, title: string) {
   const start = nodes.findIndex(
     (node) => isHeading(node, 2) && FAQ_HEADINGS.has(node.text.toLowerCase()),
   )
@@ -139,6 +138,10 @@ function faqPage(nodes: BodyNode[], url: string) {
   return {
     '@type': 'FAQPage',
     '@id': `${url}#faq`,
+    url,
+    name: title,
+    isPartOf: {'@id': `${BASE_URL}/#website`},
+    breadcrumb: {'@id': `${url}#breadcrumb`},
     mainEntity: questions.map(({name, text}) => ({
       '@type': 'Question',
       name,
@@ -153,12 +156,13 @@ function entryName(heading: string) {
 }
 
 /**
- * A heading without a hero screenshot only joins the list when it reads like a studio
- * name: numbered like the others, not a question, and no lowercase words after the
- * first, so notes such as "Studios we cut, and why" stay out.
+ * A heading without a hero screenshot joins a numbered list only when it is numbered
+ * too. In an unnumbered list it has to read like a studio name: not a question, and no
+ * lowercase words after the first, so notes such as "Studios we cut, and why" stay out.
  */
 function readsLikeEntry(heading: string, numbered: boolean) {
-  if (heading.endsWith('?') || (numbered && !NUMBERED.test(heading))) return false
+  if (heading.endsWith('?')) return false
+  if (numbered) return NUMBERED.test(heading)
   const words = entryName(heading).split(' ')
   return (
     words.length <= 5 &&
@@ -166,16 +170,22 @@ function readsLikeEntry(heading: string, numbered: boolean) {
   )
 }
 
-function organizationUrl(domain: string) {
-  const host = domain.toLowerCase()
-  return host.replace(/^www\./, '') === 'pixeluplabs.com' ? `${BASE_URL}/` : `https://${host}`
+/** Our own entry points at the home page's Organization so the two merge. */
+function organization(name: string, domain?: string) {
+  const host = domain?.toLowerCase()
+  if (host?.replace(/^www\./, '') === 'pixeluplabs.com') {
+    return {'@type': 'Organization', '@id': `${BASE_URL}/#organization`, name, url: `${BASE_URL}/`}
+  }
+  return {'@type': 'Organization', name, ...(host ? {url: `https://${host}`} : {})}
 }
 
 /**
  * The agencies a list post ranks, in page order. An entry heading (h2 or h3) is one
- * whose next block is a "<Name> homepage hero (<domain>)" screenshot. h3 entries take
- * every h3 under their list h2 and h2 entries every h2 between the first and last one
- * found, so an entry without a screenshot keeps its place.
+ * whose next block is a "<Name> homepage hero (<domain>)" screenshot. A numbered list
+ * takes every numbered heading in its run (the h3s under the list h2, or the h2s next
+ * to the ones found until the first unnumbered h2), so an entry without a screenshot
+ * keeps its place, even first or last, and each position is the number on the page.
+ * An unnumbered list runs from its start to the last screenshot and counts in order.
  */
 function itemList(nodes: BodyNode[], url: string, title: string) {
   const groups = new Map<string, ListGroup>()
@@ -201,31 +211,35 @@ function itemList(nodes: BodyNode[], url: string, title: string) {
   const {level, domains, parent: listIndex} = group
 
   const found = [...domains.keys()]
-  let from = found[0]
+  const numbered = found.every((index) => NUMBERED.test((nodes[index] as Heading).text))
+  let from = level === 3 ? listIndex + 1 : found[0]
   let to = found[found.length - 1]
-  const listHeading = nodes[listIndex]
-  if (level === 3) {
+  if (numbered && level === 3) {
     const next = nodes.findIndex((node, index) => index > listIndex && isHeading(node, 2))
-    from = listIndex + 1
     to = (next === -1 ? nodes.length : next) - 1
   }
-  const numbered = found.every((index) => NUMBERED.test((nodes[index] as Heading).text))
+  if (numbered && level === 2) {
+    const h2s = nodes.flatMap((node, index) => (isHeading(node, 2) ? [index] : []))
+    const isNumbered = (at: number) => NUMBERED.test((nodes[h2s[at]] as Heading).text)
+    let first = h2s.indexOf(from)
+    let last = h2s.indexOf(to)
+    while (first > 0 && isNumbered(first - 1)) first -= 1
+    while (last < h2s.length - 1 && isNumbered(last + 1)) last += 1
+    from = h2s[first]
+    to = h2s[last]
+  }
+  const listHeading = nodes[listIndex]
 
-  const entries: Array<{name: string; url?: string}> = []
+  const entries: Array<{position: number; name: string; domain?: string}> = []
   for (let index = from; index <= to; index += 1) {
     const node = nodes[index]
     if (!isHeading(node, level)) continue
-    let domain = domains.get(index)
+    const domain = domains.get(index)
     if (!domain && !readsLikeEntry(node.text, numbered)) continue
     const name = entryName(node.text)
     if (!name) continue
-    // No screenshot: look for a "Site: example.com" line in the entry's own section.
-    for (let next = index + 1; !domain && next < nodes.length; next += 1) {
-      const block = nodes[next]
-      if (isHeading(block) && block.level <= level) break
-      if (block.kind === 'text') domain = SITE_MENTION.exec(block.text)?.[1]
-    }
-    entries.push({name, ...(domain ? {url: organizationUrl(domain)} : {})})
+    const position = numbered ? Number(NUMBERED.exec(node.text)?.[1]) : entries.length + 1
+    entries.push({position, name, domain})
   }
 
   return {
@@ -234,11 +248,11 @@ function itemList(nodes: BodyNode[], url: string, title: string) {
     name: level === 3 && isHeading(listHeading) && listHeading.text ? listHeading.text : title,
     numberOfItems: entries.length,
     itemListOrder: 'https://schema.org/ItemListOrderAscending',
-    itemListElement: entries.map((entry, index) => ({
+    itemListElement: entries.map(({position, name, domain}) => ({
       '@type': 'ListItem',
-      position: index + 1,
-      name: entry.name,
-      item: {'@type': 'Organization', ...entry},
+      position,
+      name,
+      item: organization(name, domain),
     })),
   }
 }
@@ -264,7 +278,7 @@ export function blogPostGraph(post: BlogPostData) {
   const sections: object[] = []
   try {
     const nodes = Array.isArray(post.body) ? post.body.map(toNode) : []
-    for (const section of [faqPage(nodes, url), itemList(nodes, url, post.title)]) {
+    for (const section of [faqPage(nodes, url, post.title), itemList(nodes, url, post.title)]) {
       if (section) sections.push(section)
     }
   } catch {
