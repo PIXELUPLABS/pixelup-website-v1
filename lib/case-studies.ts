@@ -2988,8 +2988,8 @@ const ctgt: CaseStudy = {
     { slug: "replay", tags: "Branding, website & product design" },
     { slug: "fuseai", tags: "Branding, website & product design" },
   ],
-  // Draft: noindex, out of the sitemap, and nothing links to it yet. The
-  // homepage card still points at ctgt.ai.
+  // Draft: noindex and out of the sitemap. The homepage card and the
+  // /case-studies row link here (Arjun, 2026-11-03).
   publication: {
     status: "draft",
     publishedDate: "2026-11-03",
@@ -2998,7 +2998,7 @@ const ctgt: CaseStudy = {
       "Copy audit (Arjun, later).",
       "CTGT's OK to publish, plus the kickoff-call and analytics details the copy uses.",
       "No client quote yet; ask Cyril or Ethan for a dated line.",
-      "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
+      "At publish: set both dates to the publish day.",
     ],
   },
 };
@@ -3228,8 +3228,8 @@ const autumn: CaseStudy = {
     { slug: "replay", tags: "Branding, website & product design" },
     { slug: "fuseai", tags: "Branding, website & product design" },
   ],
-  // Draft: noindex, out of the sitemap, and nothing links to it yet. The
-  // homepage card still points at useautumn.com.
+  // Draft: noindex and out of the sitemap. The homepage card and the
+  // /case-studies row link here (Arjun, 2026-11-03).
   publication: {
     status: "draft",
     publishedDate: "2026-11-03",
@@ -3238,7 +3238,7 @@ const autumn: CaseStudy = {
       "Copy audit (Arjun).",
       "Autumn's OK to publish and to name its customers; the shared client channel was unreadable, so Ayush's side comes from call summaries.",
       "No client quote yet; ask Ayush for a dated line.",
-      "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
+      "At publish: set both dates to the publish day.",
     ],
   },
 };
@@ -3489,8 +3489,8 @@ const zenact: CaseStudy = {
     { slug: "replay", tags: "Branding, website & product design" },
     { slug: "fuseai", tags: "Branding, website & product design" },
   ],
-  // Draft: noindex, out of the sitemap, and nothing links to it yet. The
-  // homepage card still points at zenact.ai.
+  // Draft: noindex and out of the sitemap. The homepage card and the
+  // /case-studies row link here (Arjun, 2026-11-03).
   publication: {
     status: "draft",
     publishedDate: "2026-11-03",
@@ -3500,7 +3500,7 @@ const zenact: CaseStudy = {
       "Zenact isn't on the publishable roster in proof-bank.md: confirm we can name it.",
       "Zenact's OK to publish; the shared client channel sits in Zenact's workspace and couldn't be read.",
       "No client quote yet.",
-      "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
+      "At publish: set both dates to the publish day.",
     ],
   },
 };
@@ -3698,8 +3698,8 @@ const valley: CaseStudy = {
     { slug: "replay", tags: "Branding, website & product design" },
     { slug: "fuseai", tags: "Branding, website & product design" },
   ],
-  // Draft: noindex, out of the sitemap, and nothing links to it yet. The
-  // homepage card still points at joinvalley.co.
+  // Draft: noindex and out of the sitemap. The homepage card and the
+  // /case-studies row link here (Arjun, 2026-11-03).
   publication: {
     status: "draft",
     publishedDate: "2026-11-03",
@@ -3707,9 +3707,8 @@ const valley: CaseStudy = {
     blockers: [
       "Copy audit (Arjun).",
       "Zayd's OK as well as Shubh's (Shubh is close to the studio).",
-      "Fix the /case-studies card, which says 'Brand identity': Valley's brand pre-existed.",
       "No client quote yet.",
-      "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
+      "At publish: set both dates to the publish day.",
     ],
   },
 };

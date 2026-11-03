@@ -121,8 +121,9 @@ export const projects: Project[] = [
   {
     slug: "ctgt",
     label: "CTGT",
-    href: "https://www.ctgt.ai/",
-    external: true,
+    // The case study is still a draft (noindex).
+    href: "/case-studies/ctgt",
+    external: false,
     media: { type: "image", src: "/media/ctgt.png" },
     alt: "CTGT website design by PIXELUP LABS",
     tagline: "Applied interpretability lab for regulated industries",
@@ -168,12 +169,14 @@ export const projects: Project[] = [
   {
     slug: "valley",
     label: "Valley",
-    href: "https://www.joinvalley.co/",
-    external: true,
+    // The case study is still a draft (noindex).
+    href: "/case-studies/valley",
+    external: false,
     media: { type: "image", src: "/media/valley.png" },
     alt: "Valley website design by PIXELUP LABS",
     tagline: "AI outbound sales platform for B2B revenue teams",
-    services: ["Branding", "Website Design"],
+    // No branding: Valley's brand pre-existed (see its case study).
+    services: ["Website Design", "Framer Development"],
     year: "2025",
   },
   // Revyl pulled from the showcase (Aug 2026). Note: while absent here, the
@@ -209,8 +212,9 @@ export const projects: Project[] = [
   {
     slug: "zenact",
     label: "Zenact",
-    href: "https://zenact.ai/",
-    external: true,
+    // The case study is still a draft (noindex).
+    href: "/case-studies/zenact",
+    external: false,
     media: { type: "image", src: "/media/zenact.jpg" },
     alt: "Zenact website design by PIXELUP LABS",
     // From zenact.ai's live hero: AI agents play out natural-language
@@ -222,8 +226,9 @@ export const projects: Project[] = [
   {
     slug: "autumn",
     label: "Autumn",
-    href: "https://useautumn.com/",
-    external: true,
+    // The case study is still a draft (noindex).
+    href: "/case-studies/autumn",
+    external: false,
     media: { type: "image", src: "/media/autumn.png" },
     alt: "Autumn website design by PIXELUP LABS",
     // Verbatim from useautumn.com's live H1.
