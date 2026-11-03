@@ -2746,6 +2746,267 @@ const replay: CaseStudy = {
   },
 };
 
+const ctgtFaq: FaqItem = {
+  q: "Who designed CTGT's brand and website?",
+  a: "PIXELUP LABS designed CTGT's brand identity and website in 2025 and 2026, and built the site in Webflow. CTGT is a YC F24 applied interpretability lab that sells AI governance to banks, insurers and other regulated companies. The homepage went live for CTGT's launch on 16 December 2025, five weeks after kickoff, and CTGT's own team now runs the site.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/ctgt-case-study.md
+// (first draft, 2026-11-03), sources and open calls listed there. The copy
+// audit comes later (Arjun, 2026-11-03). No client quote yet, so no
+// testimonial block. Mockups: Figma jfiQlmF7z1j3cq8BDFhuMT (Project
+// showcase), section "Final Set" 2423:13962, frames top to bottom, exported
+// 2026-11-03 at 1x (2920×1643 full width, 1438×1800 and 1440×1558 pairs).
+const ctgt: CaseStudy = {
+  slug: "ctgt",
+  title: "We made CTGT ready for the banks and insurers it sells to.",
+  metaTitle: "CTGT Brand and Website Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS designed CTGT's brand and website for the banks and insurers it sells to, and built it in Webflow. Homepage live 5 weeks after kickoff.",
+  info: {
+    client: "CTGT",
+    year: "2025–2026",
+    // No funding row (FuseAI precedent): the round sits in the sidebar summary.
+    involvement: ["Branding", "Web Design", "Motion Design", "Webflow Development"],
+    links: [{ label: "ctgt.ai", href: "https://www.ctgt.ai/" }],
+  },
+  description: [
+    "PIXELUP LABS designed CTGT's brand identity and website in 2025 and 2026, and built the site in Webflow.",
+    "CTGT sells AI governance to banks, insurers and other regulated companies. Its buyers check the website after a warm intro, so the brand had to pass that check.",
+    "The homepage went live for CTGT's launch on 16 December 2025, five weeks after kickoff.",
+  ],
+  // Frame 1: the brand board.
+  hero: {
+    media: { type: "image", src: "/media/ctgt/hero.avif" },
+    alt: "CTGT brand board: the Switzer type specimen, the CTGT mark, a colour bar and the website on a wall display, brand identity by PIXELUP LABS",
+    intrinsicSize: { width: 2920, height: 1643 },
+  },
+  story: {
+    company: "CTGT",
+    statusBadge: "YC F24 · Enterprise AI",
+    headline: "We made CTGT ready for the banks and insurers it sells to.",
+    // CTGT's own announcement (ctgt.ai/research/ctgt-raises-7-6m, dated
+    // 2025-02-20) names the $7.6M and the backers; press reported $7.2M, so
+    // the figure is attributed ("says"). Founders: Business Insider, 2025-02-20.
+    summary:
+      "CTGT is an **applied interpretability lab**. Its policy engine holds any AI model to a company's own rules at the moment of output, for banks, insurers and other regulated businesses. CTGT says it has **raised $7.6M from Gradient, General Catalyst and Y Combinator**, with angels including François Chollet and Paul Graham. Cyril Gorlla (CEO) and Trevor Tuttle founded it in 2024, out of UC San Diego.",
+    // Kickoff 2025-11-11 to the launch-day homepage on 2025-12-16. Needs
+    // Arjun's OK (a Slack-derived timing fact); never pair it with the whole
+    // engagement, which ran to a February 2026 handoff.
+    highlights: [{ value: "5 weeks", label: "Kickoff to the homepage CTGT launched on" }],
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did CTGT need a new brand?",
+        items: [
+          {
+            label: "Where CTGT was",
+            text: "CTGT sells top-down to CIOs and data leaders at regulated companies, usually through a warm intro. **After the intro, a second decision-maker checks the website.** CTGT told us that check was where deals were being decided.",
+          },
+          {
+            label: "What CTGT asks its buyers to do",
+            text: "Put CTGT between their AI models and their customers. Every answer a model gives is checked against the company's own policy, **with an audit trail a regulator can read.**",
+          },
+          {
+            label: "What they asked us for",
+            text: "**A new brand identity and website**, with the homepage ready for CTGT's December launch.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**A bank won't run AI it can't audit.** It won't trust a vendor whose own website looks unfinished, either.",
+          },
+        ],
+      },
+      // Frame 2: the mark's construction grid.
+      {
+        kind: "media",
+        id: "snapshot-logo-construction",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/logo-construction.avif" },
+            alt: "Construction grid for the CTGT mark, a faceted outline with its anchor points and corner radius",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      // Frame 3.
+      {
+        kind: "media",
+        id: "snapshot-billboard",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/billboard.avif" },
+            alt: "CTGT street billboard reading 'Experience the next evolution of AI governance' over a misty mountain range",
+            intrinsicSize: { width: 2920, height: 1526 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-second-buyer",
+        index: "01",
+        heading: "CTGT had to pass the second buyer's check without naming its customers.",
+        problem:
+          "Regulated customers rarely let a vendor show their logo. **So CTGT couldn't lean on the logo wall** every other AI company uses.",
+        whyItMattered:
+          "The person checking the site usually sits in risk, compliance or IT. **They're looking for a reason to say no.** Most AI startups pile on proof to look serious. CTGT had to look serious with less.",
+        whatWeDid:
+          "We showed CTGT three directions and chose the calmest: **light, landscapes and precise type**, closer to a research institute than a startup. The two bolder ones were too avant-garde for bankers and lawyers. In place of customer logos, we used the proof CTGT could publish: **named endorsements from AI leaders, press logos, and benchmarks with their sources.** \"Contact us\" became **an application for partnership**, open to company email addresses only.",
+        outcome:
+          "The homepage went live on **16 December 2025**, CTGT's launch day. CTGT held its launch posts until the site was up. **The full site and the brand book followed**, built in CTGT's own Webflow account.",
+      },
+      // Frames 4a and 4b. The insurance case study is CTGT's own, still
+      // public on ctgt.ai/industries/insurance (checked 2026-11-03).
+      {
+        kind: "media",
+        id: "snapshot-phone-case-study",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/ctgt/phone-home.avif" },
+              alt: "CTGT homepage on a phone: 'The deterministic layer for frontier intelligence' with View the Research and Deploy the Platform buttons",
+              intrinsicSize: { width: 1438, height: 1800 },
+            },
+            {
+              media: { type: "image", src: "/media/ctgt/insurance-case-study.avif" },
+              alt: "CTGT case study card over a lake: 'How a Lloyd's-backed, Inc. 5000 InsurTech scaled AI powered underwriting with CTGT'",
+              intrinsicSize: { width: 1438, height: 1800 },
+            },
+          ],
+        },
+      },
+      // Frame 5.
+      {
+        kind: "media",
+        id: "snapshot-posters",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/posters.avif" },
+            alt: "Three CTGT posters on a wall: enforce policies automatically, fix violations in real time, keep an audit trail for every AI decision",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-legible",
+        index: "02",
+        heading: "The product had to make sense to executives who aren't ML researchers.",
+        problem:
+          "CTGT changes how a model behaves **without retraining it or rewriting prompts.** That's a research result, and most buyers can't picture it.",
+        whyItMattered:
+          "A CIO has to explain the purchase to a board and a regulator. **If they can't draw where CTGT sits in their stack, they can't buy it.**",
+        whatWeDid:
+          "We built a **policy engine animation**: a bad model answer is flagged, then corrected against policy, side by side. When CTGT's analytics showed visitors gave it under five seconds, **we cut it to the part that mattered.** We redrew the architecture as one simple stack, **policy documents, then CTGT, then the model, then the output**, with the point on top: change the policy and the model changes with it. Audit trails became a decision tree. Every industry page runs **challenge, solution, then ROI.**",
+        outcome:
+          "At handoff in February 2026, the homepage led with research, not a demo button. **\"View the Research\" was the primary call to action**, and the About page read like a research lab's. CTGT's team now runs the research library and the rest of the site itself.",
+      },
+      // Frame 6.
+      {
+        kind: "media",
+        id: "snapshot-kiosk",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/kiosk.avif" },
+            alt: "CTGT street kiosk showing a baseline AI answer beside a policy-corrected one, titled 'Automated enforcement & remediation'",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      // Frames 7a and 7b: the two diagrams from challenge 02.
+      {
+        kind: "media",
+        id: "snapshot-diagrams",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/ctgt/policy-as-code.avif" },
+              alt: "CTGT policy-as-code diagram: policy documents feed the CTGT Policy Engine, over the models and cloud guardrails, to the output",
+              intrinsicSize: { width: 1440, height: 1558 },
+            },
+            {
+              media: { type: "image", src: "/media/ctgt/audit-trail.avif" },
+              alt: "CTGT audit-trail diagram: a model answer checked against an organisation policy and five sub-policies, each one passed",
+              intrinsicSize: { width: 1440, height: 1558 },
+            },
+          ],
+        },
+      },
+      // Frame 8.
+      {
+        kind: "media",
+        id: "snapshot-billboards",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/billboards.avif" },
+            alt: "Two CTGT billboards on a green wall: 'CTGT is real time infrastructure for controllable AI' and 'Frontier level accuracy and reliability'",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      // Frame 9.
+      {
+        kind: "media",
+        id: "snapshot-monitor",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/monitor.avif" },
+            alt: "CTGT homepage on a desktop monitor, set in a dark mountain landscape",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where CTGT ended up.",
+        paragraphs: [
+          "CTGT left with **a brand book, logo rules, an event and sales deck, social banners**, and Loom walkthroughs for running its Webflow site.",
+          "The rules are written down. **The logo runs in dark green-black (#17201B), and pure black only when it stands alone.** Months after handoff, CTGT's team was still checking the guide before shipping.",
+          "CTGT kept its name and wrote the final copy. We **designed the brand, designed and built the site, and made the motion.**",
+          "We work founder to founder. If your rebrand needs a steering committee to sign off, a larger firm will serve you better.",
+          "Branding, web design, motion design and Webflow development by PIXELUP LABS, 2025–2026.",
+        ],
+        cta: {
+          text: "If your buyers check your website before they take the call,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    faqs: [ctgtFaq, ...pixelupFaq],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "replay", tags: "Branding, website & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
+  ],
+  // Draft: noindex, out of the sitemap, and nothing links to it yet. The
+  // homepage card still points at ctgt.ai.
+  publication: {
+    status: "draft",
+    publishedDate: "2026-11-03",
+    updatedDate: "2026-11-03",
+    blockers: [
+      "Copy audit (Arjun, later).",
+      "CTGT's OK to publish, plus the kickoff-call and analytics details the copy uses.",
+      "Arjun's OK on the 5 weeks stat.",
+      "No client quote yet; ask Cyril or Ethan for a dated line.",
+      "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
+    ],
+  },
+};
+
 const avantraFaq: FaqItem = {
   q: "Who designed Avantra's brand?",
   a: "PIXELUP LABS is designing Avantra's brand identity in 2026: strategy and moodboards, two visual directions, the logo and wordmark, an illustration and glyph system, deck and memo templates, and website explorations.",
@@ -3982,5 +4243,6 @@ export const caseStudies = {
   henryLabs,
   fuseai,
   replay,
+  ctgt,
   avantra,
 };
