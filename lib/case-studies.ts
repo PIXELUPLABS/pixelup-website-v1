@@ -2748,7 +2748,7 @@ const replay: CaseStudy = {
 
 const ctgtFaq: FaqItem = {
   q: "Who designed CTGT's brand and website?",
-  a: "PIXELUP LABS designed CTGT's brand identity and website in 2025 and 2026, and built the site in Webflow. CTGT is a YC F24 applied interpretability lab that sells AI governance to banks, insurers and other regulated companies. The homepage went live for CTGT's launch on 16 December 2025, five weeks after kickoff, and CTGT's own team now runs the site.",
+  a: "PIXELUP LABS designed CTGT's brand and website in 2025 and 2026, and built the site in Webflow. CTGT is a YC F24 applied interpretability lab that sells AI governance to regulated companies. The homepage went live for CTGT's launch on 16 December 2025.",
 };
 
 // Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/ctgt-case-study.md
@@ -2762,7 +2762,7 @@ const ctgt: CaseStudy = {
   title: "We made CTGT ready for the banks and insurers it sells to.",
   metaTitle: "CTGT Brand and Website Design | PIXELUP LABS",
   metaDescription:
-    "PIXELUP LABS designed CTGT's brand and website for the banks and insurers it sells to, and built it in Webflow. Homepage live 5 weeks after kickoff.",
+    "PIXELUP LABS designed CTGT's brand and website for the banks and insurers it sells to, and built it in Webflow, live for CTGT's December 2025 launch.",
   info: {
     client: "CTGT",
     year: "2025–2026",
@@ -2773,7 +2773,7 @@ const ctgt: CaseStudy = {
   description: [
     "PIXELUP LABS designed CTGT's brand identity and website in 2025 and 2026, and built the site in Webflow.",
     "CTGT sells AI governance to banks, insurers and other regulated companies. Its buyers check the website after a warm intro, so the brand had to pass that check.",
-    "The homepage went live for CTGT's launch on 16 December 2025, five weeks after kickoff.",
+    "The homepage went live for CTGT's launch on 16 December 2025.",
   ],
   // Frame 1: the brand board.
   hero: {
@@ -2789,11 +2789,8 @@ const ctgt: CaseStudy = {
     // 2025-02-20) names the $7.6M and the backers; press reported $7.2M, so
     // the figure is attributed ("says"). Founders: Business Insider, 2025-02-20.
     summary:
-      "CTGT is an **applied interpretability lab**. Its policy engine holds any AI model to a company's own rules at the moment of output, for banks, insurers and other regulated businesses. CTGT says it has **raised $7.6M from Gradient, General Catalyst and Y Combinator**, with angels including François Chollet and Paul Graham. Cyril Gorlla (CEO) and Trevor Tuttle founded it in 2024, out of UC San Diego.",
-    // Kickoff 2025-11-11 to the launch-day homepage on 2025-12-16. Needs
-    // Arjun's OK (a Slack-derived timing fact); never pair it with the whole
-    // engagement, which ran to a February 2026 handoff.
-    highlights: [{ value: "5 weeks", label: "Kickoff to the homepage CTGT launched on" }],
+      "CTGT is an **applied interpretability lab**. Its policy engine holds any AI model to a company's own rules, for banks, insurers and other regulated businesses. CTGT says it has **raised $7.6M from Gradient, General Catalyst and Y Combinator**. Cyril Gorlla (CEO) and Trevor Tuttle founded it in 2024, out of UC San Diego.",
+    // No stat row (Arjun, 2026-11-03).
     blocks: [
       {
         kind: "context",
@@ -2802,19 +2799,19 @@ const ctgt: CaseStudy = {
         items: [
           {
             label: "Where CTGT was",
-            text: "CTGT sells top-down to CIOs and data leaders at regulated companies, usually through a warm intro. **After the intro, a second decision-maker checks the website.** CTGT told us that check was where deals were being decided.",
+            text: "CTGT sells to CIOs at regulated companies through warm intros. **After the intro, a second decision-maker checks the website.** CTGT told us deals were decided there.",
           },
           {
             label: "What CTGT asks its buyers to do",
-            text: "Put CTGT between their AI models and their customers. Every answer a model gives is checked against the company's own policy, **with an audit trail a regulator can read.**",
+            text: "Put CTGT between their AI models and their customers, **with an audit trail a regulator can read.**",
           },
           {
             label: "What they asked us for",
-            text: "**A new brand identity and website**, with the homepage ready for CTGT's December launch.",
+            text: "**A new brand and website**, live for CTGT's December launch.",
           },
           {
             label: "Why it mattered",
-            text: "**A bank won't run AI it can't audit.** It won't trust a vendor whose own website looks unfinished, either.",
+            text: "**A bank won't run AI it can't audit**, or trust a vendor whose website looks unfinished.",
           },
         ],
       },
@@ -2850,13 +2847,13 @@ const ctgt: CaseStudy = {
         index: "01",
         heading: "CTGT had to pass the second buyer's check without naming its customers.",
         problem:
-          "Regulated customers rarely let a vendor show their logo. **So CTGT couldn't lean on the logo wall** every other AI company uses.",
+          "Regulated customers rarely let vendors show their logo. **So CTGT couldn't lean on a logo wall.**",
         whyItMattered:
-          "The person checking the site usually sits in risk, compliance or IT. **They're looking for a reason to say no.** Most AI startups pile on proof to look serious. CTGT had to look serious with less.",
+          "The reviewer usually sits in risk, compliance or IT, **looking for a reason to say no.** Most AI startups pile on proof. CTGT had to look serious with less.",
         whatWeDid:
-          "We showed CTGT three directions and chose the calmest: **light, landscapes and precise type**, closer to a research institute than a startup. The two bolder ones were too avant-garde for bankers and lawyers. In place of customer logos, we used the proof CTGT could publish: **named endorsements from AI leaders, press logos, and benchmarks with their sources.** \"Contact us\" became **an application for partnership**, open to company email addresses only.",
+          "We showed three directions and chose the calmest: **light, landscapes and precise type**, closer to a research institute than a startup. In place of customer logos, we used proof CTGT could publish: **named endorsements, press logos and sourced benchmarks.** \"Contact us\" became **an application for partnership**, for company emails only.",
         outcome:
-          "The homepage went live on **16 December 2025**, CTGT's launch day. CTGT held its launch posts until the site was up. **The full site and the brand book followed**, built in CTGT's own Webflow account.",
+          "The homepage went live on **16 December 2025**, CTGT's launch day. **The full site and brand book followed** in CTGT's own Webflow account.",
       },
       // Frames 4a and 4b. The insurance case study is CTGT's own, still
       // public on ctgt.ai/industries/insurance (checked 2026-11-03).
@@ -2898,13 +2895,13 @@ const ctgt: CaseStudy = {
         index: "02",
         heading: "The product had to make sense to executives who aren't ML researchers.",
         problem:
-          "CTGT changes how a model behaves **without retraining it or rewriting prompts.** That's a research result, and most buyers can't picture it.",
+          "CTGT changes how a model behaves **without retraining it or rewriting prompts.** Most buyers can't picture that.",
         whyItMattered:
-          "A CIO has to explain the purchase to a board and a regulator. **If they can't draw where CTGT sits in their stack, they can't buy it.**",
+          "A CIO has to explain the purchase to a board. **If they can't draw where CTGT sits in the stack, they can't buy it.**",
         whatWeDid:
-          "We built a **policy engine animation**: a bad model answer is flagged, then corrected against policy, side by side. When CTGT's analytics showed visitors gave it under five seconds, **we cut it to the part that mattered.** We redrew the architecture as one simple stack, **policy documents, then CTGT, then the model, then the output**, with the point on top: change the policy and the model changes with it. Audit trails became a decision tree. Every industry page runs **challenge, solution, then ROI.**",
+          "We built a **policy engine animation**: a bad answer flagged, then corrected, side by side. When analytics showed visitors gave it under five seconds, **we cut it to the part that mattered.** The architecture became one stack, **policies, then CTGT, then the model, then the output**: change the policy and the model follows. Industry pages run **challenge, solution, then ROI.**",
         outcome:
-          "At handoff in February 2026, the homepage led with research, not a demo button. **\"View the Research\" was the primary call to action**, and the About page read like a research lab's. CTGT's team now runs the research library and the rest of the site itself.",
+          "At handoff, the homepage led with research, not a demo button: **\"View the Research\" was the primary call to action.** CTGT's team now runs the site itself.",
       },
       // Frame 6.
       {
@@ -2970,10 +2967,10 @@ const ctgt: CaseStudy = {
         id: "after-launch",
         heading: "And this is where CTGT ended up.",
         paragraphs: [
-          "CTGT left with **a brand book, logo rules, an event and sales deck, social banners**, and Loom walkthroughs for running its Webflow site.",
-          "The rules are written down. **The logo runs in dark green-black (#17201B), and pure black only when it stands alone.** Months after handoff, CTGT's team was still checking the guide before shipping.",
-          "CTGT kept its name and wrote the final copy. We **designed the brand, designed and built the site, and made the motion.**",
-          "We work founder to founder. If your rebrand needs a steering committee to sign off, a larger firm will serve you better.",
+          "CTGT left with **a brand book, logo rules, a sales deck, social banners** and Loom walkthroughs for its Webflow site.",
+          "**The logo runs in dark green-black (#17201B), pure black only on its own.** Months later, CTGT's team was still checking the guide.",
+          "CTGT kept its name and wrote the final copy. We **designed the brand, built the site and made the motion.**",
+          "We work founder to founder. If your rebrand needs a steering committee, a larger firm fits better.",
           "Branding, web design, motion design and Webflow development by PIXELUP LABS, 2025–2026.",
         ],
         cta: {
@@ -3000,7 +2997,6 @@ const ctgt: CaseStudy = {
     blockers: [
       "Copy audit (Arjun, later).",
       "CTGT's OK to publish, plus the kickoff-call and analytics details the copy uses.",
-      "Arjun's OK on the 5 weeks stat.",
       "No client quote yet; ask Cyril or Ethan for a dated line.",
       "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
     ],
