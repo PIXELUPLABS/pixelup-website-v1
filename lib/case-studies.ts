@@ -3505,6 +3505,216 @@ const zenact: CaseStudy = {
   },
 };
 
+const valleyFaq: FaqItem = {
+  q: "Who designed Valley's website?",
+  a: "PIXELUP LABS redesigned Valley's website in 2025 and 2026, built it in Framer and designed Valley's sales deck, inside Valley's existing brand. Valley is an AI outbound platform backed by General Catalyst and Antler. The site went live on 7 January 2026.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/valley-case-study.md
+// (first draft 2026-11-03, cut about 20% with no stat row, as on CTGT), sources
+// and open calls listed there. No client quote yet, so no testimonial block.
+// Mockups: Figma gi0G5bUJkrpfJjFybaSFHi (X AI Employee File), node 1:22908,
+// the six 1920×1080 frames at 1.5x (its five 1600×1200 frames re-crop five
+// of them, so they're out), plus the brand-tile ring from Daksh's post
+// 2071536655627067730 (2026-06-29), downscaled from 4K.
+const valley: CaseStudy = {
+  slug: "valley",
+  title: "We redesigned Valley's website so buyers see the difference before the call.",
+  metaTitle: "Valley Website Design and Sales Deck | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS redesigned Valley's website inside its existing brand, built it in Framer and designed its sales deck, so buyers see what sets Valley apart.",
+  info: {
+    client: "Valley",
+    year: "2025–2026",
+    // No funding row: sources disagree on the round. Not a rebrand: Valley's
+    // brand pre-existed (Daksh, 2025-11-12).
+    involvement: ["Web Design", "Motion Design", "Framer Development", "Sales Deck"],
+    links: [{ label: "joinvalley.co", href: "https://www.joinvalley.co/" }],
+  },
+  description: [
+    "PIXELUP LABS redesigned Valley's website in 2025 and 2026, built it in Framer and designed its sales deck.",
+    "Valley's prospects kept asking how it differed from other LinkedIn tools. The new site answers that before the call.",
+    "Valley's team has kept building on the site since it launched on 7 January 2026.",
+  ],
+  hero: {
+    media: { type: "image", src: "/media/valley/monitor.avif" },
+    alt: "Valley homepage on a monitor: 'AI-Powered LinkedIn Outreach that Books Sales Calls.', website design by PIXELUP LABS",
+    intrinsicSize: { width: 2880, height: 1620 },
+  },
+  story: {
+    company: "Valley",
+    statusBadge: "AI outbound",
+    headline: "We redesigned Valley's website so buyers see the difference before the call.",
+    fullWidthHeadline: true,
+    // joinvalley.co/about (backers, 300+ teams, Zayd's two exits), 2026-11-03.
+    summary:
+      "Valley is **an AI outbound platform**: it finds the people most likely to buy, researches each one and writes outreach across LinkedIn and email. It's backed by **General Catalyst, Antler and Launch**, and says more than 300 teams use it, including Miro and UiPath. Founder Zayd Ali **built and exited two outbound agencies** first.",
+    // No stat row (Arjun, 2026-11-03, on CTGT).
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Valley need a new website?",
+        items: [
+          {
+            label: "Where Valley was",
+            text: "Valley had a brand it liked. **The homepage didn't explain the engine**, and prospects kept asking how Valley differed from other LinkedIn tools.",
+          },
+          {
+            label: "What Valley asks its buyers to do",
+            text: "Let AI run outreach from their own LinkedIn account. **Careless automation gets accounts flagged.**",
+          },
+          {
+            label: "What they asked us for",
+            text: "**A new homepage, a product-page template and a sales deck**, inside Valley's existing brand.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**Sales leaders have been burned by automation tools.** They buy the one that shows how it works.",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-homepage-hero",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/homepage-hero.avif" },
+            alt: "Valley homepage hero over an oil-paint landscape, with the signal flow and a Find Leads to Send Messages path",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-competitor-question",
+        index: "01",
+        heading: "Valley's website had to answer the competitor question before the sales call.",
+        problem:
+          "**HeyReach, Expandi and lemlist all automate LinkedIn.** Prospects finished demos unsure what made Valley different.",
+        whyItMattered:
+          "If the difference only shows up on the call, **Valley loses everyone who never books one.**",
+        whatWeDid:
+          "**A landing page has about seven seconds to answer: what is this, why now, why you.** So the page leads with results, names the category, shows the engine, then proves it. The engine is a visible flow: **find, qualify, research, personalise, send.** The comparison is concrete: **a labelled reply-rate chart**, and \"migrated off\" logos styled so they can't pass for customers.",
+        outcome:
+          "Live on **7 January 2026.** Ten months on, Valley's team has rebuilt parts of it **and kept the migrated-off band and the reply-rate comparison** (checked 3 November 2026).",
+      },
+      {
+        kind: "media",
+        id: "snapshot-comparison",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/comparison.avif" },
+            alt: "Valley's reply-rate comparison against competitors and its 'Who Valley Is Built For' section, beside the Valley mark in a dot grid",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-engine",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/engine.avif" },
+            alt: "'Powered by the Valley Warm Outbound Engine' section on a dark panel over Valley's oil-paint imagery",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-deck",
+        index: "02",
+        heading: "The sales deck could only show what the product really does.",
+        problem:
+          "Product decks drift: **callouts start promising features the screenshots can't show.**",
+        whyItMattered:
+          "**A buyer who sees a feature on a slide and can't find it in the demo stops trusting both.**",
+        whatWeDid:
+          "We locked the flow in low fidelity first. Then two rules: **cut any callout without a matching screen, and use Valley's own product wording.** The result is 18 slides plus an appendix of annotated screens.",
+        outcome: "**Every claim in the deck maps to a screen Valley can show live.**",
+      },
+      {
+        kind: "media",
+        id: "snapshot-case-studies",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/case-studies.avif" },
+            alt: "Valley's 'How Valley empowers teams to launch and scale' section: customer result cards for Deel, Frang, Kaster and others",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-workflows",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/workflows.avif" },
+            alt: "Valley homepage beside its 'AI-Powered Workflows That Fill Your Calendar' section",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      // Daksh's post 2071536655627067730.
+      {
+        kind: "media",
+        id: "snapshot-brand-ring",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/brand-ring.avif" },
+            alt: "Ring of Valley brand tiles, quotes and product screens around 'AI that Finds High-Intent Leads'",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Valley ended up.",
+        paragraphs: [
+          "The site is **a system Valley's team runs without us**: every section a Framer component, testimonials synced across pages, and a product page that copies per feature.",
+          "Valley wrote its own copy and kept its brand. We **designed and built the site, made the motion and designed the deck.**",
+          "If your brand needs rebuilding from scratch, that's a different project. Valley's didn't, so we didn't touch it.",
+          "Web design, motion design, Framer development and sales deck design by PIXELUP LABS, 2025–2026.",
+        ],
+        cta: {
+          text: "If your prospects still ask how you're different after the demo,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    faqs: [valleyFaq, ...pixelupFaq],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "replay", tags: "Branding, website & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
+  ],
+  // Draft: noindex, out of the sitemap, and nothing links to it yet. The
+  // homepage card still points at joinvalley.co.
+  publication: {
+    status: "draft",
+    publishedDate: "2026-11-03",
+    updatedDate: "2026-11-03",
+    blockers: [
+      "Copy audit (Arjun).",
+      "Zayd's OK as well as Shubh's (Shubh is close to the studio).",
+      "Fix the /case-studies card, which says 'Brand identity': Valley's brand pre-existed.",
+      "No client quote yet.",
+      "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
+    ],
+  },
+};
+
 const avantraFaq: FaqItem = {
   q: "Who designed Avantra's brand?",
   a: "PIXELUP LABS is designing Avantra's brand identity in 2026: strategy and moodboards, two visual directions, the logo and wordmark, an illustration and glyph system, deck and memo templates, and website explorations.",
@@ -4744,5 +4954,6 @@ export const caseStudies = {
   ctgt,
   autumn,
   zenact,
+  valley,
   avantra,
 };
