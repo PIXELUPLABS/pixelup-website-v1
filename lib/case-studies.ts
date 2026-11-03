@@ -2746,6 +2746,973 @@ const replay: CaseStudy = {
   },
 };
 
+const ctgtFaq: FaqItem = {
+  q: "Who designed CTGT's brand and website?",
+  a: "PIXELUP LABS designed CTGT's brand and website in 2025 and 2026, and built the site in Webflow. CTGT is a YC F24 applied interpretability lab that sells AI governance to regulated companies. The homepage went live for CTGT's launch on 16 December 2025.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/ctgt-case-study.md
+// (first draft, 2026-11-03), sources and open calls listed there. The copy
+// audit comes later (Arjun, 2026-11-03). No client quote yet, so no
+// testimonial block. Mockups: Figma jfiQlmF7z1j3cq8BDFhuMT (Project
+// showcase), section "Final Set" 2423:13962, frames top to bottom, exported
+// 2026-11-03 at 1x (2920×1643 full width, 1438×1800 and 1440×1558 pairs).
+const ctgt: CaseStudy = {
+  slug: "ctgt",
+  title: "We made CTGT a brand banks can trust.",
+  metaTitle: "CTGT Brand and Website Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS designed CTGT's brand and website for the banks and insurers it sells to, and built it in Webflow, live for CTGT's December 2025 launch.",
+  info: {
+    client: "CTGT",
+    year: "2025–2026",
+    // No funding row (FuseAI precedent): the round sits in the sidebar summary.
+    involvement: ["Branding", "Web Design", "Motion Design", "Webflow Development"],
+    links: [{ label: "ctgt.ai", href: "https://www.ctgt.ai/" }],
+  },
+  description: [
+    "PIXELUP LABS designed CTGT's brand identity and website in 2025 and 2026, and built the site in Webflow.",
+    "CTGT sells AI governance to banks, insurers and other regulated companies. Its buyers check the website after a warm intro, so the brand had to pass that check.",
+    "The homepage went live for CTGT's launch on 16 December 2025.",
+  ],
+  // Frame 1: the brand board.
+  hero: {
+    media: { type: "image", src: "/media/ctgt/hero.avif" },
+    alt: "CTGT brand board: the Switzer type specimen, the CTGT mark, a colour bar and the website on a wall display, brand identity by PIXELUP LABS",
+    intrinsicSize: { width: 2920, height: 1643 },
+  },
+  story: {
+    company: "CTGT",
+    statusBadge: "YC F24 · Enterprise AI",
+    headline: "We made CTGT a brand banks can trust.",
+    // CTGT's own announcement (ctgt.ai/research/ctgt-raises-7-6m, dated
+    // 2025-02-20) names the $7.6M and the backers; press reported $7.2M, so
+    // the figure is attributed ("says"). Founders: Business Insider, 2025-02-20.
+    summary:
+      "CTGT is an **applied interpretability lab**. Its policy engine holds any AI model to a company's own rules, for banks, insurers and other regulated businesses. CTGT says it has **raised $7.6M from Gradient, General Catalyst and Y Combinator**. Cyril Gorlla (CEO) and Trevor Tuttle founded it in 2024, out of UC San Diego.",
+    // No stat row (Arjun, 2026-11-03).
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did CTGT need a new brand?",
+        items: [
+          {
+            label: "Where CTGT was",
+            text: "CTGT sells to CIOs at regulated companies through warm intros. **After the intro, a second decision-maker checks the website.** CTGT told us deals were decided there.",
+          },
+          {
+            label: "What CTGT asks its buyers to do",
+            text: "Put CTGT between their AI models and their customers, **with an audit trail a regulator can read.**",
+          },
+          {
+            label: "What they asked us for",
+            text: "**A new brand and website**, live for CTGT's December launch.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**A bank won't run AI it can't audit**, or trust a vendor whose website looks unfinished.",
+          },
+        ],
+      },
+      // Frame 2: the mark's construction grid.
+      {
+        kind: "media",
+        id: "snapshot-logo-construction",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/logo-construction.avif" },
+            alt: "Construction grid for the CTGT mark, a faceted outline with its anchor points and corner radius",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      // Frame 3.
+      {
+        kind: "media",
+        id: "snapshot-billboard",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/billboard.avif" },
+            alt: "CTGT street billboard reading 'Experience the next evolution of AI governance' over a misty mountain range",
+            intrinsicSize: { width: 2920, height: 1526 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-second-buyer",
+        index: "01",
+        heading: "CTGT had to pass the second buyer's check without naming its customers.",
+        problem:
+          "Regulated customers rarely let vendors show their logo. **So CTGT couldn't lean on a logo wall.**",
+        whyItMattered:
+          "The reviewer usually sits in risk, compliance or IT, **looking for a reason to say no.** Most AI startups pile on proof. CTGT had to look serious with less.",
+        whatWeDid:
+          "We showed three directions and chose the calmest: **light, landscapes and precise type**, closer to a research institute than a startup. In place of customer logos, we used proof CTGT could publish: **named endorsements, press logos and sourced benchmarks.** \"Contact us\" became **an application for partnership**, for company emails only.",
+        outcome:
+          "The homepage went live on **16 December 2025**, CTGT's launch day. **The full site and brand book followed** in CTGT's own Webflow account.",
+      },
+      // Frames 4a and 4b. The insurance case study is CTGT's own, still
+      // public on ctgt.ai/industries/insurance (checked 2026-11-03).
+      {
+        kind: "media",
+        id: "snapshot-phone-case-study",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/ctgt/phone-home.avif" },
+              alt: "CTGT homepage on a phone: 'The deterministic layer for frontier intelligence' with View the Research and Deploy the Platform buttons",
+              intrinsicSize: { width: 1438, height: 1800 },
+            },
+            {
+              media: { type: "image", src: "/media/ctgt/insurance-case-study.avif" },
+              alt: "CTGT case study card over a lake: 'How a Lloyd's-backed, Inc. 5000 InsurTech scaled AI powered underwriting with CTGT'",
+              intrinsicSize: { width: 1438, height: 1800 },
+            },
+          ],
+        },
+      },
+      // Frame 5.
+      {
+        kind: "media",
+        id: "snapshot-posters",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/posters.avif" },
+            alt: "Three CTGT posters on a wall: enforce policies automatically, fix violations in real time, keep an audit trail for every AI decision",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-legible",
+        index: "02",
+        heading: "The product had to make sense to executives who aren't ML researchers.",
+        problem:
+          "CTGT changes how a model behaves **without retraining it or rewriting prompts.** Most buyers can't picture that.",
+        whyItMattered:
+          "A CIO has to explain the purchase to a board. **If they can't draw where CTGT sits in the stack, they can't buy it.**",
+        whatWeDid:
+          "We built a **policy engine animation**: a bad answer flagged, then corrected, side by side. When analytics showed visitors gave it under five seconds, **we cut it to the part that mattered.** The architecture became one stack, **policies, then CTGT, then the model, then the output**: change the policy and the model follows. Industry pages run **challenge, solution, then ROI.**",
+        outcome:
+          "At handoff, the homepage led with research, not a demo button: **\"View the Research\" was the primary call to action.** CTGT's team now runs the site itself.",
+      },
+      // Frame 6.
+      {
+        kind: "media",
+        id: "snapshot-kiosk",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/kiosk.avif" },
+            alt: "CTGT street kiosk showing a baseline AI answer beside a policy-corrected one, titled 'Automated enforcement & remediation'",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      // Frames 7a and 7b: the two diagrams from challenge 02.
+      {
+        kind: "media",
+        id: "snapshot-diagrams",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/ctgt/policy-as-code.avif" },
+              alt: "CTGT policy-as-code diagram: policy documents feed the CTGT Policy Engine, over the models and cloud guardrails, to the output",
+              intrinsicSize: { width: 1440, height: 1558 },
+            },
+            {
+              media: { type: "image", src: "/media/ctgt/audit-trail.avif" },
+              alt: "CTGT audit-trail diagram: a model answer checked against an organisation policy and five sub-policies, each one passed",
+              intrinsicSize: { width: 1440, height: 1558 },
+            },
+          ],
+        },
+      },
+      // Frame 8.
+      {
+        kind: "media",
+        id: "snapshot-billboards",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/billboards.avif" },
+            alt: "Two CTGT billboards on a green wall: 'CTGT is real time infrastructure for controllable AI' and 'Frontier level accuracy and reliability'",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      // Frame 9.
+      {
+        kind: "media",
+        id: "snapshot-monitor",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/ctgt/monitor.avif" },
+            alt: "CTGT homepage on a desktop monitor, set in a dark mountain landscape",
+            intrinsicSize: { width: 2920, height: 1643 },
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where CTGT ended up.",
+        paragraphs: [
+          "CTGT left with **a brand book, logo rules, a sales deck, social banners** and Loom walkthroughs for its Webflow site.",
+          "**The logo runs in dark green-black (#17201B), pure black only on its own.** Months later, CTGT's team was still checking the guide.",
+          "CTGT kept its name and wrote the final copy. We **designed the brand, built the site and made the motion.**",
+          "We work founder to founder. If your rebrand needs a steering committee, a larger firm fits better.",
+          "Branding, web design, motion design and Webflow development by PIXELUP LABS, 2025–2026.",
+        ],
+        cta: {
+          text: "If your buyers check your website before they take the call,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    faqs: [ctgtFaq, ...pixelupFaq],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "replay", tags: "Branding, website & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
+  ],
+  // Draft: noindex and out of the sitemap. The homepage card and the
+  // /case-studies row link here (Arjun, 2026-11-03).
+  publication: {
+    status: "draft",
+    publishedDate: "2026-11-03",
+    updatedDate: "2026-11-03",
+    blockers: [
+      "Copy audit (Arjun, later).",
+      "CTGT's OK to publish, plus the kickoff-call and analytics details the copy uses.",
+      "No client quote yet; ask Cyril or Ethan for a dated line.",
+      "At publish: set both dates to the publish day.",
+    ],
+  },
+};
+
+const autumnFaq: FaqItem = {
+  q: "Who designed Autumn's brand and website?",
+  a: "PIXELUP LABS designed Autumn's brand and website in 2026, and built the site in Next.js. Autumn (YC S25) is open-source billing infrastructure on top of Stripe, used by Mintlify, Firecrawl and Resend. Autumn's team merged the code into its own repository and runs the site.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/autumn-case-study.md
+// (first draft 2026-11-03, cut about 20% with no stat row, as on CTGT), sources
+// and open calls listed there. No client quote yet, so no testimonial block.
+// Mockups: Figma 7X9laycCOMAeyyJnDVtR2b (Drafts), node 2003:2, exported
+// 2026-11-03: the three 1920×1080 frames at 1.5x (2880×1620), the placed
+// images at 1x (their source size).
+const autumn: CaseStudy = {
+  slug: "autumn",
+  title: "We gave Autumn a brand engineers remember.",
+  metaTitle: "Autumn Brand and Website Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS designed Autumn's brand and website and built it in Next.js. Autumn (YC S25) merged the code into its own open-source repository.",
+  info: {
+    client: "Autumn",
+    year: "2026",
+    // No funding row: only aggregators report Autumn's rounds.
+    involvement: ["Branding", "Web Design", "Motion Design", "Next.js Development"],
+    links: [{ label: "useautumn.com", href: "https://useautumn.com/" }],
+  },
+  description: [
+    "PIXELUP LABS designed Autumn's brand and website in 2026, and built the site in Next.js.",
+    "Autumn is open-source billing infrastructure for AI startups, and its buyers are engineers. The brand had to work at favicon size and read in one scroll.",
+    "Autumn merged the code into its own open-source repository and runs the site itself.",
+  ],
+  // Frame autumn-02.
+  hero: {
+    media: { type: "image", src: "/media/autumn/monitor.avif" },
+    alt: "Autumn homepage on a studio monitor: 'The drop-in billing layer for AI startups', brand identity and website by PIXELUP LABS",
+    intrinsicSize: { width: 2880, height: 1620 },
+  },
+  story: {
+    company: "Autumn",
+    statusBadge: "YC S25 · Billing infrastructure",
+    headline: "We gave Autumn a brand engineers remember.",
+    // YC profile (S25, founder bio), TechCrunch 2025-09-15 (Demo Day list), and
+    // the customer logos on useautumn.com (2026-11-03).
+    summary:
+      "Autumn is **open-source billing infrastructure** on top of Stripe: usage-based billing and credits behind one API. It's backed by **Y Combinator (S25)**, and TechCrunch named it one of the most sought-after startups at YC's September 2025 Demo Day. **Mintlify, Firecrawl and Resend** run on it. CEO Ayush Rodrigues was a product manager at Checkout.com.",
+    // No stat row (Arjun, 2026-11-03, on CTGT).
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Autumn need a new brand?",
+        items: [
+          {
+            label: "Where Autumn was",
+            text: "Hundreds of AI apps already ran on Autumn. **Its leaf logo lost detail at small sizes**, and the brand lagged the infrastructure.",
+          },
+          {
+            label: "What Autumn asks its buyers to do",
+            text: "Hand their pricing and billing, **which means their revenue**, to Autumn instead of building it in-house.",
+          },
+          {
+            label: "What they asked us for",
+            text: "**A brand and website sprint**: a new identity, a new website, and the code.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**Engineers don't run revenue through a tool that looks like a side project.**",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-torii-icon",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/torii-icon.avif" },
+            alt: "Autumn torii-gate icon glowing between pink and purple light beams",
+            intrinsicSize: { width: 1920, height: 1080 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-favicon",
+        index: "01",
+        heading: "Autumn's logo had to work at favicon size.",
+        problem:
+          "The old leaf mark lost detail as it shrank, **and leaned on colour to work.**",
+        whyItMattered:
+          "Developers meet Autumn as a small mark: **a browser tab, a GitHub avatar, a docs sidebar.** That's where an infrastructure brand earns trust.",
+        whatWeDid:
+          "We explored line, torii gate, pixel and abstract leaf marks. **We kept the leaf the team loved and rebuilt it as a simple abstract form.** At small sizes, the background drops and the mark stands alone.",
+        outcome:
+          "The mark was **locked in a single review**, and ships in the brand guide with sizing rules.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-leaf-socials",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/leaf-socials.avif" },
+            alt: "Autumn's leaf mark on a social post, between posts reading 'Webhooks Handled' and 'Credits, limits and usage billing.'",
+            intrinsicSize: { width: 2202, height: 1070 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-stop-rebuilding",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/stop-rebuilding-billing.avif" },
+            alt: "Autumn poster reading 'Stop rebuilding billing' beside a stack of autumn.ts code windows",
+            intrinsicSize: { width: 1920, height: 1080 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-code",
+        media: {
+          kind: "pair",
+          aspect: "wide",
+          slots: [
+            {
+              media: { type: "image", src: "/media/autumn/code-stack.avif" },
+              alt: "Stack of autumn.ts code windows checking whether a user can access a feature",
+            },
+            {
+              media: { type: "image", src: "/media/autumn/api-tabs-poster.avif" },
+              alt: "Autumn's attach, check and track API tabs under a 'Stop rebuilding billing' headline",
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-one-scroll",
+        index: "02",
+        heading: "Autumn's brand had to be bold and still read in one scroll.",
+        problem:
+          "Autumn wanted to be remembered: dark, retro, neon. **It also wanted no clutter.**",
+        whyItMattered:
+          "An engineer evaluating billing scans for **pricing models, the API and proof of scale.** Bold isn't the risk. Bold that gets between the buyer and the docs is.",
+        whatWeDid:
+          "We merged three directions into one: **Japanese retro tech, neon on dark, straight lines and dither textures.** We chose the spacious layout and **removed the scroll hijack.** Developers get **a copy-to-terminal install command**; buyers get the logo wall, a SOC 2 Type 2 highlight and a production-scale section. We built it in **Next.js**, the way Autumn's engineers work.",
+        outcome:
+          "**Autumn merged our code into its own open-source repository** and ships on it.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-homepage",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/homepage.avif" },
+            alt: "Autumn homepage with a pixel-art city, an autumn.config.ts code window and 'The drop-in billing layer for AI startups'",
+            intrinsicSize: { width: 2048, height: 1152 },
+          },
+        },
+      },
+      // Frame autumn-01.
+      {
+        kind: "media",
+        id: "snapshot-api-tabs",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/api-tabs.avif" },
+            alt: "Autumn website section: attach, check and track tabs with the code for each step, over a dithered landscape",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-crt",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/crt-problem.avif" },
+            alt: "Autumn homepage on a CRT monitor, surrounded by Slack and GitHub messages about billing bugs",
+            intrinsicSize: { width: 2221, height: 1031 },
+          },
+        },
+      },
+      // Frame autumn-03.
+      {
+        kind: "media",
+        id: "snapshot-laptop",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/laptop.avif" },
+            alt: "Autumn homepage on a laptop against a dark pegboard wall",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Autumn ended up.",
+        paragraphs: [
+          "Autumn left with **a brand guide, the logo suite, a dev handoff file**, the animations and the Next.js code.",
+          "We wrote the first draft of the copy; **Autumn's team finalised it.** We **designed the brand and the site, built it and made the motion.**",
+          "If your brand is already locked and you only need throughput, a design subscription is cheaper.",
+          "Branding, web design, motion design and Next.js development by PIXELUP LABS, 2026.",
+        ],
+        cta: {
+          text: "If engineers are your buyers and your brand isn't keeping up,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    faqs: [autumnFaq, ...pixelupFaq],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "replay", tags: "Branding, website & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
+  ],
+  // Draft: noindex and out of the sitemap. The homepage card and the
+  // /case-studies row link here (Arjun, 2026-11-03).
+  publication: {
+    status: "draft",
+    publishedDate: "2026-11-03",
+    updatedDate: "2026-11-03",
+    blockers: [
+      "Copy audit (Arjun).",
+      "Autumn's OK to publish and to name its customers; the shared client channel was unreadable, so Ayush's side comes from call summaries.",
+      "No client quote yet; ask Ayush for a dated line.",
+      "At publish: set both dates to the publish day.",
+    ],
+  },
+};
+
+const zenactFaq: FaqItem = {
+  q: "Who designed Zenact's brand and website?",
+  a: "PIXELUP LABS designed Zenact's brand and website in 2025 and 2026, and built the site in Webflow. Zenact builds an AI QA engineer that tests iOS, Android and web apps from plain-English instructions. Its site labels SOC 2 as in progress, and Zenact's own team runs it.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/zenact-case-study.md
+// (first draft 2026-11-03, cut about 20% with no stat row, as on CTGT), sources
+// and open calls listed there. No client quote yet, so no testimonial block.
+// Mockups: the photos on Daksh's X posts 2042245174827598108 (2026-04-09),
+// 2047211832650379383 (2026-04-23) and 2057833012998644085 (2026-05-22),
+// pulled through Apify on 2026-11-03 at full size. The second post's
+// Streamline, Autumn and Valley shots are left out, and its monitor shot
+// repeats in the third post. In their place (Arjun, 2026-11-03): the hero,
+// Write Tests and FAQ sections from post 2044857553222553824 (its two
+// enterprise-section shots repeat the enterprise mockup, so they're out; so
+// is the single render on post 2040140910458294586), plus the mark from
+// post 2021881015955026420. 4K photos downscaled to 2880×1620.
+const zenact: CaseStudy = {
+  slug: "zenact",
+  title: "We made Zenact look ready for enterprise.",
+  metaTitle: "Zenact Brand and Website Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS designed Zenact's brand and website and built it in Webflow, so an AI QA product earns engineering leaders' trust before naming customers.",
+  info: {
+    client: "Zenact",
+    year: "2025–2026",
+    // No funding row: Zenact hasn't announced a round.
+    involvement: ["Branding", "Web Design", "Motion Design", "Webflow Development"],
+    links: [{ label: "zenact.ai", href: "https://www.zenact.ai/" }],
+  },
+  description: [
+    "PIXELUP LABS designed Zenact's brand and website in 2025 and 2026, and built the site in Webflow.",
+    "Zenact sells AI QA testing to engineering leaders, and it went to market before it could name its pilot customers. The brand had to earn trust without them.",
+    "Zenact's own team now runs the site.",
+  ],
+  hero: {
+    media: { type: "image", src: "/media/zenact/monitor.avif" },
+    alt: "Zenact homepage on a studio monitor: 'Your entire product, tested for you.', brand identity and website by PIXELUP LABS",
+    intrinsicSize: { width: 2880, height: 1620 },
+  },
+  story: {
+    company: "Zenact",
+    statusBadge: "AI QA testing",
+    headline: "We made Zenact look ready for enterprise.",
+    // zenact.ai (fetched 2026-11-03) and Tracxn (founders, Bengaluru, 2025).
+    summary:
+      "Zenact builds **an AI QA engineer**: agents that test iOS, Android and web apps from plain-English instructions, on every pull request and release. Srinivas Devaki and Renushri Rawat founded it in Bengaluru in 2025.",
+    // No stat row (Arjun, 2026-11-03, on CTGT).
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Zenact need a brand?",
+        items: [
+          {
+            label: "Where Zenact was",
+            text: "Zenact was going to market with pilots at large consumer apps it couldn't name yet, **aiming at US engineering buyers.**",
+          },
+          {
+            label: "What Zenact asks its buyers to do",
+            text: "Let AI agents test every release before users see it. **Tests are written in plain English, not code.**",
+          },
+          {
+            label: "What they asked us for",
+            text: "**A brand identity and a website**: a homepage, pricing, a blog and a demo, built in Webflow.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**A VP of Engineering won't let an unknown tool sign off a release.** Zenact had to look production-grade before it had the logos.",
+          },
+        ],
+      },
+      // The mark, from Daksh's post 2021881015955026420 (2026-02-12).
+      {
+        kind: "media",
+        id: "snapshot-logo",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/logo.avif" },
+            alt: "The Zenact mark: stacked orange bars of different lengths on black",
+            intrinsicSize: { width: 2400, height: 1260 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-trust",
+        index: "01",
+        heading: "Zenact had to earn enterprise trust before it could name its customers.",
+        problem: "Pilot customers couldn't be named. **SOC 2 was still in progress.**",
+        whyItMattered:
+          "Engineering buyers check security and procurement answers first. **Overclaiming is the fastest way to lose them.**",
+        whatWeDid:
+          "We gave Zenact **a technical identity**: a mark of stacked orange bars, BDO Grotesk headlines, Geist for reading and **one orange used sparingly.** Then we built trust in words, not logos: **eight enterprise capabilities** and a security band. **SOC 2 is labelled in progress, because it is.** Proof is six early-adopter quotes and only approved logos.",
+        outcome: "**Every claim on the live site can be checked.**",
+      },
+      {
+        kind: "media",
+        id: "snapshot-enterprise",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/enterprise-section.avif" },
+            alt: "Zenact's 'Production-grade QA on day one' enterprise section, with the site on a phone in a tall display",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      // The FAQ, built from sales objections. From post 2044857553222553824.
+      {
+        kind: "media",
+        id: "snapshot-faq",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/faq-section.avif" },
+            alt: "Zenact's FAQ section: pricing, getting started, data security, integrations, own cloud or AI accounts, and support",
+            intrinsicSize: { width: 2816, height: 1624 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-brand-applications",
+        media: {
+          kind: "pair",
+          aspect: "wide",
+          slots: [
+            {
+              media: { type: "image", src: "/media/zenact/subway-poster.avif" },
+              alt: "Zenact poster in a subway station reading 'Your entire product, tested for you.'",
+            },
+            {
+              media: { type: "image", src: "/media/zenact/hoodie.avif" },
+              alt: "Black hoodie with the orange zenact wordmark and stacked orange bars on the sleeves",
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-three-seconds",
+        index: "02",
+        heading: "An unfamiliar product had to make sense in three seconds.",
+        problem:
+          "An AI agent testing an app from plain English is new to most buyers. **Zenact wanted the hero to land in three seconds.**",
+        whyItMattered:
+          "Zenact sells through demos. **Nobody books a demo for something they can't picture.**",
+        whatWeDid:
+          "We cut the homepage to **three sections that follow the product: Write Tests, Automate, Get Reports.** The hero is a phone running the agent, each step labelled as it happens. The demo shows **what the AI does, what it's thinking, then the report.** Off-screen animations pause, and the heaviest ones became video.",
+        outcome:
+          "Zenact's team runs the site in Webflow. **We've reused the three-section layout on later projects.**",
+      },
+      // The hero and the Write Tests section, from post 2044857553222553824.
+      {
+        kind: "media",
+        id: "snapshot-hero-section",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/hero-section.avif" },
+            alt: "Zenact homepage hero: 'Your entire product, tested for you.' with a Book a Demo button",
+            intrinsicSize: { width: 2890, height: 1778 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-write-tests-section",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/write-tests-section.avif" },
+            alt: "Zenact's Write Tests section, 'Everyone can Own Quality', with tabs for Write Tests, Automate and Get Reports",
+            intrinsicSize: { width: 2762, height: 1608 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-write-tests",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/phone-write-tests.avif" },
+            alt: "Zenact's Write Tests section, 'Everyone can Own Quality', on a phone beside the headline 'Your entire product, tested for you.'",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-devices",
+        media: {
+          kind: "pair",
+          aspect: "wide",
+          slots: [
+            {
+              media: { type: "image", src: "/media/zenact/phone-built-for-scale.avif" },
+              alt: "Hand holding a phone showing Zenact's 'Built for Scale, Security, and Speed' section",
+            },
+            {
+              media: { type: "image", src: "/media/zenact/tablet.avif" },
+              alt: "Zenact website on a tablet resting on an orange chair, under 'Production-grade QA on day one'",
+            },
+          ],
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-laptop-wordmark",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/laptop-wordmark.avif" },
+            alt: "Laptop showing the orange zenact wordmark across the footer of Zenact's website",
+            intrinsicSize: { width: 1920, height: 1080 },
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Zenact ended up.",
+        paragraphs: [
+          "Zenact left with **brand guidelines, a handoff file, about ten animations and the demo video**, plus the Webflow site.",
+          "Zenact kept its name and wrote its own copy. We **designed the brand and the site, built it and made the motion.**",
+          "If your strategy is done and you only need pages built, a freelancer is cheaper and faster.",
+          "Branding, web design, motion design and Webflow development by PIXELUP LABS, 2025–2026.",
+        ],
+        cta: {
+          text: "If your buyers need proof you don't have yet,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    faqs: [zenactFaq, ...pixelupFaq],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "replay", tags: "Branding, website & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
+  ],
+  // Draft: noindex and out of the sitemap. The homepage card and the
+  // /case-studies row link here (Arjun, 2026-11-03).
+  publication: {
+    status: "draft",
+    publishedDate: "2026-11-03",
+    updatedDate: "2026-11-03",
+    blockers: [
+      "Copy audit (Arjun).",
+      "Zenact isn't on the publishable roster in proof-bank.md: confirm we can name it.",
+      "Zenact's OK to publish; the shared client channel sits in Zenact's workspace and couldn't be read.",
+      "No client quote yet.",
+      "At publish: set both dates to the publish day.",
+    ],
+  },
+};
+
+const valleyFaq: FaqItem = {
+  q: "Who designed Valley's website?",
+  a: "PIXELUP LABS redesigned Valley's website in 2025 and 2026, built it in Framer and designed Valley's sales deck, inside Valley's existing brand. Valley is an AI outbound platform backed by General Catalyst and Antler. The site went live on 7 January 2026.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/valley-case-study.md
+// (first draft 2026-11-03, cut about 20% with no stat row, as on CTGT), sources
+// and open calls listed there. No client quote yet, so no testimonial block.
+// Mockups: Figma gi0G5bUJkrpfJjFybaSFHi (X AI Employee File), node 1:22908,
+// the six 1920×1080 frames at 1.5x (its five 1600×1200 frames re-crop five
+// of them, so they're out), plus the brand-tile ring from Daksh's post
+// 2071536655627067730 (2026-06-29), downscaled from 4K.
+const valley: CaseStudy = {
+  slug: "valley",
+  title: "We made Valley's difference clear before the sales call.",
+  metaTitle: "Valley Website Design and Sales Deck | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS redesigned Valley's website inside its existing brand, built it in Framer and designed its sales deck, so buyers see what sets Valley apart.",
+  info: {
+    client: "Valley",
+    year: "2025–2026",
+    // No funding row: sources disagree on the round. Not a rebrand: Valley's
+    // brand pre-existed (Daksh, 2025-11-12).
+    involvement: ["Web Design", "Motion Design", "Framer Development", "Sales Deck"],
+    links: [{ label: "joinvalley.co", href: "https://www.joinvalley.co/" }],
+  },
+  description: [
+    "PIXELUP LABS redesigned Valley's website in 2025 and 2026, built it in Framer and designed its sales deck.",
+    "Valley's prospects kept asking how it differed from other LinkedIn tools. The new site answers that before the call.",
+    "Valley's team has kept building on the site since it launched on 7 January 2026.",
+  ],
+  hero: {
+    media: { type: "image", src: "/media/valley/monitor.avif" },
+    alt: "Valley homepage on a monitor: 'AI-Powered LinkedIn Outreach that Books Sales Calls.', website design by PIXELUP LABS",
+    intrinsicSize: { width: 2880, height: 1620 },
+  },
+  story: {
+    company: "Valley",
+    statusBadge: "AI outbound",
+    headline: "We made Valley's difference clear before the sales call.",
+    // joinvalley.co/about (backers, 300+ teams, Zayd's two exits), 2026-11-03.
+    summary:
+      "Valley is **an AI outbound platform**: it finds the people most likely to buy, researches each one and writes outreach across LinkedIn and email. It's backed by **General Catalyst, Antler and Launch**, and says more than 300 teams use it, including Miro and UiPath. Founder Zayd Ali **built and exited two outbound agencies** first.",
+    // No stat row (Arjun, 2026-11-03, on CTGT).
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Valley need a new website?",
+        items: [
+          {
+            label: "Where Valley was",
+            text: "Valley had a brand it liked. **The homepage didn't explain the engine**, and prospects kept asking how Valley differed from other LinkedIn tools.",
+          },
+          {
+            label: "What Valley asks its buyers to do",
+            text: "Let AI run outreach from their own LinkedIn account. **Careless automation gets accounts flagged.**",
+          },
+          {
+            label: "What they asked us for",
+            text: "**A new homepage, a product-page template and a sales deck**, inside Valley's existing brand.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**Sales leaders have been burned by automation tools.** They buy the one that shows how it works.",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-homepage-hero",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/homepage-hero.avif" },
+            alt: "Valley homepage hero over an oil-paint landscape, with the signal flow and a Find Leads to Send Messages path",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-competitor-question",
+        index: "01",
+        heading: "Valley's website had to answer the competitor question before the sales call.",
+        problem:
+          "**HeyReach, Expandi and lemlist all automate LinkedIn.** Prospects finished demos unsure what made Valley different.",
+        whyItMattered:
+          "If the difference only shows up on the call, **Valley loses everyone who never books one.**",
+        whatWeDid:
+          "**A landing page has about seven seconds to answer: what is this, why now, why you.** So the page leads with results, names the category, shows the engine, then proves it. The engine is a visible flow: **find, qualify, research, personalise, send.** The comparison is concrete: **a labelled reply-rate chart**, and \"migrated off\" logos styled so they can't pass for customers.",
+        outcome:
+          "Live on **7 January 2026.** Ten months on, Valley's team has rebuilt parts of it **and kept the migrated-off band and the reply-rate comparison** (checked 3 November 2026).",
+      },
+      {
+        kind: "media",
+        id: "snapshot-comparison",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/comparison.avif" },
+            alt: "Valley's reply-rate comparison against competitors and its 'Who Valley Is Built For' section, beside the Valley mark in a dot grid",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-engine",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/engine.avif" },
+            alt: "'Powered by the Valley Warm Outbound Engine' section on a dark panel over Valley's oil-paint imagery",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-deck",
+        index: "02",
+        heading: "The sales deck could only show what the product really does.",
+        problem:
+          "Product decks drift: **callouts start promising features the screenshots can't show.**",
+        whyItMattered:
+          "**A buyer who sees a feature on a slide and can't find it in the demo stops trusting both.**",
+        whatWeDid:
+          "We locked the flow in low fidelity first. Then two rules: **cut any callout without a matching screen, and use Valley's own product wording.** The result is 18 slides plus an appendix of annotated screens.",
+        outcome: "**Every claim in the deck maps to a screen Valley can show live.**",
+      },
+      {
+        kind: "media",
+        id: "snapshot-case-studies",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/case-studies.avif" },
+            alt: "Valley's 'How Valley empowers teams to launch and scale' section: customer result cards for Deel, Frang, Kaster and others",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-workflows",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/workflows.avif" },
+            alt: "Valley homepage beside its 'AI-Powered Workflows That Fill Your Calendar' section",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      // Daksh's post 2071536655627067730.
+      {
+        kind: "media",
+        id: "snapshot-brand-ring",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/valley/brand-ring.avif" },
+            alt: "Ring of Valley brand tiles, quotes and product screens around 'AI that Finds High-Intent Leads'",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Valley ended up.",
+        paragraphs: [
+          "The site is **a system Valley's team runs without us**: every section a Framer component, testimonials synced across pages, and a product page that copies per feature.",
+          "Valley wrote its own copy and kept its brand. We **designed and built the site, made the motion and designed the deck.**",
+          "If your brand needs rebuilding from scratch, that's a different project. Valley's didn't, so we didn't touch it.",
+          "Web design, motion design, Framer development and sales deck design by PIXELUP LABS, 2025–2026.",
+        ],
+        cta: {
+          text: "If your prospects still ask how you're different after the demo,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    faqs: [valleyFaq, ...pixelupFaq],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "replay", tags: "Branding, website & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
+  ],
+  // Draft: noindex and out of the sitemap. The homepage card and the
+  // /case-studies row link here (Arjun, 2026-11-03).
+  publication: {
+    status: "draft",
+    publishedDate: "2026-11-03",
+    updatedDate: "2026-11-03",
+    blockers: [
+      "Copy audit (Arjun).",
+      "Zayd's OK as well as Shubh's (Shubh is close to the studio).",
+      "No client quote yet.",
+      "At publish: set both dates to the publish day.",
+    ],
+  },
+};
+
 const avantraFaq: FaqItem = {
   q: "Who designed Avantra's brand?",
   a: "PIXELUP LABS is designing Avantra's brand identity in 2026: strategy and moodboards, two visual directions, the logo and wordmark, an illustration and glyph system, deck and memo templates, and website explorations.",
@@ -3982,5 +4949,9 @@ export const caseStudies = {
   henryLabs,
   fuseai,
   replay,
+  ctgt,
+  autumn,
+  zenact,
+  valley,
   avantra,
 };
