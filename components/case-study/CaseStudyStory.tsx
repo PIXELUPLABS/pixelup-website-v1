@@ -118,6 +118,32 @@ function StoryHero({
   );
 }
 
+/** Hairline-divided label + text rows. The body of ContextBlock; also used
+ * on /referral for the program's terms, perks and payout rules. */
+export function ContextRows({
+  items,
+}: {
+  items: { label: string; text: string }[];
+}) {
+  return (
+    <div className="flex flex-col divide-y-[0.5px] divide-hairline">
+      {items.map((item) => (
+        <div
+          key={item.label}
+          className="flex flex-col gap-2 py-4 first:pt-0 last:pb-0"
+        >
+          <p className="text-[14px] leading-[1.3] tracking-[-0.01em] text-white">
+            {item.label}
+          </p>
+          <p className="text-[16px] leading-[1.5] text-muted-65">
+            <Emphasis text={item.text} />
+          </p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ContextBlock({
   block,
 }: {
@@ -125,21 +151,7 @@ function ContextBlock({
 }) {
   return (
     <SectionShell heading={block.heading} topRule contentInset="wide">
-      <div className="flex flex-col divide-y-[0.5px] divide-hairline">
-        {block.items.map((item) => (
-          <div
-            key={item.label}
-            className="flex flex-col gap-2 py-4 first:pt-0 last:pb-0"
-          >
-            <p className="text-[14px] leading-[1.3] tracking-[-0.01em] text-white">
-              {item.label}
-            </p>
-            <p className="text-[16px] leading-[1.5] text-muted-65">
-              <Emphasis text={item.text} />
-            </p>
-          </div>
-        ))}
-      </div>
+      <ContextRows items={block.items} />
     </SectionShell>
   );
 }

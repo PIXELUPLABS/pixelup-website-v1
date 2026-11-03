@@ -1,5 +1,5 @@
 import { TrustedStrip } from "./TrustedStrip";
-import { CtaButtons } from "./CtaButtons";
+import { CtaButtons, type PrimaryCta } from "./CtaButtons";
 
 // Homepage hero copy — pages like /call pass their own.
 const defaultHeading =
@@ -21,6 +21,7 @@ export function LeftNav({
   headingSize = "desk:text-[30px]",
   headingFontClassName = "",
   variant = "default",
+  primaryCta,
 }: {
   heading?: React.ReactNode;
   subheading?: React.ReactNode;
@@ -42,6 +43,9 @@ export function LeftNav({
   /** The clients variant follows the dedicated Figma heading proportions
       without changing the shared sidebar treatment on other pages. */
   variant?: "default" | "clients";
+  /** Swaps the accent CTA (default BOOK A CALL) for the page's own primary
+      action, so the sidebar never competes with it. */
+  primaryCta?: PrimaryCta;
 }) {
   const isClientsVariant = variant === "clients";
 
@@ -109,7 +113,7 @@ export function LeftNav({
           </div>
         )}
         <div className="fade-up [animation-delay:400ms]">
-          <CtaButtons />
+          <CtaButtons primary={primaryCta} />
         </div>
       </div>
     </aside>

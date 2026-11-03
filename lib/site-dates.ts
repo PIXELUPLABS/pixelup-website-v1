@@ -21,6 +21,7 @@ export const siteUpdated = {
   call: "2026-07-28",
   explorations: "2026-07-29",
   clients: "2026-08-09",
+  referral: "2026-11-03",
   /** Every case study lives in lib/case-studies.ts, so they share one date. */
   caseStudies: "2026-10-07",
 } as const;

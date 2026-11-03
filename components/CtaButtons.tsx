@@ -26,12 +26,20 @@ export const ctaButtonBase =
 
 const baseButton = `${ctaButtonBase} flex-1 text-white`;
 
+export type PrimaryCta = { label: string; href: string };
+
 export function CtaButtons({
   telegramSolidBlack = false,
+  primary,
 }: {
   /** Footer's Telegram button stays solid black, no hover lighten. */
   telegramSolidBlack?: boolean;
+  /** Replaces the accent "BOOK A CALL" button on pages whose one primary
+      action is something else (e.g. /referral's partner application). An
+      in-page href ("#apply") opens in the same tab. */
+  primary?: PrimaryCta;
 }) {
+  const primaryIsExternal = !primary || /^https?:/.test(primary.href);
   return (
     // Stacked and full width at every breakpoint. Side by side on mobile forced
     // "START A CONVERSATION" onto two lines, leaving the two buttons
@@ -49,12 +57,13 @@ export function CtaButtons({
         <PaperPlaneIcon />
       </a>
       <a
-        href={links.discoveryCall}
-        target="_blank"
-        rel="noopener noreferrer"
+        href={primary?.href ?? links.discoveryCall}
+        {...(primaryIsExternal
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
         className={`${baseButton} bg-accent hover:brightness-110`}
       >
-        <span>BOOK A CALL</span>
+        <span>{primary?.label ?? "BOOK A CALL"}</span>
         <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
       </a>
     </div>

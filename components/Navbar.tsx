@@ -13,6 +13,7 @@ export const navLinks: { label: string; href: string | null }[] = [
   { label: "Clients", href: "/clients" },
   // { label: "Services", href: null },
   { label: "Blog", href: "/blog" },
+  { label: "Referral", href: "/referral" },
 ];
 
 /**

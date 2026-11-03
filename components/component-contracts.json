@@ -39,7 +39,8 @@
       "balanceHero": "boolean prop, applies text-balance/text-pretty for nicer line wrapping. Off by default because the homepage H1's line breaks were hand-tuned.",
       "headingSize": "string prop, Tailwind class override for desktop heading size (default desk:text-[30px]).",
       "headingFontClassName": "string prop, extra className applied only to the <h1> — e.g. a next/font className to swap the heading's font on a single page without touching the site-wide font-display.",
-      "variant": "default keeps the shared 405px sidebar and standard hero rhythm; clients uses the supplied Figma proportions: a responsive 431px desktop sidebar, 32px heading/description gap, 40px desktop heading, and 16px description."
+      "variant": "default keeps the shared 405px sidebar and standard hero rhythm; clients uses the supplied Figma proportions: a responsive 431px desktop sidebar, 32px heading/description gap, 40px desktop heading, and 16px description.",
+      "primaryCta": "optional { label, href }, passed to CtaButtons' primary prop so the sidebar's accent button is the page's one primary action instead of competing with it."
     },
     "states": {
       "entrance": "fade-up animation on mount, staggered via inline animation-delay per child block."
@@ -125,7 +126,8 @@
     "category": "interactive",
     "description": "The paired 'Chat on Telegram' + 'Start a Conversation' buttons.",
     "variants": {
-      "telegramSolidBlack": "boolean prop. false (default) = translucent color.neutral.button-dark with a hover lighten (used in LeftNav/CaseSidebar). true = solid black, no hover lighten (used in Footer)."
+      "telegramSolidBlack": "boolean prop. false (default) = translucent color.neutral.button-dark with a hover lighten (used in LeftNav/CaseSidebar). true = solid black, no hover lighten (used in Footer).",
+      "primary": "optional { label, href }. Replaces the accent BOOK A CALL button with the page's own primary action (/referral: APPLY AS A PARTNER → #apply). In-page hrefs open in the same tab; http(s) hrefs keep target=_blank."
     },
     "states": {
       "telegram:default": "bg-button-dark",
@@ -282,7 +284,7 @@
     },
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline", "typography.tracking.display-tight", "breakpoint.desk"],
-    "when_to_use": "Case study pages only, for the repeated 'heading left / content right' Q&A pattern (including the FAQ block).",
+    "when_to_use": "Case study pages, and /referral (same 405px LeftNav sidebar, so the 50/50 split still lines up), for the repeated 'heading left / content right' Q&A pattern (including the FAQ block).",
     "do_not": [
       "Don't reuse this for a full-width section — it hardcodes a 50/50 desktop split matched to the case study sidebar layout. The blog page's FAQ section deliberately does NOT use this for exactly that reason; it builds its own full-width heading + content stack instead."
     ]
@@ -368,7 +370,7 @@
   "CaseStudyStory": {
     "file": "components/case-study/CaseStudyStory.tsx",
     "category": "content",
-    "description": "Richer editorial renderer for a case study with a proof-led hero, blog-style YC/funding status tag, context, critical challenges, work snapshots, gallery, results, approval-aware testimonial, after-launch narrative, process FAQ, related work and the Brand Perception CTA. It composes the existing CaseMediaBlock, SectionShell, CaseFaq, ClientInfo, MoreProjects and AuditForm components.",
+    "description": "Richer editorial renderer for a case study with a proof-led hero, blog-style YC/funding status tag, context, critical challenges, work snapshots, gallery, results, approval-aware testimonial, after-launch narrative, process FAQ, related work and the Brand Perception CTA. It composes the existing CaseMediaBlock, SectionShell, CaseFaq, ClientInfo, MoreProjects and AuditForm components. Also exports Metrics (hairline metric strip) and ContextRows (hairline label + text rows), which /referral reuses.",
     "variants": [
       "CaseStudy.story drives a discriminated union of context, media, challenge, gallery, results, testimonial and afterLaunch blocks"
     ],
@@ -464,5 +466,37 @@
     "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "spacing.base", "breakpoint.desk"],
     "when_to_use": "Inside ClientRoster only, driven by lib/clients.ts.",
     "do_not": ["Don't substitute a different company's logo for Grovio as if it were approved; replace its accessible placeholder when the real SVG arrives.", "Don't replace the width variants with transform scaling; width-only sizing preserves the requested 24px height and 10px gap.", "Don't apply the pure-white filter to Vertera Health or Conigma because it removes the contrast inside their icon marks.", "Don't remove the shared contain frame, pure-white treatment for the other logos, or per-logo width adjustments without rechecking every supplied logo together.", "Don't remove the final three-word nowrap group without rechecking the roster for one- or two-word widow lines."]
-  }
+  },
+
+  "ReferralForm": {
+    "file": "components/referral/ReferralForm.tsx",
+    "category": "interactive",
+    "description": "Partner application form for /referral. Hairline-underline fields (NewsletterForm treatment), ArticleFilters-style pills as real radio groups, accent checkboxes, inline validation that focuses the first invalid field, and a success state. submitPartnerApplication currently console.logs the payload; swap its body for an API call when the backend exists.",
+    "variants": ["none"],
+    "states": {
+      "field:error": "Red underline + message under the field, cleared as soon as the field is edited.",
+      "submitting": "Fields and button disabled, label SUBMITTING….",
+      "success": "Form replaced by a confirmation message with a Submit another application link.",
+      "submit:error": "Inline Something went wrong under the button."
+    },
+    "tokens_used": ["color.neutral.hairline", "color.brand.accent", "color.neutral.button-dark", "color.neutral.label-grey", "color.neutral.muted-65"],
+    "when_to_use": "Once, in the #apply section of app/referral/page.tsx.",
+    "do_not": [
+      "Don't add another primary CTA on /referral; the sidebar's APPLY AS A PARTNER button links to this form and is the same action.",
+      "Don't swap the visible labels for placeholder-only fields; the form is long and placeholders vanish on input."
+    ]
+  },
+
+  "_gaps": [
+    {
+      "gap": "Error / validation color token",
+      "detail": "No error color exists in tokens.json or @theme. ReferralForm follows NewsletterForm's precedent of Tailwind's red-400. Define color.feedback.error and promote it into @theme before more forms ship.",
+      "closest_existing": "NewsletterForm error text"
+    },
+    {
+      "gap": "Heading-left / content-right section outside case studies",
+      "detail": "SectionShell is tuned for the 405px-sidebar layout and BlogFaq is FAQ-specific. /referral reuses SectionShell because its sidebar width matches; a page with a different shell should generalise SectionShell rather than build a one-off.",
+      "closest_existing": "SectionShell, BlogFaq"
+    }
+  ]
 }
