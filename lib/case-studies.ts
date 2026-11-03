@@ -3243,6 +3243,268 @@ const autumn: CaseStudy = {
   },
 };
 
+const zenactFaq: FaqItem = {
+  q: "Who designed Zenact's brand and website?",
+  a: "PIXELUP LABS designed Zenact's brand and website in 2025 and 2026, and built the site in Webflow. Zenact builds an AI QA engineer that tests iOS, Android and web apps from plain-English instructions. Its site labels SOC 2 as in progress, and Zenact's own team runs it.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/zenact-case-study.md
+// (first draft 2026-11-03, cut about 20% with no stat row, as on CTGT), sources
+// and open calls listed there. No client quote yet, so no testimonial block.
+// Mockups: the photos on Daksh's X posts 2042245174827598108 (2026-04-09),
+// 2047211832650379383 (2026-04-23) and 2057833012998644085 (2026-05-22),
+// pulled through Apify on 2026-11-03 at full size. The second post's
+// Streamline, Autumn and Valley shots are left out, and its monitor shot
+// repeats in the third post. In their place (Arjun, 2026-11-03): the hero,
+// Write Tests and FAQ sections from post 2044857553222553824 (its two
+// enterprise-section shots repeat the enterprise mockup, so they're out; so
+// is the single render on post 2040140910458294586), plus the mark from
+// post 2021881015955026420. 4K photos downscaled to 2880×1620.
+const zenact: CaseStudy = {
+  slug: "zenact",
+  title: "We built Zenact a brand engineering leaders take seriously.",
+  metaTitle: "Zenact Brand and Website Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS designed Zenact's brand and website and built it in Webflow, so an AI QA product earns engineering leaders' trust before naming customers.",
+  info: {
+    client: "Zenact",
+    year: "2025–2026",
+    // No funding row: Zenact hasn't announced a round.
+    involvement: ["Branding", "Web Design", "Motion Design", "Webflow Development"],
+    links: [{ label: "zenact.ai", href: "https://www.zenact.ai/" }],
+  },
+  description: [
+    "PIXELUP LABS designed Zenact's brand and website in 2025 and 2026, and built the site in Webflow.",
+    "Zenact sells AI QA testing to engineering leaders, and it went to market before it could name its pilot customers. The brand had to earn trust without them.",
+    "Zenact's own team now runs the site.",
+  ],
+  hero: {
+    media: { type: "image", src: "/media/zenact/monitor.avif" },
+    alt: "Zenact homepage on a studio monitor: 'Your entire product, tested for you.', brand identity and website by PIXELUP LABS",
+    intrinsicSize: { width: 2880, height: 1620 },
+  },
+  story: {
+    company: "Zenact",
+    statusBadge: "AI QA testing",
+    headline: "We built Zenact a brand engineering leaders take seriously.",
+    // zenact.ai (fetched 2026-11-03) and Tracxn (founders, Bengaluru, 2025).
+    summary:
+      "Zenact builds **an AI QA engineer**: agents that test iOS, Android and web apps from plain-English instructions, on every pull request and release. Srinivas Devaki and Renushri Rawat founded it in Bengaluru in 2025.",
+    // No stat row (Arjun, 2026-11-03, on CTGT).
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Zenact need a brand?",
+        items: [
+          {
+            label: "Where Zenact was",
+            text: "Zenact was going to market with pilots at large consumer apps it couldn't name yet, **aiming at US engineering buyers.**",
+          },
+          {
+            label: "What Zenact asks its buyers to do",
+            text: "Let AI agents test every release before users see it. **Tests are written in plain English, not code.**",
+          },
+          {
+            label: "What they asked us for",
+            text: "**A brand identity and a website**: a homepage, pricing, a blog and a demo, built in Webflow.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**A VP of Engineering won't let an unknown tool sign off a release.** Zenact had to look production-grade before it had the logos.",
+          },
+        ],
+      },
+      // The mark, from Daksh's post 2021881015955026420 (2026-02-12).
+      {
+        kind: "media",
+        id: "snapshot-logo",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/logo.avif" },
+            alt: "The Zenact mark: stacked orange bars of different lengths on black",
+            intrinsicSize: { width: 2400, height: 1260 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-trust",
+        index: "01",
+        heading: "Zenact had to earn enterprise trust before it could name its customers.",
+        problem: "Pilot customers couldn't be named. **SOC 2 was still in progress.**",
+        whyItMattered:
+          "Engineering buyers check security and procurement answers first. **Overclaiming is the fastest way to lose them.**",
+        whatWeDid:
+          "We gave Zenact **a technical identity**: a mark of stacked orange bars, BDO Grotesk headlines, Geist for reading and **one orange used sparingly.** Then we built trust in words, not logos: **eight enterprise capabilities** and a security band. **SOC 2 is labelled in progress, because it is.** Proof is six early-adopter quotes and only approved logos.",
+        outcome: "**Every claim on the live site can be checked.**",
+      },
+      {
+        kind: "media",
+        id: "snapshot-enterprise",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/enterprise-section.avif" },
+            alt: "Zenact's 'Production-grade QA on day one' enterprise section, with the site on a phone in a tall display",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      // The FAQ, built from sales objections. From post 2044857553222553824.
+      {
+        kind: "media",
+        id: "snapshot-faq",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/faq-section.avif" },
+            alt: "Zenact's FAQ section: pricing, getting started, data security, integrations, own cloud or AI accounts, and support",
+            intrinsicSize: { width: 2816, height: 1624 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-brand-applications",
+        media: {
+          kind: "pair",
+          aspect: "wide",
+          slots: [
+            {
+              media: { type: "image", src: "/media/zenact/subway-poster.avif" },
+              alt: "Zenact poster in a subway station reading 'Your entire product, tested for you.'",
+            },
+            {
+              media: { type: "image", src: "/media/zenact/hoodie.avif" },
+              alt: "Black hoodie with the orange zenact wordmark and stacked orange bars on the sleeves",
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-three-seconds",
+        index: "02",
+        heading: "An unfamiliar product had to make sense in three seconds.",
+        problem:
+          "An AI agent testing an app from plain English is new to most buyers. **Zenact wanted the hero to land in three seconds.**",
+        whyItMattered:
+          "Zenact sells through demos. **Nobody books a demo for something they can't picture.**",
+        whatWeDid:
+          "We cut the homepage to **three sections that follow the product: Write Tests, Automate, Get Reports.** The hero is a phone running the agent, each step labelled as it happens. The demo shows **what the AI does, what it's thinking, then the report.** Off-screen animations pause, and the heaviest ones became video.",
+        outcome:
+          "Zenact's team runs the site in Webflow. **We've reused the three-section layout on later projects.**",
+      },
+      // The hero and the Write Tests section, from post 2044857553222553824.
+      {
+        kind: "media",
+        id: "snapshot-hero-section",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/hero-section.avif" },
+            alt: "Zenact homepage hero: 'Your entire product, tested for you.' with a Book a Demo button",
+            intrinsicSize: { width: 2890, height: 1778 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-write-tests-section",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/write-tests-section.avif" },
+            alt: "Zenact's Write Tests section, 'Everyone can Own Quality', with tabs for Write Tests, Automate and Get Reports",
+            intrinsicSize: { width: 2762, height: 1608 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-write-tests",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/phone-write-tests.avif" },
+            alt: "Zenact's Write Tests section, 'Everyone can Own Quality', on a phone beside the headline 'Your entire product, tested for you.'",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-devices",
+        media: {
+          kind: "pair",
+          aspect: "wide",
+          slots: [
+            {
+              media: { type: "image", src: "/media/zenact/phone-built-for-scale.avif" },
+              alt: "Hand holding a phone showing Zenact's 'Built for Scale, Security, and Speed' section",
+            },
+            {
+              media: { type: "image", src: "/media/zenact/tablet.avif" },
+              alt: "Zenact website on a tablet resting on an orange chair, under 'Production-grade QA on day one'",
+            },
+          ],
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-laptop-wordmark",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/zenact/laptop-wordmark.avif" },
+            alt: "Laptop showing the orange zenact wordmark across the footer of Zenact's website",
+            intrinsicSize: { width: 1920, height: 1080 },
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Zenact ended up.",
+        paragraphs: [
+          "Zenact left with **brand guidelines, a handoff file, about ten animations and the demo video**, plus the Webflow site.",
+          "Zenact kept its name and wrote its own copy. We **designed the brand and the site, built it and made the motion.**",
+          "If your strategy is done and you only need pages built, a freelancer is cheaper and faster.",
+          "Branding, web design, motion design and Webflow development by PIXELUP LABS, 2025–2026.",
+        ],
+        cta: {
+          text: "If your buyers need proof you don't have yet,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    faqs: [zenactFaq, ...pixelupFaq],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "replay", tags: "Branding, website & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
+  ],
+  // Draft: noindex, out of the sitemap, and nothing links to it yet. The
+  // homepage card still points at zenact.ai.
+  publication: {
+    status: "draft",
+    publishedDate: "2026-11-03",
+    updatedDate: "2026-11-03",
+    blockers: [
+      "Copy audit (Arjun).",
+      "Zenact isn't on the publishable roster in proof-bank.md: confirm we can name it.",
+      "Zenact's OK to publish; the shared client channel sits in Zenact's workspace and couldn't be read.",
+      "No client quote yet.",
+      "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
+    ],
+  },
+};
+
 const avantraFaq: FaqItem = {
   q: "Who designed Avantra's brand?",
   a: "PIXELUP LABS is designing Avantra's brand identity in 2026: strategy and moodboards, two visual directions, the logo and wordmark, an illustration and glyph system, deck and memo templates, and website explorations.",
@@ -4481,5 +4743,6 @@ export const caseStudies = {
   replay,
   ctgt,
   autumn,
+  zenact,
   avantra,
 };
