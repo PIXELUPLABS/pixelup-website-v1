@@ -2759,7 +2759,7 @@ const ctgtFaq: FaqItem = {
 // 2026-11-03 at 1x (2920×1643 full width, 1438×1800 and 1440×1558 pairs).
 const ctgt: CaseStudy = {
   slug: "ctgt",
-  title: "We made CTGT ready for the banks and insurers it sells to.",
+  title: "We made CTGT a brand banks can trust.",
   metaTitle: "CTGT Brand and Website Design | PIXELUP LABS",
   metaDescription:
     "PIXELUP LABS designed CTGT's brand and website for the banks and insurers it sells to, and built it in Webflow, live for CTGT's December 2025 launch.",
@@ -2784,7 +2784,7 @@ const ctgt: CaseStudy = {
   story: {
     company: "CTGT",
     statusBadge: "YC F24 · Enterprise AI",
-    headline: "We made CTGT ready for the banks and insurers it sells to.",
+    headline: "We made CTGT a brand banks can trust.",
     // CTGT's own announcement (ctgt.ai/research/ctgt-raises-7-6m, dated
     // 2025-02-20) names the $7.6M and the backers; press reported $7.2M, so
     // the figure is attributed ("says"). Founders: Business Insider, 2025-02-20.
@@ -3016,7 +3016,7 @@ const autumnFaq: FaqItem = {
 // images at 1x (their source size).
 const autumn: CaseStudy = {
   slug: "autumn",
-  title: "We built Autumn a brand that holds up in front of engineers.",
+  title: "We gave Autumn a brand engineers remember.",
   metaTitle: "Autumn Brand and Website Design | PIXELUP LABS",
   metaDescription:
     "PIXELUP LABS designed Autumn's brand and website and built it in Next.js. Autumn (YC S25) merged the code into its own open-source repository.",
@@ -3041,7 +3041,7 @@ const autumn: CaseStudy = {
   story: {
     company: "Autumn",
     statusBadge: "YC S25 · Billing infrastructure",
-    headline: "We built Autumn a brand that holds up in front of engineers.",
+    headline: "We gave Autumn a brand engineers remember.",
     // YC profile (S25, founder bio), TechCrunch 2025-09-15 (Demo Day list), and
     // the customer logos on useautumn.com (2026-11-03).
     summary:
@@ -3262,7 +3262,7 @@ const zenactFaq: FaqItem = {
 // post 2021881015955026420. 4K photos downscaled to 2880×1620.
 const zenact: CaseStudy = {
   slug: "zenact",
-  title: "We built Zenact a brand engineering leaders take seriously.",
+  title: "We made Zenact look ready for enterprise.",
   metaTitle: "Zenact Brand and Website Design | PIXELUP LABS",
   metaDescription:
     "PIXELUP LABS designed Zenact's brand and website and built it in Webflow, so an AI QA product earns engineering leaders' trust before naming customers.",
@@ -3286,7 +3286,7 @@ const zenact: CaseStudy = {
   story: {
     company: "Zenact",
     statusBadge: "AI QA testing",
-    headline: "We built Zenact a brand engineering leaders take seriously.",
+    headline: "We made Zenact look ready for enterprise.",
     // zenact.ai (fetched 2026-11-03) and Tracxn (founders, Bengaluru, 2025).
     summary:
       "Zenact builds **an AI QA engineer**: agents that test iOS, Android and web apps from plain-English instructions, on every pull request and release. Srinivas Devaki and Renushri Rawat founded it in Bengaluru in 2025.",
@@ -3519,7 +3519,7 @@ const valleyFaq: FaqItem = {
 // 2071536655627067730 (2026-06-29), downscaled from 4K.
 const valley: CaseStudy = {
   slug: "valley",
-  title: "We redesigned Valley's website so buyers see the difference before the call.",
+  title: "We made Valley's difference clear before the sales call.",
   metaTitle: "Valley Website Design and Sales Deck | PIXELUP LABS",
   metaDescription:
     "PIXELUP LABS redesigned Valley's website inside its existing brand, built it in Framer and designed its sales deck, so buyers see what sets Valley apart.",
@@ -3544,8 +3544,7 @@ const valley: CaseStudy = {
   story: {
     company: "Valley",
     statusBadge: "AI outbound",
-    headline: "We redesigned Valley's website so buyers see the difference before the call.",
-    fullWidthHeadline: true,
+    headline: "We made Valley's difference clear before the sales call.",
     // joinvalley.co/about (backers, 300+ teams, Zayd's two exits), 2026-11-03.
     summary:
       "Valley is **an AI outbound platform**: it finds the people most likely to buy, researches each one and writes outreach across LinkedIn and email. It's backed by **General Catalyst, Antler and Launch**, and says more than 300 teams use it, including Miro and UiPath. Founder Zayd Ali **built and exited two outbound agencies** first.",
