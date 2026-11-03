@@ -3003,6 +3003,246 @@ const ctgt: CaseStudy = {
   },
 };
 
+const autumnFaq: FaqItem = {
+  q: "Who designed Autumn's brand and website?",
+  a: "PIXELUP LABS designed Autumn's brand and website in 2026, and built the site in Next.js. Autumn (YC S25) is open-source billing infrastructure on top of Stripe, used by Mintlify, Firecrawl and Resend. Autumn's team merged the code into its own repository and runs the site.",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/autumn-case-study.md
+// (first draft 2026-11-03, cut about 20% with no stat row, as on CTGT), sources
+// and open calls listed there. No client quote yet, so no testimonial block.
+// Mockups: Figma 7X9laycCOMAeyyJnDVtR2b (Drafts), node 2003:2, exported
+// 2026-11-03: the three 1920×1080 frames at 1.5x (2880×1620), the placed
+// images at 1x (their source size).
+const autumn: CaseStudy = {
+  slug: "autumn",
+  title: "We built Autumn a brand that holds up in front of engineers.",
+  metaTitle: "Autumn Brand and Website Design | PIXELUP LABS",
+  metaDescription:
+    "PIXELUP LABS designed Autumn's brand and website and built it in Next.js. Autumn (YC S25) merged the code into its own open-source repository.",
+  info: {
+    client: "Autumn",
+    year: "2026",
+    // No funding row: only aggregators report Autumn's rounds.
+    involvement: ["Branding", "Web Design", "Motion Design", "Next.js Development"],
+    links: [{ label: "useautumn.com", href: "https://useautumn.com/" }],
+  },
+  description: [
+    "PIXELUP LABS designed Autumn's brand and website in 2026, and built the site in Next.js.",
+    "Autumn is open-source billing infrastructure for AI startups, and its buyers are engineers. The brand had to work at favicon size and read in one scroll.",
+    "Autumn merged the code into its own open-source repository and runs the site itself.",
+  ],
+  // Frame autumn-02.
+  hero: {
+    media: { type: "image", src: "/media/autumn/monitor.avif" },
+    alt: "Autumn homepage on a studio monitor: 'The drop-in billing layer for AI startups', brand identity and website by PIXELUP LABS",
+    intrinsicSize: { width: 2880, height: 1620 },
+  },
+  story: {
+    company: "Autumn",
+    statusBadge: "YC S25 · Billing infrastructure",
+    headline: "We built Autumn a brand that holds up in front of engineers.",
+    // YC profile (S25, founder bio), TechCrunch 2025-09-15 (Demo Day list), and
+    // the customer logos on useautumn.com (2026-11-03).
+    summary:
+      "Autumn is **open-source billing infrastructure** on top of Stripe: usage-based billing and credits behind one API. It's backed by **Y Combinator (S25)**, and TechCrunch named it one of the most sought-after startups at YC's September 2025 Demo Day. **Mintlify, Firecrawl and Resend** run on it. CEO Ayush Rodrigues was a product manager at Checkout.com.",
+    // No stat row (Arjun, 2026-11-03, on CTGT).
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Autumn need a new brand?",
+        items: [
+          {
+            label: "Where Autumn was",
+            text: "Hundreds of AI apps already ran on Autumn. **Its leaf logo lost detail at small sizes**, and the brand lagged the infrastructure.",
+          },
+          {
+            label: "What Autumn asks its buyers to do",
+            text: "Hand their pricing and billing, **which means their revenue**, to Autumn instead of building it in-house.",
+          },
+          {
+            label: "What they asked us for",
+            text: "**A brand and website sprint**: a new identity, a new website, and the code.",
+          },
+          {
+            label: "Why it mattered",
+            text: "**Engineers don't run revenue through a tool that looks like a side project.**",
+          },
+        ],
+      },
+      {
+        kind: "media",
+        id: "snapshot-torii-icon",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/torii-icon.avif" },
+            alt: "Autumn torii-gate icon glowing between pink and purple light beams",
+            intrinsicSize: { width: 1920, height: 1080 },
+          },
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-favicon",
+        index: "01",
+        heading: "Autumn's logo had to work at favicon size.",
+        problem:
+          "The old leaf mark lost detail as it shrank, **and leaned on colour to work.**",
+        whyItMattered:
+          "Developers meet Autumn as a small mark: **a browser tab, a GitHub avatar, a docs sidebar.** That's where an infrastructure brand earns trust.",
+        whatWeDid:
+          "We explored line, torii gate, pixel and abstract leaf marks. **We kept the leaf the team loved and rebuilt it as a simple abstract form.** At small sizes, the background drops and the mark stands alone.",
+        outcome:
+          "The mark was **locked in a single review**, and ships in the brand guide with sizing rules.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-leaf-socials",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/leaf-socials.avif" },
+            alt: "Autumn's leaf mark on a social post, between posts reading 'Webhooks Handled' and 'Credits, limits and usage billing.'",
+            intrinsicSize: { width: 2202, height: 1070 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-stop-rebuilding",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/stop-rebuilding-billing.avif" },
+            alt: "Autumn poster reading 'Stop rebuilding billing' beside a stack of autumn.ts code windows",
+            intrinsicSize: { width: 1920, height: 1080 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-code",
+        media: {
+          kind: "pair",
+          aspect: "wide",
+          slots: [
+            {
+              media: { type: "image", src: "/media/autumn/code-stack.avif" },
+              alt: "Stack of autumn.ts code windows checking whether a user can access a feature",
+            },
+            {
+              media: { type: "image", src: "/media/autumn/api-tabs-poster.avif" },
+              alt: "Autumn's attach, check and track API tabs under a 'Stop rebuilding billing' headline",
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-one-scroll",
+        index: "02",
+        heading: "Autumn's brand had to be bold and still read in one scroll.",
+        problem:
+          "Autumn wanted to be remembered: dark, retro, neon. **It also wanted no clutter.**",
+        whyItMattered:
+          "An engineer evaluating billing scans for **pricing models, the API and proof of scale.** Bold isn't the risk. Bold that gets between the buyer and the docs is.",
+        whatWeDid:
+          "We merged three directions into one: **Japanese retro tech, neon on dark, straight lines and dither textures.** We chose the spacious layout and **removed the scroll hijack.** Developers get **a copy-to-terminal install command**; buyers get the logo wall, a SOC 2 Type 2 highlight and a production-scale section. We built it in **Next.js**, the way Autumn's engineers work.",
+        outcome:
+          "**Autumn merged our code into its own open-source repository** and ships on it.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-homepage",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/homepage.avif" },
+            alt: "Autumn homepage with a pixel-art city, an autumn.config.ts code window and 'The drop-in billing layer for AI startups'",
+            intrinsicSize: { width: 2048, height: 1152 },
+          },
+        },
+      },
+      // Frame autumn-01.
+      {
+        kind: "media",
+        id: "snapshot-api-tabs",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/api-tabs.avif" },
+            alt: "Autumn website section: attach, check and track tabs with the code for each step, over a dithered landscape",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-crt",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/crt-problem.avif" },
+            alt: "Autumn homepage on a CRT monitor, surrounded by Slack and GitHub messages about billing bugs",
+            intrinsicSize: { width: 2221, height: 1031 },
+          },
+        },
+      },
+      // Frame autumn-03.
+      {
+        kind: "media",
+        id: "snapshot-laptop",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/autumn/laptop.avif" },
+            alt: "Autumn homepage on a laptop against a dark pegboard wall",
+            intrinsicSize: { width: 2880, height: 1620 },
+          },
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Autumn ended up.",
+        paragraphs: [
+          "Autumn left with **a brand guide, the logo suite, a dev handoff file**, the animations and the Next.js code.",
+          "We wrote the first draft of the copy; **Autumn's team finalised it.** We **designed the brand and the site, built it and made the motion.**",
+          "If your brand is already locked and you only need throughput, a design subscription is cheaper.",
+          "Branding, web design, motion design and Next.js development by PIXELUP LABS, 2026.",
+        ],
+        cta: {
+          text: "If engineers are your buyers and your brand isn't keeping up,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    faqs: [autumnFaq, ...pixelupFaq],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "replay", tags: "Branding, website & product design" },
+    { slug: "fuseai", tags: "Branding, website & product design" },
+  ],
+  // Draft: noindex, out of the sitemap, and nothing links to it yet. The
+  // homepage card still points at useautumn.com.
+  publication: {
+    status: "draft",
+    publishedDate: "2026-11-03",
+    updatedDate: "2026-11-03",
+    blockers: [
+      "Copy audit (Arjun).",
+      "Autumn's OK to publish and to name its customers; the shared client channel was unreadable, so Ayush's side comes from call summaries.",
+      "No client quote yet; ask Ayush for a dated line.",
+      "At publish: set both dates to the publish day, re-point the lib/projects.ts card and add the /case-studies row.",
+    ],
+  },
+};
+
 const avantraFaq: FaqItem = {
   q: "Who designed Avantra's brand?",
   a: "PIXELUP LABS is designing Avantra's brand identity in 2026: strategy and moodboards, two visual directions, the logo and wordmark, an illustration and glyph system, deck and memo templates, and website explorations.",
@@ -4240,5 +4480,6 @@ export const caseStudies = {
   fuseai,
   replay,
   ctgt,
+  autumn,
   avantra,
 };
