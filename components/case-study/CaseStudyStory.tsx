@@ -5,6 +5,7 @@ import type {
   CaseStudy,
   CaseStudyStory as CaseStudyStoryData,
 } from "@/lib/case-studies";
+import { ProcessSection } from "../ProcessSection";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { ClientInfo } from "./ClientInfo";
@@ -449,6 +450,8 @@ export function CaseStudyStory({ study }: { study: CaseStudy }) {
               />
             );
           })}
+
+          <ProcessSection showMobileCta={!study.endCta} />
 
           {study.endCta && <EndCta endCta={study.endCta} />}
 

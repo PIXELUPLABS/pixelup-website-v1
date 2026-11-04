@@ -17,13 +17,13 @@
  * and their sitemap entries use.
  */
 export const siteUpdated = {
-  home: "2026-10-16",
+  home: "2026-11-04",
   call: "2026-07-28",
   explorations: "2026-07-29",
   clients: "2026-08-09",
   referral: "2026-11-03",
   /** Every case study lives in lib/case-studies.ts, so they share one date. */
-  caseStudies: "2026-10-07",
+  caseStudies: "2026-11-04",
 } as const;
 
 /** First public commit of the site — used as `datePublished` on the homepage. */

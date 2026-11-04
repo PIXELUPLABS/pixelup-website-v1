@@ -487,6 +487,42 @@
     ]
   },
 
+  "SectionRows": {
+    "file": "components/SectionRows.tsx",
+    "category": "layout",
+    "description": "SectionHeader (label and optional '01 / 06' counter on the left half, H2 and lead copy on the right), SplitHeader (case study SectionShell's header: H2 in the left half, full-width hairline, lead copy in the right half) and DetailRow (14px white/60 label | 16px content), on the case-study centre rule. ChallengeBlock's geometry, moved out of ServiceSection so the homepage and case studies can use it without the /services code.",
+    "variants": {
+      "edge": "\"inset\" (default) pads every cell 24px for a full-bleed main (case studies, /services). \"flush\" drops the outer side padding to line up with a LeftNav-shell column (/yc). \"bleed\" keeps flush's text positions, but the section takes `bleedMargin` (desk:-ml-4 desk:-mr-5) so its hairlines run from the shell divider to the viewport edge with no gap; the cells pad that back (homepage ProcessSection)."
+    },
+    "states": ["none"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.tracking.display-tight", "typography.font.mono", "breakpoint.desk"],
+    "when_to_use": "Any label | content section: /services, /yc, ProcessSection.",
+    "do_not": [
+      "Don't import these from components/services/ServiceSection in new code; that file stays local with /services.",
+      "Don't use \"bleed\" outside the LeftNav shell (p-5 row, mx-4 divider): bleedMargin undoes exactly those values."
+    ]
+  },
+
+  "ProcessSection": {
+    "file": "components/ProcessSection.tsx",
+    "category": "content",
+    "description": "The process section (no eyebrow): SplitHeader with the H2 and intro, then one DetailRow per step (a 20/24px H3 title on the left with its timing in white uppercase mono at the cell's right, where ChallengeBlock has its '01 / 02' counter; the step in muted-65 with **phrase** highlights in white via Emphasis on the right), then a 'How we work together' row (white lead + muted text, hairline-divided), and a closing line on the content half. Copy lives in lib/process.ts, cut from the Growth workspace sales-call copy that keeps the sources.",
+    "status": "On staging (2026-11-04): homepage between Showcase and BlogFaq; every case study, story and legacy, before EndCta and the FAQ.",
+    "variants": {
+      "edge": "\"bleed\" on the homepage (hairlines meet the LeftNav divider and the viewport edge), \"inset\" (default) on case studies.",
+      "showMobileCta": "CtaButtons under the closing line, below desk only. Case studies with an endCta pass false, because EndCta follows directly."
+    },
+    "states": ["static, server-rendered"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "color.neutral.muted-65", "typography.font.mono", "typography.tracking.display-tight", "breakpoint.desk"],
+    "when_to_use": "Once per page, after the proof (Showcase, the case-study story) and before the FAQ.",
+    "do_not": [
+      "Don't show CtaButtons here from desk up: the sticky LeftNav / CaseSidebar already pins them beside this section.",
+      "Don't highlight more than 1-3 short phrases per paragraph; a reader should get each step from the white phrases alone.",
+      "Don't add claims to lib/process.ts that the source copy file doesn't back.",
+      "Legacy case studies inset their SectionShell content 12px from the centre rule, these rows 24px, so the FAQ below sits 12px left of this section's text there. Accepted for now; the story layout matches."
+    ]
+  },
+
   "_gaps": [
     {
       "gap": "Error / validation color token",

@@ -5,6 +5,7 @@ import {
   type CaseStudy,
 } from "@/lib/case-studies";
 import { Footer } from "../Footer";
+import { ProcessSection } from "../ProcessSection";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { CaseSection } from "./CaseSection";
@@ -72,6 +73,8 @@ function LegacyCaseStudy({ study }: { study: CaseStudy }) {
               ))}
             </>
           )}
+
+          <ProcessSection showMobileCta={!study.endCta} />
 
           {study.endCta && <EndCta endCta={study.endCta} />}
 

@@ -2,6 +2,7 @@ import { AuditForm } from "@/components/AuditForm";
 import { BlogFaq } from "@/components/blog/BlogFaq";
 import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
+import { ProcessSection } from "@/components/ProcessSection";
 import { Showcase } from "@/components/Showcase";
 import { links } from "@/lib/projects";
 import { sitePublished, siteUpdated } from "@/lib/site-dates";
@@ -78,6 +79,7 @@ export default function Home() {
         />
         <div className="flex min-w-0 flex-1 flex-col gap-8">
           <Showcase scroll="page" />
+          <ProcessSection edge="bleed" />
           <BlogFaq />
           <AuditForm />
           {/* Same treatment as /blog's Footer wrapper — cancels the row's
