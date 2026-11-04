@@ -2004,7 +2004,7 @@ const henryLabs: CaseStudy = {
 // leads the FuseAI FAQ ahead of the shared questions.
 const fuseaiFaq: FaqItem = {
   q: "Who designed FuseAI's brand, website and product?",
-  a: "PIXELUP LABS rebranded FuseAI in 2026 with a new logo, and designed its website and product UI. The brand was ready for FuseAI's August launch 17 days after kickoff. The website (10+ pages) went live six weeks after the first design round, with the product UI days behind it. FuseAI's own team built the website in Framer and the product in code, and FuseAI reports free-to-paid trial conversion 20% higher since the redesign.",
+  a: "PIXELUP LABS [rebranded](/blog/rebranding) FuseAI in 2026 with a new logo, and designed its website and product UI. The brand was ready for FuseAI's August launch 17 days after kickoff. The website (10+ pages) went live six weeks after the first design round, with the product UI days behind it. FuseAI's own team built the website in Framer and the product in code, and FuseAI reports free-to-paid trial conversion 20% higher since the redesign.",
 };
 
 // Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/fuseai-case-study.md
