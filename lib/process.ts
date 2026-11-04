@@ -85,6 +85,4 @@ export const processSection = {
       text: "Strategy, direction, and wireframes and copy each need your OK. A round is one combined feedback list from your team.",
     },
   ] satisfies ProcessPrinciple[],
-  ctaLine:
-    "Launch or raise coming up? Book a call, tell us the date and we'll plan backward from it.",
 };

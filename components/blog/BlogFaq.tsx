@@ -1,6 +1,7 @@
 import Image from "next/image";
 import faqBg from "@/public/media/faq-bg.png";
 import { CaseFaq } from "@/components/case-study/CaseFaq";
+import { bleedMargin } from "@/components/SectionRows";
 import { faqHeading, pixelupFaq } from "@/lib/case-studies";
 
 /** Standalone, full-width FAQ block for /blog and the homepage, on both
@@ -13,9 +14,18 @@ import { faqHeading, pixelupFaq } from "@/lib/case-studies";
     at the different x-position a 50/50 split would put it at. Top hairline
     + breathing room matches the site's other full-width sections (Footer,
     AuditForm). */
-export function BlogFaq() {
+export function BlogFaq({
+  bleed = false,
+}: {
+  /** Homepage, directly under ProcessSection: the top hairline runs from the
+      LeftNav divider to the viewport edge and closes ProcessSection's centre
+      rule. The padding puts the content back where it was. */
+  bleed?: boolean;
+}) {
   return (
-    <section className="w-full border-t-[0.5px] border-hairline py-8">
+    <section
+      className={`border-t-[0.5px] border-hairline py-8 ${bleed ? `${bleedMargin} desk:pl-4 desk:pr-5` : "w-full"}`}
+    >
       <div className="flex w-full flex-col gap-6 desk:flex-row desk:gap-0">
         <div className="relative w-full overflow-hidden desk:w-[45%] desk:pr-5">
           <Image

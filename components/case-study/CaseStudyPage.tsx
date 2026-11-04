@@ -74,7 +74,7 @@ function LegacyCaseStudy({ study }: { study: CaseStudy }) {
             </>
           )}
 
-          <ProcessSection showMobileCta={!study.endCta} />
+          <ProcessSection />
 
           {study.endCta && <EndCta endCta={study.endCta} />}
 

@@ -79,8 +79,12 @@ export default function Home() {
         />
         <div className="flex min-w-0 flex-1 flex-col gap-8">
           <Showcase scroll="page" />
-          <ProcessSection edge="bleed" />
-          <BlogFaq />
+          {/* No gap between these two: BlogFaq's top hairline closes the
+              process section's centre rule. */}
+          <div>
+            <ProcessSection edge="bleed" />
+            <BlogFaq bleed />
+          </div>
           <AuditForm />
           {/* Same treatment as /blog's Footer wrapper — cancels the row's
               p-5 on this wrapper only, so Footer fills the extra space via
