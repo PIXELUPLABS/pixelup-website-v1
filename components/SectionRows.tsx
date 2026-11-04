@@ -5,9 +5,9 @@
  * without pulling in the /services code.
  */
 
-/** Keeps hyphenated words ("AI-native") whole when a heading wraps. */
+/** Keeps hyphenated words ("AI-native") and ranges ("1–3") whole when a line wraps. */
 export function noBreakHyphens(text: string) {
-  return text.split(/(\S+-\S+)/).map((part, i) =>
+  return text.split(/(\S+[-–]\S+)/).map((part, i) =>
     i % 2 === 1 ? (
       <span key={i} className="whitespace-nowrap">
         {part}

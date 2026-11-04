@@ -385,8 +385,8 @@ export const pixelupFaq: FaqItem[] = [
     linkLabel: "See current services and pricing on Contra.",
   },
   {
-    q: "What is it like to work with you?",
-    a: "You work directly with the team on Slack, with fast turnarounds and quick iterations. No account managers, no layers, no surprises.",
+    q: "How do we work together day to day?",
+    a: "You work directly with Daksh, your creative director and point of contact, backed by a small senior team. No account managers, no layers. We work in one shared Slack channel, post written updates every Tuesday and Friday and meet for a 30–60 minute sync each week, and the live Figma file is open to you any time. You sign off the strategy, the direction, and the wireframes and copy, with two revision rounds at each stage. A round is one combined list of feedback from your team.",
   },
   {
     q: "We already have a brand and website. Do we need to start over?",

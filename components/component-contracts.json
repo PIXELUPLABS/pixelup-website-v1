@@ -506,7 +506,7 @@
   "ProcessSection": {
     "file": "components/ProcessSection.tsx",
     "category": "content",
-    "description": "The process section (no eyebrow): SplitHeader with the H2 and intro, then one DetailRow per step (a 20/24px H3 title on the left with its timing in white uppercase mono at the cell's right, where ChallengeBlock has its '01 / 02' counter; the step in muted-65 with **phrase** highlights in white via Emphasis on the right), then a 'How we work together' row (white lead + muted text, hairline-divided). No bottom hairline or CTA: the next section's top rule closes the centre rule (BlogFaq bleed on the homepage, EndCta or the FAQ on case studies). Copy lives in lib/process.ts, cut from the Growth workspace sales-call copy that keeps the sources.",
+    "description": "The process section (no eyebrow): SplitHeader with the H2 and intro, then one DetailRow per step (a 20/24px H3 title on the left with its timing in white uppercase mono at the cell's right, where ChallengeBlock has its '01 / 02' counter; the step in muted-65 with one **phrase** highlight in white via Emphasis on the right). Day-to-day working terms live in the shared FAQ (pixelupFaq), not here. No bottom hairline or CTA: the next section's top rule closes the centre rule (BlogFaq bleed on the homepage, EndCta or the FAQ on case studies). Copy lives in lib/process.ts, cut from the Growth workspace sales-call copy that keeps the sources.",
     "status": "On staging (2026-11-04): homepage between Showcase and BlogFaq; every case study, story and legacy, before EndCta and the FAQ.",
     "variants": {
       "edge": "\"bleed\" on the homepage (hairlines meet the LeftNav divider and the viewport edge), \"inset\" (default) on case studies."
@@ -517,7 +517,7 @@
     "do_not": [
       "Don't add a CTA here: the sticky LeftNav / CaseSidebar already pins CtaButtons beside this section, and case studies end on EndCta.",
       "Don't put a gap between this section and the one after it on the homepage: BlogFaq (bleed) sits flush under it so its top hairline meets the centre rule.",
-      "Don't highlight more than 1-3 short phrases per paragraph; a reader should get each step from the white phrases alone.",
+      "Don't highlight more than one short phrase per step, or write more than two short sentences; a reader should get the process from the white phrases alone.",
       "Don't add claims to lib/process.ts that the source copy file doesn't back.",
       "Legacy case studies inset their SectionShell content 12px from the centre rule, these rows 24px, so the FAQ below sits 12px left of this section's text there. Accepted for now; the story layout matches."
     ]

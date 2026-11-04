@@ -4,16 +4,19 @@
  *
  * Cut from the sales-call copy in the Growth workspace
  * (SEO-AEO/Article Writing Workspace/outputs/sales-call-insights-2026-11/
- * process-section-copy.md), which keeps the source for every claim, so each
- * right-hand paragraph fits four lines in the 1440px layout (five at most).
+ * process-section-copy.md), which keeps the source for every claim, down to
+ * two short sentences a step (three lines in the 1440px layout, four at most).
  * No new claims were added. Timings follow a brand and website project (6–8 weeks);
- * the brand sprint and website-only variants live in that file too. Its
- * "Brand and website design · Weeks 3–6" step is split in two here; the
- * 3–4 / 4–6 split follows the brand sprint finishing in weeks 3–4, and no
- * call gives it exactly.
+ * the brand sprint and website-only variants live in that file too. Its six
+ * steps are regrouped into five here: research and the strategy deck make
+ * the brand workshop; three directions and the brand half of "Brand and
+ * website design · Weeks 3–6" make the brand sprint. The 2–4 / 4–6 split
+ * follows the brand sprint finishing in weeks 3–4, and no call gives it
+ * exactly. Its "How we work together" terms moved to the shared FAQ
+ * (pixelupFaq in lib/case-studies.ts).
  *
- * `**phrase**` renders in white (components/case-study/Emphasis), so readers
- * can skim the white phrases alone.
+ * `**phrase**` renders in white (components/case-study/Emphasis). One phrase
+ * a step, so the white phrases read as the process on their own.
  */
 
 export type ProcessStep = {
@@ -23,66 +26,35 @@ export type ProcessStep = {
   body: string;
 };
 
-export type ProcessPrinciple = {
-  /** Rendered in white, ahead of the muted text. */
-  lead: string;
-  text: string;
-};
-
 export const processSection = {
   heading: "What it looks like working with us",
   intro:
-    "You **sign off the strategy** before we commit to a direction, and see real directions before we polish one. **No surprises** at launch. The steps below follow a brand and website project: **6–8 weeks** from kickoff to launch. Brand sprints take 2–4 weeks.",
+    "A brand and website project takes **6–8 weeks** from kickoff to launch; a brand sprint on its own takes 2–4 weeks. You sign off the strategy before we commit to a direction, so there are **no surprises** at launch.",
   steps: [
     {
-      title: "Discovery call and proposal",
-      timing: "Before kickoff",
-      body: "We check we're a fit. You tell us your buyer, competitors, deadline and what success looks like; we tell you **honestly what we'd change**. Once you sign and pay the deposit, we open a shared Slack channel. Kickoff is usually **that week or the next**.",
+      title: "Discovery and kickoff",
+      timing: "Before week 1",
+      body: "You tell us your buyer, competitors and deadline, and we tell you **honestly what we'd change**. Once you sign, we open a shared Slack channel and usually kick off that week or the next.",
     },
     {
-      title: "Buyer and product research",
+      title: "Brand workshop and strategy",
       timing: "Week 1",
-      body: "Under NDA if you like, we learn your product from your engineers and **study your sales and demo calls** for what makes buyers trust you. A 1–3 hour founder workshop sets where you're headed, and we audit **competitors' ads, pages and messaging**.",
+      body: "We study your product, sales calls and competitors, then run a 1–3 hour founder workshop. It ends in **a strategy deck you sign off**, and we check every design decision against it.",
     },
     {
-      title: "Strategy deck",
-      timing: "End of week 1",
-      body: "We boil it down to one short deck: where your buyer's needs, your market gap and your vision meet. You sign it off, and we **check every design decision against it**. That **keeps bias out**, ours included.",
-    },
-    {
-      title: "Three directions",
-      timing: "Week 2",
-      body: "One direction would just be our taste, so you see three. Each has a moodboard, positioning line, storyline and rough versions of a **website hero, poster and product screen**. Pick one, or **mix parts**.",
-    },
-    {
-      title: "Brand design",
-      timing: "Weeks 3–4",
-      body: "We **test the direction** on real touchpoints: a LinkedIn post, a poster and your product screens. We polish it only once it holds up there.",
+      title: "Brand sprint",
+      timing: "Weeks 2–4",
+      body: "You see **three directions**, each shown on a website hero, poster and product screen, not just a moodboard. Pick one or mix parts, and we polish it once it holds up on real touchpoints.",
     },
     {
       title: "Website design",
       timing: "Weeks 4–6",
-      body: "Once the direction is set, we plan the website so every reader, **from the CFO to security**, finds what they need in 5–7 seconds. You write the copy with our template, we edit it, and you **approve wireframes and copy** before final design.",
+      body: "We plan it so every reader, from the CFO to security, finds what they need in 5–7 seconds. You write the copy with our template and edits, then **approve wireframes and copy** before final design.",
     },
     {
-      title: "Build, launch and handoff",
+      title: "Build, launch and support",
       timing: "Weeks 6–8",
-      body: "We build in Webflow, Framer or Next.js, so **no design decision gets lost**, and hand over the whole system so even non-designers stay on brand. Every launch includes **10 days of post-launch support**.",
+      body: "We build in Webflow, Framer or Next.js, so no design decision gets lost, then hand over the whole system. Every launch includes **10 days of post-launch support**.",
     },
   ] satisfies ProcessStep[],
-  principlesHeading: "How we work together",
-  principles: [
-    {
-      lead: "You work with Daksh.",
-      text: "Your creative director and point of contact, backed by a small senior team. No account managers, no layers. Tag Daksh on Slack.",
-    },
-    {
-      lead: "You always know where things stand.",
-      text: "One shared Slack channel, written updates every Tuesday and Friday, a 30–60 minute weekly sync and the live Figma file, any time.",
-    },
-    {
-      lead: "You sign off every stage, with two revision rounds each.",
-      text: "Strategy, direction, and wireframes and copy each need your OK. A round is one combined feedback list from your team.",
-    },
-  ] satisfies ProcessPrinciple[],
 };
