@@ -121,7 +121,7 @@ export const projects: Project[] = [
   {
     slug: "ctgt",
     label: "CTGT",
-    // The case study is still a draft (noindex).
+    // The case study is published (2026-11-05).
     href: "/case-studies/ctgt",
     external: false,
     media: { type: "image", src: "/media/ctgt.png" },
@@ -169,7 +169,7 @@ export const projects: Project[] = [
   {
     slug: "valley",
     label: "Valley",
-    // The case study is still a draft (noindex).
+    // The case study is published (2026-11-05).
     href: "/case-studies/valley",
     external: false,
     media: { type: "image", src: "/media/valley.png" },
@@ -212,7 +212,7 @@ export const projects: Project[] = [
   {
     slug: "zenact",
     label: "Zenact",
-    // The case study is still a draft (noindex).
+    // The case study is published (2026-11-05).
     href: "/case-studies/zenact",
     external: false,
     media: { type: "image", src: "/media/zenact.jpg" },
@@ -226,7 +226,7 @@ export const projects: Project[] = [
   {
     slug: "autumn",
     label: "Autumn",
-    // The case study is still a draft (noindex).
+    // The case study is published (2026-11-05).
     href: "/case-studies/autumn",
     external: false,
     media: { type: "image", src: "/media/autumn.png" },

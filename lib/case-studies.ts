@@ -2988,18 +2988,13 @@ const ctgt: CaseStudy = {
     { slug: "replay", tags: "Branding, website & product design" },
     { slug: "fuseai", tags: "Branding, website & product design" },
   ],
-  // Draft: noindex and out of the sitemap. The homepage card and the
-  // /case-studies row link here (Arjun, 2026-11-03).
+  // Published 2026-11-05: Arjun cleared the copy audit and the client's OK.
+  // The homepage card and the /case-studies row link here.
   publication: {
-    status: "draft",
-    publishedDate: "2026-11-03",
-    updatedDate: "2026-11-03",
-    blockers: [
-      "Copy audit (Arjun, later).",
-      "CTGT's OK to publish, plus the kickoff-call and analytics details the copy uses.",
-      "No client quote yet; ask Cyril or Ethan for a dated line.",
-      "At publish: set both dates to the publish day.",
-    ],
+    status: "published",
+    publishedDate: "2026-11-05",
+    updatedDate: "2026-11-05",
+    blockers: ["No client quote yet; ask Cyril or Ethan for a dated line."],
   },
 };
 
@@ -3228,18 +3223,13 @@ const autumn: CaseStudy = {
     { slug: "replay", tags: "Branding, website & product design" },
     { slug: "fuseai", tags: "Branding, website & product design" },
   ],
-  // Draft: noindex and out of the sitemap. The homepage card and the
-  // /case-studies row link here (Arjun, 2026-11-03).
+  // Published 2026-11-05: Arjun cleared the copy audit and the client's OK.
+  // The homepage card and the /case-studies row link here.
   publication: {
-    status: "draft",
-    publishedDate: "2026-11-03",
-    updatedDate: "2026-11-03",
-    blockers: [
-      "Copy audit (Arjun).",
-      "Autumn's OK to publish and to name its customers; the shared client channel was unreadable, so Ayush's side comes from call summaries.",
-      "No client quote yet; ask Ayush for a dated line.",
-      "At publish: set both dates to the publish day.",
-    ],
+    status: "published",
+    publishedDate: "2026-11-05",
+    updatedDate: "2026-11-05",
+    blockers: ["No client quote yet; ask Ayush for a dated line."],
   },
 };
 
@@ -3489,19 +3479,13 @@ const zenact: CaseStudy = {
     { slug: "replay", tags: "Branding, website & product design" },
     { slug: "fuseai", tags: "Branding, website & product design" },
   ],
-  // Draft: noindex and out of the sitemap. The homepage card and the
-  // /case-studies row link here (Arjun, 2026-11-03).
+  // Published 2026-11-05: Arjun cleared the copy audit and the client's OK.
+  // The homepage card and the /case-studies row link here.
   publication: {
-    status: "draft",
-    publishedDate: "2026-11-03",
-    updatedDate: "2026-11-03",
-    blockers: [
-      "Copy audit (Arjun).",
-      "Zenact isn't on the publishable roster in proof-bank.md: confirm we can name it.",
-      "Zenact's OK to publish; the shared client channel sits in Zenact's workspace and couldn't be read.",
-      "No client quote yet.",
-      "At publish: set both dates to the publish day.",
-    ],
+    status: "published",
+    publishedDate: "2026-11-05",
+    updatedDate: "2026-11-05",
+    blockers: ["No client quote yet."],
   },
 };
 
@@ -3698,18 +3682,13 @@ const valley: CaseStudy = {
     { slug: "replay", tags: "Branding, website & product design" },
     { slug: "fuseai", tags: "Branding, website & product design" },
   ],
-  // Draft: noindex and out of the sitemap. The homepage card and the
-  // /case-studies row link here (Arjun, 2026-11-03).
+  // Published 2026-11-05: Arjun cleared the copy audit and the client's OK.
+  // The homepage card and the /case-studies row link here.
   publication: {
-    status: "draft",
-    publishedDate: "2026-11-03",
-    updatedDate: "2026-11-03",
-    blockers: [
-      "Copy audit (Arjun).",
-      "Zayd's OK as well as Shubh's (Shubh is close to the studio).",
-      "No client quote yet.",
-      "At publish: set both dates to the publish day.",
-    ],
+    status: "published",
+    publishedDate: "2026-11-05",
+    updatedDate: "2026-11-05",
+    blockers: ["No client quote yet."],
   },
 };
 
