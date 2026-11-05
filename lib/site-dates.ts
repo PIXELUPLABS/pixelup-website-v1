@@ -21,7 +21,7 @@ export const siteUpdated = {
   call: "2026-10-07",
   explorations: "2026-09-30",
   clients: "2026-10-27",
-  privacy: "2026-08-31",
+  privacy: "2026-11-05",
   /** /faq: lib/faq.ts. Also its FAQPage `datePublished` (first published with this date). */
   faq: "2026-10-27",
   /** The /case-studies index only. Each study carries its own published /
