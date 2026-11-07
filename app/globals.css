@@ -22,6 +22,33 @@
      open state read as "darker" than the default page. */
   --color-scrim: rgba(0, 0, 0, 0.72);
 
+  /* PIXELUP Brand 2026 palette — the Figma variables of the /referral
+     redesign (PIXELUP-Brand-2026, node 1801:2472). */
+  --color-ink: #0c0c0c; /* Figma: bg */
+  --color-ink-deep: #0a0a0a;
+  --color-fg: #f2f2f2; /* Figma: text */
+  --color-fg-2: #cfcfcf; /* Figma: text-2 */
+  --color-muted: #9a9a9a;
+  --color-faint: #8a8a8a;
+  --color-placeholder: #7a7a7a;
+  --color-surface: #141414;
+  --color-surface-2: #161616;
+  --color-line: #222222;
+  --color-line-input: #2a2a2a;
+  --color-line-strong: #333333;
+  --color-accent-blue: #2337ff; /* Figma: accent/blue */
+  --color-header-blue: #1d2ee6;
+  /* Blue glow ramp shared by the referral hero and footer gradients. */
+  --color-glow-top: #1e30e9;
+  --color-glow-1: #1b2bd9;
+  --color-glow-2: #2436ff;
+  --color-glow-3: #2f42ff;
+  --color-glow-4: #9aa1ff;
+  --color-glow-5: #f3f3ff;
+  /* Footer bottom-row text sitting on the light end of the glow. */
+  --color-on-glow: #0a0a14;
+  --color-on-glow-muted: #1d2266;
+
   /* Fonts */
   --font-display: var(--font-display), "Inter", sans-serif;
   --font-button: var(--font-button), "Instrument Sans", sans-serif;

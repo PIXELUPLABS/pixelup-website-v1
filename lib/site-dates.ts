@@ -17,6 +17,8 @@
  * and their sitemap entries use.
  */
 export const siteUpdated = {
+  /** /referral: app/referral/page.tsx and lib/referral.ts. */
+  referral: "2026-11-07",
   home: "2026-10-27",
   call: "2026-10-07",
   explorations: "2026-09-30",
