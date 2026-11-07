@@ -122,54 +122,31 @@ const entries: CaseStudyShowcaseEntry[] = [
   {
     slug: "ctgt",
     niche: "Enterprise AI",
-    whatWeDid:
-      "Brand identity, marketing website, product storyboards, and pitch deck, with Webflow development",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid: "Branding, Web Design, Motion Design, Webflow Development",
     // $7.2M seed led by Gradient (Google's early-stage AI fund), Feb 2025 (public announcement).
     fundingBadge: "Seed",
   },
   {
-    slug: "reducto",
-    niche: "AI Infrastructure",
-    whatWeDid:
-      "Website redesign, brand assets, icon library, and product UI with motion specs, dev-ready",
-    // $75M Series B led by a16z, Oct 2025, tripling valuation to $600M (public announcement).
-    fundingBadge: "Series B",
-  },
-  {
     slug: "valley",
     niche: "Enterprise AI",
-    whatWeDid:
-      "Brand identity, marketing website, and final sales deck, with Framer development",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid: "Web Design, Motion Design, Framer Development, Sales Deck",
     // $3.2M pre-seed (Crunchbase-confirmed).
     fundingBadge: "Pre-Seed",
   },
   {
-    slug: "pogo",
-    niche: "Consumer Research",
-    whatWeDid: "Full multi-page marketing website, with Webflow development",
-    // Same "$32M Raised" line as its /clients roster entry; no round named there.
-    fundingBadge: "$32M Raised",
-  },
-  {
     slug: "zenact",
     niche: "DevTools",
-    whatWeDid:
-      "Brand identity, marketing website, and finalized copy, with Webflow development",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid: "Branding, Web Design, Motion Design, Webflow Development",
     // Private on /clients too — the card's default tag.
-  },
-  {
-    slug: "monumint",
-    niche: "Fintech",
-    whatWeDid:
-      "Complete brand identity and landing page, with Framer development",
-    // YC W24, per its /clients roster entry.
-    fundingBadge: "YC W24",
   },
   {
     slug: "autumn",
     niche: "DevTools",
-    whatWeDid:
-      "Full brand identity, marketing website, and social brand assets, with Next.js development",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid: "Branding, Web Design, Motion Design, Next.js Development",
     // YC S25, per its /clients roster entry (slug "autumn-pricing" there).
     fundingBadge: "YC S25",
   },
@@ -180,6 +157,31 @@ const entries: CaseStudyShowcaseEntry[] = [
       "Brand guidelines, marketing website, product UI redesign, and component library, dev-ready",
     // $1.1M pre-seed, YC-backed (public announcement).
     fundingBadge: "Pre-Seed",
+  },
+  // No case study page yet for the last three, so they close the list
+  // (Arjun, 2026-11-03).
+  {
+    slug: "reducto",
+    niche: "AI Infrastructure",
+    whatWeDid:
+      "Website redesign, brand assets, icon library, and product UI with motion specs, dev-ready",
+    // $75M Series B led by a16z, Oct 2025, tripling valuation to $600M (public announcement).
+    fundingBadge: "Series B",
+  },
+  {
+    slug: "pogo",
+    niche: "Consumer Research",
+    whatWeDid: "Full multi-page marketing website, with Webflow development",
+    // Same "$32M Raised" line as its /clients roster entry; no round named there.
+    fundingBadge: "$32M Raised",
+  },
+  {
+    slug: "monumint",
+    niche: "Fintech",
+    whatWeDid:
+      "Complete brand identity and landing page, with Framer development",
+    // YC W24, per its /clients roster entry.
+    fundingBadge: "YC W24",
   },
 ];
 

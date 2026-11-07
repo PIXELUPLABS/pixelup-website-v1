@@ -67,7 +67,7 @@ export const faqCategories: FaqCategory[] = [
       {
         id: "do-we-need-a-full-rebrand-or-a-refresh",
         q: "Do we need a full rebrand or a refresh?",
-        a: "Usually not. Most teams with a working brand and website need a refresh, and PIXELUP LABS does both.\n\nA refresh keeps your positioning and updates how the brand looks; FuseAI kept its original logo, which PIXELUP LABS refined. A full rebrand changes the positioning, and sometimes the name. Which one you need is decided on the discovery call.",
+        a: "Usually not. Most teams with a working brand and website need a refresh, and PIXELUP LABS does both.\n\nA refresh keeps your positioning and updates how the brand looks. A full rebrand changes the positioning, and sometimes the name. Which one you need is decided on the discovery call.",
       },
       {
         id: "who-writes-the-website-copy",
