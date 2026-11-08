@@ -241,13 +241,6 @@ export default function ReferralPage() {
             >
               Apply to become a partner
             </h2>
-            <div className="flex flex-col gap-2.5 rounded-[6px] border border-dashed border-line-strong p-[19px] text-muted">
-              <p className="text-[12px] leading-[15px] tracking-[0.08em]">PROGRAM TERMS</p>
-              <p className="text-[14px] leading-[1.5]">
-                [Add the program terms and conduct rules here — the second confirmation below
-                refers to them.]
-              </p>
-            </div>
           </div>
           <div className="min-w-0 flex-1">
             <ReferralForm />

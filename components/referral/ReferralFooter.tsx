@@ -93,13 +93,8 @@ export function ReferralFooter() {
             ))}
           </div>
         </div>
-        <div className="flex items-center gap-[26px] text-[13px] leading-[16px] tracking-[-0.01em] text-on-glow desk:flex-1 desk:justify-end">
-          {site.legal.map((item) => (
-            <a key={item.label} href={item.href} className={linkClass}>
-              {item.label}
-            </a>
-          ))}
-        </div>
+        {/* Empty right column so the imprint stays centred on desk. */}
+        <div className="hidden desk:block desk:flex-1" />
       </div>
     </footer>
   );
