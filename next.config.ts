@@ -82,6 +82,12 @@ const nextConfig: NextConfig = {
         destination: "/blog/startup-rebrand-cost",
         statusCode: 301,
       },
+      // Brand refresh guide moved to a longer slug at Arjun's request (2026-11-12).
+      {
+        source: "/blog/brand-refresh",
+        destination: "/blog/brand-refresh-guide",
+        statusCode: 301,
+      },
       {
         source: "/pixeluplabs",
         destination: "/",
