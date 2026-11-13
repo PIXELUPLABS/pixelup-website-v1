@@ -17,6 +17,10 @@ const caseStudies = [
   { name: "Sainapse", slug: "sainapse" },
   { name: "Sully", slug: "sully" },
   { name: "Streamline", slug: "streamline" },
+  { name: "CTGT", slug: "ctgt" },
+  { name: "Valley", slug: "valley" },
+  { name: "Zenact", slug: "zenact" },
+  { name: "Autumn", slug: "autumn" },
 ] as const;
 
 const quickLinks = [
