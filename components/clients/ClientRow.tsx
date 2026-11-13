@@ -21,6 +21,10 @@ const logoFrameClassBySlug: Record<string, string> = {
   conigma: "h-7 w-[114.3333px]",
   "conscious-engines": "h-7 w-[172.032px]",
   dayflow: "h-7 w-[98.702px]",
+  // 378x112 PNG with no padding around the mark, so it is set a little
+  // narrower than its 94.5px natural width at 28px: the wordmark then
+  // matches the others' cap height.
+  fuseai: "h-7 w-[88px]",
   greptile: "h-7 w-[115.612px]",
   henrylabs: "h-7 w-[180.32px]",
   "lasting-learn": "h-7 w-[191.1392px]",
@@ -28,12 +32,18 @@ const logoFrameClassBySlug: Record<string, string> = {
   nfa: "h-7 w-[74px]",
   pogo: "h-7 w-[57.9312px]",
   reducto: "h-7 w-[137.984px]",
+  // 111x36 viewBox.
+  replay: "h-7 w-[86.3333px]",
   revyl: "h-7 w-[102.6667px]",
   sainapse: "h-7 w-[155.0004px]",
   streamline: "h-7 w-[136.3928px]",
   sully: "h-7 w-[104.5333px]",
   "synthio-labs": "h-7 w-[160.734px]",
   umbra: "h-7 w-[104.5333px]",
+  // 320x90 viewBox with no padding, and every letter is cap height, so it
+  // is drawn 20px tall (the size varickagents.com's own header uses)
+  // instead of 28px: it then sits at the others' optical size.
+  "varick-agents": "h-7 w-[71.1111px]",
   "vertera-health": "h-7 w-[108.404px]",
   zenact: "h-7 w-[125.44px]",
   jumbo: "h-7 w-[125.44px]",

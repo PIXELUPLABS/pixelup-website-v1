@@ -22,7 +22,7 @@ export const siteUpdated = {
   home: "2026-10-27",
   call: "2026-10-07",
   explorations: "2026-09-30",
-  clients: "2026-10-27",
+  clients: "2026-11-13",
   privacy: "2026-11-05",
   /** /faq: lib/faq.ts. Also its FAQPage `datePublished` (first published with this date). */
   faq: "2026-10-27",

@@ -91,6 +91,48 @@ export const clients: Client[] = [
     engagement: "Full multi-page marketing website, with Webflow development",
     fundingNote: "$32M Raised",
   },
+  // FuseAI, Replay and Varick Agents sit right after the top six (Greptile
+  // through Pogo), as asked on 2026-11-13.
+  {
+    slug: "fuseai",
+    name: "FuseAI",
+    // Header wordmark from fuseai.com (378x112 PNG); swap in an SVG if
+    // FuseAI sends one.
+    logo: "/media/logos/clients/fuseai.png",
+    niche: "AI Sales",
+    // Involvement from its case study. FuseAI's own team built the site and
+    // product, so no development line.
+    engagement:
+      "Complete 2026 rebrand covering a new logo, website, product UI, and motion design",
+    // Its only public figure is the standard $500K YC deal, not a round, so
+    // no amount.
+    fundingNote: "YC-backed (W25)",
+  },
+  {
+    slug: "replay",
+    name: "Replay",
+    // Header wordmark from replay.ai (/images/sunset-logo.svg), 2026-11-13.
+    logo: "/media/logos/clients/replay.svg",
+    niche: "AI Data Licensing",
+    engagement:
+      "Brand identity from scratch, marketing website, and product design, with Next.js development",
+    // No public round. Investors from Replay's Ashby postings, as cited in
+    // its case study ("backed by Floodgate, Afore, Ludlow and Hustle Fund").
+    fundingNote: "Floodgate-backed",
+  },
+  {
+    slug: "varick-agents",
+    name: "Varick Agents",
+    // The new custom wordmark, from varickagents.com (/images/new-logo.svg),
+    // 2026-11-13.
+    logo: "/media/logos/clients/varick-agents.svg",
+    niche: "Enterprise AI",
+    engagement:
+      "Brand refresh with a custom wordmark, marketing website, and illustrations, with Next.js development",
+    // VCBacked ($4.0M seed led by NOMO Ventures) and GetLatka ("Confirmed by
+    // CEO") both give $4M; Varick's own sites state no figure.
+    fundingNote: "$4M Seed",
+  },
   {
     slug: "valley",
     name: "Valley",
