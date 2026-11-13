@@ -26,6 +26,14 @@ export type ProcessStep = {
   body: string;
 };
 
+/** What ProcessSection renders: this file's copy, or a page's own (/yc). */
+export type ProcessContent = {
+  heading: string;
+  /** Lead copy under the heading. /yc leaves it out: heading, then steps. */
+  intro?: string;
+  steps: ProcessStep[];
+};
+
 export const processSection = {
   heading: "What it looks like working with us",
   intro:

@@ -22,6 +22,8 @@ export const siteUpdated = {
   explorations: "2026-07-29",
   clients: "2026-11-04",
   referral: "2026-11-03",
+  /** For YC founders. On staging only; not in the sitemap or the nav. */
+  yc: "2026-11-13",
   /** Every case study lives in lib/case-studies.ts, so they share one date. */
   caseStudies: "2026-11-04",
 } as const;

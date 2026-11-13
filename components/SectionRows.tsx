@@ -31,7 +31,8 @@ export type SectionEdge = "inset" | "flush" | "bleed";
 /** The LeftNav shell's divider gap (mx-4) and outer padding (p-5), undone. */
 export const bleedMargin = "desk:-ml-4 desk:-mr-5";
 
-const labelPadding: Record<SectionEdge, string> = {
+/** Padding of a row's left-hand (label or heading) cell. */
+export const labelPadding: Record<SectionEdge, string> = {
   inset: "p-6",
   flush: "py-6 desk:pr-6",
   bleed: "py-6 desk:pl-4 desk:pr-6",
@@ -100,17 +101,21 @@ export function SplitHeader({
           </h2>
         </div>
       </div>
-      <div className="grid desk:grid-cols-2 desk:border-t-[0.5px] desk:border-hairline">
-        <div
-          aria-hidden="true"
-          className="hidden desk:block desk:border-r-[0.5px] desk:border-hairline"
-        />
-        <div
-          className={`flex flex-col gap-5 ${contentPadding[edge]} pt-0 desk:pt-6`}
-        >
-          {children}
+      {/* No lead copy: the heading row stands alone and the caller's own
+          top rule (its rows) closes it. */}
+      {children && (
+        <div className="grid desk:grid-cols-2 desk:border-t-[0.5px] desk:border-hairline">
+          <div
+            aria-hidden="true"
+            className="hidden desk:block desk:border-r-[0.5px] desk:border-hairline"
+          />
+          <div
+            className={`flex flex-col gap-5 ${contentPadding[edge]} pt-0 desk:pt-6`}
+          >
+            {children}
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

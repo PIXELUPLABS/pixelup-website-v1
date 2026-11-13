@@ -52,6 +52,17 @@
   }
 }
 
+/* TestimonialSlider's progress bar. Its animationend is what advances the
+   slider, so pausing the animation (hover/focus) also pauses the rotation. */
+@keyframes testimonial-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 html,
 body {
   background: var(--color-base);

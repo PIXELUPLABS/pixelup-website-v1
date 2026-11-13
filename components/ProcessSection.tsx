@@ -1,4 +1,4 @@
-import { processSection } from "@/lib/process";
+import { processSection, type ProcessContent } from "@/lib/process";
 import { Emphasis } from "./case-study/Emphasis";
 import {
   bleedMargin,
@@ -25,11 +25,14 @@ const rowHeading =
  */
 export function ProcessSection({
   edge = "inset",
+  content = processSection,
 }: {
   /** "bleed" in a LeftNav-shell column (homepage), "inset" on case studies. */
   edge?: SectionEdge;
+  /** A page's own wording of the same steps (/yc). Defaults to lib/process.ts. */
+  content?: ProcessContent;
 }) {
-  const { heading, intro, steps } = processSection;
+  const { heading, intro, steps } = content;
 
   return (
     <section
@@ -37,9 +40,11 @@ export function ProcessSection({
       className={`border-t-[0.5px] border-hairline ${edge === "bleed" ? bleedMargin : ""}`}
     >
       <SplitHeader heading={heading} headingId="process-heading" edge={edge}>
-        <p className="max-w-[60ch] text-[16px] leading-[1.5] text-muted-65">
-          <Emphasis text={intro} />
-        </p>
+        {intro && (
+          <p className="max-w-[60ch] text-[16px] leading-[1.5] text-muted-65">
+            <Emphasis text={intro} />
+          </p>
+        )}
       </SplitHeader>
 
       <ol className="list-none divide-y-[0.5px] divide-hairline border-t-[0.5px] border-hairline">

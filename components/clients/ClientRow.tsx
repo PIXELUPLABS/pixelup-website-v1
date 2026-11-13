@@ -20,6 +20,10 @@ const logoFrameClassBySlug: Record<string, string> = {
   ctgt: "h-7 w-[102.5682px]",
   conigma: "h-7 w-[114.3333px]",
   dayflow: "h-7 w-[98.702px]",
+  // 378x112 PNG with no padding around the mark, so it is set a little
+  // narrower than its 94.5px natural width at 28px: the wordmark then
+  // matches the others' cap height.
+  fuseai: "h-7 w-[88px]",
   greptile: "h-7 w-[115.612px]",
   henrylabs: "h-7 w-[180.32px]",
   "lasting-learn": "h-7 w-[191.1392px]",
@@ -75,13 +79,22 @@ function ClientIdentity({ client, index }: { client: Client; index: number }) {
   );
 }
 
-export function ClientRow({ client, index }: { client: Client; index: number }) {
+export function ClientRow({
+  client,
+  index,
+  className = "",
+}: {
+  client: Client;
+  index: number;
+  /** Side padding from ClientRoster's bleed variant. */
+  className?: string;
+}) {
   const entranceDelay = `${Math.min(100 + index * 70, 600)}ms`;
   const balancedEngagement = splitForBalancedLastLine(client.engagement);
 
   return (
     <li
-      className="fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-[1.6fr_0.6fr_0.8fr] desk:items-start desk:gap-6"
+      className={`fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-[1.6fr_0.6fr_0.8fr] desk:items-start desk:gap-6 ${className}`}
       style={{ animationDelay: entranceDelay }}
     >
       <ClientIdentity client={client} index={index} />

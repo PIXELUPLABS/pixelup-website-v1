@@ -15,16 +15,39 @@ import { InlineCta } from "./InlineCta";
 import { MoreProjects } from "./MoreProjects";
 import { SectionShell } from "./SectionShell";
 
+/**
+ * Side padding per cell for a four-metric band in a LeftNav-shell column,
+ * matching SectionRows' edges. "flush": the outer cells drop their outer
+ * padding so the first value lines up with the column edge. "bleed": the
+ * same text positions, but the caller pulls the band out with bleedMargin so
+ * its rules run from the LeftNav divider to the viewport edge, and the outer
+ * cells pad that distance back (/yc). Two columns below desk, four from desk.
+ */
+const edgeCellPadding = {
+  inset: [],
+  flush: ["pl-0", "pr-0 desk:pr-6", "pl-0 desk:pl-6", "pr-0"],
+  bleed: [
+    "pl-0 desk:pl-4",
+    "pr-0 desk:pr-6",
+    "pl-0 desk:pl-6",
+    "pr-0 desk:pr-5",
+  ],
+} satisfies Record<string, string[]>;
+
 /** Hairline-divided metric cells. Also the /services hero trust strip. */
 export function Metrics({
   metrics,
   usesSharedCenterRule = false,
   bottomRule = true,
+  edge = "inset",
 }: {
   metrics: CaseMetric[];
   usesSharedCenterRule?: boolean;
   /** Off when the next section's top rule would double it. */
   bottomRule?: boolean;
+  /** "flush" and "bleed" need exactly four metrics (see edgeCellPadding).
+      With "bleed" the caller's wrapper carries SectionRows' bleedMargin. */
+  edge?: "inset" | "flush" | "bleed";
 }) {
   // Two or three cells fill the row on desktop; on mobile a third spans both
   // columns instead of leaving an empty cell beside it.
@@ -52,7 +75,7 @@ export function Metrics({
         return (
           <div
             key={`${metric.value}-${metric.label}`}
-            className={`flex min-w-0 flex-col gap-4 border-hairline p-6 ${mobileBorders} ${mobileRows} ${mobileSpan} ${desktopBorders} desk:border-t-0`}
+            className={`flex min-w-0 flex-col gap-4 border-hairline p-6 ${(edgeCellPadding[edge] as string[])[index] ?? ""} ${mobileBorders} ${mobileRows} ${mobileSpan} ${desktopBorders} desk:border-t-0`}
           >
             <p className="text-[32px] font-medium leading-none tracking-display text-white desk:text-[48px]">
               {metric.value}

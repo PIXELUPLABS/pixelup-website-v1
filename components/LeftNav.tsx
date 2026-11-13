@@ -1,5 +1,7 @@
+import type { Testimonial } from "@/lib/testimonials";
 import { TrustedStrip } from "./TrustedStrip";
 import { CtaButtons, type PrimaryCta } from "./CtaButtons";
+import { TestimonialSlider } from "./TestimonialSlider";
 
 // Homepage hero copy — pages like /call pass their own.
 const defaultHeading =
@@ -22,6 +24,7 @@ export function LeftNav({
   headingFontClassName = "",
   variant = "default",
   primaryCta,
+  testimonials,
 }: {
   heading?: React.ReactNode;
   subheading?: React.ReactNode;
@@ -46,6 +49,9 @@ export function LeftNav({
   /** Swaps the accent CTA (default BOOK A CALL) for the page's own primary
       action, so the sidebar never competes with it. */
   primaryCta?: PrimaryCta;
+  /** Cross-fading testimonial card below the trusted strip (/yc; /call on
+      main). */
+  testimonials?: Testimonial[];
 }) {
   const isClientsVariant = variant === "clients";
 
@@ -102,7 +108,8 @@ export function LeftNav({
         </p>
       </div>
 
-      {/* Bottom group: callout + trusted strip + CTAs (pinned to bottom on desktop) */}
+      {/* Bottom group: callout + trusted strip + testimonials + CTAs (pinned
+          to bottom on desktop) */}
       <div className="flex flex-col gap-5 desk:mt-auto">
         {/* <div className="fade-up [animation-delay:250ms]">
           <LeadCallout />
@@ -110,6 +117,11 @@ export function LeftNav({
         {showTrustedStrip && (
           <div className="fade-up [animation-delay:300ms]">
             <TrustedStrip />
+          </div>
+        )}
+        {testimonials && testimonials.length > 0 && (
+          <div className="fade-up [animation-delay:350ms]">
+            <TestimonialSlider testimonials={testimonials} />
           </div>
         )}
         <div className="fade-up [animation-delay:400ms]">
