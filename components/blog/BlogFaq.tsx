@@ -5,6 +5,7 @@ import {
   bleedMargin,
   RegMarks,
   SplitHeader,
+  type SectionEdge,
 } from "@/components/SectionRows";
 import { faqHeading, pixelupFaq, type FaqItem } from "@/lib/case-studies";
 
@@ -20,9 +21,13 @@ import { faqHeading, pixelupFaq, type FaqItem } from "@/lib/case-studies";
 export function BlogFaq({
   items = pixelupFaq,
   grid = false,
+  edge = "bleed",
   eyebrow,
   marks = false,
 }: {
+  /** grid only: "bleed" in a LeftNav-shell column, "inset" on a full-width
+      page (/yc). */
+  edge?: SectionEdge;
   /** grid only: SectionIndex label above the heading (/yc). */
   eyebrow?: React.ReactNode;
   /** grid only: RegMarks on the top rule (/yc). */
@@ -30,10 +35,10 @@ export function BlogFaq({
   /** A page's own questions (/yc). The page then emits the matching
       FAQPage JSON-LD itself instead of pixelupFaqSchema. */
   items?: FaqItem[];
-  /** /yc: SplitHeader's layout on the "bleed" edge, like every section
-      above it: the heading row (heading left, right half empty), a
-      full-width rule, then the accordion in the right half. A bottom rule
-      closes the centre rule, since the Footer card sits apart. */
+  /** /yc: SplitHeader's layout on `edge`, like every section above it:
+      the heading row (heading left, right half empty), a full-width rule,
+      then the accordion in the right half. A bottom rule closes the centre
+      rule; on /yc it also opens the closing section. */
   grid?: boolean;
 }) {
   if (grid) {
@@ -42,14 +47,14 @@ export function BlogFaq({
     // right half under it. No faq-bg texture: no other section has one.
     return (
       <section
-        className={`relative border-y-[0.5px] border-hairline ${bleedMargin}`}
+        className={`relative border-y-[0.5px] border-hairline ${edge === "bleed" ? bleedMargin : ""}`}
         aria-labelledby="faq-heading"
       >
-        {marks && <RegMarks />}
+        {marks && <RegMarks start={edge === "bleed"} />}
         <SplitHeader
           heading={faqHeading}
           headingId="faq-heading"
-          edge="bleed"
+          edge={edge}
           eyebrow={eyebrow}
         >
           <CaseFaq items={items} />

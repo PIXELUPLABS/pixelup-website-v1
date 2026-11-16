@@ -369,8 +369,8 @@ export const ycFaq: FaqItem[] = [
   },
 ];
 
-/** The closing row below desk, where the sidebar's buttons have scrolled
-    away. Desk keeps the sticky sidebar instead. */
+/** The closing section at the end of the page, at every width: with no
+    sidebar (2026-11-16), the CTA and the YC founders' quotes come back here. */
 export const ycClosing = {
   heading: "Tell us your batch.",
   body: "We'll tell you honestly what we'd change.",

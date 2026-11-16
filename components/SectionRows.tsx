@@ -64,13 +64,20 @@ export function SectionIndex({
 }
 
 /**
- * Registration marks where a section's top rule crosses the LeftNav divider
- * and the centre rule: small hairline crosses, desk only. The section needs
- * `relative` and the "bleed" edge, so its left edge sits on the divider.
- * There is no mark at the right edge: centred on the viewport edge it would
- * overflow the page.
+ * Registration marks where a section's top rule crosses the vertical rules:
+ * small hairline crosses, desk only. The section needs `relative`. `start`
+ * marks its left edge, which is only a rule on the "bleed" edge (the LeftNav
+ * divider); a full-width section (/yc, "inset") sets it false, since a cross
+ * centred on the viewport edge would overflow the page. The same reason
+ * leaves out a mark at the right edge.
  */
-export function RegMarks({ centre = true }: { centre?: boolean }) {
+export function RegMarks({
+  centre = true,
+  start = true,
+}: {
+  centre?: boolean;
+  start?: boolean;
+}) {
   const mark =
     "pointer-events-none absolute top-0 hidden size-[11px] -translate-x-1/2 -translate-y-1/2 text-white/50 desk:block";
   const cross = (
@@ -80,9 +87,11 @@ export function RegMarks({ centre = true }: { centre?: boolean }) {
   );
   return (
     <>
-      <span aria-hidden="true" className={`${mark} left-0`}>
-        {cross}
-      </span>
+      {start && (
+        <span aria-hidden="true" className={`${mark} left-0`}>
+          {cross}
+        </span>
+      )}
       {centre && (
         <span aria-hidden="true" className={`${mark} left-1/2`}>
           {cross}

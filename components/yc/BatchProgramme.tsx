@@ -1,11 +1,11 @@
 import { ClientRow } from "@/components/clients/ClientRow";
 import type { BatchGroup } from "@/lib/yc";
 
-/** SectionRows' bleedMargin (the LeftNav shell's mx-4 and p-5), padded back
-    so text sits on the column's edges while the rules run to the divider
-    and the viewport edge. The parent section carries bleedMargin. */
-const padLeft = "desk:pl-4";
-const padRight = "desk:pr-5";
+/** The page's outer gutter (SectionRows' "inset" cells, 24px at every
+    width): /yc is full width, so the rules run to the column's edges and
+    the text sits 24px inside them. */
+const padLeft = "pl-6";
+const padRight = "pr-6";
 
 /**
  * The /yc index, set like a Swiss concert programme: the batch is the

@@ -91,13 +91,14 @@ export function ProcessSection({
   eyebrow,
   marks = false,
 }: {
-  /** "bleed" in a LeftNav-shell column (/yc); "inset" (default) in a full-bleed main. */
+  /** "inset" (default): full width, rules edge to edge (/yc since 2026-11-16).
+      "bleed" is for a LeftNav-shell column; no current caller. */
   edge?: SectionEdge;
   /** A page's own wording of the same steps (/yc). Defaults to lib/process.ts. */
   content?: ProcessContent;
   /** SplitHeader's section index label (/yc). */
   eyebrow?: React.ReactNode;
-  /** RegMarks on the section's top rule (/yc, "bleed" only). */
+  /** RegMarks on the section's top rule (/yc). The left mark only on "bleed". */
   marks?: boolean;
 }) {
   const { heading, intro, steps, trackCells, total } = content;
@@ -107,7 +108,7 @@ export function ProcessSection({
       aria-labelledby="process-heading"
       className={`relative border-t-[0.5px] border-hairline ${edge === "bleed" ? bleedMargin : ""}`}
     >
-      {marks && <RegMarks />}
+      {marks && <RegMarks start={edge === "bleed"} />}
       <SplitHeader
         heading={heading}
         headingId="process-heading"

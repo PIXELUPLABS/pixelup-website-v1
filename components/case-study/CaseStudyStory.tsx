@@ -34,7 +34,9 @@ type CopyTones = ReturnType<typeof copyTones>;
  * padding so the first value lines up with the column edge. "bleed": the
  * same text positions, but the caller pulls the band out with bleedMargin so
  * its rules run from the LeftNav divider to the viewport edge, and the outer
- * cells pad that distance back (/yc). Two columns below desk, four from desk.
+ * cells pad that distance back. No current caller: /yc used it until it
+ * dropped the LeftNav sidebar (2026-11-16). Two columns below desk, four
+ * from desk.
  */
 const edgeCellPadding = {
   inset: [],

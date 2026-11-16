@@ -107,9 +107,10 @@ export function ClientRow({
       funding note (the latest round), no engagement line, 20px top and
       bottom, and no top rule on a group's first row (the group's own rule
       is there). From desk the row is three equal columns of a 3/4-width
-      cell, each padded 24px, so they start on the page's quarter lines;
-      the last cell pads the bleed back on the right. Below desk: the logo,
-      then niche and round on one line. A missing note shows an em dash. */
+      cell, each padded 24px, so they start on the page's quarter lines
+      (full-width /yc, "inset" geometry). Below desk the row carries the
+      page's 24px gutter: the logo, then niche and round on one line. A
+      missing note shows an em dash. */
   dense?: boolean;
 }) {
   const entranceDelay = `${Math.min(100 + index * 70, 600)}ms`;
@@ -117,7 +118,7 @@ export function ClientRow({
   if (dense) {
     return (
       <li
-        className="fade-up grid grid-cols-1 gap-3 border-t-[0.5px] border-hairline py-5 first:border-t-0 desk:grid-cols-3 desk:items-center desk:gap-0"
+        className="fade-up grid grid-cols-1 gap-3 border-t-[0.5px] border-hairline px-6 py-5 first:border-t-0 desk:grid-cols-3 desk:items-center desk:gap-0 desk:px-0"
         style={{ animationDelay: entranceDelay }}
       >
         <div className="min-w-0 desk:pl-6">
@@ -128,7 +129,7 @@ export function ClientRow({
             {client.niche}
           </p>
           <p
-            className={`text-right text-[14px] leading-5 tracking-[-0.02em] desk:pl-6 desk:pr-5 desk:text-left desk:text-[16px] ${
+            className={`text-right text-[14px] leading-5 tracking-[-0.02em] desk:pl-6 desk:pr-6 desk:text-left desk:text-[16px] ${
               client.fundingNote ? "text-white" : "text-white/30"
             }`}
           >
