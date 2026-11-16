@@ -12,7 +12,9 @@
  *   no new claims invented here.
  * - Funding badges for CTGT, Reducto, Valley, Revyl, Streamline, Sully, and
  *   Greptile are sourced from public funding announcements (see per-entry
- *   notes below), checked August 2026.
+ *   notes below), checked August 2026. Pogo, Monumint and Autumn reuse their
+ *   `fundingNote` from `lib/clients.ts` (YC batch, or the raise total when no
+ *   round is named).
  * - Henry Labs and Sainapse have NO funding badge: public company databases
  *   surfaced funding rounds for similarly-named companies (a CRE startup
  *   also called "Henry AI"; a Bengaluru/Atlanta-based "Sainapse Intelligence"
@@ -42,7 +44,10 @@ export interface CaseStudyShowcaseEntry {
   niche: string;
   /** Scope of work, from this client's /clients roster entry. */
   whatWeDid: string;
-  /** Seed / Pre-Seed / Series A / Series B / Acquired — omit if unconfirmed. */
+  /**
+   * Seed / Pre-Seed / Series A / Series B / Acquired, a YC batch ("YC S25"),
+   * or a raise total ("$32M Raised") — omit if unconfirmed.
+   */
   fundingBadge?: string;
   /** Strongest proof point, optional. */
   stat?: string;
@@ -59,8 +64,7 @@ const entries: CaseStudyShowcaseEntry[] = [
   {
     slug: "henrylabs",
     niche: "Consumer AI",
-    whatWeDid:
-      "Brand identity, Positioning, Website design and build, Product design, Design system, Motion",
+    whatWeDid: "Positioning, Brand, Website, Product, Webflow Development",
     // No funding badge — see file header note.
   },
   {
@@ -94,7 +98,8 @@ const entries: CaseStudyShowcaseEntry[] = [
   {
     slug: "streamline",
     niche: "Enterprise AI",
-    whatWeDid: "Brand Identity, Positioning, Website Design, Design System",
+    whatWeDid:
+      "Brand Identity, Positioning, Website Design, Design System, Webflow Development",
     // $8.6M Series A led by Blumberg Capital, July 2025 (public announcement).
     fundingBadge: "Series A",
     stat: "One design system shipped across 200+ pages",
@@ -102,14 +107,14 @@ const entries: CaseStudyShowcaseEntry[] = [
   {
     slug: "sainapse",
     niche: "Enterprise AI",
-    whatWeDid: "Brand Identity, Website Design",
+    whatWeDid: "Brand Identity, Website Design, Webflow Development",
     // No funding badge — see file header note.
     stat: "Deployed by Fortune 500s including Ford, Avery Dennison and Freshworks",
   },
   {
     slug: "sully",
     niche: "Healthcare",
-    whatWeDid: "Website Design, Product Pages, Motion Design, SEO",
+    whatWeDid: "Website Design, Product Pages, Motion Design, Framer Development",
     // Series A + $150M valuation confirmed via public funding coverage (Jan 2025).
     fundingBadge: "Series A",
     stat: "Scaled 26x in 11 months, raising $32M+ at a $150M valuation",
@@ -117,11 +122,44 @@ const entries: CaseStudyShowcaseEntry[] = [
   {
     slug: "ctgt",
     niche: "Enterprise AI",
-    whatWeDid:
-      "Brand identity, marketing website, product storyboards, and pitch deck, with Webflow development",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid: "Branding, Web Design, Motion Design, Webflow Development",
     // $7.2M seed led by Gradient (Google's early-stage AI fund), Feb 2025 (public announcement).
     fundingBadge: "Seed",
   },
+  {
+    slug: "valley",
+    niche: "Enterprise AI",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid: "Web Design, Motion Design, Framer Development, Sales Deck",
+    // $3.2M pre-seed (Crunchbase-confirmed).
+    fundingBadge: "Pre-Seed",
+  },
+  {
+    slug: "zenact",
+    niche: "DevTools",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid: "Branding, Web Design, Motion Design, Webflow Development",
+    // Private on /clients too — the card's default tag.
+  },
+  {
+    slug: "autumn",
+    niche: "DevTools",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid: "Branding, Web Design, Motion Design, Next.js Development",
+    // YC S25, per its /clients roster entry (slug "autumn-pricing" there).
+    fundingBadge: "YC S25",
+  },
+  {
+    slug: "revyl",
+    niche: "DevTools",
+    whatWeDid:
+      "Brand guidelines, marketing website, product UI redesign, and component library, dev-ready",
+    // $1.1M pre-seed, YC-backed (public announcement).
+    fundingBadge: "Pre-Seed",
+  },
+  // No case study page yet for the last three, so they close the list
+  // (Arjun, 2026-11-03).
   {
     slug: "reducto",
     niche: "AI Infrastructure",
@@ -131,20 +169,19 @@ const entries: CaseStudyShowcaseEntry[] = [
     fundingBadge: "Series B",
   },
   {
-    slug: "valley",
-    niche: "Enterprise AI",
-    whatWeDid:
-      "Brand identity, marketing website, and final sales deck, with Framer development",
-    // $3.2M pre-seed (Crunchbase-confirmed).
-    fundingBadge: "Pre-Seed",
+    slug: "pogo",
+    niche: "Consumer Research",
+    whatWeDid: "Full multi-page marketing website, with Webflow development",
+    // Same "$32M Raised" line as its /clients roster entry; no round named there.
+    fundingBadge: "$32M Raised",
   },
   {
-    slug: "revyl",
-    niche: "DevTools",
+    slug: "monumint",
+    niche: "Fintech",
     whatWeDid:
-      "Brand guidelines, marketing website, product UI redesign, and component library, dev-ready",
-    // $1.1M pre-seed, YC-backed (public announcement).
-    fundingBadge: "Pre-Seed",
+      "Complete brand identity and landing page, with Framer development",
+    // YC W24, per its /clients roster entry.
+    fundingBadge: "YC W24",
   },
 ];
 

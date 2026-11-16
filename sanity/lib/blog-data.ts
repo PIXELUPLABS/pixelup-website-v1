@@ -6,7 +6,8 @@ import type {
   BLOG_SITEMAP_QUERY_RESULT,
   BLOG_SLUGS_QUERY_RESULT,
 } from '@/sanity.types'
-import {sanityFetch} from './live'
+import {client} from './client'
+import {SANITY_CACHE_TAG, sanityFetch} from './live'
 import {getLegacyBlogPosts} from './legacy-blog'
 import {BLOG_POST_QUERY, BLOG_POSTS_QUERY, BLOG_SITEMAP_QUERY, BLOG_SLUGS_QUERY} from './queries'
 import type {BlogImage, BlogPostData, BlogSitemapEntry} from './blog-types'
@@ -78,7 +79,11 @@ function legacyPosts() {
 
 export async function getBlogPosts(options: {stega?: boolean} = {}): Promise<BlogPostData[]> {
   if (!isSanityBlogEnabled) return legacyPosts()
-  const {data} = await sanityFetch({query: BLOG_POSTS_QUERY, stega: options.stega})
+  const {data} = await sanityFetch({
+    query: BLOG_POSTS_QUERY,
+    stega: options.stega,
+    tags: [SANITY_CACHE_TAG],
+  })
   return data.flatMap((post) => {
     const normalized = normalizePost(post)
     return normalized ? [normalized] : []
@@ -97,6 +102,7 @@ export async function getBlogPost(
     query: BLOG_POST_QUERY,
     params: {slug: cleanSlug},
     stega: options.stega,
+    tags: [SANITY_CACHE_TAG],
   })
   return data ? normalizePost(data) : null
 }
@@ -107,19 +113,28 @@ export async function getBlogSlugs(): Promise<string[]> {
     query: BLOG_SLUGS_QUERY,
     perspective: 'published',
     stega: false,
+    tags: [SANITY_CACHE_TAG],
   })
   return (data as BLOG_SLUGS_QUERY_RESULT).map((entry) => entry.slug)
 }
 
+/**
+ * Reads the published dataset on every call, skipping the Next data cache.
+ * Through sanityFetch this query was cached with no expiry, so the sitemap's
+ * `<lastmod>` values froze at whatever the last deploy fetched: on 2026-10-13
+ * it still listed 2026-10-08 for a post whose `updatedDate` had moved to
+ * 2026-10-11 two days earlier. app/sitemap.ts renders per request, so this is
+ * one small query per sitemap fetch.
+ */
 export async function getBlogSitemapEntries(): Promise<BlogSitemapEntry[]> {
   if (!isSanityBlogEnabled) {
     return legacyPosts().map(({slug, updatedDate}) => ({slug, updatedDate}))
   }
-  const {data} = await sanityFetch({
-    query: BLOG_SITEMAP_QUERY,
-    perspective: 'published',
-    stega: false,
-  })
+  const data = await client.fetch(
+    BLOG_SITEMAP_QUERY,
+    {},
+    {perspective: 'published', stega: false, cache: 'no-store'},
+  )
   return (data as BLOG_SITEMAP_QUERY_RESULT).map(({slug, updatedDate}) => ({slug, updatedDate}))
 }
 

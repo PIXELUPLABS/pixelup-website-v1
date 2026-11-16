@@ -3,20 +3,23 @@ import CopyEmail from './CopyEmail';
 import FooterGradient from './FooterGradient';
 import { ArrowSwap, StatusDots } from './ui';
 
-const echo = [
-  'Brand, websites and motion for AI companies',
-  `${site.email}, @dakshpixelup, pixeluplabs.com`,
-  `PIXELUP LABS © ${new Date().getFullYear()}, all rights reserved`,
-];
-
 type Props = {
   /** `null` drops the eyebrow. */
   eyebrow?: string | null;
   email?: string;
   note?: string;
+  /** Links in the footer bar's corner; defaults to the 2026 site's placeholders. */
+  legal?: { label: string; href: string }[];
 };
 
-export default function Footer({ eyebrow = 'New business', email = site.email, note = `${site.status} right now. Say hello.` }: Props = {}) {
+export default function Footer({ eyebrow = 'New business', email = site.email, note = `${site.status} right now. Say hello.`, legal = site.legal }: Props = {}) {
+  // The echo repeats the address shown above it, so a page with its own address doesn't print two.
+  const echo = [
+    'Brand, websites and motion for AI companies',
+    `${email}, @dakshpixelup, pixeluplabs.com`,
+    `PIXELUP LABS © ${new Date().getFullYear()}, all rights reserved`,
+  ];
+
   return (
     <footer className="foot" id="contact">
       <FooterGradient />
@@ -57,7 +60,7 @@ export default function Footer({ eyebrow = 'New business', email = site.email, n
         </div>
 
         <div className="foot__legal">
-          {site.legal.map((l) => (
+          {legal.map((l) => (
             <a key={l.label} href={l.href} className="u-link">
               {l.label}
             </a>

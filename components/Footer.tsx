@@ -1,15 +1,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { NewsletterForm } from "@/components/NewsletterForm";
+import { SocialLinks } from "@/components/SocialLinks";
 import navLogo from "@/public/media/pixelup-logo.svg";
 import unionMark from "@/public/media/Vector.svg";
 
 const JOIN_THE_TEAM_URL = "https://tally.so/r/xXE7ry";
 const TESTIMONIALS_URL = "https://contra.com/daksh_aswal_dt5tfn27/reviews"
+const DESIGN_FOR_B2B_URL = "https://designforb2b.com"
 
 const caseStudies = [
   { name: "Greptile", slug: "greptile" },
   { name: "Henry Labs", slug: "henrylabs" },
+  { name: "Replay", slug: "replay" },
+  { name: "FuseAI", slug: "fuseai" },
   { name: "Sainapse", slug: "sainapse" },
   { name: "Sully", slug: "sully" },
   { name: "Streamline", slug: "streamline" },
@@ -19,6 +23,7 @@ const quickLinks = [
   { name: "Explorations", href: "/explorations" },
   { name: "Clients", href: "/clients" },
   { name: "Blog", href: "/blog" },
+  { name: "FAQ", href: "/faq" },
 ] as const;
 
 // Outer <footer> has no padding of its own, ever — it always fills exactly
@@ -44,37 +49,53 @@ export function Footer() {
               </div>
               <p className="text-[12px] font-normal text-white">©2026 PIXELUP LABS</p>
             </div>
-            <div className="flex flex-col gap-8 p-6 desk:h-full desk:border-l-[0.5px] desk:border-hairline">
-              <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
-                Quick Links
-              </p>
-              <div className="flex flex-col gap-2">
-                {quickLinks.map((link) => (
-                  <Link
-                    key={link.name}
-                    href={link.href}
+            <div className="flex flex-col gap-8 p-6 desk:h-full desk:justify-between desk:border-l-[0.5px] desk:border-hairline">
+              <div className="flex flex-col gap-8">
+                <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
+                  Quick Links
+                </p>
+                <div className="flex flex-col gap-2">
+                  {quickLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      href={link.href}
+                      className="w-fit text-[14px] font-normal text-white"
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                  <a
+                    href={JOIN_THE_TEAM_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-fit text-[14px] font-normal text-white"
                   >
-                    {link.name}
-                  </Link>
-                ))}
-                <a
-                  href={JOIN_THE_TEAM_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-fit text-[14px] font-normal text-white"
-                >
-                  Careers
-                </a>
-                <a
-                  href={TESTIMONIALS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-fit text-[14px] font-normal text-white"
-                >
-                  Testimonials
-                </a>
+                    Careers
+                  </a>
+                  <a
+                    href={TESTIMONIALS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-fit text-[14px] font-normal text-white"
+                  >
+                    Testimonials
+                  </a>
+                  {/* Our own directory site: no noreferrer, so its DataFast
+                      sees pixeluplabs.com as the referrer. */}
+                  <a
+                    href={DESIGN_FOR_B2B_URL}
+                    target="_blank"
+                    rel="noopener"
+                    className="w-fit text-[14px] font-normal text-white"
+                  >
+                    Best B2B Websites
+                  </a>
+                </div>
               </div>
+              {/* Pinned to the bottom-left of this column by the parent's
+                  desk:justify-between. On mobile the column has no fixed
+                  height, so the row simply follows the list. */}
+              <SocialLinks />
             </div>
             <div className="flex flex-col gap-8 p-6 desk:h-full">
               <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
@@ -92,19 +113,30 @@ export function Footer() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col gap-8 p-6 desk:h-full desk:border-l-[0.5px] desk:border-hairline">
-              {/* No uppercase column label here (unlike the other two columns) —
-                  the copy names the newsletter itself. text-pretty keeps the
-                  last line from dropping to a single orphaned word. */}
-              <p className="text-pretty text-[14px] font-normal leading-[150%] text-white/60">
-                A newsletter on the design strategies that are working for enterprise
-                companies, written by Daksh. Two emails a month, no spam.
-              </p>
-              <NewsletterForm />
+            <div className="flex flex-col gap-8 p-6 desk:h-full desk:justify-between desk:border-l-[0.5px] desk:border-hairline">
+              <div className="flex flex-col gap-8">
+                {/* No uppercase column label here (unlike the other two columns) —
+                    the copy names the newsletter itself. text-pretty keeps the
+                    last line from dropping to a single orphaned word. */}
+                <p className="text-pretty text-[14px] font-normal leading-[150%] text-white/60">
+                  Design strategies that work for enterprise companies, written by
+                  Daksh. Two emails a month, no spam.
+                </p>
+                <NewsletterForm />
+              </div>
+              {/* Muted so it reads as a legal footnote under the signup rather
+                  than a link in the newsletter copy. Pinned to the bottom on
+                  desktop by justify-between; follows the form on mobile. */}
+              <Link
+                href="/privacy"
+                className="w-fit text-[12px] font-normal text-white/60"
+              >
+                Privacy Policy
+              </Link>
             </div>
           </div>
           <div className="flex w-full items-center border-t-[0.5px] border-hairline p-6">
-            <Image src={unionMark} alt="" className="h-auto w-full" />
+            <Image src={unionMark} alt="PIXELUP LABS" className="h-auto w-full" />
           </div>
         </div>
       </div>

@@ -14,15 +14,15 @@ const rowHeading =
   "text-balance text-[20px] font-medium leading-tight tracking-display text-white desk:text-[24px]";
 
 /**
- * "What it looks like working with us": the homepage and every case study.
- * The H2 and intro in case study SectionShell's layout, then the /yc and
- * /services label | content rows: one row per step (the title with its mono
- * timing where ChallengeBlock has its "01 / 02" counter, then the step with
- * its `**phrase**` highlight in white). How we work day to day lives in the
- * shared FAQ (pixelupFaq).
+ * "What it looks like working with us", on /yc only (staging): the homepage
+ * and case studies follow main, which has no process section. The H2 in
+ * case study SectionShell's layout, then SectionRows' label | content rows:
+ * one row per step (the title with its mono timing where ChallengeBlock has
+ * its "01 / 02" counter, then the step with its `**phrase**` highlight in
+ * white). How we work day to day lives in the shared FAQ (pixelupFaq).
  *
- * No bottom hairline: the next section's top rule closes the centre rule
- * (BlogFaq on the homepage, EndCta or the FAQ on case studies).
+ * No bottom hairline: the next section's top rule (/yc's FAQ) closes the
+ * centre rule.
  */
 /**
  * A step's span on the week track: one cell per week, the step's weeks in
@@ -91,7 +91,7 @@ export function ProcessSection({
   eyebrow,
   marks = false,
 }: {
-  /** "bleed" in a LeftNav-shell column (homepage), "inset" on case studies. */
+  /** "bleed" in a LeftNav-shell column (/yc); "inset" (default) in a full-bleed main. */
   edge?: SectionEdge;
   /** A page's own wording of the same steps (/yc). Defaults to lib/process.ts. */
   content?: ProcessContent;

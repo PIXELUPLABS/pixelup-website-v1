@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { AuditForm } from "@/components/AuditForm";
 import { BlogFaq } from "@/components/blog/BlogFaq";
 import { BlogFilterProvider } from "@/components/blog/BlogFilterContext";
 import { BlogList } from "@/components/blog/BlogList";
@@ -7,13 +6,17 @@ import { BlogSidebar } from "@/components/blog/BlogSidebar";
 import { Footer } from "@/components/Footer";
 import { pixelupFaqSchema } from "@/lib/case-studies";
 import { getBlogPosts } from "@/sanity/lib/blog-data";
+import { blogCategories } from "@/sanity/lib/blog-utils";
+import { withOpenGraph } from "@/lib/open-graph";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Blog - PIXELUP LABS",
   description:
     "Insights on brand, product and website design from the PIXELUP LABS team.",
   alternates: { canonical: "/blog" },
 };
+
+export const generateMetadata = withOpenGraph(metadata, "/blog");
 
 export default async function BlogPage() {
   const posts = await getBlogPosts();
@@ -25,7 +28,7 @@ export default async function BlogPage() {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(pixelupFaqSchema) }}
         />
-        <BlogSidebar />
+        <BlogSidebar categories={blogCategories(posts)} />
         {/* Divider between the aside and content columns, same treatment as the homepage. */}
         <div
           aria-hidden="true"
@@ -34,7 +37,6 @@ export default async function BlogPage() {
         <main className="flex min-w-0 flex-1 flex-col gap-8">
           <BlogList posts={posts} />
           <BlogFaq />
-          <AuditForm />
           {/* This row's own p-5 insets main's right edge from the true
               viewport edge — BlogList/BlogFaq are fine keeping that inset,
               but Footer shouldn't have it. desk:-mr-5 (the row's p-5)

@@ -1,0 +1,126 @@
+"use client";
+
+import { getCalApi } from "@calcom/embed-react";
+import Image from "next/image";
+import { useState } from "react";
+import { trackCalBookingGoals } from "@/lib/cal-booking-goals";
+import { links } from "@/lib/projects";
+import { ctaButtonBase, ctaButtonPadding } from "./cta-button-styles";
+
+type CalApi = Awaited<ReturnType<typeof getCalApi>>;
+
+// Own namespace so the popup never collides with the inline CalEmbed on /call.
+const CAL_NAMESPACE = "discovery-popup";
+const calConfig = { layout: "month_view", theme: "dark" } as const;
+
+// getCalApi resolves straight away with a stub that queues commands until
+// embed.js arrives, so a blocked script (ad blocker, strict network) would
+// swallow the modal silently. Watch the script tag and fall back to the hosted
+// booking page when it fails.
+let calApi: CalApi | null = null;
+let calLoading = false;
+let embedFailed = false;
+
+/** Loads the Cal embed on first interaction instead of on every page load. */
+function warmCal() {
+  if (calLoading) return;
+  calLoading = true;
+  void getCalApi({ namespace: CAL_NAMESPACE }).then((api) => {
+    api("ui", { ...calConfig, hideEventTypeDetails: false });
+    // Registered once per page: warmCal is guarded, and the listeners live as
+    // long as the namespace does.
+    trackCalBookingGoals(api, "popup");
+    document
+      .querySelector('script[src*="cal.com/embed/embed.js"]')
+      ?.addEventListener("error", () => {
+        embedFailed = true;
+      });
+    calApi = api;
+  });
+}
+
+/**
+ * Email field + "Book a call" submit in one row. Submitting opens the Cal.com
+ * booking popup with the email prefilled; an empty field still opens it, and
+ * the browser blocks a malformed address via type="email".
+ */
+export function BookCallForm({
+  label = "BOOK A CALL",
+  bookingUrl = links.discoveryCall,
+}: {
+  label?: string;
+  /** A cal.com booking URL; its path is the embed's calLink. */
+  bookingUrl?: string;
+}) {
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const value = email.trim();
+    const url = new URL(bookingUrl);
+
+    if (value) {
+      // Logged to the Google Sheet (app/api/book-call). Fire-and-forget: the
+      // booking popup must never wait on, or fail because of, the sheet.
+      void fetch("/api/book-call", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: value, page: window.location.pathname }),
+        keepalive: true,
+      }).catch(() => {});
+    }
+
+    if (calApi && !embedFailed) {
+      calApi("modal", {
+        calLink: url.pathname.slice(1),
+        config: value ? { ...calConfig, email: value } : calConfig,
+      });
+      return;
+    }
+
+    if (value) url.searchParams.set("email", value);
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit}
+      onFocus={warmCal}
+      onPointerEnter={warmCal}
+      // One joined control: only the outer corners are rounded, so the seam is
+      // a straight edge and the focus border doesn't curve into the button.
+      className="flex"
+    >
+      {/* 16px on mobile so iOS Safari doesn't zoom the page on focus. */}
+      <input
+        type="email"
+        name="email"
+        autoComplete="email"
+        placeholder="Your work email"
+        aria-label="Your work email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        className="min-w-0 flex-1 rounded-l-[2px] border-[0.5px] border-transparent bg-button-dark px-3 text-[16px] text-white placeholder:text-white/40 focus:border-accent focus:outline-none desk:text-[14px]"
+      />
+      {/* rounded-l-none reliably beats the base's rounded-[2px]: Tailwind v4
+          emits the longhand corner utilities after the border-radius shorthand. */}
+      <button
+        type="submit"
+        className={`group ${ctaButtonBase} ${ctaButtonPadding} shrink-0 cursor-pointer gap-3 rounded-l-none bg-accent text-white hover:brightness-110`}
+      >
+        <span>{label}</span>
+        {/* Hover: the arrow nudges a few pixels to the right. Real alt even
+            though it's aria-hidden: Bing's site scan reports alt="" as
+            missing, and aria-hidden keeps screen readers off it. */}
+        <Image
+          src="/media/Container.svg"
+          alt="Arrow"
+          width={14}
+          height={14}
+          aria-hidden="true"
+          className="transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-x-[3px] group-focus-visible:translate-x-[3px] motion-reduce:transition-none"
+        />
+      </button>
+    </form>
+  );
+}

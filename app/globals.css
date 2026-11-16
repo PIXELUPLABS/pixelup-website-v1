@@ -22,6 +22,33 @@
      open state read as "darker" than the default page. */
   --color-scrim: rgba(0, 0, 0, 0.72);
 
+  /* PIXELUP Brand 2026 palette — the Figma variables of the /referral
+     redesign (PIXELUP-Brand-2026, node 1801:2472). */
+  --color-ink: #0c0c0c; /* Figma: bg */
+  --color-ink-deep: #0a0a0a;
+  --color-fg: #f2f2f2; /* Figma: text */
+  --color-fg-2: #cfcfcf; /* Figma: text-2 */
+  --color-muted: #9a9a9a;
+  --color-faint: #8a8a8a;
+  --color-placeholder: #7a7a7a;
+  --color-surface: #141414;
+  --color-surface-2: #161616;
+  --color-line: #222222;
+  --color-line-input: #2a2a2a;
+  --color-line-strong: #333333;
+  --color-accent-blue: #2337ff; /* Figma: accent/blue */
+  --color-header-blue: #1d2ee6;
+  /* Blue glow ramp shared by the referral hero and footer gradients. */
+  --color-glow-top: #1e30e9;
+  --color-glow-1: #1b2bd9;
+  --color-glow-2: #2436ff;
+  --color-glow-3: #2f42ff;
+  --color-glow-4: #9aa1ff;
+  --color-glow-5: #f3f3ff;
+  /* Footer bottom-row text sitting on the light end of the glow. */
+  --color-on-glow: #0a0a14;
+  --color-on-glow-muted: #1d2266;
+
   /* Fonts */
   --font-display: var(--font-display), "Inter", sans-serif;
   --font-button: var(--font-button), "Instrument Sans", sans-serif;
@@ -41,6 +68,13 @@
 
   /* Marquee animation for the "Trusted by" logo strip */
   --animate-marquee: marquee 30s linear infinite;
+  /* Soft spring (damping 0.9, i.e. Framer "bounce 0.1") sampled into a
+     linear() curve — fast start, long gentle settle. Use with ~600ms.
+     Generates the `ease-spring` utility. */
+  --ease-spring: linear(
+    0, 0.0523, 0.169, 0.3085, 0.4467, 0.5713, 0.6768, 0.7626, 0.8298, 0.881, 0.9191, 0.9466,
+    0.966, 0.9794, 0.9884, 0.9941, 0.9977, 0.9998, 1.0009, 1.0014, 1
+  );
 }
 
 @keyframes marquee {
@@ -52,23 +86,27 @@
   }
 }
 
-/* /yc FundingChart: each bar rises from the baseline once, staggered by
-   inline animation-delay. Same easing and length as .fade-up. */
-@keyframes bar-rise {
+/* /explorations canvas: each card fades and settles in on first load. */
+@keyframes exploration-card-in {
   from {
-    transform: scaleY(0);
+    opacity: 0;
+    transform: scale(0.92);
+    filter: blur(8px);
   }
   to {
-    transform: scaleY(1);
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
   }
 }
-.bar-rise {
-  transform-origin: bottom;
-  animation: bar-rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-@media (prefers-reduced-motion: reduce) {
-  .bar-rise {
-    animation: none;
+
+/* Explorations "Effect 2" CRT: a soft refresh band rolling down the screen. */
+@keyframes exploration-crt-roll {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(100vh);
   }
 }
 
@@ -158,6 +196,26 @@ input:-webkit-autofill:focus {
 }
 @media (prefers-reduced-motion: reduce) {
   .fade-up {
+    animation: none;
+  }
+}
+
+/* /yc FundingChart: each bar rises from the baseline once, staggered by
+   inline animation-delay. Same easing and length as .fade-up. */
+@keyframes bar-rise {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+.bar-rise {
+  transform-origin: bottom;
+  animation: bar-rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bar-rise {
     animation: none;
   }
 }

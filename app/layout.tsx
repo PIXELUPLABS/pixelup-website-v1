@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist_Mono, Instrument_Sans } from "next/font/google";
+import { Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import Script from "next/script";
+import { DatafastVisitGoal } from "@/components/DatafastVisitGoal";
 import { DisableImageDrag } from "@/components/DisableImageDrag";
 import { SiteFrame } from "@/components/SiteFrame";
 import "./globals.css";
@@ -12,21 +13,21 @@ import "./globals.css";
 const interDisplay = localFont({
   variable: "--font-display",
   src: [
-    {
-      path: "./fonts/InterDisplay-Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
+    { path: "./fonts/InterDisplay-Regular.ttf", weight: "400", style: "normal" },
     { path: "./fonts/InterDisplay-Medium.ttf", weight: "500", style: "normal" },
   ],
   display: "swap",
 });
 
-// Instrument Sans is used only for button labels.
-const instrumentSans = Instrument_Sans({
+// Instrument Sans is used only for button labels. Self-hosted: Google Fonts
+// sometimes serves it from /l/font?kit=…&skey=… URLs, which next/font/google
+// can't resolve under Turbopack, failing the build. This is Google's own latin
+// subset (variable, so one file covers 500 and 600).
+const instrumentSans = localFont({
   variable: "--font-button",
-  subsets: ["latin"],
-  weight: ["500", "600"],
+  src: "./fonts/InstrumentSans-latin.woff2",
+  weight: "500 600",
+  style: "normal",
   display: "swap",
 });
 
@@ -53,6 +54,9 @@ export const metadata: Metadata = {
   description:
     "We build brands, websites and products that command enterprise trust.",
   alternates: { canonical: "/" },
+  // og:type only. og:url is per route (lib/open-graph.ts): set here, every
+  // route that doesn't override it would claim to be the homepage.
+  openGraph: { type: "website" },
 };
 
 export default function RootLayout({
@@ -60,11 +64,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const analyticsEnabled = process.env.NODE_ENV === "production";
-
   return (
-    // suppressHydrationWarning: /2027's boot script (app/2027/layout.tsx) adds
-    // its motion classes to <html> before React hydrates. It only covers
+    // suppressHydrationWarning: /process's boot script (components/2027/Shell.tsx)
+    // adds its motion classes to <html> before React hydrates. It only covers
     // this element's own attributes.
     <html
       lang="en"
@@ -79,42 +81,66 @@ export default function RootLayout({
             beforeInteractive is always injected into the served <head>
             regardless of where the component sits, so the datafast script
             still lands there. Only valid in the root layout. */}
-        {analyticsEnabled && (
-          <>
-            <Script id="datafast-queue" strategy="beforeInteractive">
-              {`
-                window.datafast = window.datafast || function () {
-                  window.datafast.q = window.datafast.q || [];
-                  window.datafast.q.push(arguments);
-                };
-              `}
-            </Script>
-            <Script
-              defer
-              data-website-id="dfid_swcipYZ3Rc55HGLL1A7A4"
-              data-domain="pixeluplabs.com"
-              src="https://datafa.st/js/script.js"
-              strategy="beforeInteractive"
-            />
-            {/* Google Analytics (gtag.js) — afterInteractive is Next.js's own
-                documented pattern for GA: it doesn't need to block the initial
-                render like the head-scoped script above does. */}
-            <Script
-              async
-              src="https://www.googletagmanager.com/gtag/js?id=G-M4JV6HF683"
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-M4JV6HF683');
-              `}
-            </Script>
-          </>
-        )}
+        <Script
+          defer
+          data-website-id="dfid_swcipYZ3Rc55HGLL1A7A4"
+          data-domain="pixeluplabs.com"
+          src="https://datafa.st/js/script.js"
+          strategy="beforeInteractive"
+        />
+        {/* Google Analytics (gtag.js) — afterInteractive is Next.js's own
+            documented pattern for GA: it doesn't need to block the initial
+            render like the head-scoped script above does. */}
+        <Script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-M4JV6HF683"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-M4JV6HF683');
+          `}
+        </Script>
+        {/* RB2B visitor de-anonymization. Same afterInteractive tier as
+            GA: it self-injects its own async <script>, so blocking the
+            initial render buys nothing. The guard bails if window.reb2b
+            already exists, which keeps client-side navigations from
+            loading a second copy. */}
+        <Script id="rb2b" strategy="afterInteractive">
+          {`
+            !function (key) {
+              if (window.reb2b) return;
+              window.reb2b = { loaded: true };
+              var s = document.createElement("script");
+              s.async = true;
+              s.src = "https://ddwl4m2hdecbv.cloudfront.net/b/" + key + "/" + key + ".js.gz";
+              document.getElementsByTagName("script")[0].parentNode.insertBefore(s, document.getElementsByTagName("script")[0]);
+            }("5NRP9H3XYXO1");
+          `}
+        </Script>
+        {/* Microsoft Clarity (heatmaps + session replay), project
+            z8vm197kav. Microsoft's own snippet, afterInteractive like GA and
+            RB2B: it queues clarity() calls and self-injects tag.js async, so
+            nothing here blocks first paint. Disclosed in sections 03 and 05
+            of /privacy, which Clarity's terms require. EEA, UK and Swiss
+            visits run cookieless until a consent signal is sent (Clarity
+            enforces this itself; the site has no consent banner). */}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "z8vm197kav");
+          `}
+        </Script>
         <DisableImageDrag />
+        <DatafastVisitGoal />
+        {/* The Navbar inside a column capped at 1800px; /process brings its
+            own header and full-viewport layout instead (see SiteFrame). */}
         <SiteFrame>{children}</SiteFrame>
       </body>
     </html>

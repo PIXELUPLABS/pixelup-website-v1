@@ -17,15 +17,25 @@
  * and their sitemap entries use.
  */
 export const siteUpdated = {
-  home: "2026-11-04",
-  call: "2026-07-28",
-  explorations: "2026-07-29",
-  clients: "2026-11-04",
-  referral: "2026-11-03",
+  /** /referral: app/referral/page.tsx and lib/referral.ts. */
+  referral: "2026-11-07",
+  home: "2026-10-27",
+  call: "2026-10-07",
+  explorations: "2026-09-30",
+  clients: "2026-11-13",
+  privacy: "2026-11-05",
+  /** /faq: lib/faq.ts. Also its FAQPage `datePublished` (first published with this date). */
+  faq: "2026-10-27",
+  /** The /case-studies index only. Each study carries its own published /
+      updated dates on `publication` in lib/case-studies.ts. */
+  caseStudies: "2026-10-20",
+  /** /designforb2b is a redirect to designforb2b.com (next.config.ts). */
+  designforb2b: "2026-10-02",
+  /** Swipe by PIXELUP LABS. Live but deliberately unlisted: noindex, out of
+      the sitemap, and unlinked (it exists for tool directory listings). */
+  swipe: "2026-10-22",
   /** For YC founders. On staging only; not in the sitemap or the nav. */
   yc: "2026-11-16",
-  /** Every case study lives in lib/case-studies.ts, so they share one date. */
-  caseStudies: "2026-11-04",
 } as const;
 
 /** First public commit of the site — used as `datePublished` on the homepage. */

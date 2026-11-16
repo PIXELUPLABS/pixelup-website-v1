@@ -1,6 +1,12 @@
-import Image from 'next/image'
+'use client'
+
+import Image, {type ImageLoaderProps} from 'next/image'
 import {urlFor} from '@/sanity/lib/image'
 import type {BlogImage as BlogImageValue} from '@/sanity/lib/blog-types'
+
+// Client component because the Sanity loader below is a function prop, which a
+// Server Component can't pass to next/image. BlogList already renders it on the
+// client, so nothing here depends on the server.
 
 export function BlogImage({
   image,
@@ -21,6 +27,8 @@ export function BlogImage({
   priority?: boolean
   className?: string
 }) {
+  // Omit `alt` to use the image's own alt from Sanity. Passing alt="" overrides
+  // it, and Bing's site scan reports an empty alt as a missing one.
   const imageAlt = alt ?? image.alt
 
   if (image.kind === 'legacy') {
@@ -36,16 +44,24 @@ export function BlogImage({
     )
   }
 
-  const source = urlFor(image.source)
-    .width(width)
-    .height(height)
-    .fit('crop')
-    .auto('format')
-    .url()
+  const base = urlFor(image.source).fit('crop').auto('format')
+  const ratio = height / width
+
+  // Sanity's image CDN resizes and picks the format (auto=format), so each
+  // srcset width is requested from cdn.sanity.io directly instead of going
+  // through Vercel's /_next/image optimizer, which counts against the Vercel
+  // plan's image-transformation quota. The crop keeps the width:height ratio.
+  const sanityLoader = ({width: w, quality}: ImageLoaderProps) =>
+    base
+      .width(w)
+      .height(Math.round(w * ratio))
+      .quality(quality ?? 75)
+      .url()
 
   return (
     <Image
-      src={source}
+      loader={sanityLoader}
+      src={base.width(width).height(height).url()}
       alt={imageAlt}
       {...(fill ? {fill: true} : {width, height})}
       sizes={sizes}

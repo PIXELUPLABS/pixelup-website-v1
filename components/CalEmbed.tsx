@@ -2,6 +2,7 @@
 
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect } from "react";
+import { trackCalBookingGoals } from "@/lib/cal-booking-goals";
 
 /**
  * Inline Cal.com embed of the discovery-call booking page, themed dark to
@@ -9,6 +10,9 @@ import { useEffect } from "react";
  */
 export function CalEmbed() {
   useEffect(() => {
+    let cancelled = false;
+    let stopTracking: (() => void) | undefined;
+
     (async () => {
       const cal = await getCalApi({ namespace: "discovery" });
       cal("ui", {
@@ -16,7 +20,13 @@ export function CalEmbed() {
         hideEventTypeDetails: false,
         layout: "month_view",
       });
+      if (!cancelled) stopTracking = trackCalBookingGoals(cal, "call_page");
     })();
+
+    return () => {
+      cancelled = true;
+      stopTracking?.();
+    };
   }, []);
 
   return (

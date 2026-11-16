@@ -5,15 +5,28 @@ import type {
   CaseStudy,
   CaseStudyStory as CaseStudyStoryData,
 } from "@/lib/case-studies";
-import { ProcessSection } from "../ProcessSection";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { ClientInfo } from "./ClientInfo";
-import { Emphasis } from "./Emphasis";
+import { Emphasis, hasEmphasis } from "./Emphasis";
 import { EndCta } from "./EndCta";
 import { InlineCta } from "./InlineCta";
 import { MoreProjects } from "./MoreProjects";
 import { SectionShell } from "./SectionShell";
+
+/**
+ * Row label and body copy colors for one story. A story written with
+ * `**phrase**` highlights (Henry Labs) mutes its body so the white phrases
+ * stand out, and lifts the labels to white. One without any (Streamline)
+ * keeps white body copy under grey labels.
+ */
+function copyTones(highlighted: boolean) {
+  return highlighted
+    ? { label: "text-white", body: "text-muted-65" }
+    : { label: "text-white/60", body: "text-white" };
+}
+
+type CopyTones = ReturnType<typeof copyTones>;
 
 /**
  * Side padding per cell for a four-metric band in a LeftNav-shell column,
@@ -33,6 +46,13 @@ const edgeCellPadding = {
     "pr-0 desk:pr-5",
   ],
 } satisfies Record<string, string[]>;
+
+/** " pl-0 desk:pl-4"-style suffix for one cell, or "" for "inset", so the
+    default class string stays exactly as it was before edge existed. */
+function edgePadding(edge: keyof typeof edgeCellPadding, index: number) {
+  const padding = (edgeCellPadding[edge] as string[])[index];
+  return padding ? ` ${padding}` : "";
+}
 
 /** Hairline-divided metric cells. Also the /services hero trust strip. */
 export function Metrics({
@@ -75,7 +95,7 @@ export function Metrics({
         return (
           <div
             key={`${metric.value}-${metric.label}`}
-            className={`flex min-w-0 flex-col gap-4 border-hairline p-6 ${(edgeCellPadding[edge] as string[])[index] ?? ""} ${mobileBorders} ${mobileRows} ${mobileSpan} ${desktopBorders} desk:border-t-0`}
+            className={`flex min-w-0 flex-col gap-4 border-hairline p-6${edgePadding(edge, index)} ${mobileBorders} ${mobileRows} ${mobileSpan} ${desktopBorders} desk:border-t-0`}
           >
             <p className="text-[32px] font-medium leading-none tracking-display text-white desk:text-[48px]">
               {metric.value}
@@ -142,40 +162,32 @@ function StoryHero({
   );
 }
 
-/** Hairline-divided label + text rows. The body of ContextBlock; also used
- * on /referral for the program's terms, perks and payout rules. */
-export function ContextRows({
-  items,
-}: {
-  items: { label: string; text: string }[];
-}) {
-  return (
-    <div className="flex flex-col divide-y-[0.5px] divide-hairline">
-      {items.map((item) => (
-        <div
-          key={item.label}
-          className="flex flex-col gap-2 py-4 first:pt-0 last:pb-0"
-        >
-          <p className="text-[14px] leading-[1.3] tracking-[-0.01em] text-white">
-            {item.label}
-          </p>
-          <p className="text-[16px] leading-[1.5] text-muted-65">
-            <Emphasis text={item.text} />
-          </p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function ContextBlock({
   block,
+  tones,
 }: {
   block: Extract<CaseStoryBlock, { kind: "context" }>;
+  tones: CopyTones;
 }) {
   return (
     <SectionShell heading={block.heading} topRule contentInset="wide">
-      <ContextRows items={block.items} />
+      <div className="flex flex-col divide-y-[0.5px] divide-hairline">
+        {block.items.map((item) => (
+          <div
+            key={item.label}
+            className="flex flex-col gap-2 py-4 first:pt-0 last:pb-0"
+          >
+            <p
+              className={`text-[14px] leading-[1.3] tracking-[-0.01em] ${tones.label}`}
+            >
+              {item.label}
+            </p>
+            <p className={`text-[16px] leading-[1.5] ${tones.body}`}>
+              <Emphasis text={item.text} />
+            </p>
+          </div>
+        ))}
+      </div>
     </SectionShell>
   );
 }
@@ -183,10 +195,12 @@ function ContextBlock({
 function ChallengeBlock({
   block,
   total,
+  tones,
 }: {
   block: Extract<CaseStoryBlock, { kind: "challenge" }>;
   /** How many challenge blocks the story has, so "01" reads as "01 / 02". */
   total: number;
+  tones: CopyTones;
 }) {
   const details = [
     { label: "Problem", text: block.problem },
@@ -219,10 +233,14 @@ function ChallengeBlock({
       <div className="divide-y-[0.5px] divide-hairline border-t-[0.5px] border-hairline">
         {details.map((detail) => (
           <div key={detail.label} className="grid desk:grid-cols-2">
-            <p className="p-6 pb-2 text-[14px] leading-[1.3] tracking-[-0.01em] text-white desk:border-r-[0.5px] desk:border-hairline desk:pb-6">
+            <p
+              className={`p-6 pb-2 text-[14px] leading-[1.3] tracking-[-0.01em] ${tones.label} desk:border-r-[0.5px] desk:border-hairline desk:pb-6`}
+            >
               {detail.label}
             </p>
-            <p className="p-6 pt-2 text-[16px] leading-[1.5] text-muted-65 desk:pt-6">
+            <p
+              className={`p-6 pt-2 text-[16px] leading-[1.5] ${tones.body} desk:pt-6`}
+            >
               <Emphasis text={detail.text} />
             </p>
           </div>
@@ -234,13 +252,15 @@ function ChallengeBlock({
 
 function GalleryBlock({
   block,
+  tones,
 }: {
   block: Extract<CaseStoryBlock, { kind: "gallery" }>;
+  tones: CopyTones;
 }) {
   return (
     <>
       <SectionShell heading={block.heading} topRule contentInset="wide">
-        <p className="text-[16px] leading-[1.5] text-muted-65">
+        <p className={`text-[16px] leading-[1.5] ${tones.body}`}>
           <Emphasis text={block.intro} />
         </p>
       </SectionShell>
@@ -386,16 +406,18 @@ function StoryBlock({
   challengeTotal,
   nextOpensWithRule,
   followsMedia,
+  tones,
 }: {
   block: CaseStoryBlock;
   challengeTotal: number;
   nextOpensWithRule: boolean;
   /** A media block straight after another one tightens to the pair gutter. */
   followsMedia: boolean;
+  tones: CopyTones;
 }) {
   switch (block.kind) {
     case "context":
-      return <ContextBlock block={block} />;
+      return <ContextBlock block={block} tones={tones} />;
     case "media":
       // Stacked media blocks would sit 72px apart on desktop (24px padding on
       // each block + the 24px column gap) against a 24px gap inside a pair.
@@ -409,9 +431,11 @@ function StoryBlock({
         <CaseMediaBlock block={block.media} />
       );
     case "challenge":
-      return <ChallengeBlock block={block} total={challengeTotal} />;
+      return (
+        <ChallengeBlock block={block} total={challengeTotal} tones={tones} />
+      );
     case "gallery":
-      return <GalleryBlock block={block} />;
+      return <GalleryBlock block={block} tones={tones} />;
     case "results":
       return <ResultsBlock block={block} flushNext={nextOpensWithRule} />;
     case "testimonial":
@@ -422,7 +446,7 @@ function StoryBlock({
           {block.paragraphs.map((paragraph) => (
             <p
               key={paragraph}
-              className="text-[16px] leading-[1.5] text-muted-65"
+              className={`text-[16px] leading-[1.5] ${tones.body}`}
             >
               <Emphasis text={paragraph} />
             </p>
@@ -430,7 +454,7 @@ function StoryBlock({
           {block.cta && (
             <InlineCta
               cta={block.cta}
-              className="text-[16px] leading-[1.5] text-muted-65"
+              className={`text-[16px] leading-[1.5] ${tones.body}`}
             />
           )}
         </SectionShell>
@@ -446,6 +470,9 @@ export function CaseStudyStory({ study }: { study: CaseStudy }) {
   const challengeTotal = story.blocks.filter(
     (block) => block.kind === "challenge",
   ).length;
+  // One `**phrase**` anywhere in the copy switches the whole story to the
+  // highlighted tones, so labels and body never mix styles on one page.
+  const tones = copyTones(hasEmphasis(JSON.stringify(story.blocks)));
 
   return (
     <>
@@ -470,19 +497,14 @@ export function CaseStudyStory({ study }: { study: CaseStudy }) {
                 followsMedia={
                   block.kind === "media" && previous?.kind === "media"
                 }
+                tones={tones}
               />
             );
           })}
 
-          <ProcessSection />
-
           {study.endCta && <EndCta endCta={study.endCta} />}
 
-          <SectionShell
-            heading={story.faqHeading}
-            topRule
-            contentInset="wide"
-          >
+          <SectionShell heading={story.faqHeading} topRule contentInset="wide">
             <CaseFaq items={story.faqs} />
           </SectionShell>
 

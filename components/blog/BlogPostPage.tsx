@@ -1,12 +1,25 @@
 import Link from "next/link";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
-import { AuditForm } from "@/components/AuditForm";
 import { Footer } from "@/components/Footer";
-import { blogPostSchema } from "@/sanity/lib/blog-schema";
+import { blogPostGraph, serializeJsonLd } from "@/sanity/lib/blog-structured-data";
 import type { BlogPostData } from "@/sanity/lib/blog-types";
 import { formatBlogDate } from "@/sanity/lib/blog-utils";
+import type { SanityImageSource } from "@sanity/image-url";
 import { BlogImage } from "./BlogImage";
 import { BlogPostSidebar } from "./BlogPostSidebar";
+
+/** A `blogBody` image block, as projected by BLOG_POST_QUERY. */
+type ArticleImageValue = {
+  alt?: string;
+  caption?: string;
+  sourceUrl?: string;
+  capturedOn?: string;
+  asset?: {
+    _id?: string;
+    url?: string;
+    metadata?: { lqip?: string; dimensions?: { width?: number; height?: number } };
+  };
+};
 
 /** One "Related Articles" card — date, image, category tag, heading,
     description, "Read Article". Links to the related post. */
@@ -22,7 +35,7 @@ function RelatedArticleCard({ post }: { post: BlogPostData }) {
           the image on wide viewports, where the card grows wider without
           growing taller. */}
       <div className="relative h-56.25 w-full desk:aspect-2084/960 desk:h-auto">
-        <BlogImage image={post.image} alt="" fill sizes="(min-width: 1200px) 25vw, 100vw" className="object-cover object-left" />
+        <BlogImage image={post.image} fill sizes="(min-width: 1200px) 25vw, 100vw" className="object-cover object-left" />
       </div>
       {/* Extra mt-2 on top of the card's gap-3 rhythm for the spacing
           called out between the image and the tag. */}
@@ -135,6 +148,55 @@ const portableTextComponents: PortableTextComponents = {
         </div>
       );
     },
+    articleImage: ({ value }) => {
+      const image = value as ArticleImageValue;
+      const dimensions = image.asset?.metadata?.dimensions;
+      if (!image.asset?._id || !dimensions?.width || !dimensions?.height) return null;
+      // Keep the source's own aspect ratio (screenshots aren't 2084x960 like
+      // the header images), capped at 1600px wide.
+      const width = Math.min(1600, dimensions.width);
+      const height = Math.round((width * dimensions.height) / dimensions.width);
+      let sourceLabel = "";
+      try {
+        sourceLabel = image.sourceUrl ? new URL(image.sourceUrl).hostname.replace(/^www\./, "") : "";
+      } catch {
+        sourceLabel = "";
+      }
+      return (
+        <figure className="flex w-full flex-col gap-2">
+          <BlogImage
+            image={{
+              kind: "sanity",
+              source: image as SanityImageSource,
+              alt: image.alt || "",
+              lqip: image.asset.metadata?.lqip,
+              width: dimensions.width,
+              height: dimensions.height,
+            }}
+            width={width}
+            height={height}
+            sizes="(min-width: 1200px) 70vw, 100vw"
+            className="h-auto w-full border-[0.5px] border-hairline"
+          />
+          {image.caption || sourceLabel ? (
+            <figcaption className="text-[12px] leading-[1.5] text-label-grey">
+              {image.caption}
+              {image.caption && sourceLabel ? " · " : null}
+              {sourceLabel ? (
+                <a
+                  href={image.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-white/70"
+                >
+                  {sourceLabel}
+                </a>
+              ) : null}
+            </figcaption>
+          ) : null}
+        </figure>
+      );
+    },
   },
 };
 
@@ -150,9 +212,10 @@ export function BlogPostPage({
 }) {
   return (
     <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
+      {/* One graph: BlogPosting, breadcrumb, and the FAQ and agency list when the body has them. */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostSchema(post)) }}
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(blogPostGraph(post)) }}
       />
       <BlogPostSidebar post={post} />
       {/* Divider between the aside and content columns, same treatment as /blog. */}
@@ -169,7 +232,6 @@ export function BlogPostPage({
         <div className="fade-up w-full [animation-delay:100ms]">
           <BlogImage
             image={post.image}
-            alt=""
             width={2084}
             height={960}
             priority
@@ -197,7 +259,6 @@ export function BlogPostPage({
             ))}
           </div>
         </div>
-        <AuditForm />
         {/* Same treatment as /blog's Footer wrapper — cancels the row's
             p-5 on this wrapper only, so Footer fills the extra space via
             its own w-full without needing any change to Footer itself. */}

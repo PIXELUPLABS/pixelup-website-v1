@@ -12,3 +12,12 @@ export const { sanityFetch, SanityLive } = defineLive({
   serverToken: token || false,
   browserToken: false,
 });
+
+/**
+ * Pass as `tags` on every sanityFetch() call so the publish webhook
+ * (app/api/revalidate) can expire all cached Sanity reads at once.
+ * sanityFetch caches with no expiry and otherwise tags results only with
+ * Sanity sync tags, which only <SanityLive /> revalidates — and
+ * app/blog/layout.tsx mounts it in draft mode only.
+ */
+export const SANITY_CACHE_TAG = 'sanity'

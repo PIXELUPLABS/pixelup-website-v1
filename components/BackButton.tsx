@@ -19,7 +19,9 @@ export function BackButton({
       className="-ml-1 inline-flex h-8 w-8 items-center justify-center text-white/60 transition-colors hover:text-white"
     >
       {icon === "arrow" ? (
-        <Image src="/media/back-btn.svg" alt="" width={10} height={10} aria-hidden="true" />
+        // Real alt even though it's aria-hidden: Bing's site scan reports
+        // alt="" as missing, and aria-hidden keeps screen readers off it.
+        <Image src="/media/back-btn.svg" alt={label} width={10} height={10} aria-hidden="true" />
       ) : (
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
           <path

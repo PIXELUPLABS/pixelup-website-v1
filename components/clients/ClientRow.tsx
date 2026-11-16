@@ -19,6 +19,7 @@ const logoFrameClassBySlug: Record<string, string> = {
   bland: "h-7 w-[96.7273px]",
   ctgt: "h-7 w-[102.5682px]",
   conigma: "h-7 w-[114.3333px]",
+  "conscious-engines": "h-7 w-[172.032px]",
   dayflow: "h-7 w-[98.702px]",
   // 378x112 PNG with no padding around the mark, so it is set a little
   // narrower than its 94.5px natural width at 28px: the wordmark then
@@ -27,15 +28,22 @@ const logoFrameClassBySlug: Record<string, string> = {
   greptile: "h-7 w-[115.612px]",
   henrylabs: "h-7 w-[180.32px]",
   "lasting-learn": "h-7 w-[191.1392px]",
+  "my-wonder": "h-7 w-[109.4667px]",
   nfa: "h-7 w-[74px]",
   pogo: "h-7 w-[57.9312px]",
   reducto: "h-7 w-[137.984px]",
+  // 111x36 viewBox.
+  replay: "h-7 w-[86.3333px]",
   revyl: "h-7 w-[102.6667px]",
   sainapse: "h-7 w-[155.0004px]",
   streamline: "h-7 w-[136.3928px]",
   sully: "h-7 w-[104.5333px]",
   "synthio-labs": "h-7 w-[160.734px]",
   umbra: "h-7 w-[104.5333px]",
+  // 320x90 viewBox with no padding, and every letter is cap height, so it
+  // is drawn 20px tall (the size varickagents.com's own header uses)
+  // instead of 28px: it then sits at the others' optical size.
+  "varick-agents": "h-7 w-[71.1111px]",
   "vertera-health": "h-7 w-[108.404px]",
   zenact: "h-7 w-[125.44px]",
   jumbo: "h-7 w-[125.44px]",
@@ -91,13 +99,10 @@ function ClientIdentity({
 export function ClientRow({
   client,
   index,
-  className = "",
   dense = false,
 }: {
   client: Client;
   index: number;
-  /** Side padding from ClientRoster's bleed variant. */
-  className?: string;
   /** /yc's batch programme: one short line per company. Logo | niche |
       funding note (the latest round), no engagement line, 20px top and
       bottom, and no top rule on a group's first row (the group's own rule
@@ -112,7 +117,7 @@ export function ClientRow({
   if (dense) {
     return (
       <li
-        className={`fade-up grid grid-cols-1 gap-3 border-t-[0.5px] border-hairline py-5 first:border-t-0 desk:grid-cols-3 desk:items-center desk:gap-0 ${className}`}
+        className="fade-up grid grid-cols-1 gap-3 border-t-[0.5px] border-hairline py-5 first:border-t-0 desk:grid-cols-3 desk:items-center desk:gap-0"
         style={{ animationDelay: entranceDelay }}
       >
         <div className="min-w-0 desk:pl-6">
@@ -138,7 +143,7 @@ export function ClientRow({
 
   return (
     <li
-      className={`fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-[1.6fr_0.6fr_0.8fr] desk:items-start desk:gap-6 ${className}`}
+      className="fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-[45%_0.6fr_0.8fr] desk:items-start desk:gap-5"
       style={{ animationDelay: entranceDelay }}
     >
       <ClientIdentity client={client} index={index} />

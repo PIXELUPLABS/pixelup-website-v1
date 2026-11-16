@@ -9,17 +9,15 @@ import {
 import { faqHeading, pixelupFaq, type FaqItem } from "@/lib/case-studies";
 
 /** Standalone, full-width FAQ block for /blog and the homepage, on both
-    sitting directly above AuditForm — same shared pixelupFaq
+    sitting directly above the Footer — same shared pixelupFaq
     content and CaseFaq accordion as the case study pages. Heading in the
     left 45%, accordion in the right 55% (not SectionShell — that hardcodes
     case-study-sidebar-specific padding, see DESIGN.md §14). Matches
     BlogList's 45/55 split and desk:pl-5 offset so the accordion's text
     lines up with BlogList's title/date column above it, instead of sitting
     at the different x-position a 50/50 split would put it at. Top hairline
-    + breathing room matches the site's other full-width sections (Footer,
-    AuditForm). */
+    + breathing room matches the site's other full-width sections (Footer). */
 export function BlogFaq({
-  bleed = false,
   items = pixelupFaq,
   grid = false,
   eyebrow,
@@ -32,10 +30,6 @@ export function BlogFaq({
   /** A page's own questions (/yc). The page then emits the matching
       FAQPage JSON-LD itself instead of pixelupFaqSchema. */
   items?: FaqItem[];
-  /** Homepage, directly under ProcessSection: the top hairline runs from the
-      LeftNav divider to the viewport edge and closes ProcessSection's centre
-      rule. The padding puts the content back where it was. */
-  bleed?: boolean;
   /** /yc: SplitHeader's layout on the "bleed" edge, like every section
       above it: the heading row (heading left, right half empty), a
       full-width rule, then the accordion in the right half. A bottom rule
@@ -65,14 +59,15 @@ export function BlogFaq({
   }
 
   return (
-    <section
-      className={`border-t-[0.5px] border-hairline py-8 ${bleed ? `${bleedMargin} desk:pl-4 desk:pr-5` : "w-full"}`}
-    >
+    <section className="w-full border-t-[0.5px] border-hairline py-8">
       <div className="flex w-full flex-col gap-6 desk:flex-row desk:gap-0">
         <div className="relative w-full overflow-hidden desk:w-[45%] desk:pr-5">
+          {/* Decorative, so aria-hidden; still a real alt because Bing's
+              site scan reports alt="" as missing. */}
           <Image
             src={faqBg}
-            alt=""
+            alt="Background pattern"
+            aria-hidden="true"
             fill
             sizes="(min-width: 1200px) 45vw, 100vw"
             className="scale-110 object-cover -translate-x-20 -translate-y-12"

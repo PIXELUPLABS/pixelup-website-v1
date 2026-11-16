@@ -1,11 +1,11 @@
 import {
+  caseStudySchema,
   faqHeading,
   pixelupFaq,
   pixelupFaqSchema,
   type CaseStudy,
 } from "@/lib/case-studies";
 import { Footer } from "../Footer";
-import { ProcessSection } from "../ProcessSection";
 import { CaseFaq } from "./CaseFaq";
 import { CaseMediaBlock } from "./CaseMedia";
 import { CaseSection } from "./CaseSection";
@@ -74,8 +74,6 @@ function LegacyCaseStudy({ study }: { study: CaseStudy }) {
             </>
           )}
 
-          <ProcessSection />
-
           {study.endCta && <EndCta endCta={study.endCta} />}
 
           <SectionShell heading={faqHeading} topRule>
@@ -95,6 +93,10 @@ export function CaseStudyPage({ study }: { study: CaseStudy }) {
 
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(caseStudySchema(study)) }}
+      />
       {!useStoryLayout && (
         <script
           type="application/ld+json"

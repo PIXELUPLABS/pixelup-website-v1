@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { AuditLeadMagnet } from "@/components/blog/AuditLeadMagnet";
 import { BlogPostPage } from "@/components/blog/BlogPostPage";
 import { blogImageUrl } from "@/sanity/lib/blog-schema";
 import { getBlogPost, getBlogPosts, getBlogSlugs } from "@/sanity/lib/blog-data";
@@ -34,6 +35,7 @@ export async function generateMetadata({
     // JSON-LD in BlogPostPage — different crawlers read different ones.
     openGraph: {
       type: "article",
+      url: `/blog/${post.slug}`,
       title: post.seo.title,
       description: post.seo.description,
       publishedTime: post.publishedDate,
@@ -60,5 +62,11 @@ export default async function BlogPostRoute({
   const [post, posts] = await Promise.all([getBlogPost(slug), getBlogPosts()]);
   if (!post) notFound();
   const relatedPosts = posts.filter((candidate) => candidate.slug !== post.slug).slice(0, 2);
-  return <BlogPostPage post={post} relatedPosts={relatedPosts} />;
+  return (
+    <>
+      <BlogPostPage post={post} relatedPosts={relatedPosts} />
+      {/* Blog posts only: that's where most of the traffic lands. */}
+      <AuditLeadMagnet />
+    </>
+  );
 }

@@ -1,6 +1,6 @@
 import type { Testimonial } from "@/lib/testimonials";
 import { TrustedStrip } from "./TrustedStrip";
-import { CtaButtons, type PrimaryCta } from "./CtaButtons";
+import { CtaButtons } from "./CtaButtons";
 import { TestimonialSlider } from "./TestimonialSlider";
 
 // Homepage hero copy — pages like /call pass their own.
@@ -23,8 +23,8 @@ export function LeftNav({
   headingSize = "desk:text-[30px]",
   headingFontClassName = "",
   variant = "default",
-  primaryCta,
   testimonials,
+  showCtaButtons = true,
 }: {
   heading?: React.ReactNode;
   subheading?: React.ReactNode;
@@ -46,12 +46,11 @@ export function LeftNav({
   /** The clients variant follows the dedicated Figma heading proportions
       without changing the shared sidebar treatment on other pages. */
   variant?: "default" | "clients";
-  /** Swaps the accent CTA (default BOOK A CALL) for the page's own primary
-      action, so the sidebar never competes with it. */
-  primaryCta?: PrimaryCta;
-  /** Cross-fading testimonial card below the trusted strip (/yc; /call on
-      main). */
+  /** Cross-fading testimonial card below the trusted strip (/call). */
   testimonials?: Testimonial[];
+  /** /call drops the CTAs: the page itself is the booking embed, so the
+      sidebar ends on proof instead of a competing action. */
+  showCtaButtons?: boolean;
 }) {
   const isClientsVariant = variant === "clients";
 
@@ -124,9 +123,11 @@ export function LeftNav({
             <TestimonialSlider testimonials={testimonials} />
           </div>
         )}
-        <div className="fade-up [animation-delay:400ms]">
-          <CtaButtons primary={primaryCta} />
-        </div>
+        {showCtaButtons && (
+          <div className="fade-up [animation-delay:400ms]">
+            <CtaButtons />
+          </div>
+        )}
       </div>
     </aside>
   );

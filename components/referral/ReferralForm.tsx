@@ -2,19 +2,16 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { ctaButtonBase } from "@/components/CtaButtons";
 import { partnerTypeOptions, referralVolumeOptions } from "@/lib/referral";
 
 /**
- * Partner application for /referral. Fields follow the site's existing form
- * treatment (NewsletterForm, the earlier inline AuditForm): transparent
- * fields on a hairline underline that turns accent on focus. Choice groups
- * reuse ArticleFilters' pill styling as real radio inputs.
+ * Partner application for /referral, styled to the PIXELUP Brand 2026
+ * redesign (Figma node 1801:3979): a two-column grid of underlined fields,
+ * outlined chips for the choice groups (real radio inputs), and a full-width
+ * accent-blue submit button.
  *
- * There is no backend yet: `submitPartnerApplication` logs the payload to the
- * console. Swap its body for a fetch to an API route (or a Server Action)
- * when the backend is ready; the rest of the form already handles the
- * submitting / success / error states.
+ * Submissions POST to app/api/referral, which appends a row to the partner
+ * Google Sheet (scripts/google-sheets/referral-apps-script.gs).
  */
 
 export type PartnerApplication = {
@@ -53,12 +50,14 @@ type FieldName = keyof PartnerApplication;
 type Errors = Partial<Record<FieldName, string>>;
 type Status = "idle" | "submitting" | "success" | "error";
 
+/** Saves the application to the partner Google Sheet via app/api/referral. */
 async function submitPartnerApplication(application: PartnerApplication) {
-  // TODO(backend): replace with a POST to the partner-application endpoint.
-  console.log("[referral] Partner application", {
-    ...application,
-    submittedAt: new Date().toISOString(),
+  const response = await fetch("/api/referral", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(application),
   });
+  if (!response.ok) throw new Error(`Partner application failed: ${response.status}`);
 }
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -95,10 +94,13 @@ const fieldOrder: FieldName[] = [
   "terms",
 ];
 
-const labelClassName =
-  "text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey";
+const labelClassName = "text-[12px] uppercase leading-[15px] tracking-[0.08em] text-muted";
 const fieldClassName =
-  "w-full border-b-[0.5px] bg-transparent pb-2 text-[16px] font-normal text-white placeholder:text-white/40 transition-colors focus:border-accent focus:outline-none disabled:opacity-60";
+  "w-full border-b bg-transparent pt-2 pb-3 text-[17px] leading-[21px] text-fg placeholder:text-placeholder transition-colors focus:border-accent-blue focus:outline-none disabled:opacity-60";
+
+function Optional() {
+  return <span className="normal-case tracking-normal text-faint"> (optional)</span>;
+}
 
 function ErrorText({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
@@ -120,9 +122,11 @@ function TextField({
   error,
   disabled,
   onChange,
+  className = "",
 }: {
   name: FieldName;
   label: string;
+  className?: string;
   type?: "text" | "email" | "tel" | "url";
   required?: boolean;
   autoComplete?: string;
@@ -134,10 +138,10 @@ function TextField({
 }) {
   const id = `referral-${name}`;
   return (
-    <div className="flex flex-col gap-3">
+    <div className={`flex flex-col gap-2.5 ${className}`}>
       <label htmlFor={id} className={labelClassName}>
         {label}
-        {!required && <span className="normal-case tracking-normal text-white/40"> (optional)</span>}
+        {!required && <Optional />}
       </label>
       <input
         id={id}
@@ -151,7 +155,7 @@ function TextField({
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
         onChange={(e) => onChange(e.target.value)}
-        className={`${fieldClassName} ${error ? "border-red-400" : "border-hairline"}`}
+        className={`${fieldClassName} h-[42px] ${error ? "border-red-400" : "border-line-input"}`}
       />
       <ErrorText id={`${id}-error`} message={error} />
     </div>
@@ -179,15 +183,15 @@ function TextAreaField({
 }) {
   const id = `referral-${name}`;
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2.5">
       <label htmlFor={id} className={labelClassName}>
         {label}
-        {!required && <span className="normal-case tracking-normal text-white/40"> (optional)</span>}
+        {!required && <Optional />}
       </label>
       <textarea
         id={id}
         name={name}
-        rows={3}
+        rows={2}
         placeholder={placeholder}
         value={value}
         disabled={disabled}
@@ -195,7 +199,7 @@ function TextAreaField({
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
         onChange={(e) => onChange(e.target.value)}
-        className={`${fieldClassName} min-h-24 resize-none leading-[1.5] ${error ? "border-red-400" : "border-hairline"}`}
+        className={`${fieldClassName} min-h-[86px] resize-none ${error ? "border-red-400" : "border-line-input"}`}
       />
       <ErrorText id={`${id}-error`} message={error} />
     </div>
@@ -224,13 +228,13 @@ function PillGroup({
   const id = `referral-${name}`;
   return (
     <fieldset
-      className="flex flex-col gap-3"
+      className="flex flex-col gap-3.5"
       aria-invalid={Boolean(error)}
       aria-describedby={error ? `${id}-error` : undefined}
     >
-      <legend className={`${labelClassName} mb-3`}>
+      <legend className={`${labelClassName} mb-3.5`}>
         {legend}
-        {!required && <span className="normal-case tracking-normal text-white/40"> (optional)</span>}
+        {!required && <Optional />}
       </legend>
       <div className="flex flex-wrap gap-2">
         {options.map((option, index) => (
@@ -247,9 +251,8 @@ function PillGroup({
               onChange={() => onChange(option.value)}
               className="peer sr-only"
             />
-            {/* ArticleFilters' pill states: dashed hairline at rest, filled
-                button-dark when selected. */}
-            <span className="block border border-dashed border-hairline px-3 py-1 font-button text-[12px] font-semibold uppercase tracking-[-0.02em] text-white/40 transition-colors hover:bg-button-dark peer-checked:border-solid peer-checked:border-transparent peer-checked:bg-button-dark peer-checked:text-white peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent">
+            {/* Outlined chip at rest, filled with the text color when selected. */}
+            <span className="flex h-11 items-center justify-center rounded-[4px] border border-line-strong px-[17px] text-[13px] uppercase leading-[16px] tracking-[0.04em] text-fg-2 transition-colors hover:border-faint peer-checked:border-fg peer-checked:bg-fg peer-checked:text-ink peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent-blue">
               {option.label}
             </span>
           </label>
@@ -278,7 +281,7 @@ function Checkbox({
   const id = `referral-${name}`;
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="flex cursor-pointer items-start gap-3">
+      <label htmlFor={id} className="flex cursor-pointer items-start gap-3.5">
         <input
           id={id}
           name={name}
@@ -292,8 +295,8 @@ function Checkbox({
         />
         <span
           aria-hidden="true"
-          className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center border-[0.5px] transition-colors peer-checked:border-accent peer-checked:bg-accent peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent peer-checked:[&>svg]:opacity-100 ${
-            error ? "border-red-400" : "border-white/40"
+          className={`mt-0.5 flex size-[18px] shrink-0 items-center justify-center rounded-[3px] border transition-colors peer-checked:border-accent-blue peer-checked:bg-accent-blue peer-focus-visible:outline peer-focus-visible:outline-1 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent-blue peer-checked:[&>svg]:opacity-100 ${
+            error ? "border-red-400" : "border-faint"
           }`}
         >
           <svg width="10" height="10" viewBox="0 0 12 12" fill="none" className="opacity-0">
@@ -307,7 +310,7 @@ function Checkbox({
             />
           </svg>
         </span>
-        <span className="text-[14px] leading-[1.4] text-muted-65">{children}</span>
+        <span className="text-[14px] leading-[1.5] text-fg-2">{children}</span>
       </label>
       <ErrorText id={`${id}-error`} message={error} />
     </div>
@@ -360,10 +363,10 @@ export function ReferralForm() {
   if (status === "success") {
     return (
       <div role="status" className="flex flex-col gap-4">
-        <p className="text-[24px] font-medium leading-tight tracking-display text-white">
+        <p className="text-[28px] leading-[34px] tracking-[-0.04em] text-fg">
           Application received.
         </p>
-        <p className="text-[16px] leading-[1.5] text-muted-65">
+        <p className="text-[16px] leading-[1.55] text-muted">
           We will review it and send the partner agreement to{" "}
           <span className="text-white">{submittedEmail}</span>. Once it is signed, you get
           your partner kit and can register your first lead.
@@ -384,8 +387,9 @@ export function ReferralForm() {
       onSubmit={handleSubmit}
       noValidate
       aria-label="Partner application"
-      className="flex flex-col gap-8"
+      className="flex flex-col gap-10"
     >
+      <div className="grid gap-8 desk:grid-cols-2">
       <TextField
         name="fullName"
         label="Full name"
@@ -453,11 +457,13 @@ export function ReferralForm() {
         type="url"
         autoComplete="url"
         placeholder="linkedin.com/in/you"
+        className="desk:col-span-2"
         value={values.profileUrl}
         error={errors.profileUrl}
         disabled={disabled}
         onChange={(v) => update("profileUrl", v)}
       />
+      </div>
       <PillGroup
         name="partnerType"
         legend="Which group fits you best?"
@@ -497,7 +503,7 @@ export function ReferralForm() {
         onChange={(v) => update("leadInMind", v)}
       />
 
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 border-t border-dashed border-line-input pt-6">
         <Checkbox
           name="eligibility"
           checked={values.eligibility}
@@ -524,10 +530,10 @@ export function ReferralForm() {
         <button
           type="submit"
           disabled={disabled}
-          className={`${ctaButtonBase} w-full cursor-pointer gap-8 bg-accent text-white hover:brightness-110 disabled:cursor-wait disabled:opacity-60`}
+          className="flex h-[60px] w-full cursor-pointer items-center justify-between gap-8 rounded-[4px] bg-accent-blue px-5 text-[15px] font-medium leading-[18px] text-fg transition-[filter] hover:brightness-110 disabled:cursor-wait disabled:opacity-60"
         >
           <span>{disabled ? "SUBMITTING…" : "SUBMIT APPLICATION"}</span>
-          <Image src="/media/Container.svg" alt="" width={14} height={14} aria-hidden="true" />
+          <Image src="/media/referral/arrow-right.svg" alt="" width={16} height={16} aria-hidden="true" />
         </button>
         {status === "error" && (
           <p role="alert" className="text-[14px] leading-[1.3] text-red-400">

@@ -2,12 +2,15 @@ import type { Metadata } from "next";
 import { CalEmbed } from "@/components/CalEmbed";
 import { Footer } from "@/components/Footer";
 import { LeftNav } from "@/components/LeftNav";
+import { callPageTestimonials } from "@/lib/testimonials";
 
 export const metadata: Metadata = {
   title: "Book a Call - PIXELUP LABS",
   description:
     "Book a discovery call with PIXELUP LABS: brands, websites and products that command enterprise trust.",
   alternates: { canonical: "/call" },
+  // No `images`: app/call/opengraph-image.jpg fills it (see lib/open-graph.ts).
+  openGraph: { type: "website", url: "/call" },
 };
 
 export default function CallPage() {
@@ -22,6 +25,8 @@ export default function CallPage() {
           heading="We love working with bold founders who are tired of the ordinary"
           subheading="Brands, Websites and product design that leaves a lasting impression."
           balanceHero
+          testimonials={callPageTestimonials}
+          showCtaButtons={false}
         />
         {/* `main` — this is the page's primary content region. */}
         <main

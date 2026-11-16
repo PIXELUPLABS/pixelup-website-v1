@@ -1,4 +1,4 @@
-import {BlockContentIcon} from '@sanity/icons'
+import {BlockContentIcon, ImageIcon} from '@sanity/icons'
 import {defineArrayMember, defineField, defineType} from 'sanity'
 
 export const blogBody = defineType({
@@ -59,5 +59,40 @@ export const blogBody = defineType({
       },
     }),
     defineArrayMember({type: 'comparisonTable'}),
+    defineArrayMember({
+      name: 'articleImage',
+      title: 'Image',
+      type: 'image',
+      icon: ImageIcon,
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt text',
+          type: 'string',
+          description: 'What the image shows, for screen readers and search.',
+          validation: (rule) => rule.required(),
+        }),
+        defineField({
+          name: 'caption',
+          title: 'Caption',
+          type: 'string',
+        }),
+        defineField({
+          name: 'sourceUrl',
+          title: 'Source URL',
+          type: 'url',
+          description: 'For screenshots: the page that was captured. Shown as a link after the caption.',
+        }),
+        defineField({
+          name: 'capturedOn',
+          title: 'Captured on',
+          type: 'date',
+          description: 'For screenshots of third-party sites: the day the screenshot was taken.',
+        }),
+      ],
+      preview: {
+        select: {title: 'caption', subtitle: 'alt', media: 'asset'},
+      },
+    }),
   ],
 })

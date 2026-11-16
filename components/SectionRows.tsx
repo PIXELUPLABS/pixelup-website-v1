@@ -1,8 +1,6 @@
 /**
- * The label | content rows shared by /services, /yc and ProcessSection
- * (homepage and case studies): CaseStudyStory ChallengeBlock's geometry,
- * split out of ServiceSection so pages outside /services can use them
- * without pulling in the /services code.
+ * The label | content rows behind /yc (staging only), its ProcessSection and
+ * BlogFaq's grid variant: CaseStudyStory ChallengeBlock's geometry.
  */
 
 /** Keeps hyphenated words ("AI-native") and ranges ("1–3") whole when a line wraps. */
@@ -19,9 +17,9 @@ export function noBreakHyphens(text: string) {
 }
 
 /**
- * "inset" (default) pads every cell 24px, for a full-bleed main like
- * /services. "flush" drops the outer side padding so the text lines up with
- * the edge of a LeftNav-shell column (ClientRoster, BlogFaq), as on /yc.
+ * "inset" (default) pads every cell 24px, for a full-bleed main. "flush"
+ * drops the outer side padding so the text lines up with the edge of a
+ * LeftNav-shell column.
  * "bleed" keeps flush's text positions, but the section is pulled out by
  * `bleedMargin` so its hairlines run from the shell's divider to the
  * viewport edge with no gap; the cells pad that distance back.

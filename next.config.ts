@@ -47,6 +47,37 @@ const nextConfig: NextConfig = {
         destination: "/",
         statusCode: 301,
       },
+      // Old or mistyped blog slugs that still get search impressions.
+      {
+        source: "/blog/best-b2b-ai-and-tech-startup-branding-agencies",
+        destination: "/blog/best-branding-agencies-b2b-ai-tech-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-design-adapters-for-ai-startups",
+        destination: "/blog/best-design-agencies-for-ai-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-design-agencies-ai-startups",
+        destination: "/blog/best-design-agencies-for-ai-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-b2b-ai-tech-startups-2026",
+        destination: "/blog/best-branding-agencies-b2b-ai-tech-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-branding-ai-tech-startups",
+        destination: "/blog/best-branding-agencies-b2b-ai-tech-startups",
+        statusCode: 301,
+      },
+      {
+        source: "/blog/best-design-agencies-b2b-ai-tech-startups",
+        destination: "/blog/best-branding-agencies-b2b-ai-tech-startups",
+        statusCode: 301,
+      },
       // Cost guide moved to a rebrand-only page on a new slug (2026-10-27).
       {
         source: "/blog/what-a-startup-rebrand-and-website-cost",
@@ -57,6 +88,18 @@ const nextConfig: NextConfig = {
       {
         source: "/blog/brand-refresh",
         destination: "/blog/brand-refresh-guide",
+        statusCode: 301,
+      },
+      {
+        source: "/pixeluplabs",
+        destination: "/",
+        statusCode: 301,
+      },
+      // Branded shortcut to our B2B website directory. Also listed in
+      // app/sitemap.ts.
+      {
+        source: "/designforb2b",
+        destination: "https://designforb2b.com",
         statusCode: 301,
       },
     ];

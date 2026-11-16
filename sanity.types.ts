@@ -46,9 +46,11 @@ export type BlogPost = {
   slug: Slug;
   description: string;
   author: AuthorReference;
-  categories: Array<{
-    _key: string;
-  } & CategoryReference>;
+  categories: Array<
+    {
+      _key: string;
+    } & CategoryReference
+  >;
   mainImage: {
     asset?: SanityImageAssetReference;
     media?: unknown;
@@ -79,27 +81,42 @@ export type Seo = {
   noIndex?: boolean;
 };
 
-export type BlogBody = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h2" | "h3";
-  listItem?: "bullet" | "number";
-  markDefs?: Array<{
-    href: string;
-    openInNewTab?: boolean;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-} | {
-  _key: string;
-} & ComparisonTable>;
+export type BlogBody = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h2" | "h3";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href: string;
+        openInNewTab?: boolean;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & ComparisonTable)
+  | {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      caption?: string;
+      sourceUrl?: string;
+      capturedOn?: string;
+      _type: "articleImage";
+      _key: string;
+    }
+>;
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
@@ -126,9 +143,11 @@ export type Slug = {
 export type ComparisonTable = {
   _type: "comparisonTable";
   headers: Array<string>;
-  rows: Array<{
-    _key: string;
-  } & TableRow>;
+  rows: Array<
+    {
+      _key: string;
+    } & TableRow
+  >;
 };
 
 export type TableRow = {
@@ -255,7 +274,28 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = AuthorReference | CategoryReference | SanityImageAssetReference | BlogPost | Seo | BlogBody | SanityImageCrop | SanityImageHotspot | Slug | ComparisonTable | TableRow | Category | Author | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes =
+  | AuthorReference
+  | CategoryReference
+  | SanityImageAssetReference
+  | BlogPost
+  | Seo
+  | BlogBody
+  | SanityImageCrop
+  | SanityImageHotspot
+  | Slug
+  | ComparisonTable
+  | TableRow
+  | Category
+  | Author
+  | SanityImagePaletteSwatch
+  | SanityImagePalette
+  | SanityImageDimensions
+  | SanityImageMetadata
+  | SanityFileAsset
+  | SanityAssetSourceData
+  | SanityImageAsset
+  | Geopoint;
 
 // Source: sanity/lib/queries.ts
 // Variable: BLOG_POSTS_QUERY
@@ -316,7 +356,7 @@ export type BLOG_POSTS_QUERY_RESULT = Array<{
 
 // Source: sanity/lib/queries.ts
 // Variable: BLOG_POST_QUERY
-// Query: *[_type == "blogPost" && slug.current == $slug][0]{      _id,  title,  "slug": slug.current,  description,  publishedDate,  updatedDate,  "author": author->{name, role},  "categories": categories[]->{title, "slug": slug.current},  "mainImage": mainImage{  asset->{    _id,    url,    metadata{      lqip,      dimensions{width, height}    }  },  alt,  crop,  hotspot},  "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description, description, ""),    "noIndex": seo.noIndex == true,    "image": seo.image{  asset->{    _id,    url,    metadata{      lqip,      dimensions{width, height}    }  },  alt,  crop,  hotspot}  },    body[]{      ...,      _type == "comparisonTable" => {        _key,        _type,        headers,        rows[]{_key, _type, cells}      }    }  }
+// Query: *[_type == "blogPost" && slug.current == $slug][0]{      _id,  title,  "slug": slug.current,  description,  publishedDate,  updatedDate,  "author": author->{name, role},  "categories": categories[]->{title, "slug": slug.current},  "mainImage": mainImage{  asset->{    _id,    url,    metadata{      lqip,      dimensions{width, height}    }  },  alt,  crop,  hotspot},  "seo": {    "title": coalesce(seo.title, title, ""),    "description": coalesce(seo.description, description, ""),    "noIndex": seo.noIndex == true,    "image": seo.image{  asset->{    _id,    url,    metadata{      lqip,      dimensions{width, height}    }  },  alt,  crop,  hotspot}  },    body[]{      ...,      _type == "comparisonTable" => {        _key,        _type,        headers,        rows[]{_key, _type, cells}      },      _type == "articleImage" => {        _key,        _type,        alt,        caption,        sourceUrl,        capturedOn,        crop,        hotspot,        asset->{          _id,          url,          metadata{            lqip,            dimensions{width, height}          }        }      }    }  }
 export type BLOG_POST_QUERY_RESULT = {
   _id: string;
   title: string;
@@ -369,34 +409,59 @@ export type BLOG_POST_QUERY_RESULT = {
       hotspot: SanityImageHotspot | null;
     } | null;
   };
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "h2" | "h3" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href: string;
-      openInNewTab?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    _key: string;
-    _type: "comparisonTable";
-    headers: Array<string>;
-    rows: Array<{
-      _key: string;
-      _type: "tableRow";
-      cells: Array<string>;
-    }>;
-  }>;
+  body: Array<
+    | {
+        asset: {
+          _id: string;
+          url: string;
+          metadata: {
+            lqip: string | null;
+            dimensions: {
+              width: number;
+              height: number;
+            } | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot: SanityImageHotspot | null;
+        crop: SanityImageCrop | null;
+        alt: string;
+        caption: string | null;
+        sourceUrl: string | null;
+        capturedOn: string | null;
+        _type: "articleImage";
+        _key: string;
+      }
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?: "h2" | "h3" | "normal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href: string;
+          openInNewTab?: boolean;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        _key: string;
+        _type: "comparisonTable";
+        headers: Array<string>;
+        rows: Array<{
+          _key: string;
+          _type: "tableRow";
+          cells: Array<string>;
+        }>;
+      }
+  >;
 } | null;
 
 // Source: sanity/lib/queries.ts
@@ -418,10 +483,9 @@ export type BLOG_SITEMAP_QUERY_RESULT = Array<{
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n  *[_type == \"blogPost\" && defined(slug.current)]\n  | order(publishedDate desc, _id asc){\n    \n  _id,\n  title,\n  \"slug\": slug.current,\n  description,\n  publishedDate,\n  updatedDate,\n  \"author\": author->{name, role},\n  \"categories\": categories[]->{title, \"slug\": slug.current},\n  \"mainImage\": mainImage{\n  asset->{\n    _id,\n    url,\n    metadata{\n      lqip,\n      dimensions{width, height}\n    }\n  },\n  alt,\n  crop,\n  hotspot\n},\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description, description, \"\"),\n    \"noIndex\": seo.noIndex == true,\n    \"image\": seo.image{\n  asset->{\n    _id,\n    url,\n    metadata{\n      lqip,\n      dimensions{width, height}\n    }\n  },\n  alt,\n  crop,\n  hotspot\n}\n  }\n\n  }\n": BLOG_POSTS_QUERY_RESULT;
-    "\n  *[_type == \"blogPost\" && slug.current == $slug][0]{\n    \n  _id,\n  title,\n  \"slug\": slug.current,\n  description,\n  publishedDate,\n  updatedDate,\n  \"author\": author->{name, role},\n  \"categories\": categories[]->{title, \"slug\": slug.current},\n  \"mainImage\": mainImage{\n  asset->{\n    _id,\n    url,\n    metadata{\n      lqip,\n      dimensions{width, height}\n    }\n  },\n  alt,\n  crop,\n  hotspot\n},\n  \"seo\": {\n    \"title\": coalesce(seo.title, title, \"\"),\n    \"description\": coalesce(seo.description, description, \"\"),\n    \"noIndex\": seo.noIndex == true,\n    \"image\": seo.image{\n  asset->{\n    _id,\n    url,\n    metadata{\n      lqip,\n      dimensions{width, height}\n    }\n  },\n  alt,\n  crop,\n  hotspot\n}\n  }\n,\n    body[]{\n      ...,\n      _type == \"comparisonTable\" => {\n        _key,\n        _type,\n        headers,\n        rows[]{_key, _type, cells}\n      }\n    }\n  }\n": BLOG_POST_QUERY_RESULT;
-    "\n  *[_type == \"blogPost\" && defined(slug.current)]{\"slug\": slug.current}\n": BLOG_SLUGS_QUERY_RESULT;
-    "\n  *[_type == \"blogPost\" && defined(slug.current) && seo.noIndex != true]\n  | order(publishedDate desc){\n    \"slug\": slug.current,\n    \"updatedDate\": coalesce(updatedDate, _updatedAt)\n  }\n": BLOG_SITEMAP_QUERY_RESULT;
+    '\n  *[_type == "blogPost" && defined(slug.current)]\n  | order(publishedDate desc, _id asc){\n    \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  publishedDate,\n  updatedDate,\n  "author": author->{name, role},\n  "categories": categories[]->{title, "slug": slug.current},\n  "mainImage": mainImage{\n  asset->{\n    _id,\n    url,\n    metadata{\n      lqip,\n      dimensions{width, height}\n    }\n  },\n  alt,\n  crop,\n  hotspot\n},\n  "seo": {\n    "title": coalesce(seo.title, title, ""),\n    "description": coalesce(seo.description, description, ""),\n    "noIndex": seo.noIndex == true,\n    "image": seo.image{\n  asset->{\n    _id,\n    url,\n    metadata{\n      lqip,\n      dimensions{width, height}\n    }\n  },\n  alt,\n  crop,\n  hotspot\n}\n  }\n\n  }\n': BLOG_POSTS_QUERY_RESULT;
+    '\n  *[_type == "blogPost" && slug.current == $slug][0]{\n    \n  _id,\n  title,\n  "slug": slug.current,\n  description,\n  publishedDate,\n  updatedDate,\n  "author": author->{name, role},\n  "categories": categories[]->{title, "slug": slug.current},\n  "mainImage": mainImage{\n  asset->{\n    _id,\n    url,\n    metadata{\n      lqip,\n      dimensions{width, height}\n    }\n  },\n  alt,\n  crop,\n  hotspot\n},\n  "seo": {\n    "title": coalesce(seo.title, title, ""),\n    "description": coalesce(seo.description, description, ""),\n    "noIndex": seo.noIndex == true,\n    "image": seo.image{\n  asset->{\n    _id,\n    url,\n    metadata{\n      lqip,\n      dimensions{width, height}\n    }\n  },\n  alt,\n  crop,\n  hotspot\n}\n  }\n,\n    body[]{\n      ...,\n      _type == "comparisonTable" => {\n        _key,\n        _type,\n        headers,\n        rows[]{_key, _type, cells}\n      },\n      _type == "articleImage" => {\n        _key,\n        _type,\n        alt,\n        caption,\n        sourceUrl,\n        capturedOn,\n        crop,\n        hotspot,\n        asset->{\n          _id,\n          url,\n          metadata{\n            lqip,\n            dimensions{width, height}\n          }\n        }\n      }\n    }\n  }\n': BLOG_POST_QUERY_RESULT;
+    '\n  *[_type == "blogPost" && defined(slug.current)]{"slug": slug.current}\n': BLOG_SLUGS_QUERY_RESULT;
+    '\n  *[_type == "blogPost" && defined(slug.current) && seo.noIndex != true]\n  | order(publishedDate desc){\n    "slug": slug.current,\n    "updatedDate": coalesce(updatedDate, _updatedAt)\n  }\n': BLOG_SITEMAP_QUERY_RESULT;
   }
 }
-

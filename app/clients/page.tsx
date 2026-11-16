@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { AuditForm } from "@/components/AuditForm";
 import { BlogFaq } from "@/components/blog/BlogFaq";
 import { ClientRoster } from "@/components/clients/ClientRoster";
 import { Footer } from "@/components/Footer";
@@ -7,13 +6,16 @@ import { LeftNav } from "@/components/LeftNav";
 import { pixelupFaqSchema } from "@/lib/case-studies";
 import { clients } from "@/lib/clients";
 import { sitePublished, siteUpdated } from "@/lib/site-dates";
+import { withOpenGraph } from "@/lib/open-graph";
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: "Clients - PIXELUP LABS",
   description:
     "Explore the companies PIXELUP LABS has partnered with across brand, website, and product design.",
   alternates: { canonical: "/clients" },
 };
+
+export const generateMetadata = withOpenGraph(metadata, "/clients");
 
 const schema = {
   "@context": "https://schema.org",
@@ -73,7 +75,6 @@ export default function ClientsPage() {
         <main className="flex min-w-0 flex-1 flex-col gap-8">
           <ClientRoster clients={clients} />
           <BlogFaq />
-          <AuditForm />
           <div className="-mx-4 -mb-4 desk:-mr-5 desk:-mb-5 desk:-ml-4">
             <Footer />
           </div>

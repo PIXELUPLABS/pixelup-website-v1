@@ -81,9 +81,11 @@ export function NewsletterForm() {
               : "cursor-not-allowed opacity-40"
           }`}
         >
+          {/* Real alt even though it's aria-hidden: Bing's site scan reports
+              alt="" as missing, and aria-hidden keeps screen readers off it. */}
           <Image
             src="/media/Container.svg"
-            alt=""
+            alt="Arrow"
             width={14}
             height={14}
             aria-hidden="true"

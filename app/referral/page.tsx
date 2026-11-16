@@ -1,41 +1,13 @@
+import Image from "next/image";
 import type { Metadata } from "next";
-import { CaseFaq } from "@/components/case-study/CaseFaq";
-import { ContextRows, Metrics } from "@/components/case-study/CaseStudyStory";
-import { Emphasis } from "@/components/case-study/Emphasis";
-import { SectionShell } from "@/components/case-study/SectionShell";
-import { Footer } from "@/components/Footer";
-import { LeftNav } from "@/components/LeftNav";
+import localFont from "next/font/local";
+import { ReferralFooter } from "@/components/referral/ReferralFooter";
 import { ReferralForm } from "@/components/referral/ReferralForm";
 import { links } from "@/lib/projects";
-import {
-  commissionIntro,
-  commissionNotes,
-  commissionScope,
-  commissionTiers,
-  conductIntro,
-  conductRules,
-  eligibility,
-  joinSteps,
-  partnerPerks,
-  partnerTypes,
-  payoutIntro,
-  payoutTerms,
-  programTerms,
-  qualifyIntro,
-  qualifyNote,
-  qualifyRules,
-  referralFaq,
-  referralFaqHeading,
-  referralFaqSchema,
-  referralHero,
-  referralHighlights,
-  referralOverview,
-  referralSteps,
-} from "@/lib/referral";
 import { siteUpdated } from "@/lib/site-dates";
 
 const description =
-  "Refer a company that needs brand, product or web design to PIXELUP LABS and earn up to 15% of the net fees we collect. Free to join, no targets, no exclusivity.";
+  "Apply to be a PIXELUP LABS partner and earn 15% on every company you refer. VCs get priority for their portfolio companies and free consultations.";
 
 export const metadata: Metadata = {
   title: "Partner Referral Program - PIXELUP LABS",
@@ -56,244 +28,226 @@ const schema = {
   about: { "@id": "https://www.pixeluplabs.com/#organization" },
 };
 
-/** The page's one primary action: the sidebar's accent button jumps here. */
-const APPLY_ID = "apply";
-
-const bodyText = "text-[16px] leading-[1.5] text-muted-65";
-
-/**
- * The case-study story's vertical center rule, scoped to a run of
- * SectionShell blocks. Broken between runs because the 3-up Metrics strips
- * between them have column rules at thirds, which a 50% rule would cut through.
+/*
+ * Built from the PIXELUP Brand 2026 redesign (Figma PIXELUP-Brand-2026, node
+ * 1801:2472) at its 1440 canvas: 40px side gutters, a 437px label column and
+ * a 48px gap on desktop; everything stacks below the `desk` breakpoint.
  */
-function CenterRuled({ children }: { children: React.ReactNode }) {
+
+/* The redesign is set in Inter (not the site's Inter Display), so the page
+   loads it to match the Figma line breaks and widths exactly. */
+const inter = localFont({
+  src: "../fonts/Inter-Variable-latin.woff2",
+  weight: "400 500",
+  display: "swap",
+});
+/* The latin subset has no ↗ ○ ●, which the footer uses: this four-glyph
+   Inter subset (↗ ○ ● ↑) sits first in the stack and covers only those. */
+const interSymbols = localFont({
+  src: "../fonts/Inter-Variable-symbols.woff2",
+  weight: "400 500",
+  display: "swap",
+  adjustFontFallback: false,
+});
+const fontFamily = `${interSymbols.style.fontFamily}, ${inter.style.fontFamily}`;
+
+/** The page's one primary action: the hero's accent button jumps here. */
+const APPLY_ID = "apply";
+const PARTNER_EMAIL = "daksh@pixeluplabs.com";
+
+const stats = [
+  { value: "15%", label: "Partner commission", detail: "On every company you refer to us" },
+  {
+    value: "90%",
+    label: "Of our clients refer us",
+    detail: "People who have worked with us send others our way",
+  },
+  {
+    value: "35+",
+    label: "Brand and website sprints",
+    detail: "For the teams building what comes next in AI",
+  },
+];
+
+const inlineLink =
+  "text-fg underline decoration-solid underline-offset-2 transition-colors hover:text-white";
+
+const methods = [
+  {
+    title: "Start an email chain",
+    text: (
+      <>
+        Email{" "}
+        <a href={`mailto:${PARTNER_EMAIL}`} className={inlineLink}>
+          {PARTNER_EMAIL}
+        </a>{" "}
+        and copy in the company you are referring. We take it from there.
+      </>
+    ),
+  },
+  {
+    title: "Or have them book a call",
+    text: (
+      <>
+        Ask the company to{" "}
+        <a href={links.bookCall} className={inlineLink}>
+          book a call with us
+        </a>{" "}
+        directly and mention your name in the form.
+      </>
+    ),
+  },
+];
+
+const buttonBase =
+  "flex h-[52px] w-full items-center justify-between rounded-[4px] px-5 text-[15px] leading-[18px] text-fg transition-[filter,background-color] desk:w-60";
+
+function Arrow() {
   return (
-    <div className="relative">
-      <div
-        aria-hidden="true"
-        className="absolute inset-y-0 left-1/2 hidden border-l-[0.5px] border-hairline desk:block"
-      />
-      <div className="relative flex flex-col gap-6">{children}</div>
-    </div>
+    <Image
+      src="/media/referral/arrow-right.svg"
+      alt=""
+      width={16}
+      height={16}
+      aria-hidden="true"
+    />
   );
 }
 
-/** Numbered step rows: ContextRows' hairline rhythm with CaseSection's
- * muted two-digit index. */
-function Steps({ steps }: { steps: { title: string; text: string }[] }) {
+/** Top-ruled label at the head of the left column. */
+function LabelRow({ children, index }: { children: React.ReactNode; index?: string }) {
   return (
-    <ol className="flex flex-col divide-y-[0.5px] divide-hairline">
-      {steps.map((step, index) => (
-        <li key={step.title} className="flex gap-4 py-4 first:pt-0 last:pb-0">
-          <span
-            aria-hidden="true"
-            className="w-5 shrink-0 font-mono text-[12px] leading-[1.6] text-white/40"
-          >
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <div className="flex flex-col gap-2">
-            <p className="text-[14px] leading-[1.3] tracking-[-0.01em] text-white">
-              {step.title}
-            </p>
-            <p className={bodyText}>{step.text}</p>
-          </div>
-        </li>
-      ))}
-    </ol>
+    <div className="flex w-full items-baseline justify-between border-t border-line pt-4">
+      <p className="text-[15px] leading-[18px] text-fg">{children}</p>
+      {index && (
+        <p aria-hidden="true" className="font-mono text-[12px] leading-[16px] text-faint">
+          {index}
+        </p>
+      )}
+    </div>
   );
 }
 
 export default function ReferralPage() {
   return (
-    <div className="relative">
-      <div className="relative flex flex-col gap-8 p-4 desk:flex-row desk:items-start desk:gap-0 desk:p-5">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(referralFaqSchema) }}
-        />
-        <LeftNav
-          sticky
-          balanceHero
-          heading={referralHero.heading}
-          subheading={
-            <>
-              The PIXELUP LABS partner program is{" "}
-              <strong className="font-medium text-white">
-                free to join, with no targets and no exclusivity
-              </strong>
-              . You make a warm introduction, we run the pitch, and{" "}
-              <strong className="font-medium text-white">
-                you earn on every payment the client makes
-              </strong>
-            </>
-          }
-          primaryCta={{ label: "APPLY AS A PARTNER", href: `#${APPLY_ID}` }}
-        />
-        <div
-          aria-hidden="true"
-          className="hidden desk:mx-4 desk:-my-5 desk:block desk:self-stretch desk:border-l-[0.5px] desk:border-hairline"
-        />
-        <main
-          aria-label="Partner referral program"
-          className="flex min-w-0 flex-1 flex-col gap-8"
+    <div className="flex flex-col bg-ink" style={{ fontFamily }}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+      />
+      <main aria-label="Partner referral program" className="flex flex-col">
+        {/* Hero: the header's blue fades to black behind the copy. */}
+        <section className="relative overflow-clip desk:min-h-[540px] bg-[linear-gradient(180deg,var(--color-glow-top)_0%,var(--color-glow-1)_8%,var(--color-base)_48.5%,var(--color-ink-deep)_100%)] px-4 py-12 desk:px-10">
+          <div className="relative flex w-full items-end">
+            <Image
+              src="/media/referral/ghost-15.svg"
+              alt=""
+              aria-hidden="true"
+              width={828}
+              height={382}
+              priority
+              className="pointer-events-none absolute -top-[9.78px] -right-[67.3px] hidden h-[381.563px] w-[828.09px] max-w-none desk:block"
+            />
+            <div className="relative flex flex-col gap-7">
+              <h1 className="max-w-[620px] text-[48px] leading-[0.94] tracking-[-0.045em] text-fg desk:text-[88px]">
+                Apply to be a partner and earn 15%
+              </h1>
+              <p className="max-w-[560px] text-[17px] leading-[1.5] text-fg desk:text-[19px]">
+                If you are a VC, we prioritize your portfolio companies over other projects and
+                offer extra benefits, like free consultations for your founders.
+              </p>
+              <div className="flex flex-col gap-3 desk:flex-row">
+                <a
+                  href={`#${APPLY_ID}`}
+                  className={`${buttonBase} bg-accent-blue font-medium hover:brightness-110`}
+                >
+                  <span>APPLY AS A PARTNER</span>
+                  <Arrow />
+                </a>
+                <a
+                  href={links.bookCall}
+                  className={`${buttonBase} border border-line-input bg-surface-2 px-[19px] hover:bg-surface`}
+                >
+                  <span>QUICK INTRO CHAT</span>
+                  <Arrow />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Stats: 1px gaps over the line color draw the cell rules. */}
+        <div className="grid gap-px border border-line bg-line desk:grid-cols-3">
+          {stats.map((stat) => (
+            <div
+              key={stat.value}
+              className="flex flex-col gap-2.5 bg-ink px-4 pt-8 pb-9 desk:px-10"
+            >
+              <p className="text-[48px] leading-none tracking-[-0.04em] text-fg desk:text-[64px]">
+                {stat.value}
+              </p>
+              <p className="text-[15px] leading-[18px] text-fg">{stat.label}</p>
+              <p className="text-[13px] leading-[16px] text-faint">{stat.detail}</p>
+            </div>
+          ))}
+        </div>
+
+        <section
+          aria-labelledby="how-heading"
+          className="flex flex-col gap-12 px-4 pt-16 pb-20 desk:flex-row desk:px-10 desk:pt-24 desk:pb-28"
         >
-          {/* Bleeds past the shell's padding (left on mobile, right on
-              desktop) so hairlines run edge to edge and the sections' own
-              24px padding sets the text inset, as on case study pages. */}
-          <div className="-mx-4 flex flex-col gap-6 desk:mx-0 desk:-mr-5 desk:pb-6">
-            <CenterRuled>
-              <SectionShell heading="Warm introductions, shared results" contentInset="wide">
-                {referralOverview.map((paragraph) => (
-                  <p key={paragraph} className={bodyText}>
-                    <Emphasis text={paragraph} />
+          <div className="w-full desk:w-[437px] desk:shrink-0">
+            <LabelRow>How it works</LabelRow>
+          </div>
+          <div className="flex min-w-0 flex-1 flex-col gap-10">
+            <h2
+              id="how-heading"
+              className="text-[40px] leading-none tracking-[-0.04em] text-fg desk:text-[64px]"
+            >
+              Refer a company in one of <span className="text-faint">two ways.</span>
+            </h2>
+            <ol className="flex flex-col gap-4 desk:flex-row">
+              {methods.map((method, index) => (
+                <li
+                  key={method.title}
+                  className="flex min-h-[220px] flex-1 flex-col justify-between gap-10 rounded-[6px] border border-line bg-surface p-[27px] desk:h-[280px]"
+                >
+                  <p aria-hidden="true" className="font-mono text-[11px] leading-[14px] text-faint">
+                    {String(index + 1).padStart(2, "0")}
                   </p>
-                ))}
-              </SectionShell>
-            </CenterRuled>
-
-            {/* bottomRule off + -mb-6: the next section's top rule closes the
-                cells, the same hand-off ResultsBlock uses. */}
-            <div className="fade-up -mb-6 [animation-delay:300ms]">
-              <Metrics metrics={referralHighlights} bottomRule={false} />
-            </div>
-
-            <CenterRuled>
-              <SectionShell heading="Who can join" topRule contentInset="wide">
-                <p className={bodyText}>
-                  Anyone with a genuine relationship to a potential client. Most partners
-                  come from four groups.
-                </p>
-                <ContextRows
-                  items={partnerTypes.map((type) => ({
-                    label: type.label,
-                    text: `${type.who}. **Typical referral:** ${type.referral.charAt(0).toLowerCase()}${type.referral.slice(1)}.`,
-                  }))}
-                />
-                <p className="border-t-[0.5px] border-hairline pt-4 text-[14px] leading-[1.4] text-white/60">
-                  {eligibility}
-                </p>
-              </SectionShell>
-
-              <SectionShell heading="How it works" topRule contentInset="wide">
-                <p className={bodyText}>
-                  A referral moves from introduction to payout in six steps.
-                </p>
-                <Steps steps={referralSteps} />
-              </SectionShell>
-
-              <SectionShell heading="Commission tiers" topRule contentInset="wide">
-                <p className={bodyText}>
-                  <Emphasis text={commissionIntro} />
-                </p>
-                <p className={bodyText}>
-                  <Emphasis text={commissionNotes.tiers} />
-                </p>
-              </SectionShell>
-            </CenterRuled>
-
-            <div className="-mb-6">
-              <Metrics metrics={commissionTiers} bottomRule={false} />
-            </div>
-
-            <CenterRuled>
-              <SectionShell heading="What commission is paid on" topRule contentInset="wide">
-                <ContextRows
-                  items={[
-                    ...commissionScope,
-                    { label: "Worked example", text: commissionNotes.example },
-                    { label: "Option for VCs", text: commissionNotes.vc },
-                  ]}
-                />
-              </SectionShell>
-
-              <SectionShell heading="Partner perks and support" topRule contentInset="wide">
-                <p className={bodyText}>
-                  Beyond commission, we give you the tools to refer with confidence.
-                </p>
-                <ContextRows items={partnerPerks} />
-              </SectionShell>
-
-              <SectionShell heading="Payout terms" topRule contentInset="wide">
-                <p className={bodyText}>
-                  <Emphasis text={payoutIntro} />
-                </p>
-                <ContextRows items={payoutTerms} />
-              </SectionShell>
-
-              <SectionShell heading="Qualified referrals" topRule contentInset="wide">
-                <p className={bodyText}>
-                  <Emphasis text={qualifyIntro} />
-                </p>
-                <ContextRows items={qualifyRules} />
-                <p className="border-t-[0.5px] border-hairline pt-4 text-[14px] leading-[1.4] text-white/60">
-                  {qualifyNote}
-                </p>
-              </SectionShell>
-
-              <SectionShell heading="Partner conduct" topRule contentInset="wide">
-                <p className={bodyText}>{conductIntro}</p>
-                <ContextRows items={conductRules} />
-              </SectionShell>
-
-              <SectionShell heading="Program terms" topRule contentInset="wide">
-                <ContextRows items={programTerms} />
-              </SectionShell>
-
-              <SectionShell heading={referralFaqHeading} topRule contentInset="wide">
-                <CaseFaq items={referralFaq} />
-              </SectionShell>
-
-              {/* Application: copy left, form right, split on the center rule.
-                  scroll-mt-16 clears the sticky navbar when #apply is linked. */}
-              <section
-                id={APPLY_ID}
-                aria-labelledby="apply-heading"
-                className="scroll-mt-16 border-t-[0.5px] border-hairline"
-              >
-                <div className="grid desk:grid-cols-2">
-                  <div className="flex flex-col gap-6 p-6 desk:sticky desk:top-16 desk:self-start">
-                    <p className="font-mono text-[12px] uppercase leading-none tracking-wide text-white/40">
-                      Partner application
-                    </p>
-                    <h2
-                      id="apply-heading"
-                      className="max-w-[16ch] text-balance text-[24px] font-medium leading-tight tracking-display text-white desk:text-[48px]"
-                    >
-                      Apply to become a partner
-                    </h2>
-                    <Steps steps={joinSteps} />
-                    <p className="text-[14px] leading-[1.4] text-white/60">
-                      Questions before you apply?{" "}
-                      <a
-                        href={links.telegram}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
-                      >
-                        Message us on Telegram
-                      </a>
-                      .
-                    </p>
+                  <div className="flex flex-col gap-3.5">
+                    <h3 className="text-[28px] leading-[34px] tracking-[-0.04em] text-fg">
+                      {method.title}
+                    </h3>
+                    <p className="text-[16px] leading-[1.55] text-muted">{method.text}</p>
                   </div>
-                  <div className="border-t-[0.5px] border-hairline p-6 desk:border-t-0">
-                    <ReferralForm />
-                  </div>
-                </div>
-              </section>
-            </CenterRuled>
+                </li>
+              ))}
+            </ol>
           </div>
+        </section>
 
-          {/* Same wrapper as /clients: cancels the row's padding so Footer
-              fills the column via its own w-full. */}
-          <div className="-mx-4 -mb-4 desk:-mr-5 desk:-mb-5 desk:-ml-4">
-            <Footer />
+        {/* scroll-mt-16 clears the sticky navbar when #apply is linked. */}
+        <section
+          id={APPLY_ID}
+          aria-labelledby="apply-heading"
+          className="flex scroll-mt-16 flex-col gap-12 border-t border-line px-4 pt-16 pb-20 desk:flex-row desk:px-10 desk:pt-24 desk:pb-[120px]"
+        >
+          <div className="flex w-full flex-col gap-7 desk:w-[437px] desk:shrink-0">
+            <LabelRow index="III">Partner application</LabelRow>
+            <h2
+              id="apply-heading"
+              className="max-w-[384px] text-[40px] leading-[0.98] tracking-[-0.04em] text-fg desk:text-[48px]"
+            >
+              Apply to become a partner
+            </h2>
           </div>
-        </main>
-      </div>
+          <div className="min-w-0 flex-1">
+            <ReferralForm />
+          </div>
+        </section>
+      </main>
+      <ReferralFooter />
     </div>
   );
 }

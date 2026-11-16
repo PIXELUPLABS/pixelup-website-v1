@@ -40,8 +40,8 @@
       "headingSize": "string prop, Tailwind class override for desktop heading size (default desk:text-[30px]).",
       "headingFontClassName": "string prop, extra className applied only to the <h1> — e.g. a next/font className to swap the heading's font on a single page without touching the site-wide font-display.",
       "variant": "default keeps the shared 405px sidebar and standard hero rhythm; clients uses the supplied Figma proportions: a responsive 431px desktop sidebar, 32px heading/description gap, 40px desktop heading, and 16px description.",
-      "primaryCta": "optional { label, href }, passed to CtaButtons' primary prop so the sidebar's accent button is the page's one primary action instead of competing with it.",
-      "testimonials": "Testimonial[] prop (lib/testimonials.ts). When set, a TestimonialSlider renders directly below TrustedStrip and above CtaButtons. /yc passes ycTestimonials."
+      "testimonials": "Testimonial[] prop (lib/testimonials.ts). When set, a TestimonialSlider renders directly below TrustedStrip. /call passes callPageTestimonials.",
+      "showCtaButtons": "boolean prop, default true. /call sets it false: the page is already the booking embed, so the sidebar ends on the ticker + testimonial card instead of a competing action."
     },
     "states": {
       "entrance": "fade-up animation on mount, staggered via inline animation-delay per child block."
@@ -126,22 +126,44 @@
   "CtaButtons": {
     "file": "components/CtaButtons.tsx",
     "category": "interactive",
-    "description": "The paired 'Chat on Telegram' + 'Start a Conversation' buttons.",
+    "description": "The stacked 'Chat on Telegram' button and the BookCallForm (email field + 'Book a call' submit).",
     "variants": {
-      "telegramSolidBlack": "boolean prop. false (default) = translucent color.neutral.button-dark with a hover lighten (used in LeftNav/CaseSidebar). true = solid black, no hover lighten (used in Footer).",
-      "primary": "optional { label, href }. Replaces the accent BOOK A CALL button with the page's own primary action (/referral: APPLY AS A PARTNER → #apply). In-page hrefs open in the same tab; http(s) hrefs keep target=_blank."
+      "telegramSolidBlack": "boolean prop. false (default) = translucent color.neutral.button-dark with a hover lighten (used in LeftNav/CaseSidebar). true = solid black, no hover lighten (used in Footer)."
     },
     "states": {
       "telegram:default": "bg-button-dark",
       "telegram:hover": "bg-white/12 (or stays black if telegramSolidBlack)",
-      "start-conversation:default": "bg-accent",
-      "start-conversation:hover": "brightness-110"
+      "book-call": "see BookCallForm"
     },
     "tokens_used": ["color.brand.accent", "color.neutral.button-dark", "radius.sm"],
-    "when_to_use": "Anywhere the site's two primary CTAs need to appear together (currently: LeftNav, CaseSidebar, Footer).",
+    "when_to_use": "Anywhere the site's two primary CTAs need to appear together (currently: LeftNav, CaseSidebar, BlogSidebar, BlogPostSidebar).",
     "do_not": [
-      "Don't change 'Start a Conversation' back into an internal <Link> to /call — it deliberately opens links.discoveryCall (an external Cal.com URL) in a new tab now.",
-      "Don't add a third button here — it's built for exactly two, laid out with flex-1 each."
+      "Don't turn 'Book a call' back into a plain link — it is the BookCallForm, which opens the Cal.com popup with the visitor's email prefilled.",
+      "Don't add a third CTA here — it's built for exactly two, stacked full width.",
+      "Import ctaButtonBase/ctaButtonPadding from components/cta-button-styles.ts in new code; CtaButtons only re-exports them for older importers."
+    ]
+  },
+
+  "BookCallForm": {
+    "file": "components/BookCallForm.tsx",
+    "category": "interactive",
+    "description": "One-row form: email field (color.neutral.button-dark fill) with the accent 'Book a call' submit on its right. Submitting opens the Cal.com booking popup (@calcom/embed-react modal, namespace 'discovery-popup') with the email prefilled.",
+    "variants": {
+      "label": "Button text. Defaults to 'BOOK A CALL' (sidebar); EndCta passes the case study's endCta.label.",
+      "bookingUrl": "cal.com booking URL. Defaults to links.discoveryCall; its path becomes the embed calLink."
+    },
+    "states": {
+      "input:focus": "0.5px color.brand.accent border",
+      "empty-submit": "Opens the popup without a prefill (email is optional).",
+      "invalid-email": "Blocked by the browser's type=\"email\" validation; no popup.",
+      "embed-blocked": "If Cal's embed.js fails to load, opens the hosted booking page in a new tab with ?email= instead.",
+      "submissions": "A non-empty email is also POSTed (fire-and-forget) to /api/book-call, which appends it with the page path to the 'Book a call' tab of the Website Leads Google Sheet (lib/leads-sheet.ts → scripts/apps-script/WebsiteLeads.gs). The popup never waits on it."
+    },
+    "tokens_used": ["color.brand.accent", "color.neutral.button-dark", "color.neutral.white", "radius.sm"],
+    "when_to_use": "Every 'Book a call' CTA: inside CtaButtons and the mobile case-study EndCta.",
+    "do_not": [
+      "Don't reuse the 'discovery' namespace — that belongs to the inline CalEmbed on /call.",
+      "Don't load the Cal embed on page load; it warms on the form's first focus or pointer enter."
     ]
   },
 
@@ -172,10 +194,10 @@
     "variants": ["none"],
     "states": ["continuous CSS marquee animation, no interactive states"],
     "tokens_used": ["color.neutral.label-grey", "--animate-marquee (app/globals.css)"],
-    "when_to_use": "Inside LeftNav and CaseSidebar, immediately above CtaButtons.",
+    "when_to_use": "Inside LeftNav and CaseSidebar, immediately above CtaButtons — or, on /call (no CTAs), immediately above TestimonialSlider.",
     "do_not": [
       "Don't add a logo to only one of the two duplicated blocks — both copies must stay identical or the loop will visibly jump.",
-      "The first copy carries real alt text; the duplicate is aria-hidden — keep that split when adding logos."
+      "Both copies carry the same real alt text (Bing's site scan reports alt=\"\" as missing); the duplicate's wrapper is aria-hidden so screen readers read the logos once — keep that when adding logos."
     ]
   },
 
@@ -199,7 +221,7 @@
       "typography.size.14 (quote, name), typography.size.12 (role)",
       "@keyframes testimonial-progress (app/globals.css)"
     ],
-    "when_to_use": "Through LeftNav's testimonials prop, where it sits directly below TrustedStrip. /call (which also drops CtaButtons) and /yc (which drops TrustedStrip, since the roster is the proof, and keeps CtaButtons).",
+    "when_to_use": "Through LeftNav's testimonials prop, where it sits directly below TrustedStrip. Currently /call only, which also drops CtaButtons.",
     "do_not": [
       "When a quote's wording is adapted, keep the Contra original in a comment beside it (see Greptile) so the attributed text can always be checked against what the client wrote.",
       "Don't size the card to the active slide. All slides share one grid cell so the card holds the tallest quote's height and the sidebar never jumps between quotes. Mind that height when adding a long quote: the card is sized by the longest one, and the /call sidebar is a fixed viewport-height column.",
@@ -240,7 +262,7 @@
   "Footer": {
     "file": "components/Footer.tsx",
     "category": "layout",
-    "description": "Site footer: four columns (brand/copyright, Quick Links, Case Studies, newsletter blurb + NewsletterForm) over a full-width Union wordmark row.",
+    "description": "Site footer: four columns (brand/tagline + copyright, Quick Links with SocialLinks pinned below, Case Studies, newsletter blurb + NewsletterForm with Privacy Policy pinned below) over a full-width Union wordmark row.",
     "status": "Live. Rendered on app/page.tsx, app/blog/page.tsx, app/explorations/page.tsx, app/call/page.tsx, blog/BlogPostPage.tsx and case-study/CaseStudyPage.tsx.",
     "variants": ["none"],
     "states": {
@@ -258,7 +280,7 @@
   "ArticleFilters": {
     "file": "components/blog/ArticleFilters.tsx",
     "category": "interactive",
-    "description": "\"Filter\" (category pills: All/Branding/Design/Development) + \"Display\" (List/Grid pills) row on /blog.",
+    "description": "\"Filter\" category pills on /blog: All, then every category the posts carry (Sanity `category` docs, most-used first, via blogCategories in sanity/lib/blog-utils.ts). Filters BlogList client-side through BlogFilterContext. The \"Display\" (List/Grid) row is commented out.",
     "variants": ["Display column is hidden on mobile (desk:flex only) — only Filter shows there."],
     "states": {
       "pill:default": "bg-white text-black",
@@ -266,7 +288,7 @@
       "pill:hover (inactive only)": "bg-white/80"
     },
     "tokens_used": ["color.brand.accent", "radius.lg", "color.neutral.white"],
-    "when_to_use": "Top of /blog only, currently a visual/interactive placeholder — it doesn't yet actually filter the article list below it.",
+    "when_to_use": "Top of /blog only. Add or rename categories in Sanity, not here: the pill list is derived from the posts, so a category no post uses doesn't get a pill.",
     "do_not": [
       "Don't add a flex `gap` between the two columns without removing their percentage widths (or vice versa) — gap + width summing to 100% overflows the row. Use flex-1 if a gap is needed, matching the fix already applied here."
     ]
@@ -276,20 +298,22 @@
     "file": "components/blog/BlogImage.tsx",
     "category": "content",
     "description": "Shared Next Image adapter for the temporary local blog-image fallback and Sanity image assets, including hotspot crops and LQIP placeholders.",
-    "variants": ["fill for fixed card frames", "intrinsic width and height for article heroes"],
+    "variants": ["fill for fixed card frames", "intrinsic width and height for article heroes", "in-article image: the blogBody `articleImage` block, rendered by BlogPostPage as a figure at the source's own aspect ratio (max 1600px wide) with a 0.5px hairline border and an optional caption + source-site link"],
     "states": ["legacy local source", "Sanity CDN source", "Sanity blur placeholder when LQIP metadata exists"],
-    "tokens_used": [],
-    "when_to_use": "For blog index cards, article heroes, and related-article cards. It keeps image behavior identical while the CMS source is switched.",
+    "tokens_used": ["color.neutral.hairline (in-article image border)", "color.neutral.label-grey (in-article caption)"],
+    "when_to_use": "For blog index cards, article heroes, related-article cards, and images inside an article body (the `articleImage` block). It keeps image behavior identical while the CMS source is switched.",
     "do_not": [
       "Don't build Sanity CDN URLs directly in page components; pass the normalized BlogImage value here.",
-      "Don't omit the sizes prop when using fill, because Next Image needs it for correct responsive selection."
+      "Don't omit the sizes prop when using fill, because Next Image needs it for correct responsive selection.",
+      "Don't pass alt=\"\" for a Sanity image: omit alt so the image's own Sanity alt is used. An explicit empty alt overrides it, and Bing's site scan reports it as missing.",
+      "Don't publish an in-article screenshot of a third-party site without its alt text, caption, `sourceUrl` and `capturedOn` date."
     ]
   },
 
   "ExplorationGallery": {
     "file": "components/explorations/ExplorationGallery.tsx",
     "category": "interactive",
-    "description": "Renders the /explorations image list (full-width and 50/50-pair blocks) plus the Grid/Zoom toggle, plus a click-to-expand lightbox (framer-motion fade/scale, backdrop blur, prev/next arrows, Escape/arrow-key nav, body scroll lock).",
+    "description": "Renders /explorations as a full-bleed infinite canvas: images scattered over a repeating tile that wraps in both axes, panned by wheel/trackpad or pointer drag with eased inertia, per-card velocity lag, pointer-follow parallax, a hover zoom/dim, and a staggered intro. Tabbing to a card glides it to center. Plus a click-to-expand lightbox (framer-motion fade/scale, backdrop blur, prev/next arrows, Escape/arrow-key nav, body scroll lock).",
     "variants": ["blocks prop: { kind: \"full\", src } | { kind: \"pair\", srcs: [a, b] }, ordered top-to-bottom exactly as rendered."],
     "states": {
       "view:grid": "Default. Derived (not separately tracked) from whether the lightbox is closed.",
@@ -310,11 +334,12 @@
     "description": "Case study Q&A section wrapper: uppercase heading in the left half, full-width hairline rule, content in the right half (aligned to the vertical center rule).",
     "variants": {
       "topRule": "boolean. Adds a full-width hairline above the section (used for the FAQ block).",
-      "headingSize": "default keeps the 48px desktop heading; compact uses 32px and small uses 24px for longer headings that must stay within two lines."
+      "headingSize": "default keeps the 48px desktop heading; compact uses 32px and small uses 24px for longer headings that must stay within two lines.",
+      "contentInset": "compact (default) keeps the 12px desktop side padding from the Figma template (legacy case studies); wide uses 24px so story-layout sections line up with the challenge, testimonial and metric rows."
     },
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline", "typography.tracking.display-tight", "breakpoint.desk"],
-    "when_to_use": "Case study pages, and /referral (same 405px LeftNav sidebar, so the 50/50 split still lines up), for the repeated 'heading left / content right' Q&A pattern (including the FAQ block).",
+    "when_to_use": "Case study pages only, for the repeated 'heading left / content right' Q&A pattern (including the FAQ block).",
     "do_not": [
       "Don't reuse this for a full-width section — it hardcodes a 50/50 desktop split matched to the case study sidebar layout. The blog page's FAQ section deliberately does NOT use this for exactly that reason; it builds its own full-width heading + content stack instead."
     ]
@@ -330,7 +355,7 @@
       "item:closed": "grid-rows-[0fr], opacity 0, but stays in the DOM (not unmounted)."
     },
     "tokens_used": ["color.neutral.hairline (divide-y)", "typography.size.16"],
-    "when_to_use": "Case study pages (via SectionShell) and the /blog page (standalone, full width) — same shared FAQ content (lib/case-studies.ts pixelupFaq) and matching FAQPage JSON-LD schema on both. BlogFaq (components/blog/BlogFaq.tsx) wraps it; its items prop defaults to pixelupFaq, and /yc passes ycFaq (lib/yc.ts) and emits its own FAQPage JSON-LD from the same list. BlogFaq layouts: the default 45/55 split (bleed prop on the homepage), and grid (/yc): SplitHeader on the bleed edge like every section above it, the heading row (eyebrow + 48px H2, right half empty), a full-width rule, then the accordion in the right half, with a bottom rule that closes the centre rule. grid drops the faq-bg texture, which no other /yc section has. grid also takes eyebrow (a SectionIndex above the heading) and marks (RegMarks), both on /yc.",
+    "when_to_use": "Case study pages (via SectionShell) and the /blog page (standalone, full width) — same shared FAQ content (lib/case-studies.ts pixelupFaq) and matching FAQPage JSON-LD schema on both. BlogFaq (components/blog/BlogFaq.tsx) wraps it; its items prop defaults to pixelupFaq, and /yc passes ycFaq (lib/yc.ts) and emits its own FAQPage JSON-LD from the same list. BlogFaq layouts: the default 45/55 split, and grid (/yc): SplitHeader on the bleed edge like every section above it, the heading row (eyebrow + 48px H2, right half empty), a full-width rule, then the accordion in the right half, with a bottom rule that closes the centre rule. grid drops the faq-bg texture, which no other /yc section has. grid also takes eyebrow (a SectionIndex above the heading) and marks (RegMarks), both on /yc.",
     "do_not": [
       "Don't put the heading (<h3>) inside the <button> — headings cannot legally nest inside button elements. It wraps the button instead."
     ]
@@ -369,12 +394,14 @@
   "ClientInfo": {
     "file": "components/case-study/ClientInfo.tsx",
     "category": "content",
-    "description": "Client / Year / Involvement / optional Funding / Link rows with hairline dividers. Lives in CaseSidebar on desktop, under the title on mobile. One or more external links may share the final row.",
+    "description": "Client / Year / Involvement / optional Funding / Link rows with hairline dividers. Lives in CaseSidebar on desktop, under the title on mobile. One or more external links may share the Link row. No Published / Updated rows: a study's dates live only in its Article JSON-LD and the sitemap.",
     "variants": ["funding row renders only when supplied", "single link uses the label Link; multiple links use Links and stack vertically"],
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline"],
     "when_to_use": "Case study pages only.",
-    "do_not": []
+    "do_not": [
+      "Don't add visible Published / Updated rows back; case study dates are schema-only."
+    ]
   },
 
   "MoreProjects": {
@@ -400,7 +427,7 @@
   "CaseStudyStory": {
     "file": "components/case-study/CaseStudyStory.tsx",
     "category": "content",
-    "description": "Richer editorial renderer for a case study with a proof-led hero, blog-style YC/funding status tag, context, critical challenges, work snapshots, gallery, results, approval-aware testimonial, after-launch narrative, process FAQ, related work and the Brand Perception CTA. It composes the existing CaseMediaBlock, SectionShell, CaseFaq, ClientInfo, MoreProjects and AuditForm components. Also exports Metrics (hairline metric strip) and ContextRows (hairline label + text rows), which /referral reuses.",
+    "description": "Richer editorial renderer for a case study with a proof-led hero, blog-style YC/funding status tag, context, critical challenges, work snapshots, gallery, results, approval-aware testimonial, after-launch narrative, process FAQ, related work and the Brand Perception CTA. It composes the existing CaseMediaBlock, SectionShell, CaseFaq, ClientInfo, MoreProjects and AuditForm components.",
     "exports": "Metrics (hairline-divided metric cells, CaseMetric[]) is exported for reuse. Its edge prop: \"inset\" (default) pads every cell 24px; \"flush\" drops the outer cells' outer padding so a four-metric band lines up with a LeftNav-shell column; \"bleed\" keeps those text positions inside a wrapper that carries SectionRows' bleedMargin, so the band's rules meet the LeftNav divider and the viewport edge, as on /yc (exactly four metrics for both). In that column at 1200px a cell holds about five characters at 48px, so the widest value goes first and takes no '+'.",
     "variants": [
       "CaseStudy.story drives a discriminated union of context, media, challenge, gallery, results, testimonial and afterLaunch blocks"
@@ -409,6 +436,7 @@
       "testimonial uses the left column for its section heading and the right column for the body-scale quote and attribution",
       "testimonial without a heading is a quiet row (label left, quote right) for directly after results: the results block drops its bottom rule so the testimonial's top hairline closes the metrics",
       "hero highlights and results metrics are both optional: without highlights the headline runs straight into the hero media; results without metrics is its heading alone, so a headingless testimonial below it reads as the result (Henry Labs)",
+      "copy tones are per story: one `**phrase**` anywhere in the blocks mutes body copy (muted-65, white highlights) and lifts row labels to white; a story without markers keeps white body copy under white/60 labels (Streamline)",
       "testimonial approvalPending renders an explicit prototype-only label so draft client copy cannot be mistaken for approved copy"
     ],
     "tokens_used": [
@@ -484,7 +512,7 @@
     "variants": ["none — the clients prop supplies the ordered roster"],
     "states": ["static server-rendered list"],
     "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.font.display", "breakpoint.desk"],
-    "when_to_use": "Once on app/clients/page.tsx, and on app/yc/page.tsx with the YC subset (lib/yc.ts swaps each fundingNote for a YC batch line, and adds a FuseAI row while lib/clients.ts has none), where it sits under a SplitHeader and a desk-only top rule with the bleed prop: the labels and rows pad SectionRows' bleedMargin back, so row hairlines meet the LeftNav divider and the viewport edge.",
+    "when_to_use": "Once on app/clients/page.tsx.",
     "do_not": ["Don't reuse Showcase or ProjectCard for the roster — those components are media-led portfolio entries, while this is an information-led client archive."]
   },
 
@@ -492,71 +520,271 @@
     "file": "components/clients/ClientRow.tsx",
     "category": "content",
     "description": "One hairline-separated client entry with 25px top padding and 40px bottom padding at every viewport. Desktop uses three aligned columns: the dominant logo column, Niche, and What we did. Both text columns render at 60% white opacity. Mobile stacks the same content, preserves the approved 10px logo-to-niche gap, and keeps explicit Niche and What we did labels. Approved vectors render pure white inside optically audited contain frames, preserving their original aspect ratios without transform scaling. Vertera Health and Conigma are intentional color exceptions. Vertera preserves its white wordmark and outer icon with black petals against the white icon background. Conigma preserves its original wordmark shape in white, with a white rounded icon tile and black inner star. The default frame remains 134.4px by 24px. Per-logo width changes are applied to the rendered mark—not merely to unused frame space—by pairing each requested width with a sufficient proportional height in logoFrameClassBySlug. The current optical adjustments cover Autumn Pricing, Bland, CTGT, Conigma, DayFlow, Greptile, Henrylabs, Lasting Learn, NFA, Pogo, Reducto, Revyl, Sainapse, Streamline, Sully, Synthio Labs, Umbra, Vertera Health, Zenact, and Jumbo. Grovio currently uses the established accessible duplicated-logo placeholder because its SVG was not included. The final three engagement words stay together to prevent widow lines. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
-    "variants": ["approved logo vs duplicated-logo placeholder", "bleed (via ClientRoster): each row takes SectionRows' bleedMargin and pads it back, so its top hairline runs from the LeftNav divider to the viewport edge while the three columns stay where they were", "dense (/yc BatchProgramme): one short line per company. Logo | niche | funding note (the latest round, right-aligned, white; an em dash when none) with no engagement line, 20px vertical padding, no top rule on a group's first row. From desk the row is three equal columns of BatchProgramme's 3/4 cell, each padded 24px, so logo, niche and round start on the page's quarter lines (the same lines as the 4-up Metrics bands); the round is left-aligned on the last one. Below desk: the logo, then niche and round on one line."],
+    "variants": ["approved logo vs duplicated-logo placeholder", "dense (/yc BatchProgramme): one short line per company. Logo | niche | funding note (the latest round, right-aligned, white; an em dash when none) with no engagement line, 20px vertical padding, no top rule on a group's first row. From desk the row is three equal columns of BatchProgramme's 3/4 cell, each padded 24px, so logo, niche and round start on the page's quarter lines (the same lines as the 4-up Metrics bands); the round is left-aligned on the last one. Below desk: the logo, then niche and round on one line."],
     "states": {"entrance": "fade-up stagger capped at 600ms"},
     "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "spacing.base", "breakpoint.desk"],
     "when_to_use": "Inside ClientRoster only, driven by lib/clients.ts.",
     "do_not": ["Don't substitute a different company's logo for Grovio as if it were approved; replace its accessible placeholder when the real SVG arrives.", "Don't replace the width variants with transform scaling; width-only sizing preserves the requested 24px height and 10px gap.", "Don't apply the pure-white filter to Vertera Health or Conigma because it removes the contrast inside their icon marks.", "Don't remove the shared contain frame, pure-white treatment for the other logos, or per-logo width adjustments without rechecking every supplied logo together.", "Don't remove the final three-word nowrap group without rechecking the roster for one- or two-word widow lines."]
   },
 
-  "ReferralForm": {
-    "file": "components/referral/ReferralForm.tsx",
+  "AuditLeadMagnet": {
+    "file": "components/blog/AuditLeadMagnet.tsx",
     "category": "interactive",
-    "description": "Partner application form for /referral. Hairline-underline fields (NewsletterForm treatment), ArticleFilters-style pills as real radio groups, accent checkboxes, inline validation that focuses the first invalid field, and a success state. submitPartnerApplication currently console.logs the payload; swap its body for an API call when the backend exists.",
-    "variants": ["none"],
+    "description": "Brand perception audit popup on /blog/[slug]. AuditForm's gradient + 10% pattern panel and a Daksh byline (photo avatar, public/media/daksh-avatar.jpg) on the left (a short band on top on mobile), a one-line 'Do you look enterprise-ready?' headline, then name / work email / website fields and the black audit button on a light (white) column: the one light surface on an otherwise dark-only site, so it stands apart from the article behind it. The dialog has no border. The gradient PNG is 80% opaque, so the panel keeps its black (color.neutral.base) backing; only the copy column is white. Posts to /api/audit-lead, which appends name, email, website and the article path to the 'Brand Audit Lead Magnet' tab of the Website Leads sheet (lib/leads-sheet.ts → scripts/apps-script/WebsiteLeads.gs).",
+    "variants": [
+      "none — responsive only: centered 760px dialog from desk up, full-width bottom sheet below it"
+    ],
     "states": {
-      "field:error": "Red underline + message under the field, cleared as soon as the field is edited.",
-      "submitting": "Fields and button disabled, label SUBMITTING….",
-      "success": "Form replaced by a confirmation message with a Submit another application link.",
-      "submit:error": "Inline Something went wrong under the button."
+      "hidden": "Default. Opens on exit intent only, once per page view, after 5s on the page. Fine pointers: the pointer leaves through the top edge (trigger 'exit_intent'). Touch screens: the page flicks back up by 75% of a screen within 300ms (trigger 'exit_intent_mobile').",
+      "suppressed": "localStorage 'pixelup:audit-popup': a dismissal keeps it away for 7 days, a submission for good.",
+      "forced": "?audit-popup=1 opens it on load for review, ignoring storage and skipping DataFast goals.",
+      "idle / submitting / error": "NewsletterForm's field treatment flipped for the light card: a black/20 underline (a 10% hairline all but disappears at 0.5px on white), accent on focus-within, black text with black/50 placeholders. Autofilled text is forced to color.neutral.base, since globals.css paints it white site-wide. Error copy in red-600 (red-400 is under 3:1 on white).",
+      "success": "Thank-you copy with the submitted email, plus a light 'Back to the article' button (black/[0.06] fill)."
     },
-    "tokens_used": ["color.neutral.hairline", "color.brand.accent", "color.neutral.button-dark", "color.neutral.label-grey", "color.neutral.muted-65"],
-    "when_to_use": "Once, in the #apply section of app/referral/page.tsx.",
+    "tokens_used": [
+      "color.neutral.white (card surface; byline text on the gradient panel)",
+      "color.neutral.base (text, as black; black/60 for secondary copy and labels, the dark theme's white/60 step flipped)",
+      "color.neutral.scrim",
+      "color.brand.accent (field focus only)",
+      "radius.sm",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "Blog posts only, mounted once in app/blog/[slug]/page.tsx.",
     "do_not": [
-      "Don't add another primary CTA on /referral; the sidebar's APPLY AS A PARTNER button links to this form and is the same action.",
-      "Don't swap the visible labels for placeholder-only fields; the form is long and placeholders vanish on input."
+      "Don't mount it on more routes without deciding the trigger rules for them — it's tuned for long-form reading.",
+      "Don't recolor the submit to color.brand.accent — the audit keeps the inverse of AuditCta's white colorway (black on the light card).",
+      "Don't add a box-shadow or border to lift it — the scrim behind the gradient panel and the white column does that job."
+    ],
+    "analytics": "DataFast goals audit_popup_shown (with trigger), audit_popup_dismissed, audit_popup_submitted — each with the page path."
+  },
+
+  "SectionNav": {
+    "file": "components/SectionNav.tsx",
+    "category": "interactive",
+    "description": "In-page section index with scroll-spy (the last section whose top has passed 30% of the viewport is active). Smooth-scrolls on click unless reduced motion is on, and keeps the hash via replaceState, same as AuditNavCta.",
+    "variants": {
+      "list": "Desktop sidebar: hairline-divided rows in ClientInfo's rhythm (px-5 py-3, 14px), mono index, square color.brand.accent marker on the active row. Optional per-item count (mono 12px white/40) before the marker, used on /swipe.",
+      "strip": "Mobile only (desk:hidden): sticky under the Navbar (top-16), horizontal scroll of the /case-studies NichePill look, active pill in color.brand.accent and centered within the strip."
+    },
+    "states": {
+      "item:default": "list: text-white/60, index white/40; strip: dashed hairline border, text-white/40",
+      "item:hover": "list: text-white; strip: bg-button-dark",
+      "item:active": "aria-current=\"location\". list: text-white + accent marker; strip: bg-accent text-white"
+    },
+    "tokens_used": [
+      "color.brand.accent",
+      "color.neutral.hairline",
+      "color.neutral.button-dark",
+      "typography.font.mono",
+      "typography.font.button",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "Long single pages with named sections (currently /swipe). Sections need matching ids and a scroll-mt that clears the Navbar (and any sticky strip below desk).",
+    "do_not": [
+      "Don't call scrollIntoView on the active pill — it scrolls the page as well as the strip. The strip scrolls itself with scrollTo.",
+      "Don't render the strip on desktop; the sidebar list covers it there."
     ]
   },
 
-  "SectionRows": {
-    "file": "components/SectionRows.tsx",
-    "category": "layout",
-    "description": "SectionHeader (label and optional '01 / 06' counter on the left half, H2 and lead copy on the right), SplitHeader (case study SectionShell's header: H2 in the left half, full-width hairline, lead copy in the right half) and DetailRow (14px white/60 label | 16px content), on the case-study centre rule. ChallengeBlock's geometry, moved out of ServiceSection so the homepage and case studies can use it without the /services code.",
-    "variants": {
-      "edge": "\"inset\" (default) pads every cell 24px for a full-bleed main (case studies, /services). \"flush\" drops the outer side padding to line up with a LeftNav-shell column. \"bleed\" keeps flush's text positions, but the section takes `bleedMargin` (desk:-ml-4 desk:-mr-5) so its hairlines run from the shell divider to the viewport edge with no gap; the cells pad that back (homepage ProcessSection, and every section on /yc, where each horizontal rule has to meet the LeftNav divider and the viewport edge). SplitHeader without children renders the heading row alone, its eyebrow prop puts a label above the H2, and its aside prop fills the heading row's right half (bottom-aligned on the H2's last line from desk, a child with desk:mb-auto rises to the top line; stacked under the H2 below desk). /yc uses it only for 02's lead and link; 05 and 06 keep the heading row's right half empty and put their content in the children row under it (Arjun, 2026-11-16: more white space, more readable); labelPadding and contentPadding are exported for sections that build their own cells (BlogFaq grid).",
-      "SectionIndex": "'01 — Raised': 12px uppercase mono, the number white and the name white/40. /yc numbers every section with it, passed as SplitHeader's eyebrow (and ProcessSection's and BlogFaq's).",
-      "RegMarks": "11px hairline crosses (white/50) where a bleed section's top rule meets the LeftNav divider and the centre rule, desk only. The section needs relative and the bleed edge. No mark at the right edge, which would overflow the viewport. ProcessSection and BlogFaq (grid) take a marks prop for it."
+  "SwipeExplorer": {
+    "file": "components/swipe/SwipeExplorer.tsx",
+    "category": "interactive",
+    "description": "The whole /swipe tool on one state model. Desk: the 405px sticky sidebar holds the server-rendered intro slot, search (⌘K / '/'), Platform and Category pills, a Creator chip when one is selected, Clear filters, the SectionNav index (Posts / Creators with counts) and the MADE BY PIXELUP LABS button pinned to the bottom. Below desk the intro sits in flow and the controls move to a sticky filter strip under the Navbar (toggle pills, a search row, a 'Creators 93' jump). Main: #posts (FeedBar with H2, live count and Newest / Most liked sort; or the creator profile header when a creator is selected), a 1 / 2 / 3-column hairline grid paginated 24 at a time with the HTML hidden attribute (all 189 summaries stay in the server HTML), then #creators (all 93 as dense rows, never paginated), then the page's children (DirectoryBadges + Footer). Cards open SwipePostViewer. URL state: ?post=<id> (pushState on open, replaceState on prev/next, popped on close) and ?creator=<id> (replaceState), read once after hydration and on popstate.",
+    "status": "Local draft (/swipe stays local until approved).",
+    "variants": ["none"],
+    "states": {
+      "pill:default": "Dashed hairline border, text-white/40 (ArticleFilters' pill).",
+      "pill:active": "bg-button-dark text-white, aria-pressed. Never accent.",
+      "search:focus": "Hairline border lifts to white/40.",
+      "profile": "creatorId set: profile header (CreatorMonogram lg, name, role/@handle, '30 posts · 65K likes when picked · since 2022', profile circles, prev/next creator, sort) replaces the FeedBar.",
+      "empty": "One row per list: 'No posts match …' + Clear filters + 'Try a creator:', or the profile's 'has no {Category} posts on {Platform}' line + Show all."
     },
-    "states": ["none"],
-    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.tracking.display-tight", "typography.font.mono", "breakpoint.desk"],
-    "when_to_use": "Any label | content section: /services, /yc, ProcessSection.",
+    "tokens_used": [
+      "color.neutral.hairline",
+      "color.neutral.button-dark",
+      "color.neutral.label-grey",
+      "typography.font.mono",
+      "typography.font.button",
+      "breakpoint.desk"
+    ],
+    "when_to_use": "app/swipe/page.tsx only, fed by lib/swipe/posts.ts and lib/swipe/creators.ts.",
     "do_not": [
-      "Don't import these from components/services/ServiceSection in new code; that file stays local with /services.",
-      "Don't use \"bleed\" outside the LeftNav shell (p-5 row, mx-4 divider): bleedMargin undoes exactly those values."
+      "Don't use color.brand.accent for pills or tags; on /swipe the accent is SectionNav's marker and the viewer's Copy prompt only.",
+      "Don't render a creator's own post text. Cards show our title + summary; the real post appears only through the official embed in SwipePostViewer.",
+      "Don't read searchParams in app/swipe/page.tsx: the route must stay static, URL state is client-side here."
+    ]
+  },
+
+  "SwipePostCard": {
+    "file": "components/swipe/SwipePostCard.tsx",
+    "category": "content",
+    "description": "One post cell, content only (the grid draws the rules): CreatorMonogram + name (z-10 button that selects the creator) + handle/role, a mono eyebrow 'Format / Hook' with 'New · Oct 19' or 'Sep 2025' on the right, our 2-line title, our 2-line summary, and a footer with the 'View post' cue (platform glyph) and likes at pick time. The title button's stretched ::after makes the whole cell open the viewer.",
+    "status": "Local draft.",
+    "variants": ["none"],
+    "states": {
+      "hover/focus-visible": "Cell fills bg-button-dark; 'View post' lifts to white.",
+      "new": "Posts within 14 days of the newest pick show 'New' in white (not accent)."
+    },
+    "tokens_used": ["color.neutral.button-dark", "color.neutral.label-grey", "typography.font.mono", "typography.font.button"],
+    "when_to_use": "Inside SwipeExplorer's post grid only.",
+    "do_not": [
+      "Don't add a border or radius; the grid owns the rules.",
+      "Don't put per-card Open post / Copy prompt links back: they live in the viewer."
+    ]
+  },
+
+  "SwipeCreatorCard": {
+    "file": "components/swipe/SwipeCreatorCard.tsx",
+    "category": "content",
+    "description": "One dense creator row (~68px): CreatorMonogram, name, and '{N} posts · @handle' (or role). The whole row toggles that creator's filter via the name button's stretched ::after. id=creator-<slug> is a plain anchor. Profile links live in the profile header and the viewer, and as sameAs in the page JSON-LD.",
+    "status": "Local draft.",
+    "variants": ["none"],
+    "states": {
+      "selected": "bg-button-dark fill, aria-pressed on the button."
+    },
+    "tokens_used": ["color.neutral.button-dark", "color.neutral.label-grey"],
+    "when_to_use": "Inside SwipeExplorer's creator grid only.",
+    "do_not": ["Don't swap the monogram for photos without asking: initials-only was an explicit decision."]
+  },
+
+  "SwipePostViewer": {
+    "file": "components/swipe/SwipePostViewer.tsx",
+    "category": "interactive",
+    "description": "The post viewer on the shared Dialog. Desk: 960×800 panel, 360px info column (creator row with profile circles, 20px title, 'What it covers', Category / Format / Opening move / Picked rows) beside the embed well; header bar with prev/next circles (the explorations lightbox style), '12 / 189' counter and close. Below desk: a bottom sheet with one scroll body and a pinned action bar. Actions: COPY PROMPT (the page's single accent CTA, lib/swipe/format.ts buildPrompt) and Open on X/LinkedIn. ←/→ step through the list the viewer opened from, wrapping at the ends.",
+    "status": "Local draft.",
+    "variants": ["desk centred panel", "mobile bottom sheet"],
+    "states": {
+      "copied": "Button reads PROMPT COPIED for 2s; announced via an sr-only aria-live span."
+    },
+    "tokens_used": ["color.brand.accent", "color.neutral.hairline", "color.neutral.label-grey", "color.neutral.scrim", "radius.full"],
+    "when_to_use": "Once, inside SwipeExplorer.",
+    "do_not": ["Don't show our stored like/comment counts next to a live embed (the embed has live ones); they appear only in the embed fallback, labelled 'when picked'."]
+  },
+
+  "SwipePostEmbed": {
+    "file": "components/swipe/SwipePostEmbed.tsx",
+    "category": "content",
+    "description": "The real post through the platform's official embed. X: widgets.js (injected once, on first hover/focus/open, never on page load) createTweet with theme dark, dnt, conversation none, rendered into a per-run host node so a late async render from a cleaned-up run can't stack a second copy. LinkedIn: the official embed iframe at 504px on the black well, fixed 600px tall (LinkedIn never reports its height). Placeholder while loading; flat fallback (reason, stats when picked, Open on …) when the post isn't embeddable, the script is blocked, or nothing renders within 8s; a late render still swaps in. warmEmbed(platform) preconnects and preloads on mouse hover / keyboard focus, never on touch. Render with key={post.id}.",
+    "status": "Local draft. Verified in headless Chrome: X dark embed and LinkedIn embed both render; the in-app preview pane suppresses third-party iframes, so check embeds in a real browser.",
+    "variants": ["x", "linkedin", "fallback"],
+    "states": {
+      "loading": "32px platform circle + 'Loading the post from X'.",
+      "ready": "Embed fades in (fade-up, 0.25s).",
+      "failed / unavailable / not-embeddable": "Fallback with the matching reason."
+    },
+    "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono"],
+    "when_to_use": "Inside SwipePostViewer only. lib/swipe/embeds.ts lists posts that can't be embedded.",
+    "do_not": [
+      "Don't put embeds in the grid: one live embed at a time, inside the viewer.",
+      "Don't hide the X target with display:none while loading; widgets.js measures its width."
+    ]
+  },
+
+  "Dialog": {
+    "file": "components/Dialog.tsx",
+    "category": "primitive",
+    "description": "The site's shared modal shell on the native <dialog> (showModal: top layer above the Navbar, focus containment, Escape, inert page). Bottom sheet below desk, centred panel from desk sized by the caller's className. Backdrop color.neutral.scrim + backdrop-blur-md (the ExplorationGallery lightbox treatment); flat black panel, square corners, no shadow, 0.5px hairline edge (documented deviation: a black panel on a scrimmed black page needs an edge and shadows are banned). Locks page scroll while open. Escape and backdrop clicks route through onClose.",
+    "status": "Used by SwipePostViewer. AuditLeadMagnet still has its own hand-rolled dialog; move it here next time it's touched.",
+    "variants": ["mobile bottom sheet", "desk centred panel"],
+    "states": {},
+    "tokens_used": ["color.neutral.scrim", "color.neutral.hairline", "color.neutral.base"],
+    "when_to_use": "Any new popup on the site.",
+    "do_not": ["Don't build another one-off scrim/focus trap; extend this instead."]
+  },
+
+  "SwipeGlyphs": {
+    "file": "components/swipe/SwipeGlyphs.tsx",
+    "category": "primitive",
+    "description": "PlatformIcon (the X / LinkedIn marks from SocialLinks, currentColor) and CreatorMonogram (initials in a full circle on button-dark with a hairline edge; md 36px, lg 48px).",
+    "status": "Local draft.",
+    "variants": [
+      "CreatorMonogram size: md | lg"
+    ],
+    "states": {},
+    "tokens_used": [
+      "color.neutral.button-dark",
+      "color.neutral.hairline",
+      "typography.font.mono",
+      "radius.full"
+    ],
+    "when_to_use": "The /swipe cards. Reusable anywhere a person needs an avatar without a photo.",
+    "do_not": [
+      "Don't color-code monograms per person; the page stays monochrome."
+    ]
+  },
+
+  "DirectoryBadges": {
+    "file": "components/swipe/DirectoryBadges.tsx",
+    "category": "layout",
+    "description": "'Featured on' strip directly above the /swipe Footer, in the Footer's own frame (pt-6 pb-5 desk:px-5, hairline box). Renders lib/swipe/badges.ts as dofollow links (rel=noopener) around plain <img> badges, since directory badge hosts vary and next/image would need each in remotePatterns. Empty list: nothing in production, a dashed placeholder in development.",
+    "status": "Local draft; badge list empty until listings go live.",
+    "variants": [
+      "none"
+    ],
+    "states": {
+      "empty:dev": "Dashed placeholder explaining where to add badges.",
+      "empty:prod": "Renders nothing."
+    },
+    "tokens_used": [
+      "color.neutral.hairline",
+      "color.neutral.label-grey"
+    ],
+    "when_to_use": "/swipe only, once, directly above Footer.",
+    "do_not": [
+      "Don't add rel=nofollow; directories usually require a followed badge link."
     ]
   },
 
   "ProcessSection": {
     "file": "components/ProcessSection.tsx",
     "category": "content",
-    "description": "The process section (no eyebrow): SplitHeader with the H2 and intro, then one DetailRow per step (a 20/24px H3 title on the left with its timing in white uppercase mono at the cell's right, where ChallengeBlock has its '01 / 02' counter; the step in muted-65 with one **phrase** highlight in white via Emphasis on the right). Day-to-day working terms live in the shared FAQ (pixelupFaq), not here. No bottom hairline or CTA: the next section's top rule closes the centre rule (BlogFaq bleed on the homepage, EndCta or the FAQ on case studies). Copy lives in lib/process.ts, cut from the Growth workspace sales-call copy that keeps the sources.",
-    "status": "On staging (2026-11-04): homepage between Showcase and BlogFaq; every case study, story and legacy, before EndCta and the FAQ.",
+    "description": "The process section (no eyebrow): SplitHeader with the H2 and intro, then one DetailRow per step (a 20/24px H3 title on the left with its timing in white uppercase mono at the cell's right, where ChallengeBlock has its '01 / 02' counter; the step in muted-65 with one **phrase** highlight in white via Emphasis on the right). Day-to-day working terms live in the shared FAQ (pixelupFaq), not here. No bottom hairline or CTA: the next section's top rule (/yc's FAQ) closes the centre rule. Copy lives in lib/process.ts, cut from the Growth workspace sales-call copy that keeps the sources.",
+    "status": "Staging only, on /yc only. The homepage and case studies follow main, which has no process section (staging was synced to main on 2026-11-16).",
     "variants": {
-      "edge": "\"bleed\" on the homepage and /yc (hairlines meet the LeftNav divider and the viewport edge), \"inset\" (default) on case studies.",
+      "edge": "\"bleed\" on /yc (hairlines meet the LeftNav divider and the viewport edge), \"inset\" (default) on case studies.",
       "content": "ProcessContent (lib/process.ts): a page's own wording of the same five steps. Defaults to processSection. /yc passes ycProcess (lib/yc.ts), which keeps every timing and only rewords the steps for a YC team. intro is optional: without it SplitHeader renders the heading row alone and the steps follow directly (/yc).",
-      "gantt mode": "On when ProcessContent.trackCells is set (only /yc's ycProcess). The row under the heading (SplitHeader's children, right half; the heading row's right half stays empty) carries ProcessContent.total in Metrics' cell styles (no week ruler); each step's right cell starts with its week track (step.span [start, end), accent cells on white/10, h-1.5, h-2 from desk) and then a one-line body, so the five rows read as one Gantt chart. Every track shares one grid template (trackColumns), so their columns can't drift. Decorative (aria-hidden): the mono timing says the same in words. Homepage and case studies set no trackCells and are unchanged.",
+      "gantt mode": "On when ProcessContent.trackCells is set (only /yc's ycProcess). The row under the heading (SplitHeader's children, right half; the heading row's right half stays empty) carries ProcessContent.total in Metrics' cell styles (no week ruler); each step's right cell starts with its week track (step.span [start, end), accent cells on white/10, h-1.5, h-2 from desk) and then a one-line body, so the five rows read as one Gantt chart. Every track shares one grid template (trackColumns), so their columns can't drift. Decorative (aria-hidden): the mono timing says the same in words.",
       "eyebrow / marks": "SectionIndex label above the H2 and RegMarks on the top rule (/yc)."
     },
     "states": ["static, server-rendered"],
     "tokens_used": ["color.neutral.hairline", "color.neutral.white", "color.neutral.muted-65", "typography.font.mono", "typography.tracking.display-tight", "breakpoint.desk"],
-    "when_to_use": "Once per page, after the proof (Showcase, the case-study story) and before the FAQ.",
+    "when_to_use": "/yc only (staging), after the proof and before the FAQ.",
     "do_not": [
       "Don't add a CTA here: the sticky LeftNav / CaseSidebar already pins CtaButtons beside this section, and case studies end on EndCta.",
-      "Don't put a gap between this section and the one after it on the homepage: BlogFaq (bleed) sits flush under it so its top hairline meets the centre rule.",
+      "Don't put a gap between this section and the FAQ after it: its top hairline closes the centre rule.",
       "Don't highlight more than one short phrase per step, or write more than two short sentences; a reader should get the process from the white phrases alone.",
       "Don't add claims to lib/process.ts that the source copy file doesn't back.",
-      "Legacy case studies inset their SectionShell content 12px from the centre rule, these rows 24px, so the FAQ below sits 12px left of this section's text there. Accepted for now; the story layout matches."
+      "Don't render it on the homepage or case studies without Arjun's OK: main has no process section there."
     ]
+  },
+
+  "SectionRows": {
+    "file": "components/SectionRows.tsx",
+    "category": "layout",
+    "description": "SectionHeader (label and optional '01 / 06' counter on the left half, H2 and lead copy on the right), SplitHeader (case study SectionShell's header: H2 in the left half, full-width hairline, lead copy in the right half) and DetailRow (14px white/60 label | 16px content), on the case-study centre rule: ChallengeBlock's geometry, used by /yc (staging only), ProcessSection and BlogFaq's grid variant.",
+    "variants": {
+      "edge": "\"inset\" (default) pads every cell 24px for a full-bleed main. \"flush\" drops the outer side padding to line up with a LeftNav-shell column. \"bleed\" keeps flush's text positions, but the section takes `bleedMargin` (desk:-ml-4 desk:-mr-5) so its hairlines run from the shell divider to the viewport edge with no gap; the cells pad that back (every section on /yc, where each horizontal rule has to meet the LeftNav divider and the viewport edge). SplitHeader without children renders the heading row alone, its eyebrow prop puts a label above the H2, and its aside prop fills the heading row's right half (bottom-aligned on the H2's last line from desk, a child with desk:mb-auto rises to the top line; stacked under the H2 below desk). /yc uses it only for 02's lead and link; 05 and 06 keep the heading row's right half empty and put their content in the children row under it (Arjun, 2026-11-16: more white space, more readable); labelPadding and contentPadding are exported for sections that build their own cells (BlogFaq grid).",
+      "SectionIndex": "'01 — Raised': 12px uppercase mono, the number white and the name white/40. /yc numbers every section with it, passed as SplitHeader's eyebrow (and ProcessSection's and BlogFaq's).",
+      "RegMarks": "11px hairline crosses (white/50) where a bleed section's top rule meets the LeftNav divider and the centre rule, desk only. The section needs relative and the bleed edge. No mark at the right edge, which would overflow the viewport. ProcessSection and BlogFaq (grid) take a marks prop for it."
+    },
+    "states": ["none"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.tracking.display-tight", "typography.font.mono", "breakpoint.desk"],
+    "when_to_use": "Any label | content section: /yc, ProcessSection, BlogFaq grid.",
+    "do_not": [
+      "Don't rebuild this geometry inline: import SectionRows.",
+      "Don't use \"bleed\" outside the LeftNav shell (p-5 row, mx-4 divider): bleedMargin undoes exactly those values."
+    ]
+  },
+
+  "BatchProgramme": {
+    "file": "components/yc/BatchProgramme.tsx",
+    "category": "content",
+    "description": "/yc's index, set like a Swiss concert programme: one group per YC batch, newest first. The batch code sits in 48px type (32px below desk) with its season in mono on the left quarter, a hairline spine, and the batch's companies as dense ClientRows in the right three quarters: logo, niche and latest round only (no engagement line: Arjun, 2026-11-16, 'too much copy'). A desk-only mono label row (Batch / Company / Niche / Latest round) heads the columns, so the section needs no intro. Every rule bleeds to the LeftNav divider and the viewport edge.",
+    "variants": ["none"],
+    "states": ["static, server-rendered; rows keep ClientRow's fade-up"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.font.mono", "typography.tracking.display-tight", "breakpoint.desk"],
+    "when_to_use": "/yc only, fed by lib/yc.ts ycBatchGroups. /clients keeps ClientRoster.",
+    "do_not": ["Don't pass ClientRow a column template from here; dense owns it, so two desk:grid-cols classes never compete."]
   },
 
   "FundingChart": {
@@ -577,18 +805,43 @@
     ]
   },
 
-  "BatchProgramme": {
-    "file": "components/yc/BatchProgramme.tsx",
-    "category": "content",
-    "description": "/yc's index, set like a Swiss concert programme: one group per YC batch, newest first. The batch code sits in 48px type (32px below desk) with its season in mono on the left quarter, a hairline spine, and the batch's companies as dense ClientRows in the right three quarters: logo, niche and latest round only (no engagement line: Arjun, 2026-11-16, 'too much copy'). A desk-only mono label row (Batch / Company / Niche / Latest round) heads the columns, so the section needs no intro. Every rule bleeds to the LeftNav divider and the viewport edge.",
-    "variants": ["none"],
-    "states": ["static, server-rendered; rows keep ClientRow's fade-up"],
-    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.font.mono", "typography.tracking.display-tight", "breakpoint.desk"],
-    "when_to_use": "/yc only, fed by lib/yc.ts ycBatchGroups. /clients keeps ClientRoster.",
-    "do_not": ["Don't pass ClientRow a column template from here; dense owns it, so two desk:grid-cols classes never compete."]
-  },
-
   "_gaps": [
+    {
+      "gap": "Sidebar testimonial card",
+      "status": "Built as TestimonialSlider",
+      "detail": "CaseStudyStory's TestimonialBlock is a full-width two-column section with a 48px heading, too large for a 405px sidebar and built for one quote. TestimonialSlider was added for /call and is documented above.",
+      "closest_existing": "CaseStudyStory TestimonialBlock (quote + name/role pattern)"
+    },
+    {
+      "gap": "Modal dialog",
+      "status": "Extracted as components/Dialog.tsx (used by /swipe); AuditLeadMagnet not migrated yet",
+      "detail": "The site had no dialog primitive: the Tally popup is Tally's own, and the explorations lightbox is image-only. AuditLeadMagnet carries its own scrim, scroll lock, focus trap and Escape handling. Extract a shared Dialog shell if a second popup is ever needed.",
+      "closest_existing": "ExplorationGallery lightbox (backdrop blur), MobileMenu (color.neutral.scrim)"
+    },
+    {
+      "gap": "Filterable card feed with search",
+      "status": "Built as SwipeExplorer (/swipe)",
+      "detail": "ArticleFilters is a placeholder that doesn't filter, and nothing combined pills, search and a card grid. SwipeExplorer keeps ArticleFilters' pill look and SectionHeader/SectionNav for structure. If /blog's filters ever go live, extract the Pill and the hairline grid from it.",
+      "closest_existing": "ArticleFilters (pills), ExplorationGallery (grid), BlogList"
+    },
+    {
+      "gap": "Person card / avatar without a photo",
+      "status": "Built as SwipeCreatorCard + CreatorMonogram",
+      "detail": "ClientRow is logo-based, and the blog author box is one-off. The /swipe creator directory needed 93 people with profile links and no photos.",
+      "closest_existing": "ClientRow (roster row), SocialLinks (profile buttons)"
+    },
+    {
+      "gap": "Badge / logo row that links out",
+      "status": "Built as DirectoryBadges",
+      "detail": "TrustedStrip is a marquee of client logos, not linked, and not meant to hold third-party badges that need their exact image and a followed link.",
+      "closest_existing": "TrustedStrip"
+    },
+    {
+      "gap": "Responsive grid columns past desk",
+      "status": "Open: deviation on /swipe",
+      "detail": "The /swipe grids use arbitrary min-[560px] / min-[700px] / min-[1500px] steps besides desk, because 189 cards in one column at tablet width, or two columns at 1800px, read badly. SiteFrame's min-[1800px] is the only precedent. Decide whether to formalize a second breakpoint.",
+      "closest_existing": "SiteFrame (min-[1800px])"
+    },
     {
       "gap": "Display numeral above the type scale",
       "status": "Open: deviation on /yc (2026-11-16)",
@@ -600,16 +853,6 @@
       "status": "Open: deviation on /yc (2026-11-16)",
       "detail": "color.brand.accent is otherwise reserved for CTAs and active states. /yc also uses it for FundingChart's bars and ProcessSection's week track, so data and the Book a call button share one blue in some viewports. Confirm this is acceptable or pick a data color.",
       "closest_existing": "SectionNav's accent marker"
-    },
-    {
-      "gap": "Error / validation color token",
-      "detail": "No error color exists in tokens.json or @theme. ReferralForm follows NewsletterForm's precedent of Tailwind's red-400. Define color.feedback.error and promote it into @theme before more forms ship.",
-      "closest_existing": "NewsletterForm error text"
-    },
-    {
-      "gap": "Heading-left / content-right section outside case studies",
-      "detail": "SectionShell is tuned for the 405px-sidebar layout and BlogFaq is FAQ-specific. /referral reuses SectionShell because its sidebar width matches; a page with a different shell should generalise SectionShell rather than build a one-off.",
-      "closest_existing": "SectionShell, BlogFaq"
     }
   ]
 }

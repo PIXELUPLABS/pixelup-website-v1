@@ -1,6 +1,7 @@
 /**
- * "What it looks like working with us": the process section on the homepage
- * and every case study (components/ProcessSection.tsx).
+ * "What it looks like working with us": the default steps behind
+ * components/ProcessSection.tsx, which renders on /yc only (staging), as
+ * ycProcess in lib/yc.ts reworded for YC teams.
  *
  * Cut from the sales-call copy in the Growth workspace
  * (SEO-AEO/Article Writing Workspace/outputs/sales-call-insights-2026-11/

@@ -1,15 +1,27 @@
 import type { BlogPostData } from "@/sanity/lib/blog-types";
+import { authorProfileUrl } from "@/sanity/lib/author-links";
 import { estimateReadTime, formatBlogDate } from "@/sanity/lib/blog-utils";
 import { BackButton } from "../BackButton";
 import { CtaButtons } from "../CtaButtons";
 import { LeadCallout } from "../LeadCallout";
 import { TrustedStrip } from "../TrustedStrip";
 
-function MetaRow({ label, value }: { label: string; value: string }) {
+function MetaRow({ label, value, href }: { label: string; value: string; href?: string }) {
   return (
     <div className="flex w-full items-center gap-4 border-b-[0.5px] border-hairline py-3">
       <p className="w-[72px] shrink-0 text-[14px] tracking-[-0.01em] text-label-grey">{label}</p>
-      <p className="text-[14px] tracking-[-0.01em] text-white">{value}</p>
+      {href ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[14px] tracking-[-0.01em] text-white underline underline-offset-2 hover:text-white/70"
+        >
+          {value}
+        </a>
+      ) : (
+        <p className="text-[14px] tracking-[-0.01em] text-white">{value}</p>
+      )}
     </div>
   );
 }
@@ -22,7 +34,7 @@ function MetaRow({ label, value }: { label: string; value: string }) {
  */
 export function BlogPostSidebar({ post }: { post: BlogPostData }) {
   const metaRows = [
-    { label: "Written by", value: post.author },
+    { label: "Written by", value: post.author, href: authorProfileUrl(post.author) },
     { label: "Created on", value: formatBlogDate(post.publishedDate) },
     { label: "Updated on", value: formatBlogDate(post.updatedDate) },
     { label: "Read time", value: estimateReadTime(post.body) },
@@ -42,7 +54,7 @@ export function BlogPostSidebar({ post }: { post: BlogPostData }) {
           </h1>
           <div className="flex flex-col">
             {metaRows.map((row, index) => (
-              <MetaRow key={index} label={row.label} value={row.value} />
+              <MetaRow key={index} label={row.label} value={row.value} href={row.href} />
             ))}
           </div>
         </div>

@@ -74,11 +74,10 @@ export const testimonials = {
   },
   greptile: {
     slug: "greptile",
-    // Adapted to name the team. Contra original: "Daksh is a tier-1 designer,
-    // with great taste, attention-to-detail, and strong product intuition. I
-    // highly recommend working with him."
+    // Verbatim from Daksh Gupta's Contra review (2025-05-26). Quote it as
+    // written: the earlier version swapped in "PIXELUP LABS" and "them".
     quote:
-      "PIXELUP LABS is a tier-1 design team, with great taste, attention-to-detail, and strong product intuition. I highly recommend working with them.",
+      "Daksh is a tier-1 designer, with great taste, attention-to-detail, and strong product intuition. I highly recommend working with him.",
     name: "Daksh Gupta",
     role: "CEO",
     company: "Greptile",
