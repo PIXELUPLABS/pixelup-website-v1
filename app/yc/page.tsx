@@ -243,7 +243,7 @@ export default function YcPage() {
           </section>
 
           {/* 05 — Why: the heading row (right half empty), What you get in
-              the right half under it, then a four-figure band like 02's. */}
+              the right half under it. */}
           <section aria-labelledby="yc-why-heading" className={section}>
             <RegMarks />
             <SplitHeader
@@ -267,7 +267,6 @@ export default function YcPage() {
                 ))}
               </ul>
             </SplitHeader>
-            <Metrics metrics={ycWhy.metrics} edge="bleed" bottomRule={false} />
           </section>
 
           {/* 06 — Process: each step's weeks on one track, so the rows read

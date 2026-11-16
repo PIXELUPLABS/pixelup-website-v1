@@ -38,10 +38,7 @@
  * - Greptile and Sully results, and the referral line: their case studies and
  *   pixelupFaq in lib/case-studies.ts.
  * - Deliverables: the engagement lines of the YC clients in lib/clients.ts.
- * - 05 metrics: pixelupFaq ("How do we work together day to day?": point of
- *   contact; Tuesday and Friday written updates), FuseAI's 17 days (its
- *   case study) and 10 days of post-launch support (lib/process.ts step 5).
- *   The referral line is in ycFaq ("How do YC founders find you?"; Greptile case study).
+ * - The referral line is in ycFaq ("How do YC founders find you?"; Greptile case study).
  * - FAQ and process: pixelupFaq and lib/process.ts, reworded for YC teams
  *   with the facts above. No timing, price or step is new.
  */
@@ -265,21 +262,12 @@ export const ycMoreWorkSection = {
 };
 
 /**
- * 05: four figures under the heading, and What you get in the heading row's
- * right half. Sources: FuseAI's 17 days (its case study), the working terms
- * (pixelupFaq: point of contact, Tuesday and Friday updates) and post-launch
- * support (lib/process.ts step 5). The "2" is written without "×" so it
- * can't be read as Greptile's 2× demo requests in 02.
+ * 05: What you get in the right half under the heading row. The four-figure
+ * band (17 / 1 / 2 / 10) was dropped on Arjun's call (2026-11-16).
  */
 export const ycWhy = {
   heading: "Backed by YC. Judged like everyone else.",
   // No intro: Arjun asked for the heading alone (2026-11-13).
-  metrics: [
-    { value: "17", label: "Days to a launch-day brand", detail: "FuseAI, YC W25, from kickoff" },
-    { value: "1", label: "Point of contact", detail: "Daksh, your creative director" },
-    { value: "2", label: "Written updates a week", detail: "Tuesday and Friday, in Slack" },
-    { value: "10", label: "Days of post-launch support", detail: "Included with every launch" },
-  ] satisfies CaseMetric[],
   deliverablesLabel: "What you get",
   deliverables: [
     "Brand identity and guidelines",

@@ -37,8 +37,7 @@ export type ProcessContent = {
   steps: ProcessStep[];
   /** Cells on the week track (before week 1 plus each week). Setting it
       turns on Gantt mode (/yc): each step's track moves into the right
-      cell above a one-line body, under a PRE–W8 ruler in the heading row,
-      so the rows read as one chart. */
+      cell above a one-line body, so the rows read as one chart. */
   trackCells?: number;
   /** Gantt mode's heading-row figure, in Metrics' cell styles (/yc). */
   total?: { value: string; label: string; detail?: string };

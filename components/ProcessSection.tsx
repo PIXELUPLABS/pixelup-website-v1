@@ -28,8 +28,7 @@ const rowHeading =
  * A step's span on the week track: one cell per week, the step's weeks in
  * color.brand.accent. Decorative (the mono timing says the same in words).
  */
-/** One grid template for the ruler and every track, so their columns
-    can't drift apart. */
+/** One grid template for every track, so their columns can't drift apart. */
 function trackColumns(cells: number) {
   return { gridTemplateColumns: `repeat(${cells}, minmax(0, 1fr))` };
 }
@@ -59,21 +58,18 @@ function WeekTrack({
 
 /**
  * Gantt mode's head, in the right half of the row under the heading: the
- * total in Metrics' cell styles, then the week ruler (PRE, W1…), in the same
- * box as the tracks below it.
+ * total in Metrics' cell styles. No week ruler (Arjun dropped it, 2026-11-16):
+ * the tracks and the mono timings carry the weeks.
  */
 function GanttHead({
-  cells,
   total,
 }: {
-  cells: number;
   total?: { value: string; label: string; detail?: string };
 }) {
-  const labels = ["Pre", ...Array.from({ length: cells - 1 }, (_, i) => `W${i + 1}`)];
   return (
     <>
       {total && (
-        <div className="flex flex-col gap-4 desk:pb-4">
+        <div className="flex flex-col gap-4">
           <p className="text-[32px] font-medium leading-none tracking-display text-white desk:text-[48px]">
             {total.value}
           </p>
@@ -85,15 +81,6 @@ function GanttHead({
           </div>
         </div>
       )}
-      <div
-        aria-hidden="true"
-        className="hidden gap-px font-mono text-[12px] uppercase leading-none tracking-[0.06em] text-white/40 desk:grid"
-        style={trackColumns(cells)}
-      >
-        {labels.map((label) => (
-          <span key={label}>{label}</span>
-        ))}
-      </div>
     </>
   );
 }
@@ -127,10 +114,10 @@ export function ProcessSection({
         edge={edge}
         eyebrow={eyebrow}
       >
-        {/* Gantt mode: the total and the week ruler sit in the right half
-            under the heading row (the heading row's right half stays empty,
-            like every other section), in the same box as the tracks. */}
-        {trackCells && <GanttHead cells={trackCells} total={total} />}
+        {/* Gantt mode: the total sits in the right half under the heading
+            row (the heading row's right half stays empty, like every other
+            section), in the same box as the tracks. */}
+        {trackCells && <GanttHead total={total} />}
         {intro && (
           <p className="max-w-[60ch] text-[16px] leading-[1.5] text-muted-65">
             <Emphasis text={intro} />
