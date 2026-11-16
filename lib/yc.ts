@@ -38,7 +38,10 @@
  * - Greptile and Sully results, and the referral line: their case studies and
  *   pixelupFaq in lib/case-studies.ts.
  * - Deliverables: the engagement lines of the YC clients in lib/clients.ts.
- * - Who you work with: pixelupFaq ("How do we work together day to day?").
+ * - 05 metrics: pixelupFaq ("How do we work together day to day?": point of
+ *   contact; Tuesday and Friday written updates), FuseAI's 17 days (its
+ *   case study) and 10 days of post-launch support (lib/process.ts step 5).
+ *   The referral line is in ycFaq ("How do YC founders find you?"; Greptile case study).
  * - FAQ and process: pixelupFaq and lib/process.ts, reworded for YC teams
  *   with the facts above. No timing, price or step is new.
  */
@@ -145,11 +148,14 @@ export interface FundingEntry {
 }
 
 /**
- * Fig. 01, the hero chart: every YC client as one column, in batch order
- * (oldest first), the larger total first within a batch. Heights come from
- * the same totals as ycRaisedM, so the chart and the number can't disagree.
+ * Fig. 01, the hero chart: every YC client with a public round as one
+ * column, in batch order (oldest first), the larger total first within a
+ * batch. Clients with no public round are left out of the chart (Arjun,
+ * 2026-11-16); they still appear in the index. Heights come from the same
+ * totals as ycRaisedM, so the chart and the number can't disagree.
  */
 export const ycFunding: FundingEntry[] = Object.entries(ycRecords)
+  .filter(([, r]) => r.totalM !== undefined)
   .map(([slug, r]) => ({
     slug,
     name: clientName(slug),
@@ -162,10 +168,17 @@ export const ycFunding: FundingEntry[] = Object.entries(ycRecords)
       (b.totalM ?? 0) - (a.totalM ?? 0),
   );
 
+/** The figure's batch range: oldest and newest charted batch. */
+export const ycFundingRange = {
+  first: ycFunding[0].batch,
+  last: ycFunding.at(-1)!.batch,
+};
+
 export interface BatchGroup {
   batch: string;
   season: string;
-  /** Roster rows with the latest round (not the batch) under each logo. */
+  /** Roster rows with the latest round (not the batch) as the funding note,
+      shown in BatchProgramme's right-hand column. */
   clients: Client[];
 }
 
@@ -186,11 +199,11 @@ export const ycBatchGroups: BatchGroup[] = [...batches].reverse().map((batch) =>
     case study (2×, Series A) and its Series B (see the header). */
 export const ycFeatured = {
   heading: "Greptile, from W24 to a $50M Series B",
-  lead: "Greptile had YC backing and strong technology, but its brand and product hadn't caught up as it moved upmarket. We designed **brand, product, website and sales assets as one system**, and still do.",
+  lead: "We designed Greptile's **brand, product, website and sales assets as one system**, and still do.",
   link: { label: "Read the Greptile case study", href: "/case-studies/greptile" },
   metrics: [
     { value: "W24", label: "YC batch", detail: "Winter 2024" },
-    { value: "2×", label: "Demo requests", detail: "In the first week after launch" },
+    { value: "2×", label: "Demo requests", detail: "First week after launch" },
     { value: "$25M", label: "Series A", detail: "Led by Benchmark, six months later" },
     { value: "$50M", label: "Series B", detail: "Led by Menlo Ventures, October 2026" },
   ] satisfies CaseMetric[],
@@ -232,7 +245,10 @@ const ycWork: Project[] = ycWorkSlugs.flatMap(([projectSlug, clientSlug]) => {
     : [];
 });
 
-export const [ycFeaturedWork, ...ycMoreWork] = ycWork;
+/** The featured card drops its YC line: the four metrics under it already
+    say W24 and the Series B (Arjun, 2026-11-16). */
+export const ycFeaturedWork: Project = { ...ycWork[0], tagline: undefined };
+export const ycMoreWork = ycWork.slice(1);
 
 /** The YC clients with a published testimonial. Greptile leads, as on /call. */
 export const ycTestimonials: Testimonial[] = [
@@ -242,40 +258,32 @@ export const ycTestimonials: Testimonial[] = [
 
 export const ycRoster = {
   heading: `${ycClients.length} companies, ${batches.length} batches`,
-  intro: "From teams still in batch to a Series C, newest batch first. Under each logo is **the company's latest public round**.",
 };
 
 export const ycMoreWorkSection = {
   heading: "More work for YC companies",
-  intro:
-    "Brand, website and product for more of the roster. Each one opens **the live site or the full case study**.",
 };
 
 /**
- * Three numbered columns. Sources: the referral line (Greptile case study),
- * FuseAI's 17 days (its case study) and the working terms (pixelupFaq).
+ * 05: four figures under the heading, and What you get in the heading row's
+ * right half. Sources: FuseAI's 17 days (its case study), the working terms
+ * (pixelupFaq: point of contact, Tuesday and Friday updates) and post-launch
+ * support (lib/process.ts step 5). The "2" is written without "×" so it
+ * can't be read as Greptile's 2× demo requests in 02.
  */
 export const ycWhy = {
   heading: "Backed by YC. Judged like everyone else.",
   // No intro: Arjun asked for the heading alone (2026-11-13).
-  columns: [
-    {
-      title: "Founders refer us",
-      body: "After its launch, Greptile began **referring us to other YC founders**. One introduction turned into several.",
-    },
-    {
-      title: "Planned around your date",
-      body: "We plan backwards from Demo Day, a launch or a raise. FuseAI (YC W25) had **its brand ready on launch day**, 17 days after kickoff.",
-    },
-    {
-      title: "One senior team",
-      body: "You work directly with Daksh, your creative director, backed by a small senior team in one shared Slack channel. **No account managers, no layers.**",
-    },
-  ],
+  metrics: [
+    { value: "17", label: "Days to a launch-day brand", detail: "FuseAI, YC W25, from kickoff" },
+    { value: "1", label: "Point of contact", detail: "Daksh, your creative director" },
+    { value: "2", label: "Written updates a week", detail: "Tuesday and Friday, in Slack" },
+    { value: "10", label: "Days of post-launch support", detail: "Included with every launch" },
+  ] satisfies CaseMetric[],
   deliverablesLabel: "What you get",
   deliverables: [
     "Brand identity and guidelines",
-    "Marketing website, built in Framer, Webflow or Next.js",
+    "Marketing website",
     "Product UI and design system",
     "Pitch and sales decks",
     "Launch and social assets",
@@ -283,39 +291,49 @@ export const ycWhy = {
 };
 
 /**
- * The process section for YC teams: lib/process.ts' five steps and timings,
- * reworded around a batch and a date. The only added facts are FuseAI's 17
- * days (its case study) and dev-ready handover (the Reducto and Revyl
- * engagement lines). One `**phrase**` a step, as in lib/process.ts.
+ * The process section for YC teams, in Gantt mode: lib/process.ts' five
+ * steps and timings, each cut to one line, and the total from its intro
+ * (6–8 weeks; a brand sprint alone 2–4). No fact is added. One `**phrase**`
+ * a step, as in lib/process.ts.
  */
 export const ycProcess: ProcessContent = {
   heading: "How it runs for a YC team",
   // Before week 1, then weeks 1–8: each step's span follows its timing.
   trackCells: 9,
-  // No intro: Arjun asked for the heading alone (2026-11-13). The timings
-  // are on each step and in the FAQ.
+  total: {
+    value: "6–8 weeks",
+    label: "Brand and website, kickoff to launch",
+    detail: "A brand sprint alone: 2–4 weeks",
+  },
+  // No intro: Arjun asked for the heading alone (2026-11-13).
   steps: [
     {
       ...processSection.steps[0],
       title: "Discovery call",
       span: [0, 1],
-      body: "You tell us your batch, your buyer and the date you are working to, and we tell you **honestly what we'd change**. Once you sign, we open a shared Slack channel and usually kick off that week or the next.",
+      body: "You bring **your batch, buyer and deadline**.",
     },
     {
       ...processSection.steps[1],
-      title: "Founder workshop and strategy",
+      title: "Founder workshop",
       span: [1, 2],
+      body: "It ends in **a strategy deck you sign off**.",
     },
     {
       ...processSection.steps[2],
       span: [2, 5],
-      body: "You see **three directions**, each shown on a website hero, poster and product screen, not just a moodboard. FuseAI (YC W25) had its brand ready on launch day, 17 days after kickoff.",
+      body: "**Three directions** on real touchpoints.",
     },
-    { ...processSection.steps[3], span: [4, 7] },
+    {
+      ...processSection.steps[3],
+      span: [4, 7],
+      body: "You **approve wireframes and copy** first.",
+    },
     {
       ...processSection.steps[4],
+      title: "Build and launch",
       span: [6, 9],
-      body: "We build in Webflow, Framer or Next.js, or hand dev-ready files to your engineers. Every launch includes **10 days of post-launch support**.",
+      body: "Built in **Webflow, Framer or Next.js**.",
     },
   ],
 };
@@ -334,32 +352,32 @@ export const ycFaq: FaqItem[] = [
   },
   {
     q: "What results have your YC clients seen?",
-    a: "Greptile doubled demo requests in week one and raised a $25M Series A within six months of launch, then a $50M Series B in October 2026. Sully scaled 26x in 11 months after its redesign. FuseAI reports 20% higher free-to-paid trial conversion.",
+    a: "Greptile doubled demo requests in week one and raised a $25M Series A within six months of launch. Sully scaled 26x in 11 months after its redesign. FuseAI reports 20% higher free-to-paid trial conversion.",
   },
   {
     q: "Do you work with companies that are still in batch?",
-    a: "Yes. Our YC clients run from Workers.io, in the F26 batch now, to Bland at Series C.",
+    a: "Yes. Workers.io is in the F26 batch now.",
   },
   {
     q: "Can you ship before Demo Day or a launch date?",
-    a: "Tell us the date on the first call. A brand sprint takes 2–4 weeks, and a brand and website project takes 6–8 weeks from kickoff to launch. FuseAI's brand was ready on launch day, 17 days after kickoff.",
+    a: "We regularly deliver under hard deadlines like launch dates and fundraise announcements. A brand sprint takes 2–4 weeks; brand and website, 6–8 weeks. Tell us the date on the first call.",
   },
   sharedAnswer("How much does it cost?"),
   {
     q: "Who do we work with day to day?",
-    a: "You work directly with Daksh, your creative director and point of contact, backed by a small senior team. No account managers, no layers. We work in one shared Slack channel, post written updates every Tuesday and Friday and meet for a 30–60 minute sync each week.",
+    a: "You work directly with Daksh, your creative director, backed by a small senior team. No account managers, no layers. We share one Slack channel and meet for a 30–60 minute sync each week.",
   },
   {
     q: "We already have a brand and website from our batch. Do we need to start over?",
-    a: sharedAnswer("We already have a brand and website. Do we need to start over?").a,
+    a: "Rarely. We keep what works and rebuild what holds you back.",
   },
   {
     q: "How do YC founders find you?",
-    a: "It started with a referral. After its launch, Greptile began referring us to other YC founders, and one introduction turned into several.",
+    a: "It started with Greptile, which began referring us to other YC founders after its launch.",
   },
   {
     q: "How do we get started?",
-    a: "Book a discovery call or message us on Telegram, and tell us your batch. We will review where you are today and tell you honestly what we would change.",
+    a: "Book a discovery call or message us on Telegram, and tell us your batch. We'll tell you honestly what we'd change.",
   },
 ];
 
@@ -367,7 +385,7 @@ export const ycFaq: FaqItem[] = [
     away. Desk keeps the sticky sidebar instead. */
 export const ycClosing = {
   heading: "Tell us your batch.",
-  body: "Book a call and we will review where you are today, then tell you honestly what we would change.",
+  body: "We'll tell you honestly what we'd change.",
 };
 
 /** Section index labels, in page order. */

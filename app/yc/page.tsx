@@ -10,7 +10,6 @@ import { ProcessSection } from "@/components/ProcessSection";
 import { ProjectCard } from "@/components/ProjectCard";
 import {
   bleedMargin,
-  DetailRow,
   noBreakHyphens,
   RegMarks,
   SectionIndex,
@@ -20,9 +19,7 @@ import { BatchProgramme } from "@/components/yc/BatchProgramme";
 import { FundingChart } from "@/components/yc/FundingChart";
 import { siteUpdated } from "@/lib/site-dates";
 import {
-  ycBatchCount,
   ycBatchGroups,
-  ycBatchRange,
   ycClients,
   ycClosing,
   ycFaq,
@@ -86,10 +83,6 @@ const faqSchema = {
 /** Lead copy under a section's H2: ProcessSection's intro treatment. */
 const lead = "max-w-[60ch] text-[16px] leading-[1.5] text-muted-65";
 
-/** Row and column titles: one size under the H2 (ProcessSection's steps). */
-const rowHeading =
-  "text-balance text-[20px] font-medium leading-tight tracking-display text-white desk:text-[24px]";
-
 /** The site's text link (BlogPostSidebar, CaseFaq): the accent and filled
     buttons stay with Book a call in the sidebar. */
 const textLink =
@@ -134,7 +127,7 @@ export default function YcPage() {
               From in-batch to Series C, we design brand, website and product
               as one system.{" "}
               <strong className="font-medium text-white">
-                Greptile went from YC W24 to a $25M Series A in 6 months.
+                Greptile: YC W24 to $25M Series A in 6 months.
               </strong>
             </>
           }
@@ -154,7 +147,7 @@ export default function YcPage() {
               <div className="flex items-baseline justify-between gap-6">
                 <SectionIndex index={1} label={labels.raised} />
                 <p className="hidden font-mono text-[12px] uppercase leading-none tracking-[0.06em] text-white/40 desk:block">
-                  Fig. 01 — YC {ycBatchRange.first} → {ycBatchRange.last}
+                  Fig. 01 — Total raised per company
                 </p>
               </div>
               <div className="flex flex-col gap-5">
@@ -170,17 +163,17 @@ export default function YcPage() {
                 <p className="fade-up max-w-[44ch] text-pretty text-[16px] leading-[1.5] text-muted-65 [animation-delay:250ms]">
                   Raised by the{" "}
                   <strong className="font-medium text-white">
-                    {ycClients.length} YC companies we design for
+                    YC companies we design for
                   </strong>
-                  , across {ycBatchCount} batches. A floor, not an estimate:
-                  public rounds only.
+                  . Public rounds only, so it&apos;s a floor.
                 </p>
               </div>
               <FundingChart entries={ycFunding} />
             </div>
           </section>
 
-          {/* 02 — Featured: Greptile's journey in four cells. */}
+          {/* 02 — Featured: Greptile's journey in four cells. The lead sits in
+              the heading row's right half, so no row is left half-empty. */}
           <section aria-labelledby="yc-featured-heading" className={section}>
             <RegMarks />
             <SplitHeader
@@ -188,14 +181,17 @@ export default function YcPage() {
               headingId="yc-featured-heading"
               edge="bleed"
               eyebrow={<SectionIndex index={2} label={labels.featured} />}
-            >
-              <p className={lead}>
-                <Emphasis text={ycFeatured.lead} format={noBreakHyphens} />
-              </p>
-              <Link href={ycFeatured.link.href} className={textLink}>
-                {ycFeatured.link.label}
-              </Link>
-            </SplitHeader>
+              aside={
+                <>
+                  <p className={lead}>
+                    <Emphasis text={ycFeatured.lead} format={noBreakHyphens} />
+                  </p>
+                  <Link href={ycFeatured.link.href} className={textLink}>
+                    {ycFeatured.link.label}
+                  </Link>
+                </>
+              }
+            />
             <div
               className={`border-t-[0.5px] border-hairline py-6 ${bleedPadding}`}
             >
@@ -208,7 +204,8 @@ export default function YcPage() {
             />
           </section>
 
-          {/* 03 — Index: the roster as a programme, by batch. */}
+          {/* 03 — Index: the roster as a programme, by batch. The label row
+              explains the columns, so the heading stands alone. */}
           <section aria-labelledby="yc-index-heading" className={section}>
             <RegMarks />
             <SplitHeader
@@ -216,11 +213,7 @@ export default function YcPage() {
               headingId="yc-index-heading"
               edge="bleed"
               eyebrow={<SectionIndex index={3} label={labels.index} />}
-            >
-              <p className={lead}>
-                <Emphasis text={ycRoster.intro} />
-              </p>
-            </SplitHeader>
+            />
             <BatchProgramme groups={ycBatchGroups} />
           </section>
 
@@ -232,11 +225,7 @@ export default function YcPage() {
               headingId="yc-work-heading"
               edge="bleed"
               eyebrow={<SectionIndex index={4} label={labels.work} />}
-            >
-              <p className={lead}>
-                <Emphasis text={ycMoreWorkSection.intro} />
-              </p>
-            </SplitHeader>
+            />
             <div className="grid desk:grid-cols-2">
               {ycMoreWork.map((project, index) => (
                 <div
@@ -253,7 +242,8 @@ export default function YcPage() {
             </div>
           </section>
 
-          {/* 05 — Why: three numbered columns, then what you get. */}
+          {/* 05 — Why: the heading row (right half empty), What you get in
+              the right half under it, then a four-figure band like 02's. */}
           <section aria-labelledby="yc-why-heading" className={section}>
             <RegMarks />
             <SplitHeader
@@ -261,51 +251,23 @@ export default function YcPage() {
               headingId="yc-why-heading"
               edge="bleed"
               eyebrow={<SectionIndex index={5} label={labels.why} />}
-            />
-            <ol className="grid list-none border-t-[0.5px] border-hairline desk:grid-cols-3">
-              {ycWhy.columns.map((column, index) => (
-                <li
-                  key={column.title}
-                  className={`flex flex-col gap-4 py-6 ${
-                    index > 0
-                      ? "border-t-[0.5px] border-hairline desk:border-l-[0.5px] desk:border-t-0"
-                      : ""
-                  } ${
-                    index === 0
-                      ? "desk:pl-4 desk:pr-6"
-                      : index === ycWhy.columns.length - 1
-                        ? "desk:pl-6 desk:pr-5"
-                        : "desk:px-6"
-                  }`}
-                >
-                  <p className="font-mono text-[12px] leading-none text-white/40">
-                    {String(index + 1).padStart(2, "0")}
-                  </p>
-                  <h3 className={rowHeading}>{column.title}</h3>
-                  <p className="text-[16px] leading-[1.5] text-muted-65">
-                    <Emphasis text={column.body} format={noBreakHyphens} />
-                  </p>
-                </li>
-              ))}
-            </ol>
-            <div className="border-t-[0.5px] border-hairline">
-              <DetailRow
-                edge="bleed"
-                label={<h3 className={rowHeading}>{ycWhy.deliverablesLabel}</h3>}
-              >
-                {/* CaseSection's shipped-work list. */}
-                <ul className="flex list-none flex-col gap-2 leading-[1.35]">
-                  {ycWhy.deliverables.map((item, index) => (
-                    <li key={item} className="flex gap-3">
-                      <span aria-hidden="true" className="text-white/40">
-                        {String(index + 1).padStart(2, "0")}
-                      </span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </DetailRow>
-            </div>
+            >
+              <h3 className="font-mono text-[12px] uppercase leading-none tracking-[0.06em] text-white/40">
+                {ycWhy.deliverablesLabel}
+              </h3>
+              {/* CaseSection's shipped-work list. */}
+              <ul className="flex list-none flex-col gap-2 text-[16px] leading-[1.35] text-white">
+                {ycWhy.deliverables.map((item, index) => (
+                  <li key={item} className="flex gap-3">
+                    <span aria-hidden="true" className="text-white/40">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </SplitHeader>
+            <Metrics metrics={ycWhy.metrics} edge="bleed" bottomRule={false} />
           </section>
 
           {/* 06 — Process: each step's weeks on one track, so the rows read

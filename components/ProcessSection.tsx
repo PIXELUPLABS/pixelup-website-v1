@@ -28,6 +28,12 @@ const rowHeading =
  * A step's span on the week track: one cell per week, the step's weeks in
  * color.brand.accent. Decorative (the mono timing says the same in words).
  */
+/** One grid template for the ruler and every track, so their columns
+    can't drift apart. */
+function trackColumns(cells: number) {
+  return { gridTemplateColumns: `repeat(${cells}, minmax(0, 1fr))` };
+}
+
 function WeekTrack({
   cells,
   span: [start, end],
@@ -38,16 +44,57 @@ function WeekTrack({
   return (
     <div
       aria-hidden="true"
-      className="mt-5 grid gap-px"
-      style={{ gridTemplateColumns: `repeat(${cells}, minmax(0, 1fr))` }}
+      className="grid gap-px desk:mt-3"
+      style={trackColumns(cells)}
     >
       {Array.from({ length: cells }, (_, cell) => (
         <span
           key={cell}
-          className={`h-1.5 ${cell >= start && cell < end ? "bg-accent" : "bg-white/10"}`}
+          className={`h-1.5 desk:h-2 ${cell >= start && cell < end ? "bg-accent" : "bg-white/10"}`}
         />
       ))}
     </div>
+  );
+}
+
+/**
+ * Gantt mode's head, in the right half of the row under the heading: the
+ * total in Metrics' cell styles, then the week ruler (PRE, W1…), in the same
+ * box as the tracks below it.
+ */
+function GanttHead({
+  cells,
+  total,
+}: {
+  cells: number;
+  total?: { value: string; label: string; detail?: string };
+}) {
+  const labels = ["Pre", ...Array.from({ length: cells - 1 }, (_, i) => `W${i + 1}`)];
+  return (
+    <>
+      {total && (
+        <div className="flex flex-col gap-4 desk:pb-4">
+          <p className="text-[32px] font-medium leading-none tracking-display text-white desk:text-[48px]">
+            {total.value}
+          </p>
+          <div className="flex flex-col gap-1">
+            <p className="text-[14px] leading-[1.3] text-white">{total.label}</p>
+            {total.detail && (
+              <p className="text-[12px] leading-[1.3] text-white/60">{total.detail}</p>
+            )}
+          </div>
+        </div>
+      )}
+      <div
+        aria-hidden="true"
+        className="hidden gap-px font-mono text-[12px] uppercase leading-none tracking-[0.06em] text-white/40 desk:grid"
+        style={trackColumns(cells)}
+      >
+        {labels.map((label) => (
+          <span key={label}>{label}</span>
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -66,7 +113,7 @@ export function ProcessSection({
   /** RegMarks on the section's top rule (/yc, "bleed" only). */
   marks?: boolean;
 }) {
-  const { heading, intro, steps, trackCells } = content;
+  const { heading, intro, steps, trackCells, total } = content;
 
   return (
     <section
@@ -80,6 +127,10 @@ export function ProcessSection({
         edge={edge}
         eyebrow={eyebrow}
       >
+        {/* Gantt mode: the total and the week ruler sit in the right half
+            under the heading row (the heading row's right half stays empty,
+            like every other section), in the same box as the tracks. */}
+        {trackCells && <GanttHead cells={trackCells} total={total} />}
         {intro && (
           <p className="max-w-[60ch] text-[16px] leading-[1.5] text-muted-65">
             <Emphasis text={intro} />
@@ -93,19 +144,17 @@ export function ProcessSection({
             <DetailRow
               edge={edge}
               label={
-                <>
-                  <div className="flex items-baseline justify-between gap-6">
-                    <h3 className={rowHeading}>{step.title}</h3>
-                    <p className="shrink-0 font-mono text-[12px] uppercase leading-none tracking-wide text-white">
-                      {step.timing}
-                    </p>
-                  </div>
-                  {trackCells && step.span && (
-                    <WeekTrack cells={trackCells} span={step.span} />
-                  )}
-                </>
+                <div className="flex items-baseline justify-between gap-6">
+                  <h3 className={rowHeading}>{step.title}</h3>
+                  <p className="shrink-0 font-mono text-[12px] uppercase leading-none tracking-wide text-white">
+                    {step.timing}
+                  </p>
+                </div>
               }
             >
+              {trackCells && step.span && (
+                <WeekTrack cells={trackCells} span={step.span} />
+              )}
               <p className="text-muted-65">
                 <Emphasis text={step.body} format={noBreakHyphens} />
               </p>

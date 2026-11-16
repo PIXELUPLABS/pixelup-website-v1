@@ -7,15 +7,13 @@ import type { BatchGroup } from "@/lib/yc";
 const padLeft = "desk:pl-4";
 const padRight = "desk:pr-5";
 
-/** ClientRow's dense column template, repeated for the label row. */
-const denseColumns =
-  "desk:grid-cols-[minmax(0,1fr)_minmax(0,0.75fr)_minmax(0,1.5fr)]";
-
 /**
  * The /yc index, set like a Swiss concert programme: the batch is the
  * "date" in large type on the left quarter, its companies listed beside it
- * as dense ClientRows. One group per batch, newest first. Every group's top
- * rule runs the full bleed width; the quarter line is the group's spine.
+ * as dense ClientRows (logo | niche | latest round, no engagement line:
+ * Arjun, 2026-11-16, "too much copy"). One group per batch, newest first.
+ * Every group's top rule runs the full bleed width; the quarter line is the
+ * group's spine.
  */
 export function BatchProgramme({ groups }: { groups: BatchGroup[] }) {
   let rowIndex = 0;
@@ -27,16 +25,14 @@ export function BatchProgramme({ groups }: { groups: BatchGroup[] }) {
         aria-hidden="true"
         className="hidden border-t-[0.5px] border-hairline font-mono text-[12px] uppercase leading-none tracking-[0.06em] text-white/40 desk:grid desk:grid-cols-4"
       >
+        {/* The page's four columns: each label starts on a quarter line,
+            where its cells below start. */}
         <p className={`border-r-[0.5px] border-hairline py-4 ${padLeft} pr-6`}>
           Batch
         </p>
-        <div
-          className={`col-span-3 grid gap-6 py-4 pl-6 ${padRight} ${denseColumns}`}
-        >
-          <p>Company · latest round</p>
-          <p>Niche</p>
-          <p>What we did</p>
-        </div>
+        <p className="py-4 pl-6">Company</p>
+        <p className="py-4 pl-6">Niche</p>
+        <p className={`py-4 pl-6 ${padRight}`}>Latest round</p>
       </div>
 
       {groups.map((group) => (
@@ -62,7 +58,6 @@ export function BatchProgramme({ groups }: { groups: BatchGroup[] }) {
                 client={client}
                 index={rowIndex++}
                 dense
-                className={`desk:pl-6 ${padRight}`}
               />
             ))}
           </ol>

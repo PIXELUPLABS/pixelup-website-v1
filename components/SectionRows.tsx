@@ -130,6 +130,7 @@ export function SplitHeader({
   headingId,
   edge = "inset",
   eyebrow,
+  aside,
   children,
 }: {
   heading: string;
@@ -137,6 +138,11 @@ export function SplitHeader({
   edge?: SectionEdge;
   /** Small label above the H2 (SectionIndex on /yc). */
   eyebrow?: React.ReactNode;
+  /** Content for the heading row's right half, bottom-aligned on the H2's
+      last line from desk (a child with desk:mb-auto rises to the top line).
+      Below desk it stacks under the H2. /yc uses it so no heading row is
+      left with an empty half. */
+  aside?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
@@ -153,6 +159,13 @@ export function SplitHeader({
             {noBreakHyphens(heading)}
           </h2>
         </div>
+        {aside && (
+          <div
+            className={`flex flex-col gap-5 ${contentPadding[edge]} pt-0 desk:justify-end desk:pt-6`}
+          >
+            {aside}
+          </div>
+        )}
       </div>
       {/* No lead copy: the heading row stands alone and the caller's own
           top rule (its rows) closes it. */}

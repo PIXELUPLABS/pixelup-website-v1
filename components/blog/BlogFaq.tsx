@@ -3,9 +3,8 @@ import faqBg from "@/public/media/faq-bg.png";
 import { CaseFaq } from "@/components/case-study/CaseFaq";
 import {
   bleedMargin,
-  contentPadding,
-  labelPadding,
   RegMarks,
+  SplitHeader,
 } from "@/components/SectionRows";
 import { faqHeading, pixelupFaq, type FaqItem } from "@/lib/case-studies";
 
@@ -37,43 +36,30 @@ export function BlogFaq({
       LeftNav divider to the viewport edge and closes ProcessSection's centre
       rule. The padding puts the content back where it was. */
   bleed?: boolean;
-  /** /yc: the FAQ sits on SectionRows' two-column grid instead of the 45/55
-      split, on the "bleed" edge. The heading takes the left cell at the
-      page's H2 size, the centre rule carries on from the section above, and
-      the accordion starts where every other row's content does. A bottom
-      rule closes the centre rule, since the Footer card sits apart. */
+  /** /yc: SplitHeader's layout on the "bleed" edge, like every section
+      above it: the heading row (heading left, right half empty), a
+      full-width rule, then the accordion in the right half. A bottom rule
+      closes the centre rule, since the Footer card sits apart. */
   grid?: boolean;
 }) {
   if (grid) {
+    // Every other /yc section's pattern: SplitHeader's heading row (heading
+    // left, right half empty), a full-width rule, then the accordion in the
+    // right half under it. No faq-bg texture: no other section has one.
     return (
       <section
         className={`relative border-y-[0.5px] border-hairline ${bleedMargin}`}
         aria-labelledby="faq-heading"
       >
         {marks && <RegMarks />}
-        <div className="grid desk:grid-cols-2">
-          <div
-            className={`relative flex flex-col gap-5 overflow-hidden ${labelPadding.bleed} desk:border-r-[0.5px] desk:border-hairline`}
-          >
-            {eyebrow && <div className="relative">{eyebrow}</div>}
-            <Image
-              src={faqBg}
-              alt=""
-              fill
-              sizes="(min-width: 1200px) 50vw, 100vw"
-              className="scale-110 object-cover -translate-x-20 -translate-y-12"
-            />
-            <h2
-              id="faq-heading"
-              className="relative text-balance text-[24px] font-medium leading-tight tracking-display text-white desk:text-[48px]"
-            >
-              {faqHeading}
-            </h2>
-          </div>
-          <div className={`${contentPadding.bleed} pt-0 desk:pt-6`}>
-            <CaseFaq items={items} />
-          </div>
-        </div>
+        <SplitHeader
+          heading={faqHeading}
+          headingId="faq-heading"
+          edge="bleed"
+          eyebrow={eyebrow}
+        >
+          <CaseFaq items={items} />
+        </SplitHeader>
       </section>
     );
   }
