@@ -45,6 +45,55 @@ export const contentPadding: Record<SectionEdge, string> = {
   bleed: "py-6 desk:pl-6 desk:pr-5",
 };
 
+/**
+ * A section's index label: "01 — Raised" in small uppercase mono, the number
+ * in white and the name in white/40 (/yc). Sits above a section's H2.
+ */
+export function SectionIndex({
+  index,
+  label,
+}: {
+  index: number;
+  label: string;
+}) {
+  return (
+    <p className="font-mono text-[12px] uppercase leading-none tracking-[0.06em] text-white/40">
+      <span className="text-white">{String(index).padStart(2, "0")}</span>
+      {" — "}
+      {label}
+    </p>
+  );
+}
+
+/**
+ * Registration marks where a section's top rule crosses the LeftNav divider
+ * and the centre rule: small hairline crosses, desk only. The section needs
+ * `relative` and the "bleed" edge, so its left edge sits on the divider.
+ * There is no mark at the right edge: centred on the viewport edge it would
+ * overflow the page.
+ */
+export function RegMarks({ centre = true }: { centre?: boolean }) {
+  const mark =
+    "pointer-events-none absolute top-0 hidden size-[11px] -translate-x-1/2 -translate-y-1/2 text-white/50 desk:block";
+  const cross = (
+    <svg viewBox="0 0 11 11" fill="none" className="size-full">
+      <path d="M5.5 0v11M0 5.5h11" stroke="currentColor" strokeWidth="1" />
+    </svg>
+  );
+  return (
+    <>
+      <span aria-hidden="true" className={`${mark} left-0`}>
+        {cross}
+      </span>
+      {centre && (
+        <span aria-hidden="true" className={`${mark} left-1/2`}>
+          {cross}
+        </span>
+      )}
+    </>
+  );
+}
+
 /** One label | content row: CaseStudyStory ChallengeBlock's detail row. */
 export function DetailRow({
   label,
@@ -80,19 +129,23 @@ export function SplitHeader({
   heading,
   headingId,
   edge = "inset",
+  eyebrow,
   children,
 }: {
   heading: string;
   headingId: string;
   edge?: SectionEdge;
+  /** Small label above the H2 (SectionIndex on /yc). */
+  eyebrow?: React.ReactNode;
   children?: React.ReactNode;
 }) {
   return (
     <>
       <div className="grid desk:grid-cols-2">
         <div
-          className={`${labelPadding[edge]} desk:border-r-[0.5px] desk:border-hairline`}
+          className={`flex flex-col gap-5 ${labelPadding[edge]} desk:border-r-[0.5px] desk:border-hairline`}
         >
+          {eyebrow}
           <h2
             id={headingId}
             className="text-balance text-[24px] font-medium leading-tight tracking-display text-white desk:text-[48px]"

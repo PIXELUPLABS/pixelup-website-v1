@@ -24,6 +24,9 @@ export type ProcessStep = {
   /** Mono label at the right of the title. */
   timing: string;
   body: string;
+  /** Cells this step fills on the page's week track, [start, end), where
+      cell 0 is "before week 1" and cell n is week n (/yc). */
+  span?: [number, number];
 };
 
 /** What ProcessSection renders: this file's copy, or a page's own (/yc). */
@@ -32,6 +35,10 @@ export type ProcessContent = {
   /** Lead copy under the heading. /yc leaves it out: heading, then steps. */
   intro?: string;
   steps: ProcessStep[];
+  /** Cells on the week track (before week 1 plus each week). Steps with a
+      `span` draw the track under their title; the rows then read as one
+      Gantt chart down the section (/yc). */
+  trackCells?: number;
 };
 
 export const processSection = {

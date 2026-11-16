@@ -83,18 +83,24 @@ export function ClientRow({
   client,
   index,
   className = "",
+  dense = false,
 }: {
   client: Client;
   index: number;
   /** Side padding from ClientRoster's bleed variant. */
   className?: string;
+  /** /yc's batch programme: 20px top and bottom instead of 25/40, no top
+      rule on a group's first row (the group's own rule is there), and the
+      columns re-weighted 1 / 0.75 / 1.5 for the narrower 3/4 cell, so the
+      engagement line gets the most room. */
+  dense?: boolean;
 }) {
   const entranceDelay = `${Math.min(100 + index * 70, 600)}ms`;
   const balancedEngagement = splitForBalancedLastLine(client.engagement);
 
   return (
     <li
-      className={`fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline pb-10 pt-6.25 desk:grid-cols-[1.6fr_0.6fr_0.8fr] desk:items-start desk:gap-6 ${className}`}
+      className={`fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline ${dense ? "py-5 first:border-t-0 desk:grid-cols-[minmax(0,1fr)_minmax(0,0.75fr)_minmax(0,1.5fr)]" : "pb-10 pt-6.25 desk:grid-cols-[1.6fr_0.6fr_0.8fr]"} desk:items-start desk:gap-6 ${className}`}
       style={{ animationDelay: entranceDelay }}
     >
       <ClientIdentity client={client} index={index} />

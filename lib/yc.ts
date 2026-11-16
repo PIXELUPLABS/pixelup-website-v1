@@ -113,40 +113,88 @@ const batches = [...new Set(Object.values(ycRecords).map((r) => r.batch))].sort(
 
 /** Sum of the totals above, rounded down to the nearest $10M: a minimum,
     since each total is the lowest sourced figure and three have none. */
-const raisedM =
+export const ycRaisedM =
   Math.floor(
     Object.values(ycRecords).reduce((sum, r) => sum + (r.totalM ?? 0), 0) / 10,
   ) * 10;
 
+export const ycBatchCount = batches.length;
+export const ycBatchRange = { first: batches[0], last: batches.at(-1)! };
+
+const seasonNames: Record<string, string> = {
+  W: "Winter",
+  X: "Spring",
+  S: "Summer",
+  F: "Fall",
+};
+
+/** "W24" → "Winter 2024". */
+function seasonOf(batch: string) {
+  return `${seasonNames[batch[0]]} 20${batch.slice(1)}`;
+}
+
+const clientName = (slug: string) =>
+  ycClients.find((c) => c.slug === slug)?.name ?? slug;
+
+export interface FundingEntry {
+  slug: string;
+  name: string;
+  batch: string;
+  /** Total public funding in $M; undefined when none is public. */
+  totalM?: number;
+}
+
 /**
- * The proof band under the featured card. The first two are computed from
- * the records above, so they can't drift from the roster. The raised total
- * leads because it is the widest value: the band's first cell is the only
- * one wide enough for it at 1200px. It carries no "+" for the same reason,
- * so the detail line says it is a minimum.
+ * Fig. 01, the hero chart: every YC client as one column, in batch order
+ * (oldest first), the larger total first within a batch. Heights come from
+ * the same totals as ycRaisedM, so the chart and the number can't disagree.
  */
-export const ycMetrics: CaseMetric[] = [
-  {
-    value: `$${raisedM}M`,
-    label: "Raised by our YC clients",
-    detail: "At least, in public funding to date",
-  },
-  {
-    value: String(ycClients.length),
-    label: "YC companies",
-    detail: `${batches.length} batches, ${batches[0]} to ${batches.at(-1)}`,
-  },
-  {
-    value: "2×",
-    label: "Greptile demo requests",
-    detail: "In the first week after launch",
-  },
-  {
-    value: "26×",
-    label: "Sully's growth",
-    detail: "In 11 months after its redesign",
-  },
-];
+export const ycFunding: FundingEntry[] = Object.entries(ycRecords)
+  .map(([slug, r]) => ({
+    slug,
+    name: clientName(slug),
+    batch: r.batch,
+    totalM: r.totalM,
+  }))
+  .sort(
+    (a, b) =>
+      batchOrder(a.batch) - batchOrder(b.batch) ||
+      (b.totalM ?? 0) - (a.totalM ?? 0),
+  );
+
+export interface BatchGroup {
+  batch: string;
+  season: string;
+  /** Roster rows with the latest round (not the batch) under each logo. */
+  clients: Client[];
+}
+
+/**
+ * The index, set like a concert programme: one group per batch, newest
+ * first, so a founder finds their own batch at a glance. Within a batch the
+ * /clients roster's order holds.
+ */
+export const ycBatchGroups: BatchGroup[] = [...batches].reverse().map((batch) => ({
+  batch,
+  season: seasonOf(batch),
+  clients: rosterSource
+    .filter((c) => ycRecords[c.slug]?.batch === batch)
+    .map((c) => ({ ...c, fundingNote: ycRecords[c.slug].round })),
+}));
+
+/** Greptile, the featured study: the journey in four cells. Sources: its
+    case study (2×, Series A) and its Series B (see the header). */
+export const ycFeatured = {
+  heading: "Greptile, from W24 to a $50M Series B",
+  lead: "Greptile had YC backing and strong technology, but its brand and product hadn't caught up as it moved upmarket. We designed **brand, product, website and sales assets as one system**, and still do.",
+  link: { label: "Read the Greptile case study", href: "/case-studies/greptile" },
+  metrics: [
+    { value: "W24", label: "YC batch", detail: "Winter 2024" },
+    { value: "2×", label: "Demo requests", detail: "In the first week after launch" },
+    { value: "$25M", label: "Series A", detail: "Led by Benchmark, six months later" },
+    { value: "$50M", label: "Series B", detail: "Led by Menlo Ventures, October 2026" },
+  ] satisfies CaseMetric[],
+};
 
 /**
  * YC work that has showcase media, as homepage ProjectCards with the YC line
@@ -193,8 +241,8 @@ export const ycTestimonials: Testimonial[] = [
 ];
 
 export const ycRoster = {
-  heading: "YC companies we work with",
-  intro: `${ycClients.length} companies across ${batches.length} batches, from teams still in batch to a Series C. Under each logo is **its batch and its latest public round**.`,
+  heading: `${ycClients.length} companies, ${batches.length} batches`,
+  intro: "From teams still in batch to a Series C, newest batch first. Under each logo is **the company's latest public round**.",
 };
 
 export const ycMoreWorkSection = {
@@ -203,22 +251,25 @@ export const ycMoreWorkSection = {
     "Brand, website and product for more of the roster. Each one opens **the live site or the full case study**.",
 };
 
+/**
+ * Three numbered columns. Sources: the referral line (Greptile case study),
+ * FuseAI's 17 days (its case study) and the working terms (pixelupFaq).
+ */
 export const ycWhy = {
   heading: "Backed by YC. Judged like everyone else.",
   // No intro: Arjun asked for the heading alone (2026-11-13).
-  rows: [
+  columns: [
     {
-      label: "The proof",
-      body: "Greptile had YC backing and strong technology, but gaps in product clarity and brand maturity surfaced as it moved upmarket. We designed the brand, product, website and sales assets as one system. Demo requests doubled in week one, and within six months Greptile raised **a $25M Series A at a $180M valuation**, led by Benchmark. In October 2026 it raised a $50M Series B at a $750M valuation.",
-      link: { label: "Read the Greptile case study", href: "/case-studies/greptile" },
+      title: "Founders refer us",
+      body: "After its launch, Greptile began **referring us to other YC founders**. One introduction turned into several.",
     },
     {
-      label: "The referrals",
-      body: "Greptile began **referring us to other YC founders**. One introduction turned into several, and that work became the foundation for long-term partnerships across the YC ecosystem.",
+      title: "Planned around your date",
+      body: "We plan backwards from Demo Day, a launch or a raise. FuseAI (YC W25) had **its brand ready on launch day**, 17 days after kickoff.",
     },
     {
-      label: "Who you work with",
-      body: "You work directly with Daksh, your creative director and point of contact, backed by a small senior team. **No account managers, no layers.**",
+      title: "One senior team",
+      body: "You work directly with Daksh, your creative director, backed by a small senior team in one shared Slack channel. **No account managers, no layers.**",
     },
   ],
   deliverablesLabel: "What you get",
@@ -239,25 +290,31 @@ export const ycWhy = {
  */
 export const ycProcess: ProcessContent = {
   heading: "How it runs for a YC team",
+  // Before week 1, then weeks 1–8: each step's span follows its timing.
+  trackCells: 9,
   // No intro: Arjun asked for the heading alone (2026-11-13). The timings
   // are on each step and in the FAQ.
   steps: [
     {
       ...processSection.steps[0],
       title: "Discovery call",
+      span: [0, 1],
       body: "You tell us your batch, your buyer and the date you are working to, and we tell you **honestly what we'd change**. Once you sign, we open a shared Slack channel and usually kick off that week or the next.",
     },
     {
       ...processSection.steps[1],
       title: "Founder workshop and strategy",
+      span: [1, 2],
     },
     {
       ...processSection.steps[2],
+      span: [2, 5],
       body: "You see **three directions**, each shown on a website hero, poster and product screen, not just a moodboard. FuseAI (YC W25) had its brand ready on launch day, 17 days after kickoff.",
     },
-    processSection.steps[3],
+    { ...processSection.steps[3], span: [4, 7] },
     {
       ...processSection.steps[4],
+      span: [6, 9],
       body: "We build in Webflow, Framer or Next.js, or hand dev-ready files to your engineers. Every launch includes **10 days of post-launch support**.",
     },
   ],
@@ -305,3 +362,21 @@ export const ycFaq: FaqItem[] = [
     a: "Book a discovery call or message us on Telegram, and tell us your batch. We will review where you are today and tell you honestly what we would change.",
   },
 ];
+
+/** The closing row below desk, where the sidebar's buttons have scrolled
+    away. Desk keeps the sticky sidebar instead. */
+export const ycClosing = {
+  heading: "Tell us your batch.",
+  body: "Book a call and we will review where you are today, then tell you honestly what we would change.",
+};
+
+/** Section index labels, in page order. */
+export const ycSectionLabels = {
+  raised: "Raised",
+  featured: "Featured",
+  index: "Index",
+  work: "Work",
+  why: "Why",
+  process: "Process",
+  faq: "FAQ",
+} as const;

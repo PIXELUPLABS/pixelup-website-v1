@@ -5,6 +5,7 @@ import {
   bleedMargin,
   contentPadding,
   labelPadding,
+  RegMarks,
 } from "@/components/SectionRows";
 import { faqHeading, pixelupFaq, type FaqItem } from "@/lib/case-studies";
 
@@ -22,7 +23,13 @@ export function BlogFaq({
   bleed = false,
   items = pixelupFaq,
   grid = false,
+  eyebrow,
+  marks = false,
 }: {
+  /** grid only: SectionIndex label above the heading (/yc). */
+  eyebrow?: React.ReactNode;
+  /** grid only: RegMarks on the top rule (/yc). */
+  marks?: boolean;
   /** A page's own questions (/yc). The page then emits the matching
       FAQPage JSON-LD itself instead of pixelupFaqSchema. */
   items?: FaqItem[];
@@ -40,13 +47,15 @@ export function BlogFaq({
   if (grid) {
     return (
       <section
-        className={`border-y-[0.5px] border-hairline ${bleedMargin}`}
+        className={`relative border-y-[0.5px] border-hairline ${bleedMargin}`}
         aria-labelledby="faq-heading"
       >
+        {marks && <RegMarks />}
         <div className="grid desk:grid-cols-2">
           <div
-            className={`relative overflow-hidden ${labelPadding.bleed} desk:border-r-[0.5px] desk:border-hairline`}
+            className={`relative flex flex-col gap-5 overflow-hidden ${labelPadding.bleed} desk:border-r-[0.5px] desk:border-hairline`}
           >
+            {eyebrow && <div className="relative">{eyebrow}</div>}
             <Image
               src={faqBg}
               alt=""

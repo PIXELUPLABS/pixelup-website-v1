@@ -4,6 +4,7 @@ import {
   bleedMargin,
   DetailRow,
   noBreakHyphens,
+  RegMarks,
   SplitHeader,
   type SectionEdge,
 } from "./SectionRows";
@@ -23,23 +24,62 @@ const rowHeading =
  * No bottom hairline: the next section's top rule closes the centre rule
  * (BlogFaq on the homepage, EndCta or the FAQ on case studies).
  */
+/**
+ * A step's span on the week track: one cell per week, the step's weeks in
+ * color.brand.accent. Decorative (the mono timing says the same in words).
+ */
+function WeekTrack({
+  cells,
+  span: [start, end],
+}: {
+  cells: number;
+  span: [number, number];
+}) {
+  return (
+    <div
+      aria-hidden="true"
+      className="mt-5 grid gap-px"
+      style={{ gridTemplateColumns: `repeat(${cells}, minmax(0, 1fr))` }}
+    >
+      {Array.from({ length: cells }, (_, cell) => (
+        <span
+          key={cell}
+          className={`h-1.5 ${cell >= start && cell < end ? "bg-accent" : "bg-white/10"}`}
+        />
+      ))}
+    </div>
+  );
+}
+
 export function ProcessSection({
   edge = "inset",
   content = processSection,
+  eyebrow,
+  marks = false,
 }: {
   /** "bleed" in a LeftNav-shell column (homepage), "inset" on case studies. */
   edge?: SectionEdge;
   /** A page's own wording of the same steps (/yc). Defaults to lib/process.ts. */
   content?: ProcessContent;
+  /** SplitHeader's section index label (/yc). */
+  eyebrow?: React.ReactNode;
+  /** RegMarks on the section's top rule (/yc, "bleed" only). */
+  marks?: boolean;
 }) {
-  const { heading, intro, steps } = content;
+  const { heading, intro, steps, trackCells } = content;
 
   return (
     <section
       aria-labelledby="process-heading"
-      className={`border-t-[0.5px] border-hairline ${edge === "bleed" ? bleedMargin : ""}`}
+      className={`relative border-t-[0.5px] border-hairline ${edge === "bleed" ? bleedMargin : ""}`}
     >
-      <SplitHeader heading={heading} headingId="process-heading" edge={edge}>
+      {marks && <RegMarks />}
+      <SplitHeader
+        heading={heading}
+        headingId="process-heading"
+        edge={edge}
+        eyebrow={eyebrow}
+      >
         {intro && (
           <p className="max-w-[60ch] text-[16px] leading-[1.5] text-muted-65">
             <Emphasis text={intro} />
@@ -53,12 +93,17 @@ export function ProcessSection({
             <DetailRow
               edge={edge}
               label={
-                <div className="flex items-baseline justify-between gap-6">
-                  <h3 className={rowHeading}>{step.title}</h3>
-                  <p className="shrink-0 font-mono text-[12px] uppercase leading-none tracking-wide text-white">
-                    {step.timing}
-                  </p>
-                </div>
+                <>
+                  <div className="flex items-baseline justify-between gap-6">
+                    <h3 className={rowHeading}>{step.title}</h3>
+                    <p className="shrink-0 font-mono text-[12px] uppercase leading-none tracking-wide text-white">
+                      {step.timing}
+                    </p>
+                  </div>
+                  {trackCells && step.span && (
+                    <WeekTrack cells={trackCells} span={step.span} />
+                  )}
+                </>
               }
             >
               <p className="text-muted-65">

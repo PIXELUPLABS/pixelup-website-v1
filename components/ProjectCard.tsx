@@ -7,7 +7,15 @@ import type { Project } from "@/lib/projects";
 const mediaHover =
   "transition-transform duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:scale-[1.05]";
 
-function CardMedia({ project, priority }: { project: Project; priority: boolean }) {
+function CardMedia({
+  project,
+  priority,
+  sizes,
+}: {
+  project: Project;
+  priority: boolean;
+  sizes: string;
+}) {
   if (project.media.type === "video") {
     return (
       <video
@@ -28,7 +36,7 @@ function CardMedia({ project, priority }: { project: Project; priority: boolean 
       alt={project.alt}
       fill
       priority={priority}
-      sizes="(min-width: 1200px) 70vw, 100vw"
+      sizes={sizes}
       className={`object-cover ${mediaHover}`}
     />
   );
@@ -47,7 +55,13 @@ function CardMedia({ project, priority }: { project: Project; priority: boolean 
  * so the meta drops under the title and keeps its own space-between, which
  * holds the year against the right edge at every width.
  */
-function ProjectInfo({ project }: { project: Project }) {
+function ProjectInfo({
+  project,
+  compact,
+}: {
+  project: Project;
+  compact: boolean;
+}) {
   const { label, tagline, services, year } = project;
   const hasServices = Boolean(services?.length);
 
@@ -55,19 +69,33 @@ function ProjectInfo({ project }: { project: Project }) {
   if (!tagline && !hasServices && !year) return null;
 
   return (
-    <div className="flex flex-col items-start gap-3 opacity-70 transition-opacity duration-300 hover:opacity-100 desk:flex-row desk:items-end desk:justify-between desk:gap-4">
-      <div className="w-full min-w-0 desk:flex-1">
-        <h3 className="text-[20px] font-medium leading-[1.2] tracking-[-0.02em] text-white desk:truncate desk:text-[24px]">
+    // compact (/yc's two-column grid): the stacked mobile layout at every
+    // width, since half the column can't hold the single desktop row.
+    <div
+      className={`flex flex-col items-start gap-3 opacity-70 transition-opacity duration-300 hover:opacity-100 ${
+        compact ? "" : "desk:flex-row desk:items-end desk:justify-between desk:gap-4"
+      }`}
+    >
+      <div className={`w-full min-w-0 ${compact ? "" : "desk:flex-1"}`}>
+        <h3
+          className={`text-[20px] font-medium leading-[1.2] tracking-[-0.02em] text-white ${compact ? "" : "desk:truncate desk:text-[24px]"}`}
+        >
           {label}
         </h3>
         {tagline && (
-          <p className="text-[14px] leading-[1.3] tracking-[-0.02em] text-body-grey desk:truncate desk:text-[16px]">
+          <p
+            className={`text-[14px] leading-[1.3] tracking-[-0.02em] text-body-grey ${compact ? "" : "desk:truncate desk:text-[16px]"}`}
+          >
             {tagline}
           </p>
         )}
       </div>
       {(hasServices || year) && (
-        <div className="flex w-full items-baseline justify-between gap-4 font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:w-auto desk:shrink-0 desk:justify-end desk:gap-8">
+        <div
+          className={`flex w-full items-baseline justify-between gap-4 font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey ${
+            compact ? "" : "desk:w-auto desk:shrink-0 desk:justify-end desk:gap-8"
+          }`}
+        >
           {/* Wraps below desk — a three-discipline list needs ~307px and a
               375px card only offers 296px, and losing the last discipline to an
               ellipsis is worse than a second line. `items-baseline` aligns the
@@ -76,7 +104,7 @@ function ProjectInfo({ project }: { project: Project }) {
               only break opportunities are the separators — "Product Design"
               never splits across lines. */}
           {hasServices && (
-            <p className="min-w-0 desk:truncate">
+            <p className={`min-w-0 ${compact ? "" : "desk:truncate"}`}>
               {services!.map((service, i) => (
                 <Fragment key={service}>
                   {i > 0 && " "}
@@ -98,10 +126,14 @@ function ProjectInfo({ project }: { project: Project }) {
 export function ProjectCard({
   project,
   index = 0,
+  compact = false,
 }: {
   project: Project;
   /** Position in the showcase — drives the staggered entrance delay. */
   index?: number;
+  /** Half-column card for a two-column grid (/yc): the info stacks at every
+      width and the image requests half the column. */
+  compact?: boolean;
 }) {
   // Cards join the entrance sequence after the nav copy (~200ms in), each one
   // a beat later than the last, capped so deep cards don't lag forever.
@@ -118,7 +150,15 @@ export function ProjectCard({
     <div className="flex flex-col gap-3">
       <div className="relative aspect-[1008/584] w-full overflow-hidden bg-white/[0.03]">
         {/* The first card is the homepage LCP — preload it. */}
-        <CardMedia project={project} priority={index === 0} />
+        <CardMedia
+          project={project}
+          priority={index === 0}
+          sizes={
+            compact
+              ? "(min-width: 1200px) 35vw, 100vw"
+              : "(min-width: 1200px) 70vw, 100vw"
+          }
+        />
         {project.overlayLogo && (
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <img
@@ -130,7 +170,7 @@ export function ProjectCard({
           </div>
         )}
       </div>
-      <ProjectInfo project={project} />
+      <ProjectInfo project={project} compact={compact} />
     </div>
   );
 

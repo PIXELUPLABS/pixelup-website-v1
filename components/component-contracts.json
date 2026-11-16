@@ -115,6 +115,7 @@
     "when_to_use": "Inside Showcase, one per project, and on /yc: the featured Greptile card at the top of the column and the 'More work for YC companies' stack, both fed by lib/yc.ts, which swaps each tagline for the YC line ('YC W24 · $50M Series B'). Full column width only.",
     "do_not": [
       "Don't add border-radius/shadow — square corners are a deliberate Figma decision.",
+      "Don't put the default card in a two-column grid: its desktop info row needs the full column. Use compact there (/yc's work grid), which stacks the info at every width and requests a half-column image.",
       "Don't skip the priority/fetchPriority wiring on the first card — it's the homepage's LCP element.",
       "Don't pin the info row to a fixed 50px height — it's intrinsic (24px title at 1.2 + 16px tagline at 1.3 = 49.6px) so a wrapping mobile tagline can't clip.",
       "Don't let a tagline run long on a project with three disciplines — the wider meta column leaves it only ~46 characters before it truncates at 1200px.",
@@ -329,7 +330,7 @@
       "item:closed": "grid-rows-[0fr], opacity 0, but stays in the DOM (not unmounted)."
     },
     "tokens_used": ["color.neutral.hairline (divide-y)", "typography.size.16"],
-    "when_to_use": "Case study pages (via SectionShell) and the /blog page (standalone, full width) — same shared FAQ content (lib/case-studies.ts pixelupFaq) and matching FAQPage JSON-LD schema on both. BlogFaq (components/blog/BlogFaq.tsx) wraps it; its items prop defaults to pixelupFaq, and /yc passes ycFaq (lib/yc.ts) and emits its own FAQPage JSON-LD from the same list. BlogFaq layouts: the default 45/55 split (bleed prop on the homepage), and grid (/yc): the heading in the left cell of SectionRows' two-column grid at the page's 48px H2 size, the centre rule carried on from the section above, the accordion in the right cell at the rows' content padding, on the bleed edge with a bottom rule that closes the centre rule.",
+    "when_to_use": "Case study pages (via SectionShell) and the /blog page (standalone, full width) — same shared FAQ content (lib/case-studies.ts pixelupFaq) and matching FAQPage JSON-LD schema on both. BlogFaq (components/blog/BlogFaq.tsx) wraps it; its items prop defaults to pixelupFaq, and /yc passes ycFaq (lib/yc.ts) and emits its own FAQPage JSON-LD from the same list. BlogFaq layouts: the default 45/55 split (bleed prop on the homepage), and grid (/yc): the heading in the left cell of SectionRows' two-column grid at the page's 48px H2 size, the centre rule carried on from the section above, the accordion in the right cell at the rows' content padding, on the bleed edge with a bottom rule that closes the centre rule. grid also takes eyebrow (a SectionIndex above the heading) and marks (RegMarks), both on /yc.",
     "do_not": [
       "Don't put the heading (<h3>) inside the <button> — headings cannot legally nest inside button elements. It wraps the button instead."
     ]
@@ -491,7 +492,7 @@
     "file": "components/clients/ClientRow.tsx",
     "category": "content",
     "description": "One hairline-separated client entry with 25px top padding and 40px bottom padding at every viewport. Desktop uses three aligned columns: the dominant logo column, Niche, and What we did. Both text columns render at 60% white opacity. Mobile stacks the same content, preserves the approved 10px logo-to-niche gap, and keeps explicit Niche and What we did labels. Approved vectors render pure white inside optically audited contain frames, preserving their original aspect ratios without transform scaling. Vertera Health and Conigma are intentional color exceptions. Vertera preserves its white wordmark and outer icon with black petals against the white icon background. Conigma preserves its original wordmark shape in white, with a white rounded icon tile and black inner star. The default frame remains 134.4px by 24px. Per-logo width changes are applied to the rendered mark—not merely to unused frame space—by pairing each requested width with a sufficient proportional height in logoFrameClassBySlug. The current optical adjustments cover Autumn Pricing, Bland, CTGT, Conigma, DayFlow, Greptile, Henrylabs, Lasting Learn, NFA, Pogo, Reducto, Revyl, Sainapse, Streamline, Sully, Synthio Labs, Umbra, Vertera Health, Zenact, and Jumbo. Grovio currently uses the established accessible duplicated-logo placeholder because its SVG was not included. The final three engagement words stay together to prevent widow lines. The full client name remains in accessibility text and structured data rather than appearing beside the logo.",
-    "variants": ["approved logo vs duplicated-logo placeholder", "bleed (via ClientRoster): each row takes SectionRows' bleedMargin and pads it back, so its top hairline runs from the LeftNav divider to the viewport edge while the three columns stay where they were (/yc)"],
+    "variants": ["approved logo vs duplicated-logo placeholder", "bleed (via ClientRoster): each row takes SectionRows' bleedMargin and pads it back, so its top hairline runs from the LeftNav divider to the viewport edge while the three columns stay where they were", "dense (/yc BatchProgramme): 20px vertical padding, no top rule on a group's first row, columns re-weighted 1 / 0.75 / 1.5 for a 3/4-width cell"],
     "states": {"entrance": "fade-up stagger capped at 600ms"},
     "tokens_used": ["color.neutral.hairline", "color.neutral.label-grey", "typography.font.mono", "spacing.base", "breakpoint.desk"],
     "when_to_use": "Inside ClientRoster only, driven by lib/clients.ts.",
@@ -522,7 +523,9 @@
     "category": "layout",
     "description": "SectionHeader (label and optional '01 / 06' counter on the left half, H2 and lead copy on the right), SplitHeader (case study SectionShell's header: H2 in the left half, full-width hairline, lead copy in the right half) and DetailRow (14px white/60 label | 16px content), on the case-study centre rule. ChallengeBlock's geometry, moved out of ServiceSection so the homepage and case studies can use it without the /services code.",
     "variants": {
-      "edge": "\"inset\" (default) pads every cell 24px for a full-bleed main (case studies, /services). \"flush\" drops the outer side padding to line up with a LeftNav-shell column. \"bleed\" keeps flush's text positions, but the section takes `bleedMargin` (desk:-ml-4 desk:-mr-5) so its hairlines run from the shell divider to the viewport edge with no gap; the cells pad that back (homepage ProcessSection, and every section on /yc, where each horizontal rule has to meet the LeftNav divider and the viewport edge). SplitHeader without children renders the heading row alone; labelPadding and contentPadding are exported for sections that build their own cells (BlogFaq grid)."
+      "edge": "\"inset\" (default) pads every cell 24px for a full-bleed main (case studies, /services). \"flush\" drops the outer side padding to line up with a LeftNav-shell column. \"bleed\" keeps flush's text positions, but the section takes `bleedMargin` (desk:-ml-4 desk:-mr-5) so its hairlines run from the shell divider to the viewport edge with no gap; the cells pad that back (homepage ProcessSection, and every section on /yc, where each horizontal rule has to meet the LeftNav divider and the viewport edge). SplitHeader without children renders the heading row alone, and its eyebrow prop puts a label above the H2; labelPadding and contentPadding are exported for sections that build their own cells (BlogFaq grid).",
+      "SectionIndex": "'01 — Raised': 12px uppercase mono, the number white and the name white/40. /yc numbers every section with it, passed as SplitHeader's eyebrow (and ProcessSection's and BlogFaq's).",
+      "RegMarks": "11px hairline crosses (white/50) where a bleed section's top rule meets the LeftNav divider and the centre rule, desk only. The section needs relative and the bleed edge. No mark at the right edge, which would overflow the viewport. ProcessSection and BlogFaq (grid) take a marks prop for it."
     },
     "states": ["none"],
     "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.tracking.display-tight", "typography.font.mono", "breakpoint.desk"],
@@ -540,7 +543,9 @@
     "status": "On staging (2026-11-04): homepage between Showcase and BlogFaq; every case study, story and legacy, before EndCta and the FAQ.",
     "variants": {
       "edge": "\"bleed\" on the homepage and /yc (hairlines meet the LeftNav divider and the viewport edge), \"inset\" (default) on case studies.",
-      "content": "ProcessContent (lib/process.ts): a page's own wording of the same five steps. Defaults to processSection. /yc passes ycProcess (lib/yc.ts), which keeps every timing and only rewords the steps for a YC team. intro is optional: without it SplitHeader renders the heading row alone and the steps follow directly (/yc)."
+      "content": "ProcessContent (lib/process.ts): a page's own wording of the same five steps. Defaults to processSection. /yc passes ycProcess (lib/yc.ts), which keeps every timing and only rewords the steps for a YC team. intro is optional: without it SplitHeader renders the heading row alone and the steps follow directly (/yc).",
+      "week track": "ProcessContent.trackCells plus a span [start, end) on each step draws a row of cells under the step title, the step's cells in color.brand.accent and the rest white/10, so the rows read as one Gantt chart. /yc uses 9 cells: before week 1, then weeks 1–8. Decorative (aria-hidden): the mono timing says the same.",
+      "eyebrow / marks": "SectionIndex label above the H2 and RegMarks on the top rule (/yc)."
     },
     "states": ["static, server-rendered"],
     "tokens_used": ["color.neutral.hairline", "color.neutral.white", "color.neutral.muted-65", "typography.font.mono", "typography.tracking.display-tight", "breakpoint.desk"],
@@ -554,7 +559,48 @@
     ]
   },
 
+  "FundingChart": {
+    "file": "components/yc/FundingChart.tsx",
+    "category": "content",
+    "description": "/yc's Fig. 01: one column per YC client, oldest batch first, its total public funding as a color.brand.accent bar on a 0–$110M scale with dashed $25M gridlines, a white/40 hairline baseline, the value in mono above each bar, the batch in mono and the name set vertically below. Companies without a public round get a white/30 hairline stub and an em dash. Below desk the same data runs as horizontal bars (name + batch | track | value). Both drawings are aria-hidden; an sr-only list carries the figures. Data: lib/yc.ts ycFunding, from the same totals as the headline ycRaisedM, so they can't disagree.",
+    "inspiration": "Swiss concert posters (Müller-Brockmann's Tonhalle series, the Rosbaud/Menuhin poster): data as plain blocks of one color, vertical type, a strict baseline.",
+    "variants": ["desk: vertical columns", "below desk: horizontal bars"],
+    "states": {
+      "entrance": ".bar-rise (app/globals.css): each bar scales up from the baseline, 0.7s on the fade-up easing, staggered 45ms; off under reduced motion",
+      "column:hover": "the bar turns white"
+    },
+    "tokens_used": ["color.brand.accent", "color.neutral.hairline", "color.neutral.white", "typography.font.mono", "breakpoint.desk"],
+    "when_to_use": "/yc only, under the giant $ figure in section 01.",
+    "do_not": [
+      "Don't switch to a log or sqrt scale: the small rounds are meant to look small next to the large ones, and every bar is labelled.",
+      "Don't round a value up; formatM rounds down, like the headline total."
+    ]
+  },
+
+  "BatchProgramme": {
+    "file": "components/yc/BatchProgramme.tsx",
+    "category": "content",
+    "description": "/yc's index, set like a Swiss concert programme: one group per YC batch, newest first. The batch code sits in 48px type (32px below desk) with its season in mono on the left quarter, a hairline spine, and the batch's companies as dense ClientRows in the right three quarters, the latest public round under each logo. A desk-only mono label row heads the columns. Every rule bleeds to the LeftNav divider and the viewport edge.",
+    "variants": ["none"],
+    "states": ["static, server-rendered; rows keep ClientRow's fade-up"],
+    "tokens_used": ["color.neutral.hairline", "color.neutral.white", "typography.font.mono", "typography.tracking.display-tight", "breakpoint.desk"],
+    "when_to_use": "/yc only, fed by lib/yc.ts ycBatchGroups. /clients keeps ClientRoster.",
+    "do_not": ["Don't pass ClientRow a column template from here; dense owns it, so two desk:grid-cols classes never compete."]
+  },
+
   "_gaps": [
+    {
+      "gap": "Display numeral above the type scale",
+      "status": "Open: deviation on /yc (2026-11-16)",
+      "detail": "/yc's section 01 sets the raised total at 168px desk / 88px mobile (leading 0.8, tracking-clients-heading), a poster-scale numeral the 12–64px scale has no step for. Decide whether to add a display token or keep it a one-off.",
+      "closest_existing": "typography.size.64, typography.tracking.clients-heading"
+    },
+    {
+      "gap": "Accent as data color",
+      "status": "Open: deviation on /yc (2026-11-16)",
+      "detail": "color.brand.accent is otherwise reserved for CTAs and active states. /yc also uses it for FundingChart's bars and ProcessSection's week track, so data and the Book a call button share one blue in some viewports. Confirm this is acceptable or pick a data color.",
+      "closest_existing": "SectionNav's accent marker"
+    },
     {
       "gap": "Error / validation color token",
       "detail": "No error color exists in tokens.json or @theme. ReferralForm follows NewsletterForm's precedent of Tailwind's red-400. Define color.feedback.error and promote it into @theme before more forms ship.",
