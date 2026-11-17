@@ -138,6 +138,7 @@ export function SplitHeader({
   edge = "inset",
   eyebrow,
   aside,
+  singleLine = false,
   children,
 }: {
   heading: string;
@@ -150,6 +151,10 @@ export function SplitHeader({
       Below desk it stacks under the H2. /yc uses it so no heading row is
       left with an empty half. */
   aside?: React.ReactNode;
+  /** Keeps a short H2 on one line (/yc's "13 companies, 10 batches"). Only
+      for headings that fit the half cell at desk (48px) and a 320px phone
+      (24px); a longer one would cross the centre rule. */
+  singleLine?: boolean;
   children?: React.ReactNode;
 }) {
   return (
@@ -161,7 +166,7 @@ export function SplitHeader({
           {eyebrow}
           <h2
             id={headingId}
-            className="text-balance text-[24px] font-medium leading-tight tracking-display text-white desk:text-[48px]"
+            className={`${singleLine ? "whitespace-nowrap" : "text-balance"} text-[24px] font-medium leading-tight tracking-display text-white desk:text-[48px]`}
           >
             {noBreakHyphens(heading)}
           </h2>

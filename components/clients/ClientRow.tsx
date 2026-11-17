@@ -59,16 +59,7 @@ function splitForBalancedLastLine(text: string) {
   };
 }
 
-function ClientIdentity({
-  client,
-  index,
-  showNote = true,
-}: {
-  client: Client;
-  index: number;
-  /** dense moves the funding note to its own column instead. */
-  showNote?: boolean;
-}) {
+function ClientIdentity({ client, index }: { client: Client; index: number }) {
   const isPlaceholderLogo = !client.logo;
   const preservesSourceColors = ["conigma", "vertera-health"].includes(client.slug);
   const logo = client.logo ?? placeholderLogos[index % placeholderLogos.length];
@@ -89,7 +80,7 @@ function ClientIdentity({
         />
         {isPlaceholderLogo && <span className="sr-only">{client.name} logo placeholder</span>}
       </div>
-      {showNote && client.fundingNote && (
+      {client.fundingNote && (
         <p className="text-[14px] leading-[1.3] text-label-grey">{client.fundingNote}</p>
       )}
     </div>
@@ -99,41 +90,46 @@ function ClientIdentity({
 export function ClientRow({
   client,
   index,
-  dense = false,
+  batch,
 }: {
   client: Client;
   index: number;
-  /** /yc's batch programme: one short line per company. Logo | niche |
-      funding note (the latest round), no engagement line, 20px top and
-      bottom, and no top rule on a group's first row (the group's own rule
-      is there). From desk the row is three equal columns of a 3/4-width
-      cell, each padded 24px, so they start on the page's quarter lines
-      (full-width /yc, "inset" geometry). Below desk the row carries the
-      page's 24px gutter: the logo, then niche and round on one line. A
-      missing note shows an em dash. */
-  dense?: boolean;
+  /** /yc's index: the YC batch ("F26 · Fall 2026") takes the "What we did"
+      column, in the same 14px type, on one line. The row is otherwise the
+      /clients row (logo with the latest round under it, then niche), laid
+      on /yc's quarter grid: from desk the logo cell spans the left half and
+      niche and batch start on the 1/2 and 3/4 lines, every cell padded
+      24px (full-width "inset" geometry). Below desk it stacks like
+      /clients, inside the page's 24px gutter. */
+  batch?: string;
 }) {
   const entranceDelay = `${Math.min(100 + index * 70, 600)}ms`;
 
-  if (dense) {
+  if (batch !== undefined) {
     return (
       <li
-        className="fade-up grid grid-cols-1 gap-3 border-t-[0.5px] border-hairline px-6 py-5 first:border-t-0 desk:grid-cols-3 desk:items-center desk:gap-0 desk:px-0"
+        className="fade-up grid grid-cols-1 gap-0 border-t-[0.5px] border-hairline px-6 pb-10 pt-6.25 desk:grid-cols-4 desk:items-start desk:px-0"
         style={{ animationDelay: entranceDelay }}
       >
-        <div className="min-w-0 desk:pl-6">
-          <ClientIdentity client={client} index={index} showNote={false} />
+        <div className="min-w-0 desk:col-span-2 desk:px-6">
+          <ClientIdentity client={client} index={index} />
         </div>
-        <div className="flex items-baseline justify-between gap-4 desk:contents">
-          <p className="text-[14px] leading-5 tracking-[-0.02em] text-white/60 desk:pl-6">
+
+        <div className="mt-2.5 flex min-w-0 flex-col gap-2 desk:mt-0 desk:gap-0 desk:px-6">
+          <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
+            Niche
+          </p>
+          <p className="text-[14px] leading-5 tracking-[-0.02em] text-white/60">
             {client.niche}
           </p>
-          <p
-            className={`text-right text-[14px] leading-5 tracking-[-0.02em] desk:pl-6 desk:pr-6 desk:text-left desk:text-[16px] ${
-              client.fundingNote ? "text-white" : "text-white/30"
-            }`}
-          >
-            {client.fundingNote ?? "—"}
+        </div>
+
+        <div className="mt-6 flex min-w-0 flex-col gap-3 desk:mt-0 desk:px-6">
+          <p className="font-mono text-[12px] font-medium uppercase leading-[1.3] tracking-[0.04em] text-label-grey desk:hidden">
+            Batch
+          </p>
+          <p className="whitespace-nowrap text-[14px] leading-5 tracking-[-0.02em] text-white/60">
+            {batch}
           </p>
         </div>
       </li>

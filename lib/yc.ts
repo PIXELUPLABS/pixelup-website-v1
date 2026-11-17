@@ -171,26 +171,25 @@ export const ycFundingRange = {
   last: ycFunding.at(-1)!.batch,
 };
 
-export interface BatchGroup {
-  batch: string;
-  season: string;
-  /** Roster rows with the latest round (not the batch) as the funding note,
-      shown in BatchProgramme's right-hand column. */
-  clients: Client[];
-}
-
 /**
- * The index, set like a concert programme: one group per batch, newest
- * first, so a founder finds their own batch at a glance. Within a batch the
- * /clients roster's order holds.
+ * The index (03): the /clients roster's rows (ClientRoster with batches),
+ * newest batch first and the /clients order within a batch. The latest
+ * round sits under the logo where /clients puts its funding note; the
+ * batch takes the "What we did" column (Arjun, 2026-11-17).
  */
-export const ycBatchGroups: BatchGroup[] = [...batches].reverse().map((batch) => ({
-  batch,
-  season: seasonOf(batch),
-  clients: rosterSource
+export const ycIndex: Client[] = [...batches].reverse().flatMap((batch) =>
+  rosterSource
     .filter((c) => ycRecords[c.slug]?.batch === batch)
     .map((c) => ({ ...c, fundingNote: ycRecords[c.slug].round })),
-}));
+);
+
+/** slug → "F26 · Fall 2026", the index's batch column. */
+export const ycIndexBatches: Record<string, string> = Object.fromEntries(
+  Object.entries(ycRecords).map(([slug, r]) => [
+    slug,
+    `${r.batch} · ${seasonOf(r.batch)}`,
+  ]),
+);
 
 /** Greptile, the featured study: the journey in four cells. Sources: its
     case study (2×, Series A) and its Series B (see the header). */

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BlogFaq } from "@/components/blog/BlogFaq";
+import { ClientRoster } from "@/components/clients/ClientRoster";
 import { Metrics } from "@/components/case-study/CaseStudyStory";
 import { Emphasis } from "@/components/case-study/Emphasis";
 import { CtaButtons } from "@/components/CtaButtons";
@@ -14,17 +15,17 @@ import {
   SplitHeader,
 } from "@/components/SectionRows";
 import { TestimonialSlider } from "@/components/TestimonialSlider";
-import { BatchProgramme } from "@/components/yc/BatchProgramme";
 import { FundingChart } from "@/components/yc/FundingChart";
 import { siteUpdated } from "@/lib/site-dates";
 import {
-  ycBatchGroups,
   ycClients,
   ycClosing,
   ycFaq,
   ycFeatured,
   ycFeaturedWork,
   ycFunding,
+  ycIndex,
+  ycIndexBatches,
   ycMoreWork,
   ycMoreWorkSection,
   ycProcess,
@@ -168,7 +169,7 @@ export default function YcPage() {
               <strong className="font-medium text-white">
                 YC companies we design for
               </strong>
-              . Public rounds only, so it&apos;s a floor.
+              .
             </p>
           </div>
           <FundingChart entries={ycFunding} />
@@ -200,16 +201,18 @@ export default function YcPage() {
         <Metrics metrics={ycFeatured.metrics} bottomRule={false} />
       </section>
 
-      {/* 03 — Index: the roster as a programme, by batch. The label row
-          explains the columns, so the heading stands alone. */}
+      {/* 03 — Index: the /clients roster with the batch in place of "What
+          we did", newest batch first. The label row explains the columns,
+          so the heading stands alone, on one line. */}
       <section aria-labelledby="yc-index-heading" className={section}>
         <RegMarks start={false} />
         <SplitHeader
           heading={ycRoster.heading}
           headingId="yc-index-heading"
           eyebrow={<SectionIndex index={3} label={labels.index} />}
+          singleLine
         />
-        <BatchProgramme groups={ycBatchGroups} />
+        <ClientRoster clients={ycIndex} batches={ycIndexBatches} />
       </section>
 
       {/* 04 — Work: a two-up grid of tiles split on the centre rule. */}

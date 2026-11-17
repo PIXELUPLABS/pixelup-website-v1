@@ -35,7 +35,7 @@ export const siteUpdated = {
       the sitemap, and unlinked (it exists for tool directory listings). */
   swipe: "2026-10-22",
   /** For YC founders. On staging only; not in the sitemap or the nav. */
-  yc: "2026-11-16",
+  yc: "2026-11-17",
 } as const;
 
 /** First public commit of the site — used as `datePublished` on the homepage. */
