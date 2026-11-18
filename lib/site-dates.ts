@@ -24,8 +24,8 @@ export const siteUpdated = {
   explorations: "2026-09-30",
   clients: "2026-11-13",
   privacy: "2026-11-05",
-  /** /faq: lib/faq.ts. Also its FAQPage `datePublished` (first published with this date). */
-  faq: "2026-10-27",
+  /** /faq: lib/faq.ts. Its FAQPage `datePublished` stays pinned to 2026-10-27 in lib/faq.ts. */
+  faq: "2026-11-18",
   /** The /case-studies index only. Each study carries its own published /
       updated dates on `publication` in lib/case-studies.ts. */
   caseStudies: "2026-10-20",

@@ -45,11 +45,6 @@ export const faqCategories: FaqCategory[] = [
     label: "Pricing & Scope",
     items: [
       {
-        id: "how-much-does-pixelup-labs-cost",
-        q: "How much does PIXELUP LABS cost?",
-        a: "PIXELUP LABS charges $15,000 for a brand sprint, from $20,000 for a website-only sprint, $25,000 to $40,000 for a brand and website project, and from $6,000 a month for a retainer. Prices are published on [Contra](https://contra.com/daksh_aswal_dt5tfn27/services).",
-      },
-      {
         id: "are-pixelup-labs-prices-fixed",
         q: "Are PIXELUP LABS prices fixed?",
         a: "Yes. PIXELUP LABS charges a fixed fee for an agreed scope, set in a written proposal before you sign. If you ask for something outside that scope mid-project, PIXELUP LABS quotes it before starting, and you decide whether it goes ahead.",
@@ -188,7 +183,7 @@ export const faqPageSchema = {
   "@id": "https://www.pixeluplabs.com/faq/#webpage",
   url: "https://www.pixeluplabs.com/faq",
   name: "FAQ - PIXELUP LABS",
-  datePublished: siteUpdated.faq,
+  datePublished: "2026-10-27",
   dateModified: siteUpdated.faq,
   isPartOf: { "@id": "https://www.pixeluplabs.com/#website" },
   about: { "@id": "https://www.pixeluplabs.com/#organization" },
