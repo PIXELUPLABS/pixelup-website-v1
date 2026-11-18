@@ -393,12 +393,6 @@ export const pixelupFaq: FaqItem[] = [
     a: "Brand sprints take 2–4 weeks. Brand plus website projects take 6–8 weeks from kickoff to launch. We regularly deliver under hard deadlines like fundraise announcements and launch dates.",
   },
   {
-    q: "How much does it cost?",
-    a: "Brand sprints are $15,000. Brand plus website projects run $25,000 to $40,000. Retainers start at $6,000 a month.",
-    href: "https://contra.com/daksh_aswal_dt5tfn27/services",
-    linkLabel: "See current services and pricing on Contra.",
-  },
-  {
     q: "What is it like to work with you?",
     a: "You work directly with the team on Slack, with fast turnarounds and quick iterations. No account managers, no layers, no surprises.",
   },
