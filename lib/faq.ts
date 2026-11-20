@@ -26,7 +26,7 @@ export const faqCategories: FaqCategory[] = [
       {
         id: "who-is-pixelup-labs-not-a-fit-for",
         q: "Who is PIXELUP LABS not a fit for?",
-        a: "PIXELUP LABS is not the right fit for:\n- Teams that are pre-product or still finding product-market fit.\n- Budgets under $15,000 for a brand, or under $25,000 for brand and website.\n- Teams whose strategy and designs are final and only need execution.\n- Lead generation, SEO or paid ads.",
+        a: "PIXELUP LABS is not the right fit for:\n- Teams that are pre-product or still finding product-market fit.\n- Budgets under $15,000 for a brand, or under $25,000 for brand and website.\n- Teams whose strategy and designs are final and only need execution.",
       },
       {
         id: "can-pixelup-labs-design-for-a-technical-product",
