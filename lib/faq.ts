@@ -26,7 +26,7 @@ export const faqCategories: FaqCategory[] = [
       {
         id: "who-is-pixelup-labs-not-a-fit-for",
         q: "Who is PIXELUP LABS not a fit for?",
-        a: "PIXELUP LABS is not the right fit for:\n- Teams that are pre-product or still finding product-market fit.\n- Budgets under $15,000 for a brand, or under $25,000 for brand and website.\n- Teams whose strategy and designs are final and only need execution.\n- Projects where sign-off runs through a steering committee or procurement.\n- Lead generation, SEO or paid ads.\n- Multi-year overhauls of complex enterprise software.\n- High-volume production, such as dozens of ad variants a month.",
+        a: "PIXELUP LABS is not the right fit for:\n- Teams that are pre-product or still finding product-market fit.\n- Budgets under $15,000 for a brand, or under $25,000 for brand and website.\n- Teams whose strategy and designs are final and only need execution.\n- Lead generation, SEO or paid ads.",
       },
       {
         id: "can-pixelup-labs-design-for-a-technical-product",
@@ -36,7 +36,7 @@ export const faqCategories: FaqCategory[] = [
       {
         id: "will-a-new-brand-and-website-help-us-close",
         q: "Will a new brand and website help us close enterprise deals?",
-        a: "Not on its own. A new brand and website from PIXELUP LABS are built so enterprise buyers stop hesitating before they book the demo. The product and the sales team still close the deal.",
+        a: "Yes. A new brand and website from PIXELUP LABS make it much easier for your sales team to close new deals. They're built so enterprise buyers stop hesitating before they book the demo, and your team spends less time convincing them you're credible.",
       },
     ],
   },
@@ -134,7 +134,7 @@ export const faqCategories: FaqCategory[] = [
       {
         id: "who-owns-the-work-after-the-project-ends",
         q: "Who owns the work after the project ends?",
-        a: "You do. At launch, or at final handoff on a brand-only sprint, the final brand, guidelines, design system, Figma files, code and platform accounts transfer to you. Commercial font licenses are the exception: you buy those directly.",
+        a: "You do. At launch, or at final handoff on a brand-only sprint, the final brand, guidelines, design system, Figma files, code and platform accounts transfer to you. Commercial font licenses are the exception: you buy those directly.\n\nIf you need more design help after that, for marketing campaigns, ads or launches, PIXELUP LABS can keep working with you on a retainer. Because PIXELUP LABS designed the brand, it can carry it across every marketing touchpoint better than anyone else.",
       },
     ],
   },
