@@ -32,6 +32,12 @@ export const dynamic = "force-dynamic";
  * URL is current, so they treat it as undated and discount it. Dates come
  * from lib/site-dates.ts (static routes) and each post's own `updatedDate`
  * (blog) — see the note there on why this isn't `new Date()`.
+ *
+ * List only URLs that answer 200 on this host. Redirects stay out, above all
+ * the off-site ones in next.config.ts (/designforb2b → designforb2b.com): a
+ * sitemap URL that leaves the site tells Google nothing about this one, and
+ * Search Console files it under "Page with redirect". Draft case studies stay
+ * out too; their pages are served noindex until `publication.status` flips.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = await getBlogSitemapEntries();
@@ -98,14 +104,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: siteUpdated.caseStudies,
       changeFrequency: "monthly",
       priority: 0.8,
-    },
-    // 301s to designforb2b.com (next.config.ts), so Search Console lists it
-    // under "Page with redirect" rather than as indexed.
-    {
-      url: `${BASE_URL}/designforb2b`,
-      lastModified: siteUpdated.designforb2b,
-      changeFrequency: "yearly",
-      priority: 0.5,
     },
     ...Object.values(caseStudies)
       .filter((study) => study.publication.status === "published")
