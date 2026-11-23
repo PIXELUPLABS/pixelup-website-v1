@@ -19,7 +19,7 @@
 export const siteUpdated = {
   /** /referral: app/referral/page.tsx and lib/referral.ts. */
   referral: "2026-11-07",
-  home: "2026-10-27",
+  home: "2026-11-23",
   call: "2026-10-07",
   explorations: "2026-09-30",
   clients: "2026-11-13",
@@ -28,7 +28,7 @@ export const siteUpdated = {
   faq: "2026-11-20",
   /** The /case-studies index only. Each study carries its own published /
       updated dates on `publication` in lib/case-studies.ts. */
-  caseStudies: "2026-10-20",
+  caseStudies: "2026-11-23",
   /** Swipe by PIXELUP LABS. Live but deliberately unlisted: noindex, out of
       the sitemap, and unlinked (it exists for tool directory listings). */
   swipe: "2026-10-22",

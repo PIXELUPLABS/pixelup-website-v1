@@ -86,9 +86,19 @@ const entries: CaseStudyShowcaseEntry[] = [
     // No funding badge: the tag reads the case study's status badge, "YC W25 · AI sales".
   },
   {
+    slug: "varick-agents",
+    // Sells AI agent systems to Fortune 500 companies (varickagents.com), so it
+    // sits with FuseAI and Valley. 5th, below FuseAI (Arjun, 2026-11-23).
+    niche: "Enterprise AI",
+    // Matches info.involvement in lib/case-studies.ts.
+    whatWeDid:
+      "Brand Identity, Website Design, Website Development, Illustration, Motion Design",
+    // No funding badge: the tag reads the case study's status badge, "Venture-backed · Enterprise AI".
+  },
+  {
     slug: "avantra",
     // Serving layer for real-time multimodal AI, so it sits with Reducto and
-    // Replay. 5th, below FuseAI.
+    // Replay. 6th, below Varick Agents.
     niche: "AI Infrastructure",
     // Matches info.involvement in lib/case-studies.ts.
     whatWeDid:
