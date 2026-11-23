@@ -473,7 +473,7 @@ export function caseStudySchema(study: CaseStudy) {
 const greptile: CaseStudy = {
   slug: "greptile",
   title: "Greptile: YC W24 to $25M Series A in 6 Months",
-  metaTitle: "Greptile Case Study - PIXELUP LABS",
+  metaTitle: "Greptile Logo, Brand, Website & Product Design | Case Study",
   metaDescription:
     "How we evolved Greptile's AI code review platform into an enterprise-ready system, doubling demo requests in week one and helping set up a $25M Series A.",
   info: {
@@ -807,14 +807,14 @@ const greptile: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
 const sainapse: CaseStudy = {
   slug: "sainapse",
   title: "Sainapse: From Technical Product to Enterprise Standard",
-  metaTitle: "Sainapse Case Study - PIXELUP LABS",
+  metaTitle: "Sainapse Branding & Website Design | Case Study",
   metaDescription:
     "A full system rebuild for Sainapse's agentic AI support platform: brand voice, visual identity and web presence, designed together ahead of its GA launch.",
   info: {
@@ -983,14 +983,14 @@ const sainapse: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
 const sully: CaseStudy = {
   slug: "sully",
   title: "Sully: From Liability to Deal Closer in 11 Months",
-  metaTitle: "Sully Case Study - PIXELUP LABS",
+  metaTitle: "Sully AI Website & Motion Design | Case Study",
   metaDescription:
     "How we turned Sully's website into a deal closer with motion-driven explainers, alongside 26x scale and a $32M+ raise at a $150M valuation.",
   info: {
@@ -1148,7 +1148,7 @@ const sully: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
@@ -1164,7 +1164,7 @@ const streamline: CaseStudy = {
   slug: "streamline",
   title:
     "We repositioned Streamline for enterprise, then scaled the brand across 200 pages.",
-  metaTitle: "Streamline Case Study - PIXELUP LABS",
+  metaTitle: "Streamline AI Branding, Website & Design System | Case Study",
   metaDescription:
     "PIXELUP LABS repositioned Streamline for enterprise legal teams and built a brand, website and design system that scaled across more than 200 pages.",
   info: {
@@ -1505,7 +1505,7 @@ const streamline: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-07",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
@@ -1513,7 +1513,7 @@ const henryLabs: CaseStudy = {
   slug: "henrylabs",
   title:
     "We built the Henry Labs brand, then carried it across every touchpoint.",
-  metaTitle: "Henry Labs Case Study - PIXELUP LABS",
+  metaTitle: "Henry Labs Branding, Website & Product Design | Case Study",
   metaDescription:
     "PIXELUP LABS built the brand, website, partner dashboard and checkout for Henry Labs, a founding member of the Agentic Commerce Consortium.",
   info: {
@@ -1984,7 +1984,7 @@ const henryLabs: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-17",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
     blockers: [
       'Funding reads "Private": confirm a figure directly with Henry Labs before publishing one.',
       "Add two approved Slack reactions with names and roles.",
@@ -2008,7 +2008,7 @@ const fuseaiFaq: FaqItem = {
 const fuseai: CaseStudy = {
   slug: "fuseai",
   title: "We rebranded FuseAI for their next stage of growth.",
-  metaTitle: "FuseAI Brand, Website and Product Design | PIXELUP LABS",
+  metaTitle: "FuseAI Branding, Website & Product Design | Case Study",
   metaDescription:
     "PIXELUP LABS designed FuseAI's brand, website and product UI in 2026. The brand was launch-ready in 17 days. FuseAI reports 20% higher trial conversion.",
   info: {
@@ -2303,7 +2303,7 @@ const fuseai: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-10-16",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
@@ -2321,7 +2321,7 @@ const replayFaq: FaqItem = {
 const replay: CaseStudy = {
   slug: "replay",
   title: "We built Replay a brand that can be trusted at first glance.",
-  metaTitle: "Replay Brand, Website and Product Design | PIXELUP LABS",
+  metaTitle: "Replay Branding, Website & Product Design | Case Study",
   metaDescription:
     "PIXELUP LABS built Replay's brand and website from scratch, then designed its product. Replay's founder: \"Best agency I've ever worked with.\"",
   info: {
@@ -2736,7 +2736,7 @@ const replay: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-10-20",
-    updatedDate: "2026-10-20",
+    updatedDate: "2026-11-23",
   },
 };
 
@@ -2754,7 +2754,7 @@ const ctgtFaq: FaqItem = {
 const ctgt: CaseStudy = {
   slug: "ctgt",
   title: "We made CTGT a brand banks can trust.",
-  metaTitle: "CTGT Brand and Website Design | PIXELUP LABS",
+  metaTitle: "CTGT Branding, Website & Motion Design | Case Study",
   metaDescription:
     "PIXELUP LABS designed CTGT's brand and website for the banks and insurers it sells to, and built it in Webflow, live for CTGT's December 2025 launch.",
   info: {
@@ -2987,7 +2987,7 @@ const ctgt: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-11-05",
-    updatedDate: "2026-11-05",
+    updatedDate: "2026-11-23",
     blockers: ["No client quote yet; ask Cyril or Ethan for a dated line."],
   },
 };
@@ -3006,7 +3006,7 @@ const autumnFaq: FaqItem = {
 const autumn: CaseStudy = {
   slug: "autumn",
   title: "We gave Autumn a brand engineers remember.",
-  metaTitle: "Autumn Brand and Website Design | PIXELUP LABS",
+  metaTitle: "Autumn Branding, Website & Motion Design | Case Study",
   metaDescription:
     "PIXELUP LABS designed Autumn's brand and website and built it in Next.js. Autumn (YC S25) merged the code into its own open-source repository.",
   info: {
@@ -3222,7 +3222,7 @@ const autumn: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-11-05",
-    updatedDate: "2026-11-05",
+    updatedDate: "2026-11-23",
     blockers: ["No client quote yet; ask Ayush for a dated line."],
   },
 };
@@ -3247,7 +3247,7 @@ const zenactFaq: FaqItem = {
 const zenact: CaseStudy = {
   slug: "zenact",
   title: "We made Zenact look ready for enterprise.",
-  metaTitle: "Zenact Brand and Website Design | PIXELUP LABS",
+  metaTitle: "Zenact Branding, Website & Motion Design | Case Study",
   metaDescription:
     "PIXELUP LABS designed Zenact's brand and website and built it in Webflow, so an AI QA product earns engineering leaders' trust before naming customers.",
   info: {
@@ -3478,7 +3478,7 @@ const zenact: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-11-05",
-    updatedDate: "2026-11-05",
+    updatedDate: "2026-11-23",
     blockers: ["No client quote yet."],
   },
 };
@@ -3498,7 +3498,7 @@ const valleyFaq: FaqItem = {
 const valley: CaseStudy = {
   slug: "valley",
   title: "We made Valley's difference clear before the sales call.",
-  metaTitle: "Valley Website Design and Sales Deck | PIXELUP LABS",
+  metaTitle: "Valley Website, Motion & Sales Deck Design | Case Study",
   metaDescription:
     "PIXELUP LABS redesigned Valley's website inside its existing brand, built it in Framer and designed its sales deck, so buyers see what sets Valley apart.",
   info: {
@@ -3681,7 +3681,7 @@ const valley: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-11-05",
-    updatedDate: "2026-11-05",
+    updatedDate: "2026-11-23",
     blockers: ["No client quote yet."],
   },
 };
@@ -3698,7 +3698,7 @@ const avantraFaq: FaqItem = {
 const avantra: CaseStudy = {
   slug: "avantra",
   title: "Process breakdown: building Avantra's brand for real-time AI.",
-  metaTitle: "Avantra Brand Identity Process Breakdown | PIXELUP LABS",
+  metaTitle: "Avantra Branding, Illustration & Website Design | Case Study",
   metaDescription:
     "How PIXELUP LABS is building Avantra's brand: moodboards, two directions, an Art Deco × technical system, isometrics, charts, deck and website.",
   info: {
@@ -4905,7 +4905,7 @@ const avantra: CaseStudy = {
   publication: {
     status: "draft",
     publishedDate: "2026-10-30",
-    updatedDate: "2026-10-30",
+    updatedDate: "2026-11-23",
     blockers: [
       "At publish: set both dates to the publish day.",
       "Engagement still in progress: final logo, wordmark and palette not locked.",
@@ -4934,7 +4934,7 @@ const varickAgentsFaq: FaqItem = {
 const varickAgents: CaseStudy = {
   slug: "varick-agents",
   title: "We rebranded Varick Agents for the billion-dollar companies it sells to.",
-  metaTitle: "Varick Agents Brand and Website Design | PIXELUP LABS",
+  metaTitle: "Varick Agents Branding, Website & Motion Design | Case Study",
   metaDescription:
     "PIXELUP LABS refreshed Varick Agents' brand and built its website in 2026: a deep navy, a custom serif wordmark, and AI agents drawn inside SAP and Slack.",
   info: {
