@@ -40,9 +40,10 @@
  * - Deliverables: the engagement lines of the YC clients in lib/clients.ts.
  * - The referral line is in ycFaq ("How do YC founders find you?"; Greptile case study).
  * - FAQ and process: pixelupFaq and lib/process.ts, reworded for YC teams
- *   with the facts above. No timing, price or step is new.
+ *   with the facts above. No timing or step is new, and no price is quoted:
+ *   the pricing answer left pixelupFaq on main (a8bc9b8), so it left here too.
  */
-import { pixelupFaq, type CaseMetric, type FaqItem } from "./case-studies";
+import type { CaseMetric, FaqItem } from "./case-studies";
 import { clients, type Client } from "./clients";
 import { processSection, type ProcessContent } from "./process";
 import { projects, type Project } from "./projects";
@@ -325,11 +326,6 @@ export const ycProcess: ProcessContent = {
   ],
 };
 
-/** A shared answer, reused so price and terms can't drift from pixelupFaq. */
-function sharedAnswer(q: string) {
-  return pixelupFaq.find((item) => item.q === q)!;
-}
-
 /** The page's FAQ: the questions a YC founder asks, answered from the facts
     above and the shared FAQ. The page builds its FAQPage JSON-LD from this. */
 export const ycFaq: FaqItem[] = [
@@ -349,7 +345,6 @@ export const ycFaq: FaqItem[] = [
     q: "Can you ship before Demo Day or a launch date?",
     a: "We regularly deliver under hard deadlines like launch dates and fundraise announcements. A brand sprint takes 2–4 weeks; brand and website, 6–8 weeks. Tell us the date on the first call.",
   },
-  sharedAnswer("How much does it cost?"),
   {
     q: "Who do we work with day to day?",
     a: "You work directly with Daksh, your creative director, backed by a small senior team. No account managers, no layers. We share one Slack channel and meet for a 30–60 minute sync each week.",
