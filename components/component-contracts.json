@@ -155,6 +155,7 @@
       "input:focus": "0.5px color.brand.accent border",
       "empty-submit": "Opens the popup without a prefill (email is optional).",
       "invalid-email": "Blocked by the browser's type=\"email\" validation; no popup.",
+      "personal-email": "Work emails only: a personal, ISP or disposable address (gmail, yahoo, outlook…) gets the browser's validation bubble with 'Please use your work email.' and no popup. The list lives in lib/work-email.ts; /api/book-call rejects the same addresses.",
       "embed-blocked": "If Cal's embed.js fails to load, opens the hosted booking page in a new tab with ?email= instead.",
       "submissions": "A non-empty email is also POSTed (fire-and-forget) to /api/book-call, which appends it with the page path to the 'Book a call' tab of the Website Leads Google Sheet (lib/leads-sheet.ts → scripts/apps-script/WebsiteLeads.gs). The popup never waits on it."
     },
@@ -537,6 +538,7 @@
       "suppressed": "localStorage 'pixelup:audit-popup': a dismissal keeps it away for 7 days, a submission for good.",
       "forced": "?audit-popup=1 opens it on load for review, ignoring storage and skipping DataFast goals.",
       "idle / submitting / error": "NewsletterForm's field treatment flipped for the light card: a black/20 underline (a 10% hairline all but disappears at 0.5px on white), accent on focus-within, black text with black/50 placeholders. Autofilled text is forced to color.neutral.base, since globals.css paints it white site-wide. Error copy in red-600 (red-400 is under 3:1 on white).",
+      "personal-email": "Work emails only, same rule as BookCallForm (lib/work-email.ts): a personal address gets the browser's validation bubble and never reaches /api/audit-lead, which rejects it too.",
       "success": "Thank-you copy with the submitted email, plus a light 'Back to the article' button (black/[0.06] fill)."
     },
     "tokens_used": [
