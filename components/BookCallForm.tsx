@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { trackCalBookingGoals } from "@/lib/cal-booking-goals";
 import { links } from "@/lib/projects";
+import { checkWorkEmailInput } from "@/lib/work-email";
 import { ctaButtonBase, ctaButtonPadding } from "./cta-button-styles";
 
 type CalApi = Awaited<ReturnType<typeof getCalApi>>;
@@ -42,7 +43,8 @@ function warmCal() {
 /**
  * Email field + "Book a call" submit in one row. Submitting opens the Cal.com
  * booking popup with the email prefilled; an empty field still opens it, and
- * the browser blocks a malformed address via type="email".
+ * the browser blocks a malformed address via type="email" and a personal one
+ * (gmail, yahoo…) via checkWorkEmailInput.
  */
 export function BookCallForm({
   label = "BOOK A CALL",
@@ -99,7 +101,10 @@ export function BookCallForm({
         placeholder="Your work email"
         aria-label="Your work email"
         value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => {
+          setEmail(e.target.value);
+          checkWorkEmailInput(e.target);
+        }}
         className="min-w-0 flex-1 rounded-l-[2px] border-[0.5px] border-transparent bg-button-dark px-3 text-[16px] text-white placeholder:text-white/40 focus:border-accent focus:outline-none desk:text-[14px]"
       />
       {/* rounded-l-none reliably beats the base's rounded-[2px]: Tailwind v4

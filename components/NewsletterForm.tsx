@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { checkWorkEmailInput } from "@/lib/work-email";
 
 // Split out of Footer so the footer itself stays a server component — only this
 // input pair needs to ship JS to the browser.
@@ -23,6 +24,7 @@ export function NewsletterForm() {
   const handleChange =
     (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
       setValues((prev) => ({ ...prev, [field]: e.target.value }));
+      if (field === "email") checkWorkEmailInput(e.target);
       if (status === "error") setStatus("idle");
     };
 
@@ -64,8 +66,8 @@ export function NewsletterForm() {
       <div className="flex w-full items-center justify-between border-b-[0.5px] border-hairline pb-2 focus-within:border-accent">
         <input
           type="email"
-          placeholder="Enter your email"
-          aria-label="Your email"
+          placeholder="Your work email"
+          aria-label="Your work email"
           value={values.email}
           onChange={handleChange("email")}
           disabled={status === "submitting"}

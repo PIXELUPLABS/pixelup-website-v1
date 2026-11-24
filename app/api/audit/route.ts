@@ -1,5 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
+import { isPersonalEmail, WORK_EMAIL_MESSAGE } from "@/lib/work-email";
 
 // Submissions are inserted straight into a Supabase table from this server
 // route, using the service role key (bypasses RLS — safe here since this is
@@ -44,6 +45,12 @@ export async function POST(request: Request) {
     if (typeof value !== "string" || value.trim() === "") {
       return NextResponse.json({ error: `Missing field: ${field}` }, { status: 400 });
     }
+  }
+
+  // Unused since AuditForm moved to Tally, but the endpoint still accepts
+  // posts, so it keeps the site-wide work-email rule (lib/work-email.ts).
+  if (isPersonalEmail(body.email as string)) {
+    return NextResponse.json({ error: WORK_EMAIL_MESSAGE }, { status: 400 });
   }
 
   const supabaseUrl = process.env.SUPABASE_URL;

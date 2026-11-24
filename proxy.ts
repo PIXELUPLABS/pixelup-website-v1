@@ -4,6 +4,7 @@ import {
   type NextRequest,
 } from "next/server";
 import { trackAICrawlerRequest } from "@datafast/ai-crawl";
+import { logAiTraffic } from "@/lib/ai-traffic-log";
 
 // Server-side bot traffic tracking for DataFast. This is separate from the
 // browser tracking script in app/layout.tsx: AI crawlers request raw HTML and
@@ -21,6 +22,11 @@ export function proxy(request: NextRequest, event: NextFetchEvent) {
     // DataFast accepts unless "Reject unauthenticated requests" is enabled.
     authToken: process.env.DATAFAST_BOT_TOKEN,
   });
+
+  // Our own copy of AI bot fetches and visits from AI assistants, kept in the
+  // PIXELUP LABS Search Dashboard so it survives a change of analytics tool.
+  // Off until BOT_LOG_SECRET is set; runs in the background like DataFast's.
+  logAiTraffic(request, event);
 
   return NextResponse.next();
 }

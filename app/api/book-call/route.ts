@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { appendToLeadsSheet } from "@/lib/leads-sheet";
+import { isPersonalEmail, WORK_EMAIL_MESSAGE } from "@/lib/work-email";
 
 // "Book a call" emails from BookCallForm, logged to the "Book a call" tab of
 // the Website Leads Google Sheet (see lib/leads-sheet.ts).
@@ -19,6 +20,9 @@ export async function POST(request: Request) {
   const email = typeof body.email === "string" ? body.email.trim() : "";
   if (email.length > 254 || !emailPattern.test(email)) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+  }
+  if (isPersonalEmail(email)) {
+    return NextResponse.json({ error: WORK_EMAIL_MESSAGE }, { status: 400 });
   }
 
   // The path the form was submitted from, so the sheet shows which page

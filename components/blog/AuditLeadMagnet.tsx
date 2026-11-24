@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowIcon } from "@/components/ArrowIcon";
 import { ctaButtonBase, ctaButtonPadding } from "@/components/cta-button-styles";
 import { trackDatafastGoal } from "@/lib/datafast-client";
+import { checkWorkEmailInput } from "@/lib/work-email";
 import auditFormBg from "@/public/media/audit-form-bg.png";
 import auditFormPattern from "@/public/media/audit-form-pattern.svg";
 import dakshImg from "@/public/media/daksh-avatar.jpg";
@@ -198,6 +199,7 @@ export function AuditLeadMagnet() {
 
   const handleChange = (field: FieldName) => (e: React.ChangeEvent<HTMLInputElement>) => {
     setValues((prev) => ({ ...prev, [field]: e.target.value }));
+    if (field === "email") checkWorkEmailInput(e.target);
     if (status === "error") setStatus("idle");
   };
 

@@ -1,6 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
 import { NextResponse } from "next/server";
 import { appendToLeadsSheet, type SaveResult } from "@/lib/leads-sheet";
+import { isPersonalEmail, WORK_EMAIL_MESSAGE } from "@/lib/work-email";
 
 // Newsletter signups go to two places: their own Supabase table (separate from
 // audit_submissions — see app/api/audit/route.ts for the sibling form) and the
@@ -34,6 +35,9 @@ export async function POST(request: Request) {
   const email = (body.email as string).trim();
   if (!emailPattern.test(email)) {
     return NextResponse.json({ error: "Invalid email" }, { status: 400 });
+  }
+  if (isPersonalEmail(email)) {
+    return NextResponse.json({ error: WORK_EMAIL_MESSAGE }, { status: 400 });
   }
 
   const name = (body.name as string).trim();

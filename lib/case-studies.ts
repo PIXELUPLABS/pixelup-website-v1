@@ -393,12 +393,6 @@ export const pixelupFaq: FaqItem[] = [
     a: "Brand sprints take 2–4 weeks. Brand plus website projects take 6–8 weeks from kickoff to launch. We regularly deliver under hard deadlines like fundraise announcements and launch dates.",
   },
   {
-    q: "How much does it cost?",
-    a: "Brand sprints are $15,000. Brand plus website projects run $25,000 to $40,000. Retainers start at $6,000 a month.",
-    href: "https://contra.com/daksh_aswal_dt5tfn27/services",
-    linkLabel: "See current services and pricing on Contra.",
-  },
-  {
     q: "What is it like to work with you?",
     a: "You work directly with the team on Slack, with fast turnarounds and quick iterations. No account managers, no layers, no surprises.",
   },
@@ -479,7 +473,7 @@ export function caseStudySchema(study: CaseStudy) {
 const greptile: CaseStudy = {
   slug: "greptile",
   title: "Greptile: YC W24 to $25M Series A in 6 Months",
-  metaTitle: "Greptile Case Study - PIXELUP LABS",
+  metaTitle: "Greptile Logo, Brand, Website & Product Design | Case Study",
   metaDescription:
     "How we evolved Greptile's AI code review platform into an enterprise-ready system, doubling demo requests in week one and helping set up a $25M Series A.",
   info: {
@@ -813,14 +807,14 @@ const greptile: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
 const sainapse: CaseStudy = {
   slug: "sainapse",
   title: "Sainapse: From Technical Product to Enterprise Standard",
-  metaTitle: "Sainapse Case Study - PIXELUP LABS",
+  metaTitle: "Sainapse Branding & Website Design | Case Study",
   metaDescription:
     "A full system rebuild for Sainapse's agentic AI support platform: brand voice, visual identity and web presence, designed together ahead of its GA launch.",
   info: {
@@ -989,14 +983,14 @@ const sainapse: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
 const sully: CaseStudy = {
   slug: "sully",
   title: "Sully: From Liability to Deal Closer in 11 Months",
-  metaTitle: "Sully Case Study - PIXELUP LABS",
+  metaTitle: "Sully AI Website & Motion Design | Case Study",
   metaDescription:
     "How we turned Sully's website into a deal closer with motion-driven explainers, alongside 26x scale and a $32M+ raise at a $150M valuation.",
   info: {
@@ -1154,7 +1148,7 @@ const sully: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-07-03",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
@@ -1170,7 +1164,7 @@ const streamline: CaseStudy = {
   slug: "streamline",
   title:
     "We repositioned Streamline for enterprise, then scaled the brand across 200 pages.",
-  metaTitle: "Streamline Case Study - PIXELUP LABS",
+  metaTitle: "Streamline AI Branding, Website & Design System | Case Study",
   metaDescription:
     "PIXELUP LABS repositioned Streamline for enterprise legal teams and built a brand, website and design system that scaled across more than 200 pages.",
   info: {
@@ -1511,7 +1505,7 @@ const streamline: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-07",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
@@ -1519,7 +1513,7 @@ const henryLabs: CaseStudy = {
   slug: "henrylabs",
   title:
     "We built the Henry Labs brand, then carried it across every touchpoint.",
-  metaTitle: "Henry Labs Case Study - PIXELUP LABS",
+  metaTitle: "Henry Labs Branding, Website & Product Design | Case Study",
   metaDescription:
     "PIXELUP LABS built the brand, website, partner dashboard and checkout for Henry Labs, a founding member of the Agentic Commerce Consortium.",
   info: {
@@ -1990,7 +1984,7 @@ const henryLabs: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-08-17",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
     blockers: [
       'Funding reads "Private": confirm a figure directly with Henry Labs before publishing one.',
       "Add two approved Slack reactions with names and roles.",
@@ -2014,7 +2008,7 @@ const fuseaiFaq: FaqItem = {
 const fuseai: CaseStudy = {
   slug: "fuseai",
   title: "We rebranded FuseAI for their next stage of growth.",
-  metaTitle: "FuseAI Brand, Website and Product Design | PIXELUP LABS",
+  metaTitle: "FuseAI Branding, Website & Product Design | Case Study",
   metaDescription:
     "PIXELUP LABS designed FuseAI's brand, website and product UI in 2026. The brand was launch-ready in 17 days. FuseAI reports 20% higher trial conversion.",
   info: {
@@ -2309,7 +2303,7 @@ const fuseai: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-10-16",
-    updatedDate: "2026-10-27",
+    updatedDate: "2026-11-23",
   },
 };
 
@@ -2327,7 +2321,7 @@ const replayFaq: FaqItem = {
 const replay: CaseStudy = {
   slug: "replay",
   title: "We built Replay a brand that can be trusted at first glance.",
-  metaTitle: "Replay Brand, Website and Product Design | PIXELUP LABS",
+  metaTitle: "Replay Branding, Website & Product Design | Case Study",
   metaDescription:
     "PIXELUP LABS built Replay's brand and website from scratch, then designed its product. Replay's founder: \"Best agency I've ever worked with.\"",
   info: {
@@ -2742,7 +2736,7 @@ const replay: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-10-20",
-    updatedDate: "2026-10-20",
+    updatedDate: "2026-11-23",
   },
 };
 
@@ -2760,7 +2754,7 @@ const ctgtFaq: FaqItem = {
 const ctgt: CaseStudy = {
   slug: "ctgt",
   title: "We made CTGT a brand banks can trust.",
-  metaTitle: "CTGT Brand and Website Design | PIXELUP LABS",
+  metaTitle: "CTGT Branding, Website & Motion Design | Case Study",
   metaDescription:
     "PIXELUP LABS designed CTGT's brand and website for the banks and insurers it sells to, and built it in Webflow, live for CTGT's December 2025 launch.",
   info: {
@@ -2993,7 +2987,7 @@ const ctgt: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-11-05",
-    updatedDate: "2026-11-05",
+    updatedDate: "2026-11-23",
     blockers: ["No client quote yet; ask Cyril or Ethan for a dated line."],
   },
 };
@@ -3012,7 +3006,7 @@ const autumnFaq: FaqItem = {
 const autumn: CaseStudy = {
   slug: "autumn",
   title: "We gave Autumn a brand engineers remember.",
-  metaTitle: "Autumn Brand and Website Design | PIXELUP LABS",
+  metaTitle: "Autumn Branding, Website & Motion Design | Case Study",
   metaDescription:
     "PIXELUP LABS designed Autumn's brand and website and built it in Next.js. Autumn (YC S25) merged the code into its own open-source repository.",
   info: {
@@ -3228,7 +3222,7 @@ const autumn: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-11-05",
-    updatedDate: "2026-11-05",
+    updatedDate: "2026-11-23",
     blockers: ["No client quote yet; ask Ayush for a dated line."],
   },
 };
@@ -3253,7 +3247,7 @@ const zenactFaq: FaqItem = {
 const zenact: CaseStudy = {
   slug: "zenact",
   title: "We made Zenact look ready for enterprise.",
-  metaTitle: "Zenact Brand and Website Design | PIXELUP LABS",
+  metaTitle: "Zenact Branding, Website & Motion Design | Case Study",
   metaDescription:
     "PIXELUP LABS designed Zenact's brand and website and built it in Webflow, so an AI QA product earns engineering leaders' trust before naming customers.",
   info: {
@@ -3484,7 +3478,7 @@ const zenact: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-11-05",
-    updatedDate: "2026-11-05",
+    updatedDate: "2026-11-23",
     blockers: ["No client quote yet."],
   },
 };
@@ -3504,7 +3498,7 @@ const valleyFaq: FaqItem = {
 const valley: CaseStudy = {
   slug: "valley",
   title: "We made Valley's difference clear before the sales call.",
-  metaTitle: "Valley Website Design and Sales Deck | PIXELUP LABS",
+  metaTitle: "Valley Website, Motion & Sales Deck Design | Case Study",
   metaDescription:
     "PIXELUP LABS redesigned Valley's website inside its existing brand, built it in Framer and designed its sales deck, so buyers see what sets Valley apart.",
   info: {
@@ -3687,7 +3681,7 @@ const valley: CaseStudy = {
   publication: {
     status: "published",
     publishedDate: "2026-11-05",
-    updatedDate: "2026-11-05",
+    updatedDate: "2026-11-23",
     blockers: ["No client quote yet."],
   },
 };
@@ -3704,7 +3698,7 @@ const avantraFaq: FaqItem = {
 const avantra: CaseStudy = {
   slug: "avantra",
   title: "Process breakdown: building Avantra's brand for real-time AI.",
-  metaTitle: "Avantra Brand Identity Process Breakdown | PIXELUP LABS",
+  metaTitle: "Avantra Branding, Illustration & Website Design | Case Study",
   metaDescription:
     "How PIXELUP LABS is building Avantra's brand: moodboards, two directions, an Art Deco × technical system, isometrics, charts, deck and website.",
   info: {
@@ -4911,11 +4905,318 @@ const avantra: CaseStudy = {
   publication: {
     status: "draft",
     publishedDate: "2026-10-30",
-    updatedDate: "2026-10-30",
+    updatedDate: "2026-11-23",
     blockers: [
       "At publish: set both dates to the publish day.",
       "Engagement still in progress: final logo, wordmark and palette not locked.",
       "Needs Avantra's approval before publishing; no client quotes or results yet.",
+    ],
+  },
+};
+
+// Answers the page's target prompt ("who designed Varick Agents' brand"), so
+// it leads the Varick FAQ ahead of the shared questions.
+const varickAgentsFaq: FaqItem = {
+  q: "Who designed Varick Agents' brand and website?",
+  a: "PIXELUP LABS refreshed Varick Agents' brand and designed and built its website in 2026. The work covered a deep navy and serif identity, a custom \"Varick\" wordmark, illustrations of AI agents at work inside SAP and Slack, and a brand book built as a website. The site runs on code and accounts Varick owns, and Varick's own team wrote the copy.",
+  href: "/blog/how-to-look-enterprise-ready",
+  linkLabel: "How to look credible to enterprise buyers",
+};
+
+// Copy: Growth/SEO-AEO/Article Writing Workspace/pipeline/drafts/
+// varick-agents-case-study.md (V1, 2026-10-19), sources listed there, QC'd
+// 2026-11-13 against varickagents.com: no stat row (no client result yet),
+// three challenges to fit the mockup order, and the questionnaire quote
+// swapped for its fallback until Vas OKs it. Since handoff Varick removed the
+// two homepage illustration scenes, so challenge 02 describes them in the
+// past tense. Mockups and the opener film: Krish's hand-off (2026-11-13),
+// from Figma "Varick — Case Study Mockups" sets 1 + 2.
+const varickAgents: CaseStudy = {
+  slug: "varick-agents",
+  title: "We rebranded Varick Agents for the billion-dollar companies it sells to.",
+  metaTitle: "Varick Agents Branding, Website & Motion Design | Case Study",
+  metaDescription:
+    "PIXELUP LABS refreshed Varick Agents' brand and built its website in 2026: a deep navy, a custom serif wordmark, and AI agents drawn inside SAP and Slack.",
+  info: {
+    client: "Varick Agents",
+    year: "2026",
+    // The brand film went to Varick for its launch, so motion counts.
+    involvement: [
+      "Brand Identity",
+      "Website Design",
+      "Website Development",
+      "Illustration",
+      "Motion Design",
+    ],
+    // varickagents.com 308s to www.varickagents.com: link the destination.
+    links: [
+      { label: "varickagents.com", href: "https://www.varickagents.com/" },
+      { label: "@varickagents on X", href: "https://x.com/varickagents" },
+    ],
+  },
+  description: [
+    "PIXELUP LABS refreshed Varick Agents' brand and designed and built its website in 2026.",
+    "Varick sells AI agents to companies doing billions in revenue. It asked for a brand those buyers would trust: calm, serious, and nothing that looks AI-generated.",
+    "We deepened Varick's blue to a navy, drew a custom \"Varick\" wordmark, and illustrated AI agents at work inside SAP and Slack.",
+    "Varick owns the code, the content system and the lead data behind the site.",
+  ],
+  hero: {
+    media: {
+      type: "video",
+      src: "/media/varick/opener-loop.mp4",
+      poster: "/media/varick/opener-loop-poster.jpg",
+    },
+    alt: "Varick brand film: close-ups of the letterforms under construction, then the wordmark and V on a blue glow",
+    intrinsicSize: { width: 1920, height: 1080 },
+  },
+  story: {
+    company: "Varick Agents",
+    statusBadge: "Venture-backed · Enterprise AI",
+    headline: "We rebranded Varick Agents for the billion-dollar companies it sells to.",
+    // Credibility only. What Varick does and "billions": its careers page and
+    // Ashby posts. Fortune 500 clients and 100+ agents in production: its
+    // homepage (2026-11-13), Varick's claims, so attributed ("says"). Vas:
+    // the 2026-09-28 posts and his X post of 2025-09-03. Citadel Securities:
+    // the same posts, Varick's claim.
+    summary:
+      "Varick Agents builds **AI agents that take over manual work inside large enterprises**, on top of the systems their teams already run. The venture-backed San Francisco company works with companies doing billions in revenue, and **says its clients include Fortune 500 companies**, with more than 100 agents in production. Co-founder and CEO Vas Moza was a software engineer at Meta for three years. Varick's team includes a former COO of Citadel Securities.",
+    blocks: [
+      {
+        kind: "context",
+        id: "context",
+        heading: "Why did Varick Agents need a brand refresh?",
+        items: [
+          {
+            label: "Where Varick was",
+            // Fallback line. With Vas's OK, the questionnaire quote replaces
+            // it: "It wanted a brand that reflects, in its own words,
+            // **\"the maturity of our work.\"**"
+            text: "Varick Agents sells AI agents to companies doing billions in revenue. **It wanted a brand that matched the size of the companies it works with.**",
+          },
+          {
+            label: "What Varick asks its buyers to do",
+            text: "Let AI agents work inside the systems their teams use every day, like SAP and Slack. **Big companies don't hand that access to just anyone.**",
+          },
+          {
+            label: "What they asked us for",
+            text: "A brand refresh and a new website, built in code Varick could run itself. The brief came down to one job: **look credible to enterprise buyers.** Calm, serious, trustworthy, and nothing that looks AI-generated.",
+          },
+          {
+            label: "Why it mattered",
+            text: "The person who signs sits in the C-suite of a company doing billions a year. **They don't pick the cleverest AI vendor. They pick the one that looks safest to sign.**",
+          },
+        ],
+      },
+      // Mockups: Figma "Section 3" (node 2770:3812), in its order. Pair
+      // partners are cropped to one aspect ratio so their heights match.
+      {
+        kind: "media",
+        id: "snapshot-blade-sign",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/varick/blade-sign.avif" },
+            alt: "Varick wordmark on a navy blade sign beside a timber-clad doorway",
+            intrinsicSize: { width: 2035, height: 1064 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-window-hoodie",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/varick/window-v.avif" },
+              alt: "Varick V etched on a glass window with a tree behind it",
+              intrinsicSize: { width: 998, height: 909 },
+            },
+            {
+              media: { type: "image", src: "/media/varick/hoodie.avif" },
+              alt: "Navy Varick hoodie with the wordmark on the chest and the V on the cuff",
+              intrinsicSize: { width: 991, height: 903 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-established",
+        index: "01",
+        heading: "Varick had to look established without looking like a consulting firm.",
+        problem:
+          "Varick's buyers already hire consulting firms that look calm and serious. Varick wanted that calm, **without looking like a consulting firm** or like one more AI startup.",
+        whyItMattered:
+          "Varick asks these buyers to let its agents into their core systems. **Looking new is not the flex there. Looking steady is.**",
+        whatWeDid:
+          "Varick wanted to keep its blue, so we deepened it to a navy, with Season Mix for headlines and Inter for reading. Firms like McKinsey lead with their names, so **we drew a custom serif \"Varick\" wordmark**, with a small V for browser tabs and avatars.",
+        outcome:
+          "We carried the same navy, type and wordmark onto the website, LinkedIn banners, a one-pager and Varick's brand book. **Vas Moza previewed the new wordmark on X before the site went live.**",
+      },
+      {
+        kind: "media",
+        id: "snapshot-poster-concrete",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/varick/poster-concrete.avif" },
+            alt: "Varick 'Make Your Organization AI Native' V poster on a concrete wall",
+            intrinsicSize: { width: 1753, height: 1169 },
+            // Thomas LJ's 23 Sep 2026 message in #varick-pixelup (10:34 PM
+            // IST), verbatim, picked by Arjun 2026-11-13. No avatar (initials
+            // show) and no reaction: the original was a custom Slack emoji.
+            comment: {
+              name: "Thomas LJ",
+              org: "Varick Agents",
+              time: "Sep 23rd at 10:34 PM",
+              quote:
+                "hey folks :) thanks for the good work there. love the dark navy and font, reads very pro",
+            },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-laptop-poster",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/varick/laptop-lap.avif" },
+              alt: "Varick homepage hero, 'Make Your Organization AI Native', on a laptop in someone's lap",
+              intrinsicSize: { width: 864, height: 1172 },
+            },
+            {
+              media: { type: "image", src: "/media/varick/poster-brick.avif" },
+              alt: "Varick 'deploys AI agent systems inside Fortune 500 organizations' poster on sunlit brick",
+              intrinsicSize: { width: 865, height: 1174 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-agents",
+        index: "02",
+        heading: "The website had to show what an AI agent actually does.",
+        problem:
+          "Varick's agents work out of sight. They move records between systems while the team gets on with its day. **Stock photos can't show that, and abstract AI art makes it look like magic.**",
+        whyItMattered:
+          "Magic is the last thing a CFO wants to buy. **A buyer who can see the agent at work knows what they're signing for.**",
+        whatWeDid:
+          "We drew the agent at work inside tools the buyer already uses. A pair of homepage scenes showed **how operations run today, then how they run with agents**: an SAP record goes through an agent run and comes out as a Slack approval.",
+        outcome:
+          "**Two pictures explained the product**, with no robots and no glowing orbs.",
+      },
+      {
+        kind: "media",
+        id: "snapshot-billboard-towers",
+        media: {
+          kind: "full",
+          slot: {
+            media: { type: "image", src: "/media/varick/billboard-towers.avif" },
+            alt: "Varick 'Make Your Organization AI Native' billboard with glass towers",
+            intrinsicSize: { width: 1800, height: 1200 },
+          },
+        },
+      },
+      {
+        kind: "media",
+        id: "snapshot-desk-cladding",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/varick/laptop-desk.avif" },
+              alt: "Varick 'How they run with agents' homepage scene, an agent run between an SAP ledger and a Slack approval, on a laptop on a timber desk",
+              intrinsicSize: { width: 901, height: 1222 },
+            },
+            {
+              media: { type: "image", src: "/media/varick/billboard-cladding.avif" },
+              alt: "Varick 'AI agent systems inside Fortune 500' sign on a clad building",
+              intrinsicSize: { width: 901, height: 1222 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "challenge",
+        id: "challenge-ownership",
+        index: "03",
+        heading: "Varick's team had to own the site and keep building it.",
+        problem:
+          "Varick sells by industry and by department, and it keeps adding pages. **A site only an agency can change falls behind the sales team.**",
+        whyItMattered:
+          "Enterprise buyers look for their own industry and their own team before they book a call. **Every lead also had to land in Varick's own systems**, not ours.",
+        whatWeDid:
+          "We designed and built the main pages around Varick's copy, with shared templates behind the industry and department pages. **The booking form saves every lead to Varick's own database** before a call gets booked.",
+        outcome:
+          "Varick owns everything the site runs on: **the code, the content system and the lead data.**",
+      },
+      {
+        kind: "media",
+        id: "snapshot-lightboxes-arcade",
+        media: {
+          kind: "pair",
+          slots: [
+            {
+              media: { type: "image", src: "/media/varick/subway-lightboxes.avif" },
+              alt: "Varick 'Only AI Native Orgs Will Survive' posters in subway lightboxes",
+              intrinsicSize: { width: 1080, height: 1350 },
+            },
+            {
+              media: { type: "image", src: "/media/varick/billboard-arcade.avif" },
+              alt: "Varick 'Deploy your first AI Agent' billboard in a brick arcade",
+              intrinsicSize: { width: 1014, height: 1268 },
+            },
+          ],
+        },
+      },
+      {
+        kind: "afterLaunch",
+        id: "after-launch",
+        heading: "And this is where Varick ended up.",
+        // Concise, no sales pitch, one book a call at the end (Replay and
+        // CTGT pattern, Arjun 2026-10-20). Two decision-makers: the
+        // questionnaire's sign-off, Vas and Naomi.
+        paragraphs: [
+          "Varick's brand rules live on **a website, not a PDF**: logo rules, colours, type, logo downloads and a brief written for AI tools.",
+          "Varick came with its positioning settled and **wrote every line on the site**. We refreshed the brand, drew the illustrations, and **designed and built the main pages.**",
+          "We worked with two decision-makers at Varick. If your rebrand needs a steering committee, a larger firm fits better.",
+          "Brand identity, illustration, website design and development, and motion design by PIXELUP LABS, 2026.",
+        ],
+        cta: {
+          text: "If you sell to the C-suite and your brand doesn't look the part yet,",
+          label: "book a call",
+          href: "/call",
+        },
+      },
+    ],
+    faqHeading,
+    // "How long does a typical engagement take?" stays off this page
+    // (approved in the brief, 2026-10-16).
+    faqs: [
+      varickAgentsFaq,
+      ...pixelupFaq.filter(
+        (item) => item.q !== "How long does a typical engagement take?",
+      ),
+    ],
+  },
+  sections: [],
+  moreProjects: [
+    { slug: "fuseai", tags: "Branding, website & product design" },
+    { slug: "streamline", tags: "Branding, positioning & website design" },
+  ],
+  publication: {
+    status: "published",
+    publishedDate: "2026-11-23",
+    updatedDate: "2026-11-23",
+    // Naming Varick, the mockups and the sidebar line cleared by Arjun,
+    // 2026-11-13. Shipped 2026-11-23 with laptop-desk.avif as is (Arjun).
+    blockers: [
+      "laptop-desk.avif shows the SAP mark unblurred, and Varick's live homepage no longer carries that scene: blur it if Varick objects.",
+      "No written testimonial yet: Vas offered one once the new site was live (2026-10-22), and it is live as of 2026-11-13.",
     ],
   },
 };
@@ -4927,6 +5228,7 @@ export const caseStudies = {
   streamline,
   henryLabs,
   fuseai,
+  varickAgents,
   replay,
   ctgt,
   autumn,
