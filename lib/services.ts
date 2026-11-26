@@ -60,7 +60,10 @@ export interface Service {
   /** What the service covers, under the index carousel. Title Case, comma
    * separated, the case-study Involvement format. No client names. */
   scope: string;
-  /** Carousel slides, lead first. Real work reused from case studies and the homepage. */
+  /** Carousel slides, lead first. Real work reused from case studies and the
+   * homepage. Landscape only (about 3:2 or wider): the slide frame is 1160x696
+   * and crops to fill, so a portrait mockup loses its top and bottom. For a
+   * website shot, the site itself must sit fully inside the frame. */
   gallery: ServiceSlide[];
 }
 
@@ -101,12 +104,12 @@ export const services: Service[] = [
     scope: "Identity, Guidelines, Campaigns",
     gallery: [
       { media: { type: "image", src: "/media/varick/blade-sign.avif" }, alt: "Varick wordmark on a navy blade sign beside a timber-clad doorway" },
-      { media: { type: "image", src: "/media/fuseai/logo-wall.avif" }, alt: "FuseAI's two-stripe mark on a concrete wall" },
       { media: { type: "image", src: "/media/replay/billboard.avif" }, alt: "Replay billboard on an office tower reading 'Fund growth by licensing the data you already have.', brand identity by PIXELUP LABS" },
-      { media: { type: "image", src: "/media/avantra/l-night.avif" }, alt: "Avantra wordmark on a gold billboard above a city street at night" },
-      { media: { type: "image", src: "/media/fuseai/business-cards.avif" }, alt: "FuseAI business cards in mint and white" },
-      { media: { type: "image", src: "/media/varick/hoodie.avif" }, alt: "Navy Varick hoodie with the wordmark on the chest and the V on the cuff" },
-      { media: { type: "image", src: "/media/avantra/m-logos.avif" }, alt: "System lockups: open weights, the Avantra wordmark, the real-time inference badge, the AVC mark and the full lockup" },
+      { media: { type: "image", src: "/media/fuseai/billboard.avif" }, alt: "FuseAI 'Unified Revenue Engine' billboard" },
+      { media: { type: "image", src: "/media/avantra/l-wallpanel.avif" }, alt: "Avantra 'Real time' sign with the gold coil mark on a sunlit stucco wall" },
+      { media: { type: "image", src: "/media/varick/poster-concrete.avif" }, alt: "Varick 'Make Your Organization AI Native' V poster on a concrete wall" },
+      { media: { type: "image", src: "/media/replay/stage/base.avif" }, alt: "Replay keynote stage reading 'We're setting the standard' beside a 3D Replay mark" },
+      { media: { type: "image", src: "/media/avantra/l-e-trident.avif" }, alt: "Slide: Avantra wordmark beside a gold trident on black" },
     ],
   },
   {
@@ -139,12 +142,13 @@ export const services: Service[] = [
     proof: "Sully: 26x in 11 months after the redesign, then a $32M+ raise.",
     scope: "Site Strategy, Copy, Page Design",
     gallery: [
-      { media: { type: "image", src: "/media/replay/laptop-valuation.avif" }, alt: "Replay on a laptop: 'Find out what your data is worth before you decide anything.'" },
-      { media: { type: "image", src: "/media/varick/laptop-lap.avif" }, alt: "Varick homepage hero, 'Make Your Organization AI Native', on a laptop in someone's lap" },
-      { media: { type: "image", src: "/media/avantra/l-web-hero.avif" }, alt: "Website hero: 'Enabling real-time intelligence'" },
-      { media: { type: "image", src: "/media/fuseai/phone-homepage.avif" }, alt: "FuseAI website hero on a phone" },
-      { media: { type: "image", src: "/media/varick/laptop-desk.avif" }, alt: "Varick 'How they run with agents' homepage scene, an agent run between an SAP ledger and a Slack approval, on a laptop on a timber desk" },
-      { media: { type: "image", src: "/media/replay/payout-phone.avif" }, alt: "Replay homepage on a phone: what companies get paid, from $10K+ for under 25 people to $1M+ for 100+ people" },
+      { media: { type: "image", src: "/media/sully.jpg" }, alt: "Sully.ai homepage hero on a laptop mockup, website design by PIXELUP LABS" },
+      { media: { type: "image", src: "/media/avantra/l-web-hero.avif" }, alt: "Avantra website hero: 'Enabling real-time intelligence'" },
+      { media: { type: "image", src: "/media/ctgt.png" }, alt: "CTGT website design by PIXELUP LABS" },
+      { media: { type: "image", src: "/media/streamline/img-1.png" }, alt: "Streamline homepage hero 'In-house legal runs on Streamline' on a tablet held in hands" },
+      { media: { type: "image", src: "/media/sully/img-9.png" }, alt: "Sully.ai Partner with Sully Labs page on a phone" },
+      { media: { type: "image", src: "/media/henry-labs/asset-2.avif" }, alt: "Henry Labs website hero 'Own your checkout.' over a glowing mountain landscape" },
+      { media: { type: "image", src: "/media/sully/img-6.png" }, alt: "Sully.ai scribes-versus-dictation comparison page on a laptop" },
     ],
   },
   {
@@ -177,7 +181,6 @@ export const services: Service[] = [
     scope: "Product UI, Dashboards, Onboarding",
     gallery: [
       { media: { type: "image", src: "/media/greptile/dashboard-tablet.avif" }, alt: "Greptile dashboard on a tablet held in two hands: highlight of the week, comments per day, credit summary and monthly usage" },
-      { media: { type: "image", src: "/media/greptile/dashboard-detail.avif" }, alt: "Close-up of the Greptile dashboard: repositories with week-on-week change, and monthly usage as rows of green dots" },
       { media: { type: "image", src: "/media/explorations/img-16.webp" }, alt: "Phone showing an in-app survey screen with a progress bar, a 248-points counter, a burger-meal purchase card, the question 'Did any part of this poster feel personally relevant to you?' and a woman's video bubble, beside floating data-source chips on a purple gradient" },
     ],
   },
@@ -285,13 +288,12 @@ export const services: Service[] = [
     proof: "About 10 of our first 35 projects continued on a retainer.",
     scope: "Campaigns, Decks, Social, Landing Pages",
     gallery: [
-      { media: { type: "image", src: "/media/fuseai/billboard.avif" }, alt: "FuseAI 'Unified Revenue Engine' billboard" },
-      { media: { type: "image", src: "/media/varick/subway-lightboxes.avif" }, alt: "Varick 'Only AI Native Orgs Will Survive' posters in subway lightboxes" },
-      { media: { type: "image", src: "/media/replay/yield-poster.avif" }, alt: "Replay street poster reading 'Yield on what you've already built.'" },
-      { media: { type: "image", src: "/media/avantra/l-triple.avif" }, alt: "Three lightboxes: 'Production teaches the model', 'Co-designed from the silicon up' and '14x lower first audio latency'" },
-      { media: { type: "image", src: "/media/fuseai/poster-buying-signals.avif" }, alt: "FuseAI 'Identify Buying Signals' poster" },
+      { media: { type: "image", src: "/media/avantra/l-triple.avif" }, alt: "Avantra three lightboxes: 'Production teaches the model', 'Co-designed from the silicon up' and '14x lower first audio latency'" },
+      { media: { type: "image", src: "/media/varick/billboard-towers.avif" }, alt: "Varick 'Make Your Organization AI Native' billboard with glass towers" },
+      { media: { type: "image", src: "/media/avantra/l-three-ways-deck.avif" }, alt: "Deck slide: 'Three ways to consume Avantra' with three relief medallions on cream" },
       { media: { type: "image", src: "/media/greptile/vibe-check.avif" }, alt: "Greptile banner answering 'vibe coding?' with 'vibe check greptile.' over a dot-matrix lizard" },
       { media: { type: "image", src: "/media/greptile/subway-poster.avif" }, alt: "Greptile poster in a subway car: a halftone lizard above a sign-up strip with a QR code" },
+      { media: { type: "image", src: "/media/avantra/l-quote.avif" }, alt: "Avantra deck quote slide: 'For decades technologists have teased us with the dream'" },
     ],
   },
 ];
