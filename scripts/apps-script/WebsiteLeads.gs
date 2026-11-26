@@ -11,6 +11,9 @@
  *   - "Brand Audit Lead Magnet": perception audit requests from the blog-post
  *     popup (components/blog/AuditLeadMagnet.tsx → app/api/audit-lead/route.ts),
  *     with the article path in "Page".
+ *   - "Playbook Requests": playbook requests from the inline CTA on blog posts
+ *     (components/blog/PlaybookCta.tsx → app/api/playbook-lead/route.ts), with
+ *     the playbook's title and the article path.
  *
  * This is NOT part of the Next.js build. It runs on Google's servers, attached
  * to the spreadsheet. Paste it into the Apps Script editor bound to that sheet
@@ -60,6 +63,11 @@ const FORMS = {
     sheet: 'Brand Audit Lead Magnet',
     fields: ['name', 'email', 'website', 'page'],
     headers: ['Submitted at', 'Name', 'Email', 'Website', 'Page'],
+  },
+  playbookLead: {
+    sheet: 'Playbook Requests',
+    fields: ['name', 'email', 'playbook', 'page'],
+    headers: ['Submitted at', 'Name', 'Email', 'Playbook', 'Page'],
   },
 };
 

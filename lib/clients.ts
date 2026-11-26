@@ -38,7 +38,8 @@ export const clients: Client[] = [
     niche: "AI Code Review",
     engagement:
       "2026 brand refresh, design system, pitch deck, and ongoing marketing assets",
-    fundingNote: "$25M Series A",
+    // $50M Series B announced 2026-10-19, led by Menlo Ventures.
+    fundingNote: "$50M Series B",
   },
   {
     slug: "bland",

@@ -1,6 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
+import { useEffect, useRef } from "react";
+import { recordNavigation } from "@/lib/route-history";
 import { Navbar } from "./Navbar";
 
 // Routes that bring their own header and full-viewport layout (see below). /2027 joins when its page ships here.
@@ -25,6 +27,15 @@ const OWN_SHELL = new Set(["/process", "/next/case-studies/avantra"]);
  */
 export function SiteFrame({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
+  // Every in-site navigation, for BackButton (see lib/route-history).
+  const previousPathname = useRef<string | null>(null);
+  useEffect(() => {
+    if (previousPathname.current && previousPathname.current !== pathname) {
+      recordNavigation(previousPathname.current, pathname);
+    }
+    previousPathname.current = pathname;
+  }, [pathname]);
 
   if (OWN_SHELL.has(pathname)) return children;
 

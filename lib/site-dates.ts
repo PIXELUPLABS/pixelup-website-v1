@@ -22,7 +22,7 @@ export const siteUpdated = {
   home: "2026-11-23",
   call: "2026-10-07",
   explorations: "2026-09-30",
-  clients: "2026-11-13",
+  clients: "2026-11-26",
   privacy: "2026-11-05",
   /** /faq: lib/faq.ts. Its FAQPage `datePublished` stays pinned to 2026-10-27 in lib/faq.ts. */
   faq: "2026-11-20",
