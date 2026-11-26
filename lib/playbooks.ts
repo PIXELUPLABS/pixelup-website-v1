@@ -5,9 +5,11 @@
 
 export const playbooks = {
   "enterprise-homepage": {
-    title: "The Homepage Playbook to Look Enterprise-Ready",
-    /** The attachment's filename, and its name in private/playbooks/ locally. */
+    title: "The Website Playbook to Look Enterprise-Ready",
+    /** The PDF's name in private/playbooks/ locally. */
     file: "enterprise-homepage-playbook.pdf",
+    /** The filename the reader sees on the email attachment. */
+    attachmentName: "enterprise-website-playbook.pdf",
     /** Env variable holding the PDF's private URL on deployments. */
     urlEnv: "PLAYBOOK_ENTERPRISE_HOMEPAGE_PDF_URL",
     // The playbook's own cover subheading, word for word, broken where the
