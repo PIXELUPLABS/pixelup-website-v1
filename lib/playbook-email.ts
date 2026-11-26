@@ -65,7 +65,7 @@ export async function sendPlaybookEmail({
   const playbook = playbooks[id];
   const firstName = name.trim().split(/\s+/)[0];
   const greeting = firstName ? `Hi ${firstName},` : "Hi,";
-  const callUrl = `https://www.pixeluplabs.com/call?utm_source=playbook&utm_medium=email&utm_campaign=${playbook.file.replace(/\.pdf$/, "")}`;
+  const callUrl = `https://www.pixeluplabs.com/call?utm_source=playbook&utm_medium=email&utm_campaign=${playbook.attachmentName.replace(/\.pdf$/, "")}`;
 
   const lines = [
     greeting,
@@ -98,7 +98,7 @@ export async function sendPlaybookEmail({
           `<p><a href="${callUrl}">Book a call</a></p>`,
           "<p>PIXELUP LABS</p>",
         ].join(""),
-        attachments: [{ filename: playbook.file, content: pdf.toString("base64") }],
+        attachments: [{ filename: playbook.attachmentName, content: pdf.toString("base64") }],
       }),
       signal: AbortSignal.timeout(30_000),
     });
