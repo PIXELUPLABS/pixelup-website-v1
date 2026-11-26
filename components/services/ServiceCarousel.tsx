@@ -33,7 +33,9 @@ export function ServiceCarousel({
   label: string;
   /** Constant per-service scope line under the strip (Service.scope). */
   caption: string;
-  href: string;
+  /** The service's detail page, once it exists. Without it a slide click
+      does nothing and the strip shows no pointer cursor. */
+  href?: string;
   slides: ServiceSlide[];
 }) {
   const router = useRouter();
@@ -87,7 +89,7 @@ export function ServiceCarousel({
   };
 
   const openService = (event: React.MouseEvent) => {
-    if (event.defaultPrevented || event.shiftKey || event.altKey) return;
+    if (!href || event.defaultPrevented || event.shiftKey || event.altKey) return;
     if (event.metaKey || event.ctrlKey) {
       window.open(href, "_blank", "noopener");
       return;
@@ -119,9 +121,9 @@ export function ServiceCarousel({
         }}
         onClick={openService}
         onAuxClick={(event) => {
-          if (event.button === 1) window.open(href, "_blank", "noopener");
+          if (href && event.button === 1) window.open(href, "_blank", "noopener");
         }}
-        className="no-scrollbar flex cursor-pointer snap-x snap-mandatory overflow-x-auto overscroll-x-contain focus-visible:outline focus-visible:outline-[0.5px] focus-visible:outline-white/60"
+        className={`no-scrollbar flex ${href ? "cursor-pointer" : ""} snap-x snap-mandatory overflow-x-auto overscroll-x-contain focus-visible:outline focus-visible:outline-[0.5px] focus-visible:outline-white/60`}
       >
         {slides.map((slide, i) => (
           <div

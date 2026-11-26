@@ -12,7 +12,6 @@ import {
 import { TrustedStrip } from "@/components/TrustedStrip";
 import {
   idealClient,
-  serviceHref,
   services,
   servicesFaq,
   servicesFaqSchema,
@@ -61,11 +60,12 @@ const schema = {
         position: index + 1,
         item: {
           "@type": "Service",
-          "@id": `${SITE_URL}${serviceHref(service.id)}#service`,
+          "@id": `${PAGE_URL}#${service.id}`,
           name: service.name,
           serviceType: service.name,
           description: service.headline,
-          url: `${SITE_URL}${serviceHref(service.id)}`,
+          // The row on this page: the detail pages don't exist yet.
+          url: `${PAGE_URL}#${service.id}`,
           provider: { "@id": "https://www.pixeluplabs.com/#organization" },
         },
       })),

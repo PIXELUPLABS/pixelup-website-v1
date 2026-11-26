@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { type Service, serviceHref } from "@/lib/services";
+import type { Service } from "@/lib/services";
 import { noBreakHyphens } from "../SectionRows";
 import { ServiceCarousel } from "./ServiceCarousel";
 
@@ -37,18 +36,18 @@ export function Deliverables({ items }: { items: string[] }) {
 }
 
 /**
- * One service on the /services index: the name (linking to its detail page),
- * the headline and an optional proof line top-left, the typical timeline
- * bottom-left; the work carousel on the right. Text styles: 32/24px title,
- * 16px white, 16px muted-65, and the 14px timeline line.
- * The title link's ::after stretches over the whole row, so the row is one
- * target; the carousel sits above it (z-10) to keep its own controls. The
- * "View service" text link that sat bottom-left is out for now; the timeline
- * took its place.
+ * One service on the /services index: the name, the headline and an optional
+ * proof line top-left, the typical timeline bottom-left; the work carousel on
+ * the right. Text styles: 32/24px title, 16px white, 16px muted-65, and the
+ * 14px timeline line.
+ *
+ * Nothing in the row is a link for now: the /services/<id> detail pages don't
+ * exist yet. When they do, wrap the title in a Link whose ::after stretches
+ * over the row and pass the carousel its href again (serviceHref in
+ * lib/services.ts).
  */
 export function ServiceSection({ service }: { service: Service }) {
   const titleId = `${service.id}-title`;
-  const href = serviceHref(service.id);
 
   return (
     // The first row drops its top rule below desk: the SectionNav strip's
@@ -66,12 +65,7 @@ export function ServiceSection({ service }: { service: Service }) {
                 id={titleId}
                 className="text-balance text-[24px] font-medium leading-tight tracking-display text-white desk:text-[32px]"
               >
-                <Link
-                  href={href}
-                  className="after:absolute after:inset-0 after:content-[''] focus-visible:outline-none focus-visible:after:outline focus-visible:after:outline-1 focus-visible:after:-outline-offset-1 focus-visible:after:outline-white/60"
-                >
-                  {service.name}
-                </Link>
+                {service.name}
               </h2>
               <p className="max-w-[40ch] text-pretty text-[16px] leading-[1.5] text-white">
                 {noBreakHyphens(service.headline)}
@@ -94,7 +88,6 @@ export function ServiceSection({ service }: { service: Service }) {
           <ServiceCarousel
             label={service.name}
             caption={service.scope}
-            href={href}
             slides={service.gallery}
           />
         </div>
