@@ -11,15 +11,17 @@
 // Env:
 //   RESEND_API_KEY        a Resend key with sending access (required)
 //   PLAYBOOK_ENTERPRISE_HOMEPAGE_PDF_URL  where the deployed site gets the PDF
-//   PLAYBOOK_EMAIL_FROM   optional sender, default below. The domain must be
-//                         verified in Resend (pixeluplabs.com is).
-//   PLAYBOOK_EMAIL_REPLY_TO  optional reply-to address
+//
+// The sender and reply-to are fixed to hello@pixeluplabs.com on purpose, with
+// no env override: the Resend account also has pixelup.in verified, and these
+// emails must never go out from (or route replies to) anyone's personal inbox.
 
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { playbooks, type PlaybookId } from "@/lib/playbooks";
 
-const DEFAULT_FROM = "PIXELUP LABS <hello@pixeluplabs.com>";
+const FROM = "PIXELUP LABS <hello@pixeluplabs.com>";
+const REPLY_TO = "hello@pixeluplabs.com";
 
 export type SendResult = "sent" | "not-configured" | "failed";
 
@@ -86,11 +88,9 @@ export async function sendPlaybookEmail({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: process.env.PLAYBOOK_EMAIL_FROM || DEFAULT_FROM,
+        from: FROM,
         to: [email],
-        ...(process.env.PLAYBOOK_EMAIL_REPLY_TO
-          ? { reply_to: process.env.PLAYBOOK_EMAIL_REPLY_TO }
-          : {}),
+        reply_to: REPLY_TO,
         subject: `Your copy of ${playbook.title}`,
         text: [...lines, callUrl, "", "PIXELUP LABS"].join("\n\n"),
         html: [

@@ -11,7 +11,7 @@
  *   - "Brand Audit Lead Magnet": perception audit requests from the blog-post
  *     popup (components/blog/AuditLeadMagnet.tsx → app/api/audit-lead/route.ts),
  *     with the article path in "Page".
- *   - "Playbook Requests": playbook requests from the inline CTA on blog posts
+ *   - "Enterprise Playbook Lead Magnet": playbook requests from the inline CTA on blog posts
  *     (components/blog/PlaybookCta.tsx → app/api/playbook-lead/route.ts), with
  *     the playbook's title and the article path.
  *
@@ -65,7 +65,7 @@ const FORMS = {
     headers: ['Submitted at', 'Name', 'Email', 'Website', 'Page'],
   },
   playbookLead: {
-    sheet: 'Playbook Requests',
+    sheet: 'Enterprise Playbook Lead Magnet',
     fields: ['name', 'email', 'playbook', 'page'],
     headers: ['Submitted at', 'Name', 'Email', 'Playbook', 'Page'],
   },
