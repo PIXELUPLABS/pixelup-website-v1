@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { CaseMediaSlot } from "@/components/case-study/CaseMedia";
 import type { ServiceSlide } from "@/lib/services";
 
@@ -9,13 +9,24 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+/** How long an image slide stays up before the carousel moves on. */
+const IMAGE_DWELL_MS = 4500;
+/** A video slide stays for one play-through, within these bounds. */
+const VIDEO_DWELL_MIN_MS = 5000;
+const VIDEO_DWELL_MAX_MS = 12000;
+
 const controlMotion =
   "transition-colors duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] motion-reduce:transition-none";
 
 /**
  * A service row's work carousel on /services. Native scroll-snap does the
- * swiping (touch, trackpad, momentum), so there's no drag code. Never
- * autoplays: six rotating carousels on one page would be decorative motion.
+ * swiping (touch, trackpad, momentum), so there's no drag code.
+ *
+ * Auto-rotates, with limits so six carousels on one page stay calm: only
+ * while the carousel is on screen, paused while the pointer is over it or
+ * focus is inside it, and stopped for good once the visitor swipes, uses the
+ * arrow keys or picks a slide themselves. Off entirely under reduced motion.
+ * It loops back to the first slide after the last.
  *
  * Below the strip: the service's constant scope line, and TestimonialSlider's
  * position bars (clickable) at every size. Slides mount one ahead of the
@@ -76,17 +87,49 @@ export function ServiceCarousel({
     };
   }, [count, multiple]);
 
-  const goTo = (index: number) => {
+  const goTo = useCallback(
+    (index: number) => {
+      const track = trackRef.current;
+      if (!track) return;
+      const target = Math.min(Math.max(index, 0), count - 1);
+      // Mount the target ahead of the scroll so it isn't blank on arrival.
+      setMaxSeen((seen) => Math.max(seen, target));
+      track.scrollTo({
+        left: target * track.clientWidth,
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+      });
+    },
+    [count],
+  );
+
+  // Auto-rotation state: see the component note for the rules.
+  const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [takenOver, setTakenOver] = useState(false);
+  const rotating = multiple && !takenOver;
+
+  useEffect(() => {
     const track = trackRef.current;
-    if (!track) return;
-    const target = Math.min(Math.max(index, 0), count - 1);
-    // Mount the target ahead of the scroll so it isn't blank on arrival.
-    setMaxSeen((seen) => Math.max(seen, target));
-    track.scrollTo({
-      left: target * track.clientWidth,
-      behavior: prefersReducedMotion() ? "auto" : "smooth",
-    });
-  };
+    if (!track || !multiple) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.6 },
+    );
+    observer.observe(track);
+    return () => observer.disconnect();
+  }, [multiple]);
+
+  useEffect(() => {
+    if (!rotating || !inView || paused || prefersReducedMotion()) return;
+    // A video gets one full play-through before the carousel moves on.
+    const video = trackRef.current?.children[active]?.querySelector("video");
+    const dwell =
+      video && Number.isFinite(video.duration)
+        ? Math.min(Math.max(video.duration * 1000, VIDEO_DWELL_MIN_MS), VIDEO_DWELL_MAX_MS)
+        : IMAGE_DWELL_MS;
+    const timer = window.setTimeout(() => goTo((active + 1) % count), dwell);
+    return () => window.clearTimeout(timer);
+  }, [active, count, goTo, inView, paused, rotating]);
 
   const openService = (event: React.MouseEvent) => {
     if (!href || event.defaultPrevented || event.shiftKey || event.altKey) return;
@@ -103,6 +146,14 @@ export function ServiceCarousel({
       aria-roledescription="carousel"
       aria-label={`${label} work`}
       className="flex flex-col gap-3"
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") setPaused(true);
+      }}
+      onPointerLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={(event) => {
+        if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false);
+      }}
     >
       <div
         id={trackId}
@@ -113,11 +164,18 @@ export function ServiceCarousel({
           if (!multiple || event.altKey || event.metaKey || event.ctrlKey || event.shiftKey) return;
           if (event.key === "ArrowRight") {
             event.preventDefault();
+            setTakenOver(true);
             goTo(active + 1);
           } else if (event.key === "ArrowLeft") {
             event.preventDefault();
+            setTakenOver(true);
             goTo(active - 1);
           }
+        }}
+        // A swipe or a sideways trackpad scroll: the visitor is driving now.
+        onTouchStart={() => setTakenOver(true)}
+        onWheel={(event) => {
+          if (Math.abs(event.deltaX) > Math.abs(event.deltaY)) setTakenOver(true);
         }}
         onClick={openService}
         onAuxClick={(event) => {
@@ -155,7 +213,9 @@ export function ServiceCarousel({
         </p>
         {multiple && (
           <>
-            <p className="sr-only" aria-live="polite">
+            {/* Silent while it rotates on its own, so a screen reader isn't
+                read a slide number every few seconds. */}
+            <p className="sr-only" aria-live={rotating ? "off" : "polite"}>
               {settled + 1} of {count}
             </p>
             <div className="flex shrink-0 items-center gap-1">
@@ -166,7 +226,10 @@ export function ServiceCarousel({
                   aria-controls={trackId}
                   aria-label={`Image ${i + 1} of ${count}`}
                   aria-current={i === active ? "true" : undefined}
-                  onClick={() => goTo(i)}
+                  onClick={() => {
+                    setTakenOver(true);
+                    goTo(i);
+                  }}
                   className="group/bar flex h-6 w-6 cursor-pointer items-center"
                 >
                   <span
