@@ -315,14 +315,17 @@ export const servicesTrust: CaseMetric[] = [
 ];
 
 export const idealClient = {
-  heading: "We work with AI-native B2B companies going upmarket",
+  heading: "We work with B2B and AI-native tech companies going upmarket",
   line: "Funded B2B software adding a sales-led tier, 31 times so far. Mostly AI, not only: Monumint is fintech, Sully is healthcare.",
   rightFit: [
-    { label: "Category", text: "AI-native B2B: infra, devtools, vertical, applied" },
-    { label: "Stage", text: "Series A to Series B" },
+    { label: "Category", text: "B2B and AI-native tech companies" },
+    { label: "Stage", text: "Seed to Series B" },
     { label: "Team", text: "10 to 80 people" },
     { label: "Motion", text: "PLG to sales-led, first AE hired" },
-    { label: "Trigger", text: "Going upmarket, raising, or just out-branded" },
+    {
+      label: "Trigger",
+      text: "You have product-market fit and are going upmarket, selling to enterprise, or have outgrown your brand",
+    },
   ],
 };
 
