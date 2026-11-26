@@ -10,6 +10,7 @@ import { playbooks, type PlaybookId } from "@/lib/playbooks";
 import { checkWorkEmailInput } from "@/lib/work-email";
 import panelBg from "@/public/media/audit-form-bg.png";
 import panelPattern from "@/public/media/audit-form-pattern.svg";
+import logoMark from "@/public/media/pixelup-logo.svg";
 import coverImg from "@/public/media/playbook/enterprise-homepage-cover-01.jpg";
 import mosaicImg from "@/public/media/playbook/enterprise-homepage-mosaic-01.jpg";
 
@@ -23,11 +24,10 @@ import mosaicImg from "@/public/media/playbook/enterprise-homepage-mosaic-01.jpg
 // panel the request dialog puts behind the cover. Its button takes AuditCta's
 // white colorway: accent stays with Book a call, the page's one primary action.
 
-const fieldWrapClassName =
-  "w-full border-b-[0.5px] border-hairline pb-3 focus-within:border-white";
-// 16px so iOS Safari doesn't zoom the page on focus.
+// Filled fields, as on BookCallForm. 16px so iOS Safari doesn't zoom the page
+// on focus.
 const fieldClassName =
-  "w-full bg-transparent text-[16px] font-normal text-white placeholder:text-white/40 focus:outline-none";
+  "h-12 w-full rounded-[2px] border-[0.5px] border-transparent bg-button-dark px-4 text-[16px] font-normal text-white placeholder:text-white/40 focus:border-white/60 focus:outline-none";
 
 const initialValues = { name: "", email: "" };
 
@@ -148,53 +148,28 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
         </div>
       </aside>
 
-      {/* Full page from desk: the viewport less the page shell's 20px inset. */}
+      {/* A centred card from desk (a bottom sheet below it): the request on
+          the left, and on the right an inset panel showing the playbook, its
+          cover set on the wall of homepages it is built from. */}
       <Dialog
         open={open}
         onClose={close}
         labelledBy={titleId}
-        className="desk:h-[calc(100dvh-40px)] desk:w-[calc(100vw-40px)]"
+        className="desk:h-[640px] desk:max-h-[calc(100dvh-40px)] desk:w-[1080px] desk:max-w-[calc(100vw-40px)]"
       >
-        <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto desk:flex-row desk:overflow-hidden">
+        <div className="relative flex min-h-0 flex-1 flex-col overflow-y-auto desk:grid desk:grid-cols-[minmax(0,1fr)_46%] desk:overflow-hidden">
           <button
             type="button"
             onClick={close}
             aria-label="Close"
-            className="absolute top-3 right-3 z-10 flex h-9 w-9 cursor-pointer items-center justify-center text-white/60 transition-colors hover:text-white desk:top-5 desk:right-5"
+            className="absolute top-3 right-3 z-10 flex h-9 w-9 cursor-pointer items-center justify-center bg-base/60 text-white/70 transition-colors hover:text-white desk:top-5 desk:right-5"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M6 6l12 12M18 6L6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           </button>
 
-          {/* The playbook itself: its cover on the gradient panel, with what's
-              inside underneath. A short band on top below desk. */}
-          <div className="relative shrink-0 bg-base desk:flex desk:min-h-0 desk:flex-1 desk:flex-col desk:justify-center">
-            <Image src={panelBg} alt="" fill sizes="(min-width: 1200px) 60vw, 100vw" className="object-cover" />
-            <Image src={panelPattern} alt="" fill className="object-cover opacity-10" />
-            <div className="relative flex flex-col gap-6 p-6 pr-14 desk:gap-10 desk:p-12">
-              <Image
-                src={coverImg}
-                alt={`Cover of ${playbook.title}`}
-                sizes="(min-width: 1200px) 880px, 100vw"
-                className="h-auto w-full border-[0.5px] border-hairline desk:mx-auto desk:max-w-[880px]"
-              />
-              <dl className="hidden w-full grid-cols-3 border-[0.5px] border-hairline bg-base/40 desk:mx-auto desk:grid desk:max-w-[880px] desk:divide-x-[0.5px] desk:divide-hairline">
-                {playbook.stats.map((stat) => (
-                  <div key={stat.label} className="flex flex-col-reverse gap-2 p-5">
-                    <dt className="text-[12px] font-medium uppercase tracking-[0.04em] text-white/80">
-                      {stat.label}
-                    </dt>
-                    <dd className="tracking-display text-[32px] font-medium leading-none text-white">
-                      {stat.value}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          </div>
-
-          <div className="flex flex-col justify-center gap-10 p-6 desk:w-[460px] desk:shrink-0 desk:border-l-[0.5px] desk:border-hairline desk:p-12">
+          <div className="flex flex-col justify-center gap-8 p-6 desk:p-12">
             {status === "success" ? (
               <>
                 <div className="flex flex-col gap-3">
@@ -203,7 +178,7 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
                   </p>
                   <h2
                     id={titleId}
-                    className="tracking-display text-[24px] font-medium leading-[1.15] text-white desk:text-[32px]"
+                    className="tracking-display text-[24px] font-medium leading-[1.15] text-white desk:text-[36px]"
                   >
                     Thanks{firstName ? `, ${firstName}` : ""}. It&apos;s on its way.
                   </h2>
@@ -222,13 +197,13 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
               </>
             ) : (
               <>
-                <div className="flex flex-col gap-3 pr-8 desk:pr-0">
+                <div className="flex flex-col gap-4">
                   <p className="text-[12px] font-medium uppercase tracking-[0.04em] text-label-grey">
                     Free playbook
                   </p>
                   <h2
                     id={titleId}
-                    className="tracking-display text-balance text-[24px] font-medium leading-[1.15] text-white desk:text-[32px]"
+                    className="tracking-display text-balance text-[24px] font-medium leading-[1.12] text-white desk:text-[36px]"
                   >
                     {playbook.title}
                   </h2>
@@ -237,57 +212,75 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                  <div className={fieldWrapClassName}>
-                    <input
-                      type="text"
-                      name="name"
-                      ref={nameRef}
-                      autoComplete="name"
-                      required
-                      placeholder="Your name"
-                      aria-label="Your name"
-                      value={values.name}
-                      onChange={handleChange("name")}
-                      disabled={status === "submitting"}
-                      className={fieldClassName}
-                    />
-                  </div>
-                  <div className={fieldWrapClassName}>
-                    <input
-                      type="email"
-                      name="email"
-                      autoComplete="email"
-                      required
-                      placeholder="Your work email"
-                      aria-label="Your work email"
-                      value={values.email}
-                      onChange={handleChange("email")}
-                      disabled={status === "submitting"}
-                      className={fieldClassName}
-                    />
-                  </div>
-
-                  <div className="mt-2 flex flex-col gap-3">
-                    <button
-                      type="submit"
-                      disabled={status === "submitting"}
-                      className={`${ctaButtonBase} ${ctaButtonPadding} w-full cursor-pointer gap-8 bg-white text-black hover:bg-white/90 disabled:cursor-wait disabled:opacity-60`}
-                    >
-                      <span>{status === "submitting" ? "SENDING…" : "SEND ME THE PLAYBOOK"}</span>
-                      <ArrowIcon />
-                    </button>
-                    {status === "error" ? (
-                      <p role="alert" className="text-[12px] text-white">
-                        Something went wrong. Please try again.
-                      </p>
-                    ) : (
-                      <p className="text-[12px] text-label-grey">Work emails only.</p>
-                    )}
-                  </div>
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                  <input
+                    ref={nameRef}
+                    type="text"
+                    name="name"
+                    autoComplete="name"
+                    required
+                    placeholder="Your name"
+                    aria-label="Your name"
+                    value={values.name}
+                    onChange={handleChange("name")}
+                    disabled={status === "submitting"}
+                    className={fieldClassName}
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    autoComplete="email"
+                    required
+                    placeholder="Your work email"
+                    aria-label="Your work email"
+                    value={values.email}
+                    onChange={handleChange("email")}
+                    disabled={status === "submitting"}
+                    className={fieldClassName}
+                  />
+                  <button
+                    type="submit"
+                    disabled={status === "submitting"}
+                    className={`${ctaButtonBase} h-12 w-full cursor-pointer gap-8 bg-white text-black hover:bg-white/90 disabled:cursor-wait disabled:opacity-60`}
+                  >
+                    <span>{status === "submitting" ? "SENDING…" : "SEND ME THE PLAYBOOK"}</span>
+                    <ArrowIcon />
+                  </button>
+                  {status === "error" ? (
+                    <p role="alert" className="mt-1 text-[12px] text-white">
+                      Something went wrong. Please try again.
+                    </p>
+                  ) : (
+                    <p className="mt-1 text-[12px] text-label-grey">Work emails only. No spam.</p>
+                  )}
                 </form>
               </>
             )}
+          </div>
+
+          {/* The inset visual panel: first below desk, as a band above the form. */}
+          <div aria-hidden="true" className="order-first shrink-0 p-3 pb-0 desk:order-none desk:p-3 desk:pl-0">
+            <div className="relative flex h-52 items-center justify-center overflow-hidden bg-base desk:h-full">
+              <Image src={panelBg} alt="" fill sizes="(min-width: 1200px) 500px, 100vw" className="object-cover" />
+              <Image
+                src={mosaicImg}
+                alt=""
+                fill
+                sizes="(min-width: 1200px) 500px, 100vw"
+                className="object-cover opacity-35 mix-blend-luminosity"
+              />
+              <div className="absolute inset-0 bg-linear-to-b from-base/10 via-transparent to-base/80" />
+              <Image
+                src={coverImg}
+                alt=""
+                sizes="(min-width: 1200px) 420px, 80vw"
+                className="relative h-auto w-[78%] border-[0.5px] border-white/30 desk:w-[86%]"
+              />
+              <div className="absolute inset-x-0 bottom-6 hidden items-center justify-center gap-2.5 desk:flex">
+                <Image src={logoMark} alt="" className="h-5 w-auto" />
+                <span className="text-[13px] font-medium tracking-[0.04em] text-white">PIXELUP LABS</span>
+              </div>
+            </div>
           </div>
         </div>
       </Dialog>
