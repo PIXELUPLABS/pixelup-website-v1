@@ -16,6 +16,8 @@ export const playbooks = {
       "The only playbook you need to look enterprise-ready",
       "and appeal to every persona in your customer journey.",
     ],
+    /** The request dialog's heading: a shorter cut of the subheading above. */
+    dialogHeading: "The only playbook you need to look enterprise-ready to every buyer persona",
     stats: [
       { value: "13", label: "Homepages" },
       { value: "37", label: "Examples" },
