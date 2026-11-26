@@ -4,8 +4,8 @@
 // bubble, same as a malformed address) and their API routes (the real gate,
 // since the client check can be skipped).
 //
-// Forms: BookCallForm, NewsletterForm, blog/AuditLeadMagnet.
-// Routes: app/api/book-call, newsletter, audit-lead, audit.
+// Forms: BookCallForm, NewsletterForm, blog/AuditLeadMagnet, blog/PlaybookCta.
+// Routes: app/api/book-call, newsletter, audit-lead, audit, playbook-lead.
 //
 // Third-party forms (the Cal.com booking form, the Tally audit popup) collect
 // their own email fields and aren't covered by this; they need the same rule

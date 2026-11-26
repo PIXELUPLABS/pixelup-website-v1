@@ -51,6 +51,7 @@ export function CaseSidebar({ study }: { study: CaseStudy }) {
                 href="/case-studies"
                 label="Back to all case studies"
                 icon="arrow"
+                preferHistory
               />
             </div>
             <ClientInfo info={study.info} />

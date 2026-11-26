@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { AuditLeadMagnet } from "@/components/blog/AuditLeadMagnet";
 import { BlogPostPage } from "@/components/blog/BlogPostPage";
 import { blogImageUrl } from "@/sanity/lib/blog-schema";
 import { getBlogPost, getBlogPosts, getBlogSlugs } from "@/sanity/lib/blog-data";
@@ -61,12 +60,18 @@ export default async function BlogPostRoute({
   const { slug } = await params;
   const [post, posts] = await Promise.all([getBlogPost(slug), getBlogPosts()]);
   if (!post) notFound();
-  const relatedPosts = posts.filter((candidate) => candidate.slug !== post.slug).slice(0, 2);
+  // What to read next: the two most recent other posts, same-category ones
+  // first (sort is stable, so each group keeps getBlogPosts' newest-first order).
+  const sharesCategory = (candidate: (typeof posts)[number]) =>
+    candidate.categories.some((category) => post.categories.includes(category));
+  const relatedPosts = posts
+    .filter((candidate) => candidate.slug !== post.slug)
+    .sort((a, b) => Number(sharesCategory(b)) - Number(sharesCategory(a)))
+    .slice(0, 2);
   return (
-    <>
-      <BlogPostPage post={post} relatedPosts={relatedPosts} />
-      {/* Blog posts only: that's where most of the traffic lands. */}
-      <AuditLeadMagnet />
-    </>
+    // No exit-intent popup: the only popup on a post is the playbook request,
+    // and only when "Get the playbook" is clicked (blog/PlaybookCta). The old
+    // AuditLeadMagnet component is still in the repo, unmounted.
+    <BlogPostPage post={post} relatedPosts={relatedPosts} />
   );
 }

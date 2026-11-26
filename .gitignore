@@ -48,3 +48,6 @@ migration/output/*
 # Sanity CLI cache and standalone Studio build output
 .sanity/
 dist/
+
+# Lead-magnet PDFs: emailed on request, never committed (public repo)
+/private/

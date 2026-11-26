@@ -1,5 +1,5 @@
 import { links } from "@/lib/projects";
-import { BookCallForm } from "./BookCallForm";
+import { CallButton } from "./CallButton";
 import { ctaButtonBase, ctaButtonPadding, ctaIconMotion } from "./cta-button-styles";
 
 // Re-exported so existing importers (AuditCta, AuditNavCta) keep working.
@@ -49,7 +49,7 @@ export function CtaButtons({
   return (
     // Stacked and full width at every breakpoint. Side by side on mobile forced
     // the longer label onto two lines, leaving the two CTAs mismatched in
-    // height — and the Book a call row needs the full width for its field.
+    // height.
     <div className="flex flex-col gap-2.5">
       <a
         href={links.telegram}
@@ -62,7 +62,9 @@ export function CtaButtons({
         <span>CHAT ON TELEGRAM</span>
         <AnimatedPaperPlane />
       </a>
-      <BookCallForm />
+      {/* One full-width button to /call, on every page. The email-first
+          BookCallForm this replaced now only closes case studies (EndCta). */}
+      <CallButton />
     </div>
   );
 }
