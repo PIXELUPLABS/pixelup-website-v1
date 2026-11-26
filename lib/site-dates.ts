@@ -34,6 +34,8 @@ export const siteUpdated = {
   swipe: "2026-10-22",
   /** For YC founders. On staging only; not in the sitemap or the nav. */
   yc: "2026-11-17",
+  /** Services. On staging only; not in the sitemap or the nav. */
+  services: "2026-11-26",
 } as const;
 
 /** First public commit of the site — used as `datePublished` on the homepage. */
