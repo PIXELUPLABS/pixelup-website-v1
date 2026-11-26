@@ -118,10 +118,6 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
             </p>
           </div>
           <div className="flex w-full flex-col gap-5">
-            {/* The cover's own footer line: what's inside, in mono. */}
-            <p className="font-mono text-[12px] uppercase leading-[1.6] tracking-[0.04em] text-white/70">
-              {playbook.stats.map((stat) => `${stat.value} ${stat.label}`).join("  ·  ")}
-            </p>
             <button
               type="button"
               onClick={show}
