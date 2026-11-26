@@ -70,7 +70,6 @@ export async function sendPlaybookEmail({
   const lines = [
     greeting,
     `${playbook.title} is attached as a PDF.`,
-    `It covers ${playbook.stats.map((stat) => `${stat.value} ${stat.label.toLowerCase()}`).join(", ")}.`,
     "If you'd like a second pair of eyes on your own homepage, book a call and we'll go through it together:",
   ];
 
