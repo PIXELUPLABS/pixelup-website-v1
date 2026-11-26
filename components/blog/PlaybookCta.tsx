@@ -17,7 +17,7 @@ import mosaicImg from "@/public/media/playbook/enterprise-homepage-mosaic-01.jpg
 // Inline lead-magnet CTA for blog posts: a banner between two sections of the
 // article that opens a full-page request dialog (name + work email). Requests
 // go to app/api/playbook-lead, which emails the PDF and logs the request to
-// the "Playbook Requests" tab of the Website Leads sheet.
+// the "Enterprise Playbook Lead Magnet" tab of the Website Leads sheet.
 //
 // The banner follows the playbook's own cover (title left, the cover's wall
 // of homepages right) on AuditForm's gradient + 10% pattern panel, the same
