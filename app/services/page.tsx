@@ -29,8 +29,8 @@ export const metadata: Metadata = {
   title,
   description,
   alternates: { canonical: "/services" },
-  // Staging-only for now, like /2027: not linked from the nav or footer, not
-  // in the sitemap, and kept out of the index until it goes live.
+  // Staging-only for now: in the top nav there, but not in the footer or the
+  // sitemap, and kept out of the index until it goes live.
   robots: { index: false, follow: false },
 };
 

@@ -12,8 +12,8 @@ export const navLinks: { label: string; href: string | null }[] = [
   { label: "Case Studies", href: "/case-studies" },
   { label: "Explorations", href: "/explorations" },
   { label: "Clients", href: "/clients" },
-  // { label: "Services", href: null },
-  { label: "Blog", href: "/blog" },
+  // Staging: Services takes Blog's slot. /blog is still in the footer.
+  { label: "Services", href: "/services" },
   { label: "Referral", href: "/referral" },
 ];
 

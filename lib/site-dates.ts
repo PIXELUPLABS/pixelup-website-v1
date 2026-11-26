@@ -34,7 +34,7 @@ export const siteUpdated = {
   swipe: "2026-10-22",
   /** For YC founders. On staging only; not in the sitemap or the nav. */
   yc: "2026-11-17",
-  /** Services. On staging only; not in the sitemap or the nav. */
+  /** Services. On staging only: in the top nav there, not in the sitemap. */
   services: "2026-11-26",
 } as const;
 
