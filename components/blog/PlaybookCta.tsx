@@ -10,8 +10,6 @@ import { playbooks, type PlaybookId } from "@/lib/playbooks";
 import { checkWorkEmailInput } from "@/lib/work-email";
 import panelBg from "@/public/media/audit-form-bg.png";
 import panelPattern from "@/public/media/audit-form-pattern.svg";
-import logoMark from "@/public/media/pixelup-logo.svg";
-import coverImg from "@/public/media/playbook/enterprise-homepage-cover-01.jpg";
 import mosaicImg from "@/public/media/playbook/enterprise-homepage-mosaic-01.jpg";
 
 // Inline lead-magnet CTA for blog posts: a banner between two sections of the
@@ -20,9 +18,10 @@ import mosaicImg from "@/public/media/playbook/enterprise-homepage-mosaic-01.jpg
 // the "Enterprise Playbook Lead Magnet" tab of the Website Leads sheet.
 //
 // The banner follows the playbook's own cover (title left, the cover's wall
-// of homepages right) on AuditForm's gradient + 10% pattern panel, the same
-// panel the request dialog puts behind the cover. Its button takes AuditCta's
-// white colorway: accent stays with Book a call, the page's one primary action.
+// of homepages right) on AuditForm's gradient + 10% pattern panel; the
+// request dialog shows the same wall of homepages on its own. The banner's
+// button takes AuditCta's white colorway: accent stays with Book a call, the
+// page's one primary action.
 
 // Filled fields, as on BookCallForm. 16px so iOS Safari doesn't zoom the page
 // on focus.
@@ -149,8 +148,8 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
       </aside>
 
       {/* A centred card from desk (a bottom sheet below it): the request on
-          the left, and on the right an inset panel showing the playbook, its
-          cover set on the wall of homepages it is built from. */}
+          the left, and on the right an inset panel with the wall of
+          homepages the playbook is built from. */}
       <Dialog
         open={open}
         onClose={close}
@@ -205,11 +204,8 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
                     id={titleId}
                     className="tracking-display text-balance text-[24px] font-medium leading-[1.12] text-white desk:text-[36px]"
                   >
-                    {playbook.title}
+                    {playbook.dialogHeading}
                   </h2>
-                  <p className="text-balance text-[16px] leading-[1.5] text-body-grey">
-                    {playbook.descriptionLines.join(" ")}
-                  </p>
                 </div>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
@@ -258,28 +254,17 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
             )}
           </div>
 
-          {/* The inset visual panel: first below desk, as a band above the form. */}
+          {/* The inset visual panel: the playbook's wall of homepages on its
+              own, full colour. First below desk, as a band above the form. */}
           <div aria-hidden="true" className="order-first shrink-0 p-3 pb-0 desk:order-none desk:p-3 desk:pl-0">
-            <div className="relative flex h-52 items-center justify-center overflow-hidden bg-base desk:h-full">
-              <Image src={panelBg} alt="" fill sizes="(min-width: 1200px) 500px, 100vw" className="object-cover" />
+            <div className="relative h-52 overflow-hidden bg-base desk:h-full">
               <Image
                 src={mosaicImg}
                 alt=""
                 fill
                 sizes="(min-width: 1200px) 500px, 100vw"
-                className="object-cover opacity-35 mix-blend-luminosity"
+                className="object-cover object-[center_28%] desk:object-top"
               />
-              <div className="absolute inset-0 bg-linear-to-b from-base/10 via-transparent to-base/80" />
-              <Image
-                src={coverImg}
-                alt=""
-                sizes="(min-width: 1200px) 420px, 80vw"
-                className="relative h-auto w-[78%] border-[0.5px] border-white/30 desk:w-[86%]"
-              />
-              <div className="absolute inset-x-0 bottom-6 hidden items-center justify-center gap-2.5 desk:flex">
-                <Image src={logoMark} alt="" className="h-5 w-auto" />
-                <span className="text-[13px] font-medium tracking-[0.04em] text-white">PIXELUP LABS</span>
-              </div>
             </div>
           </div>
         </div>
