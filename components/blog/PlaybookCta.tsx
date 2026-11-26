@@ -10,18 +10,19 @@ import { playbooks, type PlaybookId } from "@/lib/playbooks";
 import { checkWorkEmailInput } from "@/lib/work-email";
 import panelBg from "@/public/media/audit-form-bg.png";
 import panelPattern from "@/public/media/audit-form-pattern.svg";
-import collageImg from "@/public/media/playbook/enterprise-homepage-collage-01.jpg";
 import coverImg from "@/public/media/playbook/enterprise-homepage-cover-01.jpg";
+import mosaicImg from "@/public/media/playbook/enterprise-homepage-mosaic-01.jpg";
 
 // Inline lead-magnet CTA for blog posts: a banner between two sections of the
 // article that opens a full-page request dialog (name + work email). Requests
 // go to app/api/playbook-lead, which emails the PDF and logs the request to
 // the "Playbook Requests" tab of the Website Leads sheet.
 //
-// The banner reuses AuditForm's gradient + 10% pattern panel, so it reads as
-// the same family as the audit section, with the playbook cover's homepage
-// collage bleeding off its right edge. Its button takes AuditCta's white
-// colorway: accent stays with Book a call, the page's one primary action.
+// The banner is built like the playbook's own cover (black, title left, the
+// cover's wall of homepages right) rather than as a picture of the PDF. Its
+// button takes AuditCta's white colorway: accent stays with Book a call, the
+// page's one primary action. The request dialog keeps AuditForm's gradient +
+// 10% pattern panel behind the cover.
 
 const fieldWrapClassName =
   "w-full border-b-[0.5px] border-hairline pb-3 focus-within:border-white";
@@ -92,46 +93,57 @@ export function PlaybookCta({ id = "enterprise-homepage" }: { id?: PlaybookId })
 
   return (
     <>
+      {/* Built like the playbook's own cover: black, the title on the left,
+          the cover's wall of homepages on the right, running edge to edge
+          and off the top and bottom. The image is cut straight from the
+          cover, so its left column already fades into the black. Below
+          700px the wall becomes a band above the copy. */}
       <aside
         aria-label={playbook.title}
-        className="relative w-full overflow-hidden bg-base"
+        className="relative grid w-full overflow-hidden border-[0.5px] border-hairline bg-base min-[700px]:grid-cols-[minmax(0,1fr)_44%]"
       >
-        <Image src={panelBg} alt="" fill sizes="(min-width: 1200px) 75vw, 100vw" className="object-cover" />
-        <Image src={panelPattern} alt="" fill className="object-cover opacity-10" />
-        {/* The cover's homepage collage, desk only: tilted and bleeding off
-            the right and bottom edges, faded toward the copy so the text
-            never sits on a busy screenshot. */}
-        <div
-          aria-hidden="true"
-          className="absolute -top-10 -right-16 hidden w-[52%] rotate-6 [mask-image:linear-gradient(to_right,transparent,black_35%)] min-[700px]:block"
-        >
-          <Image src={collageImg} alt="" sizes="(min-width: 1200px) 40vw, 400px" className="h-auto w-full" />
-        </div>
-
-        <div className="relative flex flex-col items-start gap-8 p-6 min-[700px]:w-[62%] desk:p-8">
+        <div className="flex flex-col items-start justify-between gap-10 p-6 desk:p-8">
           <div className="flex flex-col gap-3">
             <p className="tracking-display text-balance text-[24px] font-medium leading-[1.15] text-white desk:text-[32px]">
               {playbook.title}
             </p>
-            {/* Two lines from 700px, broken where the cover breaks it; below
+            {/* Two lines from desk, broken where the cover breaks it; below
                 that the copy wraps on its own. */}
-            <p className="text-[16px] leading-[1.5] text-white/80">
+            <p className="text-[16px] leading-[1.5] text-muted-65">
               {playbook.descriptionLines[0]}{" "}
-              <br className="hidden min-[700px]:block" />
+              <br className="hidden desk:block" />
               {playbook.descriptionLines[1]}
             </p>
           </div>
-          <button
-            type="button"
-            onClick={show}
-            aria-haspopup="dialog"
-            className={`group ${ctaButtonBase} ${ctaButtonPadding} w-full cursor-pointer gap-8 bg-white text-black hover:bg-white/90 min-[700px]:w-auto`}
-          >
-            <span>GET THE PLAYBOOK</span>
-            <span className="transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-x-[3px] group-focus-visible:translate-x-[3px] motion-reduce:transition-none">
-              <ArrowIcon />
-            </span>
-          </button>
+          <div className="flex w-full flex-col gap-5">
+            {/* The cover's own footer line: what's inside, in mono. */}
+            <p className="font-mono text-[12px] uppercase leading-[1.6] tracking-[0.04em] text-label-grey">
+              {playbook.stats.map((stat) => `${stat.value} ${stat.label}`).join("  ·  ")}
+            </p>
+            <button
+              type="button"
+              onClick={show}
+              aria-haspopup="dialog"
+              className={`group ${ctaButtonBase} ${ctaButtonPadding} w-full cursor-pointer gap-8 bg-white text-black hover:bg-white/90 min-[700px]:w-fit`}
+            >
+              <span>GET THE PLAYBOOK</span>
+              <span className="transition-transform duration-300 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-x-[3px] group-focus-visible:translate-x-[3px] motion-reduce:transition-none">
+                <ArrowIcon />
+              </span>
+            </button>
+          </div>
+        </div>
+        <div aria-hidden="true" className="relative order-first h-44 min-[700px]:order-none min-[700px]:h-auto min-[700px]:min-h-[300px]">
+          <Image
+            src={mosaicImg}
+            alt=""
+            fill
+            sizes="(min-width: 1200px) 35vw, (min-width: 700px) 44vw, 100vw"
+            className="object-cover object-[center_28%]"
+          />
+          {/* The cover fades its first column into the black; same here, so
+              the wall has no hard left edge (bottom edge below 700px). */}
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-base to-transparent min-[700px]:inset-x-auto min-[700px]:inset-y-0 min-[700px]:left-0 min-[700px]:h-auto min-[700px]:w-32 min-[700px]:bg-linear-to-r" />
         </div>
       </aside>
 
